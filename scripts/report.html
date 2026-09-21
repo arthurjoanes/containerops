@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="Resultados dos testes do ContainerOps.">
+    <title>ContainerOps | Relatório de testes</title>
+    <style>$styles</style>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Ir para o resultado</a>
+    <header class="masthead">
+      <div><a class="brand" href="#content">ContainerOps</a></div>
+    </header>
+    <main id="content" tabindex="-1">
+      <div class="page-heading">
+        <h1>Relatório de testes</h1>
+        <p>Gerado em $created</p>
+      </div>
+      <section id="overview" class="attempt $verification_class" aria-labelledby="attempt-title">
+        <div class="attempt-heading">
+          <h2 id="attempt-title">$verification_title</h2>
+          <strong class="duration">$verification_duration</strong>
+        </div>
+        <p class="attempt-date">Execução: $verification_time · $verification_age</p>
+        $verification_explanation
+        <details>
+          <summary>Detalhes da execução</summary>
+          <dl>
+            <dt>Início</dt>
+            <dd>$verification_started</dd>
+            <dt>Projeto</dt>
+            <dd><code>$verification_project</code></dd>
+            <dt>ID da execução</dt>
+            <dd><code>$verification_run</code></dd>
+            <dt>Duração</dt>
+            <dd>$verification_duration_exact</dd>
+            <dt>Categoria de erro</dt>
+            <dd>$verification_error</dd>
+          </dl>
+          <div class="proof">$verification_proof</div>
+        </details>
+      </section>
+      $evidence_errors
+      $release_warning
+      <div class="scan-summary">
+        <p><strong>Scan da release $artifact_version:</strong> $scan_status</p>
+        <p>$scan_summary</p>
+        <a href="#artifacts">Ver scan e imagem</a>
+      </div>
+      <nav class="section-nav" aria-label="Seções do relatório"><a href="#result">Job</a><a href="#checks">Testes</a><a href="#operations">Outras operações</a><a href="#evidence">JSONs</a></nav>
+      <section id="result" aria-labelledby="result-title">
+        <h2 id="result-title">Último job</h2>
+        $job_panel
+      </section>
+      <section id="checks" aria-labelledby="checks-title">
+        <h2 id="checks-title">Testes desta execução</h2>
+        <ul class="control-list">$controls</ul>
+        <details class="section-details">
+          <summary>Usuários e limites</summary>
+          <p class="table-hint">Use as setas para rolar a tabela.</p>
+          $resources
+          <div class="proof">$hardening_proof</div>
+        </details>
+      </section>
+      <section id="operations" aria-labelledby="operations-title">
+        <h2 id="operations-title">Outras operações</h2>
+        <ul class="control-list">$operations</ul>
+        <details class="section-details">
+          <summary>Tempos e arquivos</summary>
+          <div class="timings">$recovery_metrics</div>
+          <div class="operation-sources">
+            <div class="proof">$backup_proof</div>
+            <div class="proof">$restore_proof</div>
+            <div class="proof">$release_proof</div>
+            <div class="proof">$rollback_proof</div>
+          </div>
+        </details>
+      </section>
+      <section id="artifacts" aria-labelledby="artifacts-title">
+        <h2 id="artifacts-title">Release $artifact_version</h2>
+        <p>$supply_identity</p>
+        <p class="section-context">Build: $artifact_time</p>
+        $scan_findings
+        <details class="section-details">
+          <summary>Detalhes do build</summary>
+          <dl>
+            <dt>Imagem</dt>
+            <dd><code>$artifact_image</code></dd>
+            <dt>Imagem auditada</dt>
+            <dd><code>$audit_image</code></dd>
+            <dt>Config digest</dt>
+            <dd><code>$audit_config</code></dd>
+          </dl>
+          <div class="proof">$artifact_proof</div>
+          <div class="metrics-block">$supply_metrics</div>
+          <p>Runtime: versão $snapshot_version, status $snapshot_health.</p>
+          <div class="proof">$snapshot_proof</div>
+          <ul class="artifact-files">$supply_files</ul>
+        </details>
+        <details class="section-details">
+          <summary>Cache do build</summary>
+          $cache_table
+          <div class="proof">$cache_proof</div>
+        </details>
+      </section>
+      <section id="evidence" aria-labelledby="evidence-title">
+        <h2 id="evidence-title">JSONs</h2>
+        <p class="section-context">$record_count arquivos JSON</p>
+        <details class="section-details">
+          <summary>Arquivos e datas</summary>
+          <div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0">
+            <table>
+              <caption>JSONs em docs/evidence</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Arquivo</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Projeto</th>
+                </tr>
+              </thead>
+              <tbody>$evidence_rows</tbody>
+            </table>
+          </div>
+        </details>
+        <details class="section-details">
+          <summary>Atualizar</summary>
+          <p>Comandos no <a href="../README.md">README</a>. Para atualizar o HTML:</p>
+          <code class="command">python scripts/ops.py report</code>
+        </details>
+      </section>
+      <footer><a href="../README.md">README</a><a href="runbooks.md">Runbooks</a><a href="architecture.md">Arquitetura</a><a href="#content">Voltar ao resultado</a></footer>
+    </main>
+  </body>
+</html>

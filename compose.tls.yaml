@@ -1,0 +1,15 @@
+services:
+  proxy:
+    ports:
+      - "127.0.0.1:${TLS_PORT:-8445}:8443"
+    volumes:
+      - ./docker/proxy/tls.conf:/etc/nginx/conf.d/tls.conf:ro
+    secrets:
+      - tls_certificate
+      - tls_key
+
+secrets:
+  tls_certificate:
+    file: ${CONTAINEROPS_RUNTIME:?Configure o runtime reservado ao ContainerOps}/tls/server.crt
+  tls_key:
+    file: ${CONTAINEROPS_RUNTIME:?Configure o runtime reservado ao ContainerOps}/tls/server.key

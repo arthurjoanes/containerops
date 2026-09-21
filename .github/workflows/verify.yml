@@ -1,0 +1,60 @@
+name: ContainerOps
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: containerops-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CONTAINEROPS_RUNTIME: ${{ github.workspace }}/.runtime-containerops
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Setup e build
+        run: |
+          python3 scripts/ops.py setup
+          python3 scripts/ops.py build
+          python3 scripts/ops.py sbom --version 1.0.0
+      - name: Testes
+        run: python3 scripts/ops.py verify
+      - name: Backup, restore, release e rollback
+        run: |
+          python3 scripts/ops.py start
+          python3 scripts/ops.py demo
+          python3 scripts/ops.py backup
+          python3 scripts/ops.py restore-test
+          python3 scripts/ops.py build --version 2.0.0
+          python3 scripts/ops.py sbom --version 2.0.0
+          python3 scripts/ops.py release --version 2.0.0 --inject-smoke-failure
+          python3 scripts/ops.py release --version 2.0.0
+          python3 scripts/ops.py tls
+          python3 scripts/ops.py inspect
+      - name: Scan e relatório
+        run: |
+          python3 scripts/ops.py scan --version 1.0.0
+          python3 scripts/ops.py scan --version 2.0.0
+          python3 scripts/ops.py report
+      - name: Parar containers
+        if: always()
+        run: python3 scripts/ops.py stop
+      - name: Salvar resultados
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: containerops-evidence
+          # O runtime é oculto; publicar só os caminhos abaixo.
+          include-hidden-files: true
+          path: |
+            docs/evidence/
+            docs/report.html
+            .runtime-containerops/artifacts/*/scanner/*.json
+            .runtime-containerops/artifacts/*/sbom-*.json
+            .runtime-containerops/artifacts/*/provenance-*.json
+            .runtime-containerops/artifacts/*/build-metadata.json
+          if-no-files-found: warn

@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-09-21T05:04:02.197545+00:00",
+  "project": "pf-containerops",
+  "services": {
+    "api": {
+      "image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false
+    },
+    "worker": {
+      "image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false
+    },
+    "proxy": {
+      "image": "sha256:eaae1b4af955666115528aff3e54e8c8d372615af1bc981372fbab4f5d7a1e0f",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false
+    },
+    "db": {
+      "image": "sha256:639ab7ceb90e13123085b741fb31ef493fba25463002f6da665352e7b534b652",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false
+    }
+  },
+  "ephemeral_resources_remaining": {
+    "containers": [],
+    "volumes": [],
+    "networks": []
+  },
+  "builder_stopped": true
+}

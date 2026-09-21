@@ -1,0 +1,144 @@
+{
+  "recorded_at": "2026-09-21T03:59:03.353000+00:00",
+  "project": "pf-containerops-test-df43c6a8",
+  "success": true,
+  "seed_job": {
+    "id": "d2c1dbaa-ca31-4c65-abbc-23e1c3c0a397",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 3,
+      "checksum": "0626805fe7f23bb5bde8867571ec5af737ee107f2dcf886ec1bca8190bcc503e"
+    },
+    "version": "1.0.0"
+  },
+  "automatic_rollback": {
+    "project": "pf-containerops-test-df43c6a8",
+    "previous_image": "sha256:9cfb5b73cccfa32384baa5dc741508836d386b2034a9006874e68088c63c888b",
+    "candidate_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+    "injected_smoke_failure": true,
+    "candidate_health": {
+      "status": "alive",
+      "version": "2.0.0"
+    },
+    "candidate_job": {
+      "id": "b5c83d29-e871-4464-8870-8ff153b778fc",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+      },
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "rollback_job": {
+      "id": "f30f14c2-c5f0-4613-8430-168f60a22f52",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 3,
+        "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556"
+      },
+      "version": "1.0.0"
+    },
+    "rolled_back": true,
+    "reason": "Falha de smoke injetada no ensaio de rollback",
+    "rollback_health": {
+      "status": "alive",
+      "version": "1.0.0"
+    },
+    "maintenance_seconds": 40.953,
+    "previous_health": {
+      "status": "alive",
+      "version": "1.0.0"
+    },
+    "preserved_jobs": 1
+  },
+  "promotion": {
+    "project": "pf-containerops-test-df43c6a8",
+    "previous_image": "sha256:9cfb5b73cccfa32384baa5dc741508836d386b2034a9006874e68088c63c888b",
+    "candidate_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+    "injected_smoke_failure": false,
+    "candidate_health": {
+      "status": "alive",
+      "version": "2.0.0"
+    },
+    "candidate_job": {
+      "id": "5b900fb8-42cd-4f3a-b166-826b9b95d05e",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+      },
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "rolled_back": false,
+    "maintenance_seconds": 24.235,
+    "previous_health": {
+      "status": "alive",
+      "version": "1.0.0"
+    },
+    "preserved_jobs": 3
+  },
+  "manual_cycles": [
+    {
+      "recorded_at": "2026-09-21T03:57:56.874584+00:00",
+      "project": "pf-containerops-test-df43c6a8",
+      "previous_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+      "active_image": "sha256:9cfb5b73cccfa32384baa5dc741508836d386b2034a9006874e68088c63c888b",
+      "preserved_jobs": 4,
+      "job": {
+        "id": "3c24083c-1b3d-4f31-a245-c406d005b201",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1"
+        },
+        "version": "1.0.0"
+      },
+      "maintenance_seconds": 20.75
+    },
+    {
+      "recorded_at": "2026-09-21T03:58:21.364931+00:00",
+      "project": "pf-containerops-test-df43c6a8",
+      "previous_image": "sha256:9cfb5b73cccfa32384baa5dc741508836d386b2034a9006874e68088c63c888b",
+      "active_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+      "preserved_jobs": 5,
+      "job": {
+        "id": "5316dbd8-644a-40b5-818f-1650cd1b8d80",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1"
+        },
+        "version": "2.0.0",
+        "algorithm": "unicode-alnum-marks-v1"
+      },
+      "maintenance_seconds": 19.828
+    }
+  ],
+  "restore": {
+    "project": "pf-containerops-restore-b8c2a399",
+    "backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T035823-447880c5",
+    "checksum_verified": true,
+    "snapshot_equal": true,
+    "restored_jobs": 6,
+    "new_job": {
+      "id": "52bc28c8-b729-46a2-99a5-87f3e8fb4d1d",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c"
+      },
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "recovery_seconds": 27.391
+  }
+}

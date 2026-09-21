@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-09-21T05:01:23.854284+00:00",
+  "operation_project": "pf-containerops-test-d515696a",
+  "status": "collection_failed",
+  "error_category": "TypeError",
+  "reason": "Coletor ad hoc tentou serializar o Path retornado por backup; operações individuais concluíram e gravaram seus JSONs. Não é uma falha da rotina de backup.",
+  "prior_record": {
+    "recorded_at": "2026-09-21T04:56:09.556782+00:00",
+    "project": "pf-containerops-test-d515696a",
+    "started_at": "2026-09-21T04:56:09.556782+00:00",
+    "status": "in_progress"
+  }
+}

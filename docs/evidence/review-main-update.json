@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-09-21T04:05:38.491030+00:00",
+  "before_image": "sha256:fb0085fc6b1c383700619270a67460595b0416949e637444a71529e07d7ea6bd",
+  "before_jobs": 8,
+  "promotion": {
+    "project": "pf-containerops",
+    "previous_image": "sha256:9cfb5b73cccfa32384baa5dc741508836d386b2034a9006874e68088c63c888b",
+    "candidate_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+    "injected_smoke_failure": false,
+    "candidate_health": {
+      "status": "alive",
+      "version": "2.0.0"
+    },
+    "candidate_job": {
+      "id": "78e8af74-c91a-4038-9fd5-88923f7bd2f0",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+      },
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "rolled_back": false,
+    "maintenance_seconds": 23.578,
+    "previous_health": {
+      "status": "alive",
+      "version": "1.0.0"
+    },
+    "preserved_jobs": 8
+  },
+  "restore": {
+    "project": "pf-containerops-restore-ee60e2c3",
+    "backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T040435-800c3e0d",
+    "checksum_verified": true,
+    "snapshot_equal": true,
+    "restored_jobs": 9,
+    "new_job": {
+      "id": "da98b0a1-6b91-4db1-9f59-8e61848733c2",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c"
+      },
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "recovery_seconds": 27.203
+  },
+  "all_previous_jobs_preserved": true
+}

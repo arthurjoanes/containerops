@@ -1,0 +1,764 @@
+Docker Compose version v5.5.0
+Runtime demo: <localappdata>\ContainerOps-runtime
+Credenciais: <localappdata>\ContainerOps-runtime\secrets\api_tokens
+builder-inspect.log: 1.1s
+build.log: 15.5s
+load.log: 6.0s
+daemon-export.log: 4.8s
+#0 building with "pf-containerops-builder" instance using docker-container driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 625B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 352B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
+#4 resolve docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 2.13kB 0.0s done
+#5 DONE 0.1s
+
+#6 [2/4] COPY docker/proxy/nginx.conf /etc/nginx/nginx.conf
+#6 CACHED
+
+#7 [3/4] COPY docker/proxy/locations.conf /etc/nginx/locations.conf
+#7 CACHED
+
+#8 [4/4] COPY docker/proxy/http.conf /etc/nginx/conf.d/default.conf
+#8 CACHED
+
+#9 exporting to oci image format
+#9 exporting layers done
+#9 exporting manifest sha256:eaae1b4af955666115528aff3e54e8c8d372615af1bc981372fbab4f5d7a1e0f done
+#9 exporting config sha256:bbc81df565bef9f9bc2faa395527f6cd2b9cddde035d59405de947e6613953cd done
+#9 sending tarball
+#9 sending tarball 1.3s done
+#9 DONE 1.3s
+
+#10 importing to docker
+#10 DONE 0.0s
+daemon-export.log: 3.8s
+scanner-version.log: 0.8s
+scan.log: 31.1s
+Docker Compose version v5.5.0
+Runtime demo: <localappdata>\ContainerOps-runtime
+Credenciais: <localappdata>\ContainerOps-runtime\secrets\api_tokens
+builder-inspect.log: 0.3s
+build.log: 5.7s
+load.log: 5.9s
+daemon-export.log: 4.0s
+#0 building with "pf-containerops-builder" instance using docker-container driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 625B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 352B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 2.13kB 0.0s done
+#4 DONE 0.1s
+
+#5 [1/4] FROM docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
+#5 resolve docker.io/library/nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6 0.0s done
+#5 DONE 0.0s
+
+#6 [2/4] COPY docker/proxy/nginx.conf /etc/nginx/nginx.conf
+#6 CACHED
+
+#7 [3/4] COPY docker/proxy/locations.conf /etc/nginx/locations.conf
+#7 CACHED
+
+#8 [4/4] COPY docker/proxy/http.conf /etc/nginx/conf.d/default.conf
+#8 CACHED
+
+#9 exporting to oci image format
+#9 exporting layers done
+#9 exporting manifest sha256:eaae1b4af955666115528aff3e54e8c8d372615af1bc981372fbab4f5d7a1e0f done
+#9 exporting config sha256:bbc81df565bef9f9bc2faa395527f6cd2b9cddde035d59405de947e6613953cd done
+#9 sending tarball
+#9 sending tarball 1.3s done
+#9 DONE 1.3s
+
+#10 importing to docker
+#10 DONE 0.0s
+daemon-export.log: 4.1s
+scanner-version.log: 0.6s
+scan.log: 27.7s
+Backup: <localappdata>\ContainerOps-runtime\test-temp\containerops-backup-6vjjt_k5\backups\20260921T064152-ccaf6796
+Prova: <localappdata>\ContainerOps-runtime\test-temp\containerops-proof-cur0hz0_\evidence\problem-proof\6bd63cb4d3a24bc5a7f47c98f7001ab0\manifest.json
+Prova: <localappdata>\ContainerOps-runtime\test-temp\containerops-proof-06yz86qi\evidence\problem-proof\4bebde61218b4a12b4963830321161e3\manifest.json
+test_every_operation_rejects_flags_that_do_not_apply (test_contracts.CommandContractTests.test_every_operation_rejects_flags_that_do_not_apply) ... ok
+test_invalid_ports_and_project_names_fail_before_docker (test_contracts.CommandContractTests.test_invalid_ports_and_project_names_fail_before_docker) ... ok
+test_supply_flags_are_command_specific (test_contracts.CommandContractTests.test_supply_flags_are_command_specific) ... ok
+test_terminal_job_failure_does_not_wait_or_retry (test_contracts.CommandContractTests.test_terminal_job_failure_does_not_wait_or_retry) ... ok
+test_transient_transport_failure_recovers_without_post_replay (test_contracts.CommandContractTests.test_transient_transport_failure_recovers_without_post_replay) ... ok
+test_unknown_commands_versions_and_incomplete_flags_are_rejected (test_contracts.CommandContractTests.test_unknown_commands_versions_and_incomplete_flags_are_rejected) ... ok
+test_archived_evidence_survives_alias_replacement_and_is_hashed (test_contracts.VerificationEvidenceTests.test_archived_evidence_survives_alias_replacement_and_is_hashed) ... ok
+test_failed_atomic_replace_preserves_previous_json_and_removes_temporary_file (test_contracts.VerificationEvidenceTests.test_failed_atomic_replace_preserves_previous_json_and_removes_temporary_file) ... ok
+test_failed_quality_check_records_partial_evidence_without_starting_docker (test_contracts.VerificationEvidenceTests.test_failed_quality_check_records_partial_evidence_without_starting_docker) ... ok
+test_candidate_job_must_survive_rollback_with_result_and_attempts (test_operations.OperationSafetyTests.test_candidate_job_must_survive_rollback_with_result_and_attempts) ... ok
+test_failed_automatic_rollback_never_records_recovery_as_successful (test_operations.OperationSafetyTests.test_failed_automatic_rollback_never_records_recovery_as_successful) ... ok
+test_failed_backup_is_recorded_without_changing_the_running_image (test_operations.OperationSafetyTests.test_failed_backup_is_recorded_without_changing_the_running_image) ... ok
+test_failed_drain_restores_admission_before_any_release_change (test_operations.OperationSafetyTests.test_failed_drain_restores_admission_before_any_release_change) ... ok
+test_image_without_valid_release_label_is_rejected (test_operations.OperationSafetyTests.test_image_without_valid_release_label_is_rejected) ... ok
+test_isolated_backup_does_not_replace_main_restore_pointer (test_operations.OperationSafetyTests.test_isolated_backup_does_not_replace_main_restore_pointer) ... ok
+test_manual_rollback_restores_current_image_when_previous_cannot_start (test_operations.OperationSafetyTests.test_manual_rollback_restores_current_image_when_previous_cannot_start) ... ok
+test_operation_lock_rejects_another_process_and_releases_after_exit (test_operations.OperationSafetyTests.test_operation_lock_rejects_another_process_and_releases_after_exit) ... ok
+test_release_one_is_rejected_before_docker_or_backup (test_operations.OperationSafetyTests.test_release_one_is_rejected_before_docker_or_backup) ... ok
+test_running_api_does_not_hide_worker_with_another_image (test_operations.OperationSafetyTests.test_running_api_does_not_hide_worker_with_another_image) ... ok
+test_start_selects_requested_image_and_preserves_saved_image_without_version (test_operations.OperationSafetyTests.test_start_selects_requested_image_and_preserves_saved_image_without_version) ... ok
+test_start_uses_schema_required_by_selected_image (test_operations.OperationSafetyTests.test_start_uses_schema_required_by_selected_image) ... ok
+test_verification_invalidates_previous_success_before_running_checks (test_operations.OperationSafetyTests.test_verification_invalidates_previous_success_before_running_checks) ... ok
+test_archive_remains_bound_to_attempt_when_alias_changes (test_proof.ProofEvidenceTests.test_archive_remains_bound_to_attempt_when_alias_changes) ... ok
+test_interruption_is_failed_not_false_success_and_does_not_start_stack (test_proof.ProofEvidenceTests.test_interruption_is_failed_not_false_success_and_does_not_start_stack) ... ok
+test_missing_or_changed_job_is_not_preservation (test_proof.ProofEvidenceTests.test_missing_or_changed_job_is_not_preservation) ... ok
+test_source_read_failure_invalidates_old_success_before_any_docker_command (test_proof.ProofEvidenceTests.test_source_read_failure_invalidates_old_success_before_any_docker_command) ... ok
+test_sources_mismatch_rejects_image_even_when_tag_exists (test_proof.ProofEvidenceTests.test_sources_mismatch_rejects_image_even_when_tag_exists) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.990s
+
+OK
+test_build_selection_normalizes_timezones (test_report.ReportTests.test_build_selection_normalizes_timezones) ... ok
+test_checksum_mismatch_cannot_approve_attempt (test_report.ReportTests.test_checksum_mismatch_cannot_approve_attempt) ... ok
+test_complete_attempt_uses_archived_sources (test_report.ReportTests.test_complete_attempt_uses_archived_sources) ... ok
+test_contradictory_completion_is_invalid (test_report.ReportTests.test_contradictory_completion_is_invalid) ... ok
+test_counts_reject_booleans_strings_and_fractional_values (test_report.ReportTests.test_counts_reject_booleans_strings_and_fractional_values) ... ok
+test_duplicate_snapshot_is_invalid (test_report.ReportTests.test_duplicate_snapshot_is_invalid) ... ok
+test_empty_directory_is_explicit (test_report.ReportTests.test_empty_directory_is_explicit) ... ok
+test_expired_scanner_database_does_not_pass_policy (test_report.ReportTests.test_expired_scanner_database_does_not_pass_policy) ... ok
+test_explicit_null_collections_do_not_crash_the_report (test_report.ReportTests.test_explicit_null_collections_do_not_crash_the_report) ... ok
+test_failed_command_contradicts_success_status (test_report.ReportTests.test_failed_command_contradicts_success_status) ... ok
+test_false_observation_cannot_approve_a_complete_attempt (test_report.ReportTests.test_false_observation_cannot_approve_a_complete_attempt) ... ok
+test_future_completion_is_invalid (test_report.ReportTests.test_future_completion_is_invalid) ... ok
+test_in_progress_is_not_a_completed_success (test_report.ReportTests.test_in_progress_is_not_a_completed_success) ... ok
+test_invalid_build_does_not_silently_fall_back_to_an_old_build (test_report.ReportTests.test_invalid_build_does_not_silently_fall_back_to_an_old_build) ... ok
+test_job_failure_contradicts_completed_verification (test_report.ReportTests.test_job_failure_contradicts_completed_verification) ... ok
+test_job_protocol_state_is_available_in_technical_details (test_report.ReportTests.test_job_protocol_state_is_available_in_technical_details) ... ok
+test_json_array_root_is_rejected (test_report.ReportTests.test_json_array_root_is_rejected) ... ok
+test_latest_failed_job_is_not_replaced_by_successful_journey (test_report.ReportTests.test_latest_failed_job_is_not_replaced_by_successful_journey) ... ok
+test_latest_failed_release_is_not_hidden_by_previous_promotion (test_report.ReportTests.test_latest_failed_release_is_not_hidden_by_previous_promotion) ... ok
+test_legacy_record_does_not_claim_scope_without_manifest (test_report.ReportTests.test_legacy_record_does_not_claim_scope_without_manifest) ... ok
+test_main_stack_alias_cannot_replace_archived_check (test_report.ReportTests.test_main_stack_alias_cannot_replace_archived_check) ... ok
+test_manifest_path_cannot_escape_evidence_directory (test_report.ReportTests.test_manifest_path_cannot_escape_evidence_directory) ... ok
+test_matching_but_invalid_image_ids_cannot_prove_artifact_identity (test_report.ReportTests.test_matching_but_invalid_image_ids_cannot_prove_artifact_identity) ... ok
+test_missing_job_result_prevents_approval (test_report.ReportTests.test_missing_job_result_prevents_approval) ... ok
+test_missing_required_step_is_partial (test_report.ReportTests.test_missing_required_step_is_partial) ... ok
+test_missing_scan_uses_context_without_placeholder_counts (test_report.ReportTests.test_missing_scan_uses_context_without_placeholder_counts) ... ok
+test_missing_snapshot_is_invalid (test_report.ReportTests.test_missing_snapshot_is_invalid) ... ok
+test_nested_malformed_data_is_reported_without_crashing (test_report.ReportTests.test_nested_malformed_data_is_reported_without_crashing) ... ok
+test_new_failed_attempt_does_not_inherit_old_success (test_report.ReportTests.test_new_failed_attempt_does_not_inherit_old_success) ... ok
+test_nonfinite_numbers_and_duplicate_keys_are_rejected (test_report.ReportTests.test_nonfinite_numbers_and_duplicate_keys_are_rejected) ... ok
+test_numeric_display_is_localized_and_precision_is_limited (test_report.ReportTests.test_numeric_display_is_localized_and_precision_is_limited) ... ok
+test_old_result_is_not_presented_as_recent (test_report.ReportTests.test_old_result_is_not_presented_as_recent) ... ok
+test_old_scan_of_same_image_is_not_reused_after_new_build (test_report.ReportTests.test_old_scan_of_same_image_is_not_reused_after_new_build) ... ok
+test_read_only_flag_does_not_prove_process_identity (test_report.ReportTests.test_read_only_flag_does_not_prove_process_identity) ... ok
+test_reduced_scope_stays_explicit (test_report.ReportTests.test_reduced_scope_stays_explicit) ... ok
+test_scan_from_another_image_does_not_approve_selected_build (test_report.ReportTests.test_scan_from_another_image_does_not_approve_selected_build) ... ok
+test_snapshot_from_another_attempt_is_rejected (test_report.ReportTests.test_snapshot_from_another_attempt_is_rejected) ... ok
+test_snapshot_from_another_project_is_rejected (test_report.ReportTests.test_snapshot_from_another_project_is_rejected) ... ok
+test_snapshot_outside_attempt_window_is_invalid (test_report.ReportTests.test_snapshot_outside_attempt_window_is_invalid) ... ok
+test_success_without_result_is_incomplete (test_report.ReportTests.test_success_without_result_is_incomplete) ... ok
+test_text_cannot_substitute_runtime_write_probes (test_report.ReportTests.test_text_cannot_substitute_runtime_write_probes) ... ok
+test_unknown_state_is_escaped_and_not_translated_to_success (test_report.ReportTests.test_unknown_state_is_escaped_and_not_translated_to_success) ... ok
+
+----------------------------------------------------------------------
+Ran 42 tests in 0.846s
+
+OK
+#0 building with "pf-containerops-builder" instance using docker-container driver
+
+#1 [internal] load build definition from app.Dockerfile
+#1 transferring dockerfile: 2.75kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+#2 DONE 0.6s
+
+#3 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+#3 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26
+#4 DONE 0.0s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 352B done
+#5 DONE 0.0s
+
+#6 [deps 1/5] FROM docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26
+#6 resolve docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26 0.0s done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 64.76kB 0.0s done
+#7 DONE 0.1s
+
+#8 [deps 2/5] RUN python -m venv /opt/venv
+#8 CACHED
+
+#9 [deps 3/5] COPY app/requirements-runtime.lock /locks/requirements-runtime.lock
+#9 CACHED
+
+#10 [deps 4/5] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-runtime.lock
+#10 CACHED
+
+#11 [deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel
+#11 CACHED
+
+#12 [test 1/6] COPY app/requirements-test.lock /locks/requirements-test.lock
+#12 DONE 0.1s
+
+#13 [test 2/6] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-test.lock
+#13 0.442 Requirement already satisfied: annotated-doc==0.0.5 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 2)) (0.0.5)
+#13 0.443 Requirement already satisfied: annotated-types==0.8.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 3)) (0.8.0)
+#13 0.443 Requirement already satisfied: anyio==4.15.1 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 4)) (4.15.1)
+#13 0.444 Requirement already satisfied: click==8.5.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 5)) (8.5.0)
+#13 0.444 Requirement already satisfied: colorama==0.4.6 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 6)) (0.4.6)
+#13 0.445 Requirement already satisfied: fastapi==0.141.1 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 7)) (0.141.1)
+#13 0.446 Requirement already satisfied: h11==0.16.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 8)) (0.16.0)
+#13 0.446 Requirement already satisfied: idna==3.20 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 9)) (3.20)
+#13 0.447 Requirement already satisfied: psycopg==3.3.6 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 10)) (3.3.6)
+#13 0.447 Requirement already satisfied: psycopg-binary==3.3.6 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 11)) (3.3.6)
+#13 0.448 Requirement already satisfied: pydantic==2.13.5 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 12)) (2.13.5)
+#13 0.448 Requirement already satisfied: pydantic-core==2.46.5 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 13)) (2.46.5)
+#13 0.449 Requirement already satisfied: starlette==1.6.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 14)) (1.6.0)
+#13 0.449 Requirement already satisfied: typing-extensions==4.16.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 15)) (4.16.0)
+#13 0.450 Requirement already satisfied: typing-inspection==0.4.4 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 16)) (0.4.4)
+#13 0.450 Requirement already satisfied: tzdata==2026.4 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 17)) (2026.4)
+#13 0.451 Requirement already satisfied: uvicorn==0.53.0 in ./opt/venv/lib/python3.13/site-packages (from -r /locks/requirements-runtime.lock (line 18)) (0.53.0)
+#13 0.734 Collecting ast-serialize==0.11.2 (from -r /locks/requirements-test.lock (line 2))
+#13 0.930   Downloading ast_serialize-0.11.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.4 kB)
+#13 0.973 Collecting certifi==2026.7.22 (from -r /locks/requirements-test.lock (line 3))
+#13 0.989   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#13 1.028 Collecting httpcore==1.0.9 (from -r /locks/requirements-test.lock (line 4))
+#13 1.044   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#13 1.093 Collecting httpx==0.28.1 (from -r /locks/requirements-test.lock (line 5))
+#13 1.107   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#13 1.143 Collecting iniconfig==2.3.0 (from -r /locks/requirements-test.lock (line 6))
+#13 1.157   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+#13 1.314 Collecting librt==0.15.0 (from -r /locks/requirements-test.lock (line 7))
+#13 1.329   Downloading librt-0.15.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+#13 1.449 Collecting mypy==2.3.1 (from -r /locks/requirements-test.lock (line 8))
+#13 1.464   Downloading mypy-2.3.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#13 1.499 Collecting mypy-extensions==1.1.0 (from -r /locks/requirements-test.lock (line 9))
+#13 1.513   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+#13 1.551 Collecting packaging==26.3 (from -r /locks/requirements-test.lock (line 10))
+#13 1.565   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#13 1.601 Collecting pathspec==1.1.1 (from -r /locks/requirements-test.lock (line 11))
+#13 1.616   Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+#13 1.654 Collecting pluggy==1.6.0 (from -r /locks/requirements-test.lock (line 12))
+#13 1.668   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+#13 1.709 Collecting pygments==2.21.0 (from -r /locks/requirements-test.lock (line 13))
+#13 1.724   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#13 1.772 Collecting pytest==9.1.1 (from -r /locks/requirements-test.lock (line 14))
+#13 1.787   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+#13 2.153 Collecting ruff==0.16.8 (from -r /locks/requirements-test.lock (line 15))
+#13 2.168   Downloading ruff-0.16.8-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+#13 2.225 Downloading ast_serialize-0.11.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+#13 2.318    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 19.9 MB/s  0:00:00
+#13 2.333 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#13 2.363 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#13 2.386 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#13 2.412 Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+#13 2.434 Downloading librt-0.15.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (531 kB)
+#13 2.462    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 531.7/531.7 kB 16.2 MB/s  0:00:00
+#13 2.476 Downloading mypy-2.3.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (15.2 MB)
+#13 3.118    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.2/15.2 MB 24.0 MB/s  0:00:00
+#13 3.132 Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+#13 3.155 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#13 3.182 Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+#13 3.207 Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+#13 3.229 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#13 3.282    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 24.5 MB/s  0:00:00
+#13 3.298 Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+#13 3.344 Downloading ruff-0.16.8-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.3 MB)
+#13 3.783    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.3/10.3 MB 23.8 MB/s  0:00:00
+#13 3.892 Installing collected packages: ruff, pygments, pluggy, pathspec, packaging, mypy-extensions, librt, iniconfig, certifi, ast-serialize, pytest, mypy, httpcore, httpx
+#13 6.797 
+#13 6.800 Successfully installed ast-serialize-0.11.2 certifi-2026.7.22 httpcore-1.0.9 httpx-0.28.1 iniconfig-2.3.0 librt-0.15.0 mypy-2.3.1 mypy-extensions-1.1.0 packaging-26.3 pathspec-1.1.1 pluggy-1.6.0 pygments-2.21.0 pytest-9.1.1 ruff-0.16.8
+#13 DONE 6.9s
+
+#14 [test 3/6] WORKDIR /app
+#14 DONE 0.1s
+
+#15 [test 4/6] COPY app/pyproject.toml /app/pyproject.toml
+#15 DONE 0.0s
+
+#16 [test 5/6] COPY app/src /app/src
+#16 DONE 0.0s
+
+#17 [test 6/6] COPY app/tests /app/tests
+#17 DONE 0.0s
+
+#18 exporting to oci image format
+#18 exporting layers
+#18 exporting layers 4.4s done
+#18 exporting manifest sha256:f715b5250a147327170dbcdfc45576749e362483f7ab625f0ba6c58bbbec9283 0.0s done
+#18 exporting config sha256:2f543e08e3a4dd55b153a2e9cf5976dbfba2cae6f5ccb223e398c87f4652242d 0.0s done
+#18 sending tarball
+#18 ...
+
+#19 importing to docker
+#19 DONE 0.0s
+
+#18 exporting to oci image format
+#18 sending tarball 6.1s done
+#18 DONE 10.5s
+ Network pf-containerops-test-dd4169dc_data Creating 
+ Volume pf-containerops-test-dd4169dc_pgdata Creating 
+ Network pf-containerops-test-dd4169dc_data Creating 
+ Volume pf-containerops-test-dd4169dc_pgdata Creating 
+ Volume pf-containerops-test-dd4169dc_pgdata Created 
+ Volume pf-containerops-test-dd4169dc_pgdata Created 
+ Network pf-containerops-test-dd4169dc_data Created 
+ Network pf-containerops-test-dd4169dc_data Created 
+ Container pf-containerops-test-dd4169dc-db-1 Creating 
+ Container pf-containerops-test-dd4169dc-db-1 Created 
+ Container pf-containerops-test-dd4169dc-db-1 Starting 
+ Container pf-containerops-test-dd4169dc-db-1 Started 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy
+{"schema_version": 1}
+ Container pf-containerops-test-dd4169dc-migrate-run-a734c526f051 Creating 
+ Container pf-containerops-test-dd4169dc-migrate-run-a734c526f051 Created
+ Container pf-containerops-test-dd4169dc-db-1 Running 
+ Container pf-containerops-test-dd4169dc-worker-1 Creating 
+ Network pf-containerops-test-dd4169dc_front Creating 
+ Network pf-containerops-test-dd4169dc_front Creating 
+ Network pf-containerops-test-dd4169dc_front Created 
+ Network pf-containerops-test-dd4169dc_front Created 
+ Container pf-containerops-test-dd4169dc-api-1 Creating 
+ Container pf-containerops-test-dd4169dc-worker-1 Created 
+ Container pf-containerops-test-dd4169dc-api-1 Created 
+ Container pf-containerops-test-dd4169dc-proxy-1 Creating 
+ Container pf-containerops-test-dd4169dc-proxy-1 Created 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-api-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Healthy 
+ Container pf-containerops-test-dd4169dc-proxy-1 Starting 
+ Container pf-containerops-test-dd4169dc-proxy-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Waiting 
+ Container pf-containerops-test-dd4169dc-proxy-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-worker-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Healthy 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Healthy 
+ Container pf-containerops-test-dd4169dc-proxy-1 Healthy
+ Container pf-containerops-test-dd4169dc-worker-1 Stopping 
+ Container pf-containerops-test-dd4169dc-api-1 Stopping 
+ Container pf-containerops-test-dd4169dc-worker-1 Stopped 
+ Container pf-containerops-test-dd4169dc-api-1 Stopped
+All checks passed!
+ Container pf-containerops-test-dd4169dc-test-run-cc4a4d51151e Creating 
+ Container pf-containerops-test-dd4169dc-test-run-cc4a4d51151e Created
+15 files already formatted
+ Container pf-containerops-test-dd4169dc-test-run-27a4a60fb23b Creating 
+ Container pf-containerops-test-dd4169dc-test-run-27a4a60fb23b Created
+Success: no issues found in 9 source files
+ Container pf-containerops-test-dd4169dc-test-run-85a4719c90e9 Creating 
+ Container pf-containerops-test-dd4169dc-test-run-85a4719c90e9 Created
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /app
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 102 items
+
+tests/test_api.py ...........                                            [ 10%]
+tests/test_body_limit.py ...                                             [ 13%]
+tests/test_domain.py ......................                              [ 35%]
+tests/test_http_contract.py ............................................ [ 78%]
+........                                                                 [ 86%]
+tests/test_integration.py ..............                                 [100%]
+
+=============================== warnings summary ===============================
+../opt/venv/lib/python3.13/site-packages/fastapi/testclient.py:1
+ Container pf-containerops-test-dd4169dc-test-run-42c9bc903eaf Creating 
+  /opt/venv/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+../opt/venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /opt/venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 102 passed, 2 warnings in 5.78s ========================
+ Container pf-containerops-test-dd4169dc-test-run-42c9bc903eaf Created
+ Container pf-containerops-test-dd4169dc-db-1 Running 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Starting 
+ Container pf-containerops-test-dd4169dc-api-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Started 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-worker-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-api-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Healthy
+ Container pf-containerops-test-dd4169dc-worker-1 Killing 
+ Container pf-containerops-test-dd4169dc-worker-1 Killed
+ Container pf-containerops-test-dd4169dc-db-1 Running 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Started
+ Container pf-containerops-test-dd4169dc-worker-1 Stopping 
+ Container pf-containerops-test-dd4169dc-worker-1 Stopped
+ Container pf-containerops-test-dd4169dc-db-1 Running 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Started
+ Container pf-containerops-test-dd4169dc-api-1 Stopping 
+ Container pf-containerops-test-dd4169dc-api-1 Stopped
+ Container pf-containerops-test-dd4169dc-api-1 Starting 
+ Container pf-containerops-test-dd4169dc-api-1 Started
+ Container pf-containerops-test-dd4169dc-db-1 Stopping 
+ Container pf-containerops-test-dd4169dc-db-1 Stopped
+ Container pf-containerops-test-dd4169dc-db-1 Starting 
+ Container pf-containerops-test-dd4169dc-db-1 Started 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy
+ Container pf-containerops-test-dd4169dc-worker-1 Stopping 
+ Container pf-containerops-test-dd4169dc-proxy-1 Stopping 
+ Container pf-containerops-test-dd4169dc-worker-1 Stopped 
+ Container pf-containerops-test-dd4169dc-worker-1 Removing 
+ Container pf-containerops-test-dd4169dc-worker-1 Removed 
+ Container pf-containerops-test-dd4169dc-proxy-1 Stopped 
+ Container pf-containerops-test-dd4169dc-proxy-1 Removing 
+ Container pf-containerops-test-dd4169dc-proxy-1 Removed 
+ Container pf-containerops-test-dd4169dc-api-1 Stopping 
+ Container pf-containerops-test-dd4169dc-api-1 Stopped 
+ Container pf-containerops-test-dd4169dc-api-1 Removing 
+ Container pf-containerops-test-dd4169dc-api-1 Removed 
+ Container pf-containerops-test-dd4169dc-db-1 Stopping 
+ Container pf-containerops-test-dd4169dc-db-1 Stopped 
+ Container pf-containerops-test-dd4169dc-db-1 Removing 
+ Container pf-containerops-test-dd4169dc-db-1 Removed 
+ Network pf-containerops-test-dd4169dc_data Removing 
+ Network pf-containerops-test-dd4169dc_front Removing 
+ Network pf-containerops-test-dd4169dc_front Removed 
+ Network pf-containerops-test-dd4169dc_data Removed
+ Network pf-containerops-test-dd4169dc_data Creating 
+ Network pf-containerops-test-dd4169dc_data Creating 
+ Network pf-containerops-test-dd4169dc_data Created 
+ Network pf-containerops-test-dd4169dc_data Created 
+ Container pf-containerops-test-dd4169dc-db-1 Creating 
+ Container pf-containerops-test-dd4169dc-db-1 Created 
+ Container pf-containerops-test-dd4169dc-db-1 Starting 
+ Container pf-containerops-test-dd4169dc-db-1 Started 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy
+{"schema_version": 2}
+ Container pf-containerops-test-dd4169dc-migrate-run-d2a53271310e Creating 
+ Container pf-containerops-test-dd4169dc-migrate-run-d2a53271310e Created
+ Container pf-containerops-test-dd4169dc-db-1 Running 
+ Container pf-containerops-test-dd4169dc-worker-1 Creating 
+ Network pf-containerops-test-dd4169dc_front Creating 
+ Network pf-containerops-test-dd4169dc_front Creating 
+ Network pf-containerops-test-dd4169dc_front Created 
+ Network pf-containerops-test-dd4169dc_front Created 
+ Container pf-containerops-test-dd4169dc-api-1 Creating 
+ Container pf-containerops-test-dd4169dc-worker-1 Created 
+ Container pf-containerops-test-dd4169dc-api-1 Created 
+ Container pf-containerops-test-dd4169dc-proxy-1 Creating 
+ Container pf-containerops-test-dd4169dc-proxy-1 Created 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Starting 
+ Container pf-containerops-test-dd4169dc-api-1 Starting 
+ Container pf-containerops-test-dd4169dc-worker-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Started 
+ Container pf-containerops-test-dd4169dc-api-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Healthy 
+ Container pf-containerops-test-dd4169dc-proxy-1 Starting 
+ Container pf-containerops-test-dd4169dc-proxy-1 Started 
+ Container pf-containerops-test-dd4169dc-worker-1 Waiting 
+ Container pf-containerops-test-dd4169dc-db-1 Waiting 
+ Container pf-containerops-test-dd4169dc-proxy-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Waiting 
+ Container pf-containerops-test-dd4169dc-api-1 Healthy 
+ Container pf-containerops-test-dd4169dc-db-1 Healthy 
+ Container pf-containerops-test-dd4169dc-worker-1 Healthy 
+ Container pf-containerops-test-dd4169dc-proxy-1 Healthy
+ Container pf-containerops-test-dd4169dc-proxy-1 Stopping 
+ Container pf-containerops-test-dd4169dc-worker-1 Stopping 
+ Container pf-containerops-test-dd4169dc-worker-1 Stopped 
+ Container pf-containerops-test-dd4169dc-worker-1 Removing 
+ Container pf-containerops-test-dd4169dc-worker-1 Removed 
+ Container pf-containerops-test-dd4169dc-proxy-1 Stopped 
+ Container pf-containerops-test-dd4169dc-proxy-1 Removing 
+ Container pf-containerops-test-dd4169dc-proxy-1 Removed 
+ Container pf-containerops-test-dd4169dc-api-1 Stopping 
+ Container pf-containerops-test-dd4169dc-api-1 Stopped 
+ Container pf-containerops-test-dd4169dc-api-1 Removing 
+ Container pf-containerops-test-dd4169dc-api-1 Removed 
+ Container pf-containerops-test-dd4169dc-db-1 Stopping 
+ Container pf-containerops-test-dd4169dc-db-1 Stopped 
+ Container pf-containerops-test-dd4169dc-db-1 Removing 
+ Container pf-containerops-test-dd4169dc-db-1 Removed 
+ Network pf-containerops-test-dd4169dc_data Removing 
+ Volume pf-containerops-test-dd4169dc_pgdata Removing 
+ Network pf-containerops-test-dd4169dc_front Removing 
+ Volume pf-containerops-test-dd4169dc_artifacts Removing 
+ Volume pf-containerops-test-dd4169dc_pgdata Removed 
+ Volume pf-containerops-test-dd4169dc_artifacts Removed 
+ Network pf-containerops-test-dd4169dc_front Removed 
+ Network pf-containerops-test-dd4169dc_data Removed
+ Network pf-containerops-test-aec402ee_data Creating 
+ Network pf-containerops-test-aec402ee_data Creating 
+ Volume pf-containerops-test-aec402ee_pgdata Creating 
+ Volume pf-containerops-test-aec402ee_pgdata Creating 
+ Volume pf-containerops-test-aec402ee_pgdata Created 
+ Volume pf-containerops-test-aec402ee_pgdata Created 
+ Network pf-containerops-test-aec402ee_data Created 
+ Network pf-containerops-test-aec402ee_data Created 
+ Container pf-containerops-test-aec402ee-db-1 Creating 
+ Container pf-containerops-test-aec402ee-db-1 Created 
+ Container pf-containerops-test-aec402ee-db-1 Starting 
+ Container pf-containerops-test-aec402ee-db-1 Started 
+ Container pf-containerops-test-aec402ee-db-1 Waiting 
+ Container pf-containerops-test-aec402ee-db-1 Healthy
+ Container pf-containerops-test-aec402ee-migrate-run-35cbab81b64b Creating 
+{"schema_version": 1}
+ Container pf-containerops-test-aec402ee-migrate-run-35cbab81b64b Created
+ Container pf-containerops-test-aec402ee-db-1 Running 
+ Container pf-containerops-test-aec402ee-worker-1 Creating 
+ Network pf-containerops-test-aec402ee_front Creating 
+ Network pf-containerops-test-aec402ee_front Creating 
+ Network pf-containerops-test-aec402ee_front Created 
+ Network pf-containerops-test-aec402ee_front Created 
+ Container pf-containerops-test-aec402ee-api-1 Creating 
+ Container pf-containerops-test-aec402ee-worker-1 Created 
+ Container pf-containerops-test-aec402ee-api-1 Created 
+ Container pf-containerops-test-aec402ee-proxy-1 Creating 
+ Container pf-containerops-test-aec402ee-proxy-1 Created 
+ Container pf-containerops-test-aec402ee-db-1 Waiting 
+ Container pf-containerops-test-aec402ee-db-1 Waiting 
+ Container pf-containerops-test-aec402ee-db-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Starting 
+ Container pf-containerops-test-aec402ee-db-1 Healthy 
+ Container pf-containerops-test-aec402ee-api-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-proxy-1 Starting 
+ Container pf-containerops-test-aec402ee-proxy-1 Started 
+ Container pf-containerops-test-aec402ee-worker-1 Waiting 
+ Container pf-containerops-test-aec402ee-db-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-proxy-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-db-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Healthy 
+ Container pf-containerops-test-aec402ee-proxy-1 Healthy
+ Volume pf-containerops-test-aec402ee_artifacts Creating 
+ Volume pf-containerops-test-aec402ee_artifacts Creating 
+ Volume pf-containerops-test-aec402ee_artifacts Created 
+ Volume pf-containerops-test-aec402ee_artifacts Created 
+ Container pf-containerops-test-aec402ee-backup-9251e087 Creating 
+ Container pf-containerops-test-aec402ee-backup-9251e087 Created
+Backup: <localappdata>\ContainerOps-runtime\backups\20260921T064528-2c8d8753
+ Container pf-containerops-test-aec402ee-migrate-run-91dfbda9d6d7 Creating 
+{"schema_version": 2}
+ Container pf-containerops-test-aec402ee-migrate-run-91dfbda9d6d7 Created
+ Container pf-containerops-test-aec402ee-api-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Started 
+ Container pf-containerops-test-aec402ee-worker-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Healthy
+ Container pf-containerops-test-aec402ee-api-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Started 
+ Container pf-containerops-test-aec402ee-worker-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Healthy
+ Container pf-containerops-test-aec402ee-backup-69204666 Creating 
+ Container pf-containerops-test-aec402ee-backup-69204666 Created
+Backup: <localappdata>\ContainerOps-runtime\backups\20260921T064626-ae7fc763
+ Container pf-containerops-test-aec402ee-migrate-run-49b9a220b045 Creating 
+{"schema_version": 2}
+ Container pf-containerops-test-aec402ee-migrate-run-49b9a220b045 Created
+ Container pf-containerops-test-aec402ee-api-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Started 
+ Container pf-containerops-test-aec402ee-worker-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Healthy
+ Container pf-containerops-test-aec402ee-worker-1 Recreate 
+ Container pf-containerops-test-aec402ee-api-1 Recreate 
+ Container pf-containerops-test-aec402ee-worker-1 Recreated 
+ Container pf-containerops-test-aec402ee-api-1 Recreated 
+ Container pf-containerops-test-aec402ee-worker-1 Starting 
+ Container pf-containerops-test-aec402ee-api-1 Starting 
+ Container pf-containerops-test-aec402ee-worker-1 Started 
+ Container pf-containerops-test-aec402ee-api-1 Started 
+ Container pf-containerops-test-aec402ee-worker-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Waiting 
+ Container pf-containerops-test-aec402ee-api-1 Healthy 
+ Container pf-containerops-test-aec402ee-worker-1 Healthy
+ Container pf-containerops-test-aec402ee-proxy-1 Recreate 
+ Container pf-containerops-test-aec402ee-proxy-1 Recreated 
+ Container pf-containerops-test-aec402ee-proxy-1 Starting 
+ Container pf-containerops-test-aec402ee-proxy-1 Started 
+ Container pf-containerops-test-aec402ee-proxy-1 Waiting 
+ Container pf-containerops-test-aec402ee-proxy-1 Healthy
+ Container pf-containerops-test-aec402ee-backup-c6f5fbf3 Creating 
+ Container pf-containerops-test-aec402ee-backup-c6f5fbf3 Created
+ Network pf-containerops-restore-81945929_data Creating 
+ Volume pf-containerops-restore-81945929_pgdata Creating 
+ Network pf-containerops-restore-81945929_data Creating 
+ Volume pf-containerops-restore-81945929_pgdata Creating 
+ Volume pf-containerops-restore-81945929_pgdata Created 
+ Volume pf-containerops-restore-81945929_pgdata Created 
+ Network pf-containerops-restore-81945929_data Created 
+ Network pf-containerops-restore-81945929_data Created 
+ Container pf-containerops-restore-81945929-db-1 Creating 
+ Container pf-containerops-restore-81945929-db-1 Created 
+ Container pf-containerops-restore-81945929-db-1 Starting 
+ Container pf-containerops-restore-81945929-db-1 Started 
+ Container pf-containerops-restore-81945929-db-1 Waiting 
+ Container pf-containerops-restore-81945929-db-1 Healthy
+ Volume pf-containerops-restore-81945929_artifacts Creating 
+ Volume pf-containerops-restore-81945929_artifacts Creating 
+ Volume pf-containerops-restore-81945929_artifacts Created 
+ Volume pf-containerops-restore-81945929_artifacts Created 
+ Container pf-containerops-restore-81945929-restore-1 Creating 
+ Container pf-containerops-restore-81945929-restore-1 Created
+Backup: <localappdata>\ContainerOps-runtime\backups\20260921T064743-1d755863
+{"schema_version": 2}
+ Container pf-containerops-restore-81945929-migrate-run-db3fdae6934c Creating 
+ Container pf-containerops-restore-81945929-migrate-run-db3fdae6934c Created
+ Container pf-containerops-restore-81945929-db-1 Running 
+ Container pf-containerops-restore-81945929-worker-1 Creating 
+ Network pf-containerops-restore-81945929_front Creating 
+ Network pf-containerops-restore-81945929_front Creating 
+ Network pf-containerops-restore-81945929_front Created 
+ Network pf-containerops-restore-81945929_front Created 
+ Container pf-containerops-restore-81945929-api-1 Creating 
+ Container pf-containerops-restore-81945929-worker-1 Created 
+ Container pf-containerops-restore-81945929-api-1 Created 
+ Container pf-containerops-restore-81945929-proxy-1 Creating 
+ Container pf-containerops-restore-81945929-proxy-1 Created 
+ Container pf-containerops-restore-81945929-db-1 Waiting 
+ Container pf-containerops-restore-81945929-db-1 Waiting 
+ Container pf-containerops-restore-81945929-db-1 Healthy 
+ Container pf-containerops-restore-81945929-worker-1 Starting 
+ Container pf-containerops-restore-81945929-db-1 Healthy 
+ Container pf-containerops-restore-81945929-api-1 Starting 
+ Container pf-containerops-restore-81945929-worker-1 Started 
+ Container pf-containerops-restore-81945929-api-1 Started 
+ Container pf-containerops-restore-81945929-api-1 Waiting 
+ Container pf-containerops-restore-81945929-api-1 Healthy 
+ Container pf-containerops-restore-81945929-proxy-1 Starting 
+ Container pf-containerops-restore-81945929-proxy-1 Started 
+ Container pf-containerops-restore-81945929-db-1 Waiting 
+ Container pf-containerops-restore-81945929-worker-1 Waiting 
+ Container pf-containerops-restore-81945929-proxy-1 Waiting 
+ Container pf-containerops-restore-81945929-api-1 Waiting 
+ Container pf-containerops-restore-81945929-worker-1 Healthy 
+ Container pf-containerops-restore-81945929-api-1 Healthy 
+ Container pf-containerops-restore-81945929-db-1 Healthy 
+ Container pf-containerops-restore-81945929-proxy-1 Healthy
+ Container pf-containerops-restore-81945929-proxy-1 Stopping 
+ Container pf-containerops-restore-81945929-worker-1 Stopping 
+ Container pf-containerops-restore-81945929-restore-1 Stopping 
+ Container pf-containerops-restore-81945929-restore-1 Stopped 
+ Container pf-containerops-restore-81945929-restore-1 Removing 
+ Container pf-containerops-restore-81945929-restore-1 Removed 
+ Container pf-containerops-restore-81945929-worker-1 Stopped 
+ Container pf-containerops-restore-81945929-worker-1 Removing 
+ Container pf-containerops-restore-81945929-worker-1 Removed 
+ Container pf-containerops-restore-81945929-proxy-1 Stopped 
+ Container pf-containerops-restore-81945929-proxy-1 Removing 
+ Container pf-containerops-restore-81945929-proxy-1 Removed 
+ Container pf-containerops-restore-81945929-api-1 Stopping 
+ Container pf-containerops-restore-81945929-api-1 Stopped 
+ Container pf-containerops-restore-81945929-api-1 Removing 
+ Container pf-containerops-restore-81945929-api-1 Removed 
+ Container pf-containerops-restore-81945929-db-1 Stopping 
+ Container pf-containerops-restore-81945929-db-1 Stopped 
+ Container pf-containerops-restore-81945929-db-1 Removing 
+ Container pf-containerops-restore-81945929-db-1 Removed 
+ Network pf-containerops-restore-81945929_data Removing 
+ Volume pf-containerops-restore-81945929_artifacts Removing 
+ Network pf-containerops-restore-81945929_front Removing 
+ Volume pf-containerops-restore-81945929_pgdata Removing 
+ Volume pf-containerops-restore-81945929_artifacts Removed 
+ Volume pf-containerops-restore-81945929_pgdata Removed 
+ Network pf-containerops-restore-81945929_data Removed 
+ Network pf-containerops-restore-81945929_front Removed
+ Container pf-containerops-test-aec402ee-proxy-1 Stopping 
+ Container pf-containerops-test-aec402ee-worker-1 Stopping 
+ Container pf-containerops-test-aec402ee-worker-1 Stopped 
+ Container pf-containerops-test-aec402ee-worker-1 Removing 
+ Container pf-containerops-test-aec402ee-worker-1 Removed 
+ Container pf-containerops-test-aec402ee-proxy-1 Stopped 
+ Container pf-containerops-test-aec402ee-proxy-1 Removing 
+ Container pf-containerops-test-aec402ee-proxy-1 Removed 
+ Container pf-containerops-test-aec402ee-api-1 Stopping 
+ Container pf-containerops-test-aec402ee-api-1 Stopped 
+ Container pf-containerops-test-aec402ee-api-1 Removing 
+ Container pf-containerops-test-aec402ee-api-1 Removed 
+ Container pf-containerops-test-aec402ee-db-1 Stopping 
+ Container pf-containerops-test-aec402ee-db-1 Stopped 
+ Container pf-containerops-test-aec402ee-db-1 Removing 
+ Container pf-containerops-test-aec402ee-db-1 Removed 
+ Network pf-containerops-test-aec402ee_front Removing 
+ Volume pf-containerops-test-aec402ee_pgdata Removing 
+ Volume pf-containerops-test-aec402ee_artifacts Removing 
+ Network pf-containerops-test-aec402ee_data Removing 
+ Volume pf-containerops-test-aec402ee_pgdata Removed 
+ Volume pf-containerops-test-aec402ee_artifacts Removed 
+ Network pf-containerops-test-aec402ee_front Removed 
+ Network pf-containerops-test-aec402ee_data Removed
+Prova: <repo>\docs\evidence\problem-proof\aec402ee34b14bff88ac2050108dfd1b\manifest.json

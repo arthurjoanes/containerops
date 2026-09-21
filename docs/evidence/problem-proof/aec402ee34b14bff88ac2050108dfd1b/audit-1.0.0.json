@@ -1,0 +1,125 @@
+{
+  "index_json_digest": "sha256:77128128e30568e8d44f1fbadc6486720d3fdcf6c99fcce816b017d44735e2e2",
+  "platform_manifest_digest": "sha256:badd07a8a03a837677be108c738762a8823c8dfc0bec7c57d31b357803f85478",
+  "config_digest": "sha256:9b002a77c91a222236d9e3bb33d3a4a6ae6b52bbfd36c20dea66081b8ce91504",
+  "diff_ids": [
+    "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d",
+    "sha256:0229d3e3d668de7c1d42c1e23d30f4bc5c5e93d68c8fe897e94a6fe9b0262491",
+    "sha256:d119e31e71d7a4e8b81f78a0e11901e1a2b3252619eac69266aa157d943b4763",
+    "sha256:1095031acd1c984ad93c83dadab1d79a3b2fd93d5086537b16593c47a3e3ee06",
+    "sha256:b9301a08e89ae4372498d60a44ce6333e28dafef2e98ef742369dbfbb38f9cd5",
+    "sha256:0f500eabaccf007f97318f0af3bcee32fd484743f76054dc45333defd84d23a8",
+    "sha256:f9b579f236c0fad175d0e024f648e0883ed1b90158d37666c04a5d2749d42da7",
+    "sha256:a9a17413f9fa0d2dd413b673c28bb87aace8267248f78a7cf7ee37d8c63737a3",
+    "sha256:37a9e21937d7140dae12c9c55117b3a9cc2e09c315fd7b36404c2f115e103981"
+  ],
+  "layers": [
+    {
+      "blob_digest": "sha256:774043ccc8ccd0d0833a9ee0792142ab7ad93df971e59dd248fbf82db16d0150",
+      "diff_id": "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d"
+    },
+    {
+      "blob_digest": "sha256:43dcef5051b0d747db428c3890841803fca6b253a38f1f66774f964ee0dbaa33",
+      "diff_id": "sha256:0229d3e3d668de7c1d42c1e23d30f4bc5c5e93d68c8fe897e94a6fe9b0262491"
+    },
+    {
+      "blob_digest": "sha256:2e57034c052c6d059f36df62c9e6f4ee3630bb3a653a5f9e4a196159d53abb35",
+      "diff_id": "sha256:d119e31e71d7a4e8b81f78a0e11901e1a2b3252619eac69266aa157d943b4763"
+    },
+    {
+      "blob_digest": "sha256:5483d2d2a330470f65f1ca5e1c6a9d4167051e32057624e31e13a9ec6392f42b",
+      "diff_id": "sha256:1095031acd1c984ad93c83dadab1d79a3b2fd93d5086537b16593c47a3e3ee06"
+    },
+    {
+      "blob_digest": "sha256:66236b3c8a06501d94cb5086835613bbbeeffec35a46990b0471816311c74d0a",
+      "diff_id": "sha256:b9301a08e89ae4372498d60a44ce6333e28dafef2e98ef742369dbfbb38f9cd5"
+    },
+    {
+      "blob_digest": "sha256:c1bf34e8f9c7cec787e80ca9e2127dcb8f49145ea77eb1062deeacb0c158094a",
+      "diff_id": "sha256:0f500eabaccf007f97318f0af3bcee32fd484743f76054dc45333defd84d23a8"
+    },
+    {
+      "blob_digest": "sha256:462c54d2ee070b6c11029305ba791c34ce9cc8e405cc3a3c125801640923348b",
+      "diff_id": "sha256:f9b579f236c0fad175d0e024f648e0883ed1b90158d37666c04a5d2749d42da7"
+    },
+    {
+      "blob_digest": "sha256:514c406e28fe2c320c5fd659415d3f3db691e6643e66e14d3ce495e6863df650",
+      "diff_id": "sha256:a9a17413f9fa0d2dd413b673c28bb87aace8267248f78a7cf7ee37d8c63737a3"
+    },
+    {
+      "blob_digest": "sha256:64ba7e4d4e261bb1999ce4110f01a112427dc123132558e717150d8c02b6db79",
+      "diff_id": "sha256:37a9e21937d7140dae12c9c55117b3a9cc2e09c315fd7b36404c2f115e103981"
+    }
+  ],
+  "packages_total": 121,
+  "locked_packages_verified": {
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "fastapi": "0.141.1",
+    "h11": "0.16.0",
+    "idna": "3.20",
+    "psycopg": "3.3.6",
+    "psycopg-binary": "3.3.6",
+    "pydantic": "2.13.5",
+    "pydantic-core": "2.46.5",
+    "starlette": "1.6.0",
+    "typing-extensions": "4.16.0",
+    "typing-inspection": "0.4.4",
+    "tzdata": "2026.4",
+    "uvicorn": "0.53.0"
+  },
+  "materials": [
+    {
+      "uri": "pkg:docker/docker/buildkit-syft-scanner@stable-1?digest=sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9",
+      "digest": {
+        "sha256": "ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9"
+      }
+    },
+    {
+      "uri": "pkg:docker/docker/dockerfile@1.7",
+      "digest": {
+        "sha256": "a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e"
+      }
+    },
+    {
+      "uri": "pkg:docker/python@3.13.15-slim-bookworm?digest=sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26&platform=linux%2Famd64",
+      "digest": {
+        "sha256": "2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26"
+      }
+    }
+  ],
+  "attestation_subjects_verified": true,
+  "sbom_documents": 1,
+  "provenance_documents": 1,
+  "sentinel_absent_layers_config_history_attestations": true,
+  "image_user": "10001:10001",
+  "python_base_material_matches_lock": true,
+  "executed_at": "2026-09-21T06:40:12.098091+00:00",
+  "version": "1.0.0",
+  "image_id": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
+  "daemon_config_and_layers_verified": true,
+  "daemon_link": {
+    "daemon_image_id": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
+    "config_digest": "sha256:9b002a77c91a222236d9e3bb33d3a4a6ae6b52bbfd36c20dea66081b8ce91504",
+    "diff_ids": [
+      "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d",
+      "sha256:0229d3e3d668de7c1d42c1e23d30f4bc5c5e93d68c8fe897e94a6fe9b0262491",
+      "sha256:d119e31e71d7a4e8b81f78a0e11901e1a2b3252619eac69266aa157d943b4763",
+      "sha256:1095031acd1c984ad93c83dadab1d79a3b2fd93d5086537b16593c47a3e3ee06",
+      "sha256:b9301a08e89ae4372498d60a44ce6333e28dafef2e98ef742369dbfbb38f9cd5",
+      "sha256:0f500eabaccf007f97318f0af3bcee32fd484743f76054dc45333defd84d23a8",
+      "sha256:f9b579f236c0fad175d0e024f648e0883ed1b90158d37666c04a5d2749d42da7",
+      "sha256:a9a17413f9fa0d2dd413b673c28bb87aace8267248f78a7cf7ee37d8c63737a3",
+      "sha256:37a9e21937d7140dae12c9c55117b3a9cc2e09c315fd7b36404c2f115e103981"
+    ],
+    "export_archive_sha256": "sha256:4f1577a52c841c2f170e14efade27dfa184ac2cd672f03b3f9f23379831a80e7"
+  },
+  "sentinel_absent_daemon_history_exported_filesystem": true,
+  "sentinel_sha256": "sha256:1de7b55ddfb9b705e12803c8c00cb20ce0f16c2b807925f5f2f461f5c7d90854",
+  "exported_filesystem_sha256": "sha256:3a5d0bff0bfbe8e731d489802beed6ce9ecf4ad5098f932f176971048d2927ea",
+  "oci_sha256": "sha256:fe0e2c756a991fd00980294a38958b66a5128d915ea59c343a39bd16a75f7f82",
+  "artifact_directory": "<localappdata>\\ContainerOps-runtime\\artifacts\\1.0.0"
+}

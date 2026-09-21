@@ -1,0 +1,221 @@
+{
+  "recorded_at": "2026-09-21T05:01:24.734836+00:00",
+  "project": "pf-containerops-test-d515696a",
+  "started_at": "2026-09-21T04:56:09.556782+00:00",
+  "status": "passed",
+  "collected_from_individual_records": true,
+  "collection_issue": "review-followup-collection-error.json",
+  "note": "O registro individual do primeiro retorno manual foi substituído pelo segundo. O segundo comprova imagem1 como origem e imagem2 como destino; nenhum tempo do primeiro foi reconstruído.",
+  "records": {
+    "rollback": {
+      "recorded_at": "2026-09-21T04:57:25.678937+00:00",
+      "project": "pf-containerops-test-d515696a",
+      "requested_version": "2.0.0",
+      "injected_smoke_failure": true,
+      "phase": "completed",
+      "previous_image": "sha256:73998681a0f658eaa2d2729e171af6d4b685de21b753d89f956bd8cd84b8bd5d",
+      "candidate_image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "candidate_health": {
+        "status": "alive",
+        "version": "2.0.0"
+      },
+      "candidate_job": {
+        "id": "c3f641ec-d75d-428d-abef-4b50567eeafc",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+        },
+        "error": null,
+        "version": "2.0.0",
+        "algorithm": "unicode-alnum-marks-v1"
+      },
+      "rollback_job": {
+        "id": "60c6c9b3-480d-4315-891d-59d6e27288de",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 3,
+          "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556"
+        },
+        "error": null,
+        "version": "1.0.0"
+      },
+      "rolled_back": true,
+      "reason": "Falha de smoke injetada no ensaio de rollback",
+      "rollback_health": {
+        "status": "alive",
+        "version": "1.0.0"
+      },
+      "maintenance_seconds": 39.796,
+      "previous_health": {
+        "status": "alive",
+        "version": "1.0.0"
+      },
+      "preserved_jobs": 1
+    },
+    "release": {
+      "recorded_at": "2026-09-21T04:58:02.226362+00:00",
+      "project": "pf-containerops-test-d515696a",
+      "requested_version": "2.0.0",
+      "injected_smoke_failure": false,
+      "phase": "completed",
+      "previous_image": "sha256:73998681a0f658eaa2d2729e171af6d4b685de21b753d89f956bd8cd84b8bd5d",
+      "candidate_image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "candidate_health": {
+        "status": "alive",
+        "version": "2.0.0"
+      },
+      "candidate_job": {
+        "id": "9f73c928-870c-4241-af8d-2ae1d91d4e0e",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+        },
+        "error": null,
+        "version": "2.0.0",
+        "algorithm": "unicode-alnum-marks-v1"
+      },
+      "rolled_back": false,
+      "maintenance_seconds": 23.968,
+      "previous_health": {
+        "status": "alive",
+        "version": "1.0.0"
+      },
+      "preserved_jobs": 3
+    },
+    "manual-rollback": {
+      "recorded_at": "2026-09-21T04:58:50.855223+00:00",
+      "project": "pf-containerops-test-d515696a",
+      "previous_image": "sha256:73998681a0f658eaa2d2729e171af6d4b685de21b753d89f956bd8cd84b8bd5d",
+      "active_image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "preserved_jobs": 5,
+      "job": {
+        "id": "79e0be28-c0d4-465a-83e0-e83dcb64ec95",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1"
+        },
+        "error": null,
+        "version": "2.0.0",
+        "algorithm": "unicode-alnum-marks-v1"
+      },
+      "maintenance_seconds": 20.078
+    },
+    "backup": {
+      "recorded_at": "2026-09-21T04:59:00.630820+00:00",
+      "created_at": "2026-09-21T04:59:00.122442+00:00",
+      "sha256": "bdc3d221f175378d2a35de1683d2a502784b6627b4c574bc44cf880ffd726bf7",
+      "server": "postgres (PostgreSQL) 17.11 (Debian 17.11-1.pgdg12+2)",
+      "schema_version": 2,
+      "snapshot": {
+        "admission_paused": true,
+        "counts": {
+          "failed": 0,
+          "queued": 0,
+          "running": 0,
+          "succeeded": 6
+        },
+        "jobs": [
+          {
+            "attempts": 1,
+            "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1",
+            "error_category": null,
+            "id": "12479b1b-c75a-48fb-a125-e9779a556852",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 4
+          },
+          {
+            "attempts": 1,
+            "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+            "error_category": null,
+            "id": "60c6c9b3-480d-4315-891d-59d6e27288de",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 3
+          },
+          {
+            "attempts": 1,
+            "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1",
+            "error_category": null,
+            "id": "79e0be28-c0d4-465a-83e0-e83dcb64ec95",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 4
+          },
+          {
+            "attempts": 1,
+            "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+            "error_category": null,
+            "id": "9f73c928-870c-4241-af8d-2ae1d91d4e0e",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 4
+          },
+          {
+            "attempts": 1,
+            "checksum": "008fcd8065730402523011e0d0a1aa5575e8d7bc044f4afc15430927b4112613",
+            "error_category": null,
+            "id": "b37c6bd2-d7cc-4348-90df-db734ea84141",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 4
+          },
+          {
+            "attempts": 1,
+            "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+            "error_category": null,
+            "id": "c3f641ec-d75d-428d-abef-4b50567eeafc",
+            "owner": "alice",
+            "state": "succeeded",
+            "word_count": 4
+          }
+        ],
+        "schema_version": 2
+      },
+      "source_project": "pf-containerops-test-d515696a",
+      "image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+      "elapsed_seconds": 7.875,
+      "directory": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T045852-96184354"
+    },
+    "restore": {
+      "recorded_at": "2026-09-21T04:59:30.823162+00:00",
+      "project": "pf-containerops-restore-c888f2b8",
+      "backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T045852-96184354",
+      "checksum_verified": true,
+      "snapshot_equal": true,
+      "restored_jobs": 6,
+      "new_job": {
+        "id": "4aa2d427-1977-4e82-9818-e18c3070b3a6",
+        "state": "succeeded",
+        "attempts": 1,
+        "result": {
+          "word_count": 4,
+          "checksum": "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c"
+        },
+        "error": null,
+        "version": "2.0.0",
+        "algorithm": "unicode-alnum-marks-v1"
+      },
+      "recovery_seconds": 27.641
+    }
+  },
+  "cleanup": {
+    "pf-containerops-test-d515696a": {
+      "containers": [],
+      "volumes": [],
+      "networks": []
+    },
+    "pf-containerops-restore-c888f2b8": {
+      "containers": [],
+      "volumes": [],
+      "networks": []
+    }
+  }
+}

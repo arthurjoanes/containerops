@@ -1,0 +1,509 @@
+{
+  "recorded_at": "2026-09-21T06:39:25.306040+00:00",
+  "containers": [
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 03:36:53 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "f734a9bcc0f4",
+      "Image": "pf-loja-assistente-frontend",
+      "Labels": "com.docker.compose.config-hash=f3b0f76e09fbf2e3f9ca1c22413ffae08c4751dcd120bbd93c268dabbb26f2eb,com.docker.compose.container-number=1,com.docker.compose.depends_on=backend:service_healthy:false,com.docker.compose.image=sha256:708644689d227cebd98c8cd0e988a1d29e44133c173c683b52ad1d5cf3bb1d08,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-loja-assistente,com.docker.compose.replace=frontend-1,com.docker.compose.service=frontend,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/3102/tcp=127.0.0.1:3102",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "pf-loja-assistente-frontend-1",
+      "Networks": "pf-loja-assistente_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:3102->3102/tcp",
+      "RunningFor": "2 minutes ago",
+      "Size": "4.1kB (virtual 290MB)",
+      "State": "running",
+      "Status": "Up 2 minutes (healthy)"
+    },
+    {
+      "Command": "\"uvicorn loja_assist…\"",
+      "CreatedAt": "2026-09-21 03:36:52 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "267306f0bcdf",
+      "Image": "pf-loja-assistente-backend:local",
+      "Labels": "com.docker.compose.config-hash=240af77adec43244a66817d1c7a92cde7b2f7ab814149a567269f4cd57b2a635,com.docker.compose.container-number=1,com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:fdb1316d724084878b6560f2b989aa18eaa66187cea567e208a169438fbbd6f0,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-loja-assistente,com.docker.compose.replace=backend-1,com.docker.compose.service=backend,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\data\\manifests,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/app/data/manifests,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8102/tcp=127.0.0.1:8102",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…",
+      "Names": "pf-loja-assistente-backend-1",
+      "Networks": "pf-loja-assistente_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:8102->8102/tcp",
+      "RunningFor": "2 minutes ago",
+      "Size": "4.1kB (virtual 521MB)",
+      "State": "running",
+      "Status": "Up 2 minutes (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 03:34:51 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "0a7e6e8d1b66",
+      "Image": "pgvector/pgvector:0.8.6-pg17-bookworm",
+      "Labels": "com.docker.compose.config-hash=cccbc1555f32551bc6057d3c31d3ef7641e85bb9286846ce4dcce873a8df2f38,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:dca0d688bbb31d3f851502ffcb9c7791387b4fcc544ae434dab41761e5ece317,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\infra\\compose\\compose.yaml,com.docker.compose.project.working_dir=<other-project>\\infra\\compose,com.docker.compose.project=pf-evidencedesk,com.docker.compose.service=db,com.docker.compose.version=5.5.0,desktop.docker.io/binds/1/Source=<other-project>\\infra\\init.sql,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/binds/1/Target=/docker-entrypoint-initdb.d/10-evidencedesk.sql,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/5432/tcp=127.0.0.1:5546",
+      "LocalVolumes": "1",
+      "Mounts": "/run/desktop/m…,pf-evidencedes…",
+      "Names": "pf-evidencedesk-db-1",
+      "Networks": "pf-evidencedesk_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:5546->5432/tcp",
+      "RunningFor": "4 minutes ago",
+      "Size": "24.6kB (virtual 469MB)",
+      "State": "running",
+      "Status": "Up 4 minutes (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 02:54:11 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "9e8f76d048c0",
+      "Image": "c71f6d93b2f1",
+      "Labels": "com.docker.compose.config-hash=f625f28a77112ee611a74147cb8578520315fa98c6106ff201238b130c887c3e,com.docker.compose.container-number=1,com.docker.compose.depends_on=api:service_healthy:false,com.docker.compose.image=sha256:eb6c87587e0ea680aade0343620f2c627f9ecf33ae97a655560d5634597d7fa5,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.environment_file=<other-project>\\.env,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-cobraflow,com.docker.compose.replace=frontend-1,com.docker.compose.service=frontend,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/3101/tcp=127.0.0.1:3101",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "pf-cobraflow-frontend-1",
+      "Networks": "pf-cobraflow_cobraflow",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:3101->3101/tcp",
+      "RunningFor": "45 minutes ago",
+      "Size": "16.4kB (virtual 312MB)",
+      "State": "running",
+      "Status": "Up 45 minutes (healthy)"
+    },
+    {
+      "Command": "\"python -m cobraflow…\"",
+      "CreatedAt": "2026-09-21 02:54:10 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "97b4cf8cfce6",
+      "Image": "b82b500c81d3",
+      "Labels": "com.docker.compose.config-hash=1672e48d65665b77fccbd5dc84dfa93f7f22afc1637bfc025d7837488e13d0a9,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:8a09219132a00711a4325b4498ffbbfed2b9cacec1d8e1c7716734aec9064057,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.environment_file=<other-project>\\.env,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-cobraflow,com.docker.compose.replace=worker-1,com.docker.compose.service=worker,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "pf-cobraflow-worker-1",
+      "Networks": "pf-cobraflow_cobraflow",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "8101/tcp",
+      "RunningFor": "45 minutes ago",
+      "Size": "16.4kB (virtual 624MB)",
+      "State": "running",
+      "Status": "Up 45 minutes"
+    },
+    {
+      "Command": "\"uvicorn cobraflow.a…\"",
+      "CreatedAt": "2026-09-21 02:54:10 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "03fd1a17ca53",
+      "Image": "b82b500c81d3",
+      "Labels": "com.docker.compose.config-hash=57012ff21c07285ea3e687d9edc27f13c2d662084fd268e12f16fa85e3bb16ab,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:8a09219132a00711a4325b4498ffbbfed2b9cacec1d8e1c7716734aec9064057,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.environment_file=<other-project>\\.env,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-cobraflow,com.docker.compose.replace=api-1,com.docker.compose.service=api,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8101/tcp=127.0.0.1:8101",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Names": "pf-cobraflow-api-1",
+      "Networks": "pf-cobraflow_cobraflow",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:8101->8101/tcp",
+      "RunningFor": "45 minutes ago",
+      "Size": "16.4kB (virtual 624MB)",
+      "State": "running",
+      "Status": "Up 45 minutes (healthy)"
+    },
+    {
+      "Command": "\"uvicorn alert_recei…\"",
+      "CreatedAt": "2026-09-21 02:47:25 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "6cb3f944cfe7",
+      "Image": "pf-api-sentinel:local",
+      "Labels": "com.docker.compose.config-hash=8e9d71d681a63d851e03dcadbc1af7df5e8b50c72215467e92dd03add6b6b31a,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:9e4e5ce9c435442acc4dd7c8191177659126e0a92291849240b8015f64f35949,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.environment_file=<other-project>\\.env.example,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.replace=receiver-1,com.docker.compose.service=receiver,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/9184/tcp=127.0.0.1:9184",
+      "LocalVolumes": "2",
+      "Mounts": "pf-api-sentine…,pf-api-sentine…",
+      "Names": "pf-api-sentinel-receiver-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:9184->9184/tcp",
+      "RunningFor": "52 minutes ago",
+      "Size": "24.6kB (virtual 479MB)",
+      "State": "running",
+      "Status": "Up 51 minutes"
+    },
+    {
+      "Command": "\"uvicorn api_sentine…\"",
+      "CreatedAt": "2026-09-21 02:41:47 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "543df8d1556e",
+      "Image": "8c6a451e18d4",
+      "Labels": "com.docker.compose.config-hash=75ea70d80ab16bfae11ed48bd0b9e520e60fa75e24d2d478fa0e1f86194d4e10,com.docker.compose.container-number=2,com.docker.compose.depends_on=,com.docker.compose.image=sha256:6a0cfc04c02c86c9417e7816d4c8807a31b228b8e9b659fab6c20403d465285f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.environment_file=<other-project>\\.env.example,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.replace=api-2,com.docker.compose.service=api,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-api-sentine…",
+      "Names": "pf-api-sentinel-api-2",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "57 minutes ago",
+      "Size": "20.5kB (virtual 479MB)",
+      "State": "running",
+      "Status": "Up 57 minutes (healthy)"
+    },
+    {
+      "Command": "\"uvicorn api_sentine…\"",
+      "CreatedAt": "2026-09-21 02:41:47 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "7a45979edf80",
+      "Image": "8c6a451e18d4",
+      "Labels": "com.docker.compose.config-hash=75ea70d80ab16bfae11ed48bd0b9e520e60fa75e24d2d478fa0e1f86194d4e10,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:6a0cfc04c02c86c9417e7816d4c8807a31b228b8e9b659fab6c20403d465285f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.environment_file=<other-project>\\.env.example,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.replace=api-1,com.docker.compose.service=api,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-api-sentine…",
+      "Names": "pf-api-sentinel-api-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "57 minutes ago",
+      "Size": "20.5kB (virtual 479MB)",
+      "State": "running",
+      "Status": "Up 57 minutes (healthy)"
+    },
+    {
+      "Command": "\"python -m container…\"",
+      "CreatedAt": "2026-09-21 02:02:17 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "bc01a85f5ef2",
+      "Image": "097630fc4bff",
+      "Labels": "com.docker.compose.config-hash=d9de7b787165221e8cd3b4f90769316a8069511e27d29376c712f670ddb63ca8,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<repo>\\compose.yaml,<repo>\\compose.tls.yaml,com.docker.compose.project.working_dir=<repo>,com.docker.compose.project=pf-containerops,com.docker.compose.replace=api-1,com.docker.compose.service=api,com.docker.compose.version=5.5.0,desktop.docker.io/mounts/0/Source=<localappdata>/ContainerOps-runtime/secrets/db_app,desktop.docker.io/mounts/0/SourceKind=hostFile,desktop.docker.io/mounts/0/Target=/run/secrets/db_password,desktop.docker.io/mounts/1/Source=<localappdata>/ContainerOps-runtime/secrets/api_tokens,desktop.docker.io/mounts/1/SourceKind=hostFile,desktop.docker.io/mounts/1/Target=/run/secrets/api_tokens,desktop.docker.io/ports.scheme=v2,org.opencontainers.image.description=Laboratório local de jobs, entrega e recuperação,org.opencontainers.image.revision=uncommitted,org.opencontainers.image.source=local:ContainerOps,org.opencontainers.image.title=ContainerOps,org.opencontainers.image.version=2.0.0",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…,/run/desktop/m…",
+      "Names": "pf-containerops-api-1",
+      "Networks": "pf-containerops_data,pf-containerops_front",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "8000/tcp",
+      "RunningFor": "2 hours ago",
+      "Size": "24.6kB (virtual 194MB)",
+      "State": "running",
+      "Status": "Up 2 hours (healthy)"
+    },
+    {
+      "Command": "\"python -m container…\"",
+      "CreatedAt": "2026-09-21 02:02:17 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "f50b7cda2b60",
+      "Image": "097630fc4bff",
+      "Labels": "com.docker.compose.config-hash=27edd52b7e8117a6b4507bc7d573734b6e87ae8ee5fe0f42d8bd54116dd95ebc,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<repo>\\compose.yaml,<repo>\\compose.tls.yaml,com.docker.compose.project.working_dir=<repo>,com.docker.compose.project=pf-containerops,com.docker.compose.replace=worker-1,com.docker.compose.service=worker,com.docker.compose.version=5.5.0,desktop.docker.io/mounts/0/Source=<localappdata>/ContainerOps-runtime/secrets/db_app,desktop.docker.io/mounts/0/SourceKind=hostFile,desktop.docker.io/mounts/0/Target=/run/secrets/db_password,desktop.docker.io/ports.scheme=v2,org.opencontainers.image.description=Laboratório local de jobs, entrega e recuperação,org.opencontainers.image.revision=uncommitted,org.opencontainers.image.source=local:ContainerOps,org.opencontainers.image.title=ContainerOps,org.opencontainers.image.version=2.0.0",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…",
+      "Names": "pf-containerops-worker-1",
+      "Networks": "pf-containerops_data",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "8000/tcp",
+      "RunningFor": "2 hours ago",
+      "Size": "24.6kB (virtual 194MB)",
+      "State": "running",
+      "Status": "Up 2 hours (healthy)"
+    },
+    {
+      "Command": "\"uvicorn erp_simulat…\"",
+      "CreatedAt": "2026-09-21 01:16:37 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "fe819c9f4be2",
+      "Image": "6d698d4c64e6",
+      "Labels": "com.docker.compose.config-hash=2cff407f76e13b22f5f501076b15df4331c853dc6440123aecadded347138bb8,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:fc5561ff8dcd1139549cc0d38d0e7c07b83b64a0ebc094ffa5bbf62cd3bf89b0,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.replace=erp-1,com.docker.compose.service=erp,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-api-sentine…",
+      "Names": "pf-api-sentinel-erp-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "2 hours ago",
+      "Size": "20.5kB (virtual 478MB)",
+      "State": "running",
+      "Status": "Up 2 hours"
+    },
+    {
+      "Command": "\"python -m http.serv…\"",
+      "CreatedAt": "2026-09-21 00:59:00 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "5894483fac6e",
+      "Image": "77274152e6d7",
+      "Labels": "com.docker.compose.config-hash=5a62bf5d87981c04981f9cc5ae475511d5da1ea68adf259aaae17302ac31f2aa,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:97d02922ffa4a0110c8ccc7b4e3689d04b90b87bf05a23d1c5ec1f8c164ac729,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-varejo-data,com.docker.compose.replace=report-server-1,com.docker.compose.service=report-server,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\artifacts,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/app/artifacts,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/3103/tcp=127.0.0.1:3103",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…",
+      "Names": "pf-varejo-data-report-server-1",
+      "Networks": "pf-varejo-data_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:3103->3103/tcp",
+      "RunningFor": "3 hours ago",
+      "Size": "16.4kB (virtual 770MB)",
+      "State": "running",
+      "Status": "Up 3 hours"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 00:47:29 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "a90d2a52beab",
+      "Image": "postgres:17.11-bookworm",
+      "Labels": "com.docker.compose.config-hash=ba125454681dab6bc9e987b05b7b0d2723cefcf20a8e2412396ed0fd8c8e0aa1,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:91eb910c44c7ed13f7f1a4ccadaa9ca72ef14cddc04cacb6e070e48eb44731a3,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-loja-assistente,com.docker.compose.replace=db-1,com.docker.compose.service=db,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-loja-assist…",
+      "Names": "pf-loja-assistente-db-1",
+      "Networks": "pf-loja-assistente_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "5432/tcp",
+      "RunningFor": "3 hours ago",
+      "Size": "20.5kB (virtual 463MB)",
+      "State": "running",
+      "Status": "Up 3 hours (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 00:47:23 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "ebc6a296aa0d",
+      "Image": "postgres:18.6-bookworm",
+      "Labels": "com.docker.compose.config-hash=3b4435f7343b1f803a5a4cfc21be9c2a0e7b1ee7b7efcfa0b35684ceb41628ff,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:9e73daeb439141c2b11eea2463f5f1a3b269fd90d897b41cddb7cb440f21aa5d,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yaml,com.docker.compose.project.environment_file=<other-project>\\.env,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-cobraflow,com.docker.compose.replace=db-1,com.docker.compose.service=db,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-cobraflow_p…",
+      "Names": "pf-cobraflow-db-1",
+      "Networks": "pf-cobraflow_cobraflow",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "5432/tcp",
+      "RunningFor": "3 hours ago",
+      "Size": "20.5kB (virtual 466MB)",
+      "State": "running",
+      "Status": "Up 3 hours (healthy)"
+    },
+    {
+      "Command": "\"nginx -g 'daemon of…\"",
+      "CreatedAt": "2026-09-21 00:16:45 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "c64f75e000c3",
+      "Image": "containerops-proxy:local",
+      "Labels": "com.docker.compose.config-hash=876ae7a83aeb5ce73388a32de7a0087369362d807e7e6cc9d2bad44ef43295d3,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:eaae1b4af955666115528aff3e54e8c8d372615af1bc981372fbab4f5d7a1e0f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<repo>\\compose.yaml,<repo>\\compose.tls.yaml,com.docker.compose.project.working_dir=<repo>,com.docker.compose.project=pf-containerops,com.docker.compose.replace=proxy-1,com.docker.compose.service=proxy,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<repo>\\docker\\proxy\\tls.conf,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/nginx/conf.d/tls.conf,desktop.docker.io/mounts/0/Source=<localappdata>/ContainerOps-runtime/tls/server.crt,desktop.docker.io/mounts/0/SourceKind=hostFile,desktop.docker.io/mounts/0/Target=/run/secrets/tls_certificate,desktop.docker.io/mounts/1/Source=<localappdata>/ContainerOps-runtime/tls/server.key,desktop.docker.io/mounts/1/SourceKind=hostFile,desktop.docker.io/mounts/1/Target=/run/secrets/tls_key,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8080/tcp=127.0.0.1:8105,desktop.docker.io/ports/8443/tcp=127.0.0.1:8445,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>,org.opencontainers.image.source=local:ContainerOps,org.opencontainers.image.title=ContainerOps proxy",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…,/run/desktop/m…,/run/desktop/m…",
+      "Names": "pf-containerops-proxy-1",
+      "Networks": "pf-containerops_front",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:8105->8080/tcp, 127.0.0.1:8445->8443/tcp",
+      "RunningFor": "3 hours ago",
+      "Size": "32.8kB (virtual 66.8MB)",
+      "State": "running",
+      "Status": "Up 3 hours (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 00:10:33 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "e171d67f44a7",
+      "Image": "postgres:17.11-bookworm",
+      "Labels": "com.docker.compose.config-hash=2802b7a1882329083c54c145c88259c1219201d84858af313aa4da63398927df,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:91eb910c44c7ed13f7f1a4ccadaa9ca72ef14cddc04cacb6e070e48eb44731a3,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<repo>\\compose.yaml,com.docker.compose.project.working_dir=<repo>,com.docker.compose.project=pf-containerops,com.docker.compose.service=db,com.docker.compose.version=5.5.0,desktop.docker.io/binds/1/Source=<repo>\\docker\\db\\init-roles.sh,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/binds/1/Target=/docker-entrypoint-initdb.d/10-containerops-roles.sh,desktop.docker.io/mounts/0/Source=<localappdata>/ContainerOps-runtime/secrets/db_admin,desktop.docker.io/mounts/0/SourceKind=hostFile,desktop.docker.io/mounts/0/Target=/run/secrets/db_admin,desktop.docker.io/mounts/1/Source=<localappdata>/ContainerOps-runtime/secrets/db_migrator,desktop.docker.io/mounts/1/SourceKind=hostFile,desktop.docker.io/mounts/1/Target=/run/secrets/db_migrator,desktop.docker.io/mounts/2/Source=<localappdata>/ContainerOps-runtime/secrets/db_app,desktop.docker.io/mounts/2/SourceKind=hostFile,desktop.docker.io/mounts/2/Target=/run/secrets/db_app,desktop.docker.io/mounts/3/Source=<localappdata>/ContainerOps-runtime/secrets/db_backup,desktop.docker.io/mounts/3/SourceKind=hostFile,desktop.docker.io/mounts/3/Target=/run/secrets/db_backup,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "/run/desktop/m…,/run/desktop/m…,/run/desktop/m…,pf-containerop…,/run/desktop/m…,/run/desktop/m…",
+      "Names": "pf-containerops-db-1",
+      "Networks": "pf-containerops_data",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "5432/tcp",
+      "RunningFor": "3 hours ago",
+      "Size": "16.4kB (virtual 463MB)",
+      "State": "running",
+      "Status": "Up 3 hours (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-21 00:06:38 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "02f30b430289",
+      "Image": "redis:7.4.5-alpine",
+      "Labels": "com.docker.compose.config-hash=7e7520f9e727a720b3a4048dd180fcf1165d688d85ca346663090a4013944f84,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:0302cccee2b2043e61b497c8f4075467c5f7ba27a9f38be7e092634f2734baed,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.replace=redis-1,com.docker.compose.service=redis,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\deploy\\redis\\users.acl,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/redis/users.acl,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "adcb3df5f33101…,/run/desktop/m…",
+      "Names": "pf-api-sentinel-redis-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "6379/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "12.3kB (virtual 43.4MB)",
+      "State": "running",
+      "Status": "Up 3 hours (healthy)"
+    },
+    {
+      "Command": "\"/docker-entrypoint.…\"",
+      "CreatedAt": "2026-09-20 23:59:53 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "f592646de918",
+      "Image": "nginx:1.28.0-alpine",
+      "Labels": "com.docker.compose.config-hash=6dfdb1e66d68cd0e7fdb524169ed0d102eaa10fb347bec3e6f7bd034a3245edc,com.docker.compose.container-number=1,com.docker.compose.depends_on=api:service_started:false,com.docker.compose.image=sha256:09ab424a8c788f8d0fe3a64429f6d19dfa526885c8609b748d0943a75dcb9f8c,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=proxy,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\deploy\\proxy\\nginx.conf,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/nginx/nginx.conf,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/80/tcp=127.0.0.1:8104,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>",
+      "LocalVolumes": "0",
+      "Mounts": "/run/desktop/m…",
+      "Names": "pf-api-sentinel-proxy-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:8104->80/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "81.9kB (virtual 52.8MB)",
+      "State": "running",
+      "Status": "Up 4 hours"
+    },
+    {
+      "Command": "\"/bin/prometheus --c…\"",
+      "CreatedAt": "2026-09-20 23:59:53 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "4200f1b6212f",
+      "Image": "prom/prometheus:v3.5.0",
+      "Labels": "com.docker.compose.config-hash=398010c2d489a41c7d84dc7c0b553fe8870e96c692722851eda23927e3b53f2f,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:8672a850efe2f9874702406c8318704edb363587f8c2ca88586b4c8fdb5cea24,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=prometheus,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\monitoring,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/sentinel/monitoring,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/9090/tcp=127.0.0.1:9104,maintainer=The Prometheus Authors <prometheus-developers@googlegroups.com>,org.opencontainers.image.source=https://github.com/prometheus/prometheus",
+      "LocalVolumes": "1",
+      "Mounts": "/run/desktop/m…,pf-api-sentine…",
+      "Names": "pf-api-sentinel-prometheus-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:9104->9090/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "16.4kB (virtual 316MB)",
+      "State": "running",
+      "Status": "Up 4 hours"
+    },
+    {
+      "Command": "\"/run.sh\"",
+      "CreatedAt": "2026-09-20 23:59:53 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "4f02f6b12cb7",
+      "Image": "grafana/grafana:12.1.1",
+      "Labels": "com.docker.compose.config-hash=e048b35282150e26267dbde2295d4360d24d554450a47203ddaaabfb3ee769dd,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:5749a0e982878aedaa2d320ed14d3bdce7a040a938f482258670009d419a597f,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=grafana,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\monitoring\\grafana\\provisioning,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/grafana/provisioning,desktop.docker.io/binds/1/Source=<other-project>\\monitoring\\grafana\\dashboards,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/binds/1/Target=/var/lib/grafana/dashboards,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/3000/tcp=127.0.0.1:3104,maintainer=Grafana Labs <hello@grafana.com>,org.opencontainers.image.source=https://github.com/grafana/grafana",
+      "LocalVolumes": "1",
+      "Mounts": "/run/desktop/m…,/run/desktop/m…,pf-api-sentine…",
+      "Names": "pf-api-sentinel-grafana-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:3104->3000/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "8.19kB (virtual 760MB)",
+      "State": "running",
+      "Status": "Up 4 hours"
+    },
+    {
+      "Command": "\"/bin/alertmanager -…\"",
+      "CreatedAt": "2026-09-20 23:59:53 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "9e07439cd17e",
+      "Image": "prom/alertmanager:v0.28.1",
+      "Labels": "com.docker.compose.config-hash=67904588b7d276afee87b753f4b26ace60ab2a5d799c065e1aa4f2d37d969d9b,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:220da6995a919b9ee6e0d3da7ca5f09802f3088007af56be22160314d2485b54,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=alertmanager,com.docker.compose.version=5.5.0,desktop.docker.io/binds/0/Source=<other-project>\\monitoring,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/etc/sentinel/monitoring,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/9093/tcp=127.0.0.1:9194,maintainer=The Prometheus Authors <prometheus-developers@googlegroups.com>,org.opencontainers.image.source=https://github.com/prometheus/alertmanager",
+      "LocalVolumes": "2",
+      "Mounts": "/run/desktop/m…,pf-api-sentine…,pf-api-sentine…",
+      "Names": "pf-api-sentinel-alertmanager-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:9194->9093/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "20.5kB (virtual 75.3MB)",
+      "State": "running",
+      "Status": "Up 4 hours"
+    },
+    {
+      "Command": "\"/go/bin/all-in-one-…\"",
+      "CreatedAt": "2026-09-20 23:59:53 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "c32727a3c017",
+      "Image": "jaegertracing/all-in-one:1.71.0",
+      "Labels": "com.docker.compose.config-hash=305a013692099a397c2f0a298e9e3133c8a3361476ffea621505ded94bd4bc59,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:61199b4fce8b7f7161b87da5322c5e1d1a8b69e3ceacd42cb9451ec1590db745,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=jaeger,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/16686/tcp=127.0.0.1:16684",
+      "LocalVolumes": "1",
+      "Mounts": "9450348b0529f3…",
+      "Names": "pf-api-sentinel-jaeger-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "127.0.0.1:16684->16686/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "4.1kB (virtual 86.8MB)",
+      "State": "running",
+      "Status": "Up 3 hours"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-20 23:58:51 -0300 -03",
+      "HealthStatus": "healthy",
+      "ID": "85beaf77d180",
+      "Image": "postgres:17.6-bookworm",
+      "Labels": "com.docker.compose.config-hash=e28915d66e76907359dd23d4cd11129df612a94102bad4ffe1b3aad44de6c52f,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:45cd22f8d32e189d245403954882f88e7a8714301fda80dab6da90f1265b25a3,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=<other-project>\\compose.yml,com.docker.compose.project.working_dir=<other-project>,com.docker.compose.project=pf-api-sentinel,com.docker.compose.service=postgres,com.docker.compose.version=5.5.0,desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "pf-api-sentine…",
+      "Names": "pf-api-sentinel-postgres-1",
+      "Networks": "pf-api-sentinel_default",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "5432/tcp",
+      "RunningFor": "4 hours ago",
+      "Size": "20.5kB (virtual 463MB)",
+      "State": "running",
+      "Status": "Up 4 hours (healthy)"
+    }
+  ]
+}

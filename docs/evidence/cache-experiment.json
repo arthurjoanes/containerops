@@ -1,0 +1,419 @@
+{
+  "executed_at": "2026-09-21T04:00:03.001113+00:00",
+  "runs": [
+    {
+      "case": "initial",
+      "duration_seconds": 10.531,
+      "cached_steps": 1,
+      "steps": [
+        {
+          "step": "[internal] load build definition from app.Dockerfile",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load metadata for docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load .dockerignore",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 1/5] FROM docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[internal] load build context",
+          "cached": false,
+          "completed": true,
+          "duration": "0.1s"
+        },
+        {
+          "step": "[runtime 2/6] RUN groupadd --gid 10001 containerops     && useradd --uid 10001 --gid 10001 --no-create-home --home-dir /tmp --shell /usr/sbin/nologin containerops",
+          "cached": false,
+          "completed": true,
+          "duration": "0.2s"
+        },
+        {
+          "step": "[deps 2/5] RUN python -m venv /opt/venv",
+          "cached": false,
+          "completed": true,
+          "duration": "2.7s"
+        },
+        {
+          "step": "[deps 3/5] COPY app/requirements-runtime.lock /locks/requirements-runtime.lock",
+          "cached": false,
+          "completed": true,
+          "duration": "0.1s"
+        },
+        {
+          "step": "[deps 4/5] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-runtime.lock",
+          "cached": false,
+          "completed": true,
+          "duration": "4.8s"
+        },
+        {
+          "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
+          "cached": false,
+          "completed": true,
+          "duration": "0.1s"
+        },
+        {
+          "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
+          "cached": false,
+          "completed": true,
+          "duration": "0.6s"
+        },
+        {
+          "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
+          "cached": false,
+          "completed": true,
+          "duration": "0.4s"
+        },
+        {
+          "step": "[runtime 5/6] WORKDIR /app",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[runtime 6/6] COPY --chown=10001:10001 app/src /app/src",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        }
+      ],
+      "log": "<localappdata>\\ContainerOps-runtime\\cache-experiment\\initial.log"
+    },
+    {
+      "case": "unchanged",
+      "duration_seconds": 0.859,
+      "cached_steps": 9,
+      "steps": [
+        {
+          "step": "[internal] load build definition from app.Dockerfile",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load metadata for docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load .dockerignore",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load build context",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 1/5] FROM docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[runtime 2/6] RUN groupadd --gid 10001 containerops     && useradd --uid 10001 --gid 10001 --no-create-home --home-dir /tmp --shell /usr/sbin/nologin containerops",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 5/6] WORKDIR /app",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 4/5] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-runtime.lock",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 2/5] RUN python -m venv /opt/venv",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 3/5] COPY app/requirements-runtime.lock /locks/requirements-runtime.lock",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 6/6] COPY --chown=10001:10001 app/src /app/src",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        }
+      ],
+      "log": "<localappdata>\\ContainerOps-runtime\\cache-experiment\\unchanged.log"
+    },
+    {
+      "case": "source",
+      "duration_seconds": 0.891,
+      "cached_steps": 8,
+      "steps": [
+        {
+          "step": "[internal] load build definition from app.Dockerfile",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load metadata for docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load .dockerignore",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 1/5] FROM docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load build context",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 3/5] COPY app/requirements-runtime.lock /locks/requirements-runtime.lock",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 2/5] RUN python -m venv /opt/venv",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 2/6] RUN groupadd --gid 10001 containerops     && useradd --uid 10001 --gid 10001 --no-create-home --home-dir /tmp --shell /usr/sbin/nologin containerops",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 4/5] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-runtime.lock",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 5/6] WORKDIR /app",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 6/6] COPY --chown=10001:10001 app/src /app/src",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        }
+      ],
+      "log": "<localappdata>\\ContainerOps-runtime\\cache-experiment\\source.log"
+    },
+    {
+      "case": "dependency",
+      "duration_seconds": 11.297,
+      "cached_steps": 2,
+      "steps": [
+        {
+          "step": "[internal] load build definition from app.Dockerfile",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load metadata for docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load .dockerignore",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[internal] load build context",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 1/5] FROM docker.io/library/python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 2/5] RUN python -m venv /opt/venv",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[deps 3/5] COPY app/requirements-runtime.lock /locks/requirements-runtime.lock",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[deps 4/5] RUN --mount=type=cache,target=/root/.cache/pip     pip install --only-binary=:all: -r /locks/requirements-runtime.lock",
+          "cached": false,
+          "completed": true,
+          "duration": "3.0s"
+        },
+        {
+          "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
+          "cached": false,
+          "completed": true,
+          "duration": "0.1s"
+        },
+        {
+          "step": "[runtime 2/6] RUN groupadd --gid 10001 containerops     && useradd --uid 10001 --gid 10001 --no-create-home --home-dir /tmp --shell /usr/sbin/nologin containerops",
+          "cached": true,
+          "completed": true,
+          "duration": null
+        },
+        {
+          "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
+          "cached": false,
+          "completed": true,
+          "duration": "0.6s"
+        },
+        {
+          "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
+          "cached": false,
+          "completed": true,
+          "duration": "0.4s"
+        },
+        {
+          "step": "[runtime 5/6] WORKDIR /app",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[runtime 6/6] COPY --chown=10001:10001 app/src /app/src",
+          "cached": false,
+          "completed": true,
+          "duration": "0.0s"
+        },
+        {
+          "step": "[linux/amd64] generating sbom using docker.io/docker/buildkit-syft-scanner:stable-1@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9",
+          "cached": false,
+          "completed": true,
+          "duration": "2.3s"
+        }
+      ],
+      "log": "<localappdata>\\ContainerOps-runtime\\cache-experiment\\dependency.log"
+    }
+  ],
+  "dependency_change": {
+    "package": "idna",
+    "from": "3.20",
+    "to": "3.19"
+  },
+  "experiment_id": "bd0fa1aff622d58e3cd6bd54",
+  "original_lock_sha256": "sha256:0a4cbc65c78eaee9f66ae795e4a7e1df79df66c4ebd9dee9d6381eddb5ca6a1b",
+  "original_sources_unmodified": true,
+  "original_input_hashes": {
+    ".dockerignore": "sha256:60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+    "app\\pyproject.toml": "sha256:ee9875afe8a826c65df6a63f0da9f04aa2dcd35fbfe32fb2df6534b0336c1026",
+    "app\\requirements-runtime.lock": "sha256:0a4cbc65c78eaee9f66ae795e4a7e1df79df66c4ebd9dee9d6381eddb5ca6a1b",
+    "app\\requirements-test.lock": "sha256:b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+    "app\\src\\containerops\\api.py": "sha256:187923f86844362c0b3f30a374913be16c42e68d7fac4d2ebecebca767a9db38",
+    "app\\src\\containerops\\config.py": "sha256:0ef91e59ba7cd4c8b516d0ad4c0753ff4e225127c5e681c2a6ea59f00b60c71f",
+    "app\\src\\containerops\\database.py": "sha256:e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+    "app\\src\\containerops\\domain.py": "sha256:cc4d069abc27d826185fd18662082d4bea5783403f434ef9e2c33f5af8420366",
+    "app\\src\\containerops\\log.py": "sha256:1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+    "app\\src\\containerops\\manage.py": "sha256:70c88c47320d08008b8d538af47083fc2a69308e5abeb181514efa5488339547",
+    "app\\src\\containerops\\repository.py": "sha256:cd7085382729f178bb7ce0a3f840e098ac9e6ab9c1e3f9b614e44ae1db39d808",
+    "app\\src\\containerops\\worker.py": "sha256:b270e973fbbcab4132ea20556530797ec1e2e7e4d3dbd64e552807594877d2d5",
+    "app\\src\\containerops\\__init__.py": "sha256:63ab11cb021b61e4825283399b242bf84b4512b3d4f461e1f5430b1d4d0f75fb",
+    "app\\src\\containerops\\migrations\\001.sql": "sha256:27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+    "app\\src\\containerops\\migrations\\002.sql": "sha256:8d4eeb25ddecd01e7813e93cf0e50d2d75147eb2231a049a898bba0dc63eb20b",
+    "app\\tests\\conftest.py": "sha256:5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+    "app\\tests\\test_api.py": "sha256:3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+    "app\\tests\\test_domain.py": "sha256:fa379e7a25dbe372574ce2aa9786db98f1d6b2fd8b77964690df726137219396",
+    "app\\tests\\test_integration.py": "sha256:dcd8e2c506da40e7ce265038fd37cd8e02010e5eed90625ccfc7e1df062c6844",
+    "docker\\app.Dockerfile": "sha256:f19fe465b5615a37eac13755abe191b7798ffe26e653ebbeeeb88a0145f2f69e",
+    "docker\\images.lock.json": "sha256:933bb79f4f6625dfc45c41a10824ca2a970f610f60fb9a3226655fc7939a89c9",
+    "docker\\db\\init-roles.sh": "sha256:3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+    "docker\\db\\tool.sh": "sha256:85af65ec87b8e08efcc6cc667fea6fae0c7832dd42e7ce15c9bb9010dbdf0cfb",
+    "docker\\proxy\\Dockerfile": "sha256:9b462dc1dcef6f185235b588c560db5a464221c98375a069bc2e6476867705ac",
+    "docker\\proxy\\http.conf": "sha256:22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+    "docker\\proxy\\locations.conf": "sha256:6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+    "docker\\proxy\\nginx.conf": "sha256:bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+    "docker\\proxy\\tls.conf": "sha256:11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49"
+  },
+  "changed_package_verified_in_sbom": "3.19",
+  "note": "Comentário de namespace único no lock copiado é constante nos quatro casos e isola séries anteriores. Initial usa --no-cache; cache de download pip pode estar aquecido. Só dependency inclui export OCI e SBOM para confirmar instalação; durações totais não são benchmark comparável. Fontes são cópias temporárias; nenhuma imagem experimental é carregada."
+}

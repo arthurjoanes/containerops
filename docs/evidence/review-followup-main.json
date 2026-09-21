@@ -1,0 +1,304 @@
+{
+  "recorded_at": "2026-09-21T05:03:02.903094+00:00",
+  "project": "pf-containerops",
+  "started_at": "2026-09-21T05:01:27.166715+00:00",
+  "previous_image": "sha256:b02267046b1628a845a09e13b1cd85acb5bb77aba9da5c44a4963c76ef82a62a",
+  "before": {
+    "admission_paused": false,
+    "counts": {
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "succeeded": 11
+    },
+    "jobs": [
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "1f80fdc4-9a59-4688-82bd-1a8d5738488a",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "4bce6a17-225d-46b6-b539-e1244aaa11b4",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      },
+      {
+        "attempts": 1,
+        "checksum": "c3d57bad32cbb4037b7ac0d494cb3179313113dcbe20e5740b4a19fcf9c339a6",
+        "error_category": null,
+        "id": "5fa43e2b-a198-4734-b5e4-618733737e31",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "c3d57bad32cbb4037b7ac0d494cb3179313113dcbe20e5740b4a19fcf9c339a6",
+        "error_category": null,
+        "id": "60970690-c3ee-44e0-b30d-8c7a99598f8d",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "78e8af74-c91a-4038-9fd5-88923f7bd2f0",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "b852cec3-3ffa-49db-a812-6339f1fca66b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
+        "error_category": null,
+        "id": "c553e10c-205d-48e6-bc47-748988811890",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
+        "error_category": null,
+        "id": "e3c4bcec-2a9c-41e6-9561-07ba512f3a83",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+        "error_category": null,
+        "id": "e7adfab9-ff4c-4c63-b176-c6a36a56191f",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 3
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "ec2f58ff-9175-4aff-9453-1d23044bd96b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "ff04868f-90f0-4b9e-809c-814dfd5a1121",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      }
+    ],
+    "schema_version": 2
+  },
+  "status": "passed",
+  "pre_update_backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T050127-c1ca05a9",
+  "promotion": {
+    "project": "pf-containerops",
+    "requested_version": "2.0.0",
+    "injected_smoke_failure": false,
+    "phase": "completed",
+    "previous_image": "sha256:73998681a0f658eaa2d2729e171af6d4b685de21b753d89f956bd8cd84b8bd5d",
+    "candidate_image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+    "candidate_health": {
+      "status": "alive",
+      "version": "2.0.0"
+    },
+    "candidate_job": {
+      "id": "c995f2a2-1bd3-43de-a2c1-dc7336c35fb7",
+      "state": "succeeded",
+      "attempts": 1,
+      "result": {
+        "word_count": 4,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+      },
+      "error": null,
+      "version": "2.0.0",
+      "algorithm": "unicode-alnum-marks-v1"
+    },
+    "rolled_back": false,
+    "maintenance_seconds": 23.406,
+    "previous_health": {
+      "status": "alive",
+      "version": "1.0.0"
+    },
+    "preserved_jobs": 11
+  },
+  "demo": {
+    "id": "7aee8551-77db-4c95-9007-7bdaf17a1d84",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 7,
+      "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc"
+    },
+    "error": null,
+    "version": "2.0.0",
+    "algorithm": "unicode-alnum-marks-v1"
+  },
+  "tls_health": [
+    200,
+    {
+      "status": "ready",
+      "version": "2.0.0",
+      "schema_version": 2,
+      "admission_paused": false
+    }
+  ],
+  "final_backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T050235-47d2a27f",
+  "after": {
+    "admission_paused": false,
+    "counts": {
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "succeeded": 13
+    },
+    "jobs": [
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "1f80fdc4-9a59-4688-82bd-1a8d5738488a",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "4bce6a17-225d-46b6-b539-e1244aaa11b4",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      },
+      {
+        "attempts": 1,
+        "checksum": "c3d57bad32cbb4037b7ac0d494cb3179313113dcbe20e5740b4a19fcf9c339a6",
+        "error_category": null,
+        "id": "5fa43e2b-a198-4734-b5e4-618733737e31",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "c3d57bad32cbb4037b7ac0d494cb3179313113dcbe20e5740b4a19fcf9c339a6",
+        "error_category": null,
+        "id": "60970690-c3ee-44e0-b30d-8c7a99598f8d",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "78e8af74-c91a-4038-9fd5-88923f7bd2f0",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "7aee8551-77db-4c95-9007-7bdaf17a1d84",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "b852cec3-3ffa-49db-a812-6339f1fca66b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
+        "error_category": null,
+        "id": "c553e10c-205d-48e6-bc47-748988811890",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "c995f2a2-1bd3-43de-a2c1-dc7336c35fb7",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
+        "error_category": null,
+        "id": "e3c4bcec-2a9c-41e6-9561-07ba512f3a83",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+        "error_category": null,
+        "id": "e7adfab9-ff4c-4c63-b176-c6a36a56191f",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 3
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "ec2f58ff-9175-4aff-9453-1d23044bd96b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "ff04868f-90f0-4b9e-809c-814dfd5a1121",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      }
+    ],
+    "schema_version": 2
+  },
+  "image": "sha256:097630fc4bffc7739945f0094a3cc419ca2180ca5b0777c0fc6ce4496301b29a",
+  "preserved_existing_jobs": 11,
+  "completed_at": "2026-09-21T05:03:02.902086+00:00"
+}

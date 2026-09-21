@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-09-21T05:02:35.183404+00:00",
+  "job": {
+    "id": "7aee8551-77db-4c95-9007-7bdaf17a1d84",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 7,
+      "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc"
+    },
+    "error": null,
+    "version": "2.0.0",
+    "algorithm": "unicode-alnum-marks-v1"
+  },
+  "url": "http://localhost:8105"
+}

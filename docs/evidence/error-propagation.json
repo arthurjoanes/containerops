@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-09-21T04:00:57.739665+00:00",
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "scripts/containerops.ps1",
+    "backup"
+  ],
+  "exit_code": 1,
+  "injected_condition": "Outra operação ContainerOps segura o lock do runtime",
+  "stderr": "ERRO: Outra operação ContainerOps está em andamento neste runtime. Aguarde sua conclusão; não apague o arquivo operation.lock.\nException: <repo>\\scripts\\containerops.ps1:21\nLine |\n  21 |  … ode -ne 0) { throw \"ContainerOps falhou com código $nativeExitCode\" }\n     |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | ContainerOps falhou com código 1\n",
+  "no_docker_mutation_from_rejected_command": true
+}

@@ -1,0 +1,49 @@
+{
+  "executed_at": "2026-09-21T03:05:46.975543+00:00",
+  "duration_seconds": 47.14,
+  "status": "failed_policy",
+  "version": "1.0.0",
+  "image_id": "sha256:8d96dcc2af1972cb0ad40f4e040cd76e2e2716e9ccbb83295bed4c1c7c88a4c3",
+  "config_digest": "sha256:88c0d903c4440eca8e5b8eb2c4818a35fb1dd4fc912f362d4397861eb5ba55fc",
+  "scanner_image": "aquasec/trivy:0.69.3@sha256:bcc376de8d77cfe086a917230e818dc9f8528e3c852f7b1aff648949b6258d1c",
+  "scanner_version": "Version: 0.69.3",
+  "offline": false,
+  "database": {
+    "Version": 2,
+    "NextUpdate": "2026-09-21T19:19:55.870895986Z",
+    "UpdatedAt": "2026-09-20T19:19:55.870896177Z",
+    "DownloadedAt": "2026-09-21T03:04:58.131960864Z"
+  },
+  "database_age_hours": 7.751,
+  "database_sha256": "sha256:e783fe142a8425c25c6e61be54f61698a405510057a94bfdd2253a4ded9ca0cc",
+  "max_db_age_hours": 72,
+  "report": "<localappdata>\\ContainerOps-runtime\\artifacts\\initial-scan-failed\\trivy-report.json",
+  "report_sha256": "sha256:9064bf9e7af034749edd1c23ed8a328c5c5658ad9fa5d591d16c0598b552874b",
+  "docker_archive_sha256": "sha256:1c400191fb4a17bf866a7e0b717110ed54bccc8c492cf1aa8b9ce361e7de1ac7",
+  "findings_by_severity": {
+    "UNKNOWN": 1,
+    "LOW": 86,
+    "MEDIUM": 101,
+    "HIGH": 57,
+    "CRITICAL": 5
+  },
+  "unfixed_findings": 247,
+  "blocking_findings": [
+    {
+      "VulnerabilityID": "GHSA-6v7p-g79w-8964",
+      "PkgName": "msgpack",
+      "InstalledVersion": "1.1.2",
+      "FixedVersion": "1.2.1",
+      "Severity": "HIGH"
+    },
+    {
+      "VulnerabilityID": "CVE-2025-47273",
+      "PkgName": "setuptools",
+      "InstalledVersion": "70.3.0",
+      "FixedVersion": "78.1.1",
+      "Severity": "HIGH"
+    }
+  ],
+  "policy": "Falha em HIGH/CRITICAL com correção; achados sem correção permanecem no relatório.",
+  "preservation_note": "Relatório inicial completo preservado antes da remoção de ferramentas de empacotamento desnecessárias no runtime; política não alterada."
+}

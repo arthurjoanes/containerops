@@ -1,0 +1,24 @@
+[project]
+name = "containerops"
+version = "1.0.0"
+description = "Lab de Docker com jobs em PostgreSQL"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+markers = ["integration: PostgreSQL real em ambiente isolado"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/containerops"]
+

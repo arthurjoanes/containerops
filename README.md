@@ -1,18 +1,30 @@
 # ContainerOps
 
-Laboratório de operação de serviços Docker. Uma API recebe texto, um worker calcula palavras e SHA-256, e o PostgreSQL mantém os trabalhos e resultados. O projeto exercita recuperação de processos, backup e restauração, atualização de imagens e rollback com dados persistidos.
+Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
 
-![Relatório de testes](docs/screenshots/report-desktop.png)
+![Restauração: duração, dados recuperados, etapas verificadas e evidência](docs/screenshots/report-restore.png)
 
-O relatório sai de [docs/report.html](docs/report.html) (abra local; o GitHub mostra o arquivo como código). O que cada operação faz e por que está em [problem-solution.md](docs/problem-solution.md).
+Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
 
-## Verificação completa
+## Conferir uma operação
+
+Abra [docs/report.html](docs/report.html) localmente; o GitHub exibe o HTML como código. O relatório é um snapshot de evidências, sem comandos de operação ao vivo.
+
+1. Em **Verificação**, confira a execução, suas etapas e o job registrado.
+2. Em **Recuperação → Backup e restauração**, veja checksum, igualdade dos dados e novo job. Backup e restauração mantêm suas próprias datas e projetos.
+3. Em **Release**, compare as imagens da troca e do retorno após falha controlada. Em **Artefatos**, confira a imagem à qual a auditoria e o scan se aplicam.
+
+Os links abrem os JSONs de origem. Uma versão de job não identifica, por si só, a imagem de outra operação. [Como ler o relatório](docs/report-guide.md) · [cenários e resultados esperados](docs/problem-solution.md) · [roteiro da demonstração](docs/demo.md).
+
+## Repetir a prova completa
 
 ```sh
 python scripts/ops.py prove
 ```
 
-Executa build, scan, restauração, TLS e troca de versão em projetos Docker descartáveis. Cada tentativa fica em `docs/evidence/problem-proof/`, com resultados e hashes. Exige Docker, OpenSSL e uma base Trivy preparada pelo comando `scan`.
+Executa build, scan, restauração, TLS e troca de versão em projetos Docker descartáveis. Cada tentativa fica em `docs/evidence/problem-proof/`, com resultados e hashes. Exige Docker, OpenSSL e uma base Trivy preparada pelo comando `scan`. Essa prova é mais abrangente que `demo`, que envia um job à aplicação principal.
+
+As [verificações publicadas](docs/verification.md) identificam a execução e as fontes testadas, incluindo a revisão posterior de isolamento de capacidade. Gerar outra versão do HTML não executa novamente essas provas.
 
 ## Rodar
 

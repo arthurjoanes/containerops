@@ -1,5 +1,23 @@
 # Verificação
 
+## Interface do relatório — 22/09/2026
+
+A apresentação passou de uma página contínua para seleção de operações, com
+detalhe, etapas e arquivos de origem. O modelo de evidências e a execução da
+aplicação não foram substituídos. A nova navegação é local e funciona como
+melhoria progressiva: sem JavaScript, todos os resultados continuam disponíveis.
+
+Nesta revisão foram executados 45 testes do gerador e 30 testes de operações no
+host, separadamente. Os casos cobrem também seleção estática, identidade separada
+de backup/restauração e tentativa de release inválida. As capturas em
+`docs/screenshots/report-*.png` vêm do HTML gerado com os JSONs versionados,
+sem executar novamente a prova Docker abaixo.
+
+A revisão no Edge conferiu os oito painéis em 1440, 768, 390 e 320 px, navegação
+por teclado, histórico do navegador, links locais e leitura sem JavaScript.
+Também foram conferidos impressão e reflow em viewport equivalente a zoom de
+200%. Não houve overflow horizontal na página nem erros no console.
+
 ## Revisão posterior de isolamento de capacidade
 
 A correção COPS-01 acrescenta quota por proprietário e distribuição de despacho.

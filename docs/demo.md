@@ -1,5 +1,10 @@
 # Demo de 5–8 minutos
 
+Abra o [caderno de operações](report.html) para navegar entre **Verificação**,
+**Recuperação**, **Release** e **Artefatos**. A seleção mostra resultado, identidade
+do registro e arquivos de origem. O HTML é um snapshot; os comandos abaixo são
+executados separadamente no terminal. [Guia de leitura](report-guide.md).
+
 Prepare fora da apresentação, na raiz do projeto:
 
 ```powershell

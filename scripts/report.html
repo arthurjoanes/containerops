@@ -1,118 +1,369 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="color-scheme" content="light">
-    <meta name="description" content="Resultados dos testes do ContainerOps.">
-    <title>ContainerOps | Relatório de testes</title>
-    <style>$styles</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."
+    />
+    <title>ContainerOps | Operações registradas</title>
+    <style>
+      $styles
+    </style>
   </head>
   <body>
-    <a class="skip-link" href="#content">Ir para o resultado</a>
+    <a class="skip-link" href="#content">Ir para a operação</a>
     <header class="masthead">
-      <div><a class="brand" href="#content">ContainerOps</a></div>
+      <a class="brand" href="#overview"
+        ><span class="brand-mark" aria-hidden="true">C/O</span>ContainerOps</a
+      >
+      <span class="report-kind">Caderno de operações</span>
+      <span class="snapshot-label">Snapshot · somente leitura</span>
     </header>
-    <main id="content" tabindex="-1">
-      <div class="page-heading">
-        <h1>Relatório de testes</h1>
-        <p>Gerado em $created</p>
-      </div>
-      <section id="overview" class="attempt $verification_class" aria-labelledby="attempt-title">
-        <div class="attempt-heading">
-          <h2 id="attempt-title">$verification_title</h2>
-          <strong class="duration">$verification_duration</strong>
+    <div class="report-shell">
+      <aside class="operation-sidebar">
+        <nav aria-label="Operações registradas">
+          <details class="operation-picker" open>
+            <summary>
+              Escolher operação <span aria-hidden="true">⌄</span>
+            </summary>
+            $navigation
+          </details>
+        </nav>
+        <div class="sidebar-note">
+          <strong>O que está sendo exibido</strong>
+          <p>
+            Resultados salvos em arquivos. Nenhum serviço é consultado ou
+            alterado ao abrir esta página.
+          </p>
         </div>
-        <p class="attempt-date">Execução: $verification_time · $verification_age</p>
-        $verification_explanation
-        <details>
-          <summary>Detalhes da execução</summary>
-          <dl>
-            <dt>Início</dt>
-            <dd>$verification_started</dd>
-            <dt>Projeto</dt>
-            <dd><code>$verification_project</code></dd>
-            <dt>ID da execução</dt>
-            <dd><code>$verification_run</code></dd>
-            <dt>Duração</dt>
-            <dd>$verification_duration_exact</dd>
-            <dt>Categoria de erro</dt>
-            <dd>$verification_error</dd>
-          </dl>
-          <div class="proof">$verification_proof</div>
-        </details>
-      </section>
-      $evidence_errors
-      $release_warning
-      <div class="scan-summary">
-        <p><strong>Scan da release $artifact_version:</strong> $scan_status</p>
-        <p>$scan_summary</p>
-        <a href="#artifacts">Ver scan e imagem</a>
-      </div>
-      <nav class="section-nav" aria-label="Seções do relatório"><a href="#result">Job</a><a href="#checks">Testes</a><a href="#operations">Outras operações</a><a href="#evidence">JSONs</a></nav>
-      <section id="result" aria-labelledby="result-title">
-        <h2 id="result-title">Último job</h2>
-        $job_panel
-      </section>
-      <section id="checks" aria-labelledby="checks-title">
-        <h2 id="checks-title">Testes desta execução</h2>
-        <ul class="control-list">$controls</ul>
-        <details class="section-details">
-          <summary>Usuários e limites</summary>
-          <p class="table-hint">Use as setas para rolar a tabela.</p>
-          $resources
-          <div class="proof">$hardening_proof</div>
-        </details>
-      </section>
-      <section id="operations" aria-labelledby="operations-title">
-        <h2 id="operations-title">Outras operações</h2>
-        <ul class="control-list">$operations</ul>
-        <details class="section-details">
-          <summary>Tempos e arquivos</summary>
-          <div class="timings">$recovery_metrics</div>
-          <div class="operation-sources">
+        <div class="sidebar-docs">
+          <a href="../README.md">Como executar ↗</a
+          ><a href="runbooks.md">Runbooks ↗</a>
+        </div>
+      </aside>
+      <main id="content" tabindex="-1">
+        <div class="report-heading">
+          <h1>Operações registradas</h1>
+          <p>Relatório gerado em $created</p>
+        </div>
+        $evidence_errors $release_warning
+        <noscript
+          ><p class="notice">
+            Todas as operações aparecem abaixo. Use os links da lista para
+            chegar ao resultado desejado.
+          </p></noscript
+        >
+
+        <section id="overview" data-panel aria-labelledby="overview-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Verificação / Aplicação e isolamento</p>
+              <h2 id="overview-title" tabindex="-1">
+                Verificação da aplicação
+              </h2>
+              <p>Etapas vinculadas à última execução de verificação.</p>
+            </div>
+            <span class="panel-symbol" aria-hidden="true">01</span>
+          </div>
+          <div class="attempt $verification_class">
+            <div>
+              <h3>$verification_title</h3>
+              <p>$verification_age</p>
+            </div>
+            <strong class="duration">$verification_duration</strong>
+            $verification_explanation
+          </div>
+          $verification_context
+          <div class="section-heading">
+            <h3>Etapas verificadas</h3>
+            <a href="#evidence">Todos os arquivos →</a>
+          </div>
+          <ol class="control-list">
+            $controls
+          </ol>
+          <details class="section-details">
+            <summary>Identificação e duração da execução</summary>
+            <dl class="facts">
+              <dt>Início</dt>
+              <dd>$verification_started</dd>
+              <dt>Conclusão / registro</dt>
+              <dd>$verification_time</dd>
+              <dt>Projeto</dt>
+              <dd><code>$verification_project</code></dd>
+              <dt>ID da execução</dt>
+              <dd><code>$verification_run</code></dd>
+              <dt>Duração exata</dt>
+              <dd>$verification_duration_exact</dd>
+              <dt>Categoria de erro</dt>
+              <dd>$verification_error</dd>
+            </dl>
+            <div class="proof">$verification_proof</div>
+          </details>
+          <details class="section-details">
+            <summary>Identidade dos processos e limites dos containers</summary>
+            $resources
+            <div class="proof">$hardening_proof</div>
+          </details>
+        </section>
+
+        <section id="result" data-panel aria-labelledby="result-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Verificação / Resultado do job</p>
+              <h2 id="result-title" tabindex="-1">Último job registrado</h2>
+              <p>Contagem, tentativas e checksum do resultado salvo.</p>
+            </div>
+            <span class="panel-symbol" aria-hidden="true">02</span>
+          </div>
+          $job_context $job_panel
+          <p class="notice">
+            A versão acima pertence a este job. A imagem de
+            <a href="#artifacts">Artefatos</a> pode vir de outro build; a
+            proximidade entre os registros não estabelece um vínculo.
+          </p>
+        </section>
+
+        <section id="tls" data-panel aria-labelledby="tls-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Verificação / Conexão TLS</p>
+              <h2 id="tls-title" tabindex="-1">Conexão com a CA local</h2>
+              <p>
+                Resultado da verificação do cliente contra o proxy da
+                demonstração.
+              </p>
+            </div>
+            <span class="panel-symbol" aria-hidden="true">03</span>
+          </div>
+          $tls_context
+          <ol class="control-list">
+            $tls_steps
+          </ol>
+          <p class="notice">
+            O TLS termina no proxy. Este registro não é uma observação da
+            disponibilidade atual.
+          </p>
+        </section>
+
+        <section id="recovery" data-panel aria-labelledby="recovery-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Recuperação / Dados</p>
+              <h2 id="recovery-title" tabindex="-1">Backup e restauração</h2>
+              <p>
+                Confira a cópia registrada e o teste de leitura em um volume
+                novo.
+              </p>
+            </div>
+            $restore_status
+          </div>
+          <div class="operation-summary">
+            <div>
+              <span>Restauração + novo job</span
+              ><strong>$restore_duration</strong>
+            </div>
+            <div>
+              <span>Jobs restaurados</span><strong>$restored_jobs</strong>
+            </div>
+          </div>
+          <h3 class="subheading">Restauração registrada</h3>
+          $restore_context
+          <ol class="control-list">
+            $restore_steps
+          </ol>
+          <div class="proof">$restore_proof</div>
+          <details class="section-details">
+            <summary>Job processado após a restauração</summary>
+            $restored_job
+          </details>
+          <div class="evidence-block">
+            <div class="section-heading">
+              <h3>Backup disponível</h3>
+              <span>$backup_duration</span>
+            </div>
+            <p>
+              O backup e a restauração têm registros próprios. Confira o caminho
+              do backup no JSON de restauração para estabelecer a relação.
+            </p>
+            $backup_context
+            <dl class="facts">
+              <dt>Schema do backup</dt>
+              <dd>$backup_schema</dd>
+              <dt>SHA-256 do dump</dt>
+              <dd><code>$backup_checksum</code></dd>
+            </dl>
             <div class="proof">$backup_proof</div>
-            <div class="proof">$restore_proof</div>
+          </div>
+          <p class="notice">
+            O backup permanece no mesmo computador do banco. A prova não cobre
+            perda do host nem representa um prazo garantido de recuperação.
+          </p>
+        </section>
+
+        <section id="operations" data-panel aria-labelledby="operations-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Release / Última tentativa</p>
+              <h2 id="operations-title" tabindex="-1">Troca de imagem</h2>
+              <p>
+                Resultado da tentativa mais recente, incluindo falha quando
+                registrada.
+              </p>
+            </div>
+            $release_status
+          </div>
+          <div class="operation-summary">
+            <div>
+              <span>Versão solicitada</span><strong>$release_version</strong>
+            </div>
+            <div>
+              <span>Janela da operação</span><strong>$release_duration</strong>
+            </div>
+          </div>
+          $release_context
+          <ol class="control-list">
+            $release_steps
+          </ol>
+          <div class="evidence-block">
+            <h3>Imagens desta tentativa</h3>
+            <dl class="facts">
+              <dt>Imagem anterior</dt>
+              <dd><code>$release_previous</code></dd>
+              <dt>Imagem candidata</dt>
+              <dd><code>$release_image</code></dd>
+            </dl>
             <div class="proof">$release_proof</div>
+          </div>
+          <details class="section-details">
+            <summary>Job executado pela candidata</summary>
+            $release_job
+          </details>
+          <p class="notice">
+            A identificação da candidata vem deste registro de release. O
+            <a href="#artifacts">scan disponível</a> só se aplica quando a
+            identidade da imagem coincide.
+          </p>
+        </section>
+
+        <section id="rollback" data-panel aria-labelledby="rollback-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Release / Recuperação</p>
+              <h2 id="rollback-title" tabindex="-1">
+                Retorno após falha controlada
+              </h2>
+              <p>
+                Teste de retorno à imagem anterior depois de uma falha no smoke
+                test.
+              </p>
+            </div>
+            $rollback_status
+          </div>
+          <div class="operation-summary">
+            <div>
+              <span>Janela do rollback</span><strong>$rollback_duration</strong>
+            </div>
+          </div>
+          $rollback_context
+          <ol class="control-list">
+            $rollback_steps
+          </ol>
+          <div class="evidence-block">
+            <h3>Imagens do teste</h3>
+            <dl class="facts">
+              <dt>Candidata testada</dt>
+              <dd><code>$rollback_candidate</code></dd>
+              <dt>Imagem anterior</dt>
+              <dd><code>$rollback_image</code></dd>
+            </dl>
             <div class="proof">$rollback_proof</div>
           </div>
-        </details>
-      </section>
-      <section id="artifacts" aria-labelledby="artifacts-title">
-        <h2 id="artifacts-title">Release $artifact_version</h2>
-        <p>$supply_identity</p>
-        <p class="section-context">Build: $artifact_time</p>
-        $scan_findings
-        <details class="section-details">
-          <summary>Detalhes do build</summary>
-          <dl>
-            <dt>Imagem</dt>
-            <dd><code>$artifact_image</code></dd>
-            <dt>Imagem auditada</dt>
-            <dd><code>$audit_image</code></dd>
-            <dt>Config digest</dt>
-            <dd><code>$audit_config</code></dd>
-          </dl>
-          <div class="proof">$artifact_proof</div>
+          <details class="section-details">
+            <summary>Job após o retorno</summary>
+            $rollback_job
+          </details>
+          <p class="notice">
+            O rollback troca a imagem. Não rebaixa o schema e não restaura um
+            backup antigo.
+          </p>
+        </section>
+
+        <section id="artifacts" data-panel aria-labelledby="artifacts-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Artefatos / Build selecionado</p>
+              <h2 id="artifacts-title" tabindex="-1">
+                Release $artifact_version
+              </h2>
+              <p>$supply_identity</p>
+            </div>
+            <div class="scan-status">
+              <span>Scan da imagem</span>$scan_status
+            </div>
+          </div>
+          $artifact_context
+          <div class="evidence-block">
+            <h3>Identidade da imagem</h3>
+            <dl class="facts">
+              <dt>Build</dt>
+              <dd><code>$artifact_image</code></dd>
+              <dt>Imagem auditada</dt>
+              <dd><code>$audit_image</code></dd>
+              <dt>Config digest</dt>
+              <dd><code>$audit_config</code></dd>
+            </dl>
+            <div class="proof">$artifact_proof</div>
+          </div>
+          $scan_findings
+          <ol class="control-list">
+            $artifact_steps
+          </ol>
           <div class="metrics-block">$supply_metrics</div>
-          <p>Runtime: versão $snapshot_version, status $snapshot_health.</p>
-          <div class="proof">$snapshot_proof</div>
-          <ul class="artifact-files">$supply_files</ul>
-        </details>
-        <details class="section-details">
-          <summary>Cache do build</summary>
-          $cache_table
-          <div class="proof">$cache_proof</div>
-        </details>
-      </section>
-      <section id="evidence" aria-labelledby="evidence-title">
-        <h2 id="evidence-title">JSONs</h2>
-        <p class="section-context">$record_count arquivos JSON</p>
-        <details class="section-details">
-          <summary>Arquivos e datas</summary>
-          <div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0">
+          <details class="section-details">
+            <summary>Arquivos de build, auditoria e scan</summary>
+            <ul class="artifact-files">
+              $supply_files
+            </ul>
+          </details>
+          <details class="section-details">
+            <summary>Snapshot do runtime — registro independente</summary>
+            <p>Versão $snapshot_version · status $snapshot_health.</p>
+            $snapshot_context
+            <div class="proof">$snapshot_proof</div>
+          </details>
+          <details class="section-details">
+            <summary>Experimento de cache do build</summary>
+            $cache_table
+            <div class="proof">$cache_proof</div>
+          </details>
+        </section>
+
+        <section id="evidence" data-panel aria-labelledby="evidence-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Artefatos / Arquivos</p>
+              <h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2>
+              <p>
+                $record_count arquivos JSON válidos na raiz de docs/evidence.
+                Arquivos de outras tentativas não aprovam a operação
+                selecionada.
+              </p>
+            </div>
+            <span class="panel-symbol" aria-hidden="true">{ }</span>
+          </div>
+          <div
+            class="table-wrap"
+            role="region"
+            aria-label="JSONs, tabela com rolagem horizontal"
+            tabindex="0"
+          >
             <table>
-              <caption>JSONs em docs/evidence</caption>
+              <caption>
+                Arquivos e datas dos registros
+              </caption>
               <thead>
                 <tr>
                   <th scope="col">Arquivo</th>
@@ -120,17 +371,32 @@
                   <th scope="col">Projeto</th>
                 </tr>
               </thead>
-              <tbody>$evidence_rows</tbody>
+              <tbody>
+                $evidence_rows
+              </tbody>
             </table>
           </div>
-        </details>
-        <details class="section-details">
-          <summary>Atualizar</summary>
-          <p>Comandos no <a href="../README.md">README</a>. Para atualizar o HTML:</p>
-          <code class="command">python scripts/ops.py report</code>
-        </details>
-      </section>
-      <footer><a href="../README.md">README</a><a href="runbooks.md">Runbooks</a><a href="architecture.md">Arquitetura</a><a href="#content">Voltar ao resultado</a></footer>
-    </main>
+          <div class="evidence-block">
+            <h3>Atualizar esta leitura</h3>
+            <p>
+              Depois de executar as operações pelo terminal, gere novamente o
+              relatório:
+            </p>
+            <code class="command">python scripts/ops.py report</code>
+            <p>
+              Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada
+              operação.
+            </p>
+          </div>
+        </section>
+        <footer>
+          <span>Snapshot de evidências · dados de demonstração</span
+          ><a href="verification.md">Escopo das verificações ↗</a>
+        </footer>
+      </main>
+    </div>
+    <script>
+      $scripts;
+    </script>
   </body>
 </html>

@@ -29,3 +29,12 @@ regexes = [
   '''api\.py"\s*:\s*"58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad"''',
   '''test_api\.py"\s*:\s*"3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33"''',
 ]
+
+# Verified against the source file and its Git blob on 2026-09-22.
+# Finding introduced in b5185d26eb61704c4e960e593a4f9e10fba53dbc.
+[[rules.allowlists]]
+description = "Verified SHA-256 of docs/evidence/art-direction/secret-scan.json in the focused screenshot input manifest"
+condition = "AND"
+regexTarget = "match"
+paths = ['''^docs/screenshots/focused-20260922/inputs\.json$''']
+regexes = ['''secret-scan\.json"\s*:\s*"7ed5a794a1adc691c21a15a951dc6d1f37e6a44b3adde31420062575006833eb"''']

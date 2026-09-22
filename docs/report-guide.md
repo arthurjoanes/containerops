@@ -13,7 +13,7 @@ A [sequência operacional de 22/09](operational-recovery.md) tem um [relatório 
 | Release | Tentativa mais recente de troca de imagem, inclusive falha, e teste de retorno à imagem anterior |
 | Artefatos | Identidade do build, auditoria OCI, scan compatível e catálogo dos JSONs |
 
-Selecione uma operação no índice organizado em quatro grupos. No celular, abra **Escolher operação**. Os links
+Selecione uma operação no índice lateral organizado em quatro grupos. No celular, abra o seletor **Operação: nome da operação**. Os links
 com fragmento, como `report.html#recovery`, abrem o detalhe correspondente e podem
 ser guardados. Voltar/avançar no navegador percorre as seleções. O teclado alcança
 a lista, os arquivos e os detalhes; após selecionar, o foco segue para o título
@@ -67,7 +67,7 @@ A [revisão de jornadas](evidence/interface-journeys/review.json) percorreu os o
 
 Capturas: [restauração no celular com o job expandido](screenshots/journey-restore-390.png), [troca de imagem](screenshots/journey-release.png) e [identidade e arquivos do build](screenshots/journey-artifacts.png).
 
-## Composição atual — resultado junto da prova
+## Composição anterior — versão 2
 
 O índice horizontal substitui a coluna lateral permanente. No desktop, etapas e resultado ficam na coluna principal; datas, projeto e identidade de imagem ficam ao lado da operação correspondente. No celular, o seletor nativo recolhe a lista e os metadados seguem o resultado. A página continua sendo um snapshot, sem botões de deploy, restart ou terminal.
 
@@ -77,6 +77,14 @@ Em recuperação, **jobs restaurados** vem antes da duração. A sequência é *
 
 Os corpos de texto, linhas divisórias e títulos compartilham eixos e espaçamentos; hover e foco usam 180 ms, com transições removidas quando o sistema pede menos movimento. Sem JavaScript, todas as operações aparecem e os detalhes nativos funcionam. A impressão expõe também o conteúdo dos detalhes fechados.
 
-## Limpeza de regra sem consumidores
+## Limpeza anterior de regra sem consumidores
 
 A variável CSS `--surface`, sem uso, foi removida da fonte e do HTML publicado. O restante do HTML, incluindo datas, identidades e JavaScript, foi preservado. O [registro da limpeza](evidence/interface-v2/cleanup.json) descreve o delta e as verificações estáticas; as provas anteriores não foram reexecutadas nem substituídas.
+
+## Composição atual — versão 3
+
+A navegação lateral ocupa a altura do documento e mantém as oito operações identificáveis. O título e o resultado da operação iniciam o conteúdo. No celular, o seletor informa a operação atual e recolhe a lista.
+
+Cada conjunto de verificações tem uma superfície delimitada. Na restauração, quantidade de jobs, duração e as três conferências ficam juntos; o registro da cópia ocupa uma superfície própria. Identidades, hashes e o novo job abrem em detalhes nativos. Resultados de falha, registros inválidos e ausência de scan continuam visíveis sem expansão. A versão 3 não acrescenta animações decorativas.
+
+[Restauração desktop](screenshots/interface-v3/after-recovery-1440.png) · [celular](screenshots/interface-v3/after-recovery-390.png) · [matriz antes/depois, decisões e validação](frontend-quality.md).

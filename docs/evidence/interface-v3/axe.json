@@ -1,0 +1,322 @@
+{
+  "reviewed_at": "2026-09-22T07:53:48.449Z",
+  "checks": [
+    {
+      "id": "overview",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "id": "result",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              ".surface-panel > .job > div:nth-child(1) > h3"
+            ]
+          ]
+        }
+      ],
+      "passes": 19
+    },
+    {
+      "id": "tls",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "id": "recovery",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "id": "operations",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 21
+    },
+    {
+      "id": "rollback",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "id": "artifacts",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "id": "evidence",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [],
+      "passes": 23
+    },
+    {
+      "id": "overview",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "id": "result",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".surface-panel > .job > div:nth-child(1) > h3"
+            ]
+          ]
+        }
+      ],
+      "passes": 19
+    },
+    {
+      "id": "tls",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "id": "recovery",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "id": "operations",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 21
+    },
+    {
+      "id": "rollback",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "id": "artifacts",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ]
+          ]
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "id": "evidence",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": [
+            [
+              "summary > span[aria-hidden=\"true\"]"
+            ],
+            [
+              ".surface-panel > .table-wrap[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3)"
+            ],
+            [
+              ".surface-panel > .table-wrap[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3)"
+            ],
+            [
+              ".surface-panel > .table-wrap[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3)"
+            ],
+            [
+              ".surface-panel > .table-wrap[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(5) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(6) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(7) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(8) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(9) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(10) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(11) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(12) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(13) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(14) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(15) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(16) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(17) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(18) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(19) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(20) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(21) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(22) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(23) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(24) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(25) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(26) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(27) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(28) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(29) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(30) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(31) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(32) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(33) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(34) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(35) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(36) > td:nth-child(3)"
+            ],
+            [
+              "tr:nth-child(37) > td:nth-child(3)"
+            ]
+          ]
+        }
+      ],
+      "passes": 24
+    }
+  ],
+  "scope": "Automated axe-core scan of currently visible panels only. Incomplete checks require manual review; this is not WCAG certification."
+}

@@ -22,6 +22,8 @@
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     }
+    const label = picker.querySelector("[data-operation-label]");
+    if (label) label.textContent = "Operação: " + panel.querySelector("h2").textContent;
     if (window.matchMedia("(max-width: 760px)").matches) picker.open = false;
     if (focus) {
       panel.querySelector("h2")?.focus({ preventScroll: true });

@@ -97,8 +97,8 @@ def operation_link(identifier: str, title: str, state: str, detail: str) -> str:
     return (
         f'<a class="operation-link" href="#{identifier}" data-operation="{identifier}">'
         f'<span class="operation-title"><span class="state-dot {state}" aria-hidden="true"></span>'
-        f'{escape(title)}</span><span class="operation-meta">{escape(labels.get(state, state))}'
-        f" · {detail}</span></a>"
+        f'{escape(title)}</span><span class="operation-meta" title="{escape(detail, quote=True)}">'
+        f"{escape(labels.get(state, state))}</span></a>"
     )
 
 
@@ -150,13 +150,13 @@ def resource_table(hardening: dict) -> str:
             )
         rows.append(
             f'<tr><th scope="row">{service}</th><td>{shown(user)}</td>'
-            f"<td>{shown(round(memory / 1024**2, 1) if isinstance(memory, (int, float)) else None, ' MiB')}</td>"
-            f"<td>{shown(cpu / 1_000_000_000 if isinstance(cpu, (int, float)) else None)}</td>"
-            f"<td>{shown(values.get('pids_limit'))}</td>"
+            f"<td class=\"numeric\">{shown(round(memory / 1024**2, 1) if isinstance(memory, (int, float)) else None, ' MiB')}</td>"
+            f"<td class=\"numeric\">{shown(cpu / 1_000_000_000 if isinstance(cpu, (int, float)) else None)}</td>"
+            f"<td class=\"numeric\">{shown(values.get('pids_limit'))}</td>"
             f"<td>{filesystem}</td></tr>"
         )
     return (
-        '<div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col">Memória máxima</th><th scope="col">Limite de CPU</th><th scope="col">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody>'
+        '<div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col" class="numeric">Memória máxima</th><th scope="col" class="numeric">Limite de CPU</th><th scope="col" class="numeric">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></div>"
     )
@@ -496,13 +496,13 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         scan_findings = '<p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>'
     cache = records.get("cache-experiment", {})
     cache_rows = "".join(
-        f'<tr><th scope="row">{shown(item.get("case"))}</th><td>{shown(item.get("duration_seconds"), " s")}</td>'
-        f"<td>{shown(item.get('cached_steps'))}</td></tr>"
+        f'<tr><th scope="row">{shown(item.get("case"))}</th><td class="numeric">{shown(item.get("duration_seconds"), " s")}</td>'
+        f"<td class=\"numeric\">{shown(item.get('cached_steps'))}</td></tr>"
         for item in cache.get("runs", [])
         if isinstance(item, dict)
     )
     cache_html = (
-        '<div class="table-wrap" role="region" aria-label="Experimentos de cache, tabela com rolagem horizontal" tabindex="0"><table><caption>Cache do build</caption><thead><tr><th scope="col">Teste</th><th scope="col">Duração</th><th scope="col">Etapas reutilizadas</th></tr></thead><tbody>'
+        '<div class="table-wrap" role="region" aria-label="Experimentos de cache, tabela com rolagem horizontal" tabindex="0"><table><caption>Cache do build</caption><thead><tr><th scope="col">Teste</th><th scope="col" class="numeric">Duração</th><th scope="col" class="numeric">Etapas reutilizadas</th></tr></thead><tbody>'
         + cache_rows
         + "</tbody></table></div>"
         if cache_rows
@@ -643,12 +643,9 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         verification_explanation=(
             f"<p>{escape(attempt.explanation)}</p>" if attempt.explanation else ""
         ),
-        verification_time=timestamp(verification),
         verification_age=escape(verification_age),
         verification_duration=shown(verification.get("elapsed_seconds"), " s"),
         verification_duration_exact=precise_duration,
-        verification_run=shown(verification.get("run_id")),
-        verification_project=shown(verification.get("project")),
         verification_started=timestamp({"started_at": verification.get("started_at")}),
         verification_error=shown(verification.get("error_category")),
         verification_proof=proof("verification-run", records),
@@ -685,6 +682,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         backup_checksum=shown(backup.get("sha256")),
         backup_schema=shown(backup.get("schema_version")),
         restored_jobs=shown(restore.get("restored_jobs")),
+        restored_jobs_style="unavailable" if restore.get("restored_jobs") is None else "",
+        restore_duration_style="unavailable" if restore.get("recovery_seconds") is None else "",
+        release_version_style="unavailable" if release.get("requested_version") is None else "",
+        release_duration_style="unavailable" if release.get("maintenance_seconds") is None else "",
+        rollback_duration_style="unavailable" if rollback.get("maintenance_seconds") is None else "",
         restored_job=job_panel(restore.get("new_job") or {}, proof("restore", records)),
         release_status=badge(controls[7][1]),
         release_duration=shown(release.get("maintenance_seconds"), " s"),

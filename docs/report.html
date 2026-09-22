@@ -1,268 +1,363 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><title>ContainerOps | Operações registradas</title><style>:root { color-scheme:light; --canvas:#f6f6f3; --ink:#27352f; --muted:#5c6963; --line:#dde3dd; --blue:#226959; --green:#286440; --fail:#a33838; --warning:#815d18; }
-* { box-sizing:border-box; }
-[hidden] { display:none!important; }
-html { scroll-padding-top:20px; }
-body { margin:0; background:var(--canvas); color:var(--ink); font:14px/1.55 "Segoe UI",Arial,sans-serif; }
-h1,h2,h3,p { margin:0; }
-h1,h2,h3 { line-height:1.3; }
-h1 { font-size:20px; font-weight:650; letter-spacing:-.3px; }
-h2 { font-size:27px; font-weight:650; letter-spacing:-.7px; }
-h3 { font-size:14px; font-weight:650; }
-p + p { margin-top:8px; }
-a { color:var(--blue); text-underline-offset:3px; }
-a,summary { transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
-a:hover { text-decoration-thickness:2px; }
-a:focus-visible,summary:focus-visible,[tabindex]:focus-visible { outline:3px solid #377e69; outline-offset:4px; }
-code { font:12px/1.6 "Cascadia Code",Consolas,monospace; overflow-wrap:anywhere; }
-time,.duration,.metric strong,.operation-summary strong { font-variant-numeric:tabular-nums; }
-.skip-link { position:absolute; top:-90px; left:16px; background:white; padding:12px; z-index:10; }
-.skip-link:focus { top:8px; }
-.masthead { min-height:64px; padding:12px max(28px,calc((100vw - 1440px)/2 + 28px)); background:white; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:24px; }
-.brand { display:flex; align-items:center; gap:10px; color:var(--ink); font-size:19px; font-weight:700; text-decoration:none; letter-spacing:-.5px; }
-.brand-mark { width:32px; height:32px; display:grid; place-items:center; border:1px solid #a4bbb0; border-radius:6px; font:11px Consolas,monospace; color:#28634d; background:#f1f6f2; }
-.report-kind { font-size:12px; color:var(--muted); border-left:1px solid var(--line); padding-left:24px; }
-.header-docs { display:flex; gap:20px; margin-left:auto; font-size:12px; }
-.snapshot-label { font-size:11px; color:var(--muted); }
-.report-shell { max-width:1440px; margin:auto; padding:24px 28px 20px; }
-.report-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:22px; }
-.report-heading .eyebrow { margin-bottom:5px; }
-.generated-at { font-size:11px; color:var(--muted); }
-.eyebrow { text-transform:uppercase; font-size:10px; letter-spacing:1px; font-weight:650; color:var(--muted); margin-bottom:8px; }
-.operation-sidebar { margin-bottom:28px; }
-.operation-picker > summary { display:none; }
-.operation-index { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; padding:16px 0 12px; border-top:1px solid #ccd6ce; border-bottom:1px solid #ccd6ce; }
-.operation-group { min-width:0; }
-.operation-group h2 { font-size:10px; text-transform:uppercase; letter-spacing:1px; font-weight:650; color:var(--muted); padding:0 9px 8px; }
-.operation-link { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:7px 9px; margin:2px 0; border:1px solid transparent; border-radius:4px; color:var(--ink); text-decoration:none; }
-.operation-link:hover { background:#e9eee8; }
-.operation-link[aria-current] { background:#e8f1e8; border-color:#b4c9b8; }
-.operation-title { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; }
-.operation-meta { display:block; font-size:10px; color:var(--muted); margin:0; white-space:nowrap; }
-.state-dot { width:6px; height:6px; flex:0 0 6px; border-radius:50%; background:#708074; }
-.state-dot.pass { background:#358354; }
-.state-dot.fail,.state-dot.invalid { background:#b44242; }
-.state-dot.partial,.state-dot.pending,.state-dot.stale,.state-dot.missing { background:#9d7926; }
-.state-dot.running { background:#4476ac; }
-.index-note { margin-top:8px; font-size:10px; color:var(--muted); }
-main { min-width:0; }
-[data-panel] { scroll-margin-top:20px; }
-[data-panel] + [data-panel] { margin-top:35px; }
-[data-panel][hidden] + [data-panel] { margin-top:0; }
-.panel-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:22px; }
-.panel-heading p:not(.eyebrow) { color:var(--muted); font-size:13px; margin-top:7px; max-width:760px; }
-.panel-symbol { font:28px Consolas,monospace; color:#899d8e; }
-.inspection-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:28px; align-items:start; }
-.result-column,.identity-column { min-width:0; }
-.identity-column { border-left:1px solid var(--line); padding-left:24px; }
-.identity-column > h3 { margin:0 0 14px; }
-.attempt { border:1px solid #c9ddcd; border-left:3px solid #43835a; background:#f0f6f1; padding:18px; border-radius:5px; }
-.attempt h3 { font-size:18px; color:var(--green); }
-.attempt .duration { display:block; margin-top:10px; font-size:24px; }
-.attempt p { font-size:11px; color:var(--muted); margin-top:8px; }
-.attempt.fail,.attempt.invalid { background:#fcf1ee; border-color:#e5c9c3; border-left-color:var(--fail); }
-.attempt.fail h3,.attempt.invalid h3 { color:var(--fail); }
-.attempt.partial,.attempt.running,.attempt.stale,.attempt.missing { background:#fbf6e9; border-color:#dfd3b4; border-left-color:var(--warning); }
-.attempt.partial h3,.attempt.running h3,.attempt.stale h3,.attempt.missing h3 { color:var(--warning); }
-.record-context { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:16px 0 22px; }
-.record-context > div { min-width:0; }
-.identity-column .record-context { grid-template-columns:1fr; gap:12px; }
-dt { font-size:10px; color:var(--muted); margin-bottom:4px; }
-dd { margin:0; min-width:0; overflow-wrap:anywhere; font-size:12px; }
-.section-heading { display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:12px; }
-.section-heading a,.section-heading > span { font-size:11px; }
-.control-list { list-style:none; margin:0; padding:0; counter-reset:step; border-top:1px solid var(--line); }
-.control-row { counter-increment:step; position:relative; border-bottom:1px solid var(--line); padding:13px 10px 13px 38px; }
-.control-row::before { content:counter(step,decimal-leading-zero); position:absolute; left:8px; top:15px; color:#718378; font:10px Consolas,monospace; }
-.control-title { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
-.control-title h3 { font-size:13px; }
-.control-row > p { font-size:12px; color:var(--muted); margin-top:4px; max-width:70ch; }
-.badge { display:inline-flex; align-items:center; width:fit-content; flex-shrink:0; font-size:10px; font-weight:650; line-height:1.4; padding:3px 7px; border:1px solid; border-radius:4px; }
-.badge.pass { color:var(--green); border-color:#c7ddcc; background:#eff7ef; }
-.badge.pending { color:var(--warning); border-color:#dfd1a9; background:#fbf6e6; }
-.badge.fail { color:var(--fail); border-color:#e4c4bf; background:#fcf0ed; }
-.proof { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; font-size:11px; margin-top:8px; overflow-wrap:anywhere; }
-.proof a { padding:4px 0; }
-.proof-date { color:var(--muted); font-size:10px; }
-summary { cursor:pointer; color:var(--blue); font-weight:600; padding:13px 0; font-size:12px; min-height:44px; }
-summary:hover { color:#164a3b; }
-.section-details { border-bottom:1px solid var(--line); }
-.section-details[open] { padding-bottom:16px; }
-.section-details[open] > summary { margin-bottom:4px; }
-.facts { display:grid; grid-template-columns:130px minmax(0,1fr); gap:10px 16px; margin:16px 0; }
-.facts dt { margin:0; }
-.identity-column .facts { grid-template-columns:1fr; gap:4px; }
-.identity-column .facts dd { margin-bottom:9px; }
-.job { border:1px solid var(--line); border-radius:5px; background:#fff; padding:20px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:20px; }
-.job h3 { font-size:20px; }
-.job > .proof,.job > .checksum { grid-column:1/-1; }
-.checksum { border-top:1px solid var(--line); }
-.checksum p { color:var(--muted); font-size:11px; margin:12px 0 4px; }
-.checksum code { display:block; }
-.metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
-.metric { min-width:0; }
-.metric span { display:block; font-size:10px; color:var(--muted); }
-.metric strong { display:block; font-size:23px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; }
-.metric strong.unavailable { font-size:13px; line-height:1.5; overflow-wrap:normal; color:var(--muted); }
-.metrics-block { margin:24px 0; }
-.operation-summary { display:flex; gap:40px; padding:16px 0 20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:22px; }
-.operation-summary span { font-size:11px; color:var(--muted); display:block; }
-.operation-summary strong { display:block; font-size:26px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; }
-.subheading { margin-top:18px; }
-.evidence-block { border-top:1px solid var(--line); padding:18px 0; margin:0 0 16px; }
-.evidence-block p { color:var(--muted); font-size:12px; margin-top:9px; }
-.notice { border-left:2px solid #a8bbae; background:#edf1eb; padding:12px 15px; margin-top:20px; font-size:11px; color:#4c6254; }
-.record-warning { border:1px solid #dec397; border-left:3px solid #9d751b; background:#fff8e9; padding:15px 18px; margin-bottom:20px; font-size:12px; }
-.record-warning a { margin-left:12px; }
-.scan-status { display:flex; flex-direction:column; align-items:flex-end; gap:5px; font-size:10px; color:var(--muted); }
-.scan-findings { padding:18px; border:1px solid #e3c2bf; border-left:3px solid #ae4743; background:#fff5f1; margin-bottom:20px; }
-.scan-findings.clear { border-color:var(--line); border-left-color:#a8bbae; background:white; }
-.scan-findings h3 { margin-bottom:10px; }
-.artifact-files { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-.artifact-files li { min-width:0; }
-.artifact-files a { font-size:12px; overflow-wrap:anywhere; }
-.table-wrap { overflow:auto; margin-top:15px; }
-table { width:100%; border-collapse:collapse; font-size:12px; }
-caption { text-align:left; color:var(--muted); padding:0 0 10px; font-size:12px; }
-th,td { padding:11px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
-th { background:#edf1eb; font-size:10px; font-weight:650; color:#4d6554; }
-td a { overflow-wrap:anywhere; }
-tbody tr:hover { background:#eef2eb; }
-.empty-state { padding:20px; border:1px dashed #b6c4b9; background:white; color:var(--muted); font-size:13px; }
-.empty-state h3 { color:var(--ink); }
-.empty-state p { margin-top:8px; }
-.command { display:block; padding:12px; margin:12px 0; background:#edf1eb; }
-.evidence-catalog { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:28px; align-items:start; }
-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; border-top:1px solid var(--line); padding-top:18px; margin-top:30px; font-size:10px; color:var(--muted); }
-@media(min-width:761px) { .operation-picker:not([open]) > .operation-index { display:grid; } }
-@media(max-width:1100px) {
- .operation-link { display:block; }
- .operation-meta { margin:2px 0 0 14px; }
- .report-kind { display:none; }
- .inspection-grid { grid-template-columns:minmax(0,1fr) 260px; gap:22px; }
- .identity-column { padding-left:20px; }
- .operation-index { gap:12px; }
- .job { grid-template-columns:1fr; }
- .record-context { grid-template-columns:1fr; gap:10px; }
- .record-context > div { display:grid; grid-template-columns:90px minmax(0,1fr); gap:8px; }
- .identity-column .record-context > div { display:block; }
- .evidence-catalog { grid-template-columns:1fr; }
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><title>ContainerOps | Operações registradas</title><style>:root {
+  color-scheme: light;
+  --canvas: #edf2f8;
+  --surface: #ffffff;
+  --navy: #12243e;
+  --ink: #172a45;
+  --muted: #52647d;
+  --line: #d6e0ed;
+  --blue: #205acb;
+  --green: #176246;
+  --fail: #a52734;
+  --warning: #80530a;
 }
-@media(max-width:760px) {
- .masthead { padding:14px 18px; gap:8px 18px; flex-wrap:wrap; }
- .header-docs { font-size:10px; gap:12px; }
- .snapshot-label { width:100%; margin-left:42px; font-size:10px; }
- .report-shell { padding:22px 18px; }
- .report-heading { display:block; margin-bottom:16px; }
- .generated-at { margin-top:8px; }
- .operation-sidebar { margin-bottom:22px; }
- .operation-picker > summary { display:flex; justify-content:space-between; color:var(--ink); padding:13px 0; border-top:1px solid #cbd5ca; border-bottom:1px solid #cbd5ca; }
- .operation-picker:not([open]) > .operation-index { display:none; }
- .operation-index { grid-template-columns:1fr 1fr; gap:18px; border-top:0; }
- .index-note { display:none; }
- .inspection-grid { display:flex; flex-direction:column; gap:24px; }
- .result-column,.identity-column { width:100%; }
- .identity-column { border-left:0; padding:18px 0 0; border-top:1px solid var(--line); }
- #overview .identity-column { order:-1; }
- .panel-heading { align-items:flex-start; gap:15px; }
- .panel-heading p:not(.eyebrow) { font-size:12px; }
- h2 { font-size:24px; }
- .panel-symbol { display:none; }
- .control-row { padding:13px 0 13px 30px; }
- .control-row::before { left:3px; }
- .control-title { flex-wrap:wrap; gap:7px 12px; }
- .record-context { margin:15px 0 20px; }
- .identity-column .record-context > div { display:grid; }
- .facts { grid-template-columns:1fr; gap:4px; }
- .facts dd { margin-bottom:10px; }
- .job { padding:16px; gap:16px; }
- .metric strong { font-size:22px; }
- .operation-summary { gap:25px; flex-wrap:wrap; }
- .operation-summary strong { font-size:24px; }
- .artifact-files { grid-template-columns:1fr; }
- .table-wrap table { min-width:600px; }
- .record-warning a { display:block; margin:8px 0 0; }
- .proof-date { width:100%; }
- .recovery-job .job { margin-left:0; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-padding-top: 24px; }
+body { margin: 0; background: var(--canvas); color: var(--ink); font: 14px/1.55 "Segoe UI Variable Text", "Segoe UI", sans-serif; }
+h1,h2,h3,p { margin: 0; }
+h1,h2,h3 { line-height: 1.3; text-wrap: balance; }
+h1,h2 { font-family: Bahnschrift, "Segoe UI", sans-serif; font-weight: 600; }
+h1 { font-size: 16px; }
+h2 { font-size: 28px; letter-spacing: -.5px; }
+h3 { font-size: 15px; font-weight: 650; }
+p + p { margin-top: 8px; }
+a { color: var(--blue); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a,summary { touch-action: manipulation; -webkit-tap-highlight-color: #b8d2ff; }
+a:focus-visible,summary:focus-visible,[tabindex]:focus-visible { outline: 3px solid #3776e8; outline-offset: 4px; }
+code { font: 12px/1.55 "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+time,.duration,.metric strong,.operation-summary strong { font-variant-numeric: tabular-nums; }
+.skip-link { position: absolute; top: -90px; left: 16px; background: white; padding: 12px; z-index: 10; }
+.skip-link:focus { top: 8px; }
+.masthead { min-height: 68px; padding: 14px 28px; background: var(--navy); color: #fff; border-bottom: 1px solid #2b4260; display: flex; align-items: center; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 20px; font-weight: 700; text-decoration: none; letter-spacing: -.5px; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #6082b1; border-radius: 7px; font: 12px Consolas,monospace; color: #fff; background: #203b61; }
+.report-kind { font-size: 13px; color: #c4d4ea; border-left: 1px solid #3f5777; padding-left: 24px; }
+.header-docs { display: flex; gap: 20px; margin-left: auto; font-size: 12px; }
+.header-docs a { color: #d6e6ff; display: inline-flex; align-items: center; min-height: 28px; }
+.snapshot-label { font-size: 12px; color: #c4d4ea; }
+.report-shell { display: grid; grid-template-columns: 232px minmax(0,1fr); min-height: calc(100dvh - 68px); }
+.operation-sidebar { min-width: 0; padding: 24px 16px; background: var(--navy); color: #fff; border-right: 1px solid #2b4260; }
+.operation-sidebar nav { position: relative; }
+.report-heading { margin: 0 12px 22px; }
+.report-heading h1 { color: #fff; font-size: 15px; }
+.report-heading .eyebrow { color: #adbfda; font-size: 12px; margin-bottom: 5px; }
+.eyebrow { font-size: 12px; color: var(--muted); margin-bottom: 7px; font-weight: 500; }
+.operation-picker > summary { display: none; }
+.operation-index { display: grid; gap: 22px; }
+.operation-group { min-width: 0; }
+.operation-group h2 { font: 600 12px/1.4 "Segoe UI",sans-serif; color: #aebfd6; letter-spacing: 0; padding: 0 12px 6px; }
+.operation-link { display: block; padding: 10px 12px; margin: 3px 0; border: 1px solid transparent; border-radius: 7px; color: #e2ebf8; text-decoration: none; }
+.operation-link:hover { background: #233d61; color: #fff; }
+.operation-link[aria-current] { background: #234d8b; border-color: #8ab4f2; color: white; }
+.operation-title { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; line-height: 1.4; }
+.operation-meta { display: block; font-size: 11px; color: #b8cbe7; margin: 4px 0 0 15px; }
+.operation-link[aria-current] .operation-meta { color: #e2ecfc; }
+.state-dot { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: #a3b6d0; }
+.state-dot.pass { background: #65d5ac; }
+.state-dot.fail,.state-dot.invalid { background: #ff939b; }
+.state-dot.partial,.state-dot.pending,.state-dot.stale,.state-dot.missing { background: #ecc16d; }
+.state-dot.running { background: #81b8ff; }
+.index-note { border-top: 1px solid #3d526e; padding-top: 18px; margin: 28px 12px 0; font-size: 12px; line-height: 1.55; color: #b8cbe7; }
+main { min-width: 0; width: 100%; max-width: 1480px; padding: 28px 32px 24px; margin-inline: auto; }
+[data-panel] { scroll-margin-top: 24px; }
+[data-panel] + [data-panel] { margin-top: 32px; }
+[data-panel][hidden] + [data-panel] { margin-top: 0; }
+.panel-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+.panel-heading p:not(.eyebrow) { color: var(--muted); font-size: 14px; margin-top: 8px; max-width: 68ch; }
+.panel-symbol { display: none; }
+.surface-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 20px; box-shadow: 0 2px 4px #172a4505; min-width: 0; }
+.surface-panel > :last-child { margin-bottom: 0; }
+.panel-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-bottom: 16px; margin-bottom: 4px; border-bottom: 1px solid var(--line); }
+.panel-toolbar .proof { margin-top: 0; font-size: 12px; }
+.panel-toolbar > h3 { font-size: 16px; }
+.panel-toolbar > a { display: inline-block; padding-block: 4px; }
+.inspection-grid { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 20px; align-items: start; }
+.result-column,.identity-column { min-width: 0; }
+.identity-column .surface-panel { padding: 20px; }
+.identity-column > h3 { margin-bottom: 14px; }
+.attempt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; border: 1px solid #c0d4ed; background: #f0f6ff; padding: 18px 20px; border-radius: 7px; margin-bottom: 20px; }
+.attempt h3 { font-size: 21px; color: var(--ink); }
+.attempt > div:last-child { margin-left: auto; display: grid; gap: 3px; color: var(--muted); font-size: 12px; }
+.attempt .eyebrow { width: 100%; margin: 0; }
+.attempt .duration { display: block; font-size: 18px; font-weight: 600; color: var(--ink); }
+.attempt p:not(.eyebrow) { width: 100%; font-size: 12px; color: var(--muted); }
+.attempt.fail,.attempt.invalid { background: #fff2f3; border-color: #ecc1c7; }
+.attempt.fail h3,.attempt.invalid h3 { color: var(--fail); }
+.attempt.partial,.attempt.running,.attempt.stale,.attempt.missing { background: #fff7e7; border-color: #e6cd9d; }
+.attempt.partial h3,.attempt.running h3,.attempt.stale h3,.attempt.missing h3 { color: var(--warning); }
+.record-context { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 18px 0; }
+.record-context > div { min-width: 0; }
+.identity-column .record-context { grid-template-columns: 1fr; gap: 14px; }
+dt { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font-size: 13px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+.section-heading a,.section-heading > span { font-size: 12px; }
+.control-list { list-style: none; margin: 0; padding: 0 20px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.surface-panel > .control-list { border: 0; border-radius: 0; padding: 0; }
+.control-row { padding: 17px 0; border-bottom: 1px solid var(--line); }
+.control-row:last-child { border-bottom: 0; }
+.control-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.control-title h3 { font-size: 14px; }
+.control-row > p { font-size: 13px; color: var(--muted); margin-top: 5px; max-width: 68ch; }
+.badge { display: inline-flex; align-items: center; width: fit-content; flex-shrink: 0; font-size: 11px; font-weight: 650; line-height: 1.4; padding: 4px 8px; border: 1px solid; border-radius: 5px; }
+.badge.pass { color: var(--green); border-color: #b8d8c9; background: #edf8f2; }
+.badge.pending { color: var(--warning); border-color: #e4cc9c; background: #fff7e6; }
+.badge.fail { color: var(--fail); border-color: #e5bdc3; background: #fff0f2; }
+.proof { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 12px; margin-top: 10px; overflow-wrap: anywhere; }
+.proof:empty { display: none; }
+.proof a { padding: 4px 0; }
+.proof-date { color: var(--muted); font-size: 11px; }
+summary { cursor: pointer; color: var(--blue); font-weight: 600; padding: 14px 0; font-size: 13px; min-height: 44px; }
+summary:hover { color: #123f98; }
+.section-details,.record-details { border-top: 1px solid var(--line); margin-top: 12px; }
+.section-details[open],.record-details[open] { padding-bottom: 4px; }
+.section-details[open] > summary,.record-details[open] > summary { margin-bottom: 4px; }
+.facts { display: grid; grid-template-columns: 140px minmax(0,1fr); gap: 10px 16px; margin: 16px 0; }
+.facts dt { margin: 0; }
+.identity-column .facts { grid-template-columns: 1fr; gap: 4px; }
+.identity-column .facts dd { margin-bottom: 10px; }
+.job { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 20px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,2fr); gap: 16px; }
+.job h3 { font-size: 21px; }
+.surface-panel > .job { border: 0; padding: 0; }
+.job > .proof,.job > .checksum { grid-column: 1/-1; }
+.checksum { border-top: 1px solid var(--line); }
+.checksum p { color: var(--muted); font-size: 12px; margin: 12px 0 4px; }
+.checksum code { display: block; }
+.metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.metric { min-width: 0; }
+.metric span { display: block; font-size: 12px; color: var(--muted); }
+.metric strong { display: block; font-size: 23px; font-weight: 600; margin-top: 5px; overflow-wrap: anywhere; }
+.metric strong.unavailable { font-size: 13px; line-height: 1.5; overflow-wrap: normal; color: var(--muted); }
+.metrics-block { margin: 24px 0; }
+.operation-summary { display: flex; align-items: center; gap: 32px; padding: 18px 20px; background: #f0f6ff; border: 1px solid #c9dbf2; border-radius: 7px; margin-bottom: 22px; }
+.operation-summary > div + div { border-left: 1px solid #c0d1e8; padding-left: 28px; }
+.operation-summary span { font-size: 12px; color: #405b7e; display: block; }
+.operation-summary strong { display: block; font-size: 28px; font-weight: 600; margin-top: 3px; overflow-wrap: anywhere; }
+.operation-summary > div + div strong { font-size: 21px; }
+.operation-summary strong.unavailable { font-size: 14px; font-weight: 500; color: var(--muted); }
+.subheading { margin-top: 18px; }
+.evidence-block { padding: 0; margin: 0 0 16px; }
+.evidence-block p { color: var(--muted); font-size: 13px; margin-top: 9px; }
+.notice { border: 1px solid #c9d8eb; border-left: 3px solid #7597c5; border-radius: 5px; background: #e9f0fa; padding: 12px 15px; margin-top: 18px; font-size: 12px; color: #3f5778; }
+.record-warning,.record-errors { border: 1px solid #e6c68e; border-left: 3px solid #a46b11; border-radius: 7px; background: #fff7e8; padding: 16px 18px; margin-bottom: 20px; font-size: 13px; }
+.record-errors h2 { font-size: 20px; }
+.record-warning a { margin-left: 12px; }
+.scan-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.scan-findings { padding: 18px; border: 1px solid #e5bdc3; border-left: 3px solid var(--fail); border-radius: 7px; background: #fff3f4; margin-bottom: 20px; }
+.scan-findings.clear { border-color: var(--line); border-left-color: #7697c6; background: white; }
+.scan-findings h3 { margin-bottom: 10px; }
+.artifact-files { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.artifact-files li { min-width: 0; }
+.artifact-files a { font-size: 12px; overflow-wrap: anywhere; display: inline-block; padding-block: 4px; }
+.table-wrap { overflow: auto; margin-top: 15px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+caption { text-align: left; color: var(--muted); padding: 0 0 10px; font-size: 13px; }
+th,td { padding: 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+th { background: #f0f4fa; font-size: 12px; font-weight: 650; color: #405779; }
+td a,th a { overflow-wrap: anywhere; display: inline-block; min-width: 24px; padding-block: 3px; }
+th.numeric,td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:hover { background: #f2f6fc; }
+.empty-state { padding: 20px; border: 1px dashed #9eafc6; border-radius: 7px; background: white; color: var(--muted); font-size: 14px; }
+.empty-state h3 { color: var(--ink); }
+.empty-state p { margin-top: 8px; }
+.command { display: block; padding: 12px; margin: 12px 0; background: #eff4fa; border-radius: 5px; }
+.evidence-catalog { display: grid; grid-template-columns: minmax(0,1fr) 280px; gap: 20px; align-items: start; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; padding-top: 10px; margin-top: 20px; font-size: 11px; color: var(--muted); }
+.generated-at { font-size: 11px; color: var(--muted); }
+footer a { display: inline-flex; align-items: center; min-height: 24px; }
+@media (min-width: 761px) { .operation-picker:not([open]) > .operation-index { display: grid; } }
+@media (max-width: 1100px) {
+  .report-shell { grid-template-columns: 212px minmax(0,1fr); }
+  main { padding: 24px; }
+  .inspection-grid,.evidence-catalog { grid-template-columns: 1fr; }
+  .report-kind { display: none; }
+  .identity-column .record-context { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .record-context { gap: 12px; }
+  .record-context > div { min-width: 0; }
 }
-@media(max-width:380px) { .header-docs { margin-left:42px; } .operation-index { grid-template-columns:1fr; } .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width: 760px) {
+  .masthead { padding: 14px 18px; gap: 8px 18px; flex-wrap: wrap; }
+  .brand { font-size: 19px; }
+  .header-docs { font-size: 12px; gap: 14px; }
+  .snapshot-label { width: 100%; margin-left: 44px; font-size: 11px; }
+  .report-shell { display: block; min-height: 0; }
+  .operation-sidebar { padding: 0 18px; border: 0; }
+  .operation-sidebar nav { position: static; }
+  .report-heading { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .operation-picker > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #fff; padding: 16px 0; font-size: 13px; }
+  .operation-picker:not([open]) > .operation-index { display: none; }
+  .operation-index { grid-template-columns: 1fr 1fr; gap: 18px; padding: 8px 0 20px; }
+  .operation-group h2 { padding-left: 12px; }
+  .index-note { display: none; }
+  main { padding: 24px 18px; }
+  h2 { font-size: 25px; }
+  .panel-heading { gap: 12px; margin-bottom: 20px; align-items: flex-start; }
+  .panel-heading p:not(.eyebrow) { font-size: 13px; }
+  .surface-panel,.identity-column .surface-panel { padding: 18px; border-radius: 8px; }
+  .panel-toolbar { gap: 8px; padding-bottom: 12px; }
+  .panel-toolbar .proof { width: 100%; }
+  .control-list { padding-inline: 16px; }
+  .control-row { padding: 15px 0; }
+  .control-title { align-items: flex-start; gap: 10px; }
+  .control-title h3 { min-width: 0; }
+  .control-row > p { font-size: 13px; }
+  .record-context,.identity-column .record-context { grid-template-columns: 1fr; gap: 12px; }
+  .record-context > div { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 10px; }
+  .facts { grid-template-columns: 1fr; gap: 4px; }
+  .facts dd { margin-bottom: 10px; }
+  .job { padding: 16px; grid-template-columns: 1fr; gap: 16px; }
+  .metrics { gap: 12px; }
+  .metric strong { font-size: 21px; }
+  .operation-summary { gap: 18px; padding: 16px; }
+  .operation-summary > div + div { padding-left: 18px; }
+  .operation-summary strong { font-size: 25px; }
+  .operation-summary > div + div strong { font-size: 19px; }
+  .artifact-files { grid-template-columns: 1fr; }
+  .table-wrap table { min-width: 540px; }
+  .record-warning a { display: block; margin: 8px 0 0; }
+  .proof-date { width: 100%; }
+  .attempt { padding: 16px; }
+  .attempt .duration { margin-left: 0; }
+  footer { display: block; }
+footer > * { display: block; margin-top: 8px; }
+}
+@media (max-width: 380px) {
+  .header-docs { margin-left: 44px; }
+  .operation-index { grid-template-columns: 1fr; }
+  .surface-panel,.identity-column .surface-panel { padding: 16px; }
+  .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .operation-summary { gap: 12px; }
+  .operation-summary > div + div { padding-left: 12px; }
+  .operation-summary span { font-size: 11px; }
+}
 @media print {
- @page { margin:14mm; }
- body { background:white; font-size:10pt; }
- .operation-sidebar,.skip-link,.header-docs,.report-kind,footer { display:none!important; }
- .masthead { padding:0; background:white; }
- .report-shell { padding:12px 0; max-width:none; }
- [data-panel][hidden] { display:block!important; }
- [data-panel] { margin-top:28px!important; }
- .inspection-grid,.evidence-catalog { display:block; }
- .identity-column { border:0; padding:15px 0; }
- .control-row,.job,tr { break-inside:avoid; }
- h2,h3 { break-after:avoid; }
- .table-wrap { overflow:visible; }
- .table-wrap table { min-width:0; font-size:9pt; }
- td,th { padding:7px; overflow-wrap:anywhere; }
- details::details-content { content-visibility:visible; }
+  @page { margin: 14mm; }
+  body { background: white; font-size: 10pt; }
+  .operation-sidebar,.skip-link,.header-docs,.report-kind,footer { display: none !important; }
+  .masthead { padding: 0; background: white; color: var(--ink); border: 0; }
+  .brand { color: var(--ink); }
+  .snapshot-label { color: var(--muted); }
+  .report-shell { display: block; min-height: 0; }
+  main { padding: 12px 0; max-width: none; }
+  [data-panel][hidden] { display: block !important; }
+  [data-panel] { margin-top: 28px !important; }
+  .inspection-grid,.evidence-catalog { display: block; }
+  .surface-panel { padding: 14px; box-shadow: none; }
+  .control-row,.job,tr { break-inside: avoid; }
+  h2,h3 { break-after: avoid; }
+  .table-wrap { overflow: visible; }
+  .table-wrap table { min-width: 0; font-size: 9pt; }
+  td,th { padding: 7px; overflow-wrap: anywhere; }
+  details::details-content { content-visibility: visible; }
 }
-@media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important; scroll-behavior:auto!important; } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { transition: none !important; scroll-behavior: auto !important; } }
 </style></head>
 <body>
 <a class="skip-link" href="#content">Ir para a operação</a>
-<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">C/O</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../README.md">Como executar ↗</a><a href="runbooks.md">Runbooks ↗</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
+<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">C/O</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../README.md">Como executar</a><a href="runbooks.md">Runbooks</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
 <div class="report-shell">
-  <div class="report-heading"><div><p class="eyebrow">APLICAÇÃO LOCAL / DOCKER</p><h1>Operações registradas</h1></div><p class="generated-at">Relatório gerado em <time datetime="2026-09-22T06:41:24.097525+00:00">22/09/2026 · 06:41:24 UTC</time></p></div>
-  <aside class="operation-sidebar"><nav aria-label="Operações registradas"><details class="operation-picker" open><summary>Escolher operação <span aria-hidden="true">⌄</span></summary><div class="operation-index"><div class="operation-group"><h2>Verificação</h2><a class="operation-link" href="#overview" data-operation="overview"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Aplicação e isolamento</span><span class="operation-meta">Aprovado · 246,7 s</span></a><a class="operation-link" href="#result" data-operation="result"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Resultado do job</span><span class="operation-meta">Aprovado · v1.0.0</span></a><a class="operation-link" href="#tls" data-operation="tls"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Conexão TLS</span><span class="operation-meta">Aprovado · CA local</span></a></div><div class="operation-group"><h2>Recuperação</h2><a class="operation-link" href="#recovery" data-operation="recovery"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Backup e restauração</span><span class="operation-meta">Aprovado · 27,4 s</span></a></div><div class="operation-group"><h2>Release</h2><a class="operation-link" href="#operations" data-operation="operations"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Última troca de imagem</span><span class="operation-meta">Aprovado · 30,2 s</span></a><a class="operation-link" href="#rollback" data-operation="rollback"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Retorno após falha</span><span class="operation-meta">Aprovado · 44,9 s</span></a></div><div class="operation-group"><h2>Artefatos</h2><a class="operation-link" href="#artifacts" data-operation="artifacts"><span class="operation-title"><span class="state-dot partial" aria-hidden="true"></span>Imagem, auditoria e scan</span><span class="operation-meta">Parcial · v2.0.0</span></a><a class="operation-link" href="#evidence" data-operation="evidence"><span class="operation-title"><span class="state-dot info" aria-hidden="true"></span>Arquivos de evidência</span><span class="operation-meta">Consulta · 37 JSONs</span></a></div></div></details></nav><p class="index-note">Resultados salvos em arquivos. Nenhum serviço é consultado ou alterado ao abrir esta página.</p></aside>
+  <aside class="operation-sidebar">
+    <div class="report-heading"><h1>Operações registradas</h1></div>
+    <nav aria-label="Operações registradas"><details class="operation-picker" open><summary><span data-operation-label>Escolher operação</span><span aria-hidden="true">⌄</span></summary><div class="operation-index"><div class="operation-group"><h2>Verificação</h2><a class="operation-link" href="#overview" data-operation="overview"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Aplicação e isolamento</span><span class="operation-meta" title="246,7 s">Aprovado</span></a><a class="operation-link" href="#result" data-operation="result"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Resultado do job</span><span class="operation-meta" title="v1.0.0">Aprovado</span></a><a class="operation-link" href="#tls" data-operation="tls"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Conexão TLS</span><span class="operation-meta" title="CA local">Aprovado</span></a></div><div class="operation-group"><h2>Recuperação</h2><a class="operation-link" href="#recovery" data-operation="recovery"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Backup e restauração</span><span class="operation-meta" title="27,4 s">Aprovado</span></a></div><div class="operation-group"><h2>Release</h2><a class="operation-link" href="#operations" data-operation="operations"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Última troca de imagem</span><span class="operation-meta" title="30,2 s">Aprovado</span></a><a class="operation-link" href="#rollback" data-operation="rollback"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Retorno após falha</span><span class="operation-meta" title="44,9 s">Aprovado</span></a></div><div class="operation-group"><h2>Artefatos</h2><a class="operation-link" href="#artifacts" data-operation="artifacts"><span class="operation-title"><span class="state-dot partial" aria-hidden="true"></span>Imagem, auditoria e scan</span><span class="operation-meta" title="v2.0.0">Parcial</span></a><a class="operation-link" href="#evidence" data-operation="evidence"><span class="operation-title"><span class="state-dot info" aria-hidden="true"></span>Arquivos de evidência</span><span class="operation-meta" title="37 JSONs">Consulta</span></a></div></div></details></nav>
+    <p class="index-note">Resultados salvos em arquivos. Esta página não consulta nem altera os serviços.</p>
+  </aside>
   <main id="content" tabindex="-1">
 
-    <noscript><p class="notice">Todas as operações aparecem abaixo. Use os links da lista para chegar ao resultado desejado.</p></noscript>
+    <noscript><p class="notice">Todas as operações aparecem abaixo. Use a navegação para chegar ao resultado desejado.</p></noscript>
     <section id="overview" data-panel aria-labelledby="overview-title">
-      <div class="panel-heading"><div><p class="eyebrow">Verificação / Aplicação e isolamento</p><h2 id="overview-title" tabindex="-1">Verificação da aplicação</h2><p>Etapas vinculadas à última execução de verificação.</p></div><span class="panel-symbol" aria-hidden="true">01</span></div>
-      <div class="inspection-grid"><div class="result-column">
-        <div class="section-heading"><h3>Etapas verificadas</h3><a href="#evidence">Todos os arquivos →</a></div><ol class="control-list"><li class="control-row"><div class="control-title"><h3>HTTP pelo proxy</h3><span class="badge pass">Passou</span></div><p>6 requisições simultâneas; 1 job salvo. Testa autorização e limites HTTP.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Usuário e filesystem</h3><span class="badge pass">Passou</span></div><p>Testa UID, capabilities, no-new-privileges e escrita fora dos mounts.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Rede isolada</h3><span class="badge pass">Passou</span></div><p>Testa acesso ao banco pelas redes data e front e verifica se o banco publica portas.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Recuperação do worker</h3><span class="badge pass">Passou</span></div><p>Testa conclusão após SIGKILL (2 tentativas) e após SIGTERM.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Banco indisponível</h3><span class="badge pass">Passou</span></div><p>Banco parado: espera liveness 200, readiness e criação de jobs 503. Testa um novo job após o restart.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Persistência</h3><span class="badge pass">Passou</span></div><p>Compara snapshots antes e depois de recriar os containers: 8 jobs mantidos.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li></ol>
-        <details class="section-details"><summary>Identidade dos processos e limites dos containers</summary><div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col">Memória máxima</th><th scope="col">Limite de CPU</th><th scope="col">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody><tr><th scope="row">proxy</th><td>101:101</td><td>32,0 MiB</td><td>0,2</td><td>32</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">api</th><td>10001:10001</td><td>192,0 MiB</td><td>0,5</td><td>64</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">worker</th><td>10001:10001</td><td>128,0 MiB</td><td>0,5</td><td>64</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">db</th><td>999:999</td><td>256,0 MiB</td><td>0,8</td><td>128</td><td>Gravável (banco)</td></tr></tbody></table></div><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></details>
-      </div><aside class="identity-column">
-        <div class="attempt pass"><p class="eyebrow">RESULTADO REGISTRADO</p><h3>Última verificação aprovada</h3><strong class="duration">246,7 s</strong><p>6,5 h antes da geração</p></div>
-        <dl class="record-context"><div><dt>Conclusão registrada</dt><dd><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-2b29fb96</code></dd></div><div><dt>Execução</dt><dd><code>2b29fb96a914490198d61c583b2c75d4</code></dd></div></dl>
-        <details class="section-details"><summary>Identificação e duração da execução</summary><dl class="facts"><dt>Início</dt><dd><time datetime="2026-09-22T00:10:13.773630+00:00">22/09/2026 · 00:10:13 UTC</time></dd><dt>Conclusão / registro</dt><dd><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></dd><dt>Projeto</dt><dd><code>pf-containerops-test-2b29fb96</code></dd><dt>ID da execução</dt><dd><code>2b29fb96a914490198d61c583b2c75d4</code></dd><dt>Duração exata</dt><dd>246,656 s</dd><dt>Categoria de erro</dt><dd>Não informado</dd></dl><div class="proof"><a href="evidence/verification-run.json">verification-run.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></span></div></details>
-      </aside></div>
+      <div class="panel-heading"><h2 id="overview-title" tabindex="-1">Verificação da aplicação</h2></div>
+      <div class="surface-panel">
+        <div class="attempt pass"><div><h3>Última verificação aprovada</h3><p>7,6 h antes da geração</p></div><div><span>Duração registrada</span><strong class="duration">246,7 s</strong></div></div>
+        <div class="panel-toolbar"><h3>Etapas verificadas</h3><a href="#evidence">Consultar arquivos</a></div>
+        <ol class="control-list"><li class="control-row"><div class="control-title"><h3>HTTP pelo proxy</h3><span class="badge pass">Passou</span></div><p>6 requisições simultâneas; 1 job salvo. Testa autorização e limites HTTP.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Usuário e filesystem</h3><span class="badge pass">Passou</span></div><p>Testa UID, capabilities, no-new-privileges e escrita fora dos mounts.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Rede isolada</h3><span class="badge pass">Passou</span></div><p>Testa acesso ao banco pelas redes data e front e verifica se o banco publica portas.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Recuperação do worker</h3><span class="badge pass">Passou</span></div><p>Testa conclusão após SIGKILL (2 tentativas) e após SIGTERM.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Banco indisponível</h3><span class="badge pass">Passou</span></div><p>Banco parado: espera liveness 200, readiness e criação de jobs 503. Testa um novo job após o restart.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Persistência</h3><span class="badge pass">Passou</span></div><p>Compara snapshots antes e depois de recriar os containers: 8 jobs mantidos.</p><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></span></div></li></ol>
+        <details class="record-details"><summary>Identificação e duração da execução</summary><dl class="record-context"><div><dt>Conclusão registrada</dt><dd><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-2b29fb96</code></dd></div><div><dt>Execução</dt><dd><code>2b29fb96a914490198d61c583b2c75d4</code></dd></div></dl><dl class="facts"><dt>Início</dt><dd><time datetime="2026-09-22T00:10:13.773630+00:00">22/09/2026 · 00:10:13 UTC</time></dd><dt>Duração exata</dt><dd>246,656 s</dd><dt>Categoria de erro</dt><dd>Não informado</dd></dl><div class="proof"><a href="evidence/verification-run.json">verification-run.json</a><span class="proof-date"><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></span></div></details>
+        <details class="record-details"><summary>Identidade dos processos e limites dos containers</summary><div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col" class="numeric">Memória máxima</th><th scope="col" class="numeric">Limite de CPU</th><th scope="col" class="numeric">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody><tr><th scope="row">proxy</th><td>101:101</td><td class="numeric">32,0 MiB</td><td class="numeric">0,2</td><td class="numeric">32</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">api</th><td>10001:10001</td><td class="numeric">192,0 MiB</td><td class="numeric">0,5</td><td class="numeric">64</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">worker</th><td>10001:10001</td><td class="numeric">128,0 MiB</td><td class="numeric">0,5</td><td class="numeric">64</td><td><span class="badge pass">Somente leitura</span></td></tr><tr><th scope="row">db</th><td>999:999</td><td class="numeric">256,0 MiB</td><td class="numeric">0,8</td><td class="numeric">128</td><td>Gravável (banco)</td></tr></tbody></table></div><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></span></div></details>
+      </div>
     </section>
     <section id="result" data-panel aria-labelledby="result-title">
-      <div class="panel-heading"><div><p class="eyebrow">Verificação / Resultado do job</p><h2 id="result-title" tabindex="-1">Último job registrado</h2><p>Contagem, tentativas e checksum do resultado salvo.</p></div><span class="panel-symbol" aria-hidden="true">02</span></div>
-      <div class="inspection-grid"><div class="result-column"><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>7</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>64dc6386-3541-4da4-b0a7-4e8972e12f98</code><p>SHA-256 do texto UTF-8</p><code>27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc</code></details><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></span></div></div></div><aside class="identity-column"><h3>Origem deste resultado</h3><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-2b29fb96</code></dd></div><div><dt>Execução</dt><dd><code>2b29fb96a914490198d61c583b2c75d4</code></dd></div></dl><p class="notice">A versão acima pertence a este job. A imagem de <a href="#artifacts">Artefatos</a> pode vir de outro build; a proximidade entre os registros não estabelece um vínculo.</p></aside></div>
+      <div class="panel-heading"><h2 id="result-title" tabindex="-1">Último job registrado</h2></div>
+      <div class="surface-panel">
+        <div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>7</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>64dc6386-3541-4da4-b0a7-4e8972e12f98</code><p>SHA-256 do texto UTF-8</p><code>27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc</code></details><div class="proof"><a href="evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></span></div></div>
+        <details class="record-details"><summary>Origem deste resultado</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:11:55.428074+00:00">22/09/2026 · 00:11:55 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-2b29fb96</code></dd></div><div><dt>Execução</dt><dd><code>2b29fb96a914490198d61c583b2c75d4</code></dd></div></dl></details>
+        <p class="notice">A versão pertence a este job. A imagem de <a href="#artifacts">Artefatos</a> pode vir de outro build; a proximidade entre os registros não estabelece um vínculo.</p>
+      </div>
     </section>
     <section id="tls" data-panel aria-labelledby="tls-title">
-      <div class="panel-heading"><div><p class="eyebrow">Verificação / Conexão TLS</p><h2 id="tls-title" tabindex="-1">Conexão com a CA local</h2><p>Resultado da verificação do cliente contra o proxy da demonstração.</p></div><span class="panel-symbol" aria-hidden="true">03</span></div>
-      <div class="inspection-grid"><div class="result-column"><h3>Etapas da conexão</h3><ol class="control-list"><li class="control-row"><div class="control-title"><h3>TLS local</h3><span class="badge pass">Passou</span></div><p>Testa TLS com a CA local passada ao cliente.</p><div class="proof"><a href="evidence/tls.json">tls.json</a><span class="proof-date"><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></span></div></li></ol></div><aside class="identity-column"><h3>Registro da conexão</h3><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><p class="notice">O TLS termina no proxy. Este registro não é uma observação da disponibilidade atual.</p></aside></div>
+      <div class="panel-heading"><h2 id="tls-title" tabindex="-1">Conexão com a CA local</h2></div>
+      <div class="surface-panel">
+        <div class="panel-toolbar"><h3>Verificações da conexão</h3></div>
+        <ol class="control-list"><li class="control-row"><div class="control-title"><h3>TLS local</h3><span class="badge pass">Passou</span></div><p>Testa TLS com a CA local passada ao cliente.</p><div class="proof"><a href="evidence/tls.json">tls.json</a><span class="proof-date"><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></span></div></li></ol>
+        <details class="record-details"><summary>Registro da conexão</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl></details>
+        <p class="notice">O TLS termina no proxy. Este registro não é uma observação da disponibilidade atual.</p>
+      </div>
     </section>
     <section id="recovery" data-panel aria-labelledby="recovery-title">
-      <div class="panel-heading"><div><p class="eyebrow">Recuperação / Dados</p><h2 id="recovery-title" tabindex="-1">Backup e restauração</h2><p>Confira a cópia registrada e o teste de leitura em um volume novo.</p></div><span class="badge pass">Passou</span></div>
-      <div class="inspection-grid"><div class="result-column">
-        <div class="operation-summary"><div><span>Jobs restaurados</span><strong>3</strong></div><div><span>Restauração + novo job</span><strong>27,4 s</strong></div></div>
-        <h3 class="subheading">Verificações: cópia → dados → novo job</h3><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-restore-b83b509e</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Checksum do backup</h3><span class="badge pass">Passou</span></div><p>Compara o dump recebido com o checksum registrado.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Dados no volume restaurado</h3><span class="badge pass">Passou</span></div><p>Compara o snapshot restaurado com os dados esperados.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Novo job após restauração</h3><span class="badge pass">Passou</span></div><p>Confere conclusão, contagem de palavras e checksum do novo resultado.</p><div class="proof"></div></li></ol><div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div>
-        <details class="section-details recovery-job" open><summary>Resultado do novo job no volume restaurado</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>5787bb14-bd06-4e2d-83b3-9a101a8a5b6d</code><p>SHA-256 do texto UTF-8</p><code>7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c</code></details><div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div></div></details>
-        <p class="notice">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
-      </div><aside class="identity-column"><div class="evidence-block"><div class="section-heading"><h3>Registro da cópia</h3><span>8,4 s</span></div><p>O backup e a restauração têm registros próprios. Confira o caminho do backup no JSON de restauração para estabelecer a relação.</p><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Schema do backup</dt><dd>2</dd><dt>SHA-256 do dump</dt><dd><code>11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb</code></dd></dl><div class="proof"><a href="evidence/backup.json">backup.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></span></div></div></aside></div>
+      <div class="panel-heading"><h2 id="recovery-title" tabindex="-1">Backup e restauração</h2></div>
+      <div class="inspection-grid">
+        <div class="result-column surface-panel">
+          <div class="panel-toolbar"><h3>Restauração em volume novo</h3><span class="badge pass">Passou</span></div>
+          <div class="operation-summary"><div><span>Jobs restaurados</span><strong class="">3</strong></div><div><span>Restauração + novo job</span><strong class="">27,4 s</strong></div></div>
+          <ol class="control-list"><li class="control-row"><div class="control-title"><h3>Checksum do backup</h3><span class="badge pass">Passou</span></div><p>Compara o dump recebido com o checksum registrado.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Dados no volume restaurado</h3><span class="badge pass">Passou</span></div><p>Compara o snapshot restaurado com os dados esperados.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Novo job após restauração</h3><span class="badge pass">Passou</span></div><p>Confere conclusão, contagem de palavras e checksum do novo resultado.</p><div class="proof"></div></li></ol>
+          <div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div>
+          <details class="record-details"><summary>Identidade da restauração</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-restore-b83b509e</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl></details>
+          <details class="record-details recovery-job"><summary>Resultado do novo job no volume restaurado</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>5787bb14-bd06-4e2d-83b3-9a101a8a5b6d</code><p>SHA-256 do texto UTF-8</p><code>7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c</code></details><div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div></div></details>
+          <p class="notice">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
+        </div>
+        <aside class="identity-column surface-panel">
+          <div class="panel-toolbar"><h3>Registro da cópia</h3><span>8,4 s</span></div>
+          <p>Backup e restauração têm registros próprios. O caminho no JSON de restauração permite conferir a relação entre eles.</p>
+          <div class="proof"><a href="evidence/backup.json">backup.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></span></div>
+          <details class="record-details"><summary>Identidade e checksum da cópia</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Schema do backup</dt><dd>2</dd><dt>SHA-256 do dump</dt><dd><code>11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb</code></dd></dl></details>
+        </aside>
+      </div>
     </section>
     <section id="operations" data-panel aria-labelledby="operations-title">
-      <div class="panel-heading"><div><p class="eyebrow">Release / Última tentativa</p><h2 id="operations-title" tabindex="-1">Troca de imagem</h2><p>Resultado da tentativa mais recente, incluindo falha quando registrada.</p></div><span class="badge pass">Passou</span></div>
-      <div class="inspection-grid"><div class="result-column"><div class="operation-summary"><div><span>Versão solicitada</span><strong>2.0.0</strong></div><div><span>Janela da operação</span><strong>30,2 s</strong></div></div><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Troca de release</h3><span class="badge pass">Passou</span></div><p>Confere a imagem candidata, aplica a migração e verifica 5 jobs.</p><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></li></ol><details class="section-details"><summary>Job executado pela candidata</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>2.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>284dad44-17e2-4af9-8f05-af2068b87e8b</code><p>SHA-256 do texto UTF-8</p><code>282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895</code></details><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></div></details><p class="notice">A identificação da candidata vem deste registro de release. O <a href="#artifacts">scan disponível</a> só se aplica quando a identidade da imagem coincide.</p></div>
-      <aside class="identity-column"><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-881fdd3d</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Imagens desta tentativa</h3><dl class="facts"><dt>Imagem anterior</dt><dd><code>sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5</code></dd><dt>Imagem candidata</dt><dd><code>sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21</code></dd></dl><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></div></aside></div>
+      <div class="panel-heading"><div><h2 id="operations-title" tabindex="-1">Troca de imagem</h2><p>Tentativa mais recente, incluindo falha quando registrada.</p></div></div>
+      <div class="surface-panel">
+        <div class="panel-toolbar"><h3>Resultado da tentativa</h3><span class="badge pass">Passou</span></div>
+        <div class="operation-summary"><div><span>Versão solicitada</span><strong class="">2.0.0</strong></div><div><span>Janela da operação</span><strong class="">30,2 s</strong></div></div>
+        <ol class="control-list"><li class="control-row"><div class="control-title"><h3>Troca de release</h3><span class="badge pass">Passou</span></div><p>Confere a imagem candidata, aplica a migração e verifica 5 jobs.</p><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></li></ol>
+        <details class="record-details"><summary>Job executado pela candidata</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>2.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>284dad44-17e2-4af9-8f05-af2068b87e8b</code><p>SHA-256 do texto UTF-8</p><code>282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895</code></details><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></div></details>
+        <details class="record-details"><summary>Identidade e imagens desta tentativa</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-881fdd3d</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Imagem anterior</dt><dd><code>sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5</code></dd><dt>Imagem candidata</dt><dd><code>sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21</code></dd></dl><div class="proof"><a href="evidence/release.json">release.json</a><span class="proof-date"><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></span></div></details>
+        <p class="notice">A candidata é identificada por este registro. O <a href="#artifacts">scan disponível</a> só se aplica quando a identidade da imagem coincide.</p>
+      </div>
     </section>
     <section id="rollback" data-panel aria-labelledby="rollback-title">
-      <div class="panel-heading"><div><p class="eyebrow">Release / Recuperação</p><h2 id="rollback-title" tabindex="-1">Retorno após falha controlada</h2><p>Teste de retorno à imagem anterior depois de uma falha no smoke test.</p></div><span class="badge pass">Passou</span></div>
-      <div class="inspection-grid"><div class="result-column"><div class="operation-summary"><div><span>Janela do rollback</span><strong>44,9 s</strong></div></div><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Rollback</h3><span class="badge pass">Passou</span></div><p>Injeta falha no smoke test e verifica o retorno à imagem anterior, sem downgrade do banco.</p><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></li></ol><details class="section-details"><summary>Job após o retorno</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>3</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>4e1a4711-814d-4cc3-a9f5-f579450db3dc</code><p>SHA-256 do texto UTF-8</p><code>81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556</code></details><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></div></details><p class="notice">O rollback troca a imagem. Não rebaixa o schema e não restaura um backup antigo.</p></div>
-      <aside class="identity-column"><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Imagens do teste</h3><dl class="facts"><dt>Candidata testada</dt><dd><code>sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8</code></dd><dt>Imagem anterior</dt><dd><code>sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed</code></dd></dl><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></div></aside></div>
+      <div class="panel-heading"><div><h2 id="rollback-title" tabindex="-1">Retorno após falha controlada</h2><p>Teste de retorno à imagem anterior depois de uma falha no smoke test.</p></div></div>
+      <div class="surface-panel">
+        <div class="panel-toolbar"><h3>Resultado do retorno</h3><span class="badge pass">Passou</span></div>
+        <div class="operation-summary"><div><span>Janela do rollback</span><strong class="">44,9 s</strong></div></div>
+        <ol class="control-list"><li class="control-row"><div class="control-title"><h3>Rollback</h3><span class="badge pass">Passou</span></div><p>Injeta falha no smoke test e verifica o retorno à imagem anterior, sem downgrade do banco.</p><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></li></ol>
+        <details class="record-details"><summary>Job após o retorno</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>3</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>4e1a4711-814d-4cc3-a9f5-f579450db3dc</code><p>SHA-256 do texto UTF-8</p><code>81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556</code></details><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></div></details>
+        <details class="record-details"><summary>Identidade e imagens do teste</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Candidata testada</dt><dd><code>sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8</code></dd><dt>Imagem anterior</dt><dd><code>sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed</code></dd></dl><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></details>
+        <p class="notice">O rollback troca a imagem. Não rebaixa o schema e não restaura um backup antigo.</p>
+      </div>
     </section>
     <section id="artifacts" data-panel aria-labelledby="artifacts-title">
-      <div class="panel-heading"><div><p class="eyebrow">Artefatos / Build selecionado</p><h2 id="artifacts-title" tabindex="-1">Release 2.0.0</h2><p>Sem auditoria compatível com este build. Sem scan compatível.</p></div><div class="scan-status"><span>Scan da imagem</span><span class="badge pending">Sem resultado</span></div></div>
-      <div class="inspection-grid"><div class="result-column"><p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Imagem e OCI</h3><span class="badge pending">Sem resultado</span></div><p>Confere config digest, camadas e subjects das attestations. Busca a sentinela nas camadas, histórico, filesystem e metadados.</p><div class="proof">Sem arquivo</div></li><li class="control-row"><div class="control-title"><h3>Scan</h3><span class="badge pending">Sem resultado</span></div><p>Sem scan compatível com esta imagem.</p><div class="proof">Sem arquivo</div></li></ol><div class="metrics-block"><div class="metrics"><div class="metric"><span>Build OCI + carregamento</span><strong>12,6 s</strong></div><div class="metric"><span>Pacotes no SBOM</span><strong class=unavailable>Não informado</strong></div><div class="metric"><span>Idade da base de scan</span><strong class=unavailable>Não informado</strong></div></div></div><details class="section-details"><summary>Arquivos de build, auditoria e scan</summary><ul class="artifact-files"><li><strong>audit-1.0.0</strong><div class="proof"><a href="evidence/audit-1.0.0.json">audit-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:08:07.525272+00:00">22/09/2026 · 00:08:07 UTC</time></span></div></li><li><strong>audit-2.0.0</strong><div class="proof"><a href="evidence/audit-2.0.0.json">audit-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:09:20.263400+00:00">22/09/2026 · 00:09:20 UTC</time></span></div></li><li><strong>build-1.0.0</strong><div class="proof"><a href="evidence/build-1.0.0.json">build-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:03:14.958608+00:00">22/09/2026 · 06:03:14 UTC</time></span></div></li><li><strong>build-2.0.0</strong><div class="proof"><a href="evidence/build-2.0.0.json">build-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></span></div></li><li><strong>cache-experiment</strong><div class="proof"><a href="evidence/cache-experiment.json">cache-experiment.json</a><span class="proof-date"><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></span></div></li><li><strong>scan-1.0.0</strong><div class="proof"><a href="evidence/scan-1.0.0.json">scan-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:08:28.791163+00:00">22/09/2026 · 00:08:28 UTC</time></span></div></li><li><strong>scan-2.0.0</strong><div class="proof"><a href="evidence/scan-2.0.0.json">scan-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:09:38.668536+00:00">22/09/2026 · 00:09:38 UTC</time></span></div></li><li><strong>Scan inicial</strong><div class="proof"><a href="evidence/scan-initial-failed.json">scan-initial-failed.json</a><span class="proof-date"><time datetime="2026-09-21T03:05:46.975543+00:00">21/09/2026 · 03:05:46 UTC</time></span></div></li><li><strong>scan-services</strong><div class="proof"><a href="evidence/scan-services.json">scan-services.json</a><span class="proof-date"><time datetime="2026-09-22T00:10:13.737516+00:00">22/09/2026 · 00:10:13 UTC</time></span></div></li></ul></details><details class="section-details"><summary>Experimento de cache do build</summary><div class="table-wrap" role="region" aria-label="Experimentos de cache, tabela com rolagem horizontal" tabindex="0"><table><caption>Cache do build</caption><thead><tr><th scope="col">Teste</th><th scope="col">Duração</th><th scope="col">Etapas reutilizadas</th></tr></thead><tbody><tr><th scope="row">initial</th><td>10,5 s</td><td>1</td></tr><tr><th scope="row">unchanged</th><td>0,9 s</td><td>9</td></tr><tr><th scope="row">source</th><td>0,9 s</td><td>8</td></tr><tr><th scope="row">dependency</th><td>11,3 s</td><td>2</td></tr></tbody></table></div><div class="proof"><a href="evidence/cache-experiment.json">cache-experiment.json</a><span class="proof-date"><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></span></div></details></div>
-      <aside class="identity-column"><dl class="record-context"><div><dt>Build registrado</dt><dd><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Identidade da imagem</h3><dl class="facts"><dt>Build</dt><dd><code>sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8</code></dd><dt>Imagem auditada</dt><dd><code>Não informado</code></dd><dt>Config digest</dt><dd><code>Não informado</code></dd></dl><div class="proof"><a href="evidence/build-2.0.0.json">build-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></span></div></div><details class="section-details"><summary>Snapshot do runtime — registro independente</summary><p>Versão 2.0.0 · status ready.</p><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="proof"><a href="evidence/final-state.json">final-state.json</a><span class="proof-date"><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></span></div></details></aside></div>
+      <div class="panel-heading"><div><h2 id="artifacts-title" tabindex="-1">Release 2.0.0</h2><p>Sem auditoria compatível com este build. Sem scan compatível.</p></div></div>
+      <div class="surface-panel">
+        <div class="panel-toolbar"><h3>Imagem, auditoria e scan</h3><div class="scan-status"><span>Scan da imagem</span><span class="badge pending">Sem resultado</span></div></div>
+        <p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>
+        <ol class="control-list"><li class="control-row"><div class="control-title"><h3>Imagem e OCI</h3><span class="badge pending">Sem resultado</span></div><p>Confere config digest, camadas e subjects das attestations. Busca a sentinela nas camadas, histórico, filesystem e metadados.</p><div class="proof">Sem arquivo</div></li><li class="control-row"><div class="control-title"><h3>Scan</h3><span class="badge pending">Sem resultado</span></div><p>Sem scan compatível com esta imagem.</p><div class="proof">Sem arquivo</div></li></ol>
+        <div class="metrics-block"><div class="metrics"><div class="metric"><span>Build OCI + carregamento</span><strong>12,6 s</strong></div><div class="metric"><span>Pacotes no SBOM</span><strong class=unavailable>Não informado</strong></div><div class="metric"><span>Idade da base de scan</span><strong class=unavailable>Não informado</strong></div></div></div>
+        <details class="record-details"><summary>Identidade do build e da imagem</summary><dl class="record-context"><div><dt>Build registrado</dt><dd><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Build</dt><dd><code>sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8</code></dd><dt>Imagem auditada</dt><dd><code>Não informado</code></dd><dt>Config digest</dt><dd><code>Não informado</code></dd></dl><div class="proof"><a href="evidence/build-2.0.0.json">build-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></span></div></details>
+        <details class="record-details"><summary>Arquivos de build, auditoria e scan</summary><ul class="artifact-files"><li><strong>audit-1.0.0</strong><div class="proof"><a href="evidence/audit-1.0.0.json">audit-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:08:07.525272+00:00">22/09/2026 · 00:08:07 UTC</time></span></div></li><li><strong>audit-2.0.0</strong><div class="proof"><a href="evidence/audit-2.0.0.json">audit-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:09:20.263400+00:00">22/09/2026 · 00:09:20 UTC</time></span></div></li><li><strong>build-1.0.0</strong><div class="proof"><a href="evidence/build-1.0.0.json">build-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:03:14.958608+00:00">22/09/2026 · 06:03:14 UTC</time></span></div></li><li><strong>build-2.0.0</strong><div class="proof"><a href="evidence/build-2.0.0.json">build-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></span></div></li><li><strong>cache-experiment</strong><div class="proof"><a href="evidence/cache-experiment.json">cache-experiment.json</a><span class="proof-date"><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></span></div></li><li><strong>scan-1.0.0</strong><div class="proof"><a href="evidence/scan-1.0.0.json">scan-1.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:08:28.791163+00:00">22/09/2026 · 00:08:28 UTC</time></span></div></li><li><strong>scan-2.0.0</strong><div class="proof"><a href="evidence/scan-2.0.0.json">scan-2.0.0.json</a><span class="proof-date"><time datetime="2026-09-22T00:09:38.668536+00:00">22/09/2026 · 00:09:38 UTC</time></span></div></li><li><strong>Scan inicial</strong><div class="proof"><a href="evidence/scan-initial-failed.json">scan-initial-failed.json</a><span class="proof-date"><time datetime="2026-09-21T03:05:46.975543+00:00">21/09/2026 · 03:05:46 UTC</time></span></div></li><li><strong>scan-services</strong><div class="proof"><a href="evidence/scan-services.json">scan-services.json</a><span class="proof-date"><time datetime="2026-09-22T00:10:13.737516+00:00">22/09/2026 · 00:10:13 UTC</time></span></div></li></ul></details>
+        <details class="record-details"><summary>Experimento de cache do build</summary><div class="table-wrap" role="region" aria-label="Experimentos de cache, tabela com rolagem horizontal" tabindex="0"><table><caption>Cache do build</caption><thead><tr><th scope="col">Teste</th><th scope="col" class="numeric">Duração</th><th scope="col" class="numeric">Etapas reutilizadas</th></tr></thead><tbody><tr><th scope="row">initial</th><td class="numeric">10,5 s</td><td class="numeric">1</td></tr><tr><th scope="row">unchanged</th><td class="numeric">0,9 s</td><td class="numeric">9</td></tr><tr><th scope="row">source</th><td class="numeric">0,9 s</td><td class="numeric">8</td></tr><tr><th scope="row">dependency</th><td class="numeric">11,3 s</td><td class="numeric">2</td></tr></tbody></table></div><div class="proof"><a href="evidence/cache-experiment.json">cache-experiment.json</a><span class="proof-date"><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></span></div></details>
+        <details class="record-details"><summary>Snapshot do runtime — registro independente</summary><p>Versão 2.0.0 · status ready.</p><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="proof"><a href="evidence/final-state.json">final-state.json</a><span class="proof-date"><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></span></div></details>
+      </div>
     </section>
     <section id="evidence" data-panel aria-labelledby="evidence-title">
-      <div class="panel-heading"><div><p class="eyebrow">Artefatos / Arquivos</p><h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2><p>37 arquivos JSON válidos na raiz de docs/evidence. Arquivos de outras tentativas não aprovam a operação selecionada.</p></div><span class="panel-symbol" aria-hidden="true">{ }</span></div>
-      <div class="evidence-catalog"><div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0"><table><caption>Arquivos e datas dos registros</caption><thead><tr><th scope="col">Arquivo</th><th scope="col">Data</th><th scope="col">Projeto</th></tr></thead><tbody><tr><th scope="row"><a href="evidence/audit-1.0.0.json">audit-1.0.0</a></th><td><time datetime="2026-09-22T00:08:07.525272+00:00">22/09/2026 · 00:08:07 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/audit-2.0.0.json">audit-2.0.0</a></th><td><time datetime="2026-09-22T00:09:20.263400+00:00">22/09/2026 · 00:09:20 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/backup.json">backup</a></th><td><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/build-1.0.0.json">build-1.0.0</a></th><td><time datetime="2026-09-22T06:03:14.958608+00:00">22/09/2026 · 06:03:14 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/build-2.0.0.json">build-2.0.0</a></th><td><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/cache-experiment.json">cache-experiment</a></th><td><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/demo.json">demo</a></th><td><time datetime="2026-09-21T05:02:35.183404+00:00">21/09/2026 · 05:02:35 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/error-propagation.json">error-propagation</a></th><td><time datetime="2026-09-21T04:00:57.739665+00:00">21/09/2026 · 04:00:57 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/final-state.json">final-state</a></th><td><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/hardening.json">hardening</a></th><td><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/journey.json">journey</a></th><td><time datetime="2026-09-22T00:14:53.608218+00:00">22/09/2026 · 00:14:53 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/manual-rollback.json">manual-rollback</a></th><td><time datetime="2026-09-22T00:17:52.319615+00:00">22/09/2026 · 00:17:52 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/operations-proof-latest.json">operations-proof-latest</a></th><td><time datetime="2026-09-22T06:20:05.990271+00:00">22/09/2026 · 06:20:05 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/operations-publication.json">operations-publication</a></th><td>Sem data</td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/problem-proof-latest.json">problem-proof-latest</a></th><td><time datetime="2026-09-22T00:19:32.313316+00:00">22/09/2026 · 00:19:32 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/recovery.json">recovery</a></th><td><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/release.json">release</a></th><td><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/release-failed.json">release-failed</a></th><td><time datetime="2026-09-21T23:54:44.694934+00:00">21/09/2026 · 23:54:44 UTC</time></td><td>pf-containerops-test-82c992d1</td></tr><tr><th scope="row"><a href="evidence/restore.json">restore</a></th><td><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></td><td>pf-containerops-restore-b83b509e</td></tr><tr><th scope="row"><a href="evidence/review-followup-collection-error.json">review-followup-collection-error</a></th><td><time datetime="2026-09-21T05:01:23.854284+00:00">21/09/2026 · 05:01:23 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-host-checks.json">review-followup-host-checks</a></th><td><time datetime="2026-09-21T05:02:05.963724+00:00">21/09/2026 · 05:02:05 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-host-checks-41.json">review-followup-host-checks-41</a></th><td><time datetime="2026-09-21T04:55:19.974865+00:00">21/09/2026 · 04:55:19 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-main.json">review-followup-main</a></th><td><time datetime="2026-09-21T05:03:02.902086+00:00">21/09/2026 · 05:03:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/review-followup-operations.json">review-followup-operations</a></th><td><time datetime="2026-09-21T05:01:24.734836+00:00">21/09/2026 · 05:01:24 UTC</time></td><td>pf-containerops-test-d515696a</td></tr><tr><th scope="row"><a href="evidence/review-followup-runtime.json">review-followup-runtime</a></th><td><time datetime="2026-09-21T05:04:02.197545+00:00">21/09/2026 · 05:04:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/review-followup-source-images.json">review-followup-source-images</a></th><td><time datetime="2026-09-21T04:57:51.830699+00:00">21/09/2026 · 04:57:51 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-host-checks.json">review-host-checks</a></th><td><time datetime="2026-09-21T04:04:27.145746+00:00">21/09/2026 · 04:04:27 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-main-update.json">review-main-update</a></th><td><time datetime="2026-09-21T04:05:38.491030+00:00">21/09/2026 · 04:05:38 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-operations.json">review-operations</a></th><td><time datetime="2026-09-21T03:59:03.353000+00:00">21/09/2026 · 03:59:03 UTC</time></td><td>pf-containerops-test-df43c6a8</td></tr><tr><th scope="row"><a href="evidence/rollback.json">rollback</a></th><td><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/scan-1.0.0.json">scan-1.0.0</a></th><td><time datetime="2026-09-22T00:08:28.791163+00:00">22/09/2026 · 00:08:28 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-2.0.0.json">scan-2.0.0</a></th><td><time datetime="2026-09-22T00:09:38.668536+00:00">22/09/2026 · 00:09:38 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-initial-failed.json">Scan inicial</a></th><td><time datetime="2026-09-21T03:05:46.975543+00:00">21/09/2026 · 03:05:46 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-services.json">scan-services</a></th><td><time datetime="2026-09-22T00:10:13.737516+00:00">22/09/2026 · 00:10:13 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/test-results.json">test-results</a></th><td><time datetime="2026-09-22T00:11:45.940660+00:00">22/09/2026 · 00:11:45 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/tls.json">tls</a></th><td><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/verification-run.json">verification-run</a></th><td><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr></tbody></table></div><div class="evidence-block"><h3>Atualizar esta leitura</h3><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><code class="command">python scripts/ops.py report</code><p>Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></div></div>
+      <div class="panel-heading"><div><h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2><p>37 arquivos JSON válidos. Arquivos de outras tentativas não aprovam a operação selecionada.</p></div></div>
+      <div class="surface-panel">
+        <div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0"><table><caption>Arquivos e datas dos registros</caption><thead><tr><th scope="col">Arquivo</th><th scope="col">Data</th><th scope="col">Projeto</th></tr></thead><tbody><tr><th scope="row"><a href="evidence/audit-1.0.0.json">audit-1.0.0</a></th><td><time datetime="2026-09-22T00:08:07.525272+00:00">22/09/2026 · 00:08:07 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/audit-2.0.0.json">audit-2.0.0</a></th><td><time datetime="2026-09-22T00:09:20.263400+00:00">22/09/2026 · 00:09:20 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/backup.json">backup</a></th><td><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/build-1.0.0.json">build-1.0.0</a></th><td><time datetime="2026-09-22T06:03:14.958608+00:00">22/09/2026 · 06:03:14 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/build-2.0.0.json">build-2.0.0</a></th><td><time datetime="2026-09-22T06:07:26.276150+00:00">22/09/2026 · 06:07:26 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/cache-experiment.json">cache-experiment</a></th><td><time datetime="2026-09-21T04:00:03.001113+00:00">21/09/2026 · 04:00:03 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/demo.json">demo</a></th><td><time datetime="2026-09-21T05:02:35.183404+00:00">21/09/2026 · 05:02:35 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/error-propagation.json">error-propagation</a></th><td><time datetime="2026-09-21T04:00:57.739665+00:00">21/09/2026 · 04:00:57 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/final-state.json">final-state</a></th><td><time datetime="2026-09-21T05:03:02.371318+00:00">21/09/2026 · 05:03:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/hardening.json">hardening</a></th><td><time datetime="2026-09-22T00:12:10.808867+00:00">22/09/2026 · 00:12:10 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/journey.json">journey</a></th><td><time datetime="2026-09-22T00:14:53.608218+00:00">22/09/2026 · 00:14:53 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/manual-rollback.json">manual-rollback</a></th><td><time datetime="2026-09-22T00:17:52.319615+00:00">22/09/2026 · 00:17:52 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/operations-proof-latest.json">operations-proof-latest</a></th><td><time datetime="2026-09-22T06:20:05.990271+00:00">22/09/2026 · 06:20:05 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/operations-publication.json">operations-publication</a></th><td>Sem data</td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/problem-proof-latest.json">problem-proof-latest</a></th><td><time datetime="2026-09-22T00:19:32.313316+00:00">22/09/2026 · 00:19:32 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/recovery.json">recovery</a></th><td><time datetime="2026-09-22T00:14:18.044655+00:00">22/09/2026 · 00:14:18 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/release.json">release</a></th><td><time datetime="2026-09-22T00:17:18.628751+00:00">22/09/2026 · 00:17:18 UTC</time></td><td>pf-containerops-test-881fdd3d</td></tr><tr><th scope="row"><a href="evidence/release-failed.json">release-failed</a></th><td><time datetime="2026-09-21T23:54:44.694934+00:00">21/09/2026 · 23:54:44 UTC</time></td><td>pf-containerops-test-82c992d1</td></tr><tr><th scope="row"><a href="evidence/restore.json">restore</a></th><td><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></td><td>pf-containerops-restore-b83b509e</td></tr><tr><th scope="row"><a href="evidence/review-followup-collection-error.json">review-followup-collection-error</a></th><td><time datetime="2026-09-21T05:01:23.854284+00:00">21/09/2026 · 05:01:23 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-host-checks.json">review-followup-host-checks</a></th><td><time datetime="2026-09-21T05:02:05.963724+00:00">21/09/2026 · 05:02:05 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-host-checks-41.json">review-followup-host-checks-41</a></th><td><time datetime="2026-09-21T04:55:19.974865+00:00">21/09/2026 · 04:55:19 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-followup-main.json">review-followup-main</a></th><td><time datetime="2026-09-21T05:03:02.902086+00:00">21/09/2026 · 05:03:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/review-followup-operations.json">review-followup-operations</a></th><td><time datetime="2026-09-21T05:01:24.734836+00:00">21/09/2026 · 05:01:24 UTC</time></td><td>pf-containerops-test-d515696a</td></tr><tr><th scope="row"><a href="evidence/review-followup-runtime.json">review-followup-runtime</a></th><td><time datetime="2026-09-21T05:04:02.197545+00:00">21/09/2026 · 05:04:02 UTC</time></td><td>pf-containerops</td></tr><tr><th scope="row"><a href="evidence/review-followup-source-images.json">review-followup-source-images</a></th><td><time datetime="2026-09-21T04:57:51.830699+00:00">21/09/2026 · 04:57:51 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-host-checks.json">review-host-checks</a></th><td><time datetime="2026-09-21T04:04:27.145746+00:00">21/09/2026 · 04:04:27 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-main-update.json">review-main-update</a></th><td><time datetime="2026-09-21T04:05:38.491030+00:00">21/09/2026 · 04:05:38 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/review-operations.json">review-operations</a></th><td><time datetime="2026-09-21T03:59:03.353000+00:00">21/09/2026 · 03:59:03 UTC</time></td><td>pf-containerops-test-df43c6a8</td></tr><tr><th scope="row"><a href="evidence/rollback.json">rollback</a></th><td><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/scan-1.0.0.json">scan-1.0.0</a></th><td><time datetime="2026-09-22T00:08:28.791163+00:00">22/09/2026 · 00:08:28 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-2.0.0.json">scan-2.0.0</a></th><td><time datetime="2026-09-22T00:09:38.668536+00:00">22/09/2026 · 00:09:38 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-initial-failed.json">Scan inicial</a></th><td><time datetime="2026-09-21T03:05:46.975543+00:00">21/09/2026 · 03:05:46 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/scan-services.json">scan-services</a></th><td><time datetime="2026-09-22T00:10:13.737516+00:00">22/09/2026 · 00:10:13 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/test-results.json">test-results</a></th><td><time datetime="2026-09-22T00:11:45.940660+00:00">22/09/2026 · 00:11:45 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr><tr><th scope="row"><a href="evidence/tls.json">tls</a></th><td><time datetime="2026-09-22T00:18:13.032711+00:00">22/09/2026 · 00:18:13 UTC</time></td><td>Não informado</td></tr><tr><th scope="row"><a href="evidence/verification-run.json">verification-run</a></th><td><time datetime="2026-09-22T00:14:20.434830+00:00">22/09/2026 · 00:14:20 UTC</time></td><td>pf-containerops-test-2b29fb96</td></tr></tbody></table></div>
+        <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><code class="command">python scripts/ops.py report</code><p>Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></details>
+      </div>
     </section>
-    <footer><span>Snapshot de evidências · dados de demonstração</span><a href="verification.md">Escopo das verificações ↗</a></footer>
+    <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em <time datetime="2026-09-22T07:47:24.830216+00:00">22/09/2026 · 07:47:24 UTC</time></span><a href="verification.md">Escopo das verificações</a></footer>
   </main>
 </div><script>(() => {
   "use strict";
@@ -288,6 +383,8 @@ footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; 
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     }
+    const label = picker.querySelector("[data-operation-label]");
+    if (label) label.textContent = "Operação: " + panel.querySelector("h2").textContent;
     if (window.matchMedia("(max-width: 760px)").matches) picker.open = false;
     if (focus) {
       panel.querySelector("h2")?.focus({ preventScroll: true });

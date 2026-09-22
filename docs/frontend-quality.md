@@ -1,5 +1,7 @@
 # Qualidade da interface do ContainerOps
 
+Leitura documental em **22/09/2026**. Medidas e contagens pertencem aos recibos históricos citados, incluindo [auditoria](evidence/art-direction/audit.json) e [navegador](evidence/art-direction/visual-review.json), de **22/09/2026**. A retificação dos comandos que descobriram zero testes permanece explícita. Esta leitura não repete a validação visual.
+
 As [capturas de apresentação atuais](screenshots.md) foram refeitas em 22/09/2026 a partir do código atual. As comparações e provas abaixo são registros históricos das respectivas rodadas; seus arquivos e hashes não foram regravados.
 
 ## Direção visual atual — revisão de 22/09/2026
@@ -100,6 +102,8 @@ Próximo trabalho seguro para o escopo parcial: **P2**, leitor de tela/zoom nati
 - Build do frontend = geração do HTML autocontido e fixtures, sem bundler nem TypeScript. Naquela rodada visual, API/worker/imagens não mudaram; não se repetiram stack, backup, restore, scan de imagens ou CI de infraestrutura. Os resultados históricos conservam seu escopo.
 
 ### Referências e escolhas
+
+Referências de composição registradas na revisão de **22/09/2026**. A interpretação visual é uma escolha do projeto, sem alegação de aprovação empírica por usuários. O critério normativo de contraste vem da [WCAG 2.2](https://www.w3.org/TR/WCAG22/#contrast-minimum), consultada em **22/09/2026**.
 
 | Referência primária inspecionada                                                                                                                                                                                                                            | Aspecto observado → adaptação                                                                                                      | O que foi rejeitado                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |

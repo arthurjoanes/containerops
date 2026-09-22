@@ -1,5 +1,7 @@
 # Demo de 5–8 minutos
 
+Roteiro conferido em **22/09/2026** contra [comandos](../scripts/ops.py), [runner](../scripts/proof.py) e [execução editorial de 22/09/2026](evidence/editorial-20260922/execution.json). Os 5–8 minutos são uma duração sugerida de apresentação, não um tempo medido de instalação ou restauração.
+
 Abra o [caderno de operações](report.html) para navegar entre **Verificação**,
 **Recuperação**, **Release** e **Artefatos**. A seleção mostra resultado, identidade
 do registro e arquivos de origem. O HTML é um snapshot; os comandos abaixo são

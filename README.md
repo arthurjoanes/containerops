@@ -1,81 +1,82 @@
 # ContainerOps
 
-Desenvolvi este laboratório para conferir o que permanece correto quando um processo morre, uma imagem nova falha ou os dados precisam ser restaurados. Ele é útil para quem desenvolve ou opera uma aplicação pequena com trabalhos em segundo plano.
+Laboratório de operação de uma aplicação com trabalhos em segundo plano: aceitar um pedido, recuperar um worker interrompido, trocar imagens e restaurar dados, mantendo o resultado verificável. Desenvolvi a API, o worker, os comandos de operação e o relatório de evidências.
 
-A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo simples deixa a pergunta principal verificável: **o trabalho aceito continua identificável e o resultado está correto depois da recuperação?** Os textos e as falhas são sintéticos; os processos, HTTP e banco são reais, no mesmo computador.
-
-![Página principal do ContainerOps](docs/readme/home.png)
-
-*Página principal da demonstração.*
-
-[Na prática](#na-prática) · [Implementação](#implementação) · [Executar e verificar](#executar-e-verificar) · [Limites e manutenção](#limites-e-manutenção)
-
-<p><img src="docs/readme/uso.svg" width="800" height="8" alt=""></p>
-
-## Na prática
-
-![Layout atual do relatório de backup e restauração, renderizado com registros históricos: três jobs e 27,4 segundos.](docs/screenshots/focused-20260922/restauracao-foco.png)
-
-Recorte de apresentação de **22/09/2026, 17:37 UTC**, gerada pelo renderer atual com os JSONs preservados. A restauração mostrada ocorreu às **06:20 UTC**: **3 jobs / 27,4 s**; gerar a página não repetiu a operação. [Recortes da restauração, cópia e novo job](docs/screenshots.md) · [fontes e dados usados](docs/screenshots/focused-20260922/inputs.json).
-
-**Em outra execução histórica, às 12:38 UTC de 22/09/2026**, restaurei três jobs em outro volume e exigi um novo trabalho concluído. O relatório separa a cópia da restauração; o dump sozinho não comprovaria esse resultado. [Imagem em tamanho completo](docs/screenshots/editorial-20260922/restore.png) · [caso, comandos e limites](docs/demo.md#execução-editorial-de-22092026). A imagem é um snapshot dessa operação, sem controles ao vivo.
-
-**Exemplo curto:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e um resultado de **sete palavras**. Trocar o conteúdo mantendo a chave retornou 409. Em outro caso, matei o worker depois de assumir um job: o mesmo ID passou da tentativa 1 para a 2 e terminou com as cinco palavras esperadas. [Entrada, mecanismo e provas](docs/problem-solution.md).
-
-### Conferir uma operação
-
-Abra o [relatório da nova operação](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; o GitHub exibe HTML como código. Ele contém somente job, cópia, restore e rollback dessa tentativa. O [relatório geral histórico](docs/report.html) permanece disponível com as próprias datas. Ambos são snapshots, sem comandos de operação ao vivo.
-
-1. Em **Job**, confira o trabalho de quatro palavras registrado no início da operação.
-2. Em **Backup e restauração**, confira os três jobs restaurados e as três verificações. Expanda **Resultado do novo job no volume restaurado** para consultar o trabalho posterior. Cópia e restauração mantêm suas próprias datas e projetos.
-3. Em **Rollback**, compare as imagens da troca e do retorno após falha controlada. O relatório geral histórico inclui também **Verificação** e **Artefatos**; seus testes e scans pertencem às imagens e datas indicadas nele.
-
-Os links abrem os JSONs de origem. Uma versão de job não identifica, por si só, a imagem de outra operação. [Como ler o relatório](docs/report-guide.md) · [cenários e resultados esperados](docs/problem-solution.md) · [roteiro da demonstração](docs/demo.md).
-
-A [revisão da interface](docs/frontend-quality.md) registra as oito telas, os critérios de apresentação e as comparações com os mesmos dados. Ela verifica o relatório; não representa uma nova execução dos serviços.
-
-<p><img src="docs/readme/implementacao.svg" width="800" height="8" alt=""></p>
-
-## Implementação
-
-### O que eu implementei
-
-- Separei replay de conflito na admissão: mesma chave e conteúdo recuperam o job; conteúdo diferente não sobrescreve o pedido. A transação aplica também quotas global e por proprietário.
-- Implementei posse temporária (_lease_) e token por aquisição. Um trabalho pode ser calculado novamente após a morte do worker, mas uma posse antiga não pode publicar por cima da atual.
-- Organizei backup, cópia protegida, restore em volume novo, comparação de dados e processamento posterior. A proteção demonstrada continua limitada ao mesmo host.
-- Separei troca de imagem de restauração de dados. A migração expansiva mantém a versão anterior compatível, preservando o job criado pela candidata antes de falhar.
-- Construí os comandos de operação, verificações de falhas e o relatório offline com identidade por operação. Configurei FastAPI, PostgreSQL, Nginx, Docker/BuildKit e Trivy; essas ferramentas são de terceiros, integradas ao laboratório.
-
-### Stack
-
+<!-- Navegação do README -->
 <p>
-  <img src="docs/stack/python.svg" alt="Python" width="72" height="72">
-  <img src="docs/stack/fastapi.svg" alt="FastAPI" width="72" height="72">
-  <img src="docs/stack/postgresql.svg" alt="PostgreSQL" width="72" height="72">
-  <img src="docs/stack/nginx.svg" alt="NGINX" width="72" height="72">
-  <img src="docs/stack/docker.svg" alt="Docker" width="72" height="72">
+  <a href="#demonstração"><img src="docs/readme/badges/demo.svg" alt="Demonstração" width="139" height="28"></a>
+  <a href="#arquitetura"><img src="docs/readme/badges/architecture.svg" alt="Arquitetura" width="126" height="28"></a>
+  <a href="#executar-localmente"><img src="docs/readme/badges/run.svg" alt="Executar localmente" width="107" height="28"></a>
+  <a href="#verificação-e-evidências"><img src="docs/readme/badges/evidence.svg" alt="Verificação e evidências" width="119" height="28"></a>
+  <a href="https://www.linkedin.com/in/arthur-joanes-6a2967373/"><img src="docs/readme/badges/linkedin.svg" alt="Arthur Joanes no LinkedIn" width="108" height="28"></a>
 </p>
 
-Python e FastAPI na API e no worker; PostgreSQL na fila e nos resultados; NGINX na borda HTTP/TLS. Docker Compose e BuildKit sustentam execução e troca de imagens.
+## Visão geral
 
-### Decisões que podem ser conferidas
+A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo pequeno permite conferir o que aconteceu depois da recuperação. Textos e falhas são **sintéticos**; HTTP, processos e banco executam localmente no mesmo computador.
 
-| Situação executada                       | Resultado e compromisso                                                                            |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Seis requisições repetem a mesma chave   | Um UUID, sete palavras, checksum conferido; a chave pertence ao proprietário                       |
-| Worker recebe SIGKILL após assumir o job | Mesmo UUID concluído na tentativa 2; o cálculo pode repetir, não há promessa de execução única     |
-| Candidata 2 cria dados e falha no smoke  | API/worker voltam à imagem 1, schema fica em 2 e o job da candidata permanece                      |
-| Cópia restaurada em volume novo          | Três jobs comparados e novo job com quatro palavras; não equivale a recuperação fora do computador |
+Mesma chave e conteúdo recuperam o job existente; conteúdo diferente conflita. Uma posse temporária (_lease_) e seu token impedem que um worker antigo sobrescreva a aquisição atual. Fontes: [contrato](docs/data-contract.md), [repositório transacional](app/src/containerops/repository.py) e [worker](app/src/containerops/worker.py), conferidos em **22/09/2026**.
 
-Escolhi PostgreSQL para reunir fila, estado e transações deste laboratório. Isso evita operar outro serviço de mensagens, mas faz a fila disputar recursos com a API. O token complementa a lease: o prazo diz quando recuperar; o token diz qual aquisição ainda pode finalizar. [Decisões, alternativas, código e testes](docs/decisoes-tecnicas.md).
+<a id="na-prática"></a>
 
-<p><img src="docs/readme/execucao.svg" width="800" height="8" alt=""></p>
+## Demonstração
 
-## Executar e verificar
+![Recorte do relatório de restauração: três jobs e verificações dos dados restaurados](docs/screenshots/focused-20260922/restauracao-foco.png)
 
-### Rodar
+Captura real de **22/09/2026, 17:37 UTC**, gerada com registros históricos. A restauração exibida ocorreu às **06:20 UTC**: **3 jobs / 27,4 s**. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
 
-Docker com containers Linux em máquina x86-64, Compose v2, Buildx e Python 3.11+. O primeiro build e scan baixam dependências.
+**Exemplo:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e **sete palavras**; trocar o conteúdo retornou 409. Fonte: [jornada JSON](docs/evidence/editorial-20260922/journey.json), registrada em **22/09/2026, 12:34 UTC**; [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
+
+<a id="conferir-uma-operação"></a>
+
+Abra o [relatório histórico da operação editorial](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; GitHub apresenta HTML como código. Confira o job, depois backup/restauração e rollback. Cada painel liga sua operação ao JSON de origem. [Guia de leitura](docs/report-guide.md), conferido em **22/09/2026**.
+
+<a id="implementação"></a>
+
+## Arquitetura
+
+```mermaid
+flowchart TB
+  A[NGINX e API] --> D[(PostgreSQL)]
+  W[Worker] --> D
+  O[Comandos de operação] --> D
+  O -->|registros| R[Relatório HTML]
+```
+
+API e worker usam a mesma imagem, com processos separados. O relatório lê arquivos de evidência; ele não oferece controles de deploy. Migração, backup, restore e scanner executam sob demanda. [Serviços, redes e fluxo completo](docs/architecture.md).
+
+Fontes: [Compose](compose.yaml), [API](app/src/containerops/api.py), [worker](app/src/containerops/worker.py), [operações](scripts/ops.py) e [gerador](scripts/report.py), conferidos em **22/09/2026**. A infraestrutura permanece em um único host.
+
+## Stack e decisões
+
+<a id="stack"></a>
+
+<p>
+  <img src="docs/stack/python.svg" alt="Python" width="64" height="64">
+  <img src="docs/stack/fastapi.svg" alt="FastAPI" width="64" height="64">
+  <img src="docs/stack/postgresql.svg" alt="PostgreSQL" width="64" height="64">
+  <img src="docs/stack/nginx.svg" alt="NGINX" width="64" height="64">
+  <img src="docs/stack/docker.svg" alt="Docker" width="64" height="64">
+</p>
+
+| Escolha                 | Motivo e compromisso                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| FastAPI + worker Python | Separa admissão de cálculo; exige posse, renovação e tentativas.                                                         |
+| PostgreSQL              | Reúne fila, estado e transações; API e fila disputam recursos.                                                           |
+| NGINX + Compose         | Entrada HTTP/TLS e processos separados; não protege contra perda do host.                                                |
+| BuildKit + Trivy        | Identifica artefatos e verifica vulnerabilidades conhecidas; scan não é certificação nem garantia de ausência de falhas. |
+
+<a id="o-que-eu-implementei"></a>
+<a id="decisões-que-podem-ser-conferidas"></a>
+
+[Decisões, código e testes](docs/decisoes-tecnicas.md) · [bases fixadas por digest](docker/images.lock.json). Conferência em **22/09/2026**; versões fixadas não significam versões mais recentes.
+
+<a id="executar-e-verificar"></a>
+<a id="rodar"></a>
+
+## Executar localmente
+
+Use Docker com containers Linux em **x86-64**, Compose v2, Buildx e Python **3.11+**. São os requisitos adotados pelos [comandos](scripts/ops.py), [imagens](docker/images.lock.json) e [CI](.github/workflows/verify.yml), conferidos em **22/09/2026**. Primeiro build e scan precisam baixar dependências.
 
 ```sh
 python3 scripts/ops.py setup
@@ -86,66 +87,61 @@ python3 scripts/ops.py demo
 python3 scripts/ops.py report
 ```
 
-O [CI](.github/workflows/verify.yml) executa essa sequência e testa atualização, restauração e TLS. No Windows, use `python` ou o wrapper `scripts/containerops.ps1` com Docker Desktop em modo Linux.
+No Windows, use `python` ou o [wrapper PowerShell](scripts/containerops.ps1), com Docker Desktop em modo Linux. A API é publicada em [localhost:8105](http://localhost:8105); jobs exigem Bearer, e o setup gera tokens fictícios fora do Git. Fonte: [Compose](compose.yaml) e [roteiro](docs/demo.md), conferidos em **22/09/2026**.
 
-A API fica em [localhost:8105](http://localhost:8105); `/health/live` e `/health/ready` são públicos. Jobs exigem Bearer. O setup gera os tokens fictícios de `alice` e `bob` no runtime, fora do repositório; cada conta consulta apenas os próprios jobs.
+<a id="operações"></a>
 
-### Operações
+[Runbooks](docs/runbooks.md) detalham `backup`, `restore-test`, `release`, `rollback`, `scan` e o runtime. `stop` preserva o volume; um comando de limpeza deve usar o projeto e o destino identificados pela operação.
 
-Execute `python scripts/ops.py <comando>`; o wrapper PowerShell chama o mesmo programa.
+<a id="repetir-a-prova-completa"></a>
 
-| Comando                   | O que faz                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------- |
-| `build` / `start`         | Gera OCI com SBOM e provenance e sobe com a imagem salva                            |
-| `verify`                  | Lint, tipos, testes PostgreSQL/HTTP, hardening, redes, falha do banco e recriação   |
-| `prove`                   | Build/scan offline das duas versões, restore, TLS e release isolados, com manifesto |
-| `backup` / `restore-test` | Dump com checksum e restauração em volume novo                                      |
-| `release` / `rollback`    | Troca a imagem com smoke; volta pra anterior sem rebaixar o schema                  |
-| `sbom` / `scan`           | Inspeciona attestations e aplica a política do Trivy                                |
-| `report`                  | Gera o HTML só com o que foi registrado                                             |
+## Verificação e evidências
 
-Escrita usa um lock no runtime; `status`, `logs` e `report` continuam livres. Detalhes em [runbooks](docs/runbooks.md).
+| Pergunta                              | Fonte e data da execução                                                                                                                 | Limite                                                                                 |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Worker interrompido recupera o job?   | [Antes/depois do SIGKILL](docs/evidence/editorial-20260922/recovery.json), **22/09/2026, 12:36 UTC**                                     | Mesmo ID concluiu na tentativa 2; cálculo pode repetir.                                |
+| Os dados voltam após restore?         | [Restore JSON](docs/evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), **22/09/2026, 12:38 UTC**                     | Três jobs comparados e novo trabalho concluído; volume novo no mesmo host.             |
+| A admissão se distribui entre owners? | [Manifesto da medição](docs/evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json), **22/09/2026, 06:12–06:15 UTC** | Três repetições: 120 aceitos/concluídos e 24 recusados; cenário local com dois owners. |
 
-### Repetir a prova completa
+Para repetir a prova completa, prepare antes a base Trivy com `scan`; Docker e OpenSSL são necessários:
 
 ```sh
 python scripts/ops.py prove
 ```
 
-Executa build, scan, restauração, TLS e troca de versão em projetos Docker descartáveis. Cada tentativa fica em `docs/evidence/problem-proof/`, com resultados e hashes. Exige Docker, OpenSSL e uma base Trivy preparada pelo comando `scan`. Essa prova é mais abrangente que `demo`, que envia um job à aplicação principal.
-
-As [verificações publicadas](docs/verification.md) separam a prova histórica completa da nova rodada: builds locais, 58 testes de comandos, 47 do relatório, 116 da aplicação e falhas reais. A correção do registro que descobriu zero testes está explícita; suas contagens não são reaproveitadas. Gerar outra versão do HTML não executa novamente essas provas.
-
-Para repetir apenas job, rollback e restauração após preparar as duas imagens:
+O [runner](scripts/proof.py) cria projetos descartáveis e registra manifestos por tentativa. Para executar somente job, rollback e restauração com as imagens já preparadas:
 
 ```sh
 python scripts/ops.py prove --scenario operations
 ```
 
-Esse cenário tem [evidência própria](docs/operational-recovery.md) e não executa novamente scans, TLS ou a suíte completa.
+[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md), conferidos em **22/09/2026**. Não foram repetidos builds, scans ou falhas durante esta revisão da documentação.
 
-<p><img src="docs/readme/limites.svg" width="800" height="8" alt=""></p>
+<a id="limites-e-manutenção"></a>
+<a id="segurança-das-imagens"></a>
+<a id="limites"></a>
 
-## Limites e manutenção
+## Limites e segurança
 
-### Segurança das imagens
+- **16 KiB** por texto; **100** jobs pendentes globais; **20** por owner; **3** tentativas; retenção de **24 h**. São limites do contrato, não capacidade medida. Fontes: [domínio](app/src/containerops/domain.py), [repositório](app/src/containerops/repository.py) e [contrato](docs/data-contract.md), conferidos em **22/09/2026**.
+- A demo permite atraso de até **15 s**; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py), conferidas em **22/09/2026**.
+- Backup permanece no mesmo computador; TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md), conferidos em **22/09/2026**.
+- O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md), conferidos em **22/09/2026**.
 
-As bases são fixadas por digest. O scan bloqueia qualquer achado HIGH ou CRITICAL, inclusive sem correção disponível, e preserva todas as severidades no relatório. As [evidências da revisão](docs/verification.md) identificam imagens, cobertura e resultados; a [cadeia de suprimentos](docs/supply-chain.md) descreve a auditoria OCI, SBOM e provenance.
+## Documentação
 
-Instalações antigas com PostgreSQL Debian precisam de [migração por backup e restauração](docs/runbooks.md#troca-da-base-postgresql-debian-para-alpine). A imagem atual recusa volumes sem o marcador da plataforma compatível.
+| Para entender                    | Guia                                                                                                                            |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Problema, componentes e escolhas | [Casos](docs/problem-solution.md) · [arquitetura](docs/architecture.md) · [decisões](docs/decisoes-tecnicas.md)                 |
+| API, fila e idempotência         | [Contrato de dados](docs/data-contract.md)                                                                                      |
+| Executar e recuperar             | [Demonstração](docs/demo.md) · [runbooks](docs/runbooks.md) · [recuperação](docs/operational-recovery.md)                       |
+| Conferir resultados e fontes     | [Verificação](docs/verification.md) · [admissão](docs/admission-measurement.md) · [fontes e datas](docs/fontes-e-afirmacoes.md) |
+| Interface e manutenção           | [Guia do relatório](docs/report-guide.md) · [capturas](docs/screenshots.md) · [padrão documental](docs/padrao-documentacao.md)  |
 
-### Limites
+## Autor e licença
 
-Texto até 16 KiB, fila global de 100 trabalhos e limite de 20 queued/running por proprietário. A admissão aplica os dois limites atomicamente; excesso retorna 429 e mantém o replay idempotente. O despacho prioriza o proprietário menos recentemente ativo, preservando a ordem dos seus jobs elegíveis: um backlog de Alice não deixa Bob atrás de todos os trabalhos dela. [Correção e testes de isolamento de capacidade](docs/security.md).
+Para conversar sobre containers, recuperação e operação deste laboratório:
 
-O Compose habilita a demo com atraso máximo de 15 s por trabalho; `DEMO_MODE=false` aceita apenas duração zero. São 3 tentativas e retenção de 24 h. A distribuição não interrompe jobs já em execução nem garante prazo de atendimento.
+<p><a href="https://www.linkedin.com/in/arthur-joanes-6a2967373/"><img src="docs/contact/linkedin.svg" alt="" width="24" height="24"> <strong>Arthur Joanes no LinkedIn</strong></a></p>
 
-O projeto se destina à operação local. O backup fica na mesma máquina do banco. O TLS termina no proxy. O rollback troca a imagem, não rebaixa schema nem restaura dados antigos.
-
-O build copia os inputs pra um caminho ASCII temporário porque o BuildKit recusou o caminho com acento deste projeto. [Contrato de dados](docs/data-contract.md) · [arquitetura](docs/architecture.md) · [decisões técnicas](docs/decisoes-tecnicas.md).
-
-A [medição com dois proprietários](docs/admission-measurement.md) registrou três repetições: 120 pedidos aceitos e concluídos e 24 recusados por quota. Ela separa admissão, espera induzida pela parada do worker e retomada, com percentis por proprietário. Não esgota o limite global nem mede capacidade de produção.
-
-Licença MIT.
-
-Ícones da stack: [Devicon — licença MIT](docs/stack/LICENSE.devicon).
+[Licença MIT](LICENSE). Ícones da stack e LinkedIn: [Devicon — licença MIT](docs/stack/LICENSE.devicon). Licenças conferidas nos arquivos em **22/09/2026**.

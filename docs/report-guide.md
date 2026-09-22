@@ -1,5 +1,7 @@
 # Ler as operações registradas
 
+Comportamento conferido em **22/09/2026** contra [seleção das evidências](../scripts/report_evidence.py), [gerador](../scripts/report.py), [template](../scripts/report.html) e [navegação](../scripts/report.js). O relatório é um snapshot; datas e resultados vêm dos JSONs de cada operação, sem execução ao abrir o HTML.
+
 Abra `docs/report.html` no navegador depois de clonar ou baixar o repositório.
 O HTML inclui estilos e navegação; os arquivos de evidência precisam permanecer
 na pasta `docs/evidence`. A página não consulta containers nem executa operações.

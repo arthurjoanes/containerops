@@ -2,9 +2,9 @@
 
 Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
 
-![Três trabalhos restaurados e novo job concluído na prova local de recuperação](docs/evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/restore-new-job-1440.png)
+![Interface atual: três jobs restaurados, verificações e registro da cópia separados](docs/screenshots/interface-v3/after-recovery-1440.png)
 
-Relatório de uma execução local real em 22/09/2026, com textos sintéticos. A [sequência comentada](docs/operational-recovery.md) mostra job inicial, rollback após falha e restauração com novo trabalho, com identidade e limites de cada medição.
+Interface atual do relatório, gerada a partir das evidências salvas. Cada operação mantém sua própria data e identidade; abrir o HTML não executa os testes novamente. A [sequência comentada da prova local de 22/09/2026](docs/operational-recovery.md), com textos sintéticos, mostra job inicial, rollback após falha e restauração com novo trabalho, com os limites de cada medição e as capturas daquela execução.
 
 Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
 

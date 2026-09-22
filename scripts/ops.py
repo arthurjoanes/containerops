@@ -225,6 +225,7 @@ class Stack:
             "CONTAINEROPS_RUNTIME": self.directory.as_posix(),
             "APP_IMAGE": self.image,
             "PROXY_IMAGE": "containerops-proxy:local",
+            "DATABASE_IMAGE": "containerops-database:local",
             "TEST_IMAGE": "containerops-test:local",
             "HTTP_PORT": str(self.port),
             "TLS_PORT": str(self.tls_port),
@@ -427,6 +428,26 @@ def build(version):
     setup()
     supply.build(ROOT, RUNTIME, version)
     with supply.build_context(ROOT, RUNTIME) as context:
+        run(
+            [
+                "docker",
+                "buildx",
+                "build",
+                "--builder",
+                "pf-containerops-builder",
+                "--load",
+                "--provenance=false",
+                "--tag",
+                "containerops-database:local",
+                "--build-arg",
+                "POSTGRES_IMAGE=" + supply.image_lock(ROOT)["postgres"],
+                "-f",
+                context / "docker" / "db" / "Dockerfile",
+                context,
+            ],
+            timeout=600,
+            cwd=context,
+        )
         run(
             [
                 "docker",

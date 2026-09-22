@@ -1,0 +1,95 @@
+{
+  "recorded_at": "2026-09-21T23:32:15.575338+00:00",
+  "created_at": "2026-09-21T23:32:15.354714+00:00",
+  "sha256": "f481141ef64cedb1870d811ea8ee32c96ec91462908f4b423ef49920a7f8af69",
+  "server": "postgres (PostgreSQL) 17.11 (Debian 17.11-1.pgdg12+2)",
+  "schema_version": 2,
+  "snapshot": {
+    "admission_paused": true,
+    "counts": {
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "succeeded": 8
+    },
+    "jobs": [
+      {
+        "attempts": 1,
+        "checksum": "fd9f94c2c43f9ac9d38b4fc8537ac6de3fae447768ec0033e136b8a361b5438c",
+        "error_category": null,
+        "id": "0f6c579c-07ad-4bdb-9c7c-48340da80c1e",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 3
+      },
+      {
+        "attempts": 1,
+        "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+        "error_category": null,
+        "id": "1c610c3c-9094-472a-a7de-8d745c2b47e4",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 3
+      },
+      {
+        "attempts": 1,
+        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
+        "error_category": null,
+        "id": "4f188b57-7718-4e42-9605-b7f6b2e56099",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 5
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "95db9ab1-b1ea-4ca1-a003-a916e278306b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1",
+        "error_category": null,
+        "id": "97cf813d-c2fd-4b56-9e7d-4c97d4582c78",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "931534c0c145d0a99631a32025f23f88c67fc6b34a608a73d0410bc04cf7bdce",
+        "error_category": null,
+        "id": "ab81047a-642a-49fe-9dca-9724e934a401",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 1
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "f6e9b7df-72ca-4846-ab51-2401fefaa85d",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "error_category": null,
+        "id": "fdbb74a0-e0b1-450a-ba44-6ad0b4ec7a0b",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 7
+      }
+    ],
+    "schema_version": 2
+  },
+  "source_project": "pf-containerops-test-5303ffbb",
+  "image": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+  "elapsed_seconds": 9.547,
+  "directory": "<runtime>\\backups\\20260921T233206-02c4b5eb"
+}

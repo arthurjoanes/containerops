@@ -27,24 +27,21 @@ para acrescentar broker ou orquestrador distribuído.
 | Operador repete o teste sem tocar a demo | `prove` encadeia verificação, backup/restore, TLS e releases em projetos próprios, com manifesto por tentativa | Falha retorna código não zero; sucesso só após cleanup; tentativas anteriores preservadas |
 | Artefato tem rastreabilidade e riscos visíveis | OCI/SBOM/provenance/sentinela/Trivy ligados ao mesmo config/manifest executado | Digests conferidos; scan completo com base dentro da política, ou falha explícita |
 
-## Resultado
+## Resultado esperado
 
-Valores esperados, definidos antes de executar: 3 jobs após a jornada
-(texto concorrente, corpo no limite e replay de zero); 5 após candidata+retorno
+O roteiro define os valores antes de executar: 3 jobs após a jornada (texto
+concorrente, corpo no limite e replay de zero); 5 após candidata e retorno
 automático; 6 após promoção; 7 após retorno manual; 8 após TLS. O restore deve
-recuperar esses 8 e processar um job novo. Cada snapshot também deve ter zero
-queued/running/failed. As rejeições não podem adicionar linhas ocultas.
+recuperar esses oito e processar um novo. Cada snapshot deve ter zero jobs
+queued, running ou failed. Rejeições não podem adicionar linhas.
 
-Execução de 21/09/2026, 06:39–06:48 UTC: comando `prove`, exit 0, 18 etapas em
-541,187 s. A sequência 3→5→6→7→8 bateu; restore recuperou os oito jobs e processou
-outro em 27,016 s. O job criado pela candidata permaneceu igual depois do retorno
-à imagem 1, com schema 2. API e worker usaram os IDs esperados. Estado salvo e
-ponteiro de backup principal mantiveram seus hashes.
+O [manifesto mais recente](evidence/problem-proof-latest.json) identifica a
+tentativa, suas etapas e os hashes dos arquivos. A [verificação](verification.md)
+registra os resultados da revisão para publicação. Tentativas anteriores ficam
+preservadas em diretórios próprios; uma execução interrompida não herda o sucesso
+de outra.
 
-O [manifesto](evidence/problem-proof/aec402ee34b14bff88ac2050108dfd1b/manifest.json)
-preserva fonte, ambiente, fases e hashes de 29 arquivos. A
-[verificação](verification.md) detalha contratos, imagens, riscos e limites.
-Testes: 102 da aplicação (14 integrações PostgreSQL), 27 host/operação e 42 do
-relatório, apresentados separadamente. O teste não cobre uso em produção. Cada
-imagem mantém 55 HIGH/5 CRITICAL sem correção disponível; a política de scan só
-bloqueia HIGH/CRITICAL com fix.
+Os testes da aplicação, dos comandos de operação e do relatório são suítes
+separadas. As falhas de processos, reinícios, restaurações e trocas de imagem
+exercitam containers reais, além dos testes unitários. A aprovação vale para
+este laboratório local e seus cenários documentados.

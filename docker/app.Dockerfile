@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-ARG PYTHON_IMAGE=python:3.13.15-slim-bookworm@sha256:2325bb286ec344af3e5898cc224b5844e2707ac6e26b1632516fd3edc84a5e26
+ARG PYTHON_IMAGE=python:3.13.15-alpine3.24@sha256:79e7a9b9ff1cbceff819f856fb374477792a5967759d94df266de7b7b4120e6f
 FROM ${PYTHON_IMAGE} AS deps
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_NO_COMPILE=1
 RUN python -m venv /opt/venv
@@ -27,11 +27,11 @@ ARG APP_VERSION=1.0.0
 ARG VCS_REF=uncommitted
 LABEL org.opencontainers.image.title="ContainerOps" \
       org.opencontainers.image.description="Lab de Docker com jobs em PostgreSQL" \
-      org.opencontainers.image.source="local:ContainerOps" \
+      org.opencontainers.image.source="https://github.com/arthurjoanes/containerops" \
       org.opencontainers.image.version="${APP_VERSION}" \
       org.opencontainers.image.revision="${VCS_REF}"
-RUN groupadd --gid 10001 containerops \
-    && useradd --uid 10001 --gid 10001 --no-create-home --home-dir /tmp --shell /usr/sbin/nologin containerops
+RUN addgroup -g 10001 containerops \
+    && adduser -D -H -u 10001 -G containerops -h /tmp -s /sbin/nologin containerops
 COPY --from=deps /opt/venv /opt/venv
 # pip e setuptools ficam só em deps/test; não são necessários no runtime.
 RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do \

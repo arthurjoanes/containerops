@@ -1,6 +1,6 @@
 {
-  "recorded_at": "2026-09-21T06:47:41.325130+00:00",
-  "url": "https://localhost:52838",
+  "recorded_at": "2026-09-22T00:18:13.032711+00:00",
+  "url": "https://localhost:57126",
   "verified_with_explicit_ca": true,
   "default_trust_rejected": true,
   "health": {
@@ -10,7 +10,7 @@
     "admission_paused": false
   },
   "job": {
-    "id": "965103d1-867d-4487-8b69-375c539e7880",
+    "id": "9e2b2c30-c32f-4620-ae04-6d30397f2c21",
     "state": "succeeded",
     "attempts": 1,
     "result": {

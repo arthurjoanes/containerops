@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-09-21T23:35:56.170671+00:00",
+  "status": "passed",
+  "scanner_image": "aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969",
+  "images": [
+    {
+      "component": "database",
+      "image": "containerops-database:local",
+      "image_id": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
+      "config_digest": "sha256:d4ceaacfc1de377d6883ed03526618c87efbd43b4a963c207066e59e5e6e14a3",
+      "findings_by_severity": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "blocking_count": 0,
+      "report_sha256": "sha256:13b966ad6c98b597a67c44f936b47fda26bb19d8eb7c670341c978ada21215ee",
+      "database_sha256": "sha256:a325c841036f662fee39ed929422f113030cd36ca71c55f6192cbc5f2d5d01b1",
+      "database_updated_at": "2026-09-21T07:13:21.413091201Z",
+      "database_age_hours": 16.366
+    },
+    {
+      "component": "proxy",
+      "image": "containerops-proxy:local",
+      "image_id": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe",
+      "config_digest": "sha256:b8cde2cfb7f8f640bc99dc7df8e465e930321a2249a5cbbd6d1547442f9eb51c",
+      "findings_by_severity": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "blocking_count": 0,
+      "report_sha256": "sha256:4ae26404c90c09edfec42e4d094d05c1f5edf77d5b500c76893bedfbb6e733e3",
+      "database_sha256": "sha256:a325c841036f662fee39ed929422f113030cd36ca71c55f6192cbc5f2d5d01b1",
+      "database_updated_at": "2026-09-21T07:13:21.413091201Z",
+      "database_age_hours": 16.372
+    }
+  ],
+  "policy": "Bloqueia HIGH/CRITICAL, inclusive sem correção; todas as severidades registradas."
+}

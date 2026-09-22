@@ -35,7 +35,11 @@ except ImportError:
 
 BUILDER = "pf-containerops-builder"
 ROOT = Path(__file__).resolve().parents[1]
-TRIVY_VERSION = "0.69.3"
+TRIVY_VERSION = "0.74.0"
+
+
+def blocking_vulnerabilities(findings: list[dict]) -> list[dict]:
+    return [item for item in findings if item.get("Severity") in {"HIGH", "CRITICAL"}]
 
 
 def utc_now() -> str:
@@ -534,11 +538,7 @@ def scan(
     if file_digest(cache / "db" / "trivy.db") != database_hash:
         raise RuntimeError("Base alterada durante o scan; execute novamente")
     findings = [finding for item in results for finding in item.get("Vulnerabilities", [])]
-    blocking = [
-        item
-        for item in findings
-        if item.get("Severity") in {"HIGH", "CRITICAL"} and item.get("FixedVersion")
-    ]
+    blocking = blocking_vulnerabilities(findings)
     summary = evidence(
         root,
         "scan-" + version,
@@ -577,12 +577,12 @@ def scan(
                 }
                 for item in blocking
             ],
-            "policy": "Bloqueia HIGH/CRITICAL com correção disponível.",
+            "policy": "Bloqueia todo HIGH/CRITICAL reportado, inclusive sem correção disponível.",
         },
     )
     if blocking:
         raise RuntimeError(
-            f"Scan falhou: {len(blocking)} HIGH/CRITICAL com correção; veja {report_path}"
+            f"Scan falhou: {len(blocking)} HIGH/CRITICAL reportados; veja {report_path}"
         )
     return summary
 

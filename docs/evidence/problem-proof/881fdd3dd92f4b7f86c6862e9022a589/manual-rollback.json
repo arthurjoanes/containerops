@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-09-22T00:17:52.319615+00:00",
+  "project": "pf-containerops-test-881fdd3d",
+  "previous_image": "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+  "active_image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+  "active_images": {
+    "api": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+    "worker": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5"
+  },
+  "preserved_jobs": 6,
+  "job": {
+    "id": "9472b314-9c75-42ca-91bc-7469123aa33f",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "maintenance_seconds": 27.937
+}

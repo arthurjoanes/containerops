@@ -14,6 +14,7 @@ flag também seleciona 2.0.0. O retorno à imagem anterior usa `rollback`, nunca
 ```powershell
 $project = (Get-Location).Path   # raiz do clone
 Set-Location -LiteralPath $project
+$env:CONTAINEROPS_RUNTIME = Join-Path $env:USERPROFILE 'AppData\Local\ContainerOps-runtime'
 python .\scripts\ops.py status
 python .\scripts\ops.py logs
 ```
@@ -77,9 +78,17 @@ docker inspect --format '{{json .Mounts}}' (dc ps -a -q db)
 dc exec -T db sh -ec 'id; ls -ld /var/lib/postgresql/data /var/run/postgresql; grep "^Uid:" /proc/1/status'
 ```
 
-O volume `pgdata` é exclusivo do banco. O volume `artifacts` dos helpers é outro volume, montado no mesmo caminho interno porque a imagem oficial já fornece ownership do UID 999. Confirme o nome real antes de qualquer alteração.
+O volume `pgdata` é exclusivo do banco. O volume `artifacts` dos helpers é outro volume, montado no mesmo caminho interno. A imagem própria mantém ownership do UID 999 em ambos. Confirme o nome real antes de qualquer alteração.
 
 Corrija o mount/ownership e reinicie o serviço afetado. Não use `chmod 777` nem remova o volume. Se a causa continuar incerta, teste restore de um backup em outro projeto. PostgreSQL deve rodar com UID 999; o entrypoint inicializa o ownership antes disso.
+
+## Troca da base PostgreSQL Debian para Alpine
+
+As versões antigas usavam PostgreSQL Debian. A versão atual mantém PostgreSQL 17.11, mas muda libc e locale ao usar Alpine. Não reutilize diretamente o diretório de dados antigo. O entrypoint recusa PGDATA existente sem `.containerops-platform` com valor `alpine3.24`; essa recusa acontece antes de modificar os arquivos.
+
+Antes de atualizar uma instalação com dados, execute `backup` na versão anterior e guarde dump e metadados. Construa a versão nova e use `restore-test` para verificar o dump em um volume novo: o comando compara snapshots e processa outro job. O teste não troca o volume principal.
+
+A adoção definitiva do volume restaurado exige migração manual planejada: interromper escritas na versão anterior, gerar o backup final, restaurar em volume vazio com a nova imagem e conferir os resultados antes de mudar a configuração da stack principal. Preserve o volume anterior para retorno. Não crie o marcador manualmente para contornar a recusa; isso não converte formato, locale ou collation.
 
 ## Falha de migração
 

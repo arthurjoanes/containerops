@@ -39,6 +39,7 @@ jobs:
         run: |
           python3 scripts/ops.py scan --version 1.0.0
           python3 scripts/ops.py scan --version 2.0.0
+          python3 scripts/scan_services.py --offline
           python3 scripts/ops.py report
       - name: Parar containers
         if: always()
@@ -57,4 +58,5 @@ jobs:
             .runtime-containerops/artifacts/*/sbom-*.json
             .runtime-containerops/artifacts/*/provenance-*.json
             .runtime-containerops/artifacts/*/build-metadata.json
+            .runtime-containerops/service-scans/*/scanner/*.json
           if-no-files-found: warn

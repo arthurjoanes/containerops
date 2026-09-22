@@ -184,8 +184,19 @@ def inspect_docker_archive(path: Path, expected: dict, daemon_id: str) -> dict:
             raise RuntimeError("Config exportado lista camadas diferentes das auditadas.")
         actual_layers = []
         for name in manifest["Layers"]:
-            with archive.extractfile(archive.getmember(name)) as source:
-                actual_layers.append(stream_digest(source))
+            member = archive.getmember(name)
+            if not member.isfile():
+                raise RuntimeError("Export Docker contém camada não regular.")
+            with archive.extractfile(member) as source:
+                # containerd may reuse a compressed base blob alongside tar layers.
+                # diff_ids always describe the uncompressed tar bytes.
+                compressed = source.read(2) == b"\x1f\x8b"
+                source.seek(0)
+                if compressed:
+                    with gzip.GzipFile(fileobj=source) as layer:
+                        actual_layers.append(stream_digest(layer))
+                else:
+                    actual_layers.append(stream_digest(source))
         if actual_layers != expected["diff_ids"]:
             raise RuntimeError("Conteúdo das camadas exportadas do daemon diverge do OCI.")
         if daemon_id != digest:

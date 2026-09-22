@@ -1,0 +1,264 @@
+{
+  "recorded_at": "2026-09-21T23:50:07.273285+00:00",
+  "project": "pf-containerops-test-99d040ff",
+  "checks": {
+    "api": {
+      "image": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+      "user": "10001:10001",
+      "read_only": true,
+      "memory_bytes": 201326592,
+      "nano_cpus": 500000000,
+      "pids_limit": 64,
+      "log_config": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "3",
+          "max-size": "5m"
+        }
+      },
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=16m,uid=10001,gid=10001,mode=1700"
+      },
+      "extra_devices": false,
+      "runtime": {
+        "uid": 10001,
+        "blocked": [
+          "/app/containerops-write-probe",
+          "/etc/containerops-write-probe",
+          "/containerops-write-probe"
+        ],
+        "status": {
+          "Uid": "10001\t10001\t10001\t10001",
+          "Gid": "10001\t10001\t10001\t10001",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "secrets": {
+          "api_tokens": {
+            "readable": true,
+            "writable": false,
+            "mode": "0o777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          },
+          "db_password": {
+            "readable": true,
+            "writable": false,
+            "mode": "0o777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          }
+        }
+      },
+      "no_published_port": true
+    },
+    "worker": {
+      "image": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+      "user": "10001:10001",
+      "read_only": true,
+      "memory_bytes": 134217728,
+      "nano_cpus": 500000000,
+      "pids_limit": 64,
+      "log_config": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "3",
+          "max-size": "5m"
+        }
+      },
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=16m,uid=10001,gid=10001,mode=1700"
+      },
+      "extra_devices": false,
+      "runtime": {
+        "uid": 10001,
+        "blocked": [
+          "/app/containerops-write-probe",
+          "/etc/containerops-write-probe",
+          "/containerops-write-probe"
+        ],
+        "status": {
+          "Uid": "10001\t10001\t10001\t10001",
+          "Gid": "10001\t10001\t10001\t10001",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "secrets": {
+          "db_password": {
+            "readable": true,
+            "writable": false,
+            "mode": "0o777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          }
+        }
+      },
+      "no_published_port": true
+    },
+    "proxy": {
+      "image": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe",
+      "user": "101:101",
+      "read_only": true,
+      "memory_bytes": 33554432,
+      "nano_cpus": 250000000,
+      "pids_limit": 32,
+      "log_config": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "3",
+          "max-size": "5m"
+        }
+      },
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=8m,uid=101,gid=101,mode=1700"
+      },
+      "extra_devices": false,
+      "runtime": {
+        "uid": 101,
+        "status": {
+          "Uid": "101\t101\t101\t101",
+          "Gid": "101\t101\t101\t101",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "blocked": [
+          "/etc/nginx/containerops-write-probe",
+          "/containerops-write-probe",
+          "/usr/containerops-write-probe"
+        ],
+        "secrets": {}
+      }
+    },
+    "db": {
+      "image": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
+      "user": "",
+      "read_only": false,
+      "memory_bytes": 268435456,
+      "nano_cpus": 750000000,
+      "pids_limit": 128,
+      "log_config": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "3",
+          "max-size": "5m"
+        }
+      },
+      "tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=16m,mode=1777",
+        "/var/run/postgresql": "rw,noexec,nosuid,size=8m,uid=999,gid=999,mode=3775"
+      },
+      "extra_devices": false,
+      "runtime": {
+        "uid": 999,
+        "status": {
+          "Uid": "999\t999\t999\t999",
+          "Gid": "999\t999\t999\t999",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "blocked": [],
+        "secrets": {
+          "db_admin": {
+            "readable": true,
+            "writable": false,
+            "mode": "777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          },
+          "db_app": {
+            "readable": true,
+            "writable": false,
+            "mode": "777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          },
+          "db_backup": {
+            "readable": true,
+            "writable": false,
+            "mode": "777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          },
+          "db_migrator": {
+            "readable": true,
+            "writable": false,
+            "mode": "777",
+            "uid": 0,
+            "gid": 0,
+            "mount_read_only": true
+          }
+        }
+      },
+      "no_published_port": true,
+      "effective_process_uid": "999\t999\t999\t999"
+    },
+    "network": {
+      "front_to_database": "denied",
+      "data_to_database": "allowed",
+      "proxy_to_api": "allowed",
+      "database_ip": "172.23.0.2",
+      "data_internal": true,
+      "memberships": {
+        "proxy": [
+          "pf-containerops-test-99d040ff_front"
+        ],
+        "api": [
+          "pf-containerops-test-99d040ff_data",
+          "pf-containerops-test-99d040ff_front"
+        ],
+        "worker": [
+          "pf-containerops-test-99d040ff_data"
+        ],
+        "db": [
+          "pf-containerops-test-99d040ff_data"
+        ]
+      }
+    },
+    "database_roles": {
+      "backup": {
+        "user": "containerops_backup",
+        "superuser": false,
+        "createdb": false,
+        "createrole": false,
+        "replication": false,
+        "bypassrls": false,
+        "owns_schema": false,
+        "create_schema_objects": false,
+        "select_jobs": true,
+        "insert_jobs": false,
+        "update_jobs": false,
+        "delete_jobs": false,
+        "memberships": 0,
+        "rows_read": 3,
+        "transactional_write_probes": "denied",
+        "exact_secret_set_readable_readonly": true
+      },
+      "migrator": {
+        "user": "containerops_migrator",
+        "superuser": false,
+        "createdb": false,
+        "createrole": false,
+        "replication": false,
+        "bypassrls": false,
+        "owns_schema": true,
+        "create_schema_objects": true,
+        "select_jobs": true,
+        "insert_jobs": true,
+        "update_jobs": true,
+        "delete_jobs": true,
+        "memberships": 0,
+        "rows_read": 3,
+        "transactional_write_probes": "allowed_and_rolled_back",
+        "exact_secret_set_readable_readonly": true
+      }
+    },
+    "stats": "{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"4.37%\",\"Container\":\"19d06463b83ab7d4eabf9667a1b7799b227113d61040177c5c2c91e2a73d66f4\",\"ID\":\"19d06463b83a\",\"MemPerc\":\"11.11%\",\"MemUsage\":\"3.555MiB / 32MiB\",\"Name\":\"pf-containerops-test-99d040ff-proxy-1\",\"NetIO\":\"121kB / 92.1kB\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"0.18%\",\"Container\":\"68194139db30594efe0f554ca0462e6acd95f4ea35eddb3eb5ce0c727e3357e8\",\"ID\":\"68194139db30\",\"MemPerc\":\"21.54%\",\"MemUsage\":\"41.35MiB / 192MiB\",\"Name\":\"pf-containerops-test-99d040ff-api-1\",\"NetIO\":\"112kB / 49.6kB\",\"PIDs\":\"3\"}\n{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"51.52%\",\"Container\":\"7e4662d749743f9d7cc8da52edd5ef48c14792c90b540cccf5d8e83cb4b3d52c\",\"ID\":\"7e4662d74974\",\"MemPerc\":\"31.18%\",\"MemUsage\":\"39.91MiB / 128MiB\",\"Name\":\"pf-containerops-test-99d040ff-worker-1\",\"NetIO\":\"184kB / 200kB\",\"PIDs\":\"3\"}\n{\"BlockIO\":\"0B / 57MB\",\"CPUPerc\":\"10.56%\",\"Container\":\"214494cc442c6eec4ab060eb1eed62c8217b8a6a65a3adb15b6b572730bf612f\",\"ID\":\"214494cc442c\",\"MemPerc\":\"13.78%\",\"MemUsage\":\"35.27MiB / 256MiB\",\"Name\":\"pf-containerops-test-99d040ff-db-1\",\"NetIO\":\"1.04MB / 1.08MB\",\"PIDs\":\"7\"}\n"
+  },
+  "run_id": "99d040ff89504e15a999fdfae8ecb135"
+}

@@ -16,6 +16,14 @@ import supply
 
 
 class CommandContractTests(unittest.TestCase):
+    def test_security_gate_rejects_high_severity_even_without_a_fix(self):
+        unfixed = {"Severity": "CRITICAL", "FixedVersion": ""}
+        fixed = {"Severity": "HIGH", "FixedVersion": "2.0"}
+        medium = {"Severity": "MEDIUM", "FixedVersion": "2.0"}
+        self.assertEqual(
+            supply.blocking_vulnerabilities([unfixed, medium, fixed]), [unfixed, fixed]
+        )
+
     def test_every_operation_rejects_flags_that_do_not_apply(self):
         commands = "setup build test start status demo logs inspect verify backup restore-test release rollback stop report scan sbom cache-builds tls prove".split()
         allowed = {

@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-09-21T06:43:21.254971+00:00",
-  "project": "pf-containerops-test-dd4169dc",
+  "recorded_at": "2026-09-22T00:12:10.808867+00:00",
+  "project": "pf-containerops-test-2b29fb96",
   "checks": {
     "api": {
-      "image": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
+      "image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
       "user": "10001:10001",
       "read_only": true,
       "memory_bytes": 201326592,
@@ -55,7 +55,7 @@
       "no_published_port": true
     },
     "worker": {
-      "image": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
+      "image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
       "user": "10001:10001",
       "read_only": true,
       "memory_bytes": 134217728,
@@ -99,7 +99,7 @@
       "no_published_port": true
     },
     "proxy": {
-      "image": "sha256:eaae1b4af955666115528aff3e54e8c8d372615af1bc981372fbab4f5d7a1e0f",
+      "image": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe",
       "user": "101:101",
       "read_only": true,
       "memory_bytes": 33554432,
@@ -133,7 +133,7 @@
       }
     },
     "db": {
-      "image": "sha256:639ab7ceb90e13123085b741fb31ef493fba25463002f6da665352e7b534b652",
+      "image": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
       "user": "",
       "read_only": false,
       "memory_bytes": 268435456,
@@ -202,21 +202,21 @@
       "front_to_database": "denied",
       "data_to_database": "allowed",
       "proxy_to_api": "allowed",
-      "database_ip": "172.25.0.2",
+      "database_ip": "192.168.0.2",
       "data_internal": true,
       "memberships": {
         "proxy": [
-          "pf-containerops-test-dd4169dc_front"
+          "pf-containerops-test-2b29fb96_front"
         ],
         "api": [
-          "pf-containerops-test-dd4169dc_data",
-          "pf-containerops-test-dd4169dc_front"
+          "pf-containerops-test-2b29fb96_data",
+          "pf-containerops-test-2b29fb96_front"
         ],
         "worker": [
-          "pf-containerops-test-dd4169dc_data"
+          "pf-containerops-test-2b29fb96_data"
         ],
         "db": [
-          "pf-containerops-test-dd4169dc_data"
+          "pf-containerops-test-2b29fb96_data"
         ]
       }
     },
@@ -258,6 +258,6 @@
         "exact_secret_set_readable_readonly": true
       }
     },
-    "stats": "{\"BlockIO\":\"2.9MB / 0B\",\"CPUPerc\":\"0.00%\",\"Container\":\"093d76846ff1a8c946defac88aef730c34d67e0bd861cc1fb01f5c5129aa65c4\",\"ID\":\"093d76846ff1\",\"MemPerc\":\"12.57%\",\"MemUsage\":\"4.023MiB / 32MiB\",\"Name\":\"pf-containerops-test-dd4169dc-proxy-1\",\"NetIO\":\"121kB / 92.2kB\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"213kB / 0B\",\"CPUPerc\":\"0.12%\",\"Container\":\"0b9b31847412a97c8d31aee7f49ee9fddfd952e7f18b4ce1485dbdda28fcdf07\",\"ID\":\"0b9b31847412\",\"MemPerc\":\"21.56%\",\"MemUsage\":\"41.39MiB / 192MiB\",\"Name\":\"pf-containerops-test-dd4169dc-api-1\",\"NetIO\":\"113kB / 48.5kB\",\"PIDs\":\"8\"}\n{\"BlockIO\":\"65.5kB / 0B\",\"CPUPerc\":\"4.00%\",\"Container\":\"11bc38212745e9a6555f87fc9dbf1f3bba2b7b5708567115058be9c6cc3c43ac\",\"ID\":\"11bc38212745\",\"MemPerc\":\"20.16%\",\"MemUsage\":\"25.81MiB / 128MiB\",\"Name\":\"pf-containerops-test-dd4169dc-worker-1\",\"NetIO\":\"213kB / 226kB\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"676kB / 63.8MB\",\"CPUPerc\":\"6.16%\",\"Container\":\"bf884a80fdcf1e367c5f4c4024125a6c6a271d75b54fc9c9da766300d3e67f97\",\"ID\":\"bf884a80fdcf\",\"MemPerc\":\"13.17%\",\"MemUsage\":\"33.7MiB / 256MiB\",\"Name\":\"pf-containerops-test-dd4169dc-db-1\",\"NetIO\":\"1.09MB / 1.15MB\",\"PIDs\":\"7\"}\n"
+    "stats": "{\"BlockIO\":\"987kB / 0B\",\"CPUPerc\":\"0.00%\",\"Container\":\"c97bb28711144f3575b479474d39d14f52438880e8b3c209fc35a22aa517bf47\",\"ID\":\"c97bb2871114\",\"MemPerc\":\"10.68%\",\"MemUsage\":\"3.418MiB / 32MiB\",\"Name\":\"pf-containerops-test-2b29fb96-proxy-1\",\"NetIO\":\"121kB / 92.3kB\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"0.19%\",\"Container\":\"d9e59f9de57f2981ab4223c6c3ce6222d5205db948f8b6a5446a813906a52bcc\",\"ID\":\"d9e59f9de57f\",\"MemPerc\":\"21.11%\",\"MemUsage\":\"40.53MiB / 192MiB\",\"Name\":\"pf-containerops-test-2b29fb96-api-1\",\"NetIO\":\"113kB / 49.6kB\",\"PIDs\":\"3\"}\n{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"16.68%\",\"Container\":\"11a597533457bbb74d58f7244ef3ac8e8584b55eda80935553c478ff4af62e0b\",\"ID\":\"11a597533457\",\"MemPerc\":\"19.54%\",\"MemUsage\":\"25.01MiB / 128MiB\",\"Name\":\"pf-containerops-test-2b29fb96-worker-1\",\"NetIO\":\"197kB / 213kB\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"4.1kB / 57.1MB\",\"CPUPerc\":\"8.56%\",\"Container\":\"3db3d7fbf32ad88b73dc30afb7c32c8a47742b343a816dbea45b46995726b944\",\"ID\":\"3db3d7fbf32a\",\"MemPerc\":\"12.89%\",\"MemUsage\":\"33MiB / 256MiB\",\"Name\":\"pf-containerops-test-2b29fb96-db-1\",\"NetIO\":\"1.05MB / 1.1MB\",\"PIDs\":\"6\"}\n"
   }
 }

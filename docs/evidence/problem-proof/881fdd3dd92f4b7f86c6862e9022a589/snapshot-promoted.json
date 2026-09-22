@@ -1,0 +1,66 @@
+{
+  "admission_paused": false,
+  "counts": {
+    "failed": 0,
+    "queued": 0,
+    "running": 0,
+    "succeeded": 6
+  },
+  "jobs": [
+    {
+      "attempts": 1,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+      "error_category": null,
+      "id": "284dad44-17e2-4af9-8f05-af2068b87e8b",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 4
+    },
+    {
+      "attempts": 1,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+      "error_category": null,
+      "id": "2e5a0bee-9d87-480c-be86-f35ae7645782",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 4
+    },
+    {
+      "attempts": 1,
+      "checksum": "fd9f94c2c43f9ac9d38b4fc8537ac6de3fae447768ec0033e136b8a361b5438c",
+      "error_category": null,
+      "id": "713138aa-1436-40cf-ba36-de545772056c",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 3
+    },
+    {
+      "attempts": 1,
+      "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+      "error_category": null,
+      "id": "7e5a89a9-f660-4c22-94c1-40d6e8f2fa66",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 3
+    },
+    {
+      "attempts": 1,
+      "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+      "error_category": null,
+      "id": "8bb21266-bf78-4f0a-969b-16e148a8ac9a",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 7
+    },
+    {
+      "attempts": 1,
+      "checksum": "931534c0c145d0a99631a32025f23f88c67fc6b34a608a73d0410bc04cf7bdce",
+      "error_category": null,
+      "id": "c6a04ccc-1c0b-48cc-aea8-0a6f5b46146e",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 1
+    }
+  ],
+  "schema_version": 2
+}

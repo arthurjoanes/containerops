@@ -1,12 +1,12 @@
 {
-  "recorded_at": "2026-09-21T06:48:21.000678+00:00",
-  "project": "pf-containerops-restore-81945929",
-  "backup": "<localappdata>\\ContainerOps-runtime\\backups\\20260921T064743-1d755863",
+  "recorded_at": "2026-09-22T00:19:27.860352+00:00",
+  "project": "pf-containerops-restore-90df9eb4",
+  "backup": "<runtime>\\backups\\20260922T001818-8df81add",
   "checksum_verified": true,
   "snapshot_equal": true,
   "restored_jobs": 8,
   "new_job": {
-    "id": "a246b60f-e115-4c8d-8f4e-c68bdba8aaf6",
+    "id": "78cccd95-673a-46d8-b55e-cad5cc0c13c7",
     "state": "succeeded",
     "attempts": 1,
     "result": {
@@ -16,5 +16,5 @@
     "error": null,
     "version": "1.0.0"
   },
-  "recovery_seconds": 27.016
+  "recovery_seconds": 45.281
 }

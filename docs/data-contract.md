@@ -25,6 +25,8 @@ armazenável em PostgreSQL UTF-8. O corpo HTTP completo tem limite de 32.768 byt
 inclusive para transferência em chunks. Campos desconhecidos são rejeitados.
 `demo_duration_seconds` é numérico finito, entre 0 e 15; valores maiores que zero
 exigem `DEMO_MODE=true`. Há no máximo 100 jobs queued/running em conjunto.
+O limite é global, sem quota por proprietário nem garantia de equidade: um usuário
+autenticado pode ocupar toda a fila. O escopo é operação local com usuários confiáveis.
 
 Mesma chave, proprietário, texto e duração retornam o mesmo job (HTTP 200).
 Uma criação retorna 201; conteúdo ou duração diferentes sob a mesma chave retornam

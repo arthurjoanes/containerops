@@ -1,15 +1,15 @@
 {
-  "recorded_at": "2026-09-21T06:47:26.568027+00:00",
-  "project": "pf-containerops-test-aec402ee",
-  "previous_image": "sha256:8820cba2722717b9ed45387b1cefa9456e8fe78febcf6eb60100f79add670f94",
-  "active_image": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
+  "recorded_at": "2026-09-22T00:17:52.319615+00:00",
+  "project": "pf-containerops-test-881fdd3d",
+  "previous_image": "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+  "active_image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
   "active_images": {
-    "api": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba",
-    "worker": "sha256:8694067e01fcdeda30a787a34ca068d9e7d21c65ac09d63e5127186c01c991ba"
+    "api": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+    "worker": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5"
   },
   "preserved_jobs": 6,
   "job": {
-    "id": "192491c0-30c3-4c92-9d66-cadeb2c1227b",
+    "id": "9472b314-9c75-42ca-91bc-7469123aa33f",
     "state": "succeeded",
     "attempts": 1,
     "result": {
@@ -19,5 +19,5 @@
     "error": null,
     "version": "1.0.0"
   },
-  "maintenance_seconds": 20.672
+  "maintenance_seconds": 27.937
 }

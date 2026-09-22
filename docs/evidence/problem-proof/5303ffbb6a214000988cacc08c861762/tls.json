@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-09-21T23:32:03.141831+00:00",
+  "url": "https://localhost:50659",
+  "verified_with_explicit_ca": true,
+  "default_trust_rejected": true,
+  "health": {
+    "status": "ready",
+    "version": "1.0.0",
+    "schema_version": 2,
+    "admission_paused": false
+  },
+  "job": {
+    "id": "4f188b57-7718-4e42-9605-b7f6b2e56099",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 5,
+      "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673"
+    },
+    "error": null,
+    "version": "1.0.0"
+  }
+}

@@ -19,3 +19,13 @@ condition = "AND"
 regexTarget = "match"
 paths = ['''^docs/evidence/security-admission-20260922/manifest\.json$''']
 regexes = ['''api\.py"\s*:\s*"58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad"''']
+
+[[rules.allowlists]]
+description = "Verified API and test source SHA-256 values in the bounded admission and operations manifests"
+condition = "AND"
+regexTarget = "match"
+paths = ['''^docs/evidence/(operations-proof-latest|admission-measurement/20260922T031250-0300-b87b5952/manifest)\.json$''']
+regexes = [
+  '''api\.py"\s*:\s*"58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad"''',
+  '''test_api\.py"\s*:\s*"3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33"''',
+]

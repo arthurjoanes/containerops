@@ -8,6 +8,8 @@ A [sequência operacional](operational-recovery.md) passou em 139,750 s: job ini
 
 Depois do ajuste de serialização LF, passaram no host 14 testes da nova prova, 28 de operações existentes e 47 do relatório: [resultados e hashes](evidence/operations-regression/post-serialization-results.json). As seis capturas finais registram três painéis em desktop e celular. O [registro de publicação](evidence/operations-publication.json) preserva a diferença entre os bytes executados e os arquivos publicados, incluindo a lacuna do CSS anterior. O relatório principal foi regenerado com os aliases atuais; seus painéis históricos continuam com datas e identidades próprias. Essa regeneração não reexecuta as operações nem os scans.
 
+O primeiro scan de histórico dessa publicação apontou 13 ocorrências nos hashes de `api.py` e `test_api.py`. Os valores foram recalculados a partir das fontes antes de acrescentar exceções limitadas aos dois caminhos de manifesto e aos dois hashes exatos. O scan local do histórico passou; um controle separado confirmou que uma credencial sintética diferente no mesmo caminho continuava detectável. [Classificação e controle](evidence/operations-regression/secret-fingerprint-review.json). Esse resultado não é scan das imagens.
+
 ## Admissão e espera — 22/09 às 06:12 UTC
 
 A [medição limitada](admission-measurement.md) executou três repetições com banco vazio, dois proprietários e 48 pedidos por repetição. Foram 120 admissões, 24 recusas por quota do proprietário e 120 resultados corretos, sem erros de transporte ou observações censuradas. O worker foi parado graciosamente durante admissão; a espera induzida e a incerteza do instante de retomada estão explícitas na análise. Não houve saturação global ou teste com histórico crescente.

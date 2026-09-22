@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-09-22T06:10:12.739027+00:00",
+  "scope": "measurement-helper integrity tests, no Docker workload",
+  "command": "python -m unittest discover -s tests -p test_measure_admission.py -v",
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 0.0,
+  "status": "passed",
+  "source_files": {
+    "scripts/measure_admission.py": "764bcf14858e849a680b4bd453e1dc4e82f918a07343ff1279b651ec923fb2a3",
+    "tests/test_measure_admission.py": "9ae37f0b720718de5a63beb5a0964071d8ad5cb95af95edf28abdf5bc87975ba"
+  },
+  "output": "test_cross_project_service_never_passes_ownership_check (test_measure_admission.MeasurementIntegrityTests.test_cross_project_service_never_passes_ownership_check) ... ok\ntest_duplicate_starts_do_not_look_like_independent_fast_jobs (test_measure_admission.MeasurementIntegrityTests.test_duplicate_starts_do_not_look_like_independent_fast_jobs) ... ok\ntest_every_delegated_command_is_bounded_and_function_restored (test_measure_admission.MeasurementIntegrityTests.test_every_delegated_command_is_bounded_and_function_restored) ... ok\ntest_expired_global_deadline_never_dispatches_queued_http (test_measure_admission.MeasurementIntegrityTests.test_expired_global_deadline_never_dispatches_queued_http) ... ok\ntest_http_timeout_is_capped_by_remaining_global_budget (test_measure_admission.MeasurementIntegrityTests.test_http_timeout_is_capped_by_remaining_global_budget) ... ok\ntest_job_started_while_worker_should_be_paused_invalidates_measurement (test_measure_admission.MeasurementIntegrityTests.test_job_started_while_worker_should_be_paused_invalidates_measurement) ... ok\ntest_late_completed_snapshot_is_failure_not_drain_within_budget (test_measure_admission.MeasurementIntegrityTests.test_late_completed_snapshot_is_failure_not_drain_within_budget) ... ok\ntest_missing_start_and_completion_are_censored_not_assigned_zero (test_measure_admission.MeasurementIntegrityTests.test_missing_start_and_completion_are_censored_not_assigned_zero) ... ok\ntest_nearest_rank_uses_observations_not_interpolation_or_zero_for_empty (test_measure_admission.MeasurementIntegrityTests.test_nearest_rank_uses_observations_not_interpolation_or_zero_for_empty) ... ok\ntest_rejections_and_transport_failures_remain_in_offered_latency_denominator (test_measure_admission.MeasurementIntegrityTests.test_rejections_and_transport_failures_remain_in_offered_latency_denominator) ... ok\ntest_release_bracket_separates_artificial_wait_from_queue_wait (test_measure_admission.MeasurementIntegrityTests.test_release_bracket_separates_artificial_wait_from_queue_wait) ... ok\ntest_start_after_snapshot_is_preserved_as_raw_but_censored_in_summary (test_measure_admission.MeasurementIntegrityTests.test_start_after_snapshot_is_preserved_as_raw_but_censored_in_summary) ... ok\ntest_timeout_preserves_last_snapshot_for_censorship_and_restores_global_budget (test_measure_admission.MeasurementIntegrityTests.test_timeout_preserves_last_snapshot_for_censorship_and_restores_global_budget) ... ok\ntest_wrong_owner_or_unoffered_job_cannot_be_correlated (test_measure_admission.MeasurementIntegrityTests.test_wrong_owner_or_unoffered_job_cannot_be_correlated) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.002s\n\nOK\n"
+}

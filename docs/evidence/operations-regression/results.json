@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-09-22T06:17:35.207401+00:00",
+  "results": [
+    {
+      "suite": "operations-proof",
+      "command": "python -m unittest test_operations_proof -v (PYTHONPATH=scripts;tests)",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.641,
+      "status": "passed"
+    },
+    {
+      "suite": "existing-operations",
+      "command": "python -m unittest test_operations test_proof test_contracts -v (PYTHONPATH=scripts;tests)",
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 1.0,
+      "status": "passed"
+    },
+    {
+      "suite": "existing-report",
+      "command": "python -m unittest test_report -v (PYTHONPATH=scripts;tests)",
+      "tests": 47,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 1.25,
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "scripts/ops.py": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+    "scripts/proof.py": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+    "scripts/capture_operations.py": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+    "scripts/capture_operations.cjs": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+    "tests/test_operations_proof.py": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3"
+  }
+}

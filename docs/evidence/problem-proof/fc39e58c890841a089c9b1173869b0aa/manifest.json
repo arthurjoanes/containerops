@@ -1,0 +1,297 @@
+{
+  "scenario": "operations",
+  "run_id": "fc39e58c890841a089c9b1173869b0aa",
+  "started_at": "2026-09-22T06:17:46.252769+00:00",
+  "completed_at": "2026-09-22T06:20:05.990271+00:00",
+  "status": "passed",
+  "project": "pf-containerops-test-fc39e58c",
+  "steps": [
+    {
+      "name": "source-check-1.0.0",
+      "started_at": "2026-09-22T06:17:46.782472+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:17:47.382880+00:00",
+      "elapsed_seconds": 0.61
+    },
+    {
+      "name": "source-check-2.0.0",
+      "started_at": "2026-09-22T06:17:47.548071+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:17:48.156268+00:00",
+      "elapsed_seconds": 0.609
+    },
+    {
+      "name": "start-isolated",
+      "started_at": "2026-09-22T06:17:48.320259+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:18:12.043347+00:00",
+      "elapsed_seconds": 23.719
+    },
+    {
+      "name": "initial-job",
+      "started_at": "2026-09-22T06:18:12.045484+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:18:12.480364+00:00",
+      "elapsed_seconds": 0.437
+    },
+    {
+      "name": "real-controlled-rollback",
+      "started_at": "2026-09-22T06:18:14.906962+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:19:13.534653+00:00",
+      "elapsed_seconds": 58.625
+    },
+    {
+      "name": "backup",
+      "started_at": "2026-09-22T06:19:19.218865+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:19:30.187060+00:00",
+      "elapsed_seconds": 10.968
+    },
+    {
+      "name": "protected-copy",
+      "started_at": "2026-09-22T06:19:30.206197+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:19:30.719372+00:00",
+      "elapsed_seconds": 0.516
+    },
+    {
+      "name": "corruption-control",
+      "started_at": "2026-09-22T06:19:30.731381+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:19:31.235823+00:00",
+      "elapsed_seconds": 0.5
+    },
+    {
+      "name": "restore-and-cleanup",
+      "started_at": "2026-09-22T06:19:31.247013+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:20:00.832762+00:00",
+      "elapsed_seconds": 29.578
+    },
+    {
+      "name": "cleanup-source",
+      "started_at": "2026-09-22T06:20:04.072725+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T06:20:05.872067+00:00",
+      "elapsed_seconds": 1.797
+    }
+  ],
+  "evidence": [
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/environment.json",
+      "sha256": "b0da678bb875845d052f6cb1df4c6d985d82cc6c23301adce4b3f24505848dc8"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/main-runtime-before.json",
+      "sha256": "ec191410fb6f6d6387543069dbf29682411b235d7d3e72d9c694c632bd28f9db"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/sources-1.0.0.json",
+      "sha256": "3757672c1f79add7c408d34496f775587c16f9efd1652ee66bbc543aa08f0848"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/sources-2.0.0.json",
+      "sha256": "e2646b7c1fe1b38e1d10a60a2caa3be1ff32c05d8bb3e6f7f6ac3829c37c8b4f"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/demo.json",
+      "sha256": "48771ef8d49f2de5c2d72ba115d6c592e522cece6e864c5a4ffd49616e91972f"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/snapshot-before-rollback.json",
+      "sha256": "4c24a512ceb85006b45d7fb3b4625c33c1592f4b51216235f77a4e08ed999b32"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json",
+      "sha256": "8b310319af571e7ccc86f78334062091d7dec06d20329f1d5f432942408e34de"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/snapshot-after-rollback.json",
+      "sha256": "519eb0cbf123a5f4bb555ea0fc4b69bef83367f198795a8caafdb87176730074"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/backup.json",
+      "sha256": "47d5d573a19be312c3653aaeabc657766e31a1449203eba95015b86cccac695d"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/protected-copy.json",
+      "sha256": "6906aead27d24a2c04e332226ea76258af9a224ef16d23a526448572e8acce48"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/corrupted-copy-rejected.json",
+      "sha256": "0bdd913d67bcae8bdb190b56539c7015e52a0a23d641a5fc9740b471f1cd6584"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/restore.json",
+      "sha256": "4832fc638c09cbbf09350d4bcdcdee19c124db4402e1397b21978eeb6d1e5516"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/source-preservation.json",
+      "sha256": "add1e8ee8d2abf1c3ff3ea9c13bad24c334fea581e43c48bc432001c653ce508"
+    },
+    {
+      "path": "problem-proof/fc39e58c890841a089c9b1173869b0aa/main-runtime-after.json",
+      "sha256": "ec191410fb6f6d6387543069dbf29682411b235d7d3e72d9c694c632bd28f9db"
+    }
+  ],
+  "source": {
+    "files": {
+      ".dockerignore": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "app/pyproject.toml": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "app/requirements-runtime.lock": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "app/requirements-test.lock": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "app/src/containerops/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app/src/containerops/api.py": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+      "app/src/containerops/config.py": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "app/src/containerops/database.py": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "app/src/containerops/domain.py": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+      "app/src/containerops/log.py": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "app/src/containerops/manage.py": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "app/src/containerops/migrations/001.sql": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "app/src/containerops/migrations/002.sql": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "app/src/containerops/repository.py": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+      "app/src/containerops/worker.py": "e9f8cc2771d324b743364ca7a82be638210899bf2277c939cb21c70f577a27f3",
+      "app/src/containerops/worker_health.py": "96ec054e5aa3dea1d91e75569cda89723fc022a66757c0a10e6f56be4c265c79",
+      "app/tests/conftest.py": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "app/tests/test_api.py": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "app/tests/test_body_limit.py": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "app/tests/test_domain.py": "4dbdd4ade38ca67c5d6e09e3140739a24cfb80aded711e9cef5e248f9deaa1c5",
+      "app/tests/test_http_contract.py": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "app/tests/test_integration.py": "87cdb0006fb3715f4b825ba26c723cbffdadef4f3a6e8fe06446b27c89267e20",
+      "app/tests/test_worker_health.py": "3745f43a8b90d46751444f1bf173fe8feb33f415a8d8fd2d935037050d2f80a5",
+      "compose.tls.yaml": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "compose.yaml": "cd65852edd48433aee6630657e36751c73435e4729c9b6de27b9de817bf46934",
+      "docker/app.Dockerfile": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "docker/db/00-platform.sh": "57e7da911b67e9eb7d7f1bc28c148db57750a61508de31f4347e0d90f272f43a",
+      "docker/db/Dockerfile": "8903f2ff29f95a0f22c685498326fb0e8dca929e5a18959171c58c0b29aa1039",
+      "docker/db/entrypoint.sh": "09b99c9a9a1e854bd2e016acd54a41a068fdf7c30473ebc95192037b128e8d8e",
+      "docker/db/init-roles.sh": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "docker/db/tool.sh": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "docker/images.lock.json": "56815faa17eb7129dbc24b4cc882b845322276cdaabcb2f2fdf0d62698664daf",
+      "docker/proxy/Dockerfile": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "docker/proxy/http.conf": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "docker/proxy/locations.conf": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "docker/proxy/nginx.conf": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "docker/proxy/tls.conf": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "pyproject.toml": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "scripts/capture_operations.cjs": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+      "scripts/capture_operations.py": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+      "scripts/checks.py": "d0a270749cfbfcdf341452f82be099a34a2d62a2356308c7158983385fc22f06",
+      "scripts/containerops.ps1": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "scripts/measure_admission.py": "764bcf14858e849a680b4bd453e1dc4e82f918a07343ff1279b651ec923fb2a3",
+      "scripts/oci_audit.py": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "scripts/ops.py": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+      "scripts/proof.py": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+      "scripts/render_review.py": "86d21edbb2500c68f72ddaff5bd160564cab30366287e89775b64e5a1087c250",
+      "scripts/report.css": "4689171a682618f8af56bd040ef85b2edb9744769365b2bc6088dbd08f7f62c1",
+      "scripts/report.html": "bd44a499baf1b8227e8e7bd4912e5beb7e75c583a61a3cefa92d79bb9a4fb144",
+      "scripts/report.js": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb",
+      "scripts/report.py": "13136c875b2467714610d981ca2b88257a5e9b499740afa3c1a611b03c7abb69",
+      "scripts/report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "scripts/scan_services.py": "04f469d4afea6fe1505fbf90e949e809686cc912f709f60ff10c13b567c931dd",
+      "scripts/supply.py": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "scripts/test_report.py": "76f68b4c47d95ce6beb78c7bda7ca866062dd294e918e495322036bd8cf15775",
+      "scripts/test_report_browser.cjs": "2f5dd68f9e9a91d85df3a2f22c3cabb537fc8020f82af0b67392b1083355377d",
+      "scripts/visual-review.cjs": "c6562d27f129a6f6f689ed414f0d2105de1dc30d45e8e22e6311ff2e06429ab4",
+      "tests/test_contracts.py": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "tests/test_measure_admission.py": "9ae37f0b720718de5a63beb5a0964071d8ad5cb95af95edf28abdf5bc87975ba",
+      "tests/test_oci_archive.py": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "tests/test_operations.py": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "tests/test_operations_proof.py": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3",
+      "tests/test_proof.py": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6"
+    },
+    "sha256": "58fcaefa314eabfd7dca598f8875d24cd76c7d43cea7e3dd1282f159fa79c05f",
+    "revision": "35f3f69e8bca5b5560f276f68408658c8ae894fa-dirty"
+  },
+  "scope": "CO-03/04: real rollback, protected same-host backup copy and disposable restore",
+  "elapsed_seconds": 139.75,
+  "limits": [
+    "Synthetic local data and one Docker host; no off-host disaster recovery.",
+    "Existing images with source verification; no new build or vulnerability scan.",
+    "Cutoff is the bounded UTC interval in which admission paused and jobs drained.",
+    "Recovery time and total including preflight/cleanup have separate fields."
+  ],
+  "images": {
+    "1.0.0": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+    "2.0.0": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+  },
+  "source_after": {
+    "files": {
+      ".dockerignore": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "app/pyproject.toml": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "app/requirements-runtime.lock": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "app/requirements-test.lock": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "app/src/containerops/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app/src/containerops/api.py": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+      "app/src/containerops/config.py": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "app/src/containerops/database.py": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "app/src/containerops/domain.py": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+      "app/src/containerops/log.py": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "app/src/containerops/manage.py": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "app/src/containerops/migrations/001.sql": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "app/src/containerops/migrations/002.sql": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "app/src/containerops/repository.py": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+      "app/src/containerops/worker.py": "e9f8cc2771d324b743364ca7a82be638210899bf2277c939cb21c70f577a27f3",
+      "app/src/containerops/worker_health.py": "96ec054e5aa3dea1d91e75569cda89723fc022a66757c0a10e6f56be4c265c79",
+      "app/tests/conftest.py": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "app/tests/test_api.py": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "app/tests/test_body_limit.py": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "app/tests/test_domain.py": "4dbdd4ade38ca67c5d6e09e3140739a24cfb80aded711e9cef5e248f9deaa1c5",
+      "app/tests/test_http_contract.py": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "app/tests/test_integration.py": "87cdb0006fb3715f4b825ba26c723cbffdadef4f3a6e8fe06446b27c89267e20",
+      "app/tests/test_worker_health.py": "3745f43a8b90d46751444f1bf173fe8feb33f415a8d8fd2d935037050d2f80a5",
+      "compose.tls.yaml": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "compose.yaml": "cd65852edd48433aee6630657e36751c73435e4729c9b6de27b9de817bf46934",
+      "docker/app.Dockerfile": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "docker/db/00-platform.sh": "57e7da911b67e9eb7d7f1bc28c148db57750a61508de31f4347e0d90f272f43a",
+      "docker/db/Dockerfile": "8903f2ff29f95a0f22c685498326fb0e8dca929e5a18959171c58c0b29aa1039",
+      "docker/db/entrypoint.sh": "09b99c9a9a1e854bd2e016acd54a41a068fdf7c30473ebc95192037b128e8d8e",
+      "docker/db/init-roles.sh": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "docker/db/tool.sh": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "docker/images.lock.json": "56815faa17eb7129dbc24b4cc882b845322276cdaabcb2f2fdf0d62698664daf",
+      "docker/proxy/Dockerfile": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "docker/proxy/http.conf": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "docker/proxy/locations.conf": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "docker/proxy/nginx.conf": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "docker/proxy/tls.conf": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "pyproject.toml": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "scripts/capture_operations.cjs": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+      "scripts/capture_operations.py": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+      "scripts/checks.py": "d0a270749cfbfcdf341452f82be099a34a2d62a2356308c7158983385fc22f06",
+      "scripts/containerops.ps1": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "scripts/measure_admission.py": "764bcf14858e849a680b4bd453e1dc4e82f918a07343ff1279b651ec923fb2a3",
+      "scripts/oci_audit.py": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "scripts/ops.py": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+      "scripts/proof.py": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+      "scripts/render_review.py": "86d21edbb2500c68f72ddaff5bd160564cab30366287e89775b64e5a1087c250",
+      "scripts/report.css": "4689171a682618f8af56bd040ef85b2edb9744769365b2bc6088dbd08f7f62c1",
+      "scripts/report.html": "bd44a499baf1b8227e8e7bd4912e5beb7e75c583a61a3cefa92d79bb9a4fb144",
+      "scripts/report.js": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb",
+      "scripts/report.py": "13136c875b2467714610d981ca2b88257a5e9b499740afa3c1a611b03c7abb69",
+      "scripts/report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "scripts/scan_services.py": "04f469d4afea6fe1505fbf90e949e809686cc912f709f60ff10c13b567c931dd",
+      "scripts/supply.py": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "scripts/test_report.py": "76f68b4c47d95ce6beb78c7bda7ca866062dd294e918e495322036bd8cf15775",
+      "scripts/test_report_browser.cjs": "2f5dd68f9e9a91d85df3a2f22c3cabb537fc8020f82af0b67392b1083355377d",
+      "scripts/visual-review.cjs": "c6562d27f129a6f6f689ed414f0d2105de1dc30d45e8e22e6311ff2e06429ab4",
+      "tests/test_contracts.py": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "tests/test_measure_admission.py": "9ae37f0b720718de5a63beb5a0964071d8ad5cb95af95edf28abdf5bc87975ba",
+      "tests/test_oci_archive.py": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "tests/test_operations.py": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "tests/test_operations_proof.py": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3",
+      "tests/test_proof.py": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6"
+    },
+    "sha256": "58fcaefa314eabfd7dca598f8875d24cd76c7d43cea7e3dd1282f159fa79c05f",
+    "revision": "35f3f69e8bca5b5560f276f68408658c8ae894fa-dirty"
+  },
+  "source_unchanged": true,
+  "git_revision_unchanged": true,
+  "total_seconds": 139.75,
+  "publication_serialization": {
+    "json_newlines": "LF",
+    "raw_manifest_sha256": "c7d661f88cb66aff1fb02719b9caa718bf247f7d1f5f0bed85caf779c6f82c7d",
+    "raw_artifacts_preserved_privately": true,
+    "scope": "Public JSON re-encoded from raw execution records; public references rehashed. Dump, private metadata, image and executed-source SHA256 values are unchanged."
+  }
+}

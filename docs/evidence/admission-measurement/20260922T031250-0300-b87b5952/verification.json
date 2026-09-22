@@ -1,0 +1,171 @@
+{
+  "recorded_at": "2026-09-22T06:17:57.395592+00:00",
+  "status": "passed",
+  "run_id": "20260922T031250-0300-b87b5952",
+  "scope": "offline verification of completed experiment artifacts; no extra requests/jobs/containers",
+  "artifacts": [
+    {
+      "path": "20260922T031250-0300-b87b5952/manifest.json",
+      "sha256": "0a8233e420f9ac57e9f57bbd6f6e16ddc8f69a35597ea78a1bf609861c60ce5b",
+      "bytes": 25181
+    },
+    {
+      "path": "20260922T031250-0300-b87b5952/repetition-1.json",
+      "sha256": "786eac0b289d75ffe986a855374e9933117088216ef293e92b4db4cb66b8d2d8",
+      "bytes": 136136
+    },
+    {
+      "path": "20260922T031250-0300-b87b5952/repetition-2.json",
+      "sha256": "ba12f057274dfb62b1ce4fe13823f99d7b27d15d265c61bc3b38b9a3a0a3a872",
+      "bytes": 136268
+    },
+    {
+      "path": "20260922T031250-0300-b87b5952/repetition-3.json",
+      "sha256": "c6022bd1e983a84e94652961c39c8153da64ed95883dbc9b9a783b1a6338e54e",
+      "bytes": 136179
+    },
+    {
+      "path": "unit-checks-20260922.json",
+      "sha256": "f337886e3f2e5c90acf37f24883496a4fb2e632f7ee8525c9af731e5dee47edc",
+      "bytes": 3318
+    },
+    {
+      "path": "preflight-stale-image-20260922.json",
+      "sha256": "bfca5b92458584f73ef5e331c9fa969cba84260f11228a892ee1b2ec1f9eb456",
+      "bytes": 1417
+    }
+  ],
+  "raw_counts": {
+    "requests": 144,
+    "accepted": 120,
+    "rejected_owner_quota": 24,
+    "jobs_succeeded": 120,
+    "start_censored": 0,
+    "completion_censored": 0
+  },
+  "unit_tests": {
+    "tests": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "source_hashes_still_match": true
+  },
+  "independent_checks": [
+    "repetition hashes match manifest",
+    "fresh history and distinct accepted IDs",
+    "raw request intervals peak concurrency <=8",
+    "nearest-rank p95 recomputed from raw observations",
+    "public JSON bytes LF",
+    "all three cleanup records zero remaining resources"
+  ],
+  "known_credential_check": {
+    "values": 21,
+    "artifacts": 6,
+    "matches": 0,
+    "scope": "only credentials generated for these three owned disposable stacks; not a general vulnerability/secret scan"
+  },
+  "observations": [
+    {
+      "repetition": 1,
+      "owner": "alice",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 515.9999999996217,
+      "induced_wait_lower_p95_ms": 5892.0769691467285,
+      "total_queue_wait_p95_ms": 27184.5920085907,
+      "after_release_wait_p95_lower_ms": 19465.409994125366,
+      "after_release_wait_p95_upper_ms": 22684.338092803955,
+      "drain_observed_seconds": 25.625,
+      "release_bracket_width_ms": 3218.928098678589,
+      "peak_observed_http_concurrency": 8
+    },
+    {
+      "repetition": 1,
+      "owner": "bob",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 500.0,
+      "induced_wait_lower_p95_ms": 5870.614051818848,
+      "total_queue_wait_p95_ms": 27633.198976516724,
+      "after_release_wait_p95_lower_ms": 20020.2739238739,
+      "after_release_wait_p95_upper_ms": 23239.20202255249,
+      "drain_observed_seconds": 25.625,
+      "release_bracket_width_ms": 3218.928098678589,
+      "peak_observed_http_concurrency": 8
+    },
+    {
+      "repetition": 2,
+      "owner": "alice",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 422.0000000022992,
+      "induced_wait_lower_p95_ms": 5626.763105392456,
+      "total_queue_wait_p95_ms": 27241.2691116333,
+      "after_release_wait_p95_lower_ms": 19748.284101486206,
+      "after_release_wait_p95_upper_ms": 22824.490070343018,
+      "drain_observed_seconds": 25.31300000000192,
+      "release_bracket_width_ms": 3076.2059688568115,
+      "peak_observed_http_concurrency": 8
+    },
+    {
+      "repetition": 2,
+      "owner": "bob",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 500.0,
+      "induced_wait_lower_p95_ms": 5534.306049346924,
+      "total_queue_wait_p95_ms": 27608.815908432007,
+      "after_release_wait_p95_lower_ms": 20301.21898651123,
+      "after_release_wait_p95_upper_ms": 23377.424955368042,
+      "drain_observed_seconds": 25.31300000000192,
+      "release_bracket_width_ms": 3076.2059688568115,
+      "peak_observed_http_concurrency": 8
+    },
+    {
+      "repetition": 3,
+      "owner": "alice",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 500.0,
+      "induced_wait_lower_p95_ms": 5801.176071166992,
+      "total_queue_wait_p95_ms": 27120.36085128784,
+      "after_release_wait_p95_lower_ms": 19527.677059173584,
+      "after_release_wait_p95_upper_ms": 22731.144905090332,
+      "drain_observed_seconds": 25.389999999999418,
+      "release_bracket_width_ms": 3203.467845916748,
+      "peak_observed_http_concurrency": 8
+    },
+    {
+      "repetition": 3,
+      "owner": "bob",
+      "offered": 24,
+      "accepted": 20,
+      "rejected_429": 4,
+      "succeeded": 20,
+      "admission_p95_ms": 530.9999999990396,
+      "induced_wait_lower_p95_ms": 5693.382024765015,
+      "total_queue_wait_p95_ms": 27578.829050064087,
+      "after_release_wait_p95_lower_ms": 20081.05421066284,
+      "after_release_wait_p95_upper_ms": 23284.52205657959,
+      "drain_observed_seconds": 25.389999999999418,
+      "release_bracket_width_ms": 3203.467845916748,
+      "peak_observed_http_concurrency": 8
+    }
+  ],
+  "limits": [
+    "Release start was bracketed by DB timestamps around Compose start; widths 3.076–3.219s are preserved, not assumed zero.",
+    "Per-owner p95 after release is an interval; do not add component p95 values to derive total p95.",
+    "Two owners at quota20 cap the experiment at40pending; global quota100 was not saturated.",
+    "Measured source hashes are historical execution bytes; later changes in restore helpers require an explicit separate comparison."
+  ]
+}

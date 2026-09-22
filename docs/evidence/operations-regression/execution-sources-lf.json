@@ -1,0 +1,455 @@
+{
+  "run_id": "fc39e58c890841a089c9b1173869b0aa",
+  "scope": "LF supplement from execution bytes verified against original SHA256; no runtime was repeated",
+  "sources": [
+    {
+      "path": ".dockerignore",
+      "execution_sha256": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/pyproject.toml",
+      "execution_sha256": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/requirements-runtime.lock",
+      "execution_sha256": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/requirements-test.lock",
+      "execution_sha256": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/__init__.py",
+      "execution_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/api.py",
+      "execution_sha256": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/config.py",
+      "execution_sha256": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/database.py",
+      "execution_sha256": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/domain.py",
+      "execution_sha256": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/log.py",
+      "execution_sha256": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/manage.py",
+      "execution_sha256": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/migrations/001.sql",
+      "execution_sha256": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/migrations/002.sql",
+      "execution_sha256": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/repository.py",
+      "execution_sha256": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/worker.py",
+      "execution_sha256": "e9f8cc2771d324b743364ca7a82be638210899bf2277c939cb21c70f577a27f3",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "e9f8cc2771d324b743364ca7a82be638210899bf2277c939cb21c70f577a27f3",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/src/containerops/worker_health.py",
+      "execution_sha256": "96ec054e5aa3dea1d91e75569cda89723fc022a66757c0a10e6f56be4c265c79",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "96ec054e5aa3dea1d91e75569cda89723fc022a66757c0a10e6f56be4c265c79",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/conftest.py",
+      "execution_sha256": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_api.py",
+      "execution_sha256": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_body_limit.py",
+      "execution_sha256": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_domain.py",
+      "execution_sha256": "4dbdd4ade38ca67c5d6e09e3140739a24cfb80aded711e9cef5e248f9deaa1c5",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "255c69cc3539504a488b31a05660c4fab6c889e0320b8ddc01841ff8aace0f95",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_http_contract.py",
+      "execution_sha256": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_integration.py",
+      "execution_sha256": "87cdb0006fb3715f4b825ba26c723cbffdadef4f3a6e8fe06446b27c89267e20",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "87cdb0006fb3715f4b825ba26c723cbffdadef4f3a6e8fe06446b27c89267e20",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "app/tests/test_worker_health.py",
+      "execution_sha256": "3745f43a8b90d46751444f1bf173fe8feb33f415a8d8fd2d935037050d2f80a5",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "3745f43a8b90d46751444f1bf173fe8feb33f415a8d8fd2d935037050d2f80a5",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "compose.tls.yaml",
+      "execution_sha256": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "compose.yaml",
+      "execution_sha256": "cd65852edd48433aee6630657e36751c73435e4729c9b6de27b9de817bf46934",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "57efbeb7f63ee87b6308d0c1b716ea5c18124e804540aa858024147bc71ebdba",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/app.Dockerfile",
+      "execution_sha256": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/db/00-platform.sh",
+      "execution_sha256": "57e7da911b67e9eb7d7f1bc28c148db57750a61508de31f4347e0d90f272f43a",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "57e7da911b67e9eb7d7f1bc28c148db57750a61508de31f4347e0d90f272f43a",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/db/Dockerfile",
+      "execution_sha256": "8903f2ff29f95a0f22c685498326fb0e8dca929e5a18959171c58c0b29aa1039",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "08774224fca539b6a75207e0f1985b353d14753b1c2efa7216879d07e5571e81",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/db/entrypoint.sh",
+      "execution_sha256": "09b99c9a9a1e854bd2e016acd54a41a068fdf7c30473ebc95192037b128e8d8e",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "09b99c9a9a1e854bd2e016acd54a41a068fdf7c30473ebc95192037b128e8d8e",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/db/init-roles.sh",
+      "execution_sha256": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/db/tool.sh",
+      "execution_sha256": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/images.lock.json",
+      "execution_sha256": "56815faa17eb7129dbc24b4cc882b845322276cdaabcb2f2fdf0d62698664daf",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "5d02d8ecdf730bc2be6dea52e494b6b582adc0deac8ccc706050ce0bd5496b91",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/proxy/Dockerfile",
+      "execution_sha256": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/proxy/http.conf",
+      "execution_sha256": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/proxy/locations.conf",
+      "execution_sha256": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/proxy/nginx.conf",
+      "execution_sha256": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "docker/proxy/tls.conf",
+      "execution_sha256": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "pyproject.toml",
+      "execution_sha256": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/capture_operations.cjs",
+      "execution_sha256": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+      "method": "reconstructed by reversing identified post-execution edit; accepted only after exact SHA256 match"
+    },
+    {
+      "path": "scripts/capture_operations.py",
+      "execution_sha256": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+      "method": "reconstructed by reversing identified post-execution edit; accepted only after exact SHA256 match"
+    },
+    {
+      "path": "scripts/checks.py",
+      "execution_sha256": "d0a270749cfbfcdf341452f82be099a34a2d62a2356308c7158983385fc22f06",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "d0a270749cfbfcdf341452f82be099a34a2d62a2356308c7158983385fc22f06",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/containerops.ps1",
+      "execution_sha256": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/measure_admission.py",
+      "execution_sha256": "764bcf14858e849a680b4bd453e1dc4e82f918a07343ff1279b651ec923fb2a3",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "764bcf14858e849a680b4bd453e1dc4e82f918a07343ff1279b651ec923fb2a3",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/oci_audit.py",
+      "execution_sha256": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/ops.py",
+      "execution_sha256": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+      "method": "reconstructed by reversing identified post-execution edit; accepted only after exact SHA256 match"
+    },
+    {
+      "path": "scripts/proof.py",
+      "execution_sha256": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/render_review.py",
+      "execution_sha256": "86d21edbb2500c68f72ddaff5bd160564cab30366287e89775b64e5a1087c250",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "eef659025bec1d7bca0182dc4af961b2ce17a1be6a336133bc84918a5251b266",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/report.css",
+      "execution_sha256": "4689171a682618f8af56bd040ef85b2edb9744769365b2bc6088dbd08f7f62c1",
+      "recovered_exact_bytes": false,
+      "lf_sha256": null,
+      "method": "reconstructed by reversing identified post-execution edit; accepted only after exact SHA256 match"
+    },
+    {
+      "path": "scripts/report.html",
+      "execution_sha256": "bd44a499baf1b8227e8e7bd4912e5beb7e75c583a61a3cefa92d79bb9a4fb144",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "77762a43fa4710b4bcc8bebff5fd0a9c15bde294391a906868c9442324f5ec8b",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/report.js",
+      "execution_sha256": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/report.py",
+      "execution_sha256": "13136c875b2467714610d981ca2b88257a5e9b499740afa3c1a611b03c7abb69",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "13136c875b2467714610d981ca2b88257a5e9b499740afa3c1a611b03c7abb69",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/report_evidence.py",
+      "execution_sha256": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/scan_services.py",
+      "execution_sha256": "04f469d4afea6fe1505fbf90e949e809686cc912f709f60ff10c13b567c931dd",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "04f469d4afea6fe1505fbf90e949e809686cc912f709f60ff10c13b567c931dd",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/supply.py",
+      "execution_sha256": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/test_report.py",
+      "execution_sha256": "76f68b4c47d95ce6beb78c7bda7ca866062dd294e918e495322036bd8cf15775",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "76f68b4c47d95ce6beb78c7bda7ca866062dd294e918e495322036bd8cf15775",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/test_report_browser.cjs",
+      "execution_sha256": "2f5dd68f9e9a91d85df3a2f22c3cabb537fc8020f82af0b67392b1083355377d",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "2f5dd68f9e9a91d85df3a2f22c3cabb537fc8020f82af0b67392b1083355377d",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "scripts/visual-review.cjs",
+      "execution_sha256": "c6562d27f129a6f6f689ed414f0d2105de1dc30d45e8e22e6311ff2e06429ab4",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "7d7fcbfda7d87ddc2777ac00943d7bf1a5705e17636c8c3e1524d237746aa9c2",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "tests/test_contracts.py",
+      "execution_sha256": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "tests/test_measure_admission.py",
+      "execution_sha256": "9ae37f0b720718de5a63beb5a0964071d8ad5cb95af95edf28abdf5bc87975ba",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "9ae37f0b720718de5a63beb5a0964071d8ad5cb95af95edf28abdf5bc87975ba",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "tests/test_oci_archive.py",
+      "execution_sha256": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "tests/test_operations.py",
+      "execution_sha256": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "method": "current bytes matched execution"
+    },
+    {
+      "path": "tests/test_operations_proof.py",
+      "execution_sha256": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3",
+      "method": "reconstructed by reversing identified post-execution edit; accepted only after exact SHA256 match"
+    },
+    {
+      "path": "tests/test_proof.py",
+      "execution_sha256": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6",
+      "recovered_exact_bytes": true,
+      "lf_sha256": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6",
+      "method": "current bytes matched execution"
+    }
+  ],
+  "all_recovered": false,
+  "unrecovered_css_rendering_comparison": {
+    "rendered_text_equal": false,
+    "method": "LF text with per-line trailing whitespace removed, as report.generate does; comparison against style embedded in preserved real captured HTML",
+    "rendered_style_sha256": "28bcf6589dadfc996baca162a3deb679d3d2ba325563a7cd71cc366c6f9a9c05",
+    "does_not_recover_original_raw_source_bytes": true,
+    "resolved": "Original raw CSS not recovered; current CSS removed --surface:#fff, the only rendered-line difference; raw-source LF remains unknown"
+  }
+}

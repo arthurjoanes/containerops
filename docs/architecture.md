@@ -1,5 +1,22 @@
 # Arquitetura do ContainerOps
 
+**Problema central:** depois de aceitar um trabalho, o serviço precisa permitir consultar seu resultado e recuperar falhas sem confundir a versão do programa com os dados persistidos. O cálculo de palavras é pequeno de propósito: torna possível conferir o resultado enquanto se examinam fila, morte do worker, restauração e retorno de versão. Todos os processos desta demonstração continuam no mesmo computador.
+
+## Por que cada parte existe
+
+| Parte | Responsabilidade neste problema | Custo e limite |
+| --- | --- | --- |
+| API e proxy | Receber o pedido autenticado, limitar a entrada e devolver um ID consultável | Mais processos e configuração do que executar a função diretamente; proxy e API não substituem autorização no domínio |
+| PostgreSQL | Guardar pedido, posse temporária, resultado e estado operacional na mesma transação | Fila e consultas disputam o mesmo banco; o lock de admissão/despacho precisa de medição quando o histórico crescer |
+| Worker | Executar fora da requisição HTTP e permitir recuperar uma tentativa interrompida | Requer lease, token e política de tentativas; o cálculo pode repetir |
+| Compose e volumes | Separar processos, redes e armazenamento; permitir destinos descartáveis de teste | Não distribui a demonstração entre máquinas nem protege contra perda do host |
+| Migração, backup e restore | Trocar schema de forma explícita e verificar se dados restaurados permitem novo trabalho | A pausa de admissão afeta disponibilidade para novos pedidos; a cópia local compartilha a falha do computador |
+| Prova, scanner e relatório | Identificar fontes/imagens, testar operações e apresentar a evidência | São ferramentas de verificação, não serviços exigidos para contar palavras; o relatório não opera a aplicação |
+
+Para contar palavras em um único processo, uma função e um arquivo de saída seriam suficientes. A arquitetura maior atende aos cenários operacionais escolhidos para o laboratório; não é uma alegação de demanda comercial. [Exemplos e alternativas](problem-solution.md) · [decisões e dificuldades](decisoes-tecnicas.md).
+
+## Limites entre aplicação e operação
+
 Cenários e critérios: [problema e solução](problem-solution.md). `scripts/proof.py`
 encadeia a sequência completa sem ampliar o domínio da aplicação: reutiliza as operações
 de `ops.py`, o verificador e a auditoria OCI. Cada tentativa guarda manifesto, hashes,

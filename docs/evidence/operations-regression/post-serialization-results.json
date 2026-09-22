@@ -1,0 +1,63 @@
+{
+  "recorded_at": "2026-09-22T06:31:37.261629+00:00",
+  "scope": "After LF serialization change; no repeated Docker workload",
+  "results": [
+    {
+      "suite": "operations-proof",
+      "modules": [
+        "test_operations_proof"
+      ],
+      "command": "python -m unittest test_operations_proof -v",
+      "pythonpath": [
+        "scripts",
+        "tests"
+      ],
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.781,
+      "status": "passed"
+    },
+    {
+      "suite": "existing-operations",
+      "modules": [
+        "test_operations",
+        "test_proof",
+        "test_contracts"
+      ],
+      "command": "python -m unittest test_operations test_proof test_contracts -v",
+      "pythonpath": [
+        "scripts",
+        "tests"
+      ],
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 1.015,
+      "status": "passed"
+    },
+    {
+      "suite": "existing-report",
+      "modules": [
+        "test_report"
+      ],
+      "command": "python -m unittest test_report -v",
+      "pythonpath": [
+        "scripts",
+        "tests"
+      ],
+      "tests": 47,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 1.079,
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "scripts/ops.py": "42a707a9be6f881487f15a333163d4272bc4309d544abb745e3e206f2563de3e",
+    "scripts/proof.py": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4",
+    "scripts/capture_operations.py": "76cae95af751ce2def0406d35559b030d2a69a4566bbd2ab6d68c00b41a5506d",
+    "scripts/capture_operations.cjs": "3adce682b7201d73f14d585ebd525671a409059dd23e69e89b14e67eba656bf6",
+    "tests/test_operations_proof.py": "2d26a123bddd53ab9681e0f90eb6ff18645b894204bd6eb7ba5afe2b46a16178"
+  }
+}

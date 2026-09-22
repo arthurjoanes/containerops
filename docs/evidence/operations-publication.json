@@ -1,0 +1,156 @@
+{
+  "run_id": "fc39e58c890841a089c9b1173869b0aa",
+  "scope": "Publication serialization; not a repeated Docker execution",
+  "raw_private_directory_name": "containerops-operations-raw-fc39e58c",
+  "records": [
+    {
+      "path": "docs/evidence/backup.json",
+      "raw_sha256": "9b9fd5492ff7c6290cda384268c11d66c9f5b2a708627b54e107a93d28353f05",
+      "published_sha256": "816cd8e9b1a4e852f1c102324d83402cc429a9561e31d56c95175285a9978e3e"
+    },
+    {
+      "path": "docs/evidence/build-1.0.0.json",
+      "raw_sha256": "2a303c4981dcedfa0417c1b402b2b69cb4838abde7e052131fd66cd103789184",
+      "published_sha256": "18f7f2042ae9882f4df7c8db4be723827bbcf3b2cb9ddf5d5ff770e69888b317"
+    },
+    {
+      "path": "docs/evidence/build-2.0.0.json",
+      "raw_sha256": "534c4f004279071cfacfae16506da92dc64153595c94a888cf13a13b72890cf7",
+      "published_sha256": "621284d4eed9fc4bc74ca46d67e5e9294d2a7d711c577319e2913442fbfd555a"
+    },
+    {
+      "path": "docs/evidence/operations-proof-latest.json",
+      "raw_sha256": "c7d661f88cb66aff1fb02719b9caa718bf247f7d1f5f0bed85caf779c6f82c7d",
+      "published_sha256": "d1df90efa209fe851fbd6db6555783d16faad5b0689c8c2290bb8991771bf0cb"
+    },
+    {
+      "path": "docs/evidence/operations-regression/existing-operations.xml",
+      "raw_sha256": "a328237ba3070c715667ecb97275cfb9f4fba1d1c3fecc41e8de5e0f905866d4",
+      "published_sha256": "8ba76deb079f40a8dcb88b398b5269c204bfec67578e6cfde511ae801122f658"
+    },
+    {
+      "path": "docs/evidence/operations-regression/existing-report.xml",
+      "raw_sha256": "1c3c0f49889ec9c8cd6fa1c044766bb9b3eafcfedcf06ebb7e45d1e6c346fe29",
+      "published_sha256": "703262f983bff71fe482e15f6eced10d89fc509bf4e57d739c6fbc51796e920e"
+    },
+    {
+      "path": "docs/evidence/operations-regression/operations-proof.xml",
+      "raw_sha256": "b9de8659a3a1faa6bc17cf884dc5f620859119977370fb5a799fd6543eef2238",
+      "published_sha256": "609806b860e3e8bc9533f0f8524510fcdf352db585ff43bb5df19a5360af4263"
+    },
+    {
+      "path": "docs/evidence/operations-regression/results.json",
+      "raw_sha256": "d7e83601319883e8bc9e9b3f7d81d98db999cace3e1d3637bc018acc166d5237",
+      "published_sha256": "8502cdcef4f842d2746ca18131e35c4c388d651552ecf39f7312ba4e834a89b8"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/backup.json",
+      "raw_sha256": "317c24700c0814c76cc4a866b6bbfdb42aef200f3bf88bdd62e0904424eb8601",
+      "published_sha256": "47d5d573a19be312c3653aaeabc657766e31a1449203eba95015b86cccac695d"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/corrupted-copy-rejected.json",
+      "raw_sha256": "43d81d2ca817d688e85623dfc249794567ecc481eaaa0dce4a48f00fac1572d9",
+      "published_sha256": "0bdd913d67bcae8bdb190b56539c7015e52a0a23d641a5fc9740b471f1cd6584"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/demo.json",
+      "raw_sha256": "d23506c83de77877ab196781ba265e4c9284d1475c69f95148dabfdf745936a2",
+      "published_sha256": "48771ef8d49f2de5c2d72ba115d6c592e522cece6e864c5a4ffd49616e91972f"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/environment.json",
+      "raw_sha256": "2408e75d5e780e6d73227acfb81066a8c8a0af771685fddb2b108048968675ec",
+      "published_sha256": "b0da678bb875845d052f6cb1df4c6d985d82cc6c23301adce4b3f24505848dc8"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/main-runtime-after.json",
+      "raw_sha256": "2260e828c128030ecb0de6b2beac174de931d18cd47ef4f0af7d6b97bf7704ad",
+      "published_sha256": "ec191410fb6f6d6387543069dbf29682411b235d7d3e72d9c694c632bd28f9db"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/main-runtime-before.json",
+      "raw_sha256": "2260e828c128030ecb0de6b2beac174de931d18cd47ef4f0af7d6b97bf7704ad",
+      "published_sha256": "ec191410fb6f6d6387543069dbf29682411b235d7d3e72d9c694c632bd28f9db"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json",
+      "raw_sha256": "c7d661f88cb66aff1fb02719b9caa718bf247f7d1f5f0bed85caf779c6f82c7d",
+      "published_sha256": "d1df90efa209fe851fbd6db6555783d16faad5b0689c8c2290bb8991771bf0cb"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/protected-copy.json",
+      "raw_sha256": "4c7ea164d70326c81815d4937828484e698698d7acec345501d9451a2131fccb",
+      "published_sha256": "6906aead27d24a2c04e332226ea76258af9a224ef16d23a526448572e8acce48"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/restore.json",
+      "raw_sha256": "e2f05f49182fc9d1e59f5065e48e7e5f2d052933ef2d6ad85f7c283076239d1d",
+      "published_sha256": "4832fc638c09cbbf09350d4bcdcdee19c124db4402e1397b21978eeb6d1e5516"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json",
+      "raw_sha256": "bac5ec64274d58ecb4beece2850042be7e6bdcb4cdde6bb902a76ebe6e144179",
+      "published_sha256": "8b310319af571e7ccc86f78334062091d7dec06d20329f1d5f432942408e34de"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/snapshot-after-rollback.json",
+      "raw_sha256": "1e3c903d5de722b9f05da1a91747a7c53315d9e992f7aa66644a8eb74747c0d1",
+      "published_sha256": "519eb0cbf123a5f4bb555ea0fc4b69bef83367f198795a8caafdb87176730074"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/snapshot-before-rollback.json",
+      "raw_sha256": "38909fe68be4bf174fc0af8d0bc6e5faab06ff7d4969648ec6db4b97ff6924a8",
+      "published_sha256": "4c24a512ceb85006b45d7fb3b4625c33c1592f4b51216235f77a4e08ed999b32"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/source-preservation.json",
+      "raw_sha256": "7a2255de942fc1732274ad34dacec4872eb0339257fdfb93bd84dea1abdd0d6c",
+      "published_sha256": "add1e8ee8d2abf1c3ff3ea9c13bad24c334fea581e43c48bc432001c653ce508"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/sources-1.0.0.json",
+      "raw_sha256": "48218261a1d50ee630fed9b0189c9729119b384eed682158ddfa692949f22b6c",
+      "published_sha256": "3757672c1f79add7c408d34496f775587c16f9efd1652ee66bbc543aa08f0848"
+    },
+    {
+      "path": "docs/evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/sources-2.0.0.json",
+      "raw_sha256": "8d9acdf19dab64602f6edd407b66177ff70c47cf1df245d4f092c1b270b0bf0a",
+      "published_sha256": "e2646b7c1fe1b38e1d10a60a2caa3be1ff32c05d8bb3e6f7f6ac3829c37c8b4f"
+    },
+    {
+      "path": "docs/evidence/restore.json",
+      "raw_sha256": "d591aaddd6d23d248443a1ad929a8e1b72dabab60bf24bf73550049547fd3ae4",
+      "published_sha256": "d38f93e703ef2de945869dc6fcfa8a59150118cb07ae74e86cc5324558c8c225"
+    },
+    {
+      "path": "docs/evidence/rollback.json",
+      "raw_sha256": "bac5ec64274d58ecb4beece2850042be7e6bdcb4cdde6bb902a76ebe6e144179",
+      "published_sha256": "8b310319af571e7ccc86f78334062091d7dec06d20329f1d5f432942408e34de"
+    }
+  ],
+  "post_execution_changes": {
+    "scripts/ops.py": "JSON writer now explicitly uses LF; runtime recovery logic unchanged",
+    "tests/test_operations_proof.py": "one LF-byte serialization regression added",
+    "scripts/capture_operations.py": "documentation links and capture attempt names; LF HTML",
+    "scripts/capture_operations.cjs": "validate all links, including header/footer",
+    "scripts/report.css": "Concurrent source difference: --surface:#fff removed from first line; former raw SHA256 not recovered. Both former real captures preserved privately; final capture uses current style."
+  },
+  "executed_source_files": 63,
+  "executed_source_bytes_recovered": 62,
+  "source_lf_supplement": "operations-regression/execution-sources-lf.json",
+  "original_dump_metadata_image_hashes_unchanged": true,
+  "first_two_capture_attempts_preserved_privately": true,
+  "final_capture": "operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21",
+  "final_capture_sha256": "202491afd8584c1983fa5f349cb1330dd6b40d9b2c8e82a9b71d0fa3bebb19cb",
+  "published_proof_sha256": "d1df90efa209fe851fbd6db6555783d16faad5b0689c8c2290bb8991771bf0cb",
+  "post_serialization_tests": "operations-regression/post-serialization-results.json",
+  "integrity": {
+    "checked_at": "2026-09-22T06:33:05.425868+00:00",
+    "public_reference_hashes_valid": true,
+    "operational_json_data_equal_to_preserved_raw": true,
+    "private_dump_metadata_image_executed_source_hashes_preserved": true,
+    "public_text_files_lf": true,
+    "capture_png_sha256_verified": 6
+  }
+}

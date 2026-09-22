@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-09-22T06:29:58.899Z",
+  "browser": "153.0.4234.48",
+  "playwright": "1.63.0",
+  "source": "real operational evidence; static report",
+  "checks": [
+    {
+      "panel": "result",
+      "width": 1440,
+      "job_id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+      "screenshot": "job-1440.png"
+    },
+    {
+      "panel": "rollback",
+      "width": 1440,
+      "job_id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+      "screenshot": "rollback-1440.png"
+    },
+    {
+      "panel": "recovery",
+      "width": 1440,
+      "job_id": "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+      "screenshot": "restore-new-job-1440.png"
+    },
+    {
+      "panel": "result",
+      "width": 390,
+      "job_id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+      "screenshot": "job-390.png"
+    },
+    {
+      "panel": "rollback",
+      "width": 390,
+      "job_id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+      "screenshot": "rollback-390.png"
+    },
+    {
+      "panel": "recovery",
+      "width": 390,
+      "job_id": "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+      "screenshot": "restore-new-job-390.png"
+    }
+  ],
+  "errors": [],
+  "completed_at": "2026-09-22T06:29:59.730Z"
+}

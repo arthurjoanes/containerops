@@ -51,5 +51,5 @@
   "source_project": "pf-containerops-test-fc39e58c",
   "image": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
   "elapsed_seconds": 8.406,
-  "directory": "C:\\Users\\arthu\\AppData\\Local\\ContainerOps-runtime\\backups\\20260922T061919-ac8fcc27"
+  "directory": "<runtime>\\backups\\20260922T061919-ac8fcc27"
 }

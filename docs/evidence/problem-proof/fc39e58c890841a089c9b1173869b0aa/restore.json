@@ -74,7 +74,7 @@
       "elapsed_seconds": 0.109
     }
   ],
-  "backup": "C:\\Users\\arthu\\AppData\\Local\\ContainerOps-runtime\\backups\\proof-copy-9a447bb4c8e944c7ac89562a57a0e3d5",
+  "backup": "<runtime>\\backups\\proof-copy-9a447bb4c8e944c7ac89562a57a0e3d5",
   "backup_sha256": "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
   "backup_created_at": "2026-09-22T06:19:27.438933+00:00",
   "cutoff_interval": {

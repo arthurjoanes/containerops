@@ -4,6 +4,8 @@ Abra `docs/report.html` no navegador depois de clonar ou baixar o repositório.
 O HTML inclui estilos e navegação; os arquivos de evidência precisam permanecer
 na pasta `docs/evidence`. A página não consulta containers nem executa operações.
 
+A [sequência operacional de 22/09](operational-recovery.md) tem um [relatório isolado](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/view/docs/report.html) com somente os quatro JSONs daquela tentativa. Use-o para relacionar job inicial, rollback e restore. O relatório principal reúne registros de momentos diferentes; cada painel conserva a identidade da sua operação. Os percentis da [medição de admissão](admission-measurement.md) ficam no documento próprio.
+
 | Grupo | O que conferir |
 |---|---|
 | Verificação | Última execução validada pelo manifesto, etapas de isolamento e recuperação, resultado do job e teste TLS |

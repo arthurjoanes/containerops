@@ -1,10 +1,10 @@
 {
-  "executed_at": "2026-09-22T00:07:35.872204+00:00",
-  "duration_seconds": 23.766,
+  "executed_at": "2026-09-22T06:03:14.958608+00:00",
+  "duration_seconds": 17.125,
   "version": "1.0.0",
   "tag": "containerops-app:1.0.0",
-  "image_id": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
-  "image_bytes": 91791233,
+  "image_id": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+  "image_bytes": 91792769,
   "builder": {
     "name": "pf-containerops-builder",
     "driver": "docker-container",
@@ -33,52 +33,52 @@
     "buildkit": "moby/buildkit:v0.28.0@sha256:37539dd4d60fc70968d164d3850d903a2c56f6402214a1953fbf9fcb81ada731",
     "sbom_scanner": "docker/buildkit-syft-scanner:stable-1@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9"
   },
-  "artifact_directory": "<runtime>\\artifacts\\1.0.0",
-  "oci_sha256": "sha256:253c1453a220136936cfd41bf1310ffed53eae2ba480a0d1e20a7e3ab987dcba",
-  "docker_archive_sha256": "sha256:c8a423496279f2d8947512040ef8f2b983ae7777642184cb5b892ea38c5b8641",
+  "artifact_directory": "C:\\Users\\arthu\\AppData\\Local\\ContainerOps-runtime\\artifacts\\1.0.0",
+  "oci_sha256": "sha256:5e790fd1f5021692d218dba41fbd723969b9ecc315e0d0879122e27bb1de1f91",
+  "docker_archive_sha256": "sha256:b2ea3971151f7ed0fb6aa7e60b7dec395676b00ca6c7fdde6bb075834bca2e77",
   "runtime_link": {
-    "config_digest": "sha256:cbbde61f745a5e6bc487ddb3e9d75441a540f97eaf1d61d14e9b7e94e34800e2",
+    "config_digest": "sha256:51ee584e070aa086764802c01de9e6ed24b240325cfffc3a15d3efd5b7d21269",
     "diff_ids": [
       "sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711",
       "sha256:f45404aff741b373238ea1b1ebffcef210d0b247a9b3579114c91bd4fa5a551b",
       "sha256:3585d42e3fb07a9e08ffd1799a539443f4a3096ddc0a872645182562e2fe0f17",
       "sha256:e3ef92325bef7adf7a7f86d41a1c379c2b8435c80b0b26d37ce5305d0d195519",
-      "sha256:02ba1e73775c34b044ae75fd4234356e0e6ee6c4425f4df88f08f17c82ae14d4",
-      "sha256:f7abe88218c409666bc72ea36eadbf651597281710ccb67a99877c73f1e71c8e",
-      "sha256:26fa72794414d691661b0bbad91bcbfe4a4859345291ba5d8f5e237ac99d9367",
-      "sha256:519e21b07bef2efcd0d745a7c93bbe10accbaf08efe502890adacf2c88a14195",
-      "sha256:0f03b068ad48d9e4c9ba3b50107127f5c5b39fe6b11a81c0aa14de1cb038c253"
+      "sha256:9f0ffaceb169a531f44f4a5e67e5c2fc6f018f17b967585c6f9af1b1a8eb91c9",
+      "sha256:2c041f9e9ef6daaa993ebd83b97d7971c1467337a128aec88d935be0f7806529",
+      "sha256:2ac9d28e157fcbd92eb180c5ee5eb8fffe96ba01eca0ac8bec44285eb734f3a2",
+      "sha256:e249dbb19fb44153c51116969eace6544ac8d7cc1ee08efafe53cddeb4a9da35",
+      "sha256:716106d45fb5cf0e6f7837f323d9deea9fb0c1677eb5ee69f2cab50db4db43ed"
     ],
-    "platform_manifest_digest": "sha256:fa9d9ad62a97327980a6f96b226ad4b0d776f1b9812b39e24170a92c39732c80"
+    "platform_manifest_digest": "sha256:46731b52f36096c3ec456f9c7b1801212c89f19dbaa5f0b0dc17a0f858a401e7"
   },
   "daemon_link": {
-    "daemon_image_id": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
-    "config_digest": "sha256:cbbde61f745a5e6bc487ddb3e9d75441a540f97eaf1d61d14e9b7e94e34800e2",
+    "daemon_image_id": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+    "config_digest": "sha256:51ee584e070aa086764802c01de9e6ed24b240325cfffc3a15d3efd5b7d21269",
     "diff_ids": [
       "sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711",
       "sha256:f45404aff741b373238ea1b1ebffcef210d0b247a9b3579114c91bd4fa5a551b",
       "sha256:3585d42e3fb07a9e08ffd1799a539443f4a3096ddc0a872645182562e2fe0f17",
       "sha256:e3ef92325bef7adf7a7f86d41a1c379c2b8435c80b0b26d37ce5305d0d195519",
-      "sha256:02ba1e73775c34b044ae75fd4234356e0e6ee6c4425f4df88f08f17c82ae14d4",
-      "sha256:f7abe88218c409666bc72ea36eadbf651597281710ccb67a99877c73f1e71c8e",
-      "sha256:26fa72794414d691661b0bbad91bcbfe4a4859345291ba5d8f5e237ac99d9367",
-      "sha256:519e21b07bef2efcd0d745a7c93bbe10accbaf08efe502890adacf2c88a14195",
-      "sha256:0f03b068ad48d9e4c9ba3b50107127f5c5b39fe6b11a81c0aa14de1cb038c253"
+      "sha256:9f0ffaceb169a531f44f4a5e67e5c2fc6f018f17b967585c6f9af1b1a8eb91c9",
+      "sha256:2c041f9e9ef6daaa993ebd83b97d7971c1467337a128aec88d935be0f7806529",
+      "sha256:2ac9d28e157fcbd92eb180c5ee5eb8fffe96ba01eca0ac8bec44285eb734f3a2",
+      "sha256:e249dbb19fb44153c51116969eace6544ac8d7cc1ee08efafe53cddeb4a9da35",
+      "sha256:716106d45fb5cf0e6f7837f323d9deea9fb0c1677eb5ee69f2cab50db4db43ed"
     ],
-    "export_archive_sha256": "sha256:9df524348787a65d6d1802a69aa3ea163ccbd11a3af7d7cc5c85211a4cce8b82"
+    "export_archive_sha256": "sha256:5d267b180b0fc883001ec77c5cdb5b18f215a7fa6a694190c092bad8446bfbbb"
   },
   "steps": [
     {
       "step": "[internal] load build definition from app.Dockerfile",
       "cached": false,
       "completed": true,
-      "duration": "0.1s"
+      "duration": "0.0s"
     },
     {
       "step": "[internal] load metadata for docker.io/library/python:3.13.15-alpine3.24@sha256:79e7a9b9ff1cbceff819f856fb374477792a5967759d94df266de7b7b4120e6f",
       "cached": false,
       "completed": true,
-      "duration": "0.7s"
+      "duration": "0.5s"
     },
     {
       "step": "[internal] load .dockerignore",
@@ -94,30 +94,6 @@
     },
     {
       "step": "[deps 1/5] FROM docker.io/library/python:3.13.15-alpine3.24@sha256:79e7a9b9ff1cbceff819f856fb374477792a5967759d94df266de7b7b4120e6f",
-      "cached": false,
-      "completed": true,
-      "duration": "0.1s"
-    },
-    {
-      "step": "[runtime 2/6] RUN addgroup -g 10001 containerops     && adduser -D -H -u 10001 -G containerops -h /tmp -s /sbin/nologin containerops",
-      "cached": true,
-      "completed": true,
-      "duration": null
-    },
-    {
-      "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
-      "cached": true,
-      "completed": true,
-      "duration": null
-    },
-    {
-      "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
-      "cached": true,
-      "completed": true,
-      "duration": null
-    },
-    {
-      "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
       "cached": true,
       "completed": true,
       "duration": null
@@ -141,10 +117,34 @@
       "duration": null
     },
     {
-      "step": "[runtime 5/6] WORKDIR /app",
+      "step": "[deps 5/5] RUN --mount=type=secret,id=sentinel,required=true test -s /run/secrets/sentinel",
       "cached": true,
       "completed": true,
       "duration": null
+    },
+    {
+      "step": "[runtime 2/6] RUN addgroup -g 10001 containerops     && adduser -D -H -u 10001 -G containerops -h /tmp -s /sbin/nologin containerops",
+      "cached": false,
+      "completed": true,
+      "duration": "0.2s"
+    },
+    {
+      "step": "[runtime 3/6] COPY --from=deps /opt/venv /opt/venv",
+      "cached": false,
+      "completed": true,
+      "duration": "0.9s"
+    },
+    {
+      "step": "[runtime 4/6] RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do         rm -rf \"$site/pip\" \"$site\"/pip-*.dist-info                \"$site/setuptools\" \"$site\"/setuptools-*.dist-info                \"$site/pkg_resources\" \"$site/_distutils_hack\"                \"$site/distutils-precedence.pth\";     done     && rm -rf /usr/local/lib/python3.13/ensurepip     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13              /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13     && /opt/venv/bin/python -c \"import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))\"",
+      "cached": false,
+      "completed": true,
+      "duration": "0.5s"
+    },
+    {
+      "step": "[runtime 5/6] WORKDIR /app",
+      "cached": false,
+      "completed": true,
+      "duration": "0.0s"
     },
     {
       "step": "[runtime 6/6] COPY --chown=10001:10001 app/src /app/src",
@@ -156,7 +156,7 @@
       "step": "[linux/amd64] generating sbom using docker.io/docker/buildkit-syft-scanner:stable-1@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9",
       "cached": false,
       "completed": true,
-      "duration": "3.1s"
+      "duration": "1.9s"
     }
   ],
   "context_workaround": "Cópia temporária dos inputs em caminho ASCII no runtime.",

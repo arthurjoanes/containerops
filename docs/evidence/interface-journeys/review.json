@@ -1,0 +1,225 @@
+{
+  "reviewed_at": "2026-09-22T04:35:37.344Z",
+  "browser": "153.0.4234.48",
+  "project": "containerops",
+  "scope": "Offline rendering and browser user journeys; no Spark, database, Docker operations, build or live services.",
+  "widths": [
+    1440,
+    390,
+    320
+  ],
+  "checks": [
+    {
+      "width": 1440,
+      "panel": "result",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "recovery",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "operations",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "rollback",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "artifacts",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "tls",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "evidence",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 1440,
+      "panel": "overview",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "result",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "recovery",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "operations",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "rollback",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "artifacts",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "tls",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "evidence",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 390,
+      "panel": "overview",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "result",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "recovery",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "operations",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "rollback",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "artifacts",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "tls",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "evidence",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "width": 320,
+      "panel": "overview",
+      "keyboard_selection": true,
+      "skip_link": "preserved"
+    },
+    {
+      "journey": "history/no-JS/print/reflow",
+      "panels_no_js": 8,
+      "print_panels": 8
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/screenshots/journey-release.png",
+      "sha256": "43ba4ddab3e6594992763fd8ddb34d91f3dd4bf3c882e3c6332b05a834437765"
+    },
+    {
+      "path": "docs/screenshots/journey-artifacts.png",
+      "sha256": "e479abb1420070043978c6f5c158064f44523b1ad72031468e0e6a0f6f37a212"
+    },
+    {
+      "path": "docs/screenshots/journey-restore-390.png",
+      "sha256": "4851e2b921ebc164cc5c48266ed68b087054cf8f1395ab0b179b62cc60cdf5b3"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/evidence/restore.json",
+      "sha256": "36375494f9186028b9b94cb6f7687e70da2efb05cc08300110389316073aea03"
+    },
+    {
+      "path": "docs/evidence/release.json",
+      "sha256": "feb14cd1f6250e3b2ba3694b8baa14df8b6cd31f2885d65e60cfb1151ba7bec8"
+    },
+    {
+      "path": "docs/evidence/rollback.json",
+      "sha256": "95ee2c4c8f87fde1dfb95d58177f8e74e5d4e41074174f2e36a6fefc4ce1061d"
+    },
+    {
+      "path": "docs/evidence/demo.json",
+      "sha256": "d8532a1753ede2f31bfde8e9691a8238cf84d31af61edf313d377389546b8a7e"
+    },
+    {
+      "path": "docs/evidence/verification-run.json",
+      "sha256": "b2e162bac8eb2f1d7f30a6ffdf70ee24ce0ae35da51b4fb533dc3a2e295bc7f3"
+    }
+  ],
+  "errors": [],
+  "limits": "Keyboard and browser DOM checks, not a screen reader audit. CSS zoom 200% and 640px reflow, not native browser zoom. Historical runtime proofs were not repeated.",
+  "render": "Current renderer, existing versioned JSONs, isolated folder; report generation is new, operations are historical.",
+  "status": "passed",
+  "source_revision": "fea2eba160c7d2d2b14f31945642b1dd0e749c70",
+  "source_files": [
+    {
+      "path": "scripts/report.py",
+      "sha256": "032e358419f7f69dc2c1159954fd745080193bfe782f3c1b4d25ee1555b1e1ae"
+    },
+    {
+      "path": "scripts/report_evidence.py",
+      "sha256": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5"
+    },
+    {
+      "path": "scripts/report.html",
+      "sha256": "850b2ab497f923b0fbe414bfdf7b65cab1edfc84ba735ece65d3bf2be80d6db9"
+    },
+    {
+      "path": "scripts/report.css",
+      "sha256": "8baba41295554c684802014f18ef1f9386d70f3d0ddaa49bd420f9e16f2a0252"
+    },
+    {
+      "path": "scripts/report.js",
+      "sha256": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb"
+    }
+  ]
+}

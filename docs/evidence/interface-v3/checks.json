@@ -30,7 +30,16 @@
     "visual_review": "visual-review.json",
     "comparison": "comparison.json",
     "layout_accessibility": "layout-accessibility.json",
-    "axe": "axe.json"
+    "axe": "axe.json",
+    "operation_contract_regression": {
+      "command": "PYTHONPATH=scripts;tests python -m unittest test_operations_proof test_operations test_proof test_contracts test_measure_admission",
+      "passed": 56,
+      "scope": "Unit tests of command contracts and integrity using temporary fixtures; no Docker workload."
+    },
+    "broader_lint": {
+      "command": "ruff check scripts tests",
+      "result": "passed"
+    }
   },
   "scope": "Static report presentation only. No Docker, operational backup/release/scan, paid services or live availability verification.",
   "source_lf_sha256": {

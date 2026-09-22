@@ -14,6 +14,17 @@ FROM deps AS test
 COPY app/requirements-test.lock /locks/requirements-test.lock
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --only-binary=:all: -r /locks/requirements-test.lock
+# As ferramentas de teste já estão instaladas; não precisam do instalador vendorizado.
+RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do \
+        rm -rf "$site/pip" "$site"/pip-*.dist-info \
+               "$site/setuptools" "$site"/setuptools-*.dist-info \
+               "$site/pkg_resources" "$site/_distutils_hack" \
+               "$site/distutils-precedence.pth"; \
+    done \
+    && rm -rf /usr/local/lib/python3.13/ensurepip \
+    && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.13 \
+             /opt/venv/bin/pip /opt/venv/bin/pip3 /opt/venv/bin/pip3.13 \
+    && /opt/venv/bin/python -c "import importlib.util; assert all(importlib.util.find_spec(name) is None for name in ('pip', 'setuptools', 'pkg_resources', 'ensurepip'))"
 WORKDIR /app
 ENV PYTHONPATH=/app/src PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 COPY app/pyproject.toml /app/pyproject.toml
@@ -33,7 +44,7 @@ LABEL org.opencontainers.image.title="ContainerOps" \
 RUN addgroup -g 10001 containerops \
     && adduser -D -H -u 10001 -G containerops -h /tmp -s /sbin/nologin containerops
 COPY --from=deps /opt/venv /opt/venv
-# pip e setuptools ficam só em deps/test; não são necessários no runtime.
+# pip e setuptools ficam só em deps; não são necessários nas imagens executadas.
 RUN for site in /usr/local/lib/python3.13/site-packages /opt/venv/lib/python3.13/site-packages; do \
         rm -rf "$site/pip" "$site"/pip-*.dist-info \
                "$site/setuptools" "$site"/setuptools-*.dist-info \

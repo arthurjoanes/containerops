@@ -130,3 +130,29 @@ Esta revisão muda o template, o CSS e a redação do relatório, sem alterar as
 Para repetir somente a apresentação: `python scripts/report.py`, `python scripts/render_review.py`, `node scripts/visual-review.cjs` e `node scripts/test_report_browser.cjs`. Playwright é ferramenta opcional de desenvolvimento; `PLAYWRIGHT_MODULE` aceita um caminho externo e `PLAYWRIGHT_CHANNEL=msedge` seleciona Edge. Os cenários adicionais ficam em `artifacts/interface-review`, marcados como dados de teste; não entram na pasta de evidência operacional.
 
 [Escopo e hashes da fonte](evidence/interface-v2/review-manifest.json). Ampliação por CSS a 200% foi conferida; zoom nativo, leitor de tela e paginação integral de PDF não foram auditados. Esses resultados não reatestam a prova operacional nem os scans descritos nas seções anteriores.
+
+## Revisão editorial e demonstração real — 22/09, 12:31 UTC
+
+O [registro novo](evidence/editorial-20260922/execution.json) identifica a base `46d43bf`, fontes sem mudança e builds locais com cache: versões 1/2, testes, banco e proxy. A API, worker e comandos não foram modificados nesta rodada. Novos projetos Docker executaram instalação, migração, HTTP, falhas controladas e restore. Não atribuo SBOM, attestations, scan ou CI históricos a essas imagens novas.
+
+- `python -m unittest discover -s tests -v`: **58 casos**, efetivamente descobertos e aprovados (inclui dois casos OCI além dos cinco módulos de contratos).
+- `python -m unittest discover -s scripts -p test_report.py -v`: **47 casos aprovados**.
+- Aplicação e PostgreSQL: **116 aprovados**, sem skips; dois avisos de depreciação, registrados nos logs.
+- Ruff, formato de 17 arquivos e mypy de 10 fontes: aprovados. HTTP concorrente e isolamento, SIGKILL/SIGTERM, readiness do banco e recriação: aprovados pela verificação completa.
+- Operações: candidata falha de modo controlado; imagem anterior preserva seus dados; backup copiado, controle negativo, restore em outro volume, três jobs comparados e novo job concluído. Cleanup e restauração dos aliases originais conferidos.
+
+**Retificação do registro visual:** [art-direction/checks.json](evidence/art-direction/checks.json) permanece intacto. Cinco comandos daquela rodada usaram `-s scripts` para suítes em `tests` e executaram zero testes. Seu código de saída zero não comprovava as suítes de contratos. A nova execução correta acima supre essa lacuna sem reescrever o passado; os 56 testes registrados na revisão v3 usaram outro comando e conservam seu escopo.
+
+A [demonstração comentada](demo.md#execução-editorial-de-22092026) contém os valores pequenos, capturas junto dos casos e limites. Captura, execução de serviços, teste automatizado e medição histórica continuam separados. Os dados são sintéticos; todo o ambiente está no mesmo computador. A rodada não estabelece recuperação em outro host, capacidade máxima ou aprovação humana da interface.
+
+
+### Scan posterior e correção restrita à imagem de testes
+
+Analisei por ID as cinco imagens executadas, com Trivy 0.74.0 e base atualizada em 22/09/2026 às 07:24 UTC, todas as severidades, achados sem correção incluídos e arquivo de exclusões vazio. As versões 1/2 da aplicação, banco e proxy tiveram zero achados. A imagem de testes apresentou dois HIGH e um MEDIUM no inventário de dependências vendorizadas do pip; isso não invalida os resultados funcionais anteriores, mas impedia declarar a imagem pronta pelo gate de segurança.
+
+Removi pip/ensurepip **depois** da instalação do lock no target `test`, assim como o target runtime já fazia. Não atualizei bibliotecas da aplicação nem alterei os contratos. A imagem corrigida foi construída em tag própria; lint, formato, tipos, ausência do instalador e os 116 testes com PostgreSQL passaram novamente (dois avisos de depreciação, sem skips). O novo scan teve zero achados. O projeto de teste foi removido; não foi necessário repetir SIGKILL, backup ou rollback, cujos processos e fontes ficaram intactos.
+
+O [recibo de segurança](evidence/editorial-20260922/security.json) liga IDs, Dockerfile, comando, base, relatórios antes/depois e verificação da correção. `exit 0` da coleta JSON não é aprovação por si só: o gate foi conferido no conteúdo completo. Os relatórios anteriores permanecem presentes. O scan não substitui uma auditoria nova de attestations nem cobre deploy em produção.
+
+
+Gitleaks 8.30.1 aprovou o histórico acessível e a cópia final dos arquivos públicos. O recibo novo continha dois hashes SHA-256 de fontes interpretados como chave pela regra genérica; recomputei ambos e acrescentei somente o caminho exato do recibo à regra existente, que exige os dois valores literais. Um controle positivo com token fictício no mesmo caminho continuou sendo detectado. [Escopo, capturas e revisão final](evidence/editorial-20260922/review.json). Isso não é uma exclusão de diretório nem de qualquer valor com 64 caracteres.

@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-09-22T13:09:29.321219+00:00",
+  "base_commit": "46d43bf4bdb24e648557e04d206a3b79145e4d0c",
+  "scope": "Authored documentation, newly executed synthetic-data evidence and3actual report screenshots. Report/application/operation sources unchanged; test Dockerfile installer-removal and one exact source-hash scanner path are the only technical followups.",
+  "functional": {
+    "host_tests": 58,
+    "renderer_tests": 47,
+    "application_tests": 116,
+    "after_test_image_fix_application_tests": 116,
+    "counts_are_separate_runs_not_sum": true,
+    "cleanup": "Temporary verification/operation/test-fix projects removed, historical image aliases restored; no shared volume removed."
+  },
+  "provenance": {
+    "operational_manifest": "../problem-proof/53365744ff7d4897a142f3bf897dbf39/manifest.json",
+    "original_record_hashes_verified": 14,
+    "source_hashes": "execution.json describes RAW source bytes at functional run; Dockerfile subsequently changed only test target. security.json identifies the new Dockerfile and rebuilt test image. Original manifest was not rewritten.",
+    "scan_results": "All published Trivy Results equal complete raw reports; Config/Env/History omitted; complete-raw SHA256 retained.",
+    "captures": "captures.json lists exact HTML/input/image hashes; three real-operation views, fonts loaded, no overflow/browser error. Initial job is4words; concurrent7word job is separately evidenced in journey.json."
+  },
+  "links": {
+    "documents": 15,
+    "local_file_links": 233,
+    "broken": [],
+    "html_local_links": 28,
+    "broken_html_links": []
+  },
+  "markdown": {
+    "renderer": "Python-Markdown3.8.2, neutral external stylesheet, Edge1000px/content830px",
+    "images_all_loaded": true,
+    "manual_review": [
+      "README first viewport and entire hero/caption",
+      "Problem-solution cases with initial-job crop, rollback and restore",
+      "Source links and independent expected values"
+    ],
+    "overflow": "Five edited narrative docs fit. frontend-quality historical wide matrix overflows neutral renderer; no interface layout changed and table is scrollable on GitHub. Not a new mobile/accessibility certification."
+  },
+  "secret_scan": {
+    "tool": "Gitleaks8.30.1",
+    "public_files": 524,
+    "before_exact_path_fix": {
+      "exit_code": 1,
+      "findings": 2,
+      "classification": "Two SHA256 source fingerprints recomputed against current files; not credentials."
+    },
+    "final": {
+      "label": "final",
+      "exit_code": 0,
+      "count": 0,
+      "seconds": 25.046,
+      "paths": []
+    },
+    "same_path_positive_control": {
+      "label": "positive",
+      "exit_code": 1,
+      "count": 1,
+      "seconds": 11.219,
+      "paths": [
+        {
+          "file": "docs/evidence/editorial-20260922/execution.json",
+          "line": 281,
+          "rule": "github-pat"
+        }
+      ]
+    },
+    "history": {
+      "all_accessible_refs": true,
+      "exit_code": 0,
+      "findings": 0
+    },
+    "policy": "One exact receipt path added to existing AND allowlist with two existing literal source hashes. Both recomputed. Same-path synthetic credential remains detected; no values published.",
+    "initial_absolute_mirror_scan": "61 findings,53sourceSHA+8publicGPG; paths prevented existing relative allowlists. All source values verified against current/Git history except one historical source subsequently checked inside its original image; no usable secret found. Curated reports remove irrelevant GPG ENV. This first exit1 was retained externally, not called a clean scan."
+  },
+  "diff_check": "passed",
+  "limits": [
+    "No new off-host disaster recovery, quota benchmark, production capacity or user study.",
+    "Initial and patched-test scans are distinct; no new SBOM/provenance attestation approval.",
+    "Operational run used baseline Dockerfile. Only installer removal in test target was subsequently rebuilt/tested/scanned; operational UI and runtime remain unchanged.",
+    "No commit/push performed."
+  ]
+}

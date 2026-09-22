@@ -33,6 +33,15 @@ A README atual passou a usar a [captura editorial de restauração](screenshots/
 
 [Inputs e hashes](evidence/art-direction/inputs.json) separam os 37 JSONs lidos diretamente dos arquivos históricos recursivos. A leitura antes/depois compartilha os mesmos arquivos e o mesmo instante de geração; datas das operações permanecem originais. `scripts/render_art_direction.py` carrega o renderer da base Git e gera os dois HTMLs. O horário de geração é atual e compartilhado, não uma nova execução de restore.
 
+Para repetir essa comparação a partir da raiz, instale Playwright em um diretório de ferramentas e seu Chromium (`npm install playwright@1.63.0` e `npx playwright install chromium` nesse diretório). Defina `PLAYWRIGHT_MODULE` com o caminho absoluto do módulo instalado; `PLAYWRIGHT_CHANNEL=msedge` pode selecionar o Edge já instalado. Python 3.11+, Node.js e o commit histórico `243b1a4` no clone são pré-requisitos. Esta auditoria usou Node 24.19.0 e Playwright 1.63.0.
+
+```sh
+python scripts/render_art_direction.py
+node scripts/audit_art_direction.cjs "<diretório de replay informado pelo comando anterior>"
+```
+
+O preparo cria `.runtime/art-direction/replay-<UTC>/` com cópias dos registros e um relógio compartilhado. HTMLs, capturas e `audit.json` novos ficam nesse diretório ignorado; repetir a comparação não substitui as provas publicadas. O auditor exige os dois HTMLs, texto/fontes efetivamente encontrados, 32 pares em quatro larguras e navegação offline. Contraste textual é uma amostra automatizada de cores opacas, não certificação WCAG ou teste com leitor de tela.
+
 | Informação | Pergunta e limite |
 |---|---|
 | Jobs restaurados | Quantos registros a operação recuperou; não é throughput, meta ou taxa |

@@ -15,7 +15,7 @@ Laboratório de operação de uma aplicação com trabalhos em segundo plano: ac
 
 A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo pequeno permite conferir o que aconteceu depois da recuperação. Textos e falhas são **sintéticos**; HTTP, processos e banco executam localmente no mesmo computador.
 
-Mesma chave e conteúdo recuperam o job existente; conteúdo diferente conflita. Uma posse temporária (_lease_) e seu token impedem que um worker antigo sobrescreva a aquisição atual. Fontes: [contrato](docs/data-contract.md), [repositório transacional](app/src/containerops/repository.py) e [worker](app/src/containerops/worker.py), conferidos em **22/09/2026**.
+Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o job existente; conteúdo diferente conflita. O [repositório transacional](app/src/containerops/repository.py) controla uma posse temporária (_lease_) e seu token, impedindo que um [worker](app/src/containerops/worker.py) antigo sobrescreva a aquisição atual.
 
 <a id="na-prática"></a>
 
@@ -25,11 +25,11 @@ Mesma chave e conteúdo recuperam o job existente; conteúdo diferente conflita.
 
 Captura real de **22/09/2026, 17:37 UTC**, gerada com registros históricos. A restauração exibida ocorreu às **06:20 UTC**: **3 jobs / 27,4 s**. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
 
-**Exemplo:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e **sete palavras**; trocar o conteúdo retornou 409. Fonte: [jornada JSON](docs/evidence/editorial-20260922/journey.json), registrada em **22/09/2026, 12:34 UTC**; [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
+**Exemplo:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e **sete palavras**; trocar o conteúdo retornou 409. A [jornada de **22/09/2026, 12:34 UTC**](docs/evidence/editorial-20260922/journey.json) registra as respostas segundo os [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
 
 <a id="conferir-uma-operação"></a>
 
-Abra o [relatório histórico da operação editorial](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; GitHub apresenta HTML como código. Confira o job, depois backup/restauração e rollback. Cada painel liga sua operação ao JSON de origem. [Guia de leitura](docs/report-guide.md), conferido em **22/09/2026**.
+Abra o [relatório histórico da operação editorial](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; GitHub apresenta HTML como código. Confira o job, depois backup/restauração e rollback. Cada painel liga sua operação ao JSON de origem, como mostra o [guia de leitura](docs/report-guide.md).
 
 <a id="implementação"></a>
 
@@ -45,7 +45,7 @@ flowchart TB
 
 API e worker usam a mesma imagem, com processos separados. O relatório lê arquivos de evidência; ele não oferece controles de deploy. Migração, backup, restore e scanner executam sob demanda. [Serviços, redes e fluxo completo](docs/architecture.md).
 
-Fontes: [Compose](compose.yaml), [API](app/src/containerops/api.py), [worker](app/src/containerops/worker.py), [operações](scripts/ops.py) e [gerador](scripts/report.py), conferidos em **22/09/2026**. A infraestrutura permanece em um único host.
+O [Compose](compose.yaml) mantém a [API](app/src/containerops/api.py) e o [worker](app/src/containerops/worker.py) em um único host. Os [comandos de operação](scripts/ops.py) produzem os registros usados pelo [gerador do relatório](scripts/report.py).
 
 ## Stack e decisões
 
@@ -69,14 +69,14 @@ Fontes: [Compose](compose.yaml), [API](app/src/containerops/api.py), [worker](ap
 <a id="o-que-eu-implementei"></a>
 <a id="decisões-que-podem-ser-conferidas"></a>
 
-[Decisões, código e testes](docs/decisoes-tecnicas.md) · [bases fixadas por digest](docker/images.lock.json). Conferência em **22/09/2026**; versões fixadas não significam versões mais recentes.
+[Decisões, código e testes](docs/decisoes-tecnicas.md) · [bases fixadas por digest](docker/images.lock.json). Versões fixadas não significam versões mais recentes.
 
 <a id="executar-e-verificar"></a>
 <a id="rodar"></a>
 
 ## Executar localmente
 
-Use Docker com containers Linux em **x86-64**, Compose v2, Buildx e Python **3.11+**. São os requisitos adotados pelos [comandos](scripts/ops.py), [imagens](docker/images.lock.json) e [CI](.github/workflows/verify.yml), conferidos em **22/09/2026**. Primeiro build e scan precisam baixar dependências.
+Use Docker com containers Linux em **x86-64**, Compose v2, Buildx e Python **3.11+**. São os requisitos adotados pelos [comandos](scripts/ops.py), [imagens](docker/images.lock.json) e [CI](.github/workflows/verify.yml). Primeiro build e scan precisam baixar dependências.
 
 ```sh
 python3 scripts/ops.py setup
@@ -87,7 +87,7 @@ python3 scripts/ops.py demo
 python3 scripts/ops.py report
 ```
 
-No Windows, use `python` ou o [wrapper PowerShell](scripts/containerops.ps1), com Docker Desktop em modo Linux. A API é publicada em [localhost:8105](http://localhost:8105); jobs exigem Bearer, e o setup gera tokens fictícios fora do Git. Fonte: [Compose](compose.yaml) e [roteiro](docs/demo.md), conferidos em **22/09/2026**.
+No Windows, use `python` ou o [wrapper PowerShell](scripts/containerops.ps1), com Docker Desktop em modo Linux. O [Compose](compose.yaml) publica a API em [localhost:8105](http://localhost:8105). Jobs exigem Bearer; o setup gera tokens fictícios fora do Git, conforme o [roteiro](docs/demo.md).
 
 <a id="operações"></a>
 
@@ -115,7 +115,7 @@ O [runner](scripts/proof.py) cria projetos descartáveis e registra manifestos p
 python scripts/ops.py prove --scenario operations
 ```
 
-[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md), conferidos em **22/09/2026**. Não foram repetidos builds, scans ou falhas durante esta revisão da documentação.
+[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md). Não foram repetidos builds, scans ou falhas durante esta revisão da documentação.
 
 <a id="limites-e-manutenção"></a>
 <a id="segurança-das-imagens"></a>
@@ -123,10 +123,10 @@ python scripts/ops.py prove --scenario operations
 
 ## Limites e segurança
 
-- **16 KiB** por texto; **100** jobs pendentes globais; **20** por owner; **3** tentativas; retenção de **24 h**. São limites do contrato, não capacidade medida. Fontes: [domínio](app/src/containerops/domain.py), [repositório](app/src/containerops/repository.py) e [contrato](docs/data-contract.md), conferidos em **22/09/2026**.
-- A demo permite atraso de até **15 s**; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py), conferidas em **22/09/2026**.
-- Backup permanece no mesmo computador; TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md), conferidos em **22/09/2026**.
-- O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md), conferidos em **22/09/2026**.
+- **16 KiB** por texto; **100** jobs pendentes globais; **20** por owner; **3** tentativas; retenção de **24 h**. São limites do [contrato](docs/data-contract.md), implementados no [domínio](app/src/containerops/domain.py) e no [repositório](app/src/containerops/repository.py); não medem capacidade.
+- A demo permite atraso de até **15 s**; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
+- Backup permanece no mesmo computador; TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
+- O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md).
 
 ## Documentação
 
@@ -144,4 +144,4 @@ Para conversar sobre containers, recuperação e operação deste laboratório:
 
 <p><a href="https://www.linkedin.com/in/arthur-joanes-6a2967373/"><img src="docs/contact/linkedin.svg" alt="" width="24" height="24"> <strong>Arthur Joanes no LinkedIn</strong></a></p>
 
-[Licença MIT](LICENSE). Ícones da stack e LinkedIn: [Devicon — licença MIT](docs/stack/LICENSE.devicon). Licenças conferidas nos arquivos em **22/09/2026**.
+[Licença MIT](LICENSE). Ícones da stack e LinkedIn: [Devicon — licença MIT](docs/stack/LICENSE.devicon).

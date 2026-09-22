@@ -1,6 +1,6 @@
 # Build e scan
 
-Política conferida em **22/09/2026** em [build/scan](../scripts/supply.py), [auditoria OCI](../scripts/oci_audit.py), [scan de serviços](../scripts/scan_services.py), [Dockerfile](../docker/app.Dockerfile) e [lock de bases](../docker/images.lock.json). A fonte dos resultados históricos é o [recibo de segurança de 22/09/2026](evidence/editorial-20260922/security.json), separado das regras atuais.
+A política é implementada em [build/scan](../scripts/supply.py), [auditoria OCI](../scripts/oci_audit.py), [scan de serviços](../scripts/scan_services.py), [Dockerfile](../docker/app.Dockerfile) e [lock de bases](../docker/images.lock.json). Os resultados históricos estão no [recibo de segurança de 22/09/2026](evidence/editorial-20260922/security.json).
 
 O build gera um OCI e carrega a mesma imagem no Docker. Plataforma, bases e dependências ficam fixadas.
 
@@ -78,4 +78,4 @@ Logs, duração e cache por etapa ficam no runtime; resumo em `docs/evidence/cac
 
 Resolva a versão/digest com `docker buildx imagetools inspect <imagem:versão>`. Atualize lock e defaults do Dockerfile. Resolva dependências em ambiente descartável. Gere outra imagem e rode testes, audit, scan e HTTP. Guarde o ID anterior para rollback.
 
-Referências oficiais, consultadas em **22/09/2026**: [armazenamento de attestations](https://docs.docker.com/build/metadata/attestations/attestation-storage/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/), [geração de SBOM](https://docs.docker.com/build/metadata/attestations/sbom/), [driver docker-container](https://docs.docker.com/build/builders/drivers/docker-container/), [Trivy em arquivos de imagem](https://trivy.dev/docs/latest/target/container_image/) e [bases do Trivy](https://trivy.dev/docs/latest/configuration/db/).
+Referências oficiais: [armazenamento de attestations](https://docs.docker.com/build/metadata/attestations/attestation-storage/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/), [geração de SBOM](https://docs.docker.com/build/metadata/attestations/sbom/), [driver docker-container](https://docs.docker.com/build/builders/drivers/docker-container/), [Trivy em arquivos de imagem](https://trivy.dev/docs/latest/target/container_image/) e [bases do Trivy](https://trivy.dev/docs/latest/configuration/db/).

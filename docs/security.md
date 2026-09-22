@@ -1,6 +1,6 @@
 # Segurança e isolamento de capacidade
 
-Contrato de admissão conferido em **22/09/2026** em [domínio](../app/src/containerops/domain.py), [repositório](../app/src/containerops/repository.py) e [integração](../app/tests/test_integration.py). Resultados executados pertencem ao [manifesto](evidence/security-admission-20260922/manifest.json) e ao [JUnit](evidence/security-admission-20260922/tests.xml), de **22/09/2026**; não houve reexecução nesta leitura.
+A admissão é definida pelo [domínio](../app/src/containerops/domain.py), pelo [repositório](../app/src/containerops/repository.py) e pelos [testes de integração](../app/tests/test_integration.py). O [manifesto](evidence/security-admission-20260922/manifest.json) e o [JUnit](evidence/security-admission-20260922/tests.xml) registram a execução de **22/09/2026**.
 
 ## COPS-01 — ocupação da fila por um proprietário
 

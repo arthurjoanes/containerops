@@ -1,6 +1,6 @@
 # Admissão e espera com dois proprietários
 
-Fontes numéricas: [manifesto](evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json), [repetição 1](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-1.json), [2](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-2.json) e [3](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-3.json), de **22/09/2026, 06:12–06:15 UTC**. Conferência documental em **22/09/2026**; esta revisão não executou outra carga.
+O [manifesto](evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json) e as repetições [1](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-1.json), [2](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-2.json) e [3](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-3.json) registram a carga de **22/09/2026, 06:12–06:15 UTC**.
 
 **Problema central:** limitar o número de pedidos aceitos não informa quanto cada proprietário espera para começar a executar. Este ensaio mede as duas coisas separadamente, em uma fila pequena e controlada, antes de propor mudanças na arquitetura.
 

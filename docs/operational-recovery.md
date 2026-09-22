@@ -1,6 +1,6 @@
 # Preservar trabalhos durante rollback e restauração
 
-Fontes primárias conferidas em **22/09/2026**: [manifesto de 22/09/2026, 06:17–06:20 UTC](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json), [rollback](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json) e [restore](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/restore.json). São resultados históricos da mesma tentativa, não uma nova operação.
+O [manifesto de 22/09/2026, 06:17–06:20 UTC](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json), o [rollback](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json) e o [restore](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/restore.json) registram a mesma tentativa histórica.
 
 **Registro histórico:** as imagens desta página pertencem às execuções identificadas abaixo e preservam seus bytes originais. Veja a [galeria da interface atual](screenshots.md) para a apresentação do código atual.
 

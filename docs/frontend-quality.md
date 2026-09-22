@@ -1,6 +1,6 @@
 # Qualidade da interface do ContainerOps
 
-Leitura documental em **22/09/2026**. Medidas e contagens pertencem aos recibos históricos citados, incluindo [auditoria](evidence/art-direction/audit.json) e [navegador](evidence/art-direction/visual-review.json), de **22/09/2026**. A retificação dos comandos que descobriram zero testes permanece explícita. Esta leitura não repete a validação visual.
+Medidas e contagens pertencem aos recibos históricos de cada rodada, incluindo a [auditoria](evidence/art-direction/audit.json) e o [navegador](evidence/art-direction/visual-review.json), de **22/09/2026**. A retificação dos comandos que descobriram zero testes permanece explícita.
 
 As [capturas de apresentação atuais](screenshots.md) foram refeitas em 22/09/2026 a partir do código atual. As comparações e provas abaixo são registros históricos das respectivas rodadas; seus arquivos e hashes não foram regravados.
 
@@ -103,7 +103,7 @@ Próximo trabalho seguro para o escopo parcial: **P2**, leitor de tela/zoom nati
 
 ### Referências e escolhas
 
-Referências de composição registradas na revisão de **22/09/2026**. A interpretação visual é uma escolha do projeto, sem alegação de aprovação empírica por usuários. O critério normativo de contraste vem da [WCAG 2.2](https://www.w3.org/TR/WCAG22/#contrast-minimum), consultada em **22/09/2026**.
+Referências de composição registradas na revisão de **22/09/2026**. A interpretação visual é uma escolha do projeto, sem alegação de aprovação empírica por usuários. O critério normativo de contraste vem da [WCAG 2.2](https://www.w3.org/TR/WCAG22/#contrast-minimum).
 
 | Referência primária inspecionada                                                                                                                                                                                                                            | Aspecto observado → adaptação                                                                                                      | O que foi rejeitado                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -153,7 +153,7 @@ Referências consultadas:
 - [Allure — relatório funcional de testes](https://allure-framework.github.io/allure3-demo/awesomeAll/): navegação persistente, resultado próximo à sequência de verificações e aprofundamento em evidências. A interface não copia identidade, código ou recursos visuais do produto.
 - [Carbon — dashboards](https://carbondesignsystem.com/data-visualization/dashboards/): prioridade pelo contexto, limitação de métricas e agrupamento das informações relacionadas.
 - [Nielsen Norman Group — progressive disclosure](https://www.nngroup.com/articles/progressive-disclosure/): identidades e hashes completos sob demanda, mantendo falhas e ausência de prova aparentes.
-- [Vercel — Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md): navegação nativa, foco, conteúdo extenso, redução de movimento e revisão dos controles. Fonte atual consultada em 22/09/2026.
+- [Vercel — Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md): navegação nativa, foco, conteúdo extenso, redução de movimento e revisão dos controles.
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/): referência para contraste, teclado, foco, alvo e reorganização. Esta revisão não é uma certificação WCAG.
 
 A composição e a revisão seguiram as referências acima. Orientações específicas de React/Next.js são **Não aplicáveis**: este frontend é gerado em Python com HTML/CSS/JavaScript. Nenhuma dependência de produção foi adicionada.

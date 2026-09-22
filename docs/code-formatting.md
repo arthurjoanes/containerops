@@ -1,6 +1,6 @@
 # Código no relatório
 
-Fonte técnica: [gerador](../scripts/report.py), [template](../scripts/report.html) e [CSS](../scripts/report.css), conferidos em **22/09/2026**. Captura e medidas pertencem ao [recibo de 22/09/2026, 18:05 UTC](screenshots/syntax-20260922/review.json); não houve nova captura nesta leitura.
+O [gerador](../scripts/report.py), o [template](../scripts/report.html) e o [CSS](../scripts/report.css) definem a apresentação do código. A captura e suas medidas estão no [recibo de 22/09/2026, 18:05 UTC](screenshots/syntax-20260922/review.json).
 
 Os comandos de geração do relatório e de scan aparecem em blocos Shell compactos.
 Comando, caminho, opção e valor a substituir recebem cores distintas. O texto

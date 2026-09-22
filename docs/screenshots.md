@@ -1,6 +1,6 @@
 # Recortes da interface atual
 
-Proveniência conferida em **22/09/2026**: [manifesto](screenshots/focused-20260922/capture.json), [entradas preservadas](screenshots/focused-20260922/inputs.json) e [coletor](../scripts/capture_docs.py). A data de renderização/captura não substitui a data da operação.
+O [manifesto](screenshots/focused-20260922/capture.json), as [entradas preservadas](screenshots/focused-20260922/inputs.json) e o [coletor](../scripts/capture_docs.py) documentam a origem das imagens. A data de renderização ou captura não substitui a data da operação.
 
 Capturados em **22/09/2026, 17:37 UTC**, diretamente no navegador, sem montagem ou alteração dos dados. Cada imagem isola o trecho relacionado à explicação; páginas históricas completas ficam disponíveis por links.
 

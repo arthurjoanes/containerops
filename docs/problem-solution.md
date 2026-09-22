@@ -1,6 +1,6 @@
 # Problema e solução
 
-Fontes conferidas em **22/09/2026**: [contrato do domínio](../app/src/containerops/domain.py), [admissão e posse](../app/src/containerops/repository.py), [jornada de 22/09/2026](evidence/editorial-20260922/journey.json) e [recuperação da mesma rodada](evidence/editorial-20260922/recovery.json). As evidências antigas abaixo conservam suas próprias identidades.
+Os casos ligam o [contrato do domínio](../app/src/containerops/domain.py) à [admissão e posse](../app/src/containerops/repository.py), à [jornada de 22/09/2026](evidence/editorial-20260922/journey.json) e à [recuperação da mesma rodada](evidence/editorial-20260922/recovery.json). As evidências antigas conservam suas identidades e datas.
 
 ## Tese e limite
 
@@ -18,7 +18,7 @@ para acrescentar broker ou orquestrador distribuído.
 
 O [post-mortem do GitLab de 31/01/2017, publicado em 10/02/2017](https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/) relata que os dumps esperados não estavam disponíveis: a ferramenta de backup usava uma versão incompatível com o banco. É um incidente observado por outra organização. Este laboratório reproduz a pergunta limitada “a cópia restaura e volta a processar?”, conferindo checksum, dados e um novo job; não reproduz aquele ambiente nem demonstra que evitaria o incidente. A cópia continua no mesmo computador.
 
-A [documentação PostgreSQL sobre `SKIP LOCKED`](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE) descreve o uso em tabelas de fila e a visão incompleta que ele produz quando ignora linhas bloqueadas. Aqui, o despacho usa esse mecanismo com uma transação curta, lease e token; o snapshot de restauração não usa `SKIP LOCKED`. São comportamentos documentados da plataforma, não evidência de escala ou uso em produção. Fontes consultadas em 22/09/2026.
+A [documentação PostgreSQL sobre `SKIP LOCKED`](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE) descreve o uso em tabelas de fila e a visão incompleta que ele produz quando ignora linhas bloqueadas. Aqui, o despacho usa esse mecanismo com uma transação curta, lease e token; o snapshot de restauração não usa `SKIP LOCKED`. São comportamentos documentados da plataforma, não evidência de escala ou uso em produção.
 
 ## Exemplo: repetição da chamada e morte do worker
 

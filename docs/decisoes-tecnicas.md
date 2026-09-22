@@ -1,6 +1,6 @@
 # Decisões técnicas
 
-Conferência documental em **22/09/2026**: implementação e testes estão ligados a cada decisão; os resultados históricos têm fonte própria na [execução editorial de 22/09/2026](evidence/editorial-20260922/execution.json). As alternativas são análise de engenharia; não houve benchmark de custo ou comparação com serviço comercial.
+Cada decisão liga a implementação aos testes correspondentes; resultados históricos têm fonte própria na [execução editorial de 22/09/2026](evidence/editorial-20260922/execution.json). As alternativas são análise de engenharia, sem benchmark de custo ou comparação com serviço comercial.
 
 As escolhas abaixo explicam o que implementei e os compromissos atuais. Elas não descrevem incidentes de clientes nem uma comparação histórica de alternativas que não foi registrada. Os [casos novos](problem-solution.md) têm entradas sintéticas pequenas, execução real e prova separada das capturas.
 
@@ -39,7 +39,7 @@ PostgreSQL guarda fila, resultados e estado operacional. O proxy usa a rede fron
 
 ## Conceitos
 
-Referências externas conferidas em **22/09/2026**: [rootless Docker](https://docs.docker.com/engine/security/rootless/), [ordem de início no Compose](https://docs.docker.com/compose/how-tos/startup-order/), [políticas de reinício](https://docs.docker.com/engine/containers/start-containers-automatically/) e [attestations](https://docs.docker.com/build/metadata/attestations/). As provas de enforcement e recuperação são as locais ligadas na tabela.
+Referências para essas decisões: [rootless Docker](https://docs.docker.com/engine/security/rootless/), [ordem de início no Compose](https://docs.docker.com/compose/how-tos/startup-order/), [políticas de reinício](https://docs.docker.com/engine/containers/start-containers-automatically/) e [attestations](https://docs.docker.com/build/metadata/attestations/). As provas de enforcement e recuperação são as locais ligadas na tabela.
 
 | Pergunta                                      | Explicação aplicada ao projeto                                                                                                                                                                                            | Como conferir                                                                                                                          |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |

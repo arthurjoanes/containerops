@@ -1,10 +1,10 @@
 # Verificação
 
-Índice conferido em **22/09/2026**. Fontes primárias: [prova completa](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/manifest.json), [execução editorial](evidence/editorial-20260922/execution.json) e [scan/correção](evidence/editorial-20260922/security.json), de **22/09/2026**. Contagens descrevem suítes/rodadas identificadas; não são um total de testes executados nesta revisão documental.
+A [prova completa](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/manifest.json), a [execução editorial](evidence/editorial-20260922/execution.json) e o [scan/correção](evidence/editorial-20260922/security.json) registram as rodadas de **22/09/2026**. Contagens descrevem as suítes e versões identificadas nesses recibos.
 
 ## Auditoria do candidato — 22/09/2026
 
-A narrativa anterior descrevia uma inspeção sobre `783461d7b0a0a68c3f67990c90c9b3afa10ba941`, com resultados locais e consultas ao CI. Seus registros completos não estão ligados a um pacote público verificável nesta seção. Por isso, na revisão documental de **22/09/2026**, as contagens, tempos, inventários e conclusões de contratação sustentados apenas por essa narrativa foram retirados da apresentação de resultados comprovados.
+A narrativa anterior descrevia uma inspeção sobre `783461d7b0a0a68c3f67990c90c9b3afa10ba941`, com resultados locais e consultas ao CI. Seus registros completos não estão ligados a um pacote público verificável nesta seção. Por isso, as contagens, tempos, inventários e conclusões de contratação sustentados apenas por essa narrativa foram retirados da apresentação de resultados comprovados.
 
 As execuções com JSON/XML publicados continuam identificadas nas seções seguintes. A [configuração do CI](../.github/workflows/verify.yml) define os checks; sua existência não atesta aprovação de um commit. Esta revisão de documentação não repetiu builds, scans, falhas ou testes da aplicação.
 

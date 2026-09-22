@@ -18,6 +18,18 @@ Em 22/09/2026, restaurei três jobs em outro volume e exigi um novo trabalho con
 - Separei troca de imagem de restauração de dados. A migração expansiva mantém a versão anterior compatível, preservando o job criado pela candidata antes de falhar.
 - Construí os comandos de operação, verificações de falhas e o relatório offline com identidade por operação. Configurei FastAPI, PostgreSQL, Nginx, Docker/BuildKit e Trivy; essas ferramentas são de terceiros, integradas ao laboratório.
 
+## Stack
+
+<p>
+  <img src="docs/stack/python.svg" alt="Python" width="72" height="72">
+  <img src="docs/stack/fastapi.svg" alt="FastAPI" width="72" height="72">
+  <img src="docs/stack/postgresql.svg" alt="PostgreSQL" width="72" height="72">
+  <img src="docs/stack/nginx.svg" alt="NGINX" width="72" height="72">
+  <img src="docs/stack/docker.svg" alt="Docker" width="72" height="72">
+</p>
+
+Python e FastAPI na API e no worker; PostgreSQL na fila e nos resultados; NGINX na borda HTTP/TLS. Docker Compose e BuildKit sustentam execução e troca de imagens.
+
 ## Decisões que podem ser conferidas
 
 | Situação executada | Resultado e compromisso |
@@ -98,4 +110,6 @@ O Compose habilita a demo com atraso máximo de 15 s por trabalho; `DEMO_MODE=fa
 
 A [medição com dois proprietários](docs/admission-measurement.md) registrou três repetições: 120 pedidos aceitos e concluídos e 24 recusados por quota. Ela separa admissão, espera induzida pela parada do worker e retomada, com percentis por proprietário. Não esgota o limite global nem mede capacidade de produção.
 
-Python, FastAPI, PostgreSQL, Nginx, Docker Compose e BuildKit. Licença MIT.
+Licença MIT.
+
+Ícones da stack: [Devicon — licença MIT](docs/stack/LICENSE.devicon).

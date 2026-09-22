@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-09-22T06:20:57.836075+00:00",
+  "baseline_commit": "35f3f69e8bca5b5560f276f68408658c8ae894fa",
+  "scope": "Remove only CSS declarations with no generated markup or property consumers. No renderer logic, state selection, runtime, data or screenshots changed.",
+  "removed": [
+    "--surface:#fff (CSS source and identical embedded declaration)"
+  ],
+  "why_layout_is_unchanged": "The removed custom property has no var() or JavaScript property consumers. No rendered-element selector or consumed CSS property changed. The published HTML differs only by removal of that declaration inside style.",
+  "hash_method": "source_sha256_lf normalizes CRLF to LF. worktree_sha256 hashes the exact local bytes. before_source_sha256_lf hashes the published Git blob with the same normalization.",
+  "file_delta": {
+    "docs/report-guide.md": {
+      "before_source_sha256_lf": "d4c779b216ceeae4523339bb778be667030ed4cabf86a10854fc7c045c74ae1b",
+      "after_source_sha256_lf": "0bdbfc2cc974e11cebaba0831d5f00978db4e0b9f93cb523cad0b40994f519c2",
+      "after_worktree_sha256": "a3a36213baa0e88414ef08c86576a729d477cf87dc231c7e2420155a9bfb269d"
+    },
+    "docs/report.html": {
+      "before_source_sha256_lf": "affac822358c67b436dd8ccdbb80edfcec26ba13dd203f94a8b300d25ee28ce2",
+      "after_source_sha256_lf": "87856cf316160d09456454c9d9ee94c259217ea4a567b1d32a69b346a805c710",
+      "after_worktree_sha256": "bad69451a832f45f90ac2c6018fc981008715bfa9536a48c9960e843062ea8e5"
+    },
+    "scripts/report.css": {
+      "before_source_sha256_lf": "16b8f9e414d5623d45cfc33913c8ac3fb1fba77b1faf1511ac3a870f9f4c6a45",
+      "after_source_sha256_lf": "8d6e38be5abd05c208f99c0f6924a4145730c40c430c999da278b4b55b3f0db8",
+      "after_worktree_sha256": "cac630351ac3c8ba6dbbc1961ad8d09354ed87105abc0ca5b1283cc693fb48cd"
+    }
+  },
+  "checks": {
+    "surface_css_var_consumers_before": 0,
+    "surface_js_property_consumers_before": 0,
+    "embedded_css_matches_source_lf": true,
+    "html_outside_style_unchanged_lf": true,
+    "embedded_javascript_matches_unchanged_source_plus_template_semicolon": true,
+    "operation_dates_and_identities_unchanged": true,
+    "git_diff_check_exit_code": 0,
+    "tracked_changed_files_match_allowlist": true,
+    "historical_manifest_unchanged_lf": true,
+    "historical_manifest_sha256_lf": "36d73886413561675eb616fe54c5cc78ddedc32893545f2a958fb094f38f9025",
+    "markdown_local_links": {
+      "documents": 12,
+      "local_file_links": 116,
+      "broken": []
+    }
+  },
+  "validation_limits": "Static source/consumer inspection and exact artifact comparison only. Renderer/browser tests and screenshots were not rerun because removed declarations cannot match/affect the produced HTML. No Docker, Spark, service or operation executed."
+}

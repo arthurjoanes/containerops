@@ -1,4 +1,4 @@
-:root { color-scheme:light; --canvas:#f6f6f3; --surface:#fff; --ink:#27352f; --muted:#5c6963; --line:#dde3dd; --blue:#226959; --green:#286440; --fail:#a33838; --warning:#815d18; }
+:root { color-scheme:light; --canvas:#f6f6f3; --ink:#27352f; --muted:#5c6963; --line:#dde3dd; --blue:#226959; --green:#286440; --fail:#a33838; --warning:#815d18; }
 * { box-sizing:border-box; }
 [hidden] { display:none!important; }
 html { scroll-padding-top:20px; }

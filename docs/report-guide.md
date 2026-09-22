@@ -74,3 +74,7 @@ Em recuperação, **jobs restaurados** vem antes da duração. A sequência é *
 [Desktop](screenshots/interface-v2/recovery-1440.png), [celular](screenshots/interface-v2/recovery-390.png), [tentativa de release](screenshots/interface-v2/operations-1440.png) e [backup sem prova de restauração — cenário de apresentação](screenshots/interface-v2/fixture-backup-only-390.png). [Verificação desta composição](evidence/interface-v2/visual-review.json).
 
 Os corpos de texto, linhas divisórias e títulos compartilham eixos e espaçamentos; hover e foco usam 180 ms, com transições removidas quando o sistema pede menos movimento. Sem JavaScript, todas as operações aparecem e os detalhes nativos funcionam. A impressão expõe também o conteúdo dos detalhes fechados.
+
+## Limpeza de regra sem consumidores
+
+A variável CSS `--surface`, sem uso, foi removida da fonte e do HTML publicado. O restante do HTML, incluindo datas, identidades e JavaScript, foi preservado. O [registro da limpeza](evidence/interface-v2/cleanup.json) descreve o delta e as verificações estáticas; as provas anteriores não foram reexecutadas nem substituídas.

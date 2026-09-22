@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><title>ContainerOps | Operações registradas</title><style>$styles</style></head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,$favicon"/><title>ContainerOps | Operações registradas</title><style>$styles</style></head>
 <body>
 <a class="skip-link" href="#content">Ir para a operação</a>
-<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">C/O</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../README.md">Como executar</a><a href="runbooks.md">Runbooks</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
+<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">$brand_mark</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../README.md">Como executar</a><a href="runbooks.md">Runbooks</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
 <div class="report-shell">
   <aside class="operation-sidebar">
     <div class="report-heading"><h1>Operações registradas</h1></div>
@@ -50,7 +50,7 @@
           <div class="proof">$restore_proof</div>
           <details class="record-details"><summary>Identidade da restauração</summary>$restore_context</details>
           <details class="record-details recovery-job"><summary>Resultado do novo job no volume restaurado</summary>$restored_job</details>
-          <p class="notice">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
+          <p class="notice operation-limit">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
         </div>
         <aside class="identity-column surface-panel">
           <div class="panel-toolbar"><h3>Registro da cópia</h3><span>$backup_duration</span></div>
@@ -83,13 +83,12 @@
       </div>
     </section>
     <section id="artifacts" data-panel aria-labelledby="artifacts-title">
-      <div class="panel-heading"><div><h2 id="artifacts-title" tabindex="-1">Release $artifact_version</h2><p>$supply_identity</p></div></div>
+      <div class="panel-heading"><h2 id="artifacts-title" tabindex="-1">Release $artifact_version</h2></div>
       <div class="surface-panel">
-        <div class="panel-toolbar"><h3>Imagem, auditoria e scan</h3><div class="scan-status"><span>Scan da imagem</span>$scan_status</div></div>
-        $scan_findings
-        <ol class="control-list">$artifact_steps</ol>
-        <div class="metrics-block">$supply_metrics</div>
-        <details class="record-details"><summary>Identidade do build e da imagem</summary>$artifact_context<dl class="facts"><dt>Build</dt><dd><code>$artifact_image</code></dd><dt>Imagem auditada</dt><dd><code>$audit_image</code></dd><dt>Config digest</dt><dd><code>$audit_config</code></dd></dl><div class="proof">$artifact_proof</div></details>
+        <div class="artifact-diagnosis $artifact_state"><span class="artifact-state">$artifact_state_label</span><h3>$artifact_diagnosis</h3><p>$artifact_reason</p></div>
+        <div class="scan-findings-area">$scan_findings</div>
+        <details class="record-details"><summary>Critérios de auditoria e scan</summary><ol class="control-list">$artifact_steps</ol><div class="scan-status"><span>Scan da imagem</span>$scan_status</div></details>
+        <details class="record-details"><summary>Identidade do build e da imagem</summary><p>$supply_identity</p>$artifact_context<div class="metrics-block">$supply_metrics</div><dl class="facts"><dt>Build</dt><dd><code>$artifact_image</code></dd><dt>Imagem auditada</dt><dd><code>$audit_image</code></dd><dt>Config digest</dt><dd><code>$audit_config</code></dd></dl><div class="proof">$artifact_proof</div></details>
         <details class="record-details"><summary>Arquivos de build, auditoria e scan</summary><ul class="artifact-files">$supply_files</ul></details>
         <details class="record-details"><summary>Experimento de cache do build</summary>$cache_table<div class="proof">$cache_proof</div></details>
         <details class="record-details"><summary>Snapshot do runtime — registro independente</summary><p>Versão $snapshot_version · status $snapshot_health.</p>$snapshot_context<div class="proof">$snapshot_proof</div></details>

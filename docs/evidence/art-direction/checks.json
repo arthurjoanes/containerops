@@ -1,0 +1,154 @@
+{
+  "checked_at": "2026-09-22T09:18:08.931561+00:00",
+  "scope": "Presentation generator and host operation contracts; no infrastructure operations",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_report.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "...............................................\n----------------------------------------------------------------------\nRan 47 tests in 3.292s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_operations_proof.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_operations.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_proof.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_contracts.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_measure_admission.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--name",
+        "ui-container-art-checks",
+        "--mount",
+        "type=bind,source=D:/busca-emprego/.worktrees/containerops-art-direction-20260922,target=/app,readonly",
+        "containerops-test:local",
+        "sh",
+        "-c",
+        "python -m ruff check --no-cache scripts tests && python -m ruff format --check --no-cache scripts/report.py scripts/render_art_direction.py"
+      ],
+      "exit_code": 0,
+      "stdout": "All checks passed!\n2 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "scripts/report.js"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "scripts/visual-review.cjs"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "scripts/audit_art_direction.cjs"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "scripts/test_report_browser.cjs"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

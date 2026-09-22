@@ -7,6 +7,10 @@
 *.Dockerfile text eol=lf
 Dockerfile text eol=lf
 *.png binary
+*.woff2 binary
+*.svg text eol=lf
+# Preserve the upstream OFL notice byte for byte.
+/scripts/assets/source-sans-LICENSE.md -text
 # Public evidence hashes must survive Windows and Linux checkouts unchanged.
 /docs/evidence/**/*.json text eol=lf
 /docs/evidence/**/*.html text eol=lf

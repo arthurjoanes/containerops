@@ -16,15 +16,20 @@ aleatório a um proprietário. A consulta autoriza pelo proprietário; outro usu
 recebe 404 mesmo quando o UUID existe. Não há cookies, cadastro ou CORS liberado.
 
 ```json
-{"text":"Olá, mundo!", "demo_duration_seconds":0}
+{
+  "text": "Olá, mundo!",
+  "demo_duration_seconds": 0
+}
 ```
 
 `text` é uma string Unicode válida com até 16.384 bytes em UTF-8; vazio é permitido.
 Caractere NUL e surrogate isolado são rejeitados porque não representam texto
 armazenável em PostgreSQL UTF-8. O corpo HTTP completo tem limite de 32.768 bytes,
 inclusive para transferência em chunks. Campos desconhecidos são rejeitados.
+
 `demo_duration_seconds` é numérico finito, entre 0 e 15; valores maiores que zero
 exigem `DEMO_MODE=true` (padrão no Compose; fora dele, o padrão da aplicação é false).
+
 Há no máximo 100 jobs queued/running em conjunto e 20 por proprietário. Os dois
 limites incluem leases vivas ou expiradas ainda não finalizadas e são verificados
 sob o mesmo lock transacional da inserção. Um proprietário não ocupa sozinho a
@@ -33,15 +38,17 @@ As quotas não reservam capacidade para todos os proprietários simultaneamente:
 cinco proprietários podem preencher os 100 lugares. O escopo permanece local.
 
 Mesma chave, proprietário, texto e duração retornam o mesmo job (HTTP 200).
-Uma criação retorna 201; conteúdo ou duração diferentes sob a mesma chave retornam
-409. A duração 1 equivale a 1.0, e -0.0 equivale a 0.0. O replay também reconhece
+Uma criação retorna 201; conteúdo ou duração diferentes sob a mesma chave retornam 409. A duração 1 equivale a 1.0, e -0.0 equivale a 0.0. O replay também reconhece
 o hash de zero negativo persistido pela versão anterior, sem migrar nem duplicar jobs. A restrição UNIQUE(owner,idempotency_key) e o lock
 transacional no singleton de operações protegem concorrência e ambos os limites da fila.
+
 Nova admissão pausada retorna 503; fila cheia, 429; entrada inválida, 422; corpo
 excessivo, 413; indisponibilidade, timeout ou lock de banco, 503 com Retry-After.
 Um defeito SQL permanente retorna 500 sem instruir o cliente a repetir, e um
 estado de schema incompatível retorna 503 sem expor nomes internos. Logs preservam
-a categoria e o request_id, nunca a mensagem SQL completa. Uma repetição idempotente continua consultável
+a categoria e o `request_id`, nunca a mensagem SQL completa.
+
+Uma repetição idempotente continua consultável
 durante pausa ou fila cheia. Não há retry automático de POST na API: o cliente
 pode repetir com a mesma chave após erro de transporte.
 
@@ -58,9 +65,17 @@ trim ou alteração de espaços. `é` e `e` seguido de acento combinante têm ch
 diferentes. O identificador público do algoritmo é `unicode-alnum-marks-v1`.
 
 ```json
-{"id":"<UUID>","state":"succeeded","attempts":1,
- "result":{"word_count":2,"checksum":"<64 caracteres hexadecimais>"},
- "error":null,"version":"1.0.0"}
+{
+  "id": "<UUID>",
+  "state": "succeeded",
+  "attempts": 1,
+  "result": {
+    "word_count": 2,
+    "checksum": "<64 caracteres hexadecimais>"
+  },
+  "error": null,
+  "version": "1.0.0"
+}
 ```
 
 `result` é null até o sucesso. `error` é null nos estados queued/running/succeeded;
@@ -79,7 +94,9 @@ a versão 1 ou 2 do schema. Todos os dados de negócio ficam no PostgreSQL.
 
 Transições: queued → running → succeeded; running expirado pode ser adquirido
 novamente com outro token; após três aquisições, uma lease expirada passa a failed
-com `error_category=attempts_exhausted`. O despacho usa o mesmo lock curto de
+com `error_category=attempts_exhausted`.
+
+O despacho usa o mesmo lock curto de
 operações para que workers concorrentes observem a escolha anterior. Prioriza o
 owner sem atividade anterior e, depois, o menor `max(updated_at)` dos jobs desse
 owner com `attempts > 0`; dentro dessa prioridade, usa created_at/id. Aquisição,
@@ -87,8 +104,10 @@ renovação, conclusão e falha contam como atividade. O histórico expira com a
 Isso evita despachar todo o backlog de um owner antes de atender outro; não é
 reserva de workers, preempção ou garantia de latência. Após o despacho, workers
 executam em paralelo. A pausa de admissão não impede o dreno.
+
 O worker usa `FOR UPDATE OF j SKIP LOCKED`, lease de cinco segundos e renovação
 a cada segundo durante a duração demo.
+
 Renovação e conclusão exigem token atual **e** lease ainda válida. Um worker antigo
 pode recalcular a função pura, mas não sobrescreve o resultado persistido.
 
@@ -125,25 +144,25 @@ Downgrade de schema é rejeitado. Migração 2 apenas acrescenta uma coluna opci
 
 ## Matriz HTTP e persistência
 
-| Entrada/estado | Comportamento | Teste |
-|---|---|---|
-| Authorization | Ausente, vazio, Basic, token errado/não ASCII → 401 e challenge; esquema em caixa variada válido; duas ocorrências recusadas, iguais ou diferentes | `test_http_contract.py`: autenticação e duplicatas; `checks.http_boundary_checks` pelo Nginx |
-| Proprietário | Token define o owner; UUID de outro owner → 404; mesma chave para Alice/Bob gera trabalhos distintos | `test_integration.py`: owner boundary e owner scoped keys |
-| Idempotency-Key | Obrigatório; 1–128 ASCII imprimíveis; 129, vazio, só espaços, tabulação e não ASCII → 422; cabeçalho repetido → 422 | `test_http_contract.py`: limites e duplicatas; teste pelo proxy |
-| text | String estrita; null, bool, número, lista/objeto, NUL e surrogate → 422; vazio permitido; UTF-8 com 16.384 bytes aceito e 16.386 rejeitado; emojis e caracteres combinantes preservados | `test_http_contract.py`; `test_domain.py` |
-| Corpo HTTP | JSON inválido, null/lista, campo ausente/extra → 422; 32.768 bytes aceitos e 32.769 → 413 | Testes HTTP e limites pelo proxy |
-| Frames ASGI | Orçamento de bytes acumulado entre frames; desconexão parcial não chama a rota | `test_body_limit.py`, sem depender de TestClient agrupar o corpo |
-| demo_duration_seconds | Número finito, 0–15 inclusive; bool/string/null/NaN/Infinity/fora do intervalo → 422; valor positivo exige DEMO_MODE | `test_http_contract.py`; `test_domain.py` |
-| Canonização e replay | 1=1.0 e -0.0=0.0; mesmo pedido/owner/chave → 200 e mesmo UUID; alteração de texto/duração → 409 | Unidade + integração com hash legado em PostgreSQL + jornada HTTP |
-| job_id | UUID inválido → 422 sem consultar banco; inexistente ou não autorizado → 404 | Contrato HTTP e integração |
-| Pausa/fila cheia | Pausa → 503/Retry-After 2 para novos; limites de 100 globais e 20 por owner → 429/Retry-After 2; replay continua 200; pedido conflitante permanece 409 | Integração HTTP e corridas de ambas as quotas com PostgreSQL |
-| Distribuição entre owners | Alice no limite não impede admissão de Bob; backlog mais antigo de Alice não toma os quatro despachos concorrentes; terminais liberam quota | `test_one_owner_cannot_block_another_in_demo_mode`, `test_dispatch_shares_workers_between_owners`, `test_owner_quota_is_atomic_and_includes_running_jobs` |
-| Resultado | Queued/running: result e error null; succeeded: contagem e SHA-256 dos bytes; failed: tentativas 3 e erro estável sem payload | Integração, algoritmo puro e jornada |
-| Concorrência/lease | Uma linha por chave; workers não tomam a mesma lease viva; token antigo não renova/conclui; 3 expirações produzem failed; replay não reenfileira | Testes concorrentes com PostgreSQL real |
-| Retenção/manutenção | Limpeza de terminais após retenção; bloqueada durante pausa; snapshot estável após drenar | Integração; backup/restore e operação |
-| Saúde/erro | Live não depende de banco; ready observa schema e pausa; erro DB transitório → 503/Retry-After, SQL permanente → 500 sem retry | Testes HTTP; falhas reais de banco/schema no verify |
-| Encerramento | API rejeita admissão quando encerrando; SIGTERM termina trabalho atual e preserva próximo; SIGKILL recupera lease | Teste HTTP + experimento de recuperação |
-| Métricas | API interna exige token; Nginx não publica /internal; contagens e latência respeitam dados retidos | Integração HTTP e jornada pelo proxy |
+| Entrada/estado            | Comportamento                                                                                                                                                                           | Teste                                                                                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization             | Ausente, vazio, Basic, token errado/não ASCII → 401 e challenge; esquema em caixa variada válido; duas ocorrências recusadas, iguais ou diferentes                                      | `test_http_contract.py`: autenticação e duplicatas; `checks.http_boundary_checks` pelo Nginx                                                              |
+| Proprietário              | Token define o owner; UUID de outro owner → 404; mesma chave para Alice/Bob gera trabalhos distintos                                                                                    | `test_integration.py`: owner boundary e owner scoped keys                                                                                                 |
+| Idempotency-Key           | Obrigatório; 1–128 ASCII imprimíveis; 129, vazio, só espaços, tabulação e não ASCII → 422; cabeçalho repetido → 422                                                                     | `test_http_contract.py`: limites e duplicatas; teste pelo proxy                                                                                           |
+| text                      | String estrita; null, bool, número, lista/objeto, NUL e surrogate → 422; vazio permitido; UTF-8 com 16.384 bytes aceito e 16.386 rejeitado; emojis e caracteres combinantes preservados | `test_http_contract.py`; `test_domain.py`                                                                                                                 |
+| Corpo HTTP                | JSON inválido, null/lista, campo ausente/extra → 422; 32.768 bytes aceitos e 32.769 → 413                                                                                               | Testes HTTP e limites pelo proxy                                                                                                                          |
+| Frames ASGI               | Orçamento de bytes acumulado entre frames; desconexão parcial não chama a rota                                                                                                          | `test_body_limit.py`, sem depender de TestClient agrupar o corpo                                                                                          |
+| demo_duration_seconds     | Número finito, 0–15 inclusive; bool/string/null/NaN/Infinity/fora do intervalo → 422; valor positivo exige DEMO_MODE                                                                    | `test_http_contract.py`; `test_domain.py`                                                                                                                 |
+| Canonização e replay      | 1=1.0 e -0.0=0.0; mesmo pedido/owner/chave → 200 e mesmo UUID; alteração de texto/duração → 409                                                                                         | Unidade + integração com hash legado em PostgreSQL + jornada HTTP                                                                                         |
+| job_id                    | UUID inválido → 422 sem consultar banco; inexistente ou não autorizado → 404                                                                                                            | Contrato HTTP e integração                                                                                                                                |
+| Pausa/fila cheia          | Pausa → 503/Retry-After 2 para novos; limites de 100 globais e 20 por owner → 429/Retry-After 2; replay continua 200; pedido conflitante permanece 409                                  | Integração HTTP e corridas de ambas as quotas com PostgreSQL                                                                                              |
+| Distribuição entre owners | Alice no limite não impede admissão de Bob; backlog mais antigo de Alice não toma os quatro despachos concorrentes; terminais liberam quota                                             | `test_one_owner_cannot_block_another_in_demo_mode`, `test_dispatch_shares_workers_between_owners`, `test_owner_quota_is_atomic_and_includes_running_jobs` |
+| Resultado                 | Queued/running: result e error null; succeeded: contagem e SHA-256 dos bytes; failed: tentativas 3 e erro estável sem payload                                                           | Integração, algoritmo puro e jornada                                                                                                                      |
+| Concorrência/lease        | Uma linha por chave; workers não tomam a mesma lease viva; token antigo não renova/conclui; 3 expirações produzem failed; replay não reenfileira                                        | Testes concorrentes com PostgreSQL real                                                                                                                   |
+| Retenção/manutenção       | Limpeza de terminais após retenção; bloqueada durante pausa; snapshot estável após drenar                                                                                               | Integração; backup/restore e operação                                                                                                                     |
+| Saúde/erro                | Live não depende de banco; ready observa schema e pausa; erro DB transitório → 503/Retry-After, SQL permanente → 500 sem retry                                                          | Testes HTTP; falhas reais de banco/schema no verify                                                                                                       |
+| Encerramento              | API rejeita admissão quando encerrando; SIGTERM termina trabalho atual e preserva próximo; SIGKILL recupera lease                                                                       | Teste HTTP + experimento de recuperação                                                                                                                   |
+| Métricas                  | API interna exige token; Nginx não publica /internal; contagens e latência respeitam dados retidos                                                                                      | Integração HTTP e jornada pelo proxy                                                                                                                      |
 
 Nginx pode rejeitar Authorization duplicado com 400 antes da API, que retorna 401.
 

@@ -28,12 +28,12 @@ Arquivos em `artifacts/<versão>/` no runtime: `image.oci.tar`, `image.docker.ta
 
 ## Imagem e OCI
 
-| Identidade | Significado | Verificação |
-|---|---|---|
-| SHA-256 do índice OCI | Agrega manifests de plataforma e attestations | Hash dos bytes de `index.json`; não é o ID Docker |
-| Digest do manifesto linux/amd64 | Referencia config e camadas comprimidas | Verificação SHA-256 e tamanho de cada descritor; subject das attestations deve corresponder |
-| Config digest | Configuração executável, histórico e diff_ids | SHA-256 dos bytes do config em `docker image save` precisa coincidir com config OCI |
-| ID apresentado pelo daemon | Config digest no store clássico; manifesto no Docker 29/containerd observado | Manifesto exportado precisa ter esse digest e referenciar o config esperado |
+| Identidade                      | Significado                                                                  | Verificação                                                                                 |
+| ------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| SHA-256 do índice OCI           | Agrega manifests de plataforma e attestations                                | Hash dos bytes de `index.json`; não é o ID Docker                                           |
+| Digest do manifesto linux/amd64 | Referencia config e camadas comprimidas                                      | Verificação SHA-256 e tamanho de cada descritor; subject das attestations deve corresponder |
+| Config digest                   | Configuração executável, histórico e diff_ids                                | SHA-256 dos bytes do config em `docker image save` precisa coincidir com config OCI         |
+| ID apresentado pelo daemon      | Config digest no store clássico; manifesto no Docker 29/containerd observado | Manifesto exportado precisa ter esse digest e referenciar o config esperado                 |
 
 `oci_audit.py` converte OCI para `docker load` mantendo config e camadas descomprimidas. Confere blob digest, `diff_id` e `RootFS.Layers`; depois exporta a imagem pelo ID do daemon e confere config/camadas de novo. O export do containerd pode misturar blobs gzip e tar: a comparação usa os bytes descomprimidos de cada camada, sem dispensar o hash. No Docker 29/containerd deste host, `inspect.Id` é o digest do manifesto: o manifesto exportado deve apontar ao config OCI.
 

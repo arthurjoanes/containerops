@@ -135,7 +135,14 @@ tbody tr:hover { background: #f2f6fc; }
 .empty-state { background: white; color: var(--muted); font-size: 14px; border: 0; border-left: 2px solid var(--line); border-radius: 0; padding: 4px 16px; }
 .empty-state h3 { color: var(--ink); }
 .empty-state p { margin-top: 8px; }
-.command { display: block; padding: 12px; margin: 12px 0; background: #eff4fa; border-radius: 5px; }
+.code-block { margin: 12px 0; background: #1c2b42; color: #edf3ff; border-radius: 5px; }
+.code-language { display: block; padding: 8px 14px; border-bottom: 1px solid #526077; color: #c8d2e3; font-size: 12px; font-weight: 600; }
+.code-block pre { margin: 0; padding: 14px; overflow: auto; max-width: 100%; tab-size: 4; }
+.code-block code { font-size: 13px; white-space: pre; overflow-wrap: normal; }
+.syntax-command { color: #9dcfff; }
+.syntax-path { color: #a7e3ad; }
+.syntax-option { color: #88e0df; }
+.syntax-placeholder { color: #ffd09a; }
 footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; padding-top: 10px; margin-top: 20px; font-size: 11px; color: var(--muted); }
 .generated-at { font-size: 11px; color: var(--muted); }
 footer a { display: inline-flex; align-items: center; min-height: 24px; }
@@ -290,7 +297,13 @@ h2,h3 { break-after: avoid; }
 .table-wrap { overflow: visible; }
 .table-wrap table { min-width: 0; font-size: 9pt; }
 td,th { padding: 7px; overflow-wrap: anywhere; }
-details::details-content { content-visibility: visible; }
-}
+  details::details-content { content-visibility: visible; }
+  .code-block { background: #fff; color: #202b3a; border: 1px solid #c6ceda; break-inside: avoid; }
+  .code-language { color: #59636e; border-color: #c6ceda; }
+  .code-block pre,.code-block code { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .syntax-command,.syntax-option { color: #0550ae; }
+  .syntax-path { color: #9a3412; }
+  .syntax-placeholder { color: #116329; }
+  }
 @media (prefers-reduced-motion: reduce) {
 *,*::before,*::after { transition: none !important; scroll-behavior: auto !important; } }

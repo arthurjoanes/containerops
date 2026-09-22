@@ -1,0 +1,447 @@
+{
+  "capturedAt": "2026-09-22T17:37:22.271Z",
+  "browser": "153.0.4234.48",
+  "scope": "Current renderer with historical operation JSONs; static snapshot only, no service operation rerun",
+  "source": ".runtime/docs-captures/current-r6qb98z6/docs/report.html",
+  "views": [
+    {
+      "name": "overview",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#overview",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "result",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#result",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "tls",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#tls",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "recovery",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "operations",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#operations",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "rollback",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#rollback",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "artifacts",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#artifacts",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "evidence",
+      "width": 1120,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#evidence",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 1120,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "overview",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#overview",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "result",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#result",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "tls",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#tls",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "recovery",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "operations",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#operations",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "rollback",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#rollback",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "artifacts",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#artifacts",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "evidence",
+      "width": 390,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#evidence",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 390,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "overview",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#overview",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "result",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#result",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "tls",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#tls",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "recovery",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "operations",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#operations",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "rollback",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#rollback",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "artifacts",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#artifacts",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    },
+    {
+      "name": "evidence",
+      "width": 320,
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#evidence",
+      "title": "ContainerOps | OperaÃ§Ãµes registradas",
+      "scrollWidth": 320,
+      "fonts": [
+        {
+          "family": "Source Sans 3",
+          "status": "loaded"
+        }
+      ],
+      "h1": "OperaÃ§Ãµes registradas"
+    }
+  ],
+  "images": [
+    {
+      "image": "restauracao-foco.png",
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "viewport": {
+        "width": 1120,
+        "height": 1000
+      },
+      "clip": {
+        "x": 224,
+        "y": 141,
+        "width": 572,
+        "height": 442
+      },
+      "focus": {
+        "startSelector": "#recovery .result-column",
+        "endSelector": "#recovery .result-column > .proof"
+      },
+      "sha256": "2e7ba569cc81ed094408e6c36987b031f7cee28ab23d91f6e27ee5b2bf31285a",
+      "imageDimensions": {
+        "width": 572,
+        "height": 442
+      }
+    },
+    {
+      "image": "restauracao-movel-foco.png",
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "clip": {
+        "x": 10,
+        "y": 207,
+        "width": 370,
+        "height": 430
+      },
+      "focus": {
+        "startSelector": "#recovery .result-column",
+        "endSelector": "#recovery .result-column > .proof"
+      },
+      "sha256": "6dde8824df7304b6c76a214cb7d5ee0468b6ee02e43248e70a007d8526db93c6",
+      "imageDimensions": {
+        "width": 370,
+        "height": 430
+      }
+    },
+    {
+      "image": "novo-job-foco.png",
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "viewport": {
+        "width": 1120,
+        "height": 1000
+      },
+      "clip": {
+        "x": 249,
+        "y": 612,
+        "width": 522,
+        "height": 260
+      },
+      "focus": {
+        "startSelector": "#recovery .recovery-job",
+        "endSelector": "#recovery .recovery-job"
+      },
+      "sha256": "a255d9b5bf4cf7b6adad83066846538f4682b896dd2b33c54947811f93717177",
+      "imageDimensions": {
+        "width": 522,
+        "height": 260
+      }
+    },
+    {
+      "image": "copia-foco.png",
+      "url": ".runtime/docs-captures/current-r6qb98z6/docs/report.html#recovery",
+      "viewport": {
+        "width": 1120,
+        "height": 1000
+      },
+      "clip": {
+        "x": 800,
+        "y": 141,
+        "width": 296,
+        "height": 289
+      },
+      "focus": {
+        "startSelector": "#recovery .identity-column",
+        "endSelector": "#recovery .identity-column"
+      },
+      "sha256": "68e64a855307fca687583116cf46b4cc7b2a43193c4bab55d255599135ad27cc",
+      "imageDimensions": {
+        "width": 296,
+        "height": 289
+      }
+    }
+  ],
+  "pageErrors": [],
+  "sourceFiles": {
+    "scripts/report.py": "caed120a1774d6b3eca1eaf10840b8167c5250f837746dcb0aa6737eda0134b7",
+    "scripts/report.html": "e7170829cde69dc0a2376e9e2dd3971645d65f89107f3ddf2f833ef90dfba188",
+    "scripts/report.css": "dd2d6933908b6a946f363fe0daf19e3913fd9d2b12015ec20e7be74d289ad663",
+    "scripts/report.js": "ba01f72f569c42a49a001b4ed93ad6807178603ae86a62df02d3cc996cefe89b",
+    "scripts/report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5"
+  },
+  "status": "passed"
+}

@@ -72,13 +72,13 @@ A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a par
 
 Esse build local usou `--provenance=false`: **não produziu uma nova prova de SBOM/attestations**. O Trivy posterior está registrado separadamente em [segurança](evidence/editorial-20260922/security.json). Os scans históricos e o CI de outra imagem não passam a aprovar estas imagens. A prova demonstra instalação e comportamento local do código atual; a cadeia de suprimentos completa continua sendo o cenário padrão `prove`.
 
-| Caso e esperado independente | Observado | Evidência |
-|---|---|---|
-| Seis POSTs, mesma chave e texto de sete palavras | Um UUID; sete palavras; conteúdo divergente 409; outro proprietário 404 | [journey.json](evidence/editorial-20260922/journey.json) |
-| `Recuperar depois de término abrupto`: cinco palavras | Mesmo UUID, running/tentativa 1 antes do SIGKILL, succeeded/tentativa 2 depois | [Antes/depois](evidence/editorial-20260922/recovery.json) |
-| Candidata 2 falha após gravar seu job | Imagem 1 retomada, schema 2 e três jobs preservados | [Rollback](screenshots/editorial-20260922/rollback.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json) |
-| Dump restaurado em volume novo | Três jobs iguais, novo job com quatro palavras, cleanup concluído | [Restauração](screenshots/editorial-20260922/restore.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json) |
-| Cópia separada adulterada | Checksum recusado antes de criar destino | [Controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json) |
+| Caso e esperado independente                          | Observado                                                                      | Evidência                                                                                                                               |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Seis POSTs, mesma chave e texto de sete palavras      | Um UUID; sete palavras; conteúdo divergente 409; outro proprietário 404        | [journey.json](evidence/editorial-20260922/journey.json)                                                                                |
+| `Recuperar depois de término abrupto`: cinco palavras | Mesmo UUID, running/tentativa 1 antes do SIGKILL, succeeded/tentativa 2 depois | [Antes/depois](evidence/editorial-20260922/recovery.json)                                                                               |
+| Candidata 2 falha após gravar seu job                 | Imagem 1 retomada, schema 2 e três jobs preservados                            | [Rollback](screenshots/editorial-20260922/rollback.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json)  |
+| Dump restaurado em volume novo                        | Três jobs iguais, novo job com quatro palavras, cleanup concluído              | [Restauração](screenshots/editorial-20260922/restore.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json) |
+| Cópia separada adulterada                             | Checksum recusado antes de criar destino                                       | [Controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json)                               |
 
 A conta de palavras foi definida antes: `Olá / mundo / Café / e / ação / 東京 / 42` são sete; `Backup / restaurado / com / sucesso` são quatro. O runner compara também SHA-256 dos bytes originais. Não há ganho financeiro, capacidade de produção ou prazo de recuperação inferido desses números.
 

@@ -98,7 +98,7 @@
       <div class="panel-heading"><div><h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2><p>$record_count arquivos JSON válidos. Arquivos de outras tentativas não aprovam a operação selecionada.</p></div></div>
       <div class="surface-panel">
         <div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0"><table><caption>Arquivos e datas dos registros</caption><thead><tr><th scope="col">Arquivo</th><th scope="col">Data</th><th scope="col">Projeto</th></tr></thead><tbody>$evidence_rows</tbody></table></div>
-        <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><code class="command">python scripts/ops.py report</code><p>Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></details>
+        <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><div class="code-block"><span class="code-language">Shell</span><pre tabindex="0" aria-label="Comando para gerar o relatório"><code class="language-sh"><span class="syntax-command">python</span> <span class="syntax-path">scripts/ops.py</span> report</code></pre></div><p>Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></details>
       </div>
     </section>
     <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em $created</span><a href="verification.md">Escopo das verificações</a></footer>

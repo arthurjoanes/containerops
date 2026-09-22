@@ -19,13 +19,13 @@ Foram usados Windows/Python 3.11.9, Docker Linux/amd64 e Compose 5.5.0. Os limit
 Em **cada linha**, houve 24 pedidos: **20 respostas 201**, **4 respostas 429 por quota do proprietário** e **20 jobs concluídos**. A tabela separa o tempo das admissões e das recusas. O p95 ordena as observações e escolhe a posição `ceil(0,95 × n)`, sem interpolar. Com apenas quatro recusas, seu p95 é o maior dos quatro tempos; não é uma estimativa estável de tráfego real.
 
 | Repetição | Proprietário | p95 aceitos, n=20 (ms) | p95 recusados, n=4 (ms) | p95 da espera total, n=20 (s) |
-| --- | --- | ---: | ---: | ---: |
-| 1 | Alice | 516 | 500 | 27,185 |
-| 1 | Bob | 500 | 484 | 27,633 |
-| 2 | Alice | 407 | 422 | 27,241 |
-| 2 | Bob | 500 | 391 | 27,609 |
-| 3 | Alice | 500 | 406 | 27,120 |
-| 3 | Bob | 531 | 406 | 27,579 |
+| --------- | ------------ | ---------------------: | ----------------------: | ----------------------------: |
+| 1         | Alice        |                    516 |                     500 |                        27,185 |
+| 1         | Bob          |                    500 |                     484 |                        27,633 |
+| 2         | Alice        |                    407 |                     422 |                        27,241 |
+| 2         | Bob          |                    500 |                     391 |                        27,609 |
+| 3         | Alice        |                    500 |                     406 |                        27,120 |
+| 3         | Bob          |                    531 |                     406 |                        27,579 |
 
 Dados completos: [repetição 1](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-1.json), [repetição 2](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-2.json) e [repetição 3](evidence/admission-measurement/20260922T031250-0300-b87b5952/repetition-3.json). Contêm pedidos, estados, eventos do worker, limites, medianas, extremos e hashes. Os percentis foram recalculados a partir das amostras na revisão; não foi feita média de percentis para fabricar um resultado agregado.
 
@@ -38,10 +38,10 @@ O tempo HTTP usa o relógio monotônico do Python do host. Uma [inspeção poste
 Para separar a retomada, o medidor observa o relógio do banco antes e depois do comando de iniciar o worker. O instante exato em que ele volta a trabalhar fica dentro desse intervalo. Sua largura foi de **3,076 a 3,219 s** nas três repetições; por isso o resultado abaixo é um intervalo, não um valor exato de espera depois da retomada.
 
 | Repetição | p95 após retomada — Alice (s) | p95 após retomada — Bob (s) |
-| --- | ---: | ---: |
-| 1 | 19,465–22,684 | 20,020–23,239 |
-| 2 | 19,748–22,824 | 20,301–23,377 |
-| 3 | 19,528–22,731 | 20,081–23,285 |
+| --------- | ----------------------------: | --------------------------: |
+| 1         |                 19,465–22,684 |               20,020–23,239 |
+| 2         |                 19,748–22,824 |               20,301–23,377 |
+| 3         |                 19,528–22,731 |               20,081–23,285 |
 
 Esses intervalos delimitam o efeito da incerteza sobre o instante de retomada; **não são intervalos estatísticos de confiança**. Incluem o custo de iniciar o processo. Os dados também preservam o limite inferior da espera induzida antes do comando. Banco e worker usam timestamps do mesmo host Docker; mudanças indevidas de relógio ou múltiplas aquisições tornam a interpretação inconclusiva.
 

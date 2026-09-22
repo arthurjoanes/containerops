@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from datetime import UTC, datetime, timedelta
+from html.parser import HTMLParser
 from pathlib import Path
 
 import report
@@ -36,6 +37,35 @@ def job(state="succeeded", attempts=1):
 
 
 class ReportTests(unittest.TestCase):
+    def test_terminal_commands_are_highlighted_without_changing_source(self):
+        class CodeText(HTMLParser):
+            def __init__(self, document):
+                super().__init__(convert_charrefs=True)
+                self.commands = []
+                self.active = False
+                self.feed(document)
+
+            def handle_starttag(self, tag, attrs):
+                if tag == "code" and dict(attrs).get("class") == "language-sh":
+                    self.active = True
+                    self.commands.append("")
+
+            def handle_endtag(self, tag):
+                if tag == "code":
+                    self.active = False
+
+            def handle_data(self, value):
+                if self.active:
+                    self.commands[-1] += value
+
+        page = self.render()
+        self.assertEqual(
+            CodeText(page).commands,
+            ["python scripts/ops.py scan --version <versão>", "python scripts/ops.py report"],
+        )
+        self.assertIn('class="syntax-option">--version</span>', page)
+        self.assertNotIn("<versão>", page)
+
     def test_missing_metrics_do_not_become_words_inside_operation_descriptions(self):
         page = self.render()
         self.assertIn("Confere a imagem candidata, aplica a migração e verifica os jobs.", page)

@@ -498,7 +498,15 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         + f'<div class="proof">{proof(scan_name, records)}</div></div>'
     )
     if not scan:
-        scan_findings = '<p class="empty-state">Gerar scan pelo terminal: <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>'
+        scan_findings = (
+            '<div class="empty-state"><p>Gerar scan pelo terminal:</p>'
+            '<div class="code-block"><span class="code-language">Shell</span>'
+            '<pre tabindex="0" aria-label="Comando para gerar o scan">'
+            '<code class="language-sh"><span class="syntax-command">python</span> '
+            '<span class="syntax-path">scripts/ops.py</span> scan '
+            '<span class="syntax-option">--version</span> '
+            '<span class="syntax-placeholder">&lt;versão&gt;</span></code></pre></div></div>'
+        )
     cache = records.get("cache-experiment", {})
     cache_rows = "".join(
         f'<tr><th scope="row">{shown(item.get("case"))}</th><td class="numeric">{shown(item.get("duration_seconds"), " s")}</td>'

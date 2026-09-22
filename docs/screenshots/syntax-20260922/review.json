@@ -1,0 +1,155 @@
+{
+  "reviewed_at": "2026-09-22T18:05:57.275Z",
+  "scope": "Presentation-only syntax highlighting; exact source text preserved, no commands executed",
+  "browser": "153.0.4234.48",
+  "source_files_sha256": {
+    "scripts/report.py": "b6b4b918319ec6b780a4b99581560304956d27b134c51e9a5a379f8f373b6ab6",
+    "scripts/report.html": "f9e60001d234964cb2854a9b1cdbbad9a645b6e6fb14cc78b889cb1fdf180895",
+    "scripts/report.css": "d772d757045677b8d8fb67eaf43eb3b015cb3a205324baf17394285a76776305",
+    "docs/report.html": "f6f4d804d8f650974a31c82e0c75af8925c34b04db3ceb95467a4ee331a5c37c"
+  },
+  "views": [
+    {
+      "name": "commands",
+      "url": "http://localhost:3105/report.html#evidence",
+      "width": 1120,
+      "sourcePreserved": true,
+      "scrollWidth": 1120,
+      "blocks": [
+        {
+          "width": 0,
+          "scrollWidth": 0
+        },
+        {
+          "width": 806,
+          "scrollWidth": 806
+        }
+      ]
+    },
+    {
+      "name": "scan",
+      "url": "http://localhost:3105/report.html#artifacts",
+      "width": 1120,
+      "sourcePreserved": true,
+      "scrollWidth": 1120,
+      "blocks": [
+        {
+          "width": 774,
+          "scrollWidth": 774
+        },
+        {
+          "width": 0,
+          "scrollWidth": 0
+        }
+      ]
+    },
+    {
+      "name": "commands",
+      "url": "http://localhost:3105/report.html#evidence",
+      "width": 390,
+      "sourcePreserved": true,
+      "scrollWidth": 390,
+      "blocks": [
+        {
+          "width": 0,
+          "scrollWidth": 0
+        },
+        {
+          "width": 320,
+          "scrollWidth": 320
+        }
+      ]
+    },
+    {
+      "name": "scan",
+      "url": "http://localhost:3105/report.html#artifacts",
+      "width": 390,
+      "sourcePreserved": true,
+      "scrollWidth": 390,
+      "blocks": [
+        {
+          "width": 288,
+          "scrollWidth": 371
+        },
+        {
+          "width": 0,
+          "scrollWidth": 0
+        }
+      ]
+    },
+    {
+      "name": "commands",
+      "url": "http://localhost:3105/report.html#evidence",
+      "width": 320,
+      "sourcePreserved": true,
+      "scrollWidth": 320,
+      "blocks": [
+        {
+          "width": 0,
+          "scrollWidth": 0
+        },
+        {
+          "width": 254,
+          "scrollWidth": 254
+        }
+      ]
+    },
+    {
+      "name": "scan",
+      "url": "http://localhost:3105/report.html#artifacts",
+      "width": 320,
+      "sourcePreserved": true,
+      "scrollWidth": 320,
+      "blocks": [
+        {
+          "width": 222,
+          "scrollWidth": 371
+        },
+        {
+          "width": 0,
+          "scrollWidth": 0
+        }
+      ]
+    }
+  ],
+  "minimum_token_contrast": 8.688102406947111,
+  "images": [
+    {
+      "repo": "containerops",
+      "path": "docs/screenshots/syntax-20260922/shell-command.png",
+      "url": "http://localhost:3105/report.html#artifacts",
+      "viewport": {
+        "width": 840,
+        "height": 850
+      },
+      "clip": {
+        "x": 277,
+        "y": 378,
+        "width": 498,
+        "height": 86
+      },
+      "imageDimensions": {
+        "width": 498,
+        "height": 86
+      },
+      "sha256": "ebbfbf89613469d20abeeb9cdf10f0a8409164f177a69573cfb9e7e8454baa06"
+    }
+  ],
+  "page_errors": [],
+  "external_requests": [],
+  "test_result": {
+    "passed": 48
+  },
+  "print_review": {
+    "passed": true,
+    "scope": "White background, wrapped lines and token contrast >=4.5:1 in print CSS; PDF pagination not audited"
+  },
+  "static_report_equivalence": {
+    "scope": "Current standalone HTML regenerated with identical input JSONs and original timestamp; no operation run",
+    "original_timestamp": "2026-09-22T09:15:06.314174+00:00",
+    "text_equivalent": true,
+    "allowed_text_delta": "Shell labels, final punctuation following scan command",
+    "before_sha256": "a174025c6b9b21afe8c4201bb1fc78eb2105d56bd8374d7f5addfae6d8a83581",
+    "after_sha256": "f6f4d804d8f650974a31c82e0c75af8925c34b04db3ceb95467a4ee331a5c37c"
+  }
+}

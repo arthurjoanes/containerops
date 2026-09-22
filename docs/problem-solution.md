@@ -50,37 +50,39 @@ A [evidência de retorno](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a58
 
 No relatório, percorra **Resultado do job → Backup e restauração → Última troca de imagem → Imagem, auditoria e scan**. Confira em cada detalhe data, projeto e imagem: esses registros podem pertencer a operações diferentes. O estado do job não certifica a release, e um scan de outra imagem não aprova a candidata. [Guia de leitura](report-guide.md).
 
-## Conferência nova: imagem, dados e restauração são fronteiras diferentes
+## Execução histórica de 22/09/2026: imagem, dados e restauração
+
+As três imagens abaixo preservam a execução original; a [galeria atual](screenshots.md) mostra o renderer atual sem repetir operações.
 
 Na sequência de operações `53365744…`, processei um texto de quatro palavras, executei uma candidata 2 com falha controlada e voltei à imagem 1. O schema permaneceu na versão 2; os três jobs anteriores ao backup continuaram consultáveis. Em seguida, restaurei a cópia em outro projeto e comparei os dados antes de enviar `Backup restaurado com sucesso`: quatro palavras em um novo UUID.
 
 ![Trabalho inicial da operação, concluído com quatro palavras e identidade própria.](screenshots/editorial-20260922/initial-job.png)
 
-*`Trabalho identificado e preservado` tem quatro palavras. Este é o job inicial da operação, distinto da jornada concorrente de sete palavras. [Registro](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/demo.json) · [imagem completa](screenshots/editorial-20260922/initial-job.png).*
+_`Trabalho identificado e preservado` tem quatro palavras. Este é o job inicial da operação, distinto da jornada concorrente de sete palavras. [Registro](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/demo.json) · [imagem completa](screenshots/editorial-20260922/initial-job.png)._
 
-![Retorno real após falha da candidata, com imagens anterior e candidata identificadas.](screenshots/editorial-20260922/rollback.png)
+[Captura histórica completa: Retorno real após falha da candidata, com imagens anterior e candidata identificadas.](screenshots/editorial-20260922/rollback.png)
 
-*Voltar à imagem 1 preservou o trabalho criado pela versão 2. A captura não representa downgrade do banco nem recuperação de um backup antigo. [Resultado completo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json) · [imagem completa](screenshots/editorial-20260922/rollback.png).*
+_Voltar à imagem 1 preservou o trabalho criado pela versão 2. A captura não representa downgrade do banco nem recuperação de um backup antigo. [Resultado completo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json) · [imagem completa](screenshots/editorial-20260922/rollback.png)._
 
-![Três jobs restaurados, integridade e dados conferidos antes do novo trabalho.](screenshots/editorial-20260922/restore.png)
+[Captura histórica completa: Três jobs restaurados, integridade e dados conferidos antes do novo trabalho.](screenshots/editorial-20260922/restore.png)
 
-*São três critérios diferentes: checksum da cópia, comparação dos dados e novo job concluído. A cópia adulterada foi recusada antes de criar o destino. [Restore](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), [controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json) e [preservação da origem](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/source-preservation.json) sustentam o caso. Duração local não é SLA; cópia no mesmo computador não protege contra a perda dele.*
+_São três critérios diferentes: checksum da cópia, comparação dos dados e novo job concluído. A cópia adulterada foi recusada antes de criar o destino. [Restore](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), [controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json) e [preservação da origem](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/source-preservation.json) sustentam o caso. Duração local não é SLA; cópia no mesmo computador não protege contra a perda dele._
 
 A [demonstração executada](demo.md#execução-editorial-de-22092026) separa essa rodada das oito tarefas e 45,281 s históricos citados acima. Os nomes dos helpers e os contratos permaneceram iguais; nenhuma imagem antiga passou a receber a aprovação desta nova execução.
 
 ## Cenários
 
-| Cenário | Como é testado | Critério |
-|---|---|---|
-| Repetir admissão não duplica trabalho | UNIQUE por owner/chave e lock em operations; seis POSTs concorrentes pelo proxy | Um UUID e um resultado com contagem e SHA-256; conflito 409 e outro owner 404 |
-| Um owner não monopoliza a fila | Quota atômica de 20 pendentes por owner, 100 globais; despacho por atividade recente | Alice recebe 429 no limite enquanto Bob recebe 201; quatro despachos concorrentes com backlog de ambos distribuem dois para cada um; replay segue 200 |
-| Worker morto deixa trabalho recuperável | Lease temporal e token; SIGKILL/SIGTERM no projeto descartável | Job running antes, nova tentativa depois; SIGTERM conclui o atual sem adquirir o próximo; tentativa antiga não finaliza |
-| A imagem demonstrada contém o código atual | Build OCI, auditoria de manifest/config e SHA das fontes dentro das duas imagens; API e worker inspecionados | As duas imagens têm os arquivos esperados e os dois serviços usam o ID solicitado |
-| Hardening e isolamento são efetivos | Inspeção de kernel, mounts, escrita negada, conectividade e papéis DB em containers reais | UID/caps/rootfs/limites/redes/permissões observados; YAML sozinho não conta |
-| Backup recupera serviço utilizável | Pausa/drenagem, dump binário, checksum; restore em projeto/volume novos | Dump íntegro, snapshot igual e novo job com contagem/checksum corretos |
-| Rollback preserva dados pós-migração | Migração expansiva; candidata cria job antes da falha; retorno à imagem 1 | Imagem 1 em API/worker, schema 2, resultados anteriores e job da candidata preservados, novo job concluído |
-| Operador repete o teste sem tocar a demo | `prove` encadeia verificação, backup/restore, TLS e releases em projetos próprios, com manifesto por tentativa | Falha retorna código não zero; sucesso só após cleanup; tentativas anteriores preservadas |
-| Artefato tem rastreabilidade e riscos visíveis | OCI/SBOM/provenance/sentinela/Trivy ligados ao mesmo config/manifest executado | Digests conferidos; scan completo com base dentro da política, ou falha explícita |
+| Cenário                                        | Como é testado                                                                                                 | Critério                                                                                                                                              |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repetir admissão não duplica trabalho          | UNIQUE por owner/chave e lock em operations; seis POSTs concorrentes pelo proxy                                | Um UUID e um resultado com contagem e SHA-256; conflito 409 e outro owner 404                                                                         |
+| Um owner não monopoliza a fila                 | Quota atômica de 20 pendentes por owner, 100 globais; despacho por atividade recente                           | Alice recebe 429 no limite enquanto Bob recebe 201; quatro despachos concorrentes com backlog de ambos distribuem dois para cada um; replay segue 200 |
+| Worker morto deixa trabalho recuperável        | Lease temporal e token; SIGKILL/SIGTERM no projeto descartável                                                 | Job running antes, nova tentativa depois; SIGTERM conclui o atual sem adquirir o próximo; tentativa antiga não finaliza                               |
+| A imagem demonstrada contém o código atual     | Build OCI, auditoria de manifest/config e SHA das fontes dentro das duas imagens; API e worker inspecionados   | As duas imagens têm os arquivos esperados e os dois serviços usam o ID solicitado                                                                     |
+| Hardening e isolamento são efetivos            | Inspeção de kernel, mounts, escrita negada, conectividade e papéis DB em containers reais                      | UID/caps/rootfs/limites/redes/permissões observados; YAML sozinho não conta                                                                           |
+| Backup recupera serviço utilizável             | Pausa/drenagem, dump binário, checksum; restore em projeto/volume novos                                        | Dump íntegro, snapshot igual e novo job com contagem/checksum corretos                                                                                |
+| Rollback preserva dados pós-migração           | Migração expansiva; candidata cria job antes da falha; retorno à imagem 1                                      | Imagem 1 em API/worker, schema 2, resultados anteriores e job da candidata preservados, novo job concluído                                            |
+| Operador repete o teste sem tocar a demo       | `prove` encadeia verificação, backup/restore, TLS e releases em projetos próprios, com manifesto por tentativa | Falha retorna código não zero; sucesso só após cleanup; tentativas anteriores preservadas                                                             |
+| Artefato tem rastreabilidade e riscos visíveis | OCI/SBOM/provenance/sentinela/Trivy ligados ao mesmo config/manifest executado                                 | Digests conferidos; scan completo com base dentro da política, ou falha explícita                                                                     |
 
 ## Resultado esperado
 

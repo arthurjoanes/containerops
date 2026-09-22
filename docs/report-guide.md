@@ -6,12 +6,12 @@ na pasta `docs/evidence`. A página não consulta containers nem executa operaç
 
 A [sequência operacional de 22/09](operational-recovery.md) tem um [relatório isolado](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/view/docs/report.html) com somente os quatro JSONs daquela tentativa. Use-o para relacionar job inicial, rollback e restore. O relatório principal reúne registros de momentos diferentes; cada painel conserva a identidade da sua operação. Os percentis da [medição de admissão](admission-measurement.md) ficam no documento próprio.
 
-| Grupo | O que conferir |
-|---|---|
+| Grupo       | O que conferir                                                                                            |
+| ----------- | --------------------------------------------------------------------------------------------------------- |
 | Verificação | Última execução validada pelo manifesto, etapas de isolamento e recuperação, resultado do job e teste TLS |
-| Recuperação | Checksum do backup, igualdade dos dados restaurados e processamento de um novo job |
-| Release | Tentativa mais recente de troca de imagem, inclusive falha, e teste de retorno à imagem anterior |
-| Artefatos | Identidade do build, auditoria OCI, scan compatível e catálogo dos JSONs |
+| Recuperação | Checksum do backup, igualdade dos dados restaurados e processamento de um novo job                        |
+| Release     | Tentativa mais recente de troca de imagem, inclusive falha, e teste de retorno à imagem anterior          |
+| Artefatos   | Identidade do build, auditoria OCI, scan compatível e catálogo dos JSONs                                  |
 
 Selecione uma operação no índice lateral organizado em quatro grupos. No celular, abra o seletor **Operação: nome da operação**. Os links
 com fragmento, como `report.html#recovery`, abrem o detalhe correspondente e podem

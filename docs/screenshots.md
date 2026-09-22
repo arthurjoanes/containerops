@@ -1,5 +1,7 @@
 # Recortes da interface atual
 
+Proveniência conferida em **22/09/2026**: [manifesto](screenshots/focused-20260922/capture.json), [entradas preservadas](screenshots/focused-20260922/inputs.json) e [coletor](../scripts/capture_docs.py). A data de renderização/captura não substitui a data da operação.
+
 Capturados em **22/09/2026, 17:37 UTC**, diretamente no navegador, sem montagem ou alteração dos dados. Cada imagem isola o trecho relacionado à explicação; páginas históricas completas ficam disponíveis por links.
 
 O renderer atual lê os JSONs operacionais preservados. A restauração exibida pertence a **22/09/2026, 06:20 UTC**: **3 jobs / 27,4 s**; a cópia tem horário próprio de **06:19:27 UTC**. Capturar a página não executa restore, backup, jobs ou worker.
@@ -25,4 +27,4 @@ Escolha uma saída nova: o script recusa sobrescrever imagens. Confira região, 
 
 ## Conservação e limpeza
 
-7 imagens órfãs/aliases antigos e os 16 prints amplos da primeira tentativa desta revisão foram copiados para backup externo antes da remoção. Pares de comparação necessários às provas e capturas com hashes permanecem preservados. O inventário e as cópias de segurança são mantidos fora do repositório.
+Capturas com hashes e pares de comparação continuam ligados às execuções originais. O inventário da limpeza e as cópias de segurança anteriores ficaram fora do repositório; não são uma prova pública de contagem de arquivos removidos. Para a proveniência das imagens publicadas, use o manifesto ligado acima, de **22/09/2026**.

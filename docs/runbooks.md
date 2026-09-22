@@ -1,5 +1,7 @@
 # Runbooks
 
+Procedimentos conferidos em **22/09/2026** contra [comandos e validações](../scripts/ops.py), [Compose](../compose.yaml), [runner de prova](../scripts/proof.py) e [entrada do PostgreSQL](../docker/db/entrypoint.sh). Instruções são o contrato de operação local; roteiros ainda não executados continuam identificados.
+
 Execute os comandos na raiz do projeto. Anote horário, versão e job antes de intervir.
 
 Operações de escrita usam um lock no runtime. Aguarde a atual terminar; `status`, `logs` e `report` continuam disponíveis. O lock é liberado ao sair do processo. Não apague `operation.lock` nem execute comandos Docker manuais durante backup, restore ou troca de release.

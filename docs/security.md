@@ -1,5 +1,7 @@
 # Segurança e isolamento de capacidade
 
+Contrato de admissão conferido em **22/09/2026** em [domínio](../app/src/containerops/domain.py), [repositório](../app/src/containerops/repository.py) e [integração](../app/tests/test_integration.py). Resultados executados pertencem ao [manifesto](evidence/security-admission-20260922/manifest.json) e ao [JUnit](evidence/security-admission-20260922/tests.xml), de **22/09/2026**; não houve reexecução nesta leitura.
+
 ## COPS-01 — ocupação da fila por um proprietário
 
 A revisão local encontrou um problema de disponibilidade: um Bearer válido podia

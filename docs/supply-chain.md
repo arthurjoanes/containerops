@@ -1,5 +1,7 @@
 # Build e scan
 
+Política conferida em **22/09/2026** em [build/scan](../scripts/supply.py), [auditoria OCI](../scripts/oci_audit.py), [scan de serviços](../scripts/scan_services.py), [Dockerfile](../docker/app.Dockerfile) e [lock de bases](../docker/images.lock.json). A fonte dos resultados históricos é o [recibo de segurança de 22/09/2026](evidence/editorial-20260922/security.json), separado das regras atuais.
+
 O build gera um OCI e carrega a mesma imagem no Docker. Plataforma, bases e dependências ficam fixadas.
 
 ## Comandos e arquivos
@@ -57,7 +59,7 @@ Qualquer HIGH/CRITICAL bloqueia o comando, com ou sem `FixedVersion`. Todas as s
 
 A imagem de banco usa PostgreSQL 17.11/Alpine 3.24 e mantém o contrato UID/GID 999 dos volumes e helpers. O Dockerfile confere os IDs da base antes de ajustar usuário/grupo e substitui `gosu` por `su-exec`. O entrypoint recusa um PGDATA existente sem marcador Alpine. Isso impede reutilização acidental de um volume Debian sem a migração lógica descrita nos runbooks.
 
-Scans limpos são observações das imagens e da base de avisos daquela execução. A cobertura Alpine difere da Debian, sobretudo para avisos ainda sem correção. Trivy 0.74 pode avisar que sua tabela de fim de suporte ainda não inclui Alpine 3.24; esse aviso não é suprimido. Ferramentas de build, scanner e testes não são imagens servidas pela aplicação.
+Scans limpos são observações das imagens e da base de avisos daquela execução. A cobertura depende das fontes de avisos da distribuição. Consulte [Alpine](https://trivy.dev/docs/latest/coverage/os/alpine/) e [Debian](https://trivy.dev/docs/latest/coverage/os/debian/) na documentação oficial do Trivy, consultada em **22/09/2026**; os resultados não devem ser comparados como cobertura idêntica. Trivy 0.74 pode avisar que sua tabela de fim de suporte ainda não inclui Alpine 3.24; esse aviso não é suprimido. Ferramentas de build, scanner e testes não são imagens servidas pela aplicação.
 
 Os resultados atuais e seus limites estão na [verificação](verification.md). Tentativas anteriores com a base Debian e uma política que aceitava achados sem correção foram preservadas como histórico; não comprovam aprovação pela política atual. Remover pip/ensurepip elimina os instaladores do filesystem final, mas os bytes originais continuam nas camadas da base.
 
@@ -68,7 +70,7 @@ Os resultados atuais e seus limites estão na [verificação](verification.md). 
 1. `initial`: usa `--no-cache`; o cache de download do pip pode estar aquecido.
 2. `unchanged`: mesmo contexto, deve reutilizar instalação de dependências.
 3. `source`: acrescenta um marcador Python inofensivo em fonte copiada; COPY da fonte deve executar, instalação deve continuar em cache.
-4. `dependency`: troca `idna` 3.20 por 3.19 no lock copiado. A instalação deve rodar e o SBOM deve mostrar 3.19. Ambas atendem `idna>=2.8` do AnyIO; [idna 3.19](https://pypi.org/project/idna/3.19/) suporta Python 3.13.
+4. `dependency`: troca `idna` 3.20 por 3.19 no lock copiado. A instalação deve rodar e o SBOM deve mostrar 3.19. Ambas atendem `idna>=2.8` do AnyIO; [idna 3.19](https://pypi.org/project/idna/3.19/) declara suporte a Python 3.13 nos metadados do mantenedor (publicação: **18/08/2026**; consulta: **22/09/2026**). A troca executada está no [experimento de cache](evidence/cache-experiment.json); isso não recomenda a versão antiga para novas instalações.
 
 Logs, duração e cache por etapa ficam no runtime; resumo em `docs/evidence/cache-experiment.json`. Só dependency exporta OCI e SBOM, então os tempos totais incluem etapas diferentes. O script confere a invalidação esperada e remove o contexto temporário.
 
@@ -76,4 +78,4 @@ Logs, duração e cache por etapa ficam no runtime; resumo em `docs/evidence/cac
 
 Resolva a versão/digest com `docker buildx imagetools inspect <imagem:versão>`. Atualize lock e defaults do Dockerfile. Resolva dependências em ambiente descartável. Gere outra imagem e rode testes, audit, scan e HTTP. Guarde o ID anterior para rollback.
 
-Referências oficiais: [armazenamento de attestations](https://docs.docker.com/build/metadata/attestations/attestation-storage/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/), [geração de SBOM](https://docs.docker.com/build/metadata/attestations/sbom/), [driver docker-container](https://docs.docker.com/build/builders/drivers/docker-container/), [Trivy em arquivos de imagem](https://trivy.dev/docs/latest/target/container_image/) e [bases do Trivy](https://trivy.dev/docs/latest/configuration/db/).
+Referências oficiais, consultadas em **22/09/2026**: [armazenamento de attestations](https://docs.docker.com/build/metadata/attestations/attestation-storage/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/), [geração de SBOM](https://docs.docker.com/build/metadata/attestations/sbom/), [driver docker-container](https://docs.docker.com/build/builders/drivers/docker-container/), [Trivy em arquivos de imagem](https://trivy.dev/docs/latest/target/container_image/) e [bases do Trivy](https://trivy.dev/docs/latest/configuration/db/).

@@ -1,5 +1,7 @@
 # Arquitetura do ContainerOps
 
+Base técnica conferida em **22/09/2026**: [Compose](../compose.yaml), [API](../app/src/containerops/api.py), [worker](../app/src/containerops/worker.py), [repositório transacional](../app/src/containerops/repository.py), [operações](../scripts/ops.py) e [lock das imagens](../docker/images.lock.json). Quantidades e prazos abaixo são contratos/configurações; não são capacidade de produção medida.
+
 **Problema central:** depois de aceitar um trabalho, o serviço precisa permitir consultar seu resultado e recuperar falhas sem confundir a versão do programa com os dados persistidos. O cálculo de palavras é pequeno de propósito: torna possível conferir o resultado enquanto se examinam fila, morte do worker, restauração e retorno de versão. Todos os processos desta demonstração continuam no mesmo computador.
 
 ## Por que cada parte existe
@@ -125,4 +127,4 @@ O backup local depende do mesmo host. Secrets do Compose são arquivos montados.
 
 Unitários de Unicode, checksum e validação; integração PostgreSQL para concorrência, leases e limites; testes pelo proxy para autorização, sinais, banco indisponível, recriação e redes; backup/restore, release/rollback, OCI, scan e sentinela.
 
-Referências consultadas: https://docs.docker.com/build/metadata/attestations/ ; https://docs.docker.com/build/exporters/oci-docker/ ; https://hub.docker.com/_/postgres ; https://docs.docker.com/compose/how-tos/use-secrets/ .
+Referências oficiais consultadas em **22/09/2026**: [attestations Docker](https://docs.docker.com/build/metadata/attestations/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/) e [secrets no Compose](https://docs.docker.com/compose/how-tos/use-secrets/). As versões usadas são as do lock local; estas páginas não aprovam as imagens do laboratório.

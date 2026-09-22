@@ -1,6 +1,10 @@
 # Contrato de dados
 
+Contrato conferido em **22/09/2026** contra [API](../app/src/containerops/api.py), [domínio](../app/src/containerops/domain.py), [repositório](../app/src/containerops/repository.py), [worker](../app/src/containerops/worker.py) e [migrações](../app/src/containerops/migrations/001.sql). Exemplos são sintéticos; códigos HTTP e limites são regras locais, não estatísticas externas.
+
 ## Entrada
+
+Fontes: [validação HTTP](../app/src/containerops/api.py), [constantes](../app/src/containerops/domain.py) e [transação de admissão](../app/src/containerops/repository.py), conferidas em **22/09/2026**.
 
 O cliente envia texto sintético por JSON. O banco guarda o texto para reprocessar o job; respostas HTTP, snapshots e logs não incluem o payload.
 
@@ -54,6 +58,8 @@ pode repetir com a mesma chave após erro de transporte.
 
 ## Cálculo
 
+Fonte: [`analyze_text`](../app/src/containerops/domain.py) e [testes do domínio](../app/tests/test_domain.py), conferidos em **22/09/2026**. Trata-se do algoritmo definido aqui, não de uma regra universal de segmentação linguística.
+
 Uma palavra começa com um caractere para o qual `str.isalnum()` é verdadeiro.
 Outros alfanuméricos e marcas Unicode das categorias M continuam a palavra.
 Marcas isoladas não iniciam palavra. Todos os demais caracteres separam palavras:
@@ -87,6 +93,8 @@ A versão descreve a imagem que respondeu, não a versão original que criou o j
 
 ## Estados e persistência
 
+Fonte: [repositório](../app/src/containerops/repository.py), [worker](../app/src/containerops/worker.py) e [schema](../app/src/containerops/migrations/001.sql), conferidos em **22/09/2026**.
+
 `jobs` contém UUID, proprietário, chave, texto, hash canônico do pedido, estado,
 tentativas, token/validade da lease, timestamps UTC, duração demo e resultado.
 `operations` possui uma única linha com o sinal de pausa; `schema_version` registra
@@ -118,6 +126,8 @@ snapshot e dump permanecem estáveis até retomar. A remoção também remove a 
 de idempotência; repetir uma chave depois da retenção cria um novo trabalho.
 
 ## Operação, métricas e acesso
+
+Fonte: [manage](../app/src/containerops/manage.py), [API](../app/src/containerops/api.py) e [papéis SQL](../docker/db/init-roles.sh), conferidos em **22/09/2026**.
 
 `python -m containerops.manage snapshot` escreve somente JSON determinístico no
 stdout, com `schema_version`, `admission_paused`, `counts` para os quatro estados
@@ -177,5 +187,5 @@ somente o banco fornecido; nunca habilite essa flag na demonstração. São exer
 limite concorrente, conflito, lease antiga, três tentativas, permissões, retenção,
 autorização e compatibilidade de schema.
 
-Referências de comportamento das bibliotecas: [transações psycopg](https://www.psycopg.org/psycopg3/docs/basic/transactions.html)
+Referências de comportamento das bibliotecas, consultadas em **22/09/2026**: [transações psycopg](https://www.psycopg.org/psycopg3/docs/basic/transactions.html)
 e [lifespan FastAPI](https://fastapi.tiangolo.com/advanced/events/).

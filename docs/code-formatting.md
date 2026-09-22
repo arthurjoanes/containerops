@@ -1,5 +1,7 @@
 # Código no relatório
 
+Fonte técnica: [gerador](../scripts/report.py), [template](../scripts/report.html) e [CSS](../scripts/report.css), conferidos em **22/09/2026**. Captura e medidas pertencem ao [recibo de 22/09/2026, 18:05 UTC](screenshots/syntax-20260922/review.json); não houve nova captura nesta leitura.
+
 Os comandos de geração do relatório e de scan aparecem em blocos Shell compactos.
 Comando, caminho, opção e valor a substituir recebem cores distintas. O texto
 continua selecionável e preserva exatamente o comando original.

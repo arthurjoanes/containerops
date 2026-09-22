@@ -1,5 +1,7 @@
 # Problema e solução
 
+Fontes conferidas em **22/09/2026**: [contrato do domínio](../app/src/containerops/domain.py), [admissão e posse](../app/src/containerops/repository.py), [jornada de 22/09/2026](evidence/editorial-20260922/journey.json) e [recuperação da mesma rodada](evidence/editorial-20260922/recovery.json). As evidências antigas abaixo conservam suas próprias identidades.
+
 ## Tese e limite
 
 Desenvolvi este laboratório para recuperar um serviço assíncrono pequeno sem perder trabalhos aceitos,

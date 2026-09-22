@@ -2,7 +2,9 @@
 
 Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
 
-![Restauração: duração, dados recuperados, etapas verificadas e evidência](docs/screenshots/interface-v2/recovery-1440.png)
+![Três trabalhos restaurados e novo job concluído na prova local de recuperação](docs/evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/restore-new-job-1440.png)
+
+Relatório de uma execução local real em 22/09/2026, com textos sintéticos. A [sequência comentada](docs/operational-recovery.md) mostra job inicial, rollback após falha e restauração com novo trabalho, com identidade e limites de cada medição.
 
 Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
 
@@ -29,6 +31,8 @@ python scripts/ops.py prove
 Executa build, scan, restauração, TLS e troca de versão em projetos Docker descartáveis. Cada tentativa fica em `docs/evidence/problem-proof/`, com resultados e hashes. Exige Docker, OpenSSL e uma base Trivy preparada pelo comando `scan`. Essa prova é mais abrangente que `demo`, que envia um job à aplicação principal.
 
 As [verificações publicadas](docs/verification.md) identificam a execução e as fontes testadas, incluindo a revisão posterior de isolamento de capacidade. Gerar outra versão do HTML não executa novamente essas provas.
+
+Para repetir apenas job, rollback e restauração após preparar as duas imagens, use `python scripts/ops.py prove --scenario operations`. Esse cenário tem [evidência própria](docs/operational-recovery.md) e não executa novamente scans, TLS ou a suíte completa.
 
 ## Rodar
 
@@ -72,5 +76,7 @@ Instalações antigas com PostgreSQL Debian precisam de [migração por backup e
 Texto até 16 KiB, fila global de 100 trabalhos e limite de 20 queued/running por proprietário. A admissão aplica os dois limites atomicamente; excesso retorna 429 e mantém o replay idempotente. O despacho prioriza o proprietário menos recentemente ativo, preservando a ordem dos seus jobs elegíveis: um backlog de Alice não deixa Bob atrás de todos os trabalhos dela. [Correção e testes de isolamento de capacidade](docs/security.md).
 
 O Compose habilita a demo com atraso máximo de 15 s por trabalho; `DEMO_MODE=false` aceita apenas duração zero. São 3 tentativas e retenção de 24 h. A distribuição não interrompe jobs já em execução nem garante prazo de atendimento. O projeto se destina à operação local. O backup fica na mesma máquina do banco. O TLS termina no proxy. O rollback troca a imagem, não rebaixa schema nem restaura dados antigos. O build copia os inputs pra um caminho ASCII temporário porque o BuildKit recusou o caminho com acento deste projeto. [Contrato de dados](docs/data-contract.md) · [arquitetura](docs/architecture.md) · [decisões técnicas](docs/decisoes-tecnicas.md).
+
+A [medição com dois proprietários](docs/admission-measurement.md) registrou três repetições: 120 pedidos aceitos e concluídos e 24 recusados por quota. Ela separa admissão, espera induzida pela parada do worker e retomada, com percentis por proprietário. Não esgota o limite global nem mede capacidade de produção.
 
 Python, FastAPI, PostgreSQL, Nginx, Docker Compose e BuildKit. Licença MIT.

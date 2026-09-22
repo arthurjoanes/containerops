@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-09-22T06:18:12.482989+00:00",
+  "project": "pf-containerops-test-fc39e58c",
+  "job": {
+    "id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60"
+    },
+    "error": null,
+    "version": "1.0.0"
+  }
+}

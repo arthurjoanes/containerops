@@ -1,0 +1,67 @@
+{
+  "recorded_at": "2026-09-22T06:19:13.533545+00:00",
+  "project": "pf-containerops-test-fc39e58c",
+  "requested_version": "2.0.0",
+  "injected_smoke_failure": true,
+  "phase": "completed",
+  "previous_image": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+  "candidate_image": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+  "candidate_images": {
+    "api": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+    "worker": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+  },
+  "candidate_health": {
+    "status": "alive",
+    "version": "2.0.0"
+  },
+  "candidate_job": {
+    "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+    },
+    "error": null,
+    "version": "2.0.0",
+    "algorithm": "unicode-alnum-marks-v1"
+  },
+  "rollback_images": {
+    "api": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+    "worker": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed"
+  },
+  "preserved_candidate_job": {
+    "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "rollback_job": {
+    "id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 3,
+      "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "rolled_back": true,
+  "reason": "Falha de smoke injetada no teste de rollback",
+  "rollback_health": {
+    "status": "alive",
+    "version": "1.0.0"
+  },
+  "maintenance_seconds": 44.89,
+  "previous_health": {
+    "status": "alive",
+    "version": "1.0.0"
+  },
+  "preserved_jobs": 1
+}

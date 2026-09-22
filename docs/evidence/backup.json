@@ -1,7 +1,12 @@
 {
-  "recorded_at": "2026-09-22T00:18:35.666997+00:00",
-  "created_at": "2026-09-22T00:18:35.000705+00:00",
-  "sha256": "56192f6c30b2553caefc61bc72ae8ccfca552217892f44985d724471500b8b5a",
+  "recorded_at": "2026-09-22T06:19:27.627077+00:00",
+  "created_at": "2026-09-22T06:19:27.438933+00:00",
+  "cutoff_interval": {
+    "started_at": "2026-09-22T06:19:21.653220+00:00",
+    "completed_at": "2026-09-22T06:19:26.546757+00:00",
+    "method": "admission paused; queued/running drained; snapshot observed in interval"
+  },
+  "sha256": "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
   "server": "postgres (PostgreSQL) 17.11",
   "schema_version": 2,
   "snapshot": {
@@ -10,86 +15,41 @@
       "failed": 0,
       "queued": 0,
       "running": 0,
-      "succeeded": 8
+      "succeeded": 3
     },
     "jobs": [
       {
         "attempts": 1,
-        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
         "error_category": null,
-        "id": "284dad44-17e2-4af9-8f05-af2068b87e8b",
+        "id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
         "owner": "alice",
         "state": "succeeded",
         "word_count": 4
-      },
-      {
-        "attempts": 1,
-        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
-        "error_category": null,
-        "id": "2e5a0bee-9d87-480c-be86-f35ae7645782",
-        "owner": "alice",
-        "state": "succeeded",
-        "word_count": 4
-      },
-      {
-        "attempts": 1,
-        "checksum": "fd9f94c2c43f9ac9d38b4fc8537ac6de3fae447768ec0033e136b8a361b5438c",
-        "error_category": null,
-        "id": "713138aa-1436-40cf-ba36-de545772056c",
-        "owner": "alice",
-        "state": "succeeded",
-        "word_count": 3
       },
       {
         "attempts": 1,
         "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
         "error_category": null,
-        "id": "7e5a89a9-f660-4c22-94c1-40d6e8f2fa66",
+        "id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
         "owner": "alice",
         "state": "succeeded",
         "word_count": 3
       },
       {
         "attempts": 1,
-        "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
         "error_category": null,
-        "id": "8bb21266-bf78-4f0a-969b-16e148a8ac9a",
-        "owner": "alice",
-        "state": "succeeded",
-        "word_count": 7
-      },
-      {
-        "attempts": 1,
-        "checksum": "076bd715e2260adae3ff15715e3255230a5b79b52249cbdc1cf8473f615729c1",
-        "error_category": null,
-        "id": "9472b314-9c75-42ca-91bc-7469123aa33f",
+        "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
         "owner": "alice",
         "state": "succeeded",
         "word_count": 4
-      },
-      {
-        "attempts": 1,
-        "checksum": "f0184f0ebf650ad47b2f52296c48fe1afa595b700fb35af40d56b8892da69673",
-        "error_category": null,
-        "id": "9e2b2c30-c32f-4620-ae04-6d30397f2c21",
-        "owner": "alice",
-        "state": "succeeded",
-        "word_count": 5
-      },
-      {
-        "attempts": 1,
-        "checksum": "931534c0c145d0a99631a32025f23f88c67fc6b34a608a73d0410bc04cf7bdce",
-        "error_category": null,
-        "id": "c6a04ccc-1c0b-48cc-aea8-0a6f5b46146e",
-        "owner": "alice",
-        "state": "succeeded",
-        "word_count": 1
       }
     ],
     "schema_version": 2
   },
-  "source_project": "pf-containerops-test-881fdd3d",
-  "image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
-  "elapsed_seconds": 17.125,
-  "directory": "<runtime>\\backups\\20260922T001818-8df81add"
+  "source_project": "pf-containerops-test-fc39e58c",
+  "image": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+  "elapsed_seconds": 8.406,
+  "directory": "C:\\Users\\arthu\\AppData\\Local\\ContainerOps-runtime\\backups\\20260922T061919-ac8fcc27"
 }

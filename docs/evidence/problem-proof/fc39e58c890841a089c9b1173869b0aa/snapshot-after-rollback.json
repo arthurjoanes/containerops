@@ -1,0 +1,39 @@
+{
+  "admission_paused": false,
+  "counts": {
+    "failed": 0,
+    "queued": 0,
+    "running": 0,
+    "succeeded": 3
+  },
+  "jobs": [
+    {
+      "attempts": 1,
+      "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
+      "error_category": null,
+      "id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 4
+    },
+    {
+      "attempts": 1,
+      "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+      "error_category": null,
+      "id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 3
+    },
+    {
+      "attempts": 1,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+      "error_category": null,
+      "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 4
+    }
+  ],
+  "schema_version": 2
+}

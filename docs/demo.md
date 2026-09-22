@@ -5,6 +5,8 @@ Abra o [caderno de operações](report.html) para navegar entre **Verificação*
 do registro e arquivos de origem. O HTML é um snapshot; os comandos abaixo são
 executados separadamente no terminal. [Guia de leitura](report-guide.md).
 
+Para uma apresentação centrada no problema, use primeiro a [sequência de job, rollback e restauração](operational-recovery.md): três trabalhos preservados e um novo concluído no destino, com capturas e tempos explicados. A [medição de admissão e espera](admission-measurement.md) mostra separadamente o comportamento de dois proprietários sob uma carga pequena e controlada. Esses ensaios têm manifestos próprios; não substituem a prova completa descrita abaixo.
+
 Prepare fora da apresentação, na raiz do projeto:
 
 ```powershell

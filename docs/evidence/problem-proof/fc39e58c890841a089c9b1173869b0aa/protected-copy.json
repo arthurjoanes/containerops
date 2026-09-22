@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-09-22T06:19:30.718371+00:00",
+  "original": "<runtime>\\backups\\20260922T061919-ac8fcc27",
+  "copy": "<runtime>\\backups\\proof-copy-9a447bb4c8e944c7ac89562a57a0e3d5",
+  "sha256": {
+    "metadata.json": "7c7f60b0bc8d870fb378416b9cadedd31b2634b99d173ee0bb7b6607b8c0b9c6",
+    "containerops.dump": "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb"
+  },
+  "protection": {
+    "method": "Windows DACL",
+    "verified_files": 2,
+    "inheritance_disabled": true,
+    "principals": "current user and SYSTEM"
+  },
+  "same_host": true,
+  "limit": "Independent files, not an independent host/disaster recovery or encrypted backup"
+}

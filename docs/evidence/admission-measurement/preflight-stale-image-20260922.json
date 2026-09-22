@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-09-22T06:02:47.030883+00:00",
+  "status": "rejected_before_measurement",
+  "check": "proof.image_sources(containerops-app:1.0.0)",
+  "image_id": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+  "mismatches": [
+    {
+      "file": "containerops/api.py",
+      "image_sha256": "c0c14ac025ee701270beaa9e46f7492d55dfbe369791b9a413ba2060c7b855ce",
+      "working_sha256": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+      "working_lf_sha256": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad"
+    },
+    {
+      "file": "containerops/domain.py",
+      "image_sha256": "1a093d116e6cf4e59ce593bea8a3011f1b12e2d83f8ddb032bb9febdc17d0c49",
+      "working_sha256": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+      "working_lf_sha256": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c"
+    },
+    {
+      "file": "containerops/repository.py",
+      "image_sha256": "52b687ba7dc52392deb201ee1d29e8c7493b95e27f9f36603c847b0e83274ab3",
+      "working_sha256": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+      "working_lf_sha256": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe"
+    }
+  ],
+  "measurement_requests_sent": 0,
+  "action": "rebuild current source through existing ops.build; preserve this failed preflight; do not weaken equality guard"
+}

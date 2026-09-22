@@ -1,0 +1,106 @@
+{
+  "recorded_at": "2026-09-22T06:20:01.459868+00:00",
+  "run_id": "20260922T031250-0300-b87b5952",
+  "status": "post_measurement_read_only_supplement",
+  "manifest_unchanged_sha256": "0a8233e420f9ac57e9f57bbd6f6e16ddc8f69a35597ea78a1bf609861c60ce5b",
+  "clock_observation": {
+    "observed_after_experiment": true,
+    "python": "3.11.9",
+    "implementation": "GetTickCount64()",
+    "resolution_seconds": 0.015625,
+    "monotonic": true,
+    "adjustable": false,
+    "interpretation": "HTTP durations and global/drain budgets used time.monotonic on this host; nominal tick15.625ms. Stored float digits do not imply sub-millisecond precision. DB/worker UTC clocks are separate observations."
+  },
+  "source_comparison": {
+    "baseline_revision": "35f3f69e8bca5b5560f276f68408658c8ae894fa",
+    "measured_file_count": 44,
+    "changed_files": [
+      {
+        "path": "scripts/ops.py",
+        "measured_sha256": "dd46434c73a0a4883a18af42f14737d1f74cd7f39ef5eccea6f61117cb636087",
+        "current_sha256": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a"
+      },
+      {
+        "path": "scripts/proof.py",
+        "measured_sha256": "cc246374e76dcffbb7a0023ae21d4bdcdf0c13cb56c8331170ea4c465dc82cb6",
+        "current_sha256": "3f4c59f5481b20a5e62f4b066517a4115fd2f055aaa8df8477c794a05bcfc0b4"
+      }
+    ],
+    "unchanged_count": 42,
+    "application_compose_and_measurement_files_unchanged": true,
+    "current_called_definitions_compared_to_baseline": [
+      {
+        "path": "scripts/ops.py",
+        "definition": "operation_lock",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "2f887babc62e77c368bc021c53a86b69aa7e6de891ca1560a90e07d3440a0bf1"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "now",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "b4fc2cd004325edefb8cf921861fd97944fb83166258e8622122a42a534e5ce4"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "write_json",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "753bb5713448c5a209faaafb1d353ed60b3277bc10748c1b5010dc9be23ae21a"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "read_json",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "65db0c6d55d37c9223ce117caa1d8ffe99807e65c3bab95deb8560f7d17dc83e"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "run",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "f88a48295f0f9e4da4f086f406171050726a41d16035f93473bafc4fe1e38924"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "free_port",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "cc0ea41d879f155f2c837e65aee36c66f3c5f2d232d39e6c03da53f143f1de0c"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "setup_secrets",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "70a3bc306a2695233d7f7fbb628f161c111eb74c6feb6e8f7400efdd38f1aa24"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "Stack",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "c5c31e03b39eeb7fd83ac4e6d1dc70ef239ea6c3273782c3c541704e87902363"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "image_id",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "e1e81fe619b9243e061f09905013975b0cff9e3ad0ecd63a56e36faadaac3eb5"
+      },
+      {
+        "path": "scripts/ops.py",
+        "definition": "release_version",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "f330401dcfb566dc74ec3e2680a5c418d170731ce3637c5781955d062e738001"
+      },
+      {
+        "path": "scripts/proof.py",
+        "definition": "image_sources",
+        "equal_to_baseline_ast": true,
+        "ast_sha256": "0c6d57d48520cfba911faef65590c6c0d821ae367d53aed284a397148457ae4b"
+      }
+    ],
+    "scope": "Exact file hashes identify the historical measured helpers. Post-run changes concern CO03/04 restore/proof reporting; comparison above independently confirms the measurement-called ops definitions and image_sources match the Git baseline. This is not a rerun on the final helper bytes."
+  },
+  "verification_reference": {
+    "path": "verification.json",
+    "sha256": "65b2c5d3f0c6a708be651aae4747bfaad43066d13e3784cc95df7df33dee60df"
+  }
+}

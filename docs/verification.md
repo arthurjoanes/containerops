@@ -1,5 +1,19 @@
 # Verificação
 
+## Rollback e restauração — 22/09 às 06:17 UTC
+
+A [sequência operacional](operational-recovery.md) passou em 139,750 s: job inicial identificado, candidata gravando antes da falha controlada, retorno à imagem anterior com dados preservados, cópia privada e restore em volume novo. Três jobs foram comparados e outro foi concluído no destino. O restore levou 27,437 s no intervalo interno e 29,578 s incluindo preflight/limpeza. Origem e backup original permaneceram iguais; a cópia adulterada foi recusada antes de criar o destino.
+
+[Manifesto](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json) e [capturas do relatório](operational-recovery.md) identificam fontes, imagens, marcos de tempo e limites. `operations-proof-latest.json` é o ponteiro desse cenário curto; a prova completa histórica abaixo permanece separada. Não houve novo scan, teste com outra pessoa ou recuperação em outro computador nesta execução.
+
+Depois do ajuste de serialização LF, passaram no host 14 testes da nova prova, 28 de operações existentes e 47 do relatório: [resultados e hashes](evidence/operations-regression/post-serialization-results.json). As seis capturas finais registram três painéis em desktop e celular. O [registro de publicação](evidence/operations-publication.json) preserva a diferença entre os bytes executados e os arquivos publicados, incluindo a lacuna do CSS anterior. O relatório principal foi regenerado com os aliases atuais; seus painéis históricos continuam com datas e identidades próprias. Essa regeneração não reexecuta as operações nem os scans.
+
+## Admissão e espera — 22/09 às 06:12 UTC
+
+A [medição limitada](admission-measurement.md) executou três repetições com banco vazio, dois proprietários e 48 pedidos por repetição. Foram 120 admissões, 24 recusas por quota do proprietário e 120 resultados corretos, sem erros de transporte ou observações censuradas. O worker foi parado graciosamente durante admissão; a espera induzida e a incerteza do instante de retomada estão explícitas na análise. Não houve saturação global ou teste com histórico crescente.
+
+O [manifesto](evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json) identifica imagem, fontes, ambiente, amostras e limpeza. Os 14 testes do medidor e os pedidos HTTP são denominadores diferentes. A imagem foi reconstruída após recusa de uma versão antiga; esta medição não executou novo scan. Ajustes posteriores de `ops.py`/`proof.py` para a restauração estão no [suplemento datado](evidence/admission-measurement/20260922T031250-0300-b87b5952/post-measurement-supplement.json); não são apresentados como bytes reexecutados pelo medidor.
+
 ## Revisão de explicações e jornadas — 22/09/2026
 
 README, problema/solução e decisões técnicas passaram a ligar os exemplos às funções e regressões existentes: admissão idempotente, lease/token, quota, restauração com novo job e retorno de imagem com dados preservados. Os oito jobs restaurados e os 45,281 s são da prova histórica identificada abaixo; esta revisão não executou outra operação Docker.

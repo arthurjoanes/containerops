@@ -152,6 +152,19 @@ Backup pausa e drena a fila até terminar snapshot e dump. Restore confere check
 
 O artefato binário é exportado com `docker cp`; não use redirecionamento textual do PowerShell para `pg_dump`. Guarde o JSON de metadados junto ao dump. Backup no mesmo computador não protege contra perda do computador.
 
+## Recuperação em outro computador — roteiro ainda não executado
+
+**Objetivo:** conferir se uma cópia fora da máquina original permite retomar trabalho quando ela não está disponível. A prova local em volume novo valida o procedimento de restauração, mas não satisfaz esse objetivo. É necessário um destino independente, armazenamento protegido da cópia e acesso às imagens compatíveis.
+
+1. Na origem, registre versão do schema, imagem, intervalo de captura e hashes do dump/metadados. Guarde também a referência das fontes e o artefato de imagem correspondente; reconstruir uma tag não garante obter a mesma imagem.
+2. Transfira a cópia por um meio protegido e confira os hashes no destino. Mantenha dump e metadados privados: podem conter textos dos jobs e identificadores. Copiar apenas o arquivo JSON não restaura os dados.
+3. Prepare um runtime novo, credenciais próprias e as imagens conferidas. Verifique a compatibilidade das ferramentas PostgreSQL e da plataforma antes de restaurar. Não reutilize um volume já preenchido nem o runtime principal da outra máquina.
+4. Execute a restauração pelo contrato de destino descartável de `restore_test`, usando explicitamente a cópia escolhida. Confira IDs, proprietários, estados, contagens e checksums dos jobs restaurados; depois exija um novo job concluído.
+5. Registre o tempo desde o início da preparação até o novo resultado, com fases separadas: obtenção de imagem/cópia, configuração, restore, validação e limpeza. Registre também a idade dos dados no ponto de corte. O tempo interno de `pg_restore` sozinho não representa o tempo total de recuperação.
+6. Preserve o relatório, eventuais falhas e a conferência de que a origem permaneceu intacta. Remova somente os recursos descartáveis identificados. A adoção do destino como serviço principal exige um procedimento próprio de troca de acesso; este ensaio não faz essa mudança.
+
+**Aceite pendente:** destino e cópia independentes da origem, hashes válidos, dados conferidos, novo trabalho concluído e durações observadas. Sem esse ensaio, não há RTO (prazo de recuperação) nem RPO (perda de dados tolerada) contratual demonstrado. Um teste em VM no mesmo host ajuda a examinar portabilidade, mas continua compartilhando a falha física.
+
 ## Parar e limpar
 
 `python .\scripts\ops.py stop` mantém os volumes. Os scripts apagam só volumes dos projetos temporários que criaram. Não use `docker system prune` para limpar este projeto.

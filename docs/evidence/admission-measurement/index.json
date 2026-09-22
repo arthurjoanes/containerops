@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-22T06:20:01.467875+00:00",
+  "status": "local_measurement_passed",
+  "selected_run_id": "20260922T031250-0300-b87b5952",
+  "manifest": {
+    "path": "20260922T031250-0300-b87b5952/manifest.json",
+    "sha256": "0a8233e420f9ac57e9f57bbd6f6e16ddc8f69a35597ea78a1bf609861c60ce5b"
+  },
+  "verification": {
+    "path": "20260922T031250-0300-b87b5952/verification.json",
+    "sha256": "65b2c5d3f0c6a708be651aae4747bfaad43066d13e3784cc95df7df33dee60df"
+  },
+  "post_measurement_supplement": {
+    "path": "20260922T031250-0300-b87b5952/post-measurement-supplement.json",
+    "sha256": "160759f86ef918fbd6cf10781fe011f34975c6341cfd5e57ff23aefd45d57abf"
+  },
+  "unit_checks": {
+    "path": "unit-checks-20260922.json",
+    "sha256": "f337886e3f2e5c90acf37f24883496a4fb2e632f7ee8525c9af731e5dee47edc"
+  },
+  "preserved_failed_preflight": {
+    "path": "preflight-stale-image-20260922.json",
+    "sha256": "bfca5b92458584f73ef5e331c9fa969cba84260f11228a892ee1b2ec1f9eb456"
+  },
+  "counts": {
+    "independent_repetitions": 3,
+    "requests": 144,
+    "accepted": 120,
+    "rejected_owner_quota": 24,
+    "succeeded_jobs": 120,
+    "censored_jobs": 0
+  },
+  "elapsed_seconds": 185.9220000000023,
+  "elapsed_scope": "includes start/admission/drain/cleanup of three stacks; excludes image build and unit tests",
+  "new_image_vulnerability_scan_in_this_experiment": false,
+  "publication": "working-tree evidence; commit/push/CI of this increment are separate delivery steps"
+}

@@ -1,0 +1,18 @@
+{
+  "image_id": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+  "files": {
+    "containerops/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "containerops/api.py": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+    "containerops/config.py": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+    "containerops/database.py": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+    "containerops/domain.py": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+    "containerops/log.py": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+    "containerops/manage.py": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+    "containerops/migrations/001.sql": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+    "containerops/migrations/002.sql": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+    "containerops/repository.py": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+    "containerops/worker.py": "e9f8cc2771d324b743364ca7a82be638210899bf2277c939cb21c70f577a27f3",
+    "containerops/worker_health.py": "96ec054e5aa3dea1d91e75569cda89723fc022a66757c0a10e6f56be4c265c79"
+  },
+  "equal": true
+}

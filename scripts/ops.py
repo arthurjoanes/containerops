@@ -83,7 +83,7 @@ def write_json(path, data):
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
     try:
         temporary.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
         temporary.replace(path)
     finally:
@@ -488,7 +488,9 @@ def backup(stack):
     helper = stack.project + "-backup-" + uuid.uuid4().hex[:8]
     previous_pause = stack.snapshot()["admission_paused"]
     try:
+        cutoff_started_at = now()
         snapshot = drain(stack)
+        cutoff_completed_at = now()
         stack.compose(
             "run",
             "--name",
@@ -505,6 +507,11 @@ def backup(stack):
         ).stdout.strip()
         metadata = {
             "created_at": now(),
+            "cutoff_interval": {
+                "started_at": cutoff_started_at,
+                "completed_at": cutoff_completed_at,
+                "method": "admission paused; queued/running drained; snapshot observed in interval",
+            },
             "sha256": hashlib.sha256(dump.read_bytes()).hexdigest(),
             "server": server,
             "schema_version": snapshot["schema_version"],
@@ -527,69 +534,173 @@ def backup(stack):
 
 
 def restore_test(directory=None):
-    directory = Path(directory or read_json(RUNTIME / "latest-backup.json")["directory"]).resolve()
-    if not directory.is_relative_to(RUNTIME / "backups"):
-        raise RuntimeError("Origem de backup fora do runtime reservado")
-    metadata = read_json(directory / "metadata.json")
-    dump = directory / "containerops.dump"
-    if hashlib.sha256(dump.read_bytes()).hexdigest() != metadata["sha256"]:
-        raise RuntimeError("Checksum de backup inválido")
-    stack = Stack("pf-containerops-restore-" + uuid.uuid4().hex[:8], image=metadata["image"])
-    stack.assert_fresh()
-    setup_secrets(stack.directory)
     started = time.monotonic()
+    result = {"started_at": now(), "status": "in_progress", "phases": []}
+    stack = None
+    cleanup_required = False
+
+    def phase(name, callback):
+        step = {"name": name, "started_at": now(), "status": "in_progress"}
+        result["phases"].append(step)
+        phase_start = time.monotonic()
+        try:
+            value = callback()
+            step["status"] = "passed"
+            return value
+        except BaseException as error:
+            step.update(status="failed", error_category=type(error).__name__)
+            raise
+        finally:
+            step.update(
+                completed_at=now(), elapsed_seconds=round(time.monotonic() - phase_start, 3)
+            )
+
+    evidence("restore", result)
     try:
-        stack.compose("up", "-d", "--wait", "--wait-timeout", "100", "db")
+        directory = Path(
+            directory or read_json(RUNTIME / "latest-backup.json")["directory"]
+        ).resolve()
+        if not directory.is_relative_to(RUNTIME / "backups"):
+            raise RuntimeError("Origem de backup fora do runtime reservado")
+        metadata = read_json(directory / "metadata.json")
+        dump = directory / "containerops.dump"
+
+        def verify_checksum():
+            actual_hash = hashlib.sha256(dump.read_bytes()).hexdigest()
+            if actual_hash != metadata["sha256"]:
+                raise RuntimeError("Checksum de backup inválido")
+            return actual_hash
+
+        actual_hash = phase("checksum", verify_checksum)
+        result.update(
+            backup=str(directory),
+            backup_sha256=actual_hash,
+            backup_created_at=metadata["created_at"],
+            cutoff_interval=metadata.get("cutoff_interval"),
+        )
+        stack = Stack("pf-containerops-restore-" + uuid.uuid4().hex[:8], image=metadata["image"])
+        stack.assert_fresh()
+        result["project"] = stack.project
+        setup_secrets(stack.directory)
+        cleanup_required = True
+        recovery_started = time.monotonic()
+        phase(
+            "database-ready",
+            lambda: stack.compose("up", "-d", "--wait", "--wait-timeout", "100", "db"),
+        )
         stack.compose("create", "restore")
         helper = stack.cid("restore")
         staged = stack.directory / "restore.dump"
         shutil.copyfile(dump, staged)
-        staged.chmod(0o644)  # docker cp otherwise preserves pg_dump's 0600 for root, not UID999.
+        staged.chmod(0o644)  # Docker cp preserves the mode; pg_restore runs as UID 999.
         try:
-            run(["docker", "cp", staged, f"{helper}:/var/lib/postgresql/data/containerops.dump"])
+            phase(
+                "stage-dump",
+                lambda: run(
+                    ["docker", "cp", staged, f"{helper}:/var/lib/postgresql/data/containerops.dump"]
+                ),
+            )
         finally:
             staged.unlink()
-        run(["docker", "start", "-a", helper], timeout=120)
+        phase("pg-restore", lambda: run(["docker", "start", "-a", helper], timeout=120))
         restored = json.loads(run(["docker", "inspect", helper], capture=True).stdout)[0]
         if restored["State"]["ExitCode"] != 0:
             raise RuntimeError("pg_restore falhou")
-        stack.compose(
-            "run",
-            "--rm",
-            "--no-deps",
-            "migrate",
-            "python",
-            "-m",
-            "containerops.manage",
-            "migrate",
-            "--target",
-            str(metadata["schema_version"]),
+        phase(
+            "grants-and-schema",
+            lambda: stack.compose(
+                "run",
+                "--rm",
+                "--no-deps",
+                "migrate",
+                "python",
+                "-m",
+                "containerops.manage",
+                "migrate",
+                "--target",
+                str(metadata["schema_version"]),
+            ),
         )
-        snapshot = stack.snapshot()
+        snapshot = phase("snapshot", stack.snapshot)
         if snapshot != metadata["snapshot"]:
             raise RuntimeError("Snapshot restaurado difere do backup")
+        result["restored_snapshot"] = snapshot
         stack.manage("resume")
-        stack.compose("up", "-d", "--wait", "--wait-timeout", "120", "api", "worker", "proxy")
+        phase(
+            "application-ready",
+            lambda: stack.compose(
+                "up", "-d", "--wait", "--wait-timeout", "120", "api", "worker", "proxy"
+            ),
+        )
         stack.ready()
-        job = stack.completed(stack.job("Backup restaurado com sucesso")["id"])
+        job = phase(
+            "new-job",
+            lambda: stack.completed(stack.job("Backup restaurado com sucesso")["id"]),
+        )
         if job["result"] != {
             "word_count": 4,
             "checksum": hashlib.sha256(b"Backup restaurado com sucesso").hexdigest(),
         }:
             raise RuntimeError("Novo job pós-restore incorreto")
-        result = {
-            "project": stack.project,
-            "backup": str(directory),
-            "checksum_verified": True,
-            "snapshot_equal": True,
-            "restored_jobs": len(snapshot["jobs"]),
-            "new_job": job,
-            "recovery_seconds": round(time.monotonic() - started, 3),
-        }
-        evidence("restore", result)
-        return result
+        validated_at = now()
+        result.update(
+            checksum_verified=True,
+            snapshot_equal=True,
+            restored_jobs=len(snapshot["jobs"]),
+            new_job=job,
+            validated_at=validated_at,
+            recovery_seconds=round(time.monotonic() - recovery_started, 3),
+            timing_definition={
+                "recovery": "recovery_seconds: after preflight/setup through validated new job; excludes cleanup (legacy scope)",
+                "total": "total_seconds: entry through cleanup and resource absence check",
+            },
+            backup_age_seconds=(
+                datetime.fromisoformat(validated_at)
+                - datetime.fromisoformat(metadata["created_at"])
+            ).total_seconds(),
+        )
+        if metadata.get("cutoff_interval"):
+            result["cutoff_age"] = {
+                "minimum_seconds": (
+                    datetime.fromisoformat(validated_at)
+                    - datetime.fromisoformat(metadata["cutoff_interval"]["completed_at"])
+                ).total_seconds(),
+                "maximum_seconds": (
+                    datetime.fromisoformat(validated_at)
+                    - datetime.fromisoformat(metadata["cutoff_interval"]["started_at"])
+                ).total_seconds(),
+            }
+        if result["backup_age_seconds"] < 0:
+            raise RuntimeError("Data do backup está no futuro; idade não é confiável")
+    except BaseException as error:
+        result.update(status="failed", error_category=type(error).__name__)
+        raise
     finally:
-        stack.destroy_test()
+        try:
+            if cleanup_required:
+                phase("cleanup", stack.destroy_test)
+                phase("cleanup-check", stack.assert_fresh)
+            result["cleanup_succeeded"] = True
+        except BaseException as error:
+            result.update(
+                status="failed",
+                cleanup_succeeded=False,
+                cleanup_error_category=type(error).__name__,
+            )
+            raise
+        finally:
+            if result["status"] == "in_progress":
+                result["status"] = "passed"
+            if result["status"] != "passed":
+                # Preserve facts, but do not expose the legacy success shape to the report.
+                result["observations"] = {
+                    key: result.pop(key)
+                    for key in ("checksum_verified", "snapshot_equal", "new_job")
+                    if key in result
+                }
+            result.update(completed_at=now(), total_seconds=round(time.monotonic() - started, 3))
+            evidence("restore", result)
+    return result
 
 
 def image_id(image):
@@ -615,7 +726,7 @@ class InjectedSmokeFailure(RuntimeError):
     pass
 
 
-def release(stack, version, inject_failure=False):
+def release(stack, version, inject_failure=False, *, candidate_image=None):
     if version != "2.0.0":
         raise ValueError("Use --version 2.0.0 para atualizar ou rollback para voltar")
     result = {
@@ -625,7 +736,7 @@ def release(stack, version, inject_failure=False):
         "phase": "preflight",
     }
     try:
-        candidate = image_id("containerops-app:" + version)
+        candidate = image_id(candidate_image or "containerops-app:" + version)
         old = stack.inspect("api")["Image"]
         result.update(previous_image=old, candidate_image=candidate)
         previous_pause = stack.snapshot()["admission_paused"]
@@ -902,7 +1013,7 @@ def tls_setup(stack):
 
 def parse_arguments(argv=None):
     parser = argparse.ArgumentParser(description="Operação local do ContainerOps")
-    parser.set_defaults(version=None, inject_smoke_failure=False, offline=False)
+    parser.set_defaults(version=None, inject_smoke_failure=False, offline=False, scenario="full")
     commands = parser.add_subparsers(dest="command", required=True)
     for name in [
         "setup",
@@ -933,6 +1044,8 @@ def parse_arguments(argv=None):
             command.add_argument("--inject-smoke-failure", action="store_true")
         if name == "scan":
             command.add_argument("--offline", action="store_true")
+        if name == "prove":
+            command.add_argument("--scenario", choices=("full", "operations"), default="full")
     return parser.parse_args(argv)
 
 
@@ -997,7 +1110,10 @@ def execute(args):
     elif args.command == "prove":
         import proof
 
-        proof.prove()
+        if args.scenario == "operations":
+            proof.prove_operations()
+        else:
+            proof.prove()
 
 
 if __name__ == "__main__":

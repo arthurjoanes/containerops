@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><title>ContainerOps | Operações registradas</title><style>:root { color-scheme:light; --canvas:#f6f6f3; --ink:#27352f; --muted:#5c6963; --line:#dde3dd; --blue:#226959; --green:#286440; --fail:#a33838; --warning:#815d18; }
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html { scroll-padding-top:20px; }
+body { margin:0; background:var(--canvas); color:var(--ink); font:14px/1.55 "Segoe UI",Arial,sans-serif; }
+h1,h2,h3,p { margin:0; }
+h1,h2,h3 { line-height:1.3; }
+h1 { font-size:20px; font-weight:650; letter-spacing:-.3px; }
+h2 { font-size:27px; font-weight:650; letter-spacing:-.7px; }
+h3 { font-size:14px; font-weight:650; }
+p + p { margin-top:8px; }
+a { color:var(--blue); text-underline-offset:3px; }
+a,summary { transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
+a:hover { text-decoration-thickness:2px; }
+a:focus-visible,summary:focus-visible,[tabindex]:focus-visible { outline:3px solid #377e69; outline-offset:4px; }
+code { font:12px/1.6 "Cascadia Code",Consolas,monospace; overflow-wrap:anywhere; }
+time,.duration,.metric strong,.operation-summary strong { font-variant-numeric:tabular-nums; }
+.skip-link { position:absolute; top:-90px; left:16px; background:white; padding:12px; z-index:10; }
+.skip-link:focus { top:8px; }
+.masthead { min-height:64px; padding:12px max(28px,calc((100vw - 1440px)/2 + 28px)); background:white; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:24px; }
+.brand { display:flex; align-items:center; gap:10px; color:var(--ink); font-size:19px; font-weight:700; text-decoration:none; letter-spacing:-.5px; }
+.brand-mark { width:32px; height:32px; display:grid; place-items:center; border:1px solid #a4bbb0; border-radius:6px; font:11px Consolas,monospace; color:#28634d; background:#f1f6f2; }
+.report-kind { font-size:12px; color:var(--muted); border-left:1px solid var(--line); padding-left:24px; }
+.header-docs { display:flex; gap:20px; margin-left:auto; font-size:12px; }
+.snapshot-label { font-size:11px; color:var(--muted); }
+.report-shell { max-width:1440px; margin:auto; padding:24px 28px 20px; }
+.report-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:22px; }
+.report-heading .eyebrow { margin-bottom:5px; }
+.generated-at { font-size:11px; color:var(--muted); }
+.eyebrow { text-transform:uppercase; font-size:10px; letter-spacing:1px; font-weight:650; color:var(--muted); margin-bottom:8px; }
+.operation-sidebar { margin-bottom:28px; }
+.operation-picker > summary { display:none; }
+.operation-index { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; padding:16px 0 12px; border-top:1px solid #ccd6ce; border-bottom:1px solid #ccd6ce; }
+.operation-group { min-width:0; }
+.operation-group h2 { font-size:10px; text-transform:uppercase; letter-spacing:1px; font-weight:650; color:var(--muted); padding:0 9px 8px; }
+.operation-link { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:7px 9px; margin:2px 0; border:1px solid transparent; border-radius:4px; color:var(--ink); text-decoration:none; }
+.operation-link:hover { background:#e9eee8; }
+.operation-link[aria-current] { background:#e8f1e8; border-color:#b4c9b8; }
+.operation-title { display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; }
+.operation-meta { display:block; font-size:10px; color:var(--muted); margin:0; white-space:nowrap; }
+.state-dot { width:6px; height:6px; flex:0 0 6px; border-radius:50%; background:#708074; }
+.state-dot.pass { background:#358354; }
+.state-dot.fail,.state-dot.invalid { background:#b44242; }
+.state-dot.partial,.state-dot.pending,.state-dot.stale,.state-dot.missing { background:#9d7926; }
+.state-dot.running { background:#4476ac; }
+.index-note { margin-top:8px; font-size:10px; color:var(--muted); }
+main { min-width:0; }
+[data-panel] { scroll-margin-top:20px; }
+[data-panel] + [data-panel] { margin-top:35px; }
+[data-panel][hidden] + [data-panel] { margin-top:0; }
+.panel-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:22px; }
+.panel-heading p:not(.eyebrow) { color:var(--muted); font-size:13px; margin-top:7px; max-width:760px; }
+.panel-symbol { font:28px Consolas,monospace; color:#899d8e; }
+.inspection-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:28px; align-items:start; }
+.result-column,.identity-column { min-width:0; }
+.identity-column { border-left:1px solid var(--line); padding-left:24px; }
+.identity-column > h3 { margin:0 0 14px; }
+.attempt { border:1px solid #c9ddcd; border-left:3px solid #43835a; background:#f0f6f1; padding:18px; border-radius:5px; }
+.attempt h3 { font-size:18px; color:var(--green); }
+.attempt .duration { display:block; margin-top:10px; font-size:24px; }
+.attempt p { font-size:11px; color:var(--muted); margin-top:8px; }
+.attempt.fail,.attempt.invalid { background:#fcf1ee; border-color:#e5c9c3; border-left-color:var(--fail); }
+.attempt.fail h3,.attempt.invalid h3 { color:var(--fail); }
+.attempt.partial,.attempt.running,.attempt.stale,.attempt.missing { background:#fbf6e9; border-color:#dfd3b4; border-left-color:var(--warning); }
+.attempt.partial h3,.attempt.running h3,.attempt.stale h3,.attempt.missing h3 { color:var(--warning); }
+.record-context { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:16px 0 22px; }
+.record-context > div { min-width:0; }
+.identity-column .record-context { grid-template-columns:1fr; gap:12px; }
+dt { font-size:10px; color:var(--muted); margin-bottom:4px; }
+dd { margin:0; min-width:0; overflow-wrap:anywhere; font-size:12px; }
+.section-heading { display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:12px; }
+.section-heading a,.section-heading > span { font-size:11px; }
+.control-list { list-style:none; margin:0; padding:0; counter-reset:step; border-top:1px solid var(--line); }
+.control-row { counter-increment:step; position:relative; border-bottom:1px solid var(--line); padding:13px 10px 13px 38px; }
+.control-row::before { content:counter(step,decimal-leading-zero); position:absolute; left:8px; top:15px; color:#718378; font:10px Consolas,monospace; }
+.control-title { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
+.control-title h3 { font-size:13px; }
+.control-row > p { font-size:12px; color:var(--muted); margin-top:4px; max-width:70ch; }
+.badge { display:inline-flex; align-items:center; width:fit-content; flex-shrink:0; font-size:10px; font-weight:650; line-height:1.4; padding:3px 7px; border:1px solid; border-radius:4px; }
+.badge.pass { color:var(--green); border-color:#c7ddcc; background:#eff7ef; }
+.badge.pending { color:var(--warning); border-color:#dfd1a9; background:#fbf6e6; }
+.badge.fail { color:var(--fail); border-color:#e4c4bf; background:#fcf0ed; }
+.proof { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; font-size:11px; margin-top:8px; overflow-wrap:anywhere; }
+.proof a { padding:4px 0; }
+.proof-date { color:var(--muted); font-size:10px; }
+summary { cursor:pointer; color:var(--blue); font-weight:600; padding:13px 0; font-size:12px; min-height:44px; }
+summary:hover { color:#164a3b; }
+.section-details { border-bottom:1px solid var(--line); }
+.section-details[open] { padding-bottom:16px; }
+.section-details[open] > summary { margin-bottom:4px; }
+.facts { display:grid; grid-template-columns:130px minmax(0,1fr); gap:10px 16px; margin:16px 0; }
+.facts dt { margin:0; }
+.identity-column .facts { grid-template-columns:1fr; gap:4px; }
+.identity-column .facts dd { margin-bottom:9px; }
+.job { border:1px solid var(--line); border-radius:5px; background:#fff; padding:20px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:20px; }
+.job h3 { font-size:20px; }
+.job > .proof,.job > .checksum { grid-column:1/-1; }
+.checksum { border-top:1px solid var(--line); }
+.checksum p { color:var(--muted); font-size:11px; margin:12px 0 4px; }
+.checksum code { display:block; }
+.metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.metric { min-width:0; }
+.metric span { display:block; font-size:10px; color:var(--muted); }
+.metric strong { display:block; font-size:23px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; }
+.metric strong.unavailable { font-size:13px; line-height:1.5; overflow-wrap:normal; color:var(--muted); }
+.metrics-block { margin:24px 0; }
+.operation-summary { display:flex; gap:40px; padding:16px 0 20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:22px; }
+.operation-summary span { font-size:11px; color:var(--muted); display:block; }
+.operation-summary strong { display:block; font-size:26px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; }
+.subheading { margin-top:18px; }
+.evidence-block { border-top:1px solid var(--line); padding:18px 0; margin:0 0 16px; }
+.evidence-block p { color:var(--muted); font-size:12px; margin-top:9px; }
+.notice { border-left:2px solid #a8bbae; background:#edf1eb; padding:12px 15px; margin-top:20px; font-size:11px; color:#4c6254; }
+.record-warning { border:1px solid #dec397; border-left:3px solid #9d751b; background:#fff8e9; padding:15px 18px; margin-bottom:20px; font-size:12px; }
+.record-warning a { margin-left:12px; }
+.scan-status { display:flex; flex-direction:column; align-items:flex-end; gap:5px; font-size:10px; color:var(--muted); }
+.scan-findings { padding:18px; border:1px solid #e3c2bf; border-left:3px solid #ae4743; background:#fff5f1; margin-bottom:20px; }
+.scan-findings.clear { border-color:var(--line); border-left-color:#a8bbae; background:white; }
+.scan-findings h3 { margin-bottom:10px; }
+.artifact-files { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.artifact-files li { min-width:0; }
+.artifact-files a { font-size:12px; overflow-wrap:anywhere; }
+.table-wrap { overflow:auto; margin-top:15px; }
+table { width:100%; border-collapse:collapse; font-size:12px; }
+caption { text-align:left; color:var(--muted); padding:0 0 10px; font-size:12px; }
+th,td { padding:11px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+th { background:#edf1eb; font-size:10px; font-weight:650; color:#4d6554; }
+td a { overflow-wrap:anywhere; }
+tbody tr:hover { background:#eef2eb; }
+.empty-state { padding:20px; border:1px dashed #b6c4b9; background:white; color:var(--muted); font-size:13px; }
+.empty-state h3 { color:var(--ink); }
+.empty-state p { margin-top:8px; }
+.command { display:block; padding:12px; margin:12px 0; background:#edf1eb; }
+.evidence-catalog { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:28px; align-items:start; }
+footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; border-top:1px solid var(--line); padding-top:18px; margin-top:30px; font-size:10px; color:var(--muted); }
+@media(min-width:761px) { .operation-picker:not([open]) > .operation-index { display:grid; } }
+@media(max-width:1100px) {
+ .operation-link { display:block; }
+ .operation-meta { margin:2px 0 0 14px; }
+ .report-kind { display:none; }
+ .inspection-grid { grid-template-columns:minmax(0,1fr) 260px; gap:22px; }
+ .identity-column { padding-left:20px; }
+ .operation-index { gap:12px; }
+ .job { grid-template-columns:1fr; }
+ .record-context { grid-template-columns:1fr; gap:10px; }
+ .record-context > div { display:grid; grid-template-columns:90px minmax(0,1fr); gap:8px; }
+ .identity-column .record-context > div { display:block; }
+ .evidence-catalog { grid-template-columns:1fr; }
+}
+@media(max-width:760px) {
+ .masthead { padding:14px 18px; gap:8px 18px; flex-wrap:wrap; }
+ .header-docs { font-size:10px; gap:12px; }
+ .snapshot-label { width:100%; margin-left:42px; font-size:10px; }
+ .report-shell { padding:22px 18px; }
+ .report-heading { display:block; margin-bottom:16px; }
+ .generated-at { margin-top:8px; }
+ .operation-sidebar { margin-bottom:22px; }
+ .operation-picker > summary { display:flex; justify-content:space-between; color:var(--ink); padding:13px 0; border-top:1px solid #cbd5ca; border-bottom:1px solid #cbd5ca; }
+ .operation-picker:not([open]) > .operation-index { display:none; }
+ .operation-index { grid-template-columns:1fr 1fr; gap:18px; border-top:0; }
+ .index-note { display:none; }
+ .inspection-grid { display:flex; flex-direction:column; gap:24px; }
+ .result-column,.identity-column { width:100%; }
+ .identity-column { border-left:0; padding:18px 0 0; border-top:1px solid var(--line); }
+ #overview .identity-column { order:-1; }
+ .panel-heading { align-items:flex-start; gap:15px; }
+ .panel-heading p:not(.eyebrow) { font-size:12px; }
+ h2 { font-size:24px; }
+ .panel-symbol { display:none; }
+ .control-row { padding:13px 0 13px 30px; }
+ .control-row::before { left:3px; }
+ .control-title { flex-wrap:wrap; gap:7px 12px; }
+ .record-context { margin:15px 0 20px; }
+ .identity-column .record-context > div { display:grid; }
+ .facts { grid-template-columns:1fr; gap:4px; }
+ .facts dd { margin-bottom:10px; }
+ .job { padding:16px; gap:16px; }
+ .metric strong { font-size:22px; }
+ .operation-summary { gap:25px; flex-wrap:wrap; }
+ .operation-summary strong { font-size:24px; }
+ .artifact-files { grid-template-columns:1fr; }
+ .table-wrap table { min-width:600px; }
+ .record-warning a { display:block; margin:8px 0 0; }
+ .proof-date { width:100%; }
+ .recovery-job .job { margin-left:0; }
+}
+@media(max-width:380px) { .header-docs { margin-left:42px; } .operation-index { grid-template-columns:1fr; } .metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media print {
+ @page { margin:14mm; }
+ body { background:white; font-size:10pt; }
+ .operation-sidebar,.skip-link,.header-docs,.report-kind,footer { display:none!important; }
+ .masthead { padding:0; background:white; }
+ .report-shell { padding:12px 0; max-width:none; }
+ [data-panel][hidden] { display:block!important; }
+ [data-panel] { margin-top:28px!important; }
+ .inspection-grid,.evidence-catalog { display:block; }
+ .identity-column { border:0; padding:15px 0; }
+ .control-row,.job,tr { break-inside:avoid; }
+ h2,h3 { break-after:avoid; }
+ .table-wrap { overflow:visible; }
+ .table-wrap table { min-width:0; font-size:9pt; }
+ td,th { padding:7px; overflow-wrap:anywhere; }
+ details::details-content { content-visibility:visible; }
+}
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important; scroll-behavior:auto!important; } }
+</style></head>
+<body>
+<a class="skip-link" href="#content">Ir para a operação</a>
+<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">C/O</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../../../../../../README.md">Como executar ↗</a><a href="../../../../../runbooks.md">Runbooks ↗</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
+<div class="report-shell">
+  <div class="report-heading"><div><p class="eyebrow">APLICAÇÃO LOCAL / DOCKER</p><h1>Operações registradas</h1></div><p class="generated-at">Relatório gerado em <time datetime="2026-09-22T06:29:58.334926+00:00">22/09/2026 · 06:29:58 UTC</time></p></div>
+  <aside class="operation-sidebar"><nav aria-label="Operações registradas"><details class="operation-picker" open><summary>Escolher operação <span aria-hidden="true">⌄</span></summary><div class="operation-index"><div class="operation-group"><h2>Verificação</h2><a class="operation-link" href="#overview" data-operation="overview"><span class="operation-title"><span class="state-dot missing" aria-hidden="true"></span>Aplicação e isolamento</span><span class="operation-meta">Ausente · Não informado</span></a><a class="operation-link" href="#result" data-operation="result"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Resultado do job</span><span class="operation-meta">Aprovado · v1.0.0</span></a><a class="operation-link" href="#tls" data-operation="tls"><span class="operation-title"><span class="state-dot missing" aria-hidden="true"></span>Conexão TLS</span><span class="operation-meta">Ausente · CA local</span></a></div><div class="operation-group"><h2>Recuperação</h2><a class="operation-link" href="#recovery" data-operation="recovery"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Backup e restauração</span><span class="operation-meta">Aprovado · 27,4 s</span></a></div><div class="operation-group"><h2>Release</h2><a class="operation-link" href="#operations" data-operation="operations"><span class="operation-title"><span class="state-dot missing" aria-hidden="true"></span>Última troca de imagem</span><span class="operation-meta">Ausente · Não informado</span></a><a class="operation-link" href="#rollback" data-operation="rollback"><span class="operation-title"><span class="state-dot pass" aria-hidden="true"></span>Retorno após falha</span><span class="operation-meta">Aprovado · 44,9 s</span></a></div><div class="operation-group"><h2>Artefatos</h2><a class="operation-link" href="#artifacts" data-operation="artifacts"><span class="operation-title"><span class="state-dot missing" aria-hidden="true"></span>Imagem, auditoria e scan</span><span class="operation-meta">Ausente · Versão não informada</span></a><a class="operation-link" href="#evidence" data-operation="evidence"><span class="operation-title"><span class="state-dot info" aria-hidden="true"></span>Arquivos de evidência</span><span class="operation-meta">Consulta · 4 JSONs</span></a></div></div></details></nav><p class="index-note">Resultados salvos em arquivos. Nenhum serviço é consultado ou alterado ao abrir esta página.</p></aside>
+  <main id="content" tabindex="-1">
+
+    <noscript><p class="notice">Todas as operações aparecem abaixo. Use os links da lista para chegar ao resultado desejado.</p></noscript>
+    <section id="overview" data-panel aria-labelledby="overview-title">
+      <div class="panel-heading"><div><p class="eyebrow">Verificação / Aplicação e isolamento</p><h2 id="overview-title" tabindex="-1">Verificação da aplicação</h2><p>Etapas vinculadas à última execução de verificação.</p></div><span class="panel-symbol" aria-hidden="true">01</span></div>
+      <div class="inspection-grid"><div class="result-column">
+        <div class="section-heading"><h3>Etapas verificadas</h3><a href="#evidence">Todos os arquivos →</a></div><ol class="control-list"><li class="empty-state">Sem etapas vinculadas a esta execução.</li></ol>
+        <details class="section-details"><summary>Identidade dos processos e limites dos containers</summary><div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col">Memória máxima</th><th scope="col">Limite de CPU</th><th scope="col">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody><tr><th scope="row">proxy</th><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Sem dados</td></tr><tr><th scope="row">api</th><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Sem dados</td></tr><tr><th scope="row">worker</th><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Sem dados</td></tr><tr><th scope="row">db</th><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Não informado</td><td>Sem dados</td></tr></tbody></table></div><div class="proof">Sem arquivo</div></details>
+      </div><aside class="identity-column">
+        <div class="attempt missing"><p class="eyebrow">RESULTADO REGISTRADO</p><h3>Nenhuma verificação registrada</h3><strong class="duration">Não informado</strong><p>Sem execução</p><p>Execute python scripts/ops.py verify e python scripts/ops.py report.</p></div>
+        <dl class="record-context"><div><dt>Conclusão registrada</dt><dd>Sem data</dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl>
+        <details class="section-details"><summary>Identificação e duração da execução</summary><dl class="facts"><dt>Início</dt><dd>Sem data</dd><dt>Conclusão / registro</dt><dd>Sem data</dd><dt>Projeto</dt><dd><code>Não informado</code></dd><dt>ID da execução</dt><dd><code>Não informado</code></dd><dt>Duração exata</dt><dd>Não informado</dd><dt>Categoria de erro</dt><dd>Não informado</dd></dl><div class="proof">Sem arquivo</div></details>
+      </aside></div>
+    </section>
+    <section id="result" data-panel aria-labelledby="result-title">
+      <div class="panel-heading"><div><p class="eyebrow">Verificação / Resultado do job</p><h2 id="result-title" tabindex="-1">Último job registrado</h2><p>Contagem, tentativas e checksum do resultado salvo.</p></div><span class="panel-symbol" aria-hidden="true">02</span></div>
+      <div class="inspection-grid"><div class="result-column"><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>29a855d0-7e64-4055-9f9e-0004c4ff4175</code><p>SHA-256 do texto UTF-8</p><code>10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60</code></details><div class="proof"><a href="evidence/demo.json">demo.json</a><span class="proof-date"><time datetime="2026-09-22T06:18:12.482989+00:00">22/09/2026 · 06:18:12 UTC</time></span></div></div></div><aside class="identity-column"><h3>Origem deste resultado</h3><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:18:12.482989+00:00">22/09/2026 · 06:18:12 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><p class="notice">A versão acima pertence a este job. A imagem de <a href="#artifacts">Artefatos</a> pode vir de outro build; a proximidade entre os registros não estabelece um vínculo.</p></aside></div>
+    </section>
+    <section id="tls" data-panel aria-labelledby="tls-title">
+      <div class="panel-heading"><div><p class="eyebrow">Verificação / Conexão TLS</p><h2 id="tls-title" tabindex="-1">Conexão com a CA local</h2><p>Resultado da verificação do cliente contra o proxy da demonstração.</p></div><span class="panel-symbol" aria-hidden="true">03</span></div>
+      <div class="inspection-grid"><div class="result-column"><h3>Etapas da conexão</h3><ol class="control-list"><li class="control-row"><div class="control-title"><h3>TLS local</h3><span class="badge pending">Sem resultado</span></div><p>Testa TLS com a CA local passada ao cliente.</p><div class="proof">Sem arquivo</div></li></ol></div><aside class="identity-column"><h3>Registro da conexão</h3><dl class="record-context"><div><dt>Registro</dt><dd>Sem data</dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><p class="notice">O TLS termina no proxy. Este registro não é uma observação da disponibilidade atual.</p></aside></div>
+    </section>
+    <section id="recovery" data-panel aria-labelledby="recovery-title">
+      <div class="panel-heading"><div><p class="eyebrow">Recuperação / Dados</p><h2 id="recovery-title" tabindex="-1">Backup e restauração</h2><p>Confira a cópia registrada e o teste de leitura em um volume novo.</p></div><span class="badge pass">Passou</span></div>
+      <div class="inspection-grid"><div class="result-column">
+        <div class="operation-summary"><div><span>Jobs restaurados</span><strong>3</strong></div><div><span>Restauração + novo job</span><strong>27,4 s</strong></div></div>
+        <h3 class="subheading">Verificações: cópia → dados → novo job</h3><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-restore-b83b509e</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Checksum do backup</h3><span class="badge pass">Passou</span></div><p>Compara o dump recebido com o checksum registrado.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Dados no volume restaurado</h3><span class="badge pass">Passou</span></div><p>Compara o snapshot restaurado com os dados esperados.</p><div class="proof"></div></li><li class="control-row"><div class="control-title"><h3>Novo job após restauração</h3><span class="badge pass">Passou</span></div><p>Confere conclusão, contagem de palavras e checksum do novo resultado.</p><div class="proof"></div></li></ol><div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div>
+        <details class="section-details recovery-job" open><summary>Resultado do novo job no volume restaurado</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>4</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>5787bb14-bd06-4e2d-83b3-9a101a8a5b6d</code><p>SHA-256 do texto UTF-8</p><code>7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c</code></details><div class="proof"><a href="evidence/restore.json">restore.json</a><span class="proof-date"><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></span></div></div></details>
+        <p class="notice">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
+      </div><aside class="identity-column"><div class="evidence-block"><div class="section-heading"><h3>Registro da cópia</h3><span>8,4 s</span></div><p>O backup e a restauração têm registros próprios. Confira o caminho do backup no JSON de restauração para estabelecer a relação.</p><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><dl class="facts"><dt>Schema do backup</dt><dd>2</dd><dt>SHA-256 do dump</dt><dd><code>11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb</code></dd></dl><div class="proof"><a href="evidence/backup.json">backup.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></span></div></div></aside></div>
+    </section>
+    <section id="operations" data-panel aria-labelledby="operations-title">
+      <div class="panel-heading"><div><p class="eyebrow">Release / Última tentativa</p><h2 id="operations-title" tabindex="-1">Troca de imagem</h2><p>Resultado da tentativa mais recente, incluindo falha quando registrada.</p></div><span class="badge pending">Sem resultado</span></div>
+      <div class="inspection-grid"><div class="result-column"><div class="operation-summary"><div><span>Versão solicitada</span><strong>Não informado</strong></div><div><span>Janela da operação</span><strong>Não informado</strong></div></div><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Troca de release</h3><span class="badge pending">Sem resultado</span></div><p>Confere a imagem candidata, aplica a migração e verifica os jobs.</p><div class="proof">Sem arquivo</div></li></ol><details class="section-details"><summary>Job executado pela candidata</summary><div class="empty-state"><h3>Nenhum resultado registrado</h3><p>Não há job vinculado a este registro. Consulte o arquivo da operação; uma nova demonstração não completa uma evidência anterior.</p></div></details><p class="notice">A identificação da candidata vem deste registro de release. O <a href="#artifacts">scan disponível</a> só se aplica quando a identidade da imagem coincide.</p></div>
+      <aside class="identity-column"><dl class="record-context"><div><dt>Registro</dt><dd>Sem data</dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Imagens desta tentativa</h3><dl class="facts"><dt>Imagem anterior</dt><dd><code>Não informado</code></dd><dt>Imagem candidata</dt><dd><code>Não informado</code></dd></dl><div class="proof">Sem arquivo</div></div></aside></div>
+    </section>
+    <section id="rollback" data-panel aria-labelledby="rollback-title">
+      <div class="panel-heading"><div><p class="eyebrow">Release / Recuperação</p><h2 id="rollback-title" tabindex="-1">Retorno após falha controlada</h2><p>Teste de retorno à imagem anterior depois de uma falha no smoke test.</p></div><span class="badge pass">Passou</span></div>
+      <div class="inspection-grid"><div class="result-column"><div class="operation-summary"><div><span>Janela do rollback</span><strong>44,9 s</strong></div></div><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Rollback</h3><span class="badge pass">Passou</span></div><p>Injeta falha no smoke test e verifica o retorno à imagem anterior, sem downgrade do banco.</p><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></li></ol><details class="section-details"><summary>Job após o retorno</summary><div class="job"><div><h3>Concluído</h3></div><div class="metrics"><div class="metric"><span>Palavras</span><strong>3</strong></div><div class="metric"><span>Tentativas</span><strong>1</strong></div><div class="metric"><span>Versão</span><strong>1.0.0</strong></div></div><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>4e1a4711-814d-4cc3-a9f5-f579450db3dc</code><p>SHA-256 do texto UTF-8</p><code>81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556</code></details><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></div></details><p class="notice">O rollback troca a imagem. Não rebaixa o schema e não restaura um backup antigo.</p></div>
+      <aside class="identity-column"><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-fc39e58c</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Imagens do teste</h3><dl class="facts"><dt>Candidata testada</dt><dd><code>sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8</code></dd><dt>Imagem anterior</dt><dd><code>sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed</code></dd></dl><div class="proof"><a href="evidence/rollback.json">rollback.json</a><span class="proof-date"><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></span></div></div></aside></div>
+    </section>
+    <section id="artifacts" data-panel aria-labelledby="artifacts-title">
+      <div class="panel-heading"><div><p class="eyebrow">Artefatos / Build selecionado</p><h2 id="artifacts-title" tabindex="-1">Release Não informado</h2><p>Build, auditoria ou scan ausentes para esta imagem.</p></div><div class="scan-status"><span>Scan da imagem</span><span class="badge pending">Sem resultado</span></div></div>
+      <div class="inspection-grid"><div class="result-column"><p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p><ol class="control-list"><li class="control-row"><div class="control-title"><h3>Imagem e OCI</h3><span class="badge pending">Sem resultado</span></div><p>Confere config digest, camadas e subjects das attestations. Busca a sentinela nas camadas, histórico, filesystem e metadados.</p><div class="proof">Sem arquivo</div></li><li class="control-row"><div class="control-title"><h3>Scan</h3><span class="badge pending">Sem resultado</span></div><p>Sem scan compatível com esta imagem.</p><div class="proof">Sem arquivo</div></li></ol><div class="metrics-block"><div class="metrics"><div class="metric"><span>Build OCI + carregamento</span><strong class=unavailable>Não informado</strong></div><div class="metric"><span>Pacotes no SBOM</span><strong class=unavailable>Não informado</strong></div><div class="metric"><span>Idade da base de scan</span><strong class=unavailable>Não informado</strong></div></div></div><details class="section-details"><summary>Arquivos de build, auditoria e scan</summary><ul class="artifact-files"><li>Sem arquivos de build, SBOM, provenance ou scan.</li></ul></details><details class="section-details"><summary>Experimento de cache do build</summary><p class="metadata">Cache sem medições.</p><div class="proof">Sem arquivo</div></details></div>
+      <aside class="identity-column"><dl class="record-context"><div><dt>Build registrado</dt><dd>Sem data</dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="evidence-block"><h3>Identidade da imagem</h3><dl class="facts"><dt>Build</dt><dd><code>Não informado</code></dd><dt>Imagem auditada</dt><dd><code>Não informado</code></dd><dt>Config digest</dt><dd><code>Não informado</code></dd></dl><div class="proof">Sem arquivo</div></div><details class="section-details"><summary>Snapshot do runtime — registro independente</summary><p>Versão Não informado · status Não informado.</p><dl class="record-context"><div><dt>Registro</dt><dd>Sem data</dd></div><div><dt>Projeto</dt><dd><code>Não informado</code></dd></div><div><dt>Execução</dt><dd><code>Não informado</code></dd></div></dl><div class="proof">Sem arquivo</div></details></aside></div>
+    </section>
+    <section id="evidence" data-panel aria-labelledby="evidence-title">
+      <div class="panel-heading"><div><p class="eyebrow">Artefatos / Arquivos</p><h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2><p>4 arquivos JSON válidos na raiz de docs/evidence. Arquivos de outras tentativas não aprovam a operação selecionada.</p></div><span class="panel-symbol" aria-hidden="true">{ }</span></div>
+      <div class="evidence-catalog"><div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0"><table><caption>Arquivos e datas dos registros</caption><thead><tr><th scope="col">Arquivo</th><th scope="col">Data</th><th scope="col">Projeto</th></tr></thead><tbody><tr><th scope="row"><a href="evidence/backup.json">backup</a></th><td><time datetime="2026-09-22T06:19:27.627077+00:00">22/09/2026 · 06:19:27 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/demo.json">demo</a></th><td><time datetime="2026-09-22T06:18:12.482989+00:00">22/09/2026 · 06:18:12 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr><tr><th scope="row"><a href="evidence/restore.json">restore</a></th><td><time datetime="2026-09-22T06:20:00.831503+00:00">22/09/2026 · 06:20:00 UTC</time></td><td>pf-containerops-restore-b83b509e</td></tr><tr><th scope="row"><a href="evidence/rollback.json">rollback</a></th><td><time datetime="2026-09-22T06:19:13.533545+00:00">22/09/2026 · 06:19:13 UTC</time></td><td>pf-containerops-test-fc39e58c</td></tr></tbody></table></div><div class="evidence-block"><h3>Atualizar esta leitura</h3><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><code class="command">python scripts/ops.py report</code><p>Os <a href="../../../../../runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></div></div>
+    </section>
+    <footer><span>Snapshot de evidências · dados de demonstração</span><a href="../../../../../verification.md">Escopo das verificações ↗</a></footer>
+  </main>
+</div><script>(() => {
+  "use strict";
+  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+  const links = Array.from(document.querySelectorAll("[data-operation]"));
+  const picker = document.querySelector(".operation-picker");
+  if (!panels.length || !picker) return;
+
+  const content = document.getElementById("content");
+  document.querySelector(".skip-link")?.addEventListener("click", (event) => {
+    if (!content) return;
+    event.preventDefault();
+    content.focus({ preventScroll: true });
+    content.scrollIntoView({ block: "start" });
+  });
+
+  function select(focus) {
+    const target = document.getElementById(window.location.hash.slice(1));
+    const panel = target?.closest("[data-panel]") || panels[0];
+    for (const candidate of panels) candidate.hidden = candidate !== panel;
+    for (const link of links) {
+      if (link.dataset.operation === panel.id)
+        link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    }
+    if (window.matchMedia("(max-width: 760px)").matches) picker.open = false;
+    if (focus) {
+      panel.querySelector("h2")?.focus({ preventScroll: true });
+      panel.scrollIntoView({ block: "start" });
+    }
+  }
+
+  select(false);
+  window
+    .matchMedia("(max-width: 760px)")
+    .addEventListener("change", (event) => {
+      picker.open = !event.matches;
+    });
+  window.addEventListener("hashchange", () => select(true));
+  for (const link of links)
+    link.addEventListener("click", () => {
+      if (link.hash === window.location.hash) select(true);
+    });
+  window.addEventListener("beforeprint", () => {
+    for (const panel of panels) panel.hidden = false;
+  });
+  window.addEventListener("afterprint", () => select(false));
+})();
+;</script></body></html>

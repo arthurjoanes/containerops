@@ -1,0 +1,21 @@
+{
+  "admission_paused": false,
+  "counts": {
+    "failed": 0,
+    "queued": 0,
+    "running": 0,
+    "succeeded": 1
+  },
+  "jobs": [
+    {
+      "attempts": 1,
+      "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
+      "error_category": null,
+      "id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+      "owner": "alice",
+      "state": "succeeded",
+      "word_count": 4
+    }
+  ],
+  "schema_version": 1
+}

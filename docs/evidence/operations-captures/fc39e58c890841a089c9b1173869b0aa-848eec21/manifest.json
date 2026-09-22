@@ -1,0 +1,106 @@
+{
+  "run_id": "fc39e58c890841a089c9b1173869b0aa",
+  "status": "passed",
+  "recorded_at": "2026-09-22T06:29:58.359491+00:00",
+  "scope": "Real recorded operations rendered locally; not a live application UI or user study",
+  "proof": "problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json",
+  "proof_sha256": "d1df90efa209fe851fbd6db6555783d16faad5b0689c8c2290bb8991771bf0cb",
+  "renderer_sources": {
+    "report.py": "13136c875b2467714610d981ca2b88257a5e9b499740afa3c1a611b03c7abb69",
+    "report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+    "report.html": "bd44a499baf1b8227e8e7bd4912e5beb7e75c583a61a3cefa92d79bb9a4fb144",
+    "report.css": "cac630351ac3c8ba6dbbc1961ad8d09354ed87105abc0ca5b1283cc693fb48cd",
+    "report.js": "45095368c1a24ebaba332e279401097472c391100ec3ab5392c1906d6ccf2adb",
+    "capture_operations.py": "76cae95af751ce2def0406d35559b030d2a69a4566bbd2ab6d68c00b41a5506d",
+    "capture_operations.cjs": "3adce682b7201d73f14d585ebd525671a409059dd23e69e89b14e67eba656bf6"
+  },
+  "report_sha256": "2733ddf6c9eabfd5c2d192d49b16758d53a9f0f11d152bb4b8cac736bf8419fa",
+  "documentation_links": {
+    "../README.md": "../../../../../../README.md",
+    "runbooks.md": "../../../../../runbooks.md",
+    "verification.md": "../../../../../verification.md"
+  },
+  "changes_since_operational_proof": [
+    {
+      "path": "scripts/capture_operations.cjs",
+      "at_proof": "92f214a960428084c704acc699232f5f6c08e755577d185d17f495ae887fd587",
+      "at_capture": "3adce682b7201d73f14d585ebd525671a409059dd23e69e89b14e67eba656bf6"
+    },
+    {
+      "path": "scripts/capture_operations.py",
+      "at_proof": "052a3c9e827e09caae0a2f58155e6e8ab8c690ae17f436be0c38c5510412842b",
+      "at_capture": "76cae95af751ce2def0406d35559b030d2a69a4566bbd2ab6d68c00b41a5506d"
+    },
+    {
+      "path": "scripts/ops.py",
+      "at_proof": "1e64478357924eaddd806f28789fad8e39ec61baa037f04a07a40e0ec5de945a",
+      "at_capture": "42a707a9be6f881487f15a333163d4272bc4309d544abb745e3e206f2563de3e"
+    },
+    {
+      "path": "scripts/report.css",
+      "at_proof": "4689171a682618f8af56bd040ef85b2edb9744769365b2bc6088dbd08f7f62c1",
+      "at_capture": "cac630351ac3c8ba6dbbc1961ad8d09354ed87105abc0ca5b1283cc693fb48cd"
+    },
+    {
+      "path": "tests/test_operations_proof.py",
+      "at_proof": "38853e48d97cdac134d936beddae737605d05d99a5c7c3b9bbecd659e9e37af3",
+      "at_capture": "2d26a123bddd53ab9681e0f90eb6ff18645b894204bd6eb7ba5afe2b46a16178"
+    }
+  ],
+  "completed_at": "2026-09-22T06:29:59.948412+00:00",
+  "browser": {
+    "status": "passed",
+    "recorded_at": "2026-09-22T06:29:58.899Z",
+    "browser": "153.0.4234.48",
+    "playwright": "1.63.0",
+    "source": "real operational evidence; static report",
+    "checks": [
+      {
+        "panel": "result",
+        "width": 1440,
+        "job_id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+        "screenshot": "job-1440.png"
+      },
+      {
+        "panel": "rollback",
+        "width": 1440,
+        "job_id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+        "screenshot": "rollback-1440.png"
+      },
+      {
+        "panel": "recovery",
+        "width": 1440,
+        "job_id": "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+        "screenshot": "restore-new-job-1440.png"
+      },
+      {
+        "panel": "result",
+        "width": 390,
+        "job_id": "29a855d0-7e64-4055-9f9e-0004c4ff4175",
+        "screenshot": "job-390.png"
+      },
+      {
+        "panel": "rollback",
+        "width": 390,
+        "job_id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+        "screenshot": "rollback-390.png"
+      },
+      {
+        "panel": "recovery",
+        "width": 390,
+        "job_id": "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+        "screenshot": "restore-new-job-390.png"
+      }
+    ],
+    "errors": [],
+    "completed_at": "2026-09-22T06:29:59.730Z"
+  },
+  "screenshots": {
+    "job-1440.png": "b8cb68aef5009fc05d556573090e7e1784d76674f73745ff893a457474319c5d",
+    "job-390.png": "fffd52b1b806b8d869cadf55530b429b08fadb7c01a7341247c09a7654d81b13",
+    "restore-new-job-1440.png": "c79ddc4218d29cb88a7974c077c602b700b3695935c2cc9b52102d9d90c93c40",
+    "restore-new-job-390.png": "0c656bca1b97232ae6934d08cf91ce13cbd98fcb732b5443124e454fc9221ef3",
+    "rollback-1440.png": "dd66c2393fa9f4139eed01d8d420cb02256d1a4a1498c891382c3b08e7606fe5",
+    "rollback-390.png": "66c567ec397cf620681df73dd864e0cfa7e720c111d1729d5389c6214a7d2038"
+  }
+}

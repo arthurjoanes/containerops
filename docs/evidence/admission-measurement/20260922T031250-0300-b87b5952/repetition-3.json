@@ -1,0 +1,4131 @@
+{
+  "number": 3,
+  "project": "pf-containerops-test-656ab69f",
+  "started_at": "2026-09-22T06:14:55.011851+00:00",
+  "status": "passed",
+  "phase": "complete",
+  "requests": [
+    {
+      "owner": "alice",
+      "sequence": 1,
+      "started_at": "2026-09-22T06:15:22.245759+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.464009+00:00",
+      "admission_latency_ms": 219.00000000096043
+    },
+    {
+      "owner": "alice",
+      "sequence": 2,
+      "started_at": "2026-09-22T06:15:22.246290+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.663650+00:00",
+      "admission_latency_ms": 421.9999999986612
+    },
+    {
+      "owner": "alice",
+      "sequence": 3,
+      "started_at": "2026-09-22T06:15:22.246823+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.672108+00:00",
+      "admission_latency_ms": 421.9999999986612
+    },
+    {
+      "owner": "alice",
+      "sequence": 4,
+      "started_at": "2026-09-22T06:15:22.247881+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.679885+00:00",
+      "admission_latency_ms": 436.99999999807915
+    },
+    {
+      "owner": "bob",
+      "sequence": 1,
+      "started_at": "2026-09-22T06:15:22.246290+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.763560+00:00",
+      "admission_latency_ms": 515.9999999996217
+    },
+    {
+      "owner": "bob",
+      "sequence": 2,
+      "started_at": "2026-09-22T06:15:22.246823+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.770486+00:00",
+      "admission_latency_ms": 515.9999999996217
+    },
+    {
+      "owner": "bob",
+      "sequence": 3,
+      "started_at": "2026-09-22T06:15:22.247881+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "076c4f24-4331-444a-be2d-b2a719c77607",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.780242+00:00",
+      "admission_latency_ms": 530.9999999990396
+    },
+    {
+      "owner": "bob",
+      "sequence": 4,
+      "started_at": "2026-09-22T06:15:22.248412+00:00",
+      "started_offset_seconds": 151.45300000000134,
+      "status": 201,
+      "response": {
+        "id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.858673+00:00",
+      "admission_latency_ms": 609.0000000003783
+    },
+    {
+      "owner": "alice",
+      "sequence": 5,
+      "started_at": "2026-09-22T06:15:22.464676+00:00",
+      "started_offset_seconds": 151.6720000000023,
+      "status": 201,
+      "response": {
+        "id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.865013+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "bob",
+      "sequence": 5,
+      "started_at": "2026-09-22T06:15:22.664230+00:00",
+      "started_offset_seconds": 151.875,
+      "status": 201,
+      "response": {
+        "id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.873515+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "alice",
+      "sequence": 6,
+      "started_at": "2026-09-22T06:15:22.672108+00:00",
+      "started_offset_seconds": 151.875,
+      "status": 201,
+      "response": {
+        "id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.957923+00:00",
+      "admission_latency_ms": 281.00000000267755
+    },
+    {
+      "owner": "bob",
+      "sequence": 6,
+      "started_at": "2026-09-22T06:15:22.679885+00:00",
+      "started_offset_seconds": 151.88999999999942,
+      "status": 201,
+      "response": {
+        "id": "7497900b-8919-4360-9383-f8e94553a896",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.961675+00:00",
+      "admission_latency_ms": 282.0000000028813
+    },
+    {
+      "owner": "alice",
+      "sequence": 7,
+      "started_at": "2026-09-22T06:15:22.763560+00:00",
+      "started_offset_seconds": 151.96900000000096,
+      "status": 201,
+      "response": {
+        "id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.961675+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "bob",
+      "sequence": 7,
+      "started_at": "2026-09-22T06:15:22.770486+00:00",
+      "started_offset_seconds": 151.96900000000096,
+      "status": 201,
+      "response": {
+        "id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.964891+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "alice",
+      "sequence": 8,
+      "started_at": "2026-09-22T06:15:22.780242+00:00",
+      "started_offset_seconds": 151.98400000000038,
+      "status": 201,
+      "response": {
+        "id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:22.978608+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "bob",
+      "sequence": 8,
+      "started_at": "2026-09-22T06:15:22.858673+00:00",
+      "started_offset_seconds": 152.06200000000172,
+      "status": 201,
+      "response": {
+        "id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.059766+00:00",
+      "admission_latency_ms": 202.9999999977008
+    },
+    {
+      "owner": "alice",
+      "sequence": 9,
+      "started_at": "2026-09-22T06:15:22.865013+00:00",
+      "started_offset_seconds": 152.07800000000134,
+      "status": 201,
+      "response": {
+        "id": "f34016d5-d586-48f1-a5a5-700db780612d",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.060298+00:00",
+      "admission_latency_ms": 186.99999999807915
+    },
+    {
+      "owner": "bob",
+      "sequence": 9,
+      "started_at": "2026-09-22T06:15:22.873515+00:00",
+      "started_offset_seconds": 152.07800000000134,
+      "status": 201,
+      "response": {
+        "id": "e062435c-b616-4568-8c74-57789e00a170",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.061363+00:00",
+      "admission_latency_ms": 186.99999999807915
+    },
+    {
+      "owner": "alice",
+      "sequence": 10,
+      "started_at": "2026-09-22T06:15:22.958427+00:00",
+      "started_offset_seconds": 152.1720000000023,
+      "status": 201,
+      "response": {
+        "id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.165162+00:00",
+      "admission_latency_ms": 202.9999999977008
+    },
+    {
+      "owner": "alice",
+      "sequence": 11,
+      "started_at": "2026-09-22T06:15:22.962217+00:00",
+      "started_offset_seconds": 152.1720000000023,
+      "status": 201,
+      "response": {
+        "id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.265297+00:00",
+      "admission_latency_ms": 296.9999999986612
+    },
+    {
+      "owner": "bob",
+      "sequence": 10,
+      "started_at": "2026-09-22T06:15:22.961675+00:00",
+      "started_offset_seconds": 152.1720000000023,
+      "status": 201,
+      "response": {
+        "id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.362742+00:00",
+      "admission_latency_ms": 389.9999999994179
+    },
+    {
+      "owner": "bob",
+      "sequence": 11,
+      "started_at": "2026-09-22T06:15:22.964891+00:00",
+      "started_offset_seconds": 152.1720000000023,
+      "status": 201,
+      "response": {
+        "id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.459326+00:00",
+      "admission_latency_ms": 500.0
+    },
+    {
+      "owner": "bob",
+      "sequence": 12,
+      "started_at": "2026-09-22T06:15:23.059766+00:00",
+      "started_offset_seconds": 152.26499999999942,
+      "status": 201,
+      "response": {
+        "id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.463692+00:00",
+      "admission_latency_ms": 407.0000000028813
+    },
+    {
+      "owner": "alice",
+      "sequence": 12,
+      "started_at": "2026-09-22T06:15:22.978608+00:00",
+      "started_offset_seconds": 152.18700000000172,
+      "status": 201,
+      "response": {
+        "id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.474617+00:00",
+      "admission_latency_ms": 500.0
+    },
+    {
+      "owner": "bob",
+      "sequence": 13,
+      "started_at": "2026-09-22T06:15:23.061363+00:00",
+      "started_offset_seconds": 152.26499999999942,
+      "status": 201,
+      "response": {
+        "id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.560926+00:00",
+      "admission_latency_ms": 500.0
+    },
+    {
+      "owner": "alice",
+      "sequence": 13,
+      "started_at": "2026-09-22T06:15:23.060298+00:00",
+      "started_offset_seconds": 152.26499999999942,
+      "status": 201,
+      "response": {
+        "id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.566001+00:00",
+      "admission_latency_ms": 500.0
+    },
+    {
+      "owner": "alice",
+      "sequence": 14,
+      "started_at": "2026-09-22T06:15:23.165162+00:00",
+      "started_offset_seconds": 152.375,
+      "status": 201,
+      "response": {
+        "id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.660051+00:00",
+      "admission_latency_ms": 484.00000000037835
+    },
+    {
+      "owner": "bob",
+      "sequence": 14,
+      "started_at": "2026-09-22T06:15:23.265809+00:00",
+      "started_offset_seconds": 152.46900000000096,
+      "status": 201,
+      "response": {
+        "id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.669400+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "alice",
+      "sequence": 15,
+      "started_at": "2026-09-22T06:15:23.362742+00:00",
+      "started_offset_seconds": 152.56200000000172,
+      "status": 201,
+      "response": {
+        "id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.759308+00:00",
+      "admission_latency_ms": 406.9999999992433
+    },
+    {
+      "owner": "bob",
+      "sequence": 15,
+      "started_at": "2026-09-22T06:15:23.459833+00:00",
+      "started_offset_seconds": 152.6720000000023,
+      "status": 201,
+      "response": {
+        "id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.763263+00:00",
+      "admission_latency_ms": 296.9999999986612
+    },
+    {
+      "owner": "alice",
+      "sequence": 16,
+      "started_at": "2026-09-22T06:15:23.463692+00:00",
+      "started_offset_seconds": 152.6720000000023,
+      "status": 201,
+      "response": {
+        "id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.863733+00:00",
+      "admission_latency_ms": 389.9999999994179
+    },
+    {
+      "owner": "bob",
+      "sequence": 16,
+      "started_at": "2026-09-22T06:15:23.474617+00:00",
+      "started_offset_seconds": 152.68700000000172,
+      "status": 201,
+      "response": {
+        "id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.960700+00:00",
+      "admission_latency_ms": 485.0000000005821
+    },
+    {
+      "owner": "bob",
+      "sequence": 17,
+      "started_at": "2026-09-22T06:15:23.566001+00:00",
+      "started_offset_seconds": 152.76499999999942,
+      "status": 201,
+      "response": {
+        "id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.961225+00:00",
+      "admission_latency_ms": 407.0000000028813
+    },
+    {
+      "owner": "alice",
+      "sequence": 17,
+      "started_at": "2026-09-22T06:15:23.560926+00:00",
+      "started_offset_seconds": 152.76499999999942,
+      "status": 201,
+      "response": {
+        "id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:23.965517+00:00",
+      "admission_latency_ms": 407.0000000028813
+    },
+    {
+      "owner": "alice",
+      "sequence": 18,
+      "started_at": "2026-09-22T06:15:23.660051+00:00",
+      "started_offset_seconds": 152.85900000000038,
+      "status": 201,
+      "response": {
+        "id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.060641+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "bob",
+      "sequence": 18,
+      "started_at": "2026-09-22T06:15:23.669400+00:00",
+      "started_offset_seconds": 152.875,
+      "status": 201,
+      "response": {
+        "id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.063280+00:00",
+      "admission_latency_ms": 389.9999999994179
+    },
+    {
+      "owner": "alice",
+      "sequence": 19,
+      "started_at": "2026-09-22T06:15:23.759308+00:00",
+      "started_offset_seconds": 152.96900000000096,
+      "status": 201,
+      "response": {
+        "id": "1d42680d-0e03-4cef-982d-53d928503e84",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.163062+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "bob",
+      "sequence": 19,
+      "started_at": "2026-09-22T06:15:23.763263+00:00",
+      "started_offset_seconds": 152.96900000000096,
+      "status": 201,
+      "response": {
+        "id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.258787+00:00",
+      "admission_latency_ms": 500.0
+    },
+    {
+      "owner": "alice",
+      "sequence": 20,
+      "started_at": "2026-09-22T06:15:23.863733+00:00",
+      "started_offset_seconds": 153.06200000000172,
+      "status": 201,
+      "response": {
+        "id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.265690+00:00",
+      "admission_latency_ms": 406.9999999992433
+    },
+    {
+      "owner": "bob",
+      "sequence": 20,
+      "started_at": "2026-09-22T06:15:23.961225+00:00",
+      "started_offset_seconds": 153.1720000000023,
+      "status": 201,
+      "response": {
+        "id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+        "state": "queued",
+        "attempts": 0,
+        "result": null,
+        "error": null,
+        "version": "1.0.0"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.359447+00:00",
+      "admission_latency_ms": 389.9999999994179
+    },
+    {
+      "owner": "alice",
+      "sequence": 21,
+      "started_at": "2026-09-22T06:15:23.961225+00:00",
+      "started_offset_seconds": 153.1720000000023,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.366066+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "bob",
+      "sequence": 21,
+      "started_at": "2026-09-22T06:15:23.965517+00:00",
+      "started_offset_seconds": 153.1720000000023,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.371371+00:00",
+      "admission_latency_ms": 405.9999999990396
+    },
+    {
+      "owner": "alice",
+      "sequence": 22,
+      "started_at": "2026-09-22T06:15:24.060641+00:00",
+      "started_offset_seconds": 153.26499999999942,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.376359+00:00",
+      "admission_latency_ms": 313.00000000192085
+    },
+    {
+      "owner": "bob",
+      "sequence": 22,
+      "started_at": "2026-09-22T06:15:24.063280+00:00",
+      "started_offset_seconds": 153.26499999999942,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.458030+00:00",
+      "admission_latency_ms": 391.00000000325963
+    },
+    {
+      "owner": "alice",
+      "sequence": 23,
+      "started_at": "2026-09-22T06:15:24.163062+00:00",
+      "started_offset_seconds": 153.375,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.462940+00:00",
+      "admission_latency_ms": 297.0000000022992
+    },
+    {
+      "owner": "bob",
+      "sequence": 23,
+      "started_at": "2026-09-22T06:15:24.258787+00:00",
+      "started_offset_seconds": 153.46900000000096,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.467135+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "alice",
+      "sequence": 24,
+      "started_at": "2026-09-22T06:15:24.266222+00:00",
+      "started_offset_seconds": 153.46900000000096,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.471923+00:00",
+      "admission_latency_ms": 203.00000000133878
+    },
+    {
+      "owner": "bob",
+      "sequence": 24,
+      "started_at": "2026-09-22T06:15:24.359447+00:00",
+      "started_offset_seconds": 153.56200000000172,
+      "status": 429,
+      "response": {
+        "detail": "Limite de trabalhos pendentes do proprietário"
+      },
+      "dispatch_censored": false,
+      "completed_at": "2026-09-22T06:15:24.475607+00:00",
+      "admission_latency_ms": 125.0
+    }
+  ],
+  "jobs": [
+    {
+      "id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.460577+00:00",
+      "updated_at": "2026-09-22 06:15:31.585899+00:00",
+      "completed_at": "2026-09-22 06:15:31.585899+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 1,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:31.068891+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5998.903036117554,
+      "total_queue_wait_ms": 8608.314037322998,
+      "after_release_wait_lower_ms": 0,
+      "after_release_wait_upper_ms": 2609.4110012054443,
+      "start_to_db_completion_ms": 517.0080661773682
+    },
+    {
+      "id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.658304+00:00",
+      "updated_at": "2026-09-22 06:15:32.697488+00:00",
+      "completed_at": "2026-09-22 06:15:32.697488+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 2,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:32.179448+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5801.176071166992,
+      "total_queue_wait_ms": 9521.143913269043,
+      "after_release_wait_lower_ms": 516.4999961853027,
+      "after_release_wait_upper_ms": 3719.967842102051,
+      "start_to_db_completion_ms": 518.0401802062988
+    },
+    {
+      "id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.668421+00:00",
+      "updated_at": "2026-09-22 06:15:33.807539+00:00",
+      "completed_at": "2026-09-22 06:15:33.807539+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 3,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:33.290665+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5791.0590171813965,
+      "total_queue_wait_ms": 10622.243881225586,
+      "after_release_wait_lower_ms": 1627.7170181274414,
+      "after_release_wait_upper_ms": 4831.184864044189,
+      "start_to_db_completion_ms": 516.8740749359131
+    },
+    {
+      "id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.676625+00:00",
+      "updated_at": "2026-09-22 06:15:35.018005+00:00",
+      "completed_at": "2026-09-22 06:15:35.018005+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 4,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:34.500955+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5782.855033874512,
+      "total_queue_wait_ms": 11824.33009147644,
+      "after_release_wait_lower_ms": 2838.0072116851807,
+      "after_release_wait_upper_ms": 6041.475057601929,
+      "start_to_db_completion_ms": 517.0497894287109
+    },
+    {
+      "id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.683438+00:00",
+      "updated_at": "2026-09-22 06:15:32.140264+00:00",
+      "completed_at": "2026-09-22 06:15:32.140264+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 1,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:31.623707+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5776.0419845581055,
+      "total_queue_wait_ms": 8940.268993377686,
+      "after_release_wait_lower_ms": 0,
+      "after_release_wait_upper_ms": 3164.22700881958,
+      "start_to_db_completion_ms": 516.556978225708
+    },
+    {
+      "id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.766098+00:00",
+      "updated_at": "2026-09-22 06:15:33.251884+00:00",
+      "completed_at": "2026-09-22 06:15:33.251884+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 2,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:32.735222+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5693.382024765015,
+      "total_queue_wait_ms": 9969.12407875061,
+      "after_release_wait_lower_ms": 1072.2742080688477,
+      "after_release_wait_upper_ms": 4275.742053985596,
+      "start_to_db_completion_ms": 516.6618824005127
+    },
+    {
+      "id": "076c4f24-4331-444a-be2d-b2a719c77607",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.776253+00:00",
+      "updated_at": "2026-09-22 06:15:34.392250+00:00",
+      "completed_at": "2026-09-22 06:15:34.392250+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 3,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:33.844617+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "076c4f24-4331-444a-be2d-b2a719c77607",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5683.227062225342,
+      "total_queue_wait_ms": 11068.363904953003,
+      "after_release_wait_lower_ms": 2181.668996810913,
+      "after_release_wait_upper_ms": 5385.136842727661,
+      "start_to_db_completion_ms": 547.633171081543
+    },
+    {
+      "id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.785648+00:00",
+      "updated_at": "2026-09-22 06:15:35.574061+00:00",
+      "completed_at": "2026-09-22 06:15:35.574061+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 4,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:35.055800+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5673.831939697266,
+      "total_queue_wait_ms": 12270.151853561401,
+      "after_release_wait_lower_ms": 3392.8520679473877,
+      "after_release_wait_upper_ms": 6596.319913864136,
+      "start_to_db_completion_ms": 518.2609558105469
+    },
+    {
+      "id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.861190+00:00",
+      "updated_at": "2026-09-22 06:15:36.132331+00:00",
+      "completed_at": "2026-09-22 06:15:36.132331+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 5,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:35.613859+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5598.289966583252,
+      "total_queue_wait_ms": 12752.668857574463,
+      "after_release_wait_lower_ms": 3950.911045074463,
+      "after_release_wait_upper_ms": 7154.378890991211,
+      "start_to_db_completion_ms": 518.4719562530518
+    },
+    {
+      "id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.870151+00:00",
+      "updated_at": "2026-09-22 06:15:36.687931+00:00",
+      "completed_at": "2026-09-22 06:15:36.687932+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 5,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:36.171677+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5589.32900428772,
+      "total_queue_wait_ms": 13301.526069641113,
+      "after_release_wait_lower_ms": 4508.7292194366455,
+      "after_release_wait_upper_ms": 7712.197065353394,
+      "start_to_db_completion_ms": 516.2549018859863
+    },
+    {
+      "id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.877580+00:00",
+      "updated_at": "2026-09-22 06:15:37.241564+00:00",
+      "completed_at": "2026-09-22 06:15:37.241564+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 6,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:36.725169+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5581.900119781494,
+      "total_queue_wait_ms": 13847.589015960693,
+      "after_release_wait_lower_ms": 5062.221050262451,
+      "after_release_wait_upper_ms": 8265.6888961792,
+      "start_to_db_completion_ms": 516.395092010498
+    },
+    {
+      "id": "7497900b-8919-4360-9383-f8e94553a896",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.883950+00:00",
+      "updated_at": "2026-09-22 06:15:37.795258+00:00",
+      "completed_at": "2026-09-22 06:15:37.795258+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 6,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:37.278373+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "7497900b-8919-4360-9383-f8e94553a896",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5575.530052185059,
+      "total_queue_wait_ms": 14394.423007965088,
+      "after_release_wait_lower_ms": 5615.425109863281,
+      "after_release_wait_upper_ms": 8818.89295578003,
+      "start_to_db_completion_ms": 516.8850421905518
+    },
+    {
+      "id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.891187+00:00",
+      "updated_at": "2026-09-22 06:15:38.349367+00:00",
+      "completed_at": "2026-09-22 06:15:38.349367+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 7,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:37.832068+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5568.29309463501,
+      "total_queue_wait_ms": 14940.88101387024,
+      "after_release_wait_lower_ms": 6169.120073318481,
+      "after_release_wait_upper_ms": 9372.58791923523,
+      "start_to_db_completion_ms": 517.2989368438721
+    },
+    {
+      "id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.897503+00:00",
+      "updated_at": "2026-09-22 06:15:38.907871+00:00",
+      "completed_at": "2026-09-22 06:15:38.907871+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 7,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:38.388589+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5561.97714805603,
+      "total_queue_wait_ms": 15491.08600616455,
+      "after_release_wait_lower_ms": 6725.6410121917725,
+      "after_release_wait_upper_ms": 9929.10885810852,
+      "start_to_db_completion_ms": 519.2821025848389
+    },
+    {
+      "id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.969764+00:00",
+      "updated_at": "2026-09-22 06:15:39.460824+00:00",
+      "completed_at": "2026-09-22 06:15:39.460824+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 8,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:38.944528+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5489.716053009033,
+      "total_queue_wait_ms": 15974.764108657837,
+      "after_release_wait_lower_ms": 7281.580209732056,
+      "after_release_wait_upper_ms": 10485.048055648804,
+      "start_to_db_completion_ms": 516.2959098815918
+    },
+    {
+      "id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.983026+00:00",
+      "updated_at": "2026-09-22 06:15:40.013370+00:00",
+      "completed_at": "2026-09-22 06:15:40.013370+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 8,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:39.496961+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5476.454019546509,
+      "total_queue_wait_ms": 16513.935089111328,
+      "after_release_wait_lower_ms": 7834.013223648071,
+      "after_release_wait_upper_ms": 11037.48106956482,
+      "start_to_db_completion_ms": 516.4089202880859
+    },
+    {
+      "id": "f34016d5-d586-48f1-a5a5-700db780612d",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.989823+00:00",
+      "updated_at": "2026-09-22 06:15:40.564946+00:00",
+      "completed_at": "2026-09-22 06:15:40.564946+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 9,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:40.049445+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "f34016d5-d586-48f1-a5a5-700db780612d",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5469.656944274902,
+      "total_queue_wait_ms": 17059.621810913086,
+      "after_release_wait_lower_ms": 8386.497020721436,
+      "after_release_wait_upper_ms": 11589.964866638184,
+      "start_to_db_completion_ms": 515.5010223388672
+    },
+    {
+      "id": "e062435c-b616-4568-8c74-57789e00a170",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:22.995708+00:00",
+      "updated_at": "2026-09-22 06:15:41.119227+00:00",
+      "completed_at": "2026-09-22 06:15:41.119227+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 9,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:40.602720+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "e062435c-b616-4568-8c74-57789e00a170",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5463.7720584869385,
+      "total_queue_wait_ms": 17607.012033462524,
+      "after_release_wait_lower_ms": 8939.772129058838,
+      "after_release_wait_upper_ms": 12143.239974975586,
+      "start_to_db_completion_ms": 516.5069103240967
+    },
+    {
+      "id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.159047+00:00",
+      "updated_at": "2026-09-22 06:15:41.672961+00:00",
+      "completed_at": "2026-09-22 06:15:41.672961+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 10,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:41.156704+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5300.433158874512,
+      "total_queue_wait_ms": 17997.65706062317,
+      "after_release_wait_lower_ms": 9493.75605583191,
+      "after_release_wait_upper_ms": 12697.223901748657,
+      "start_to_db_completion_ms": 516.2570476531982
+    },
+    {
+      "id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.260112+00:00",
+      "updated_at": "2026-09-22 06:15:42.783631+00:00",
+      "completed_at": "2026-09-22 06:15:42.783631+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 11,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:42.264053+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5199.368000030518,
+      "total_queue_wait_ms": 19003.94105911255,
+      "after_release_wait_lower_ms": 10601.105213165283,
+      "after_release_wait_upper_ms": 13804.573059082031,
+      "start_to_db_completion_ms": 519.5779800415039
+    },
+    {
+      "id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.270723+00:00",
+      "updated_at": "2026-09-22 06:15:42.227946+00:00",
+      "completed_at": "2026-09-22 06:15:42.227946+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 10,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:41.711278+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5188.756942749023,
+      "total_queue_wait_ms": 18440.55485725403,
+      "after_release_wait_lower_ms": 10048.330068588257,
+      "after_release_wait_upper_ms": 13251.797914505005,
+      "start_to_db_completion_ms": 516.6680812835693
+    },
+    {
+      "id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.369541+00:00",
+      "updated_at": "2026-09-22 06:15:43.336866+00:00",
+      "completed_at": "2026-09-22 06:15:43.336866+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 11,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:42.820351+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5089.939117431641,
+      "total_queue_wait_ms": 19450.809955596924,
+      "after_release_wait_lower_ms": 11157.402992248535,
+      "after_release_wait_upper_ms": 14360.870838165283,
+      "start_to_db_completion_ms": 516.5150165557861
+    },
+    {
+      "id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.458956+00:00",
+      "updated_at": "2026-09-22 06:15:44.449259+00:00",
+      "completed_at": "2026-09-22 06:15:44.449259+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 12,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:43.932684+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 5000.524044036865,
+      "total_queue_wait_ms": 20473.72794151306,
+      "after_release_wait_lower_ms": 12269.736051559448,
+      "after_release_wait_upper_ms": 15473.203897476196,
+      "start_to_db_completion_ms": 516.5750980377197
+    },
+    {
+      "id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.469735+00:00",
+      "updated_at": "2026-09-22 06:15:43.895654+00:00",
+      "completed_at": "2026-09-22 06:15:43.895654+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 12,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:43.375122+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4989.745140075684,
+      "total_queue_wait_ms": 19905.38716316223,
+      "after_release_wait_lower_ms": 11712.1741771698,
+      "after_release_wait_upper_ms": 14915.642023086548,
+      "start_to_db_completion_ms": 520.5318927764893
+    },
+    {
+      "id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.478912+00:00",
+      "updated_at": "2026-09-22 06:15:45.561853+00:00",
+      "completed_at": "2026-09-22 06:15:45.561853+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 13,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:45.045441+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4980.567932128906,
+      "total_queue_wait_ms": 21566.52879714966,
+      "after_release_wait_lower_ms": 13382.493019104004,
+      "after_release_wait_upper_ms": 16585.960865020752,
+      "start_to_db_completion_ms": 516.4120197296143
+    },
+    {
+      "id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.561143+00:00",
+      "updated_at": "2026-09-22 06:15:45.007456+00:00",
+      "completed_at": "2026-09-22 06:15:45.007456+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 13,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:44.488214+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4898.337125778198,
+      "total_queue_wait_ms": 20927.07109451294,
+      "after_release_wait_lower_ms": 12825.266122817993,
+      "after_release_wait_upper_ms": 16028.733968734741,
+      "start_to_db_completion_ms": 519.2420482635498
+    },
+    {
+      "id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.570577+00:00",
+      "updated_at": "2026-09-22 06:15:46.118986+00:00",
+      "completed_at": "2026-09-22 06:15:46.118986+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 14,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:45.599517+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4888.9031410217285,
+      "total_queue_wait_ms": 22028.940200805664,
+      "after_release_wait_lower_ms": 13936.569213867188,
+      "after_release_wait_upper_ms": 17140.037059783936,
+      "start_to_db_completion_ms": 519.4687843322754
+    },
+    {
+      "id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.665339+00:00",
+      "updated_at": "2026-09-22 06:15:46.679233+00:00",
+      "completed_at": "2026-09-22 06:15:46.679233+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 14,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:46.162519+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4794.141054153442,
+      "total_queue_wait_ms": 22497.179985046387,
+      "after_release_wait_lower_ms": 14499.571084976196,
+      "after_release_wait_upper_ms": 17703.038930892944,
+      "start_to_db_completion_ms": 516.7140960693359
+    },
+    {
+      "id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.675559+00:00",
+      "updated_at": "2026-09-22 06:15:47.235062+00:00",
+      "completed_at": "2026-09-22 06:15:47.235062+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 15,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:46.717876+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4783.921003341675,
+      "total_queue_wait_ms": 23042.316913604736,
+      "after_release_wait_lower_ms": 15054.928064346313,
+      "after_release_wait_upper_ms": 18258.39591026306,
+      "start_to_db_completion_ms": 517.1859264373779
+    },
+    {
+      "id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.681925+00:00",
+      "updated_at": "2026-09-22 06:15:47.788769+00:00",
+      "completed_at": "2026-09-22 06:15:47.788769+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 15,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:47.272749+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4777.554988861084,
+      "total_queue_wait_ms": 23590.823888778687,
+      "after_release_wait_lower_ms": 15609.801054000854,
+      "after_release_wait_upper_ms": 18813.268899917603,
+      "start_to_db_completion_ms": 516.0200595855713
+    },
+    {
+      "id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.860089+00:00",
+      "updated_at": "2026-09-22 06:15:48.343816+00:00",
+      "completed_at": "2026-09-22 06:15:48.343816+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 16,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:47.826095+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4599.390983581543,
+      "total_queue_wait_ms": 23966.00604057312,
+      "after_release_wait_lower_ms": 16163.14721107483,
+      "after_release_wait_upper_ms": 19366.615056991577,
+      "start_to_db_completion_ms": 517.7209377288818
+    },
+    {
+      "id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.869697+00:00",
+      "updated_at": "2026-09-22 06:15:48.899684+00:00",
+      "completed_at": "2026-09-22 06:15:48.899684+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 16,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:48.380075+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4589.782953262329,
+      "total_queue_wait_ms": 24510.377883911133,
+      "after_release_wait_lower_ms": 16717.127084732056,
+      "after_release_wait_upper_ms": 19920.594930648804,
+      "start_to_db_completion_ms": 519.6089744567871
+    },
+    {
+      "id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.876111+00:00",
+      "updated_at": "2026-09-22 06:15:50.007014+00:00",
+      "completed_at": "2026-09-22 06:15:50.007014+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 17,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:49.490187+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4583.369016647339,
+      "total_queue_wait_ms": 25614.075899124146,
+      "after_release_wait_lower_ms": 17827.23903656006,
+      "after_release_wait_upper_ms": 21030.706882476807,
+      "start_to_db_completion_ms": 516.8271064758301
+    },
+    {
+      "id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.959567+00:00",
+      "updated_at": "2026-09-22 06:15:49.452570+00:00",
+      "completed_at": "2026-09-22 06:15:49.452570+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 17,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:48.936461+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4499.912977218628,
+      "total_queue_wait_ms": 24976.89390182495,
+      "after_release_wait_lower_ms": 17273.513078689575,
+      "after_release_wait_upper_ms": 20476.980924606323,
+      "start_to_db_completion_ms": 516.1089897155762
+    },
+    {
+      "id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.971523+00:00",
+      "updated_at": "2026-09-22 06:15:50.598151+00:00",
+      "completed_at": "2026-09-22 06:15:50.598151+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 18,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:50.043865+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4487.957000732422,
+      "total_queue_wait_ms": 26072.341918945312,
+      "after_release_wait_lower_ms": 18380.917072296143,
+      "after_release_wait_upper_ms": 21584.38491821289,
+      "start_to_db_completion_ms": 554.286003112793
+    },
+    {
+      "id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:23.980383+00:00",
+      "updated_at": "2026-09-22 06:15:51.151568+00:00",
+      "completed_at": "2026-09-22 06:15:51.151569+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 18,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:50.634880+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4479.097127914429,
+      "total_queue_wait_ms": 26654.497146606445,
+      "after_release_wait_lower_ms": 18971.93217277527,
+      "after_release_wait_upper_ms": 22175.400018692017,
+      "start_to_db_completion_ms": 516.6888236999512
+    },
+    {
+      "id": "1d42680d-0e03-4cef-982d-53d928503e84",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:24.070264+00:00",
+      "updated_at": "2026-09-22 06:15:51.707005+00:00",
+      "completed_at": "2026-09-22 06:15:51.707005+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 19,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:51.190625+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "1d42680d-0e03-4cef-982d-53d928503e84",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4389.21594619751,
+      "total_queue_wait_ms": 27120.36085128784,
+      "after_release_wait_lower_ms": 19527.677059173584,
+      "after_release_wait_upper_ms": 22731.144905090332,
+      "start_to_db_completion_ms": 516.3800716400146
+    },
+    {
+      "id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:24.165173+00:00",
+      "updated_at": "2026-09-22 06:15:52.260392+00:00",
+      "completed_at": "2026-09-22 06:15:52.260392+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 19,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:51.744002+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4294.306993484497,
+      "total_queue_wait_ms": 27578.829050064087,
+      "after_release_wait_lower_ms": 20081.05421066284,
+      "after_release_wait_upper_ms": 23284.52205657959,
+      "start_to_db_completion_ms": 516.3898468017578
+    },
+    {
+      "id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+      "owner": "alice",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:24.261035+00:00",
+      "updated_at": "2026-09-22 06:15:52.814234+00:00",
+      "completed_at": "2026-09-22 06:15:52.814234+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 20,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:52.297418+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4198.445081710815,
+      "total_queue_wait_ms": 28036.383152008057,
+      "after_release_wait_lower_ms": 20634.470224380493,
+      "after_release_wait_upper_ms": 23837.93807029724,
+      "start_to_db_completion_ms": 516.8159008026123
+    },
+    {
+      "id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+      "owner": "bob",
+      "state": "succeeded",
+      "attempts": 1,
+      "created_at": "2026-09-22 06:15:24.268934+00:00",
+      "updated_at": "2026-09-22 06:15:53.367117+00:00",
+      "completed_at": "2026-09-22 06:15:53.367117+00:00",
+      "duration_seconds": 0.5,
+      "word_count": 3,
+      "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+      "error_category": null,
+      "request_sequence": 20,
+      "start_events": [
+        {
+          "timestamp": "2026-09-22T06:15:52.850562+00:00",
+          "service": "worker",
+          "version": "1.0.0",
+          "event": "job_started",
+          "job_id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+          "attempt": 1,
+          "recovered": false
+        }
+      ],
+      "start_censored": false,
+      "completion_censored": false,
+      "induced_wait_lower_ms": 4190.546035766602,
+      "total_queue_wait_ms": 28581.62808418274,
+      "after_release_wait_lower_ms": 21187.61420249939,
+      "after_release_wait_upper_ms": 24391.082048416138,
+      "start_to_db_completion_ms": 516.5548324584961
+    }
+  ],
+  "resources": {
+    "api": {
+      "id": "2d8392c2f432c6bdd6fafb968bd963651502a9305b8fd2cc58876d65f14e417b",
+      "image_id": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+      "memory_bytes": 201326592,
+      "nano_cpus": 500000000,
+      "pids_limit": 64
+    },
+    "worker": {
+      "id": "10a83bbf16e40c3e94d6d10b1e1ccbafe635521f8bea19d900ea360c84a645d5",
+      "image_id": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+      "memory_bytes": 134217728,
+      "nano_cpus": 500000000,
+      "pids_limit": 64
+    },
+    "db": {
+      "id": "bea4b10882266db8db78b088cbb9a865220ad4015165e86612a99a1228be3fc3",
+      "image_id": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
+      "memory_bytes": 268435456,
+      "nano_cpus": 750000000,
+      "pids_limit": 128
+    },
+    "proxy": {
+      "id": "a4b64e74ac6881ab579d3175754985783efa30fb317edbf656d796cabbf3ab3e",
+      "image_id": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe",
+      "memory_bytes": 33554432,
+      "nano_cpus": 250000000,
+      "pids_limit": 32
+    }
+  },
+  "initial_database": {
+    "observed_at": "2026-09-22 06:15:21.458300+00:00",
+    "jobs": [],
+    "admission_paused": false,
+    "schema_version": 1,
+    "global_limit": 100,
+    "owner_limit": 20
+  },
+  "paused_database": {
+    "observed_at": "2026-09-22 06:15:26.695093+00:00",
+    "jobs": [
+      {
+        "id": "076c4f24-4331-444a-be2d-b2a719c77607",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.776253+00:00",
+        "updated_at": "2026-09-22 06:15:22.776253+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.860089+00:00",
+        "updated_at": "2026-09-22 06:15:23.860089+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "1d42680d-0e03-4cef-982d-53d928503e84",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:24.070264+00:00",
+        "updated_at": "2026-09-22 06:15:24.070264+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.478912+00:00",
+        "updated_at": "2026-09-22 06:15:23.478912+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.876111+00:00",
+        "updated_at": "2026-09-22 06:15:23.876112+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.658304+00:00",
+        "updated_at": "2026-09-22 06:15:22.658304+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:24.261035+00:00",
+        "updated_at": "2026-09-22 06:15:24.261035+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.458956+00:00",
+        "updated_at": "2026-09-22 06:15:23.458956+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.676625+00:00",
+        "updated_at": "2026-09-22 06:15:22.676625+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.561143+00:00",
+        "updated_at": "2026-09-22 06:15:23.561143+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.460577+00:00",
+        "updated_at": "2026-09-22 06:15:22.460577+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.665339+00:00",
+        "updated_at": "2026-09-22 06:15:23.665339+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.675559+00:00",
+        "updated_at": "2026-09-22 06:15:23.675559+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.980383+00:00",
+        "updated_at": "2026-09-22 06:15:23.980383+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "7497900b-8919-4360-9383-f8e94553a896",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.883950+00:00",
+        "updated_at": "2026-09-22 06:15:22.883950+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.668421+00:00",
+        "updated_at": "2026-09-22 06:15:22.668421+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.877580+00:00",
+        "updated_at": "2026-09-22 06:15:22.877580+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.159047+00:00",
+        "updated_at": "2026-09-22 06:15:23.159047+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.260112+00:00",
+        "updated_at": "2026-09-22 06:15:23.260112+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.959567+00:00",
+        "updated_at": "2026-09-22 06:15:23.959567+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.983026+00:00",
+        "updated_at": "2026-09-22 06:15:22.983026+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.469735+00:00",
+        "updated_at": "2026-09-22 06:15:23.469735+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.570577+00:00",
+        "updated_at": "2026-09-22 06:15:23.570577+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.683438+00:00",
+        "updated_at": "2026-09-22 06:15:22.683438+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.785648+00:00",
+        "updated_at": "2026-09-22 06:15:22.785648+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.270723+00:00",
+        "updated_at": "2026-09-22 06:15:23.270723+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.969764+00:00",
+        "updated_at": "2026-09-22 06:15:22.969764+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.869697+00:00",
+        "updated_at": "2026-09-22 06:15:23.869697+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.897503+00:00",
+        "updated_at": "2026-09-22 06:15:22.897503+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.971523+00:00",
+        "updated_at": "2026-09-22 06:15:23.971523+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "e062435c-b616-4568-8c74-57789e00a170",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.995708+00:00",
+        "updated_at": "2026-09-22 06:15:22.995708+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.861190+00:00",
+        "updated_at": "2026-09-22 06:15:22.861190+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.766098+00:00",
+        "updated_at": "2026-09-22 06:15:22.766098+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:24.268934+00:00",
+        "updated_at": "2026-09-22 06:15:24.268934+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "f34016d5-d586-48f1-a5a5-700db780612d",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.989823+00:00",
+        "updated_at": "2026-09-22 06:15:22.989823+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.369541+00:00",
+        "updated_at": "2026-09-22 06:15:23.369541+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+        "owner": "alice",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.891187+00:00",
+        "updated_at": "2026-09-22 06:15:22.891187+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:22.870151+00:00",
+        "updated_at": "2026-09-22 06:15:22.870151+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:23.681925+00:00",
+        "updated_at": "2026-09-22 06:15:23.681925+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      },
+      {
+        "id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+        "owner": "bob",
+        "state": "queued",
+        "attempts": 0,
+        "created_at": "2026-09-22 06:15:24.165173+00:00",
+        "updated_at": "2026-09-22 06:15:24.165173+00:00",
+        "completed_at": null,
+        "duration_seconds": 0.5,
+        "word_count": null,
+        "checksum": null,
+        "error_category": null
+      }
+    ],
+    "admission_paused": false,
+    "schema_version": 1,
+    "global_limit": 100,
+    "owner_limit": 20
+  },
+  "release": {
+    "before_db_utc": "2026-09-22 06:15:28.459480+00:00",
+    "command_started_at": "2026-09-22T06:15:28.506924+00:00",
+    "command_finished_at": "2026-09-22T06:15:29.313241+00:00",
+    "after_db_utc": "2026-09-22 06:15:31.662948+00:00",
+    "bracket_width_ms": 3203.467845916748
+  },
+  "final_database": {
+    "observed_at": "2026-09-22 06:15:53.809205+00:00",
+    "jobs": [
+      {
+        "id": "076c4f24-4331-444a-be2d-b2a719c77607",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.776253+00:00",
+        "updated_at": "2026-09-22 06:15:34.392250+00:00",
+        "completed_at": "2026-09-22 06:15:34.392250+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.860089+00:00",
+        "updated_at": "2026-09-22 06:15:48.343816+00:00",
+        "completed_at": "2026-09-22 06:15:48.343816+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "1d42680d-0e03-4cef-982d-53d928503e84",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:24.070264+00:00",
+        "updated_at": "2026-09-22 06:15:51.707005+00:00",
+        "completed_at": "2026-09-22 06:15:51.707005+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.478912+00:00",
+        "updated_at": "2026-09-22 06:15:45.561853+00:00",
+        "completed_at": "2026-09-22 06:15:45.561853+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.876111+00:00",
+        "updated_at": "2026-09-22 06:15:50.007014+00:00",
+        "completed_at": "2026-09-22 06:15:50.007014+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.658304+00:00",
+        "updated_at": "2026-09-22 06:15:32.697488+00:00",
+        "completed_at": "2026-09-22 06:15:32.697488+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:24.261035+00:00",
+        "updated_at": "2026-09-22 06:15:52.814234+00:00",
+        "completed_at": "2026-09-22 06:15:52.814234+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.458956+00:00",
+        "updated_at": "2026-09-22 06:15:44.449259+00:00",
+        "completed_at": "2026-09-22 06:15:44.449259+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.676625+00:00",
+        "updated_at": "2026-09-22 06:15:35.018005+00:00",
+        "completed_at": "2026-09-22 06:15:35.018005+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.561143+00:00",
+        "updated_at": "2026-09-22 06:15:45.007456+00:00",
+        "completed_at": "2026-09-22 06:15:45.007456+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.460577+00:00",
+        "updated_at": "2026-09-22 06:15:31.585899+00:00",
+        "completed_at": "2026-09-22 06:15:31.585899+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.665339+00:00",
+        "updated_at": "2026-09-22 06:15:46.679233+00:00",
+        "completed_at": "2026-09-22 06:15:46.679233+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.675559+00:00",
+        "updated_at": "2026-09-22 06:15:47.235062+00:00",
+        "completed_at": "2026-09-22 06:15:47.235062+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.980383+00:00",
+        "updated_at": "2026-09-22 06:15:51.151568+00:00",
+        "completed_at": "2026-09-22 06:15:51.151569+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "7497900b-8919-4360-9383-f8e94553a896",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.883950+00:00",
+        "updated_at": "2026-09-22 06:15:37.795258+00:00",
+        "completed_at": "2026-09-22 06:15:37.795258+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.668421+00:00",
+        "updated_at": "2026-09-22 06:15:33.807539+00:00",
+        "completed_at": "2026-09-22 06:15:33.807539+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.877580+00:00",
+        "updated_at": "2026-09-22 06:15:37.241564+00:00",
+        "completed_at": "2026-09-22 06:15:37.241564+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.159047+00:00",
+        "updated_at": "2026-09-22 06:15:41.672961+00:00",
+        "completed_at": "2026-09-22 06:15:41.672961+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.260112+00:00",
+        "updated_at": "2026-09-22 06:15:42.783631+00:00",
+        "completed_at": "2026-09-22 06:15:42.783631+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.959567+00:00",
+        "updated_at": "2026-09-22 06:15:49.452570+00:00",
+        "completed_at": "2026-09-22 06:15:49.452570+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.983026+00:00",
+        "updated_at": "2026-09-22 06:15:40.013370+00:00",
+        "completed_at": "2026-09-22 06:15:40.013370+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.469735+00:00",
+        "updated_at": "2026-09-22 06:15:43.895654+00:00",
+        "completed_at": "2026-09-22 06:15:43.895654+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.570577+00:00",
+        "updated_at": "2026-09-22 06:15:46.118986+00:00",
+        "completed_at": "2026-09-22 06:15:46.118986+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.683438+00:00",
+        "updated_at": "2026-09-22 06:15:32.140264+00:00",
+        "completed_at": "2026-09-22 06:15:32.140264+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.785648+00:00",
+        "updated_at": "2026-09-22 06:15:35.574061+00:00",
+        "completed_at": "2026-09-22 06:15:35.574061+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.270723+00:00",
+        "updated_at": "2026-09-22 06:15:42.227946+00:00",
+        "completed_at": "2026-09-22 06:15:42.227946+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.969764+00:00",
+        "updated_at": "2026-09-22 06:15:39.460824+00:00",
+        "completed_at": "2026-09-22 06:15:39.460824+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.869697+00:00",
+        "updated_at": "2026-09-22 06:15:48.899684+00:00",
+        "completed_at": "2026-09-22 06:15:48.899684+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.897503+00:00",
+        "updated_at": "2026-09-22 06:15:38.907871+00:00",
+        "completed_at": "2026-09-22 06:15:38.907871+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.971523+00:00",
+        "updated_at": "2026-09-22 06:15:50.598151+00:00",
+        "completed_at": "2026-09-22 06:15:50.598151+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "e062435c-b616-4568-8c74-57789e00a170",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.995708+00:00",
+        "updated_at": "2026-09-22 06:15:41.119227+00:00",
+        "completed_at": "2026-09-22 06:15:41.119227+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.861190+00:00",
+        "updated_at": "2026-09-22 06:15:36.132331+00:00",
+        "completed_at": "2026-09-22 06:15:36.132331+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.766098+00:00",
+        "updated_at": "2026-09-22 06:15:33.251884+00:00",
+        "completed_at": "2026-09-22 06:15:33.251884+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:24.268934+00:00",
+        "updated_at": "2026-09-22 06:15:53.367117+00:00",
+        "completed_at": "2026-09-22 06:15:53.367117+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "f34016d5-d586-48f1-a5a5-700db780612d",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.989823+00:00",
+        "updated_at": "2026-09-22 06:15:40.564946+00:00",
+        "completed_at": "2026-09-22 06:15:40.564946+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.369541+00:00",
+        "updated_at": "2026-09-22 06:15:43.336866+00:00",
+        "completed_at": "2026-09-22 06:15:43.336866+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+        "owner": "alice",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.891187+00:00",
+        "updated_at": "2026-09-22 06:15:38.349367+00:00",
+        "completed_at": "2026-09-22 06:15:38.349367+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:22.870151+00:00",
+        "updated_at": "2026-09-22 06:15:36.687931+00:00",
+        "completed_at": "2026-09-22 06:15:36.687932+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:23.681925+00:00",
+        "updated_at": "2026-09-22 06:15:47.788769+00:00",
+        "completed_at": "2026-09-22 06:15:47.788769+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      },
+      {
+        "id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+        "owner": "bob",
+        "state": "succeeded",
+        "attempts": 1,
+        "created_at": "2026-09-22 06:15:24.165173+00:00",
+        "updated_at": "2026-09-22 06:15:52.260392+00:00",
+        "completed_at": "2026-09-22 06:15:52.260392+00:00",
+        "duration_seconds": 0.5,
+        "word_count": 3,
+        "checksum": "64989ccbf3efa9c84e2afe7cee9bc5828bf0fcb91e44f8c1e591638a2c2e90e3",
+        "error_category": null
+      }
+    ],
+    "admission_paused": false,
+    "schema_version": 1,
+    "global_limit": 100,
+    "owner_limit": 20
+  },
+  "drain_observed_seconds": 25.389999999999418,
+  "worker_lifecycle": [
+    {
+      "timestamp": "2026-09-22T06:15:31.068891+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:31.587839+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "3e4794a1-2f03-4663-86a2-08a7799e9344",
+      "attempt": 1,
+      "duration_ms": 518.95
+    },
+    {
+      "timestamp": "2026-09-22T06:15:31.623707+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:32.142821+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "97bbd606-5070-44f7-8e2c-620d01a352f6",
+      "attempt": 1,
+      "duration_ms": 519.11
+    },
+    {
+      "timestamp": "2026-09-22T06:15:32.179448+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:32.699512+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "2f4bc8ca-4ebc-49ec-a5d5-fc5ab5bdc207",
+      "attempt": 1,
+      "duration_ms": 520.06
+    },
+    {
+      "timestamp": "2026-09-22T06:15:32.735222+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:33.253780+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "e9e580ac-9aa3-4b54-a444-6f0a690bf2cd",
+      "attempt": 1,
+      "duration_ms": 518.55
+    },
+    {
+      "timestamp": "2026-09-22T06:15:33.290665+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:33.809656+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "775d9d50-562b-49f3-8561-9c8fb631f6b7",
+      "attempt": 1,
+      "duration_ms": 519.0
+    },
+    {
+      "timestamp": "2026-09-22T06:15:33.844617+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "076c4f24-4331-444a-be2d-b2a719c77607",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:34.394468+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "076c4f24-4331-444a-be2d-b2a719c77607",
+      "attempt": 1,
+      "duration_ms": 549.84
+    },
+    {
+      "timestamp": "2026-09-22T06:15:34.500955+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:35.019839+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "3a148e5d-1faa-4dfd-a77d-c38e72c92e64",
+      "attempt": 1,
+      "duration_ms": 518.88
+    },
+    {
+      "timestamp": "2026-09-22T06:15:35.055800+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:35.575973+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "a2f0e0c8-ea02-4651-8948-2a080ef82a6c",
+      "attempt": 1,
+      "duration_ms": 520.17
+    },
+    {
+      "timestamp": "2026-09-22T06:15:35.613859+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:36.134687+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "e246e9b9-a1b8-4c68-bbfd-ddfa25de47d9",
+      "attempt": 1,
+      "duration_ms": 520.82
+    },
+    {
+      "timestamp": "2026-09-22T06:15:36.171677+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:36.689711+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "fa475b81-4eb5-441f-b03a-cbec5321e8c2",
+      "attempt": 1,
+      "duration_ms": 518.03
+    },
+    {
+      "timestamp": "2026-09-22T06:15:36.725169+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:37.243381+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "797e432b-a75f-4967-8aa4-b3381b38a05b",
+      "attempt": 1,
+      "duration_ms": 518.21
+    },
+    {
+      "timestamp": "2026-09-22T06:15:37.278373+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "7497900b-8919-4360-9383-f8e94553a896",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:37.797074+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "7497900b-8919-4360-9383-f8e94553a896",
+      "attempt": 1,
+      "duration_ms": 518.7
+    },
+    {
+      "timestamp": "2026-09-22T06:15:37.832068+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:38.351270+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "fa1312d3-53dc-496a-aaf1-6bdb4e987d42",
+      "attempt": 1,
+      "duration_ms": 519.2
+    },
+    {
+      "timestamp": "2026-09-22T06:15:38.388589+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:38.909665+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "c5e188aa-6b75-48bf-87d1-79883158ff2b",
+      "attempt": 1,
+      "duration_ms": 521.07
+    },
+    {
+      "timestamp": "2026-09-22T06:15:38.944528+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:39.462664+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "b3aa6dc5-1b09-400e-a51e-4ce5ade57573",
+      "attempt": 1,
+      "duration_ms": 518.13
+    },
+    {
+      "timestamp": "2026-09-22T06:15:39.496961+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:40.015232+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "83caea12-1f6c-41f9-8f29-d634f2354560",
+      "attempt": 1,
+      "duration_ms": 518.26
+    },
+    {
+      "timestamp": "2026-09-22T06:15:40.049445+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "f34016d5-d586-48f1-a5a5-700db780612d",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:40.566850+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "f34016d5-d586-48f1-a5a5-700db780612d",
+      "attempt": 1,
+      "duration_ms": 517.4
+    },
+    {
+      "timestamp": "2026-09-22T06:15:40.602720+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "e062435c-b616-4568-8c74-57789e00a170",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:41.121061+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "e062435c-b616-4568-8c74-57789e00a170",
+      "attempt": 1,
+      "duration_ms": 518.34
+    },
+    {
+      "timestamp": "2026-09-22T06:15:41.156704+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:41.674767+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "7b47894c-ae27-402c-b93c-1638d026b9ec",
+      "attempt": 1,
+      "duration_ms": 518.06
+    },
+    {
+      "timestamp": "2026-09-22T06:15:41.711278+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:42.229746+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "b284c98f-a316-485b-a59d-0e1c2384b80e",
+      "attempt": 1,
+      "duration_ms": 518.46
+    },
+    {
+      "timestamp": "2026-09-22T06:15:42.264053+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:42.785462+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "7b7a6edf-bdca-4e4f-8324-c607168031f1",
+      "attempt": 1,
+      "duration_ms": 521.4
+    },
+    {
+      "timestamp": "2026-09-22T06:15:42.820351+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:43.338708+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "f9e7d588-cbcf-4d0c-9b4c-0f58b6297728",
+      "attempt": 1,
+      "duration_ms": 518.35
+    },
+    {
+      "timestamp": "2026-09-22T06:15:43.375122+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:43.897514+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "85c1cee7-2143-409a-83b9-4c48d1ec597e",
+      "attempt": 1,
+      "duration_ms": 522.39
+    },
+    {
+      "timestamp": "2026-09-22T06:15:43.932684+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:44.451084+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "399c3d0e-fc16-494a-b378-0254050e4ca1",
+      "attempt": 1,
+      "duration_ms": 518.39
+    },
+    {
+      "timestamp": "2026-09-22T06:15:44.488214+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:45.009395+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "3bf36a54-4489-4186-bb13-b674e266d1cd",
+      "attempt": 1,
+      "duration_ms": 521.18
+    },
+    {
+      "timestamp": "2026-09-22T06:15:45.045441+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:45.563699+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "2259ba32-9fc6-4da1-ae9b-78733b696052",
+      "attempt": 1,
+      "duration_ms": 518.25
+    },
+    {
+      "timestamp": "2026-09-22T06:15:45.599517+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:46.120893+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "87db3d79-b2a2-41db-8d3f-b802169606c9",
+      "attempt": 1,
+      "duration_ms": 521.37
+    },
+    {
+      "timestamp": "2026-09-22T06:15:46.162519+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:46.681086+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "608c4ce8-949a-4df2-ab28-f4e7abc4bb4e",
+      "attempt": 1,
+      "duration_ms": 518.56
+    },
+    {
+      "timestamp": "2026-09-22T06:15:46.717876+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:47.236864+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "66e31744-f1ab-4976-8f7d-bec434cfbac2",
+      "attempt": 1,
+      "duration_ms": 518.98
+    },
+    {
+      "timestamp": "2026-09-22T06:15:47.272749+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:47.790610+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "faf74288-d1a6-439f-847a-15a5bdcb790f",
+      "attempt": 1,
+      "duration_ms": 517.86
+    },
+    {
+      "timestamp": "2026-09-22T06:15:47.826095+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:48.345627+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "0d9d5b54-90d5-4b91-8db0-65785d7f61ce",
+      "attempt": 1,
+      "duration_ms": 519.52
+    },
+    {
+      "timestamp": "2026-09-22T06:15:48.380075+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:48.901631+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "b8132f02-4774-40e4-86d4-51ed8b726221",
+      "attempt": 1,
+      "duration_ms": 521.55
+    },
+    {
+      "timestamp": "2026-09-22T06:15:48.936461+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:49.454354+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "837a8a1d-b007-4daf-847a-f18bdfd676b8",
+      "attempt": 1,
+      "duration_ms": 517.89
+    },
+    {
+      "timestamp": "2026-09-22T06:15:49.490187+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:50.008951+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "2b22116a-dc84-4ba1-a094-0d8d1513dcc6",
+      "attempt": 1,
+      "duration_ms": 518.76
+    },
+    {
+      "timestamp": "2026-09-22T06:15:50.043865+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:50.600164+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "e02fba6e-4b05-4773-94e2-befe2d410137",
+      "attempt": 1,
+      "duration_ms": 556.29
+    },
+    {
+      "timestamp": "2026-09-22T06:15:50.634880+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:51.153462+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "67992e2b-2bdb-4ecd-a1cb-e0b3a903c044",
+      "attempt": 1,
+      "duration_ms": 518.57
+    },
+    {
+      "timestamp": "2026-09-22T06:15:51.190625+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "1d42680d-0e03-4cef-982d-53d928503e84",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:51.709287+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "1d42680d-0e03-4cef-982d-53d928503e84",
+      "attempt": 1,
+      "duration_ms": 518.64
+    },
+    {
+      "timestamp": "2026-09-22T06:15:51.744002+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:52.262208+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "fdc64301-71fd-4618-89fd-12d91b1a74e6",
+      "attempt": 1,
+      "duration_ms": 518.2
+    },
+    {
+      "timestamp": "2026-09-22T06:15:52.297418+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:52.816106+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "306b2778-0e42-4e4a-80e5-88a99dccdba6",
+      "attempt": 1,
+      "duration_ms": 518.68
+    },
+    {
+      "timestamp": "2026-09-22T06:15:52.850562+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_started",
+      "job_id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+      "attempt": 1,
+      "recovered": false
+    },
+    {
+      "timestamp": "2026-09-22T06:15:53.368994+00:00",
+      "service": "worker",
+      "version": "1.0.0",
+      "event": "job_completed",
+      "job_id": "eaccdd03-e97c-4da5-b2a6-e628b677f40e",
+      "attempt": 1,
+      "duration_ms": 518.42
+    }
+  ],
+  "censoring_boundary_db_utc": "2026-09-22 06:15:53.809205+00:00",
+  "summary_by_owner": {
+    "alice": {
+      "offered": 24,
+      "accepted": 20,
+      "rejected": 4,
+      "status_counts": {
+        "201": 20,
+        "429": 4
+      },
+      "transport_errors": 0,
+      "http_attempted": 24,
+      "dispatch_censored": 0,
+      "admission_all": {
+        "n": 24,
+        "min": 186.99999999807915,
+        "p50": 405.9999999990396,
+        "p95": 500.0,
+        "max": 500.0,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "admission_accepted": {
+        "n": 20,
+        "min": 186.99999999807915,
+        "p50": 405.9999999990396,
+        "p95": 500.0,
+        "max": 500.0,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "admission_rejected": {
+        "n": 4,
+        "min": 203.00000000133878,
+        "p50": 297.0000000022992,
+        "p95": 405.9999999990396,
+        "max": 405.9999999990396,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "started": 20,
+      "start_censored": 0,
+      "succeeded": 20,
+      "failed": 0,
+      "completion_censored": 0,
+      "induced_wait_lower_ms": {
+        "n": 20,
+        "min": 4198.445081710815,
+        "p50": 5199.368000030518,
+        "p95": 5801.176071166992,
+        "max": 5998.903036117554,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "total_queue_wait_ms": {
+        "n": 20,
+        "min": 8608.314037322998,
+        "p50": 17997.65706062317,
+        "p95": 27120.36085128784,
+        "max": 28036.383152008057,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "after_release_wait_lower_ms": {
+        "n": 20,
+        "min": 0,
+        "p50": 9493.75605583191,
+        "p95": 19527.677059173584,
+        "max": 20634.470224380493,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "after_release_wait_upper_ms": {
+        "n": 20,
+        "min": 2609.4110012054443,
+        "p50": 12697.223901748657,
+        "p95": 22731.144905090332,
+        "max": 23837.93807029724,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "start_to_db_completion_ms": {
+        "n": 20,
+        "min": 515.5010223388672,
+        "p50": 517.0497894287109,
+        "p95": 520.5318927764893,
+        "max": 554.286003112793,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "wait_percentiles_population": "observed jobs only; censored jobs explicitly counted above, not imputed or called zero"
+    },
+    "bob": {
+      "offered": 24,
+      "accepted": 20,
+      "rejected": 4,
+      "status_counts": {
+        "201": 20,
+        "429": 4
+      },
+      "transport_errors": 0,
+      "http_attempted": 24,
+      "dispatch_censored": 0,
+      "admission_all": {
+        "n": 24,
+        "min": 125.0,
+        "p50": 391.00000000325963,
+        "p95": 530.9999999990396,
+        "max": 609.0000000003783,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "admission_accepted": {
+        "n": 20,
+        "min": 186.99999999807915,
+        "p50": 405.9999999990396,
+        "p95": 530.9999999990396,
+        "max": 609.0000000003783,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "admission_rejected": {
+        "n": 4,
+        "min": 125.0,
+        "p50": 203.00000000133878,
+        "p95": 405.9999999990396,
+        "max": 405.9999999990396,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "started": 20,
+      "start_censored": 0,
+      "succeeded": 20,
+      "failed": 0,
+      "completion_censored": 0,
+      "induced_wait_lower_ms": {
+        "n": 20,
+        "min": 4190.546035766602,
+        "p50": 5089.939117431641,
+        "p95": 5693.382024765015,
+        "max": 5776.0419845581055,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "total_queue_wait_ms": {
+        "n": 20,
+        "min": 8940.268993377686,
+        "p50": 18440.55485725403,
+        "p95": 27578.829050064087,
+        "max": 28581.62808418274,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "after_release_wait_lower_ms": {
+        "n": 20,
+        "min": 0,
+        "p50": 10048.330068588257,
+        "p95": 20081.05421066284,
+        "max": 21187.61420249939,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "after_release_wait_upper_ms": {
+        "n": 20,
+        "min": 3164.22700881958,
+        "p50": 13251.797914505005,
+        "p95": 23284.52205657959,
+        "max": 24391.082048416138,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "start_to_db_completion_ms": {
+        "n": 20,
+        "min": 516.0200595855713,
+        "p50": 516.5750980377197,
+        "p95": 519.6089744567871,
+        "max": 547.633171081543,
+        "unit": "milliseconds",
+        "method": "nearest-rank: sorted values[ceil(p*n)-1], no interpolation"
+      },
+      "wait_percentiles_population": "observed jobs only; censored jobs explicitly counted above, not imputed or called zero"
+    }
+  },
+  "measurement_finished_at": "2026-09-22T06:15:54.060028+00:00",
+  "cleanup": {
+    "status": "passed",
+    "remaining_owned_resources": 0,
+    "completed_at": "2026-09-22T06:15:56.612445+00:00"
+  },
+  "completed_at": "2026-09-22T06:15:56.612445+00:00"
+}

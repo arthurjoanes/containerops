@@ -1,21 +1,21 @@
 {
-  "recorded_at": "2026-09-22T00:16:26.759663+00:00",
-  "project": "pf-containerops-test-881fdd3d",
+  "recorded_at": "2026-09-22T06:19:13.533545+00:00",
+  "project": "pf-containerops-test-fc39e58c",
   "requested_version": "2.0.0",
   "injected_smoke_failure": true,
   "phase": "completed",
-  "previous_image": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
-  "candidate_image": "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+  "previous_image": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+  "candidate_image": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
   "candidate_images": {
-    "api": "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
-    "worker": "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21"
+    "api": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+    "worker": "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
   },
   "candidate_health": {
     "status": "alive",
     "version": "2.0.0"
   },
   "candidate_job": {
-    "id": "2e5a0bee-9d87-480c-be86-f35ae7645782",
+    "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
     "state": "succeeded",
     "attempts": 1,
     "result": {
@@ -27,11 +27,11 @@
     "algorithm": "unicode-alnum-marks-v1"
   },
   "rollback_images": {
-    "api": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
-    "worker": "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5"
+    "api": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+    "worker": "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed"
   },
   "preserved_candidate_job": {
-    "id": "2e5a0bee-9d87-480c-be86-f35ae7645782",
+    "id": "d734dd01-4e3e-4d37-8f50-b2e6b930834b",
     "state": "succeeded",
     "attempts": 1,
     "result": {
@@ -42,7 +42,7 @@
     "version": "1.0.0"
   },
   "rollback_job": {
-    "id": "7e5a89a9-f660-4c22-94c1-40d6e8f2fa66",
+    "id": "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
     "state": "succeeded",
     "attempts": 1,
     "result": {
@@ -58,10 +58,10 @@
     "status": "alive",
     "version": "1.0.0"
   },
-  "maintenance_seconds": 70.266,
+  "maintenance_seconds": 44.89,
   "previous_health": {
     "status": "alive",
     "version": "1.0.0"
   },
-  "preserved_jobs": 3
+  "preserved_jobs": 1
 }

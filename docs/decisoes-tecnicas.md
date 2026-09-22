@@ -14,6 +14,17 @@
 
 Essas escolhas são proporcionais a uma aplicação local pequena. A [verificação](verification.md) separa os testes da aplicação, das operações e da apresentação, com a fonte e o período a que cada resultado se aplica.
 
+## Dificuldades registradas e o que elas ensinam
+
+| Dificuldade observada | Resposta técnica | O que ainda precisa ser distinguido |
+| --- | --- | --- |
+| Um proprietário podia consumir a fila global | Limitar admissão por proprietário e considerar atividade recente no despacho, usando a transação existente | Quota limita ocupação; não demonstra, sozinha, espera justa ou prazo máximo. As regressões estão em [segurança](security.md). |
+| Uma candidata podia produzir dados antes de falhar | Fazer migração expansiva, voltar a imagem e conferir o job criado pela candidata | Compatibilidade desta mudança não autoriza downgrade de schema ou migração destrutiva. [Prova de rollback](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/rollback.json). |
+| O BuildKit recusou o caminho com acento usado no desenvolvimento | Copiar os inputs de build para um caminho temporário ASCII, mantendo a identificação das fontes | É uma adaptação do ambiente de build, não melhora medida no desempenho da aplicação. Implementação em [ops.py](../scripts/ops.py). |
+| Uma apresentação podia misturar resultados de operações ou imagens diferentes | Manter identidade e datas por operação e validar referências antes de apresentar aprovação | Regerar HTML ou fotografá-lo não repete backup, scan ou release. [Guia do relatório](report-guide.md). |
+
+As notas explicam os motivos técnicos verificáveis no código e nos artefatos. Não atribuem ao autor uma experiência com clientes nem benefícios financeiros que não foram medidos.
+
 ## Fluxo
 
 O cliente envia texto sintético ao proxy com Bearer e chave de idempotência. A API autentica o proprietário, valida tamanho/duração e grava o job no PostgreSQL. Uma restrição única sobre proprietário e chave protege requisições concorrentes. Repetir a chave com o mesmo conteúdo devolve o job existente; conteúdo diferente conflita.
@@ -53,6 +64,8 @@ ou inventar um broker para a fila pequena; exige agregar o histórico retido e d
 ser reavaliado com medições se o volume crescer. Não há garantia de prazo, reserva
 por owner nem proteção contra operadores que distribuam várias credenciais a uma
 mesma pessoa. [Regressão em PostgreSQL](security.md).
+
+A [medição posterior de admissão e espera](admission-measurement.md) estabelece uma referência local com histórico vazio, dois proprietários e atraso sintético fixo. As três repetições tiveram 20 admissões e quatro recusas por proprietário, e todos os aceitos concluíram. Ela não compara a versão anterior nem mede crescimento do histórico; não permite atribuir um ganho numérico à correção ou prometer prazo máximo.
 
 **Alpine na aplicação.** Reduz os componentes do sistema distribuídos com a API e o worker. As dependências nativas usam wheels musllinux, verificadas no build. Deps/test ficam separados do runtime, e Python continua disponível para os healthchecks.
 

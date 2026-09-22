@@ -7,3 +7,8 @@
 *.Dockerfile text eol=lf
 Dockerfile text eol=lf
 *.png binary
+# Public evidence hashes must survive Windows and Linux checkouts unchanged.
+/docs/evidence/**/*.json text eol=lf
+/docs/evidence/**/*.html text eol=lf
+/docs/evidence/**/*.xml text eol=lf
+/docs/evidence/**/*.txt text eol=lf

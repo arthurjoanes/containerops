@@ -1,0 +1,529 @@
+{
+  "reviewed_at": "2026-09-22T07:47:28.267Z",
+  "observations": [
+    {
+      "version": "before",
+      "id": "overview",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1286,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "result",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 836,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "tls",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 819,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "recovery",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1395,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "operations",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1012,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "rollback",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1012,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "artifacts",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1091,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "evidence",
+      "width": 1440,
+      "headingTop": 394.28125,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 2184,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "overview",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1756,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "result",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 966,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "tls",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 852,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "recovery",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1934,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "operations",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1307,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "rollback",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1338,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "artifacts",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1524,
+      "elements": 1012
+    },
+    {
+      "version": "before",
+      "id": "evidence",
+      "width": 390,
+      "headingTop": 286.140625,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 2322,
+      "elements": 1012
+    },
+    {
+      "version": "after",
+      "id": "overview",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1313,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "result",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 943,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "tls",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 943,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "recovery",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 967,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "operations",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 943,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "rollback",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 943,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "artifacts",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 1007,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "evidence",
+      "width": 1440,
+      "headingTop": 96,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "bodyHeight": 2317,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "overview",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1672,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "result",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 790,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "tls",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 709,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "recovery",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1454,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "operations",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 958,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "rollback",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 960,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "artifacts",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 1210,
+      "elements": 985
+    },
+    {
+      "version": "after",
+      "id": "evidence",
+      "width": 390,
+      "headingTop": 164.1875,
+      "documentWidth": 390,
+      "viewport": 390,
+      "bodyHeight": 3000,
+      "elements": 985
+    }
+  ],
+  "targets": [
+    {
+      "id": "overview",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "result",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "tls",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "recovery",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "operations",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "rollback",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "artifacts",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "evidence",
+      "width": 1440,
+      "small": []
+    },
+    {
+      "id": "overview",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "result",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "tls",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "recovery",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "operations",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "rollback",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "artifacts",
+      "width": 390,
+      "small": []
+    },
+    {
+      "id": "evidence",
+      "width": 390,
+      "small": []
+    }
+  ],
+  "pairs": [
+    {
+      "label": "body",
+      "foreground": "172a45",
+      "background": "ffffff",
+      "minimum": 4.5,
+      "ratio": 14.447371052211476
+    },
+    {
+      "label": "muted",
+      "foreground": "52647d",
+      "background": "ffffff",
+      "minimum": 4.5,
+      "ratio": 6.038352287834037
+    },
+    {
+      "label": "muted on canvas",
+      "foreground": "52647d",
+      "background": "edf2f8",
+      "minimum": 4.5,
+      "ratio": 5.364707797775583
+    },
+    {
+      "label": "action",
+      "foreground": "205acb",
+      "background": "ffffff",
+      "minimum": 4.5,
+      "ratio": 6.201568050578295
+    },
+    {
+      "label": "summary label",
+      "foreground": "405b7e",
+      "background": "f0f6ff",
+      "minimum": 4.5,
+      "ratio": 6.4102321200883665
+    },
+    {
+      "label": "table heading",
+      "foreground": "405779",
+      "background": "f0f4fa",
+      "minimum": 4.5,
+      "ratio": 6.658481574150104
+    },
+    {
+      "label": "sidebar group",
+      "foreground": "aebfd6",
+      "background": "12243e",
+      "minimum": 4.5,
+      "ratio": 8.327998403609842
+    },
+    {
+      "label": "sidebar metadata",
+      "foreground": "b8cbe7",
+      "background": "12243e",
+      "minimum": 4.5,
+      "ratio": 9.449437612116702
+    },
+    {
+      "label": "selected metadata",
+      "foreground": "e2ecfc",
+      "background": "234d8b",
+      "minimum": 4.5,
+      "ratio": 7.038615149637932
+    },
+    {
+      "label": "header metadata",
+      "foreground": "c4d4ea",
+      "background": "12243e",
+      "minimum": 4.5,
+      "ratio": 10.353469207276795
+    },
+    {
+      "label": "pass",
+      "foreground": "176246",
+      "background": "edf8f2",
+      "minimum": 4.5,
+      "ratio": 6.723678045746002
+    },
+    {
+      "label": "pending",
+      "foreground": "80530a",
+      "background": "fff7e6",
+      "minimum": 4.5,
+      "ratio": 6.234780157721162
+    },
+    {
+      "label": "fail",
+      "foreground": "a52734",
+      "background": "fff0f2",
+      "minimum": 4.5,
+      "ratio": 6.462717071242602
+    },
+    {
+      "label": "notice",
+      "foreground": "3f5778",
+      "background": "e9f0fa",
+      "minimum": 4.5,
+      "ratio": 6.433659586095327
+    },
+    {
+      "label": "focus on surface",
+      "foreground": "3776e8",
+      "background": "ffffff",
+      "minimum": 3,
+      "ratio": 4.269110583907381
+    },
+    {
+      "label": "focus on sidebar",
+      "foreground": "3776e8",
+      "background": "12243e",
+      "minimum": 3,
+      "ratio": 3.650153540089908
+    },
+    {
+      "label": "active border",
+      "foreground": "8ab4f2",
+      "background": "234d8b",
+      "minimum": 3,
+      "ratio": 3.9473194623697316
+    }
+  ],
+  "scope": "Same 225 original JSON artifacts and generation timestamp in both versions. Geometry and selected token contrast pairs, native controls and 24px target inspection. Inline text links excluded from size check. Not a screen-reader or full WCAG certification."
+}

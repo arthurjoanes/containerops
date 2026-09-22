@@ -1,0 +1,46 @@
+{
+  "reviewed_at": "2026-09-22T07:54:26.596653+00:00",
+  "source_sha256": {
+    "scripts/report.py": "3d1383691ec60a1afea60fd169ae35b519d167eee46de0c0044c7939a34e3d96",
+    "scripts/report.html": "8ec031a0d89f5400f922514dd1cb78e86888c0375d1d1f40a7eca7e9043f6071",
+    "scripts/report.css": "eadd076770470dbe0bfeaa39177240a708962847a6b25ed08a3e9c9757941389",
+    "scripts/report.js": "02ea18cd9dc5e122301674a378fcccca1baa148e6da72eb6291be94a61d5bf3e",
+    "scripts/render_review.py": "6ec2e6089bf6bd4be5a6c9a2dd38d1ac9c63fbce1281d14076df4328155f6e41",
+    "scripts/visual-review.cjs": "c24967bfc25be9f217f2762d6376d351d281daa64e511da80d1bcb1eb0211f20",
+    "docs/report.html": "dbab9a951f387441f3258b51ba20b3b3da79b45cec05a28fc3ea675ae3d365b1"
+  },
+  "checks": {
+    "report_unit_tests": {
+      "command": "python -m unittest discover -s scripts -p test_report.py",
+      "passed": 47
+    },
+    "lint": {
+      "command": "ruff check scripts/report.py scripts/render_review.py",
+      "result": "passed",
+      "executable": "existing isolated development venv"
+    },
+    "javascript_syntax": {
+      "command": "node --check scripts/report.js && node --check scripts/visual-review.cjs",
+      "result": "passed"
+    },
+    "navigation": {
+      "command": "node scripts/test_report_browser.cjs",
+      "result": "six skip-link cases, keyboard selection/history, print and no-JS passed"
+    },
+    "visual_review": "visual-review.json",
+    "comparison": "comparison.json",
+    "layout_accessibility": "layout-accessibility.json",
+    "axe": "axe.json"
+  },
+  "scope": "Static report presentation only. No Docker, operational backup/release/scan, paid services or live availability verification.",
+  "source_lf_sha256": {
+    "scripts/report.py": "3d1383691ec60a1afea60fd169ae35b519d167eee46de0c0044c7939a34e3d96",
+    "scripts/report.html": "8ec031a0d89f5400f922514dd1cb78e86888c0375d1d1f40a7eca7e9043f6071",
+    "scripts/report.css": "bc5ce665fe0d266b8e0ea27b9104b066ea05f7be627b6c74c60ec360cde222c6",
+    "scripts/report.js": "4485e109ae66efd3f851ce196968fd458b5a4aaa6a5eb833e57c80a060db22cd",
+    "scripts/render_review.py": "6ec2e6089bf6bd4be5a6c9a2dd38d1ac9c63fbce1281d14076df4328155f6e41",
+    "scripts/visual-review.cjs": "d9b0d40592ae00431cd1a8601c8b6661b7016f1bb3e0cd4ad40cdb8ac83bbc6a",
+    "docs/report.html": "eab6a7ba5ca121cc11c008cf3c6008c68795c75a512034ae1703a44378e35380"
+  },
+  "hash_convention": "source_sha256 records inspected Windows checkout bytes; source_lf_sha256 supports comparison after Git text normalization. Operational evidence hashes are strict raw-byte hashes and are not normalized."
+}

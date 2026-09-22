@@ -47,6 +47,23 @@ def main() -> None:
     cases["job-incomplete"] = {
         "demo": {"recorded_at": timestamp, "job": {**completed, "result": None}}
     }
+    for label, count in (("zero", 0), ("large", 123456789012345)):
+        cases["job-" + label] = {
+            "demo": {
+                "recorded_at": timestamp,
+                "project": "presentation-review-" + "long-identifier-" * 14,
+                "job": {**completed, "result": {"word_count": count, "checksum": "c" * 64}},
+            }
+        }
+    cases["restore-failed"] = {
+        "restore": {
+            "recorded_at": timestamp,
+            "checksum_verified": True,
+            "snapshot_equal": False,
+            "restored_jobs": 0,
+            "new_job": {**completed, "state": "failed", "result": None},
+        }
+    }
     case_manifest: dict[str, object] = {}
     manifest: dict[str, object] = {
         "generated_at": datetime.now(UTC).isoformat(),
@@ -66,9 +83,9 @@ def main() -> None:
             (evidence / f"{record_name}.json").write_bytes(data)
         output = generate(root, root / "unused-runtime")
         html = output.read_text(encoding="utf-8").replace(
-            '<div class="report-heading">',
-            '<p class="record-warning">Cenário de apresentação — dados de teste; '
-            'nenhuma operação executada.</p><div class="report-heading">',
+            '<main id="content" tabindex="-1">',
+            '<main id="content" tabindex="-1"><p class="record-warning">'
+            'Cenário de apresentação — dados de teste; nenhuma operação executada.</p>',
             1,
         )
         output.write_text(html, encoding="utf-8")

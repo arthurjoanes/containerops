@@ -17,10 +17,12 @@ O PostgreSQL reúne fila, resultado e transações para manter o laboratório pe
 Abra [docs/report.html](docs/report.html) localmente; o GitHub exibe o HTML como código. O relatório é um snapshot de evidências, sem comandos de operação ao vivo.
 
 1. Em **Verificação**, confira a execução, suas etapas e o job registrado.
-2. Em **Recuperação → Backup e restauração**, veja os jobs restaurados, a conferência do dump e dos dados e o resultado do novo job já aberto. Backup e restauração mantêm suas próprias datas e projetos.
+2. Em **Recuperação → Backup e restauração**, confira os jobs restaurados e as três verificações. Expanda **Resultado do novo job no volume restaurado** para consultar o trabalho. Backup e restauração mantêm suas próprias datas e projetos.
 3. Em **Release**, compare as imagens da troca e do retorno após falha controlada. Em **Artefatos**, confira a imagem à qual a auditoria e o scan se aplicam.
 
 Os links abrem os JSONs de origem. Uma versão de job não identifica, por si só, a imagem de outra operação. [Como ler o relatório](docs/report-guide.md) · [cenários e resultados esperados](docs/problem-solution.md) · [roteiro da demonstração](docs/demo.md).
+
+A [revisão da interface](docs/frontend-quality.md) registra as oito telas, os critérios de apresentação e as comparações com os mesmos dados. Ela verifica o relatório; não representa uma nova execução dos serviços.
 
 ## Repetir a prova completa
 

@@ -1,0 +1,405 @@
+{
+  "reviewed_at": "2026-09-22T07:54:25.864Z",
+  "browser": "153.0.4234.48",
+  "results": [
+    {
+      "id": "overview",
+      "width": 1440
+    },
+    {
+      "id": "result",
+      "width": 1440
+    },
+    {
+      "id": "tls",
+      "width": 1440
+    },
+    {
+      "id": "recovery",
+      "width": 1440
+    },
+    {
+      "id": "operations",
+      "width": 1440
+    },
+    {
+      "id": "rollback",
+      "width": 1440
+    },
+    {
+      "id": "artifacts",
+      "width": 1440
+    },
+    {
+      "id": "evidence",
+      "width": 1440
+    },
+    {
+      "id": "overview",
+      "width": 1024
+    },
+    {
+      "id": "result",
+      "width": 1024
+    },
+    {
+      "id": "tls",
+      "width": 1024
+    },
+    {
+      "id": "recovery",
+      "width": 1024
+    },
+    {
+      "id": "operations",
+      "width": 1024
+    },
+    {
+      "id": "rollback",
+      "width": 1024
+    },
+    {
+      "id": "artifacts",
+      "width": 1024
+    },
+    {
+      "id": "evidence",
+      "width": 1024
+    },
+    {
+      "id": "overview",
+      "width": 768
+    },
+    {
+      "id": "result",
+      "width": 768
+    },
+    {
+      "id": "tls",
+      "width": 768
+    },
+    {
+      "id": "recovery",
+      "width": 768
+    },
+    {
+      "id": "operations",
+      "width": 768
+    },
+    {
+      "id": "rollback",
+      "width": 768
+    },
+    {
+      "id": "artifacts",
+      "width": 768
+    },
+    {
+      "id": "evidence",
+      "width": 768
+    },
+    {
+      "id": "overview",
+      "width": 390
+    },
+    {
+      "id": "result",
+      "width": 390
+    },
+    {
+      "id": "tls",
+      "width": 390
+    },
+    {
+      "id": "recovery",
+      "width": 390
+    },
+    {
+      "id": "operations",
+      "width": 390
+    },
+    {
+      "id": "rollback",
+      "width": 390
+    },
+    {
+      "id": "artifacts",
+      "width": 390
+    },
+    {
+      "id": "evidence",
+      "width": 390
+    },
+    {
+      "id": "overview",
+      "width": 320
+    },
+    {
+      "id": "result",
+      "width": 320
+    },
+    {
+      "id": "tls",
+      "width": 320
+    },
+    {
+      "id": "recovery",
+      "width": 320
+    },
+    {
+      "id": "operations",
+      "width": 320
+    },
+    {
+      "id": "rollback",
+      "width": 320
+    },
+    {
+      "id": "artifacts",
+      "width": 320
+    },
+    {
+      "id": "evidence",
+      "width": 320
+    }
+  ],
+  "states": [
+    {
+      "name": "empty",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Nenhum resultado registrado"
+    },
+    {
+      "name": "empty",
+      "panel": "result",
+      "width": 390,
+      "expected": "Nenhum resultado registrado"
+    },
+    {
+      "name": "empty",
+      "panel": "result",
+      "width": 320,
+      "expected": "Nenhum resultado registrado"
+    },
+    {
+      "name": "backup-only",
+      "panel": "recovery",
+      "width": 1440,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "backup-only",
+      "panel": "recovery",
+      "width": 390,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "backup-only",
+      "panel": "recovery",
+      "width": 320,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "release-invalid",
+      "panel": "operations",
+      "width": 1440,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "release-invalid",
+      "panel": "operations",
+      "width": 390,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "release-invalid",
+      "panel": "operations",
+      "width": 320,
+      "expected": "Sem resultado"
+    },
+    {
+      "name": "release-failed",
+      "panel": "operations",
+      "width": 1440,
+      "expected": "Falhou"
+    },
+    {
+      "name": "release-failed",
+      "panel": "operations",
+      "width": 390,
+      "expected": "Falhou"
+    },
+    {
+      "name": "release-failed",
+      "panel": "operations",
+      "width": 320,
+      "expected": "Falhou"
+    },
+    {
+      "name": "job-queued",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Na fila"
+    },
+    {
+      "name": "job-queued",
+      "panel": "result",
+      "width": 390,
+      "expected": "Na fila"
+    },
+    {
+      "name": "job-queued",
+      "panel": "result",
+      "width": 320,
+      "expected": "Na fila"
+    },
+    {
+      "name": "job-running",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Processando"
+    },
+    {
+      "name": "job-running",
+      "panel": "result",
+      "width": 390,
+      "expected": "Processando"
+    },
+    {
+      "name": "job-running",
+      "panel": "result",
+      "width": 320,
+      "expected": "Processando"
+    },
+    {
+      "name": "job-succeeded",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Concluído"
+    },
+    {
+      "name": "job-succeeded",
+      "panel": "result",
+      "width": 390,
+      "expected": "Concluído"
+    },
+    {
+      "name": "job-succeeded",
+      "panel": "result",
+      "width": 320,
+      "expected": "Concluído"
+    },
+    {
+      "name": "job-failed",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Falhou"
+    },
+    {
+      "name": "job-failed",
+      "panel": "result",
+      "width": 390,
+      "expected": "Falhou"
+    },
+    {
+      "name": "job-failed",
+      "panel": "result",
+      "width": 320,
+      "expected": "Falhou"
+    },
+    {
+      "name": "job-unexpected",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Estado não reconhecido"
+    },
+    {
+      "name": "job-unexpected",
+      "panel": "result",
+      "width": 390,
+      "expected": "Estado não reconhecido"
+    },
+    {
+      "name": "job-unexpected",
+      "panel": "result",
+      "width": 320,
+      "expected": "Estado não reconhecido"
+    },
+    {
+      "name": "job-incomplete",
+      "panel": "result",
+      "width": 1440,
+      "expected": "Resultado incompleto"
+    },
+    {
+      "name": "job-incomplete",
+      "panel": "result",
+      "width": 390,
+      "expected": "Resultado incompleto"
+    },
+    {
+      "name": "job-incomplete",
+      "panel": "result",
+      "width": 320,
+      "expected": "Resultado incompleto"
+    },
+    {
+      "name": "job-zero",
+      "panel": "result",
+      "width": 1440,
+      "expected": "0"
+    },
+    {
+      "name": "job-zero",
+      "panel": "result",
+      "width": 390,
+      "expected": "0"
+    },
+    {
+      "name": "job-zero",
+      "panel": "result",
+      "width": 320,
+      "expected": "0"
+    },
+    {
+      "name": "job-large",
+      "panel": "result",
+      "width": 1440,
+      "expected": "123.456.789.012.345"
+    },
+    {
+      "name": "job-large",
+      "panel": "result",
+      "width": 390,
+      "expected": "123.456.789.012.345"
+    },
+    {
+      "name": "job-large",
+      "panel": "result",
+      "width": 320,
+      "expected": "123.456.789.012.345"
+    },
+    {
+      "name": "restore-failed",
+      "panel": "recovery",
+      "width": 1440,
+      "expected": "Falhou"
+    },
+    {
+      "name": "restore-failed",
+      "panel": "recovery",
+      "width": 390,
+      "expected": "Falhou"
+    },
+    {
+      "name": "restore-failed",
+      "panel": "recovery",
+      "width": 320,
+      "expected": "Falhou"
+    }
+  ],
+  "screenshots": 20,
+  "errors": [],
+  "scope": "Existing JSONs rendered offline. Separate marked presentation fixtures exercise missing/invalid/failed/pending/incomplete states. No Docker operation, service or build. Print panels and native disclosure content checked; full PDF pagination was not audited. CSS zoom 200%, not native browser zoom. No screen-reader audit."
+}

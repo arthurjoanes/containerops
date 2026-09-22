@@ -16,6 +16,7 @@ com fragmento, como `report.html#recovery`, abrem o detalhe correspondente e pod
 ser guardados. Voltar/avançar no navegador percorre as seleções. O teclado alcança
 a lista, os arquivos e os detalhes; após selecionar, o foco segue para o título
 do resultado. Sem JavaScript, todas as operações ficam visíveis na mesma página.
+O atalho **Ir para a operação** pula a navegação e mantém o resultado selecionado.
 
 ## Interpretar o resultado
 
@@ -23,6 +24,11 @@ do resultado. Sem JavaScript, todas as operações ficam visíveis na mesma pág
 **ausente**, **inválido**, **em andamento** e **falhou** não equivalem a aprovação.
 Um arquivo antigo aprovado não substitui uma tentativa recente que falhou. JSONs
 inválidos aparecem no aviso acima dos detalhes, com acesso ao arquivo.
+
+No resultado do job, **Na fila** e **Em andamento** conservam o estado registrado.
+Um job marcado como concluído, mas sem resultado completo, aparece como **Parcial**;
+um estado desconhecido aparece como **Inválido**. Esses casos não são rotulados
+como falha de processamento.
 
 Cada operação mantém sua data, projeto e identificação de execução, quando
 presentes. Backup e restauração não são unidos apenas porque aparecem juntos;

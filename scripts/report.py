@@ -90,6 +90,7 @@ def operation_link(identifier: str, title: str, state: str, detail: str) -> str:
         "invalid": "Inválido",
         "partial": "Parcial",
         "running": "Em andamento",
+        "queued": "Na fila",
         "stale": "Registro antigo",
         "info": "Consulta",
     }
@@ -103,6 +104,17 @@ def operation_link(identifier: str, title: str, state: str, detail: str) -> str:
 
 def state_of(value: bool | None) -> str:
     return "pass" if value is True else "fail" if value is False else "missing"
+
+
+def job_state(job: dict) -> str:
+    if not job:
+        return "missing"
+    state = job.get("state")
+    if state in ("queued", "running"):
+        return state
+    if state == "succeeded":
+        return "pass" if successful_job(job) else "partial"
+    return "fail" if state == "failed" else "invalid"
 
 
 def metrics(items: list[tuple[str, object, str]]) -> str:
@@ -547,7 +559,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 (
                     "result",
                     "Resultado do job",
-                    state_of(observed(job, successful_job(job))),
+                    job_state(job),
                     "v" + shown(job.get("version")),
                 ),
                 ("tls", "Conexão TLS", operation_states["tls"], "CA local"),

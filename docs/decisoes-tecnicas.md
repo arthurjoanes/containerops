@@ -20,7 +20,7 @@ PostgreSQL guarda fila, resultados e estado operacional. O proxy usa a rede fron
 | Healthcheck reinicia o serviço? | Compose usa healthcheck para estado/ordem inicial. `unhealthy` não implica reinício automático. A política de restart trata processo encerrado. | Banco parado produz live 200 e ready 503; o teste recupera o fluxo depois de reiniciar o banco. |
 | Digest é só uma tag longa? | Tag pode ser movida. Config digest, manifesto de plataforma e índice com attestations identificam objetos diferentes. No Docker 29/containerd deste host, o ID devolvido pelo daemon é um manifesto, não o config digest. | Metadados de build e `audit-*.json`, comparando config e camadas exportadas do daemon; detalhes em [supply-chain.md](supply-chain.md). |
 | SBOM e provenance mostram o quê? | SBOM descreve componentes observados; provenance descreve materiais e execução do build. As attestations são ligadas ao artefato auditado. Isso não é assinatura nem certificação SLSA. | Inspeção do OCI e subjects das attestations. |
-| Um scan sem achados é sempre aprovado? | Só se completou com base identificada e política satisfeita. Base ausente, execução interrompida ou findings corrigíveis bloqueantes não são aprovação. | `scan-*.json`, base/idade e relatório completo do Trivy. |
+| Um scan sem achados é sempre aprovado? | Só se completou com base identificada e política satisfeita. Base ausente, execução interrompida ou achados HIGH/CRITICAL não são aprovação. | `scan-*.json`, base/idade e relatório completo do Trivy. |
 | Backup funcionando equivale a recuperação? | Não. Criar um dump só mostra que a exportação funciona; restaurar em outro volume, comparar resultados e processar novo job testa a recuperação. | `backup.json` e `restore.json`, com checksum e duração observada. |
 | Rollback reverte o banco? | Aqui troca a imagem da aplicação. A expansão de schema da segunda release permite a primeira continuar funcionando. Não há downgrade destrutivo nem sobrescrita de dados recentes. | `release.json` e `rollback.json`; IDs anteriores e posteriores, schema e jobs preservados. |
 | Compose local fornece alta disponibilidade? | Não. Todos os serviços e o backup local dependem de um único computador. Restart e recuperação de lease reduzem alguns incidentes de processo, não perda do host. | Limite explícito na arquitetura e nos runbooks. |
@@ -29,7 +29,7 @@ PostgreSQL guarda fila, resultados e estado operacional. O proxy usa a rede fron
 
 **Fila no PostgreSQL.** Transações, leases e resultados ficam no mesmo banco. Dispensa um broker, mas fila e API disputam recursos.
 
-**Debian slim.** Aproveita wheels e Python para os healthchecks. Deps/test ficam separados do runtime.
+**Alpine na aplicação.** Reduz os componentes do sistema distribuídos com a API e o worker. As dependências nativas usam wheels musllinux, verificadas no build. Deps/test ficam separados do runtime, e Python continua disponível para os healthchecks.
 
 **Readiness consulta o banco.** Liveness verifica só o processo da API. Com o banco fora, o cliente recebe erro e pode repetir usando a mesma chave.
 

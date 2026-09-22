@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-09-21T23:32:47.904886+00:00",
+  "project": "pf-containerops-restore-d995c3a8",
+  "backup": "<runtime>\\backups\\20260921T233206-02c4b5eb",
+  "checksum_verified": true,
+  "snapshot_equal": true,
+  "restored_jobs": 8,
+  "new_job": {
+    "id": "9b10d938-924d-4ad4-bacf-142da6cc5d9a",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "recovery_seconds": 29.234
+}

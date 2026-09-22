@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-09-21T23:31:06.178126+00:00",
+  "project": "pf-containerops-test-5303ffbb",
+  "requested_version": "2.0.0",
+  "injected_smoke_failure": false,
+  "phase": "completed",
+  "previous_image": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+  "candidate_image": "sha256:36416f04b968957b137f6978c270eafc4a8169c892c401efd561bd34ddf8e555",
+  "candidate_images": {
+    "api": "sha256:36416f04b968957b137f6978c270eafc4a8169c892c401efd561bd34ddf8e555",
+    "worker": "sha256:36416f04b968957b137f6978c270eafc4a8169c892c401efd561bd34ddf8e555"
+  },
+  "candidate_health": {
+    "status": "alive",
+    "version": "2.0.0"
+  },
+  "candidate_job": {
+    "id": "95db9ab1-b1ea-4ca1-a003-a916e278306b",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895"
+    },
+    "error": null,
+    "version": "2.0.0",
+    "algorithm": "unicode-alnum-marks-v1"
+  },
+  "rolled_back": false,
+  "maintenance_seconds": 31.671,
+  "previous_health": {
+    "status": "alive",
+    "version": "1.0.0"
+  },
+  "preserved_jobs": 5
+}

@@ -207,7 +207,13 @@ def database_role_probe(stack, service, expected_user):
         """set -eu
 set -- /run/secrets/*
 [ "$#" -eq 1 ] && [ "$1" = /run/secrets/db_password ]
-[ -r "$1" ] && [ ! -w "$1" ]
+[ -r "$1" ]
+# BusyBox test -w checks permission bits even on read-only bind mounts.
+# Opening for append exercises the mount restriction without changing content.
+if (: >> "$1") 2>/dev/null; then
+    printf '%s\n' 'Helper credential unexpectedly writable' >&2
+    exit 1
+fi
 export PGPASSWORD="$(cat /run/secrets/db_password)"
 export PGCONNECT_TIMEOUT=5
 export PGOPTIONS='-c statement_timeout=3000 -c lock_timeout=2000'

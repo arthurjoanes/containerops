@@ -40,6 +40,8 @@ flowchart LR
 
 Compose configura redes, mounts, limites e ordem inicial. O kernel aplica as restrições. A API controla autorização e limites; o banco impede resultados duplicados. O cálculo pode repetir após expirar uma lease.
 
+O worker atualiza um timestamp no tmpfs durante seu ciclo. A probe `containerops.worker_health` lê esse arquivo usando apenas a biblioteca padrão, sem carregar o driver PostgreSQL; aceita idade de até 20 segundos e recusa arquivo ausente, inválido ou no futuro. O timeout permanece em 3 segundos, com o mesmo limite de CPU do serviço.
+
 ## Contratos
 - API: POST /v1/jobs com Bearer e Idempotency-Key (1..128 ASCII), JSON {text, demo_duration_seconds opcional 0..15}; GET /v1/jobs/{UUID}; /health/live; /health/ready. Sem cookies/CORS público.
 - Resposta de job: id, state (queued/running/succeeded/failed), attempts, result {word_count, checksum} ou null; version nas respostas de saúde e job. Release 2 acrescenta campo opcional algorithm, mantendo release 1 compatível.
@@ -55,7 +57,9 @@ Setup gera segredos somente demo fora do Git → build/test → db saudável →
 Release salva os IDs anteriores, faz backup, pausa e drena a fila, aplica migração expand-only e troca API/worker. Se readiness ou smoke falhar, volta aos IDs anteriores sem downgrade do banco.
 
 ## Imagens e runtime
-Bases fixadas por digest em docker/images.lock.json; plataforma linux/amd64. Python usa Debian slim para aproveitar wheels; o proxy usa Alpine. Multi-stage separa deps/test/runtime. Config digest e camadas vinculam o OCI à imagem executada. Trivy bloqueia HIGH/CRITICAL corrigíveis e falha se a base estiver ausente ou incompleta.
+Bases fixadas por digest em docker/images.lock.json; plataforma linux/amd64. Python e proxy usam Alpine. Multi-stage separa deps/test/runtime e a instalação Python aceita somente wheels. Config digest e camadas vinculam o OCI à imagem executada. Trivy bloqueia qualquer HIGH/CRITICAL, inclusive sem correção disponível, e falha se a base estiver ausente ou incompleta.
+
+PostgreSQL 17.11 também usa Alpine 3.24, com UID/GID 999 preservados na imagem própria. O entrypoint usa `su-exec` e exige um marcador de plataforma ao reutilizar PGDATA; volumes Debian antigos exigem backup/restore. O scan de serviços verifica banco e proxy além das duas releases da aplicação.
 
 Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`. No Linux CI, o diretório é configurado para a execução. Runtime, secrets, caches, backups e OCI ficam fora das fontes. Os projetos Compose são pf-containerops, pf-containerops-test-* e pf-containerops-restore-*.
 

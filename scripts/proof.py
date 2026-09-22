@@ -8,6 +8,7 @@ import uuid
 
 import checks
 import ops
+import scan_services
 import supply
 
 
@@ -213,6 +214,8 @@ def prove():
                 lambda v=version: supply.scan(ops.ROOT, ops.RUNTIME, v, offline=True),
             )
             attempt.archive("scan-" + version)
+        attempt.step("scan-services", lambda: scan_services.scan_services(offline=True))
+        attempt.archive("scan-services")
         attempt.step("verify", checks.verify)
         attempt.archive("verification-run")
         verified = ops.read_json(ops.EVIDENCE / "verification-run.json")

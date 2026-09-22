@@ -1,0 +1,249 @@
+{
+  "run_id": "82c992d174ac407887bd82e1b800d076",
+  "started_at": "2026-09-21T23:47:07.469309+00:00",
+  "completed_at": "2026-09-21T23:54:48.609159+00:00",
+  "status": "failed",
+  "project": "pf-containerops-test-82c992d1",
+  "steps": [
+    {
+      "name": "build-1.0.0",
+      "started_at": "2026-09-21T23:47:07.984900+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:47:28.774969+00:00",
+      "elapsed_seconds": 20.797
+    },
+    {
+      "name": "sources-1.0.0",
+      "started_at": "2026-09-21T23:47:28.930972+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:47:29.584728+00:00",
+      "elapsed_seconds": 0.657
+    },
+    {
+      "name": "audit-1.0.0",
+      "started_at": "2026-09-21T23:47:29.589728+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:47:35.462618+00:00",
+      "elapsed_seconds": 5.875
+    },
+    {
+      "name": "scan-1.0.0",
+      "started_at": "2026-09-21T23:47:35.478189+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:47:45.471935+00:00",
+      "elapsed_seconds": 9.985
+    },
+    {
+      "name": "build-2.0.0",
+      "started_at": "2026-09-21T23:47:45.480951+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:48:02.591710+00:00",
+      "elapsed_seconds": 17.11
+    },
+    {
+      "name": "sources-2.0.0",
+      "started_at": "2026-09-21T23:48:02.761154+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:48:03.477896+00:00",
+      "elapsed_seconds": 0.718
+    },
+    {
+      "name": "audit-2.0.0",
+      "started_at": "2026-09-21T23:48:03.492399+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:48:11.067108+00:00",
+      "elapsed_seconds": 7.562
+    },
+    {
+      "name": "scan-2.0.0",
+      "started_at": "2026-09-21T23:48:11.097653+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:48:23.163385+00:00",
+      "elapsed_seconds": 12.063
+    },
+    {
+      "name": "scan-services",
+      "started_at": "2026-09-21T23:48:23.175432+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:48:43.429315+00:00",
+      "elapsed_seconds": 20.265
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-09-21T23:48:43.439822+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:52:04.923771+00:00",
+      "elapsed_seconds": 201.485
+    },
+    {
+      "name": "start-isolated",
+      "started_at": "2026-09-21T23:52:05.362613+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:52:34.841645+00:00",
+      "elapsed_seconds": 29.469
+    },
+    {
+      "name": "journey",
+      "started_at": "2026-09-21T23:52:35.909837+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:52:37.732589+00:00",
+      "elapsed_seconds": 1.812
+    },
+    {
+      "name": "release-controlled-failure",
+      "started_at": "2026-09-21T23:52:43.503155+00:00",
+      "status": "failed",
+      "error_category": "RuntimeError",
+      "completed_at": "2026-09-21T23:54:44.699448+00:00",
+      "elapsed_seconds": 121.187
+    },
+    {
+      "name": "cleanup",
+      "started_at": "2026-09-21T23:54:44.708999+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:54:48.028407+00:00",
+      "elapsed_seconds": 3.312
+    }
+  ],
+  "evidence": [
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/main-runtime-before.json",
+      "sha256": "2260e828c128030ecb0de6b2beac174de931d18cd47ef4f0af7d6b97bf7704ad"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/concurrent-containers.json",
+      "sha256": "18923c00e30c34aa54d268df7169139734c509f07b20edda60e86fb73e141d25"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/environment.json",
+      "sha256": "0534b9940a00f11ced1ef08d5af25829122a49dc4549ae450d3cf0d1c06f4fea"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/build-1.0.0.json",
+      "sha256": "2a013ff1dcc14b05b8b13070b7f6b2f2cf40f371fa27a7e2e58a4211efae0454"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/sources-1.0.0.json",
+      "sha256": "5f35e2d0214a391c69e3fdda74dd619c1286c5f46bccc87c9ea81dc6bace1e06"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/audit-1.0.0.json",
+      "sha256": "b0502846ae09b700cdbcc895949c3b2b7bc95706f9436a0070a8d88c778017f0"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/scan-1.0.0.json",
+      "sha256": "ea3d5b9725473416cf81002a984c65452a4da1c92e79fb8a0187eeb822413d61"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/build-2.0.0.json",
+      "sha256": "cae24890d380b78a0aafbb1a0596f012360e2a4ad3fea282022100fc82492c1f"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/sources-2.0.0.json",
+      "sha256": "b81aee02011077e97c3317fd5d52baa552cd637d2e8b6f4fc87e1f30bc9b88eb"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/audit-2.0.0.json",
+      "sha256": "62588df125904e3e08730433a34d4dff0e1cfa3caa714c6325c956dd4ffcaa66"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/scan-2.0.0.json",
+      "sha256": "9c8048f420af95bc85e50cf3677a3dd62390305d96f550ae3650bc689971e12c"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/scan-services.json",
+      "sha256": "909e564ec86a07cd0983b828294ba2fa63adab0f85e645bb3fd9bdc7fa1f73ea"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/verification-run.json",
+      "sha256": "3ce95bc9320366997946d33b4622766635094d4ec87010723b85716f037714fb"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/verify-test-results.json",
+      "sha256": "f31d4df29d979d70216fb12a061c17cdd74a6e9a1fdda372bd2d770e3ece6a62"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/verify-journey.json",
+      "sha256": "66fcdf91c4885ac467e2bcb4df8f0a0e91466faa4412145bcce1bae1a6ecb895"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/verify-hardening.json",
+      "sha256": "9d5361c9b54f2c0834993c63831b13b72902745274a647f5e1163597fa0ae35d"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/verify-recovery.json",
+      "sha256": "0c3d3a47eddd2c8a4491bbfb018ae50b71a9175fa37c98f2c4d93e8a16210571"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/images-before.json",
+      "sha256": "e34657736943ac3155136e3b69327303fc80688455a6c18d3d5fd65317475c6f"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/journey.json",
+      "sha256": "a6dced8970d19250ca8313b70c0868cc118c7453f09e551742a32e54ae9317e6"
+    },
+    {
+      "path": "problem-proof/82c992d174ac407887bd82e1b800d076/snapshot-before.json",
+      "sha256": "7bfefd9b005f1bb6490a49eb5848b8ee8c9e4372225cf9835e63cd4002507aa4"
+    }
+  ],
+  "source": {
+    "files": {
+      ".dockerignore": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "app/pyproject.toml": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "app/requirements-runtime.lock": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "app/requirements-test.lock": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "app/src/containerops/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app/src/containerops/api.py": "c0c14ac025ee701270beaa9e46f7492d55dfbe369791b9a413ba2060c7b855ce",
+      "app/src/containerops/config.py": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "app/src/containerops/database.py": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "app/src/containerops/domain.py": "1a093d116e6cf4e59ce593bea8a3011f1b12e2d83f8ddb032bb9febdc17d0c49",
+      "app/src/containerops/log.py": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "app/src/containerops/manage.py": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "app/src/containerops/migrations/001.sql": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "app/src/containerops/migrations/002.sql": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "app/src/containerops/repository.py": "52b687ba7dc52392deb201ee1d29e8c7493b95e27f9f36603c847b0e83274ab3",
+      "app/src/containerops/worker.py": "b270e973fbbcab4132ea20556530797ec1e2e7e4d3dbd64e552807594877d2d5",
+      "app/tests/conftest.py": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "app/tests/test_api.py": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "app/tests/test_body_limit.py": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "app/tests/test_domain.py": "4dbdd4ade38ca67c5d6e09e3140739a24cfb80aded711e9cef5e248f9deaa1c5",
+      "app/tests/test_http_contract.py": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "app/tests/test_integration.py": "1546bb1ded4f4770dc6ee8844b12942ca659f987d85af76237cbd2226c94d158",
+      "compose.tls.yaml": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "compose.yaml": "ab14a97af03c031ba8fec60934737d7402a51738ca2dbddde2fdfdb946a8bfe8",
+      "docker/app.Dockerfile": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "docker/db/00-platform.sh": "57e7da911b67e9eb7d7f1bc28c148db57750a61508de31f4347e0d90f272f43a",
+      "docker/db/Dockerfile": "8903f2ff29f95a0f22c685498326fb0e8dca929e5a18959171c58c0b29aa1039",
+      "docker/db/entrypoint.sh": "09b99c9a9a1e854bd2e016acd54a41a068fdf7c30473ebc95192037b128e8d8e",
+      "docker/db/init-roles.sh": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "docker/db/tool.sh": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "docker/images.lock.json": "56815faa17eb7129dbc24b4cc882b845322276cdaabcb2f2fdf0d62698664daf",
+      "docker/proxy/Dockerfile": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "docker/proxy/http.conf": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "docker/proxy/locations.conf": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "docker/proxy/nginx.conf": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "docker/proxy/tls.conf": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "pyproject.toml": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "scripts/checks.py": "d0a270749cfbfcdf341452f82be099a34a2d62a2356308c7158983385fc22f06",
+      "scripts/containerops.ps1": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "scripts/oci_audit.py": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "scripts/ops.py": "81f438cd3340eff1eed4a97078483911fc14edf6ac4753d79756e62600646cfd",
+      "scripts/proof.py": "44f6ba37a32d7bd2802749c85007605361b58ad9baa1b63bcc1e8203ac859a1a",
+      "scripts/report.py": "471e187977bd579bc292db0691b603ce309dc94e8528c9591a270e0567369425",
+      "scripts/report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "scripts/scan_services.py": "04f469d4afea6fe1505fbf90e949e809686cc912f709f60ff10c13b567c931dd",
+      "scripts/supply.py": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "scripts/test_report.py": "bf040ef2a103c2b5c5cbddb515d4ec10cf030282d37b83f18e2c898fda685598",
+      "tests/test_contracts.py": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "tests/test_oci_archive.py": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "tests/test_operations.py": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "tests/test_proof.py": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6"
+    },
+    "sha256": "4b12da2e8b3b992f6766759b60adebf9818f8438352e75e1536e0121d85abbbf",
+    "revision": "9aa76353a68472838d977fe2f6c4e7d4686eef3f-dirty"
+  },
+  "scope": "projetos descartáveis; nenhuma operação na stack principal",
+  "elapsed_seconds": 461.14,
+  "error_category": "RuntimeError"
+}

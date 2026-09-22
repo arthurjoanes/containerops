@@ -2,7 +2,6 @@ import argparse
 import signal
 import threading
 import time
-from pathlib import Path
 from types import FrameType
 
 import psycopg
@@ -11,20 +10,9 @@ from containerops import repository
 from containerops.config import Settings
 from containerops.domain import Job, SchemaIncompatible, analyze_text
 from containerops.log import configure, event
+from containerops.worker_health import healthy, heartbeat
 
-HEARTBEAT = Path("/tmp/worker-health")
 MAX_DATABASE_FAILURES = 6
-
-
-def heartbeat() -> None:
-    HEARTBEAT.write_text(str(time.time()), encoding="ascii")
-
-
-def healthy() -> bool:
-    try:
-        return 0 <= time.time() - float(HEARTBEAT.read_text(encoding="ascii")) <= 20
-    except (OSError, ValueError):
-        return False
 
 
 def process_job(settings: Settings, job: Job) -> bool:

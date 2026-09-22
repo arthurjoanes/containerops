@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-09-21T23:28:35.881537+00:00",
+  "run_id": "4b23abee77304c0bbe56ded67836bd83",
+  "project": "pf-containerops-test-4b23abee",
+  "started_at": "2026-09-21T23:24:41.159644+00:00",
+  "completed_at": "2026-09-21T23:28:35.881537+00:00",
+  "full": true,
+  "evidence": [
+    {
+      "path": "runs/4b23abee77304c0bbe56ded67836bd83/test-results.json",
+      "sha256": "sha256:77b180fbfe42c9183ea63ec884ae1f475e5a75344a4fe1bcbb74f702215528a5"
+    },
+    {
+      "path": "runs/4b23abee77304c0bbe56ded67836bd83/journey.json",
+      "sha256": "sha256:0122372fe80eec122126a5a478d733d8c05109d50c1f34c2d7ad3b4a1da087b9"
+    },
+    {
+      "path": "runs/4b23abee77304c0bbe56ded67836bd83/hardening.json",
+      "sha256": "sha256:179a053f02b3d77f0d2b9cfe5bd4cf83c4e24832abbdd7ca0740d5fcc9c3081b"
+    },
+    {
+      "path": "runs/4b23abee77304c0bbe56ded67836bd83/recovery.json",
+      "sha256": "sha256:dbca02d3d05aceaf134c2e0021059f1f22f46e73817fd1636802a3ef8da752ce"
+    }
+  ],
+  "status": "passed",
+  "success": true,
+  "elapsed_seconds": 234.735,
+  "application_image_id": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+  "test_image_id": "sha256:dc6ae94470cdbf7dd8b04c92ea1b9084d98a806a5b17b8efe1f39fb08cc96ee9"
+}

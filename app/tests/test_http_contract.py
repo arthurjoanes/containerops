@@ -88,7 +88,11 @@ def test_duplicate_idempotency_key_is_rejected(client: TestClient, other_key: st
     submit.assert_not_called()
 
 
-@pytest.mark.parametrize("text", [None, True, 123, [], {}, "\x00", "\ud800", "é" * 8193])
+@pytest.mark.parametrize(
+    "text",
+    [None, True, 123, [], {}, "\x00", "\ud800", "é" * 8193],
+    ids=["null", "boolean", "integer", "array", "object", "nul", "surrogate", "over-limit"],
+)
 def test_invalid_text_types_and_encoding_do_not_reach_database(
     client: TestClient, auth: dict[str, str], text: object
 ) -> None:
@@ -103,7 +107,9 @@ def test_invalid_text_types_and_encoding_do_not_reach_database(
 
 
 @pytest.mark.parametrize(
-    "text", ["", "x" * MAX_TEXT_BYTES, "é" * 8192, "🚀" * 4096, "中文 cafe\u0301"]
+    "text",
+    ["", "x" * MAX_TEXT_BYTES, "é" * 8192, "🚀" * 4096, "中文 cafe\u0301"],
+    ids=["empty", "ascii-limit", "accent-limit", "emoji-limit", "combining-unicode"],
 )
 def test_valid_text_boundaries_preserve_original_bytes(
     client: TestClient, auth: dict[str, str], queued_job: Job, text: str

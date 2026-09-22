@@ -1,0 +1,14 @@
+title = "ContainerOps secret scanning"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "SHA-256 fingerprints of source files in build and runtime evidence"
+condition = "AND"
+regexTarget = "match"
+paths = ['''^docs/evidence/(problem-proof/[^/]+/(sources-[12]\.0\.0|manifest)|problem-proof-latest|review-followup-source-images)\.json$''']
+regexes = ['''(?:api|test_api)\.py"\s*:\s*"[a-f0-9]{64}"''']

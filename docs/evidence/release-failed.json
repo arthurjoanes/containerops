@@ -1,0 +1,11 @@
+{
+  "recorded_at": "2026-09-21T23:54:44.694934+00:00",
+  "project": "pf-containerops-test-82c992d1",
+  "requested_version": "2.0.0",
+  "injected_smoke_failure": true,
+  "phase": "rollback",
+  "previous_image": "sha256:f24f89c6c6229bbcc60c4ea64382e1fb2aa8ee41212bb52eca21cd0fa2be4915",
+  "candidate_image": "sha256:36416f04b968957b137f6978c270eafc4a8169c892c401efd561bd34ddf8e555",
+  "error_category": "RuntimeError",
+  "reason": "Comando falhou (1): docker compose --project-directory <repo> -p pf-containerops-test-82c992d1"
+}

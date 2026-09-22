@@ -1,0 +1,307 @@
+{
+  "run_id": "5303ffbb6a214000988cacc08c861762",
+  "started_at": "2026-09-21T23:23:07.447163+00:00",
+  "completed_at": "2026-09-21T23:32:52.428267+00:00",
+  "status": "passed",
+  "project": "pf-containerops-test-5303ffbb",
+  "steps": [
+    {
+      "name": "build-1.0.0",
+      "started_at": "2026-09-21T23:23:07.867392+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:23:21.413406+00:00",
+      "elapsed_seconds": 13.547
+    },
+    {
+      "name": "sources-1.0.0",
+      "started_at": "2026-09-21T23:23:21.589294+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:23:22.881198+00:00",
+      "elapsed_seconds": 1.297
+    },
+    {
+      "name": "audit-1.0.0",
+      "started_at": "2026-09-21T23:23:22.895361+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:23:29.304096+00:00",
+      "elapsed_seconds": 6.406
+    },
+    {
+      "name": "scan-1.0.0",
+      "started_at": "2026-09-21T23:23:29.325482+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:23:52.789918+00:00",
+      "elapsed_seconds": 23.469
+    },
+    {
+      "name": "build-2.0.0",
+      "started_at": "2026-09-21T23:23:52.802951+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:24:10.717554+00:00",
+      "elapsed_seconds": 17.907
+    },
+    {
+      "name": "sources-2.0.0",
+      "started_at": "2026-09-21T23:24:10.879939+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:24:12.146897+00:00",
+      "elapsed_seconds": 1.265
+    },
+    {
+      "name": "audit-2.0.0",
+      "started_at": "2026-09-21T23:24:12.167138+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:24:20.590212+00:00",
+      "elapsed_seconds": 8.422
+    },
+    {
+      "name": "scan-2.0.0",
+      "started_at": "2026-09-21T23:24:20.610985+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:24:41.145086+00:00",
+      "elapsed_seconds": 20.532
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-09-21T23:24:41.157637+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:28:35.883651+00:00",
+      "elapsed_seconds": 234.735
+    },
+    {
+      "name": "start-isolated",
+      "started_at": "2026-09-21T23:28:36.190695+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:29:01.500391+00:00",
+      "elapsed_seconds": 25.297
+    },
+    {
+      "name": "journey",
+      "started_at": "2026-09-21T23:29:01.968471+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:29:03.690236+00:00",
+      "elapsed_seconds": 1.718
+    },
+    {
+      "name": "release-controlled-failure",
+      "started_at": "2026-09-21T23:29:06.433352+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:30:16.556328+00:00",
+      "elapsed_seconds": 70.125
+    },
+    {
+      "name": "release-success",
+      "started_at": "2026-09-21T23:30:19.268003+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:31:06.179188+00:00",
+      "elapsed_seconds": 46.906
+    },
+    {
+      "name": "manual-rollback",
+      "started_at": "2026-09-21T23:31:09.330416+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:31:50.488510+00:00",
+      "elapsed_seconds": 41.14
+    },
+    {
+      "name": "tls",
+      "started_at": "2026-09-21T23:31:53.221824+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:32:03.142889+00:00",
+      "elapsed_seconds": 9.907
+    },
+    {
+      "name": "backup",
+      "started_at": "2026-09-21T23:32:06.029750+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:32:18.458652+00:00",
+      "elapsed_seconds": 12.438
+    },
+    {
+      "name": "restore",
+      "started_at": "2026-09-21T23:32:18.477913+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:32:49.926014+00:00",
+      "elapsed_seconds": 31.438
+    },
+    {
+      "name": "cleanup",
+      "started_at": "2026-09-21T23:32:50.092503+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-21T23:32:52.277379+00:00",
+      "elapsed_seconds": 2.187
+    }
+  ],
+  "evidence": [
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/main-runtime-before.json",
+      "sha256": "2260e828c128030ecb0de6b2beac174de931d18cd47ef4f0af7d6b97bf7704ad"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/concurrent-containers.json",
+      "sha256": "62593a4b567f1b73f9f221e08499ed40a0aa46c3719c9cfd2214c785f158751a"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/environment.json",
+      "sha256": "0534b9940a00f11ced1ef08d5af25829122a49dc4549ae450d3cf0d1c06f4fea"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/build-1.0.0.json",
+      "sha256": "74531cdaa8427968b846f1eec1ef66114a1d5e8fb620ee7df4daa13258170a66"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/sources-1.0.0.json",
+      "sha256": "5f35e2d0214a391c69e3fdda74dd619c1286c5f46bccc87c9ea81dc6bace1e06"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/audit-1.0.0.json",
+      "sha256": "6e99b683af094a3fbec9b81cabdc49c6c50dba4f1b492d37173a1af6e137098d"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/scan-1.0.0.json",
+      "sha256": "eac00f950fb03e2645d4c0ee91fdabb261367f867bb6f07b5f1ca542cbccac3c"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/build-2.0.0.json",
+      "sha256": "ca4bea6896af7caac8a690d79cd6e42a39a06d5d9adfc744b4eb35b7e2feb8f4"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/sources-2.0.0.json",
+      "sha256": "b81aee02011077e97c3317fd5d52baa552cd637d2e8b6f4fc87e1f30bc9b88eb"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/audit-2.0.0.json",
+      "sha256": "3e846e4b15b7d5f6cf58b0f57082a2ccd786661f0920f5e40a40e2de723aaf92"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/scan-2.0.0.json",
+      "sha256": "e879a2b8fd9ed0c4b228fce95d8fff0c74f474ced2112e6e754ab1716ebc149d"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/verification-run.json",
+      "sha256": "af847a7da7beef4a766a87c85a66311f48bcfc71a43b0a75599f659a6e04a151"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/verify-test-results.json",
+      "sha256": "77b180fbfe42c9183ea63ec884ae1f475e5a75344a4fe1bcbb74f702215528a5"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/verify-journey.json",
+      "sha256": "0122372fe80eec122126a5a478d733d8c05109d50c1f34c2d7ad3b4a1da087b9"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/verify-hardening.json",
+      "sha256": "179a053f02b3d77f0d2b9cfe5bd4cf83c4e24832abbdd7ca0740d5fcc9c3081b"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/verify-recovery.json",
+      "sha256": "dbca02d3d05aceaf134c2e0021059f1f22f46e73817fd1636802a3ef8da752ce"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/images-before.json",
+      "sha256": "e34657736943ac3155136e3b69327303fc80688455a6c18d3d5fd65317475c6f"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/journey.json",
+      "sha256": "defbe5e10927beb3ee2c7550b2a3c5f7a41b1b25ca86cac9bfd2ac84027398b1"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/snapshot-before.json",
+      "sha256": "ee3d9c217a20039772bb4bd0c89c29fd2243f19114327afa20e106b2b318652b"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/rollback.json",
+      "sha256": "cb1f219e6a6f00bcf5d59019941b714649068eef8e6a8959fa7243ae22512ef6"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/snapshot-after-controlled-failure.json",
+      "sha256": "576ec5ec2f2fcab960baacd8e900b29f4f16571f984383e61589af589c53ff2b"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/release.json",
+      "sha256": "94b5e79f3bb9d0814c94408b1b6157fd685116b038ec017bae47883e3e82743a"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/snapshot-promoted.json",
+      "sha256": "ecaaef5195b82feaf6161ff0f02af50a36337662ec7a6b1e6f2af4c4a62978eb"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/manual-rollback.json",
+      "sha256": "14c46fa36a4f8678700cbd5e1381189ceb9dc43e672ec467c689a7b4da288170"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/snapshot-rolled-back.json",
+      "sha256": "f9cfc2e3f01b33e763c9d9aa4ace4b9dc5cc4ea02c7d6c6dbedbe2b053b2f4e1"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/tls.json",
+      "sha256": "0f5bca339565c9cc4ac426cc2dace812dc153af0bcc4b706ca858fe8cf42a2a7"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/backup.json",
+      "sha256": "852568ee7d2661f45b15e193276de5d32c397a06fe0417ee926dd0d06f55bb37"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/restore.json",
+      "sha256": "e353af509bb8847ce0682bff92b426a4ba89334f68b1c72ebdb0a40c060b5342"
+    },
+    {
+      "path": "problem-proof/5303ffbb6a214000988cacc08c861762/main-runtime-after.json",
+      "sha256": "2260e828c128030ecb0de6b2beac174de931d18cd47ef4f0af7d6b97bf7704ad"
+    }
+  ],
+  "source": {
+    "files": {
+      ".dockerignore": "60aa998ed466376f30ab28f4545b7eb2bab4caa83cac67a75155d1c6d960ac6a",
+      "app/pyproject.toml": "eee9cf501d0d2fdbf63f62ca3374e87fe0ef240a5d65d60d99b8530c210d1a51",
+      "app/requirements-runtime.lock": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+      "app/requirements-test.lock": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c",
+      "app/src/containerops/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app/src/containerops/api.py": "c0c14ac025ee701270beaa9e46f7492d55dfbe369791b9a413ba2060c7b855ce",
+      "app/src/containerops/config.py": "94b9d43a7613ff136bee44c2e22cda72c558cbe4e0a516c29398ad77acf814f2",
+      "app/src/containerops/database.py": "e6a7157638b817690b2b2e3a52a426c8a9e8759675383956b22f362215d98c6b",
+      "app/src/containerops/domain.py": "1a093d116e6cf4e59ce593bea8a3011f1b12e2d83f8ddb032bb9febdc17d0c49",
+      "app/src/containerops/log.py": "1e67d3e2a5420b94e2d21071d5e5e2191472514db6995df82ae970d64e74ebae",
+      "app/src/containerops/manage.py": "ff03c2e3d009d7c5287ade285b857e3ed92bad435823cc3822f20203bcecc8f7",
+      "app/src/containerops/migrations/001.sql": "27546343ad247505ee3725630d1af161823bbc81249f7058fa5aefd4fced1838",
+      "app/src/containerops/migrations/002.sql": "93bf51b46ed37818e66bd803444ddeff0783249e3aa9d3ed9d49d8652d28739c",
+      "app/src/containerops/repository.py": "52b687ba7dc52392deb201ee1d29e8c7493b95e27f9f36603c847b0e83274ab3",
+      "app/src/containerops/worker.py": "b270e973fbbcab4132ea20556530797ec1e2e7e4d3dbd64e552807594877d2d5",
+      "app/tests/conftest.py": "5a5d7992181364ab4c22380ff4336f2e3ef089da661327274709291f36d9690e",
+      "app/tests/test_api.py": "3e04692f0c60820f08bc1b7ff9aa6d239e09d63efb4121a6eaa6539ff4dcbe33",
+      "app/tests/test_body_limit.py": "272873a6af4cb87c4c269388e7be73bbc4ea65401d1b409bce5e052ce1eb3c48",
+      "app/tests/test_domain.py": "4dbdd4ade38ca67c5d6e09e3140739a24cfb80aded711e9cef5e248f9deaa1c5",
+      "app/tests/test_http_contract.py": "273721c39275a831c5608e131669090b7cc89ab451ba5a84e354cd4b4bb704c1",
+      "app/tests/test_integration.py": "1546bb1ded4f4770dc6ee8844b12942ca659f987d85af76237cbd2226c94d158",
+      "compose.tls.yaml": "643f5c39690021873056d7799cb35a0131d78537be00a57efb0a3393ae72e075",
+      "compose.yaml": "8544cf554390cb6ea226b67bb465ac7a0d4638bdc1f9edb44af5fff52be059d6",
+      "docker/app.Dockerfile": "dcff30cceb379ed5729ea4713dca2cdd2a09a1cfef5e793b22cbcc2c8a3c0d48",
+      "docker/db/init-roles.sh": "3359e4d7a69c299e73e4813a116dc7c7455c2ce8f512fbb9dcf21dbed1136540",
+      "docker/db/tool.sh": "4f834572ce80946c76d876c091df7a91b178ddd4fdec4fbd67b6d42a7bdccb04",
+      "docker/images.lock.json": "ede1f42479cdc08eecfcd31d1473b5c28bbad61acf63b4a8861f50af5c18a554",
+      "docker/proxy/Dockerfile": "afde0317e34d10521a4414bf5e8b1919cd90bf14f817dc1a1d835a1db5d1ace8",
+      "docker/proxy/http.conf": "22be7c18f59c5aca7bd335816fca4600cc3675ca3ed60dbb092b1f46705c84c5",
+      "docker/proxy/locations.conf": "6b4d406f30aead3cb178a109f88d2df3640d6619c658b555f5a6c798a52b63d1",
+      "docker/proxy/nginx.conf": "bcd2265204419cad9fc50933ee4bab15ce53df7dd73dbc3486375ef90eab91f6",
+      "docker/proxy/tls.conf": "11649d6ad1ee808976597349a0c1fc6f69eab4030dbac613084ecf3898d7aa49",
+      "pyproject.toml": "7edb5ec3d10cb49389f6b345564c74c9a2d9f738796b64440ab138c426e20d83",
+      "scripts/checks.py": "585e409ddccf8ec19febc4893816c106cadf8a15c63bc5c65645ce4c2d246f17",
+      "scripts/containerops.ps1": "b92219771be3d01eb76b0dbaa300b6a33f25f82dcabb59fca200979633beab30",
+      "scripts/oci_audit.py": "a73f590d55fedb41316803f5bbd334548c353c37079a524ca35d13f389974fe0",
+      "scripts/ops.py": "9080c7073ea6dcecbb1af879e1345e3164efcd678279a163b35e4fcc55a96ffc",
+      "scripts/proof.py": "4ad42c2d47cc8907b0c4618967379795e0730ecc45224ee76724b783c9439072",
+      "scripts/report.py": "471e187977bd579bc292db0691b603ce309dc94e8528c9591a270e0567369425",
+      "scripts/report_evidence.py": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5",
+      "scripts/supply.py": "8a00eba498fe3e07d9b2774ee284ac2d3274b6713684e0ec5b2c6e27cd308de9",
+      "scripts/test_report.py": "bf040ef2a103c2b5c5cbddb515d4ec10cf030282d37b83f18e2c898fda685598",
+      "tests/test_contracts.py": "09c93b97dafc15107325d8ff970983097b376f24b763f66646c338fa791b6576",
+      "tests/test_oci_archive.py": "f9e30b0b3f5e20770624e8aa44936d3d9c0e72bd01f55f972a978e94a32d2c69",
+      "tests/test_operations.py": "7e69ac9dffd22d1c202524a0c868f3829dedede268ba6e1c4443a3051fcf207f",
+      "tests/test_proof.py": "1777b82149141c4e36ebabb1eff91c698cdbfca1846cfc3d585ac8323a3244d6"
+    },
+    "sha256": "3d4f8bb194fe8a8eef38118be69e7a44f4794b2951dad2c27045555aa639e6d0",
+    "revision": "9aa76353a68472838d977fe2f6c4e7d4686eef3f-dirty"
+  },
+  "scope": "projetos descartáveis; nenhuma operação na stack principal",
+  "elapsed_seconds": 584.984
+}

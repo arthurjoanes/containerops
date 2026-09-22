@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-09-21T23:47:07.636023+00:00",
+  "containers": [
+    {
+      "Command": "\"/usr/bin/buildkitd-…\"",
+      "CreatedAt": "2026-09-20 23:57:37 -0300 -03",
+      "HealthStatus": "none",
+      "ID": "96bb0b97a1fc",
+      "Image": "moby/buildkit:v0.28.0",
+      "Labels": "desktop.docker.io/ports.scheme=v2",
+      "LocalVolumes": "1",
+      "Mounts": "buildx_buildki…",
+      "Names": "buildx_buildkit_pf-containerops-builder0",
+      "Networks": "bridge",
+      "Platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      },
+      "Ports": "",
+      "RunningFor": "21 hours ago",
+      "Size": "94.2kB (virtual 242MB)",
+      "State": "running",
+      "Status": "Up 26 minutes"
+    }
+  ],
+  "publication_redaction": {
+    "unrelated_containers_omitted": 0
+  }
+}

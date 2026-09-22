@@ -85,7 +85,7 @@ def main() -> None:
         html = output.read_text(encoding="utf-8").replace(
             '<main id="content" tabindex="-1">',
             '<main id="content" tabindex="-1"><p class="record-warning">'
-            'Cenário de apresentação — dados de teste; nenhuma operação executada.</p>',
+            "Cenário de apresentação — dados de teste; nenhuma operação executada.</p>",
             1,
         )
         output.write_text(html, encoding="utf-8")

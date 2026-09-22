@@ -1,5 +1,7 @@
 # Preservar trabalhos durante rollback e restauração
 
+**Registro histórico:** as imagens desta página pertencem às execuções identificadas abaixo e preservam seus bytes originais. Veja a [galeria da interface atual](screenshots.md) para a apresentação do código atual.
+
 **Problema central:** voltar a versão do programa não pode apagar o trabalho que ela já aceitou. E encontrar um dump no disco não basta: o serviço restaurado precisa devolver os dados corretos e aceitar um novo trabalho.
 
 A execução `fc39e58c890841a089c9b1173869b0aa`, em **22/09/2026, 06:17:46–06:20:05 UTC**, testou essa sequência com containers e PostgreSQL reais, textos sintéticos e namespaces descartáveis. Terminou aprovada em **139,750 s**, incluindo a limpeza. O [manifesto da operação](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json) registra fontes, imagens, etapas e artefatos. É um cenário limitado de operações, separado da prova completa de build, segurança, TLS e integração.
@@ -8,19 +10,19 @@ A execução `fc39e58c890841a089c9b1173869b0aa`, em **22/09/2026, 06:17:46–06:
 
 A release 1 processou `Trabalho identificado e preservado`: **quatro palavras**, checksum dos bytes originais e ID `29a855d0-7e64-4055-9f9e-0004c4ff4175`. Esse registro permite conferir preservação por identidade e resultado, em vez de observar apenas uma mensagem de sucesso. [Job inicial](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/demo.json).
 
-![Job inicial concluído, com quatro palavras, ID e checksum visíveis](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/job-1440.png)
+[Captura histórica completa: Job inicial concluído, com quatro palavras, ID e checksum visíveis](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/job-1440.png)
 
 Captura do relatório gerado em 22/09 às 06:29 UTC a partir dos JSONs reais desta execução. O relatório é uma leitura de resultados salvos, sem consulta ao serviço ao abrir a página. Os estados ausentes de TLS, scan e prova completa não são apresentados como aprovados nesse cenário curto.
 
 ## 2. Voltar a imagem depois de uma falha real da candidata
 
-A release 2 ampliou o schema e concluiu outro job. Em seguida, o runner provocou falha no teste de prontidão funcional da candidata (*smoke test*). A operação voltou API e worker à imagem anterior, sem rebaixar o schema nem restaurar dados antigos.
+A release 2 ampliou o schema e concluiu outro job. Em seguida, o runner provocou falha no teste de prontidão funcional da candidata (_smoke test_). A operação voltou API e worker à imagem anterior, sem rebaixar o schema nem restaurar dados antigos.
 
 O job criado pela candidata, `d734dd01-4e3e-4d37-8f50-b2e6b930834b`, continuou consultável, com quatro palavras e o mesmo checksum. A release 1 também concluiu `Rollback preserva dados`, com três palavras. A origem passou a ter **três jobs concluídos**, preservando o inicial. [Resultado do rollback](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json).
 
 Essa estratégia depende da compatibilidade da migração expansiva. Não cobre uma mudança que remova campos necessários à versão anterior. `version` na resposta identifica a aplicação que respondeu à consulta; comparar o resultado persistido não exige que a versão da resposta continue sendo 2.0.0 após o rollback.
 
-![Retorno após falha controlada com imagens identificadas e novo job concluído pela versão anterior](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/rollback-1440.png)
+[Captura histórica completa: Retorno após falha controlada com imagens identificadas e novo job concluído pela versão anterior](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/rollback-1440.png)
 
 A imagem mostra o retorno após falha, não uma promoção bem-sucedida. Os 44,9 s exibidos são o intervalo interno após o backup preliminar, incluindo troca, verificações e retorno ao estado de pausa anterior. A chamada completa de release/rollback levou 58,625 s. Esse intervalo não mede indisponibilidade contínua para o usuário.
 
@@ -32,7 +34,7 @@ O destino foi outro projeto e volume vazio. A restauração conferiu o checksum,
 
 A [conferência da origem](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/source-preservation.json) encontrou os mesmos jobs, imagens e estado de pausa após o ensaio, além do backup original íntegro. Os arquivos de estado do ambiente principal também foram comparados antes/depois. O destino e a origem descartáveis foram removidos; o resultado só passou a aprovado depois das verificações de limpeza.
 
-![Três jobs restaurados e um novo trabalho com quatro palavras no volume de destino](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/restore-new-job-1440.png)
+[Captura histórica completa: Três jobs restaurados e um novo trabalho com quatro palavras no volume de destino](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/restore-new-job-1440.png)
 
 A captura expõe os três critérios: cópia conferida, dados comparados e novo job concluído. Os 27,4 s representam a recuperação interna; 29,578 s incluem preflight e limpeza. O registro da cópia mostra 8,4 s internos antes da finalização do backup; a chamada completa levou 10,968 s. Essas fronteiras estão separadas na tabela abaixo.
 
@@ -40,14 +42,14 @@ A captura expõe os três critérios: cópia conferida, dados comparados e novo 
 
 ## 4. O que os tempos medem
 
-| Medida | Observado | Fronteira |
-| --- | ---: | --- |
-| Cenário completo | 139,750 s | Preparação e conferências, job, rollback, backup/cópia, controle negativo, restore e limpeza da origem |
-| Operação de rollback | 58,625 s | Chamada da operação de release com falha controlada e retorno validado |
-| Backup | 10,968 s | Chamada de backup, incluindo retorno ao estado de pausa anterior |
-| Cópia protegida | 0,516 s | Cópia e conferência de hashes/permissões |
-| Recuperação interna | 27,437 s | Após preflight/configuração do destino até validar o novo job; campo histórico `recovery_seconds` |
-| Restore completo | 29,578 s | Entrada no restore, checksum/preflight, recuperação, limpeza e conferência de ausência dos recursos do destino |
+| Medida               | Observado | Fronteira                                                                                                      |
+| -------------------- | --------: | -------------------------------------------------------------------------------------------------------------- |
+| Cenário completo     | 139,750 s | Preparação e conferências, job, rollback, backup/cópia, controle negativo, restore e limpeza da origem         |
+| Operação de rollback |  58,625 s | Chamada da operação de release com falha controlada e retorno validado                                         |
+| Backup               |  10,968 s | Chamada de backup, incluindo retorno ao estado de pausa anterior                                               |
+| Cópia protegida      |   0,516 s | Cópia e conferência de hashes/permissões                                                                       |
+| Recuperação interna  |  27,437 s | Após preflight/configuração do destino até validar o novo job; campo histórico `recovery_seconds`              |
+| Restore completo     |  29,578 s | Entrada no restore, checksum/preflight, recuperação, limpeza e conferência de ausência dos recursos do destino |
 
 As fases internas constam no JSON. Elas não devem ser somadas aos totais acima como trabalho adicional: são intervalos contidos na mesma operação. São tempos de uma execução local com três jobs, não SLA ou comparação de desempenho com a [prova histórica de oito jobs](verification.md#execução-de-22092026-utc).
 

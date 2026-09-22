@@ -66,9 +66,43 @@ def control_row(title: str, passed: bool | None, body: str, evidence: str) -> st
     return (
         '<li class="control-row">'
         f'<div class="control-title"><h3>{escape(title)}</h3>{badge(passed)}</div>'
-        f'<details><summary aria-label="Detalhes: {escape(title)}">Detalhes</summary>'
-        f'<p>{body}</p><div class="proof">{evidence}</div></details></li>'
+        f'<p>{body}</p><div class="proof">{evidence}</div></li>'
     )
+
+
+def record_context(record: dict, *, label: str = "Registro") -> str:
+    """Keep the identity and clock of each operation beside its own result."""
+    return (
+        '<dl class="record-context">'
+        f"<div><dt>{escape(label)}</dt><dd>{timestamp(record)}</dd></div>"
+        f"<div><dt>Projeto</dt><dd><code>{shown(record.get('project', record.get('source_project')))}</code></dd></div>"
+        f"<div><dt>Execução</dt><dd><code>{shown(record.get('run_id'))}</code></dd></div>"
+        "</dl>"
+    )
+
+
+def operation_link(identifier: str, title: str, state: str, detail: str) -> str:
+    labels = {
+        "pass": "Aprovado",
+        "fail": "Falhou",
+        "pending": "Sem resultado",
+        "missing": "Ausente",
+        "invalid": "Inválido",
+        "partial": "Parcial",
+        "running": "Em andamento",
+        "stale": "Registro antigo",
+        "info": "Consulta",
+    }
+    return (
+        f'<a class="operation-link" href="#{identifier}" data-operation="{identifier}">'
+        f'<span class="operation-title"><span class="state-dot {state}" aria-hidden="true"></span>'
+        f'{escape(title)}</span><span class="operation-meta">{escape(labels.get(state, state))}'
+        f" · {detail}</span></a>"
+    )
+
+
+def state_of(value: bool | None) -> str:
+    return "pass" if value is True else "fail" if value is False else "missing"
 
 
 def metrics(items: list[tuple[str, object, str]]) -> str:
@@ -118,7 +152,7 @@ def resource_table(hardening: dict) -> str:
 
 def job_panel(job: dict, evidence: str) -> str:
     if not job:
-        return '<div class="empty-state"><h3>Nenhum resultado registrado</h3><p>Com a aplicação iniciada, execute <code>python scripts/ops.py demo</code> e <code>python scripts/ops.py report</code>.</p></div>'
+        return '<div class="empty-state"><h3>Nenhum resultado registrado</h3><p>Não há job vinculado a este registro. Consulte o arquivo da operação; uma nova demonstração não completa uma evidência anterior.</p></div>'
     result = job.get("result") or {}
     state = job.get("state")
     label = {
@@ -340,9 +374,32 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         if current
         else '<li class="empty-state">Sem etapas vinculadas a esta execução.</li>'
     )
-    operations_html = "".join(
-        control_row(title, status, body, proof(name, records))
+    operation_records = dict(records)
+    if not release:
+        operation_records.pop(release_source, None)
+    operation_rows = {
+        name: control_row(title, status, body, proof(name, operation_records))
         for title, status, body, name in controls[6:]
+    }
+    restore_steps = "".join(
+        control_row(title, passed, body, "")
+        for title, passed, body in (
+            (
+                "Checksum do backup",
+                restore.get("checksum_verified"),
+                "Compara o dump recebido com o checksum registrado.",
+            ),
+            (
+                "Dados no volume restaurado",
+                restore.get("snapshot_equal"),
+                "Compara o snapshot restaurado com os dados esperados.",
+            ),
+            (
+                "Novo job após restauração",
+                observed(restore.get("new_job", {}), successful_job(restore.get("new_job", {}))),
+                "Confere conclusão, contagem de palavras e checksum do novo resultado.",
+            ),
+        )
     )
     evidence_rows = (
         "".join(
@@ -408,16 +465,6 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     )
     if not scan:
         scan_findings = '<p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>'
-    scan_counts = [
-        f"{shown(severities[key])} {key}"
-        for key in ("HIGH", "CRITICAL")
-        if severities.get(key) is not None
-    ]
-    scan_summary = " · ".join(scan_counts) + (" detectados." if scan_counts else "")
-    if scan.get("unfixed_findings") is not None:
-        scan_summary += f" {shown(scan['unfixed_findings'])} sem correção."
-    if not scan_summary.strip():
-        scan_summary = "Scan sem contagens." if scan else "Sem scan para esta imagem."
     cache = records.get("cache-experiment", {})
     cache_rows = "".join(
         f'<tr><th scope="row">{shown(item.get("case"))}</th><td>{shown(item.get("duration_seconds"), " s")}</td>'
@@ -458,7 +505,8 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     ):
         supply_identity += " Base do scanner vencida no momento do scan."
     release_warning = (
-        '<p class="record-warning">A última tentativa de release falhou. <a href="#operations">Ver falha</a></p>'
+        '<p class="record-warning"><strong>A última tentativa de release falhou.</strong> '
+        '<a href="#operations">Conferir esta tentativa →</a></p>'
         if release_source == "release-failed"
         else ""
     )
@@ -469,9 +517,94 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         else "Não informado"
     )
     assets = Path(__file__).resolve().parent
+    operation_states = {name: state_of(status) for _, status, _, name in controls[6:]}
+    for name in ("restore", release_source, "rollback", "tls"):
+        if name + ".json" in errors:
+            operation_states[name] = "invalid"
+    if "release-failed.json" in errors:
+        operation_states[release_source] = "invalid"
+    artifact_state = (
+        "fail"
+        if False in (audit_passed, scan_passed)
+        else "pass"
+        if audit_passed is True and scan_passed is True
+        else "partial"
+        if build
+        else "missing"
+    )
+    if any(name.startswith(("build-", "audit-", "scan-")) for name in errors):
+        artifact_state = "invalid"
+    operation_groups = [
+        (
+            "Verificação",
+            [
+                (
+                    "overview",
+                    "Aplicação e isolamento",
+                    attempt.state,
+                    shown(verification.get("elapsed_seconds"), " s"),
+                ),
+                (
+                    "result",
+                    "Resultado do job",
+                    state_of(observed(job, successful_job(job))),
+                    "v" + shown(job.get("version")),
+                ),
+                ("tls", "Conexão TLS", operation_states["tls"], "CA local"),
+            ],
+        ),
+        (
+            "Recuperação",
+            [
+                (
+                    "recovery",
+                    "Backup e restauração",
+                    operation_states["restore"],
+                    shown(restore.get("recovery_seconds"), " s"),
+                ),
+            ],
+        ),
+        (
+            "Release",
+            [
+                (
+                    "operations",
+                    "Última troca de imagem",
+                    operation_states[release_source],
+                    shown(release.get("maintenance_seconds"), " s"),
+                ),
+                (
+                    "rollback",
+                    "Retorno após falha",
+                    operation_states["rollback"],
+                    shown(rollback.get("maintenance_seconds"), " s"),
+                ),
+            ],
+        ),
+        (
+            "Artefatos",
+            [
+                (
+                    "artifacts",
+                    "Imagem, auditoria e scan",
+                    artifact_state,
+                    "v" + shown(build.get("version")),
+                ),
+                ("evidence", "Arquivos de evidência", "info", f"{len(records)} JSONs"),
+            ],
+        ),
+    ]
+    navigation = "".join(
+        f'<div class="operation-group"><h2>{title}</h2>'
+        + "".join(operation_link(*item) for item in items)
+        + "</div>"
+        for title, items in operation_groups
+    )
     template = Template((assets / "report.html").read_text(encoding="utf-8"))
     page = template.substitute(
         styles=(assets / "report.css").read_text(encoding="utf-8"),
+        scripts=(assets / "report.js").read_text(encoding="utf-8"),
+        navigation=navigation,
         created=timestamp({"recorded_at": generated_at.isoformat()}),
         record_count=len(records),
         verification_class=attempt.state,
@@ -489,32 +622,56 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         verification_error=shown(verification.get("error_category")),
         verification_proof=proof("verification-run", records),
         artifact_version=shown(build.get("version")),
-        artifact_time=timestamp(build),
         artifact_image=shown(build.get("image_id")),
         artifact_proof=proof(build_name, records),
         scan_status=badge(scan_passed),
-        scan_summary=scan_summary,
         snapshot_version=shown(final_health.get("version")),
         snapshot_health=shown(final_health.get("status")),
         snapshot_proof=proof("final-state", records),
         supply_identity=escape(supply_identity),
         job_panel=job_panel(job, proof(job_source, {job_source: job_record} if job_record else {})),
         controls=controls_html,
-        operations=operations_html,
+        restore_steps=restore_steps,
+        release_steps=operation_rows[release_source],
+        rollback_steps=operation_rows["rollback"],
+        tls_steps=operation_rows["tls"],
+        artifact_steps="".join(
+            control_row(title, status, body, proof(name, records))
+            for title, status, body, name in controls[10:]
+        ),
+        verification_context=record_context(verification, label="Conclusão registrada"),
+        job_context=record_context(job_record),
+        backup_context=record_context(backup),
+        restore_context=record_context(restore),
+        release_context=record_context(release),
+        rollback_context=record_context(rollback),
+        tls_context=record_context(tls),
+        artifact_context=record_context(build, label="Build registrado"),
+        snapshot_context=record_context(final_state),
+        restore_duration=shown(restore.get("recovery_seconds"), " s"),
+        restore_status=badge(controls[6][1]),
+        backup_duration=shown(backup.get("elapsed_seconds"), " s"),
+        backup_checksum=shown(backup.get("sha256")),
+        backup_schema=shown(backup.get("schema_version")),
+        restored_jobs=shown(restore.get("restored_jobs")),
+        restored_job=job_panel(restore.get("new_job") or {}, proof("restore", records)),
+        release_status=badge(controls[7][1]),
+        release_duration=shown(release.get("maintenance_seconds"), " s"),
+        release_version=shown(release.get("requested_version")),
+        release_image=shown(release.get("candidate_image")),
+        release_previous=shown(release.get("previous_image")),
+        release_job=job_panel(release.get("candidate_job") or {}, proof(release_source, records)),
+        rollback_status=badge(controls[8][1]),
+        rollback_duration=shown(rollback.get("maintenance_seconds"), " s"),
+        rollback_image=shown(rollback.get("previous_image")),
+        rollback_candidate=shown(rollback.get("candidate_image")),
+        rollback_job=job_panel(rollback.get("rollback_job") or {}, proof("rollback", records)),
         release_warning=release_warning,
         resources=resource_table(hardening),
         hardening_proof=proof("hardening", current),
-        recovery_metrics=metrics(
-            [
-                ("Dump + captura", backup.get("elapsed_seconds"), " s"),
-                ("Restore + novo job", restore.get("recovery_seconds"), " s"),
-                ("Janela da release", release.get("maintenance_seconds"), " s"),
-                ("Rollback", rollback.get("maintenance_seconds"), " s"),
-            ]
-        ),
         backup_proof=proof("backup", records),
         restore_proof=proof("restore", records),
-        release_proof=proof(release_source, records),
+        release_proof=proof(release_source, operation_records),
         rollback_proof=proof("rollback", records),
         supply_metrics=supply_metrics,
         scan_findings=scan_findings,
@@ -526,6 +683,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         evidence_errors=errors_html,
         evidence_rows=evidence_rows,
     )
+    page = "\n".join(line.rstrip() for line in page.splitlines()) + "\n"
     destination = root / "docs" / "report.html"
     destination.write_text(page, encoding="utf-8")
     print(f"Relatório: {destination}")

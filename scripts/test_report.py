@@ -341,7 +341,8 @@ class ReportTests(unittest.TestCase):
             },
         )
         page = self.render()
-        self.assertNotIn("<script>", page)
+        self.assertEqual(page.count("<script>"), 1)  # Only the local navigation script.
+        self.assertNotIn('<script>alert("x")</script>', page)
         self.assertIn("&lt;script&gt;", page)
         self.assertIn("Estado não reconhecido", page)
 
@@ -497,6 +498,66 @@ class ReportTests(unittest.TestCase):
         )
         self.assertNotIn("configured", table)
         self.assertIn("10001:10001", table)
+
+    def test_operation_navigation_keeps_all_results_in_static_html(self):
+        self.complete_attempt()
+        page = self.render()
+        for identifier in (
+            "overview",
+            "result",
+            "tls",
+            "recovery",
+            "operations",
+            "rollback",
+            "artifacts",
+            "evidence",
+        ):
+            self.assertIn(f'data-operation="{identifier}"', page)
+            self.assertIn(f'<section id="{identifier}" data-panel', page)
+        self.assertNotIn("data-panel hidden", page)
+        self.assertIn("Snapshot · somente leitura", page)
+        self.assertNotIn("fetch(", page)
+
+    def test_restore_and_backup_identity_are_not_combined(self):
+        self.write(
+            "backup",
+            {
+                "recorded_at": "2026-09-20T03:00:00Z",
+                "source_project": "backup-project",
+                "schema_version": 1,
+                "elapsed_seconds": 3,
+            },
+        )
+        self.write(
+            "restore",
+            {
+                "recorded_at": "2026-09-21T05:00:00Z",
+                "project": "restore-project",
+                "checksum_verified": True,
+                "snapshot_equal": True,
+                "new_job": job(),
+                "recovery_seconds": 45.2,
+            },
+        )
+        page = self.render()
+        panel = page.split('<section id="recovery"', 1)[1].split("</section>", 1)[0]
+        restore_part, backup_part = panel.split("Backup disponível", 1)
+        self.assertIn("restore-project", restore_part)
+        self.assertNotIn("backup-project", restore_part)
+        self.assertIn("backup-project", backup_part)
+        self.assertIn("Checksum do backup", panel)
+        self.assertIn("Novo job após restauração", panel)
+
+    def test_latest_invalid_release_remains_invalid_in_navigation(self):
+        self.write(
+            "release",
+            {"recorded_at": "2026-09-21T04:00:00Z", "rolled_back": False, "candidate_job": job()},
+        )
+        (self.evidence / "release-failed.json").write_text("broken", encoding="utf-8")
+        page = self.render()
+        link = page.split('data-operation="operations"', 1)[1].split("</a>", 1)[0]
+        self.assertIn("Inválido", link)
+        self.assertNotIn("Aprovado", link)
 
 
 if __name__ == "__main__":

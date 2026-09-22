@@ -36,6 +36,17 @@ def job(state="succeeded", attempts=1):
 
 
 class ReportTests(unittest.TestCase):
+    def test_missing_metrics_do_not_become_words_inside_operation_descriptions(self):
+        page = self.render()
+        self.assertIn("Confere a imagem candidata, aplica a migração e verifica os jobs.", page)
+        for invalid_phrase in (
+            "Não informado jobs",
+            "Não informado job salvo",
+            "Não informado tentativas",
+            "vNão informado",
+        ):
+            self.assertNotIn(invalid_phrase, page)
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="containerops-report-test-")
         self.addCleanup(self.temporary.cleanup)
@@ -541,7 +552,7 @@ class ReportTests(unittest.TestCase):
         )
         page = self.render()
         panel = page.split('<section id="recovery"', 1)[1].split("</section>", 1)[0]
-        restore_part, backup_part = panel.split("Backup disponível", 1)
+        restore_part, backup_part = panel.split("Registro da cópia", 1)
         self.assertIn("restore-project", restore_part)
         self.assertNotIn("backup-project", restore_part)
         self.assertIn("backup-project", backup_part)

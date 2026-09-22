@@ -102,3 +102,15 @@ python scripts/ops.py report
 ```
 
 O primeiro scan prepara a base. `prove` usa scan offline e recusa base ausente ou vencida. O [guia de demonstração](demo.md) apresenta os cenários; os [runbooks](runbooks.md) detalham operações e recuperação.
+
+## Refinamento do relatório — 22/09/2026
+
+Esta revisão muda o template, o CSS e a redação do relatório, sem alterar as operações Docker nem a seleção de evidências. Campos ausentes deixam de virar frases como “Não informado jobs”; métricas ausentes usam texto menor, e o bloco de scan aprovado não recebe cor de falha. `docs/report.html` foi gerado dos mesmos JSONs; as datas, IDs, resultados e arquivos históricos foram preservados. Não houve execução de serviços, builds, backup ou release nesta rodada.
+
+- **47 testes do gerador aprovados** ([saída](evidence/interface-v2/report-tests.txt)); Ruff e formato dos scripts aprovados. Os testes cobrem tentativa inválida/falha, identidade independente e ausência de vínculo entre registros.
+- **40 combinações** dos oito painéis com 1440, 1024, 768, 390 e 320 px, mais **20 combinações** de dez estados em desktop/celular: ausência, cópia sem restore, release inválida/falha e job na fila, em andamento, concluído, falho, desconhecido ou incompleto. **19 capturas**. [Registro de navegador](evidence/interface-v2/visual-review.json).
+- Seis regressões de link de salto, navegação por teclado/histórico, seletor móvel, arquivos locais, impressão, detalhes sem JavaScript e transições com redução de movimento aprovados. [Script de regressão](../scripts/test_report_browser.cjs).
+
+Para repetir somente a apresentação: `python scripts/report.py`, `python scripts/render_review.py`, `node scripts/visual-review.cjs` e `node scripts/test_report_browser.cjs`. Playwright é ferramenta opcional de desenvolvimento; `PLAYWRIGHT_MODULE` aceita um caminho externo e `PLAYWRIGHT_CHANNEL=msedge` seleciona Edge. Os cenários adicionais ficam em `artifacts/interface-review`, marcados como dados de teste; não entram na pasta de evidência operacional.
+
+[Escopo e hashes da fonte](evidence/interface-v2/review-manifest.json). Ampliação por CSS a 200% foi conferida; zoom nativo, leitor de tela e paginação integral de PDF não foram auditados. Esses resultados não reatestam a prova operacional nem os scans descritos nas seções anteriores.

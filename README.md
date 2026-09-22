@@ -2,7 +2,7 @@
 
 Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
 
-![Restauração: duração, dados recuperados, etapas verificadas e evidência](docs/screenshots/report-restore.png)
+![Restauração: duração, dados recuperados, etapas verificadas e evidência](docs/screenshots/interface-v2/recovery-1440.png)
 
 Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
 
@@ -15,7 +15,7 @@ O PostgreSQL reúne fila, resultado e transações para manter o laboratório pe
 Abra [docs/report.html](docs/report.html) localmente; o GitHub exibe o HTML como código. O relatório é um snapshot de evidências, sem comandos de operação ao vivo.
 
 1. Em **Verificação**, confira a execução, suas etapas e o job registrado.
-2. Em **Recuperação → Backup e restauração**, veja checksum, igualdade dos dados e novo job. Backup e restauração mantêm suas próprias datas e projetos.
+2. Em **Recuperação → Backup e restauração**, veja os jobs restaurados, a conferência do dump e dos dados e o resultado do novo job já aberto. Backup e restauração mantêm suas próprias datas e projetos.
 3. Em **Release**, compare as imagens da troca e do retorno após falha controlada. Em **Artefatos**, confira a imagem à qual a auditoria e o scan se aplicam.
 
 Os links abrem os JSONs de origem. Uma versão de job não identifica, por si só, a imagem de outra operação. [Como ler o relatório](docs/report-guide.md) · [cenários e resultados esperados](docs/problem-solution.md) · [roteiro da demonstração](docs/demo.md).

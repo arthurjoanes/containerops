@@ -34,18 +34,84 @@ No Windows, o runtime reservado é `%USERPROFILE%\AppData\Local\ContainerOps-run
 
 ## Fluxo
 
-O cliente envia texto pelo proxy e consulta a contagem de palavras e o SHA-256 do job. API e worker usam PostgreSQL para guardar a fila e os resultados.
+O cliente envia texto pelo proxy e consulta a contagem de palavras e o SHA-256 do job. API e worker usam PostgreSQL para guardar a fila e os resultados. O [mapa de serviços no README](../README.md#arquitetura) mostra redes, volume e ferramentas; abaixo estão os módulos que executam cada etapa. Os grupos API/worker representam processos; seus blocos internos são funções/módulos, não serviços extras.
 
 ```mermaid
-flowchart LR
-  C[Cliente Bearer] -->|127.0.0.1:8105 ou TLS 8445| P[Proxy UID 101]
-  P -->|front :8000| A[FastAPI UID 10001]
-  A -->|data interna| D[(PostgreSQL)]
-  W[Worker UID 10001] -->|lease + token| D
-  M[Migração sob demanda] --> D
-  B[Backup sob demanda] --> D
-  B --> R[Restore em projeto e volume novos]
+flowchart TB
+  C["Cliente com Bearer"] -->|"HTTP :8105 ou perfil TLS :8445"| P["NGINX · rede front<br/>corpo 32 KiB · /internal bloqueado"]
+  subgraph API["Processo API · redes front + data · UID 10001"]
+    H["api.py<br/>token → owner · JSON e texto 16 KiB"]
+    S["submit_job<br/>idempotência → pausa → quotas → INSERT"]
+    G["get_job<br/>WHERE owner e UUID"]
+    H -->|"POST /v1/jobs"| S
+    H -->|"GET /v1/jobs/UUID"| G
+  end
+  P -->|"HTTP api:8000"| H
+  subgraph WORKER["Processo worker · somente rede data · UID 10001"]
+    Q["claim_job<br/>owner menos recentemente ativo"]
+    X["process_job / analyze_text<br/>Unicode + SHA-256 fora da transação"]
+    F["complete_job<br/>valida estado, token e lease"]
+    Q -->|"job + novo lease_token"| X
+    X -->|"word_count + checksum"| F
+  end
+  D[("PostgreSQL :5432 · rede data interna<br/>jobs + operations + schema_version<br/>volume pgdata")]
+  S -->|"lock curto de operations + UNIQUE owner/chave"| D
+  G -->|"SELECT autorizado"| D
+  Q -->|"lock operations + SKIP LOCKED · lease 5 s"| D
+  X -->|"renova a cada 1 s durante atraso demo"| D
+  F -->|"UPDATE condicional · mesma linha do job"| D
+  L["Logs JSON no stdout<br/>request_id / job_id / tentativa"]
+  H -.->|"requisição e admissão"| L
+  X -.->|"início, conclusão ou perda de lease"| L
 ```
+
+O único caminho publicado para jobs passa pelo proxy. O [Compose](../compose.yaml) conecta API a `front` e `data`; worker e banco somente a `data`, marcada `internal: true`, sem porta de banco no host. Segredos são arquivos montados nos serviços que os usam. A API resolve Bearer para owner a partir do arquivo de tokens carregado no startup; o repositório aplica esse owner nas consultas. [Conexões curtas](../app/src/containerops/database.py) usam papel de aplicação, timeout de conexão de 2 s, SQL de 3 s e espera de lock de 2 s.
+
+### Do POST à consulta do resultado
+
+```mermaid
+sequenceDiagram
+  actor C as Cliente via proxy
+  participant A as API
+  participant D as PostgreSQL
+  participant W as Worker
+  C->>A: POST /v1/jobs + Bearer + Idempotency-Key
+  Note over A: Resolve owner e valida payload
+  A->>D: BEGIN, lock de operations, procura owner + chave
+  alt Chave já existe com mesmo fingerprint
+    D-->>A: Job existente, inclusive terminal ou durante pausa
+    A-->>C: 200 + mesmo UUID e estado atual
+  else Chave já existe com conteúdo diferente
+    A-->>C: 409, sem alterar o job
+  else Chave nova
+    A->>D: Confere pausa, 20 por owner e 100 globais, INSERT queued
+    D-->>A: COMMIT + job persistido
+    A-->>C: 201 + UUID
+  end
+  W->>D: Claim: lock curto, escolhe owner e job elegíveis
+  D-->>W: COMMIT running, attempts + 1, token novo, lease 5 s
+  Note over W: Calcula fora da transação, renova lease durante atraso demo
+  W->>D: UPDATE resultado se running + token + lease vigente
+  D-->>W: Uma linha atualizada ou posse perdida
+  C->>A: GET /v1/jobs/UUID + Bearer
+  A->>D: SELECT WHERE owner = autenticado AND id = UUID
+  D-->>A: Estado, tentativas e resultado persistidos
+  A-->>C: 200 + resultado, 404 se não pertence ao owner
+```
+
+O fingerprint inclui texto e duração solicitada; checksum do resultado usa somente os bytes UTF-8 originais. Replay consulta a linha existente antes de verificar pausa/quota, de modo que uma repetição válida não ocupa outra vaga. Para uma chave nova, pausa retorna 503 e fila cheia retorna 429 com `Retry-After`; validações anteriores podem recusar o pedido antes da transação. O [repositório](../app/src/containerops/repository.py) mantém admissão e despacho sob o mesmo lock curto de `operations`, mas libera o banco antes do cálculo. O teste de [concorrência e recuperação](../app/tests/test_integration.py) cobre essas fronteiras.
+
+### Falha do worker e propriedade do resultado
+
+| Evento | Transição persistida | Consequência |
+| --- | --- | --- |
+| Primeiro claim | `queued` → `running`, `attempts = 1`, token novo e `lease_until` | Só a tentativa que possui esse token pode renovar ou concluir enquanto a lease estiver vigente. |
+| SIGKILL ou perda de lease | Após 5 s sem renovação, um claim elegível troca token e incrementa a tentativa no mesmo UUID | O cálculo pode repetir. Um worker antigo não sobrescreve o resultado, mesmo que termine depois. |
+| Terceira tentativa expira | Próximo ciclo de claim marca `failed` e `error_category = attempts_exhausted` | GET explica a falha; replay não reenfileira automaticamente o job terminal. |
+| Conclusão válida | `running` → `succeeded`; resultado e limpeza do token/lease no mesmo UPDATE | A consulta lê o resultado da mesma linha; não há janela entre confirmar fila e gravar resultado em outro sistema. |
+| Banco indisponível | API retorna 503 para erro transitório; worker limita a seis falhas consecutivas com espera crescente | Ao esgotar o orçamento, worker sai com erro; Compose pode reiniciar o processo. O healthcheck por si só não reinicia um processo vivo. |
+
+O despacho favorece o owner menos recentemente ativo entre os elegíveis, com desempate por criação e ID; não interrompe jobs que já estão em execução. `SKIP LOCKED` evita esperar pela linha de job ocupada, enquanto o singleton serializa a escolha entre workers. Isso é recuperação com execução possivelmente repetida, não uma garantia de executar o cálculo uma única vez.
 
 ## Serviços
 

@@ -37,15 +37,33 @@ Abra o [relatório histórico da operação editorial](docs/evidence/editorial-2
 
 ```mermaid
 flowchart TB
-  A[NGINX e API] --> D[(PostgreSQL)]
-  W[Worker] --> D
-  O[Comandos de operação] --> D
-  O -->|registros| R[Relatório HTML]
+  C["Cliente<br/>Bearer + chave idempotente"] -->|"HTTP :8105"| P
+  subgraph FRONT["Rede front"]
+    P["NGINX :8080<br/>limita entrada HTTP"]
+    A["FastAPI :8000<br/>owner + contrato do job"]
+    P -->|"POST / GET jobs"| A
+  end
+  subgraph DATA["Rede data interna"]
+    D[("PostgreSQL · pgdata<br/>fila, lease e resultado")]
+    W["Worker<br/>contagem Unicode + SHA-256"]
+    W -->|"claim / conclusão com token"| D
+  end
+  A -->|"SQL: admissão e consulta"| D
+  O["CLI ops.py<br/>migração e backup"] -->|"pausa / dreno / pg_dump"| D
+  O -->|"dump + restore-test"| T[("Volume novo<br/>dados + job de verificação")]
+  O -.->|"evidências → report.py"| R["Relatório HTML<br/>execuções identificadas"]
 ```
 
-API e worker usam a mesma imagem, com processos separados. O relatório lê arquivos de evidência; ele não oferece controles de deploy. Migração, backup, restore e scanner executam sob demanda. [Serviços, redes e fluxo completo](docs/architecture.md).
+As setas contínuas representam chamadas e transferência de dados; as pontilhadas, geração de evidências. A API pertence às redes `front` e `data`; worker e banco apenas à `data`. API e worker usam a mesma imagem em processos separados. PostgreSQL guarda a fila e o resultado na mesma linha; o worker busca trabalho no banco, sem chamada direta da API. O [Compose](compose.yaml) mantém todos os serviços no mesmo host e publica HTTP em loopback; o banco não publica porta no host.
 
-O [Compose](compose.yaml) mantém a [API](app/src/containerops/api.py) e o [worker](app/src/containerops/worker.py) em um único host. Os [comandos de operação](scripts/ops.py) produzem os registros usados pelo [gerador do relatório](scripts/report.py).
+| Responsabilidade | Implementação e garantia |
+| --- | --- |
+| Aceitar e consultar | [API](app/src/containerops/api.py) + [repository](app/src/containerops/repository.py): `UNIQUE(owner, idempotency_key)`, comparação do conteúdo e limite de 100 pendentes globais/20 por owner na transação. Corpo até 32 KiB e texto até 16 KiB. Retorna 201 para criação, 200 para replay e 409 para conteúdo divergente. |
+| Executar e recuperar | [Worker](app/src/containerops/worker.py): despacho favorece o owner menos recentemente ativo; calcula fora da transação e só grava com lease de 5 s/token válidos. Trabalho interrompido pode repetir, até três tentativas. |
+| Persistir e operar | [Conexões](app/src/containerops/database.py) e [CLI](scripts/ops.py): papéis distintos para DML, migração e backup. Guarda dump/hash/snapshot no runtime local e restaura em volume novo. Release troca API/worker; rollback preserva o schema expansivo. |
+| Observar e apresentar | [Logs estruturados](app/src/containerops/log.py), healthchecks e métricas internas; [relatório](scripts/report.py) lê arquivos de execuções identificadas e apresenta evidências estáticas. |
+
+**Um job completo:** POST autenticado → admissão transacional → `queued` → claim com lease → cálculo → `succeeded` → GET pelo mesmo owner. Se o worker morrer, o próximo claim após expirar a lease conserva o ID e incrementa a tentativa. [Sequências, permissões e recuperação](docs/architecture.md) mostram o caminho normal e as operações de manutenção.
 
 ## Stack e decisões
 

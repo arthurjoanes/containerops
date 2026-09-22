@@ -40,12 +40,19 @@ flowchart LR
 
 Compose configura redes, mounts, limites e ordem inicial. O kernel aplica as restrições. A API controla autorização e limites; o banco impede resultados duplicados. O cálculo pode repetir após expirar uma lease.
 
+Admissão e despacho usam transações curtas no singleton de operações. A admissão
+limita queued/running a 100 globais e 20 por owner. O despacho escolhe primeiro o
+owner menos recentemente ativo entre os elegíveis; os workers executam fora do
+lock e preservam lease/token. Esse controle resolve a ocupação da fila por um único
+token, sem desligar o atraso da demo. Critério exato, concorrência e limites em
+[contrato de dados](data-contract.md) e [segurança](security.md).
+
 O worker atualiza um timestamp no tmpfs durante seu ciclo. A probe `containerops.worker_health` lê esse arquivo usando apenas a biblioteca padrão, sem carregar o driver PostgreSQL; aceita idade de até 20 segundos e recusa arquivo ausente, inválido ou no futuro. O timeout permanece em 3 segundos, com o mesmo limite de CPU do serviço.
 
 ## Contratos
 - API: POST /v1/jobs com Bearer e Idempotency-Key (1..128 ASCII), JSON {text, demo_duration_seconds opcional 0..15}; GET /v1/jobs/{UUID}; /health/live; /health/ready. Sem cookies/CORS público.
 - Resposta de job: id, state (queued/running/succeeded/failed), attempts, result {word_count, checksum} ou null; version nas respostas de saúde e job. Release 2 acrescenta campo opcional algorithm, mantendo release 1 compatível.
-- Limite de texto UTF-8 16 KiB; corpo HTTP 32 KiB; fila global 100; retenção de terminais 24 h, limpeza explícita/worker; limite de tentativas 3; lease 5 s renovado durante duração demo limitada. Tokenização: sequências de caracteres Unicode alfanuméricos com marcas combinantes ligadas; apóstrofos e hífens separam. Checksum sobre bytes UTF-8 originais, sem normalização.
+- Limite de texto UTF-8 16 KiB; corpo HTTP 32 KiB; fila global 100 e 20 pendentes por owner; retenção de terminais 24 h, limpeza explícita/worker; limite de tentativas 3; lease 5 s renovado durante duração demo limitada. Tokenização: sequências de caracteres Unicode alfanuméricos com marcas combinantes ligadas; apóstrofos e hífens separam. Checksum sobre bytes UTF-8 originais, sem normalização.
 - PostgreSQL public: schema_version(version integer); operations singleton para admission_paused; jobs (UUID, owner, idempotency_key, payload, payload_hash, state, attempts, lease_token UUID, lease_until timestamptz, created_at, updated_at, completed_at, duration_seconds, word_count, checksum, error_category). UNIQUE(owner,idempotency_key); resultado armazenado na própria linha, conclusão condicionada ao token e lease vigente.
 - API tokens em /run/secrets/api_tokens: JSON objeto owner -> token. db_password em /run/secrets/db_password. Variáveis DB_HOST=db, DB_PORT=5432, DB_NAME=containerops, DB_USER=containerops_app, APP_VERSION=1.0.0, DEMO_MODE=true. APP_VERSION é gravada no build; troca real usa imagens diferentes.
 - Comandos na imagem: python -m containerops.api; python -m containerops.worker; python -m containerops.manage migrate --target 1|2; pause; resume; snapshot; cleanup. Manage usa DB_USER/segredo conforme serviço. Snapshot JSON determinístico com contagens e resultados ordenados, sem payload/segredos.

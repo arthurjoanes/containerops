@@ -1,5 +1,13 @@
 # Verificação
 
+## Revisão posterior de isolamento de capacidade
+
+A correção COPS-01 acrescenta quota por proprietário e distribuição de despacho.
+A validação posterior passou em 188 testes e 99 subtests com PostgreSQL real,
+Ruff, formatação e mypy. [Escopo, regressões e limites](security.md), com JUnit e
+saída publicados. A prova completa de imagens abaixo corresponde às fontes e
+fingerprint daquela execução; ela não atesta o build desta alteração posterior.
+
 ## Execução de 22/09/2026 (UTC)
 
 `python scripts/ops.py prove` terminou com código 0 e 19 etapas aprovadas em 746.562 segundos. A execução partiu de um clone local limpo, acrescido somente dos arquivos candidatos à publicação, sem `.env`, ambiente virtual ou caches do diretório de desenvolvimento. O runtime e a base Trivy ficaram fora desse clone.

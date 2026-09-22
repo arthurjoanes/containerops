@@ -19,6 +19,7 @@ para acrescentar broker ou orquestrador distribuído.
 | Cenário | Como é testado | Critério |
 |---|---|---|
 | Repetir admissão não duplica trabalho | UNIQUE por owner/chave e lock em operations; seis POSTs concorrentes pelo proxy | Um UUID e um resultado com contagem e SHA-256; conflito 409 e outro owner 404 |
+| Um owner não monopoliza a fila | Quota atômica de 20 pendentes por owner, 100 globais; despacho por atividade recente | Alice recebe 429 no limite enquanto Bob recebe 201; quatro despachos concorrentes com backlog de ambos distribuem dois para cada um; replay segue 200 |
 | Worker morto deixa trabalho recuperável | Lease temporal e token; SIGKILL/SIGTERM no projeto descartável | Job running antes, nova tentativa depois; SIGTERM conclui o atual sem adquirir o próximo; tentativa antiga não finaliza |
 | A imagem demonstrada contém o código atual | Build OCI, auditoria de manifest/config e SHA das fontes dentro das duas imagens; API e worker inspecionados | As duas imagens têm os arquivos esperados e os dois serviços usam o ID solicitado |
 | Hardening e isolamento são efetivos | Inspeção de kernel, mounts, escrita negada, conectividade e papéis DB em containers reais | UID/caps/rootfs/limites/redes/permissões observados; YAML sozinho não conta |

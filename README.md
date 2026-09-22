@@ -53,6 +53,8 @@ Instalações antigas com PostgreSQL Debian precisam de [migração por backup e
 
 ## Limites
 
-Texto até 16 KiB, fila global de 100 trabalhos, atraso da demo de 15 s, 3 tentativas, retenção de 24 h. A fila é compartilhada e não oferece quota ou equidade por usuário; o projeto se destina à operação local com usuários confiáveis. O backup fica na mesma máquina do banco. O TLS termina no proxy. O rollback troca a imagem, não rebaixa schema nem restaura dados antigos. O build copia os inputs pra um caminho ASCII temporário porque o BuildKit recusou o caminho com acento deste projeto. [Contrato de dados](docs/data-contract.md) · [arquitetura](docs/architecture.md) · [decisões técnicas](docs/decisoes-tecnicas.md).
+Texto até 16 KiB, fila global de 100 trabalhos e limite de 20 queued/running por proprietário. A admissão aplica os dois limites atomicamente; excesso retorna 429 e mantém o replay idempotente. O despacho prioriza o proprietário menos recentemente ativo, preservando a ordem dos seus jobs elegíveis: um backlog de Alice não deixa Bob atrás de todos os trabalhos dela. [Correção e testes de isolamento de capacidade](docs/security.md).
+
+O Compose habilita a demo com atraso máximo de 15 s por trabalho; `DEMO_MODE=false` aceita apenas duração zero. São 3 tentativas e retenção de 24 h. A distribuição não interrompe jobs já em execução nem garante prazo de atendimento. O projeto se destina à operação local. O backup fica na mesma máquina do banco. O TLS termina no proxy. O rollback troca a imagem, não rebaixa schema nem restaura dados antigos. O build copia os inputs pra um caminho ASCII temporário porque o BuildKit recusou o caminho com acento deste projeto. [Contrato de dados](docs/data-contract.md) · [arquitetura](docs/architecture.md) · [decisões técnicas](docs/decisoes-tecnicas.md).
 
 Python, FastAPI, PostgreSQL, Nginx, Docker Compose e BuildKit. Licença MIT.

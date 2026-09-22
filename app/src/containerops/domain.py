@@ -7,6 +7,7 @@ from uuid import UUID
 MAX_TEXT_BYTES = 16 * 1024
 MAX_BODY_BYTES = 32 * 1024
 MAX_PENDING_JOBS = 100
+MAX_PENDING_JOBS_PER_OWNER = 20
 MAX_ATTEMPTS = 3
 LEASE_SECONDS = 5
 ALGORITHM = "unicode-alnum-marks-v1"
@@ -42,6 +43,10 @@ class AdmissionPaused(Exception):
 
 
 class QueueFull(Exception):
+    pass
+
+
+class OwnerQueueFull(QueueFull):
     pass
 
 

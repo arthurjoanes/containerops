@@ -6,6 +6,10 @@ Verifique recuperação de processos, restauração de dados e troca de imagens 
 
 Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
 
+**Exemplo:** Alice envia `Olá, mundo!` com uma chave de idempotência. A primeira chamada cria um job; repetir a mesma chave e conteúdo devolve seu mesmo ID. O worker produz duas palavras e o checksum dos bytes originais. Se ele morrer após assumir o trabalho, outra tentativa pode recuperar esse ID; um token impede que o processo antigo sobrescreva o resultado. [Entrada, resultado e limites](docs/problem-solution.md#exemplo-repetição-da-chamada-e-morte-do-worker).
+
+O PostgreSQL reúne fila, resultado e transações para manter o laboratório pequeno. Na recuperação, o projeto restaura o dump em outro volume, compara os dados e exige um novo job concluído. Na troca de versão, o rollback muda a imagem e conserva o schema compatível e os dados recentes. [Por que essas decisões e onde estão no código](docs/decisoes-tecnicas.md#problemas-que-orientaram-a-implementação).
+
 ## Conferir uma operação
 
 Abra [docs/report.html](docs/report.html) localmente; o GitHub exibe o HTML como código. O relatório é um snapshot de evidências, sem comandos de operação ao vivo.

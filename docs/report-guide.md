@@ -53,3 +53,14 @@ O comando relê os arquivos existentes. Para produzir novos resultados, siga os
 `prove` inclui imagens, restauração, TLS e release em projetos descartáveis.
 O [registro de verificação](verification.md) distingue as execuções históricas
 das verificações de apresentação.
+
+## Jornada conferida em 22/09
+
+1. Em **Resultado do job**, diferencie o estado concluído da versão que o processou. Essa versão não identifica automaticamente a imagem do painel Artefatos.
+2. Abra **Backup e restauração** e expanda **Job processado após a restauração → Detalhes do job**. O resultado salvo registra oito jobs restaurados e quatro palavras no novo trabalho; o checksum completo pode ser conferido com o JSON. O projeto do backup e o da restauração permanecem separados.
+3. Em **Última troca de imagem** e **Retorno após falha**, confira candidata, imagem anterior e os arquivos da operação antes de associar o resultado a uma release.
+4. Em **Imagem, auditoria e scan**, compare o ID do build e da auditoria e abra **Arquivos de build, auditoria e scan**. O catálogo contém outros registros; estar listado não significa aprovar a imagem selecionada.
+
+A [revisão de jornadas](evidence/interface-journeys/review.json) percorreu os oito painéis por teclado em 1440, 390 e 320 px, com seleção/foco, link de salto, histórico, arquivos locais, rolagem interna da tabela, impressão e leitura sem JavaScript. O HTML foi renderizado novamente em pasta isolada com os mesmos JSONs; as datas das operações não foram atualizadas. Nenhum serviço foi iniciado.
+
+Capturas: [restauração no celular com o job expandido](screenshots/journey-restore-390.png), [troca de imagem](screenshots/journey-release.png) e [identidade e arquivos do build](screenshots/journey-artifacts.png).

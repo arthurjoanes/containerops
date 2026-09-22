@@ -1,5 +1,19 @@
 # Decisões técnicas
 
+## Problemas que orientaram a implementação
+
+| Problema | Decisão e motivo | Custo ou limite; como conferir |
+|---|---|---|
+| Duas chamadas podem verificar a mesma chave antes de qualquer inserção. | [`submit_job`](../app/src/containerops/repository.py) resolve replay, conflito, quotas e inserção na transação; a restrição única por owner/chave mantém a invariável no banco. | A admissão é serializada em uma seção curta. Não se espera o cálculo sob o lock. [`test_concurrent_idempotency_is_one_row`](../app/tests/test_integration.py). |
+| O worker pode morrer e depois voltar com uma posse antiga. | [`claim_job`, `renew_lease` e `complete_job`](../app/src/containerops/repository.py) exigem lease válida e token da aquisição. Isso permite recuperar trabalho sem deixar o processo antigo sobrescrever o atual. | Cálculo pode repetir; são três tentativas. Não é garantia de efeito único em sistemas externos. [`test_stale_worker_cannot_renew_or_overwrite_result`](../app/tests/test_integration.py). |
+| Um cliente podia ocupar todos os lugares e atrasar os demais. | Quota de 20 pendentes por owner e despacho pela atividade recente em [`submit_job` e `claim_job`](../app/src/containerops/repository.py), usando o lock já existente. | Mantém o limite global de 100; não há prazo garantido nem defesa contra várias credenciais da mesma pessoa. [Regressões de concorrência e despacho](../app/tests/test_integration.py), [validação em PostgreSQL](security.md). |
+| Gerar um dump não prova que será possível continuar trabalhando. | [`backup` e `restore_test`](../scripts/ops.py) pausam/drenam, conferem checksum e igualdade do snapshot, depois exigem um novo job no volume restaurado. | Há pausa de admissão e o backup continua local. [Resultado observado](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/restore.json). |
+| Uma candidata pode gravar dados antes de falhar no smoke. | [`release` e `rollback`](../scripts/ops.py) trocam imagens e preservam dados, com migração expansiva compatível com a versão anterior. | Não rebaixam schema e não cobrem migrações destrutivas. [`test_release_two_schema_keeps_release_one_compatible`](../app/tests/test_integration.py) e [falha controlada real](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/rollback.json). |
+| JSON antigo ou de outra imagem pode produzir uma aprovação falsa. | [`verification_result` e `select_artifacts`](../scripts/report_evidence.py) verificam manifesto, hashes, janela temporal e identidade; [`generate`](../scripts/report.py) mantém falha de release recente e metadados de cada operação. | São arquivos de um laboratório local, não atestação assinada. [Regressões do relatório](../scripts/test_report.py) cobrem checksum, imagem divergente e tentativa inválida. |
+| A página longa dificultava associar uma operação à sua evidência. | [`report.html`](../scripts/report.html) organiza seleção, resultado, etapas e arquivos; [`report.js`](../scripts/report.js) seleciona o painel e move o foco, sem chamadas ao backend. | Snapshot sem controles de deploy ou terminal. Sem JavaScript, os oito painéis permanecem legíveis. [Regressões de navegação](../scripts/test_report_browser.cjs). |
+
+Essas escolhas são proporcionais a uma aplicação local pequena. A [verificação](verification.md) separa os testes da aplicação, das operações e da apresentação, com a fonte e o período a que cada resultado se aplica.
+
 ## Fluxo
 
 O cliente envia texto sintético ao proxy com Bearer e chave de idempotência. A API autentica o proprietário, valida tamanho/duração e grava o job no PostgreSQL. Uma restrição única sobre proprietário e chave protege requisições concorrentes. Repetir a chave com o mesmo conteúdo devolve o job existente; conteúdo diferente conflita.

@@ -11,7 +11,7 @@ na pasta `docs/evidence`. A página não consulta containers nem executa operaç
 | Release | Tentativa mais recente de troca de imagem, inclusive falha, e teste de retorno à imagem anterior |
 | Artefatos | Identidade do build, auditoria OCI, scan compatível e catálogo dos JSONs |
 
-Selecione uma operação na lista. No celular, abra **Escolher operação**. Os links
+Selecione uma operação no índice organizado em quatro grupos. No celular, abra **Escolher operação**. Os links
 com fragmento, como `report.html#recovery`, abrem o detalhe correspondente e podem
 ser guardados. Voltar/avançar no navegador percorre as seleções. O teclado alcança
 a lista, os arquivos e os detalhes; após selecionar, o foco segue para o título
@@ -54,13 +54,23 @@ O comando relê os arquivos existentes. Para produzir novos resultados, siga os
 O [registro de verificação](verification.md) distingue as execuções históricas
 das verificações de apresentação.
 
-## Jornada conferida em 22/09
+## Revisão anterior de jornadas em 22/09
 
 1. Em **Resultado do job**, diferencie o estado concluído da versão que o processou. Essa versão não identifica automaticamente a imagem do painel Artefatos.
-2. Abra **Backup e restauração** e expanda **Job processado após a restauração → Detalhes do job**. O resultado salvo registra oito jobs restaurados e quatro palavras no novo trabalho; o checksum completo pode ser conferido com o JSON. O projeto do backup e o da restauração permanecem separados.
+2. Abra **Backup e restauração** e expanda o resultado do job e seus detalhes (naquela composição, **Job processado após a restauração → Detalhes do job**). O resultado salvo registra oito jobs restaurados e quatro palavras no novo trabalho; o checksum completo pode ser conferido com o JSON. O projeto do backup e o da restauração permanecem separados.
 3. Em **Última troca de imagem** e **Retorno após falha**, confira candidata, imagem anterior e os arquivos da operação antes de associar o resultado a uma release.
 4. Em **Imagem, auditoria e scan**, compare o ID do build e da auditoria e abra **Arquivos de build, auditoria e scan**. O catálogo contém outros registros; estar listado não significa aprovar a imagem selecionada.
 
 A [revisão de jornadas](evidence/interface-journeys/review.json) percorreu os oito painéis por teclado em 1440, 390 e 320 px, com seleção/foco, link de salto, histórico, arquivos locais, rolagem interna da tabela, impressão e leitura sem JavaScript. O HTML foi renderizado novamente em pasta isolada com os mesmos JSONs; as datas das operações não foram atualizadas. Nenhum serviço foi iniciado.
 
 Capturas: [restauração no celular com o job expandido](screenshots/journey-restore-390.png), [troca de imagem](screenshots/journey-release.png) e [identidade e arquivos do build](screenshots/journey-artifacts.png).
+
+## Composição atual — resultado junto da prova
+
+O índice horizontal substitui a coluna lateral permanente. No desktop, etapas e resultado ficam na coluna principal; datas, projeto e identidade de imagem ficam ao lado da operação correspondente. No celular, o seletor nativo recolhe a lista e os metadados seguem o resultado. A página continua sendo um snapshot, sem botões de deploy, restart ou terminal.
+
+Em recuperação, **jobs restaurados** vem antes da duração. A sequência é **cópia → dados → novo job**: verificar o checksum, comparar o volume restaurado e conferir o trabalho processado depois da restauração. O novo resultado começa aberto; hash e ID do job ficam em seus detalhes. Um registro de backup isolado deixa as verificações de restauração **sem resultado**. Data e projeto do backup continuam próprios.
+
+[Desktop](screenshots/interface-v2/recovery-1440.png), [celular](screenshots/interface-v2/recovery-390.png), [tentativa de release](screenshots/interface-v2/operations-1440.png) e [backup sem prova de restauração — cenário de apresentação](screenshots/interface-v2/fixture-backup-only-390.png). [Verificação desta composição](evidence/interface-v2/visual-review.json).
+
+Os corpos de texto, linhas divisórias e títulos compartilham eixos e espaçamentos; hover e foco usam 180 ms, com transições removidas quando o sistema pede menos movimento. Sem JavaScript, todas as operações aparecem e os detalhes nativos funcionam. A impressão expõe também o conteúdo dos detalhes fechados.

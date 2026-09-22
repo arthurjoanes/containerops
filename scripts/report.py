@@ -121,7 +121,7 @@ def metrics(items: list[tuple[str, object, str]]) -> str:
     return (
         '<div class="metrics">'
         + "".join(
-            f'<div class="metric"><span>{escape(label)}</span><strong>{shown(value, suffix)}</strong></div>'
+            f'<div class="metric"><span>{escape(label)}</span><strong{" class=unavailable" if value is None or value == "" else ""}>{shown(value, suffix)}</strong></div>'
             for label, value, suffix in items
         )
         + "</div>"
@@ -273,7 +273,12 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 journey,
                 stage_checks["journey"],
             ),
-            f"{shown(journey.get('concurrent_requests'))} requisições simultâneas; {shown(journey.get('unique_jobs'))} job salvo. Testa autorização e limites HTTP.",
+            (
+                f"{shown(journey.get('concurrent_requests'))} requisições simultâneas; {shown(journey.get('unique_jobs'))} job salvo. Testa autorização e limites HTTP."
+                if journey.get("concurrent_requests") is not None
+                and journey.get("unique_jobs") is not None
+                else "Testa chamadas simultâneas, autorização, idempotência e limites HTTP."
+            ),
             "journey",
         ),
         (
@@ -300,7 +305,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 recovery,
                 stage_checks["worker"],
             ),
-            f"Testa conclusão após SIGKILL ({shown(recovery_kill.get('attempts'))} tentativas) e após SIGTERM.",
+            (
+                f"Testa conclusão após SIGKILL ({shown(recovery_kill.get('attempts'))} {'tentativa' if recovery_kill.get('attempts') == 1 else 'tentativas'}) e após SIGTERM."
+                if recovery_kill.get("attempts") is not None
+                else "Testa conclusão após SIGKILL e após SIGTERM."
+            ),
             "recovery",
         ),
         (
@@ -315,7 +324,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         (
             "Persistência",
             observed(recovery, stage_checks["persistence"]),
-            f"Compara snapshots antes e depois de recriar os containers: {shown(recreation.get('preserved_jobs'))} jobs mantidos.",
+            (
+                f"Compara snapshots antes e depois de recriar os containers: {shown(recreation.get('preserved_jobs'))} jobs mantidos."
+                if recreation.get("preserved_jobs") is not None
+                else "Compara os jobs antes e depois de recriar os containers."
+            ),
             "recovery",
         ),
         (
@@ -337,7 +350,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 and successful_job(release.get("candidate_job", {}))
                 and release_source == "release",
             ),
-            f"Confere a imagem candidata, aplica a migração e verifica {shown(release.get('preserved_jobs'))} jobs.",
+            (
+                f"Confere a imagem candidata, aplica a migração e verifica {shown(release.get('preserved_jobs'))} jobs."
+                if release.get("preserved_jobs") is not None
+                else "Confere a imagem candidata, aplica a migração e verifica os jobs."
+            ),
             release_source,
         ),
         (
@@ -464,7 +481,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         ]
     )
     scan_findings = (
-        '<div class="scan-findings"><h3>Vulnerabilidades</h3>'
+        f'<div class="scan-findings {"clear" if scan_passed is True else "attention"}"><h3>Vulnerabilidades</h3>'
         + metrics(
             [
                 ("HIGH", severities.get("HIGH"), ""),
@@ -560,7 +577,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                     "result",
                     "Resultado do job",
                     job_state(job),
-                    "v" + shown(job.get("version")),
+                    "v" + shown(job["version"]) if job.get("version") else "Versão não informada",
                 ),
                 ("tls", "Conexão TLS", operation_states["tls"], "CA local"),
             ],
@@ -600,7 +617,9 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                     "artifacts",
                     "Imagem, auditoria e scan",
                     artifact_state,
-                    "v" + shown(build.get("version")),
+                    "v" + shown(build["version"])
+                    if build.get("version")
+                    else "Versão não informada",
                 ),
                 ("evidence", "Arquivos de evidência", "info", f"{len(records)} JSONs"),
             ],

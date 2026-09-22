@@ -1,0 +1,187 @@
+{
+  "recorded_at_utc": "2026-09-22T07:33:37.979817+00:00",
+  "baseline_commit": "32370e05ffc9f50cd67456df98505585b2a61f06",
+  "manifest": {
+    "path": "docs/evidence/verification-run.json",
+    "sha256": "sha256:f4e45102f88d74a286bff076e13e5e6ff9614a1260356ab85daf3ff1f81224d6",
+    "unchanged_from_git_baseline": true
+  },
+  "method": "SHA-256 of exact bytes, UTF-8 BOM/EOL inspection, JSON equality and LF-normalized byte comparison. Four historical files were copied from original checkout only after their raw SHA-256 matched the unchanged manifest. Exact-path -text attributes preserve them in future Git blobs.",
+  "before": {
+    "observed_at_utc": "2026-09-22T07:27:20.630245+00:00",
+    "original": {
+      "state": "pass",
+      "title": "Última verificação aprovada",
+      "problems": []
+    },
+    "worktree": {
+      "state": "invalid",
+      "title": "Arquivos da execução inválidos",
+      "problems": [
+        "test-results.json: SHA-256 diverge do manifesto",
+        "journey.json: SHA-256 diverge do manifesto",
+        "hardening.json: SHA-256 diverge do manifesto",
+        "recovery.json: SHA-256 diverge do manifesto"
+      ]
+    },
+    "observation_scope": "Actual read-only verification_result calls before restoration, recorded in task output."
+  },
+  "files": [
+    {
+      "path": "docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/test-results.json",
+      "expected_from_manifest": "sha256:9568b2074a57bfce541434c0b305a8413c50c272bc433fc36fd2eb7e0f6f1d66",
+      "git_baseline_lf": {
+        "sha256": "sha256:d33c7ad62aae56bdcd97f6c137f64d802714a8ca226a4188e0a3ffb818a6f8a3",
+        "bytes": 14292,
+        "utf8_bom": false,
+        "crlf": 0,
+        "lf_only": 37
+      },
+      "original_crlf": {
+        "sha256": "sha256:9568b2074a57bfce541434c0b305a8413c50c272bc433fc36fd2eb7e0f6f1d66",
+        "bytes": 14329,
+        "utf8_bom": false,
+        "crlf": 37,
+        "lf_only": 0
+      },
+      "restored_worktree": {
+        "sha256": "sha256:9568b2074a57bfce541434c0b305a8413c50c272bc433fc36fd2eb7e0f6f1d66",
+        "bytes": 14329,
+        "utf8_bom": false,
+        "crlf": 37,
+        "lf_only": 0
+      },
+      "json_content_equal": true,
+      "lf_normalized_bytes_equal": true,
+      "git_blob_sha1_raw": "f96a219cdfbd2f990fa55f53facc83053194e8d2",
+      "git_blob_sha1_with_path_attributes": "f96a219cdfbd2f990fa55f53facc83053194e8d2",
+      "git_will_preserve_original_bytes": true
+    },
+    {
+      "path": "docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+      "expected_from_manifest": "sha256:3b01a7cdcded0a080526d922aad11017470c5c17b098d2c0e02d12416bdc718c",
+      "git_baseline_lf": {
+        "sha256": "sha256:36f2ed58a37f260be141742f71fd685daf0bb2fa13abde3c16b297196af2f6a0",
+        "bytes": 805,
+        "utf8_bom": false,
+        "crlf": 0,
+        "lf_only": 30
+      },
+      "original_crlf": {
+        "sha256": "sha256:3b01a7cdcded0a080526d922aad11017470c5c17b098d2c0e02d12416bdc718c",
+        "bytes": 835,
+        "utf8_bom": false,
+        "crlf": 30,
+        "lf_only": 0
+      },
+      "restored_worktree": {
+        "sha256": "sha256:3b01a7cdcded0a080526d922aad11017470c5c17b098d2c0e02d12416bdc718c",
+        "bytes": 835,
+        "utf8_bom": false,
+        "crlf": 30,
+        "lf_only": 0
+      },
+      "json_content_equal": true,
+      "lf_normalized_bytes_equal": true,
+      "git_blob_sha1_raw": "6a49c9c3749e76212075299ba34d21f800490152",
+      "git_blob_sha1_with_path_attributes": "6a49c9c3749e76212075299ba34d21f800490152",
+      "git_will_preserve_original_bytes": true
+    },
+    {
+      "path": "docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+      "expected_from_manifest": "sha256:231a62aa95db5695d39344ac390c71b7bec4d88329307e04fafb2c95d81c5e90",
+      "git_baseline_lf": {
+        "sha256": "sha256:bc4c9e7e1bdfab650d78a8c5da819ad7859e9ab8ebb298f30f839c5c8f508f92",
+        "bytes": 8435,
+        "utf8_bom": false,
+        "crlf": 0,
+        "lf_only": 264
+      },
+      "original_crlf": {
+        "sha256": "sha256:231a62aa95db5695d39344ac390c71b7bec4d88329307e04fafb2c95d81c5e90",
+        "bytes": 8699,
+        "utf8_bom": false,
+        "crlf": 264,
+        "lf_only": 0
+      },
+      "restored_worktree": {
+        "sha256": "sha256:231a62aa95db5695d39344ac390c71b7bec4d88329307e04fafb2c95d81c5e90",
+        "bytes": 8699,
+        "utf8_bom": false,
+        "crlf": 264,
+        "lf_only": 0
+      },
+      "json_content_equal": true,
+      "lf_normalized_bytes_equal": true,
+      "git_blob_sha1_raw": "144233942a8bc10992cba4da5956b0e941443488",
+      "git_blob_sha1_with_path_attributes": "144233942a8bc10992cba4da5956b0e941443488",
+      "git_will_preserve_original_bytes": true
+    },
+    {
+      "path": "docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+      "expected_from_manifest": "sha256:4808f777e9790f0ad728226355c0a83e0cffec455fa6369711c27d5fadc70ebf",
+      "git_baseline_lf": {
+        "sha256": "sha256:e7c1caed9de1190416c7c69933f496cca64b5ef10d4ea976d9aa2e0ff9418c43",
+        "bytes": 46191,
+        "utf8_bom": false,
+        "crlf": 0,
+        "lf_only": 122
+      },
+      "original_crlf": {
+        "sha256": "sha256:4808f777e9790f0ad728226355c0a83e0cffec455fa6369711c27d5fadc70ebf",
+        "bytes": 46313,
+        "utf8_bom": false,
+        "crlf": 122,
+        "lf_only": 0
+      },
+      "restored_worktree": {
+        "sha256": "sha256:4808f777e9790f0ad728226355c0a83e0cffec455fa6369711c27d5fadc70ebf",
+        "bytes": 46313,
+        "utf8_bom": false,
+        "crlf": 122,
+        "lf_only": 0
+      },
+      "json_content_equal": true,
+      "lf_normalized_bytes_equal": true,
+      "git_blob_sha1_raw": "4d01dd4c228bad700b3a7a96f53772857e36007f",
+      "git_blob_sha1_with_path_attributes": "4d01dd4c228bad700b3a7a96f53772857e36007f",
+      "git_will_preserve_original_bytes": true
+    }
+  ],
+  "after": {
+    "original": {
+      "state": "pass",
+      "title": "Última verificação aprovada",
+      "explanation": "",
+      "problems": []
+    },
+    "worktree": {
+      "state": "pass",
+      "title": "Última verificação aprovada",
+      "explanation": "",
+      "problems": []
+    },
+    "effective_attributes": "docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/test-results.json: text: unset\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/test-results.json: eol: lf\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json: text: unset\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json: eol: lf\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json: text: unset\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json: eol: lf\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json: text: unset\ndocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json: eol: lf\n",
+    "numstat": "6\t0\t.gitattributes\n264\t264\tdocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json\n30\t30\tdocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json\n122\t122\tdocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json\n37\t37\tdocs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/test-results.json\n"
+  },
+  "diff_checks": {
+    "default": {
+      "exit_code": 2,
+      "trailing_whitespace_messages": 453,
+      "output_bytes": 112386
+    },
+    "explicit_crlf": {
+      "exit_code": 0,
+      "trailing_whitespace_messages": 0,
+      "output_bytes": 0
+    },
+    "explanation": "Default check treats historical CR bytes as trailing whitespace because -text disables conversion. The second invocation retains normal whitespace checks and explicitly recognizes CRLF. No repository or global Git configuration changed."
+  },
+  "limits": [
+    "Only .gitattributes and the four listed archived JSON files were edited in this integrity correction.",
+    "No operational test, Docker, Spark, renderer or browser ran for this correction. verification_result reads archived evidence only.",
+    "No manifest, validator or JSON content changed; hash comparison remains strict.",
+    "Wildcard LF policy remains for other evidence; the four exact paths have text unset, so eol=lf is inactive for them.",
+    "No commit or push was performed."
+  ]
+}

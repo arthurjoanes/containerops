@@ -29,6 +29,17 @@ PostgreSQL guarda fila, resultados e estado operacional. O proxy usa a rede fron
 
 **Fila no PostgreSQL.** Transações, leases e resultados ficam no mesmo banco. Dispensa um broker, mas fila e API disputam recursos.
 
+**Quota por proprietário e despacho compartilhado.** O limite global sozinho
+permitia a um token preencher todos os 100 lugares com jobs de demo de 15 segundos.
+Agora cada owner pode manter 20 pendentes; a contagem e a inserção compartilham o
+lock existente. O despacho prioriza quem não teve atividade recente e mantém a
+seleção persistida antes de outro worker escolher. O lock cobre apenas transações
+curtas, sem aguardar o cálculo. Reutilizar timestamps dos jobs evita alterar schema
+ou inventar um broker para a fila pequena; exige agregar o histórico retido e deve
+ser reavaliado com medições se o volume crescer. Não há garantia de prazo, reserva
+por owner nem proteção contra operadores que distribuam várias credenciais a uma
+mesma pessoa. [Regressão em PostgreSQL](security.md).
+
 **Alpine na aplicação.** Reduz os componentes do sistema distribuídos com a API e o worker. As dependências nativas usam wheels musllinux, verificadas no build. Deps/test ficam separados do runtime, e Python continua disponível para os healthchecks.
 
 **Readiness consulta o banco.** Liveness verifica só o processo da API. Com o banco fora, o cliente recebe erro e pode repetir usando a mesma chave.

@@ -1,0 +1,38 @@
+{
+  "scope": "Source mounted into existing test image; isolated PostgreSQL, no rebuilt release image",
+  "base_commit": "56599ec04fb5a078d88118a4d6b60ead14f65ab3",
+  "compose_project": "fix-cops-20260922",
+  "test_image": "sha256:888fa56d4c126a2c724449313f0c807831ff14fed0bb008c6164a2458a1d6817",
+  "database_image": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
+  "pytest_command": "python -m pytest -c app/pyproject.toml -q app/tests tests scripts/test_report.py --junitxml=/audit/docs/evidence/security-admission-20260922/tests.xml",
+  "junit": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "287",
+    "time": "15.541",
+    "timestamp": "2026-09-22T01:07:25.826842+00:00",
+    "hostname": "2138290f5815"
+  },
+  "test_cases": 188,
+  "subtests": 99,
+  "checks": {
+    "ruff": "passed: python -m ruff check app tests scripts",
+    "format": "passed: python -m ruff format --check app",
+    "mypy": "passed: cd app; python -m mypy src/containerops"
+  },
+  "source_sha256": {
+    "app/src/containerops/domain.py": "55762f05d3a8e665eb67b5b6ada6d335287fa53dbc444bb7e00bae309e92ec4c",
+    "app/src/containerops/repository.py": "56b299cfb55021c99830e7314b672588548a26914a67797493c71da8c21487fe",
+    "app/src/containerops/api.py": "58af19b254df59d38e1cf3593d23e5f0a55ab0632db96e55259fa580ecbe80ad",
+    "app/tests/test_integration.py": "87cdb0006fb3715f4b825ba26c723cbffdadef4f3a6e8fe06446b27c89267e20",
+    "app/requirements-runtime.lock": "7d4ea05b8c0b6fce13720dd85b8331bd6af846cf8dfd7615e74a6a453fee7788",
+    "app/requirements-test.lock": "b1c0723b45cb1db5d11dd2a6a06c281436e1eb59b6c228ea1b301758abad570c"
+  },
+  "evidence_sha256": {
+    "tests.xml": "78fd0fb9423d0a91a11319d67f7f8dfe3770793048350d6ef3110724d853b06a",
+    "tests.log": "9931a51767bc39046b1d156460af40bfc02f99530574b0cad1521c4d442b96e5"
+  },
+  "log_normalization": "Trailing whitespace removed; LF line endings; test results unchanged"
+}

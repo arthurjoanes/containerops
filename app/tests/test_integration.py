@@ -11,7 +11,14 @@ from containerops import repository
 from containerops.api import create_app
 from containerops.config import Settings
 from containerops.database import connect
-from containerops.domain import AdmissionPaused, JobConflict, QueueFull, analyze_text
+from containerops.domain import (
+    MAX_PENDING_JOBS_PER_OWNER,
+    AdmissionPaused,
+    JobConflict,
+    OwnerQueueFull,
+    QueueFull,
+    analyze_text,
+)
 
 pytestmark = pytest.mark.integration
 
@@ -93,11 +100,11 @@ def test_expired_jobs_fail_after_three_attempts(database: Settings) -> None:
 
 def test_queue_limit_is_atomic_under_concurrency(database: Settings) -> None:
     for number in range(99):
-        repository.submit_job(database, "alice", f"fill-{number}", "abc", 0)
+        repository.submit_job(database, f"owner-{number // 20}", f"fill-{number}", "abc", 0)
 
     def submit(key: str) -> str:
         try:
-            repository.submit_job(database, "alice", key, "abc", 0)
+            repository.submit_job(database, key, key, "abc", 0)
             return "created"
         except QueueFull:
             return "full"
@@ -106,7 +113,7 @@ def test_queue_limit_is_atomic_under_concurrency(database: Settings) -> None:
         result = list(pool.map(submit, ["last-a", "last-b"]))
     assert sorted(result) == ["created", "full"]
     assert repository.snapshot(database)["counts"]["queued"] == 100
-    _, created = repository.submit_job(database, "alice", "fill-0", "abc", 0)
+    _, created = repository.submit_job(database, "owner-0", "fill-0", "abc", 0)
     assert created is False
 
 
@@ -240,7 +247,7 @@ def test_http_pause_capacity_and_owner_scoped_keys(
         assert paused.status_code == 503 and paused.headers["Retry-After"] == "2"
         repository.set_admission(database, False)
         for number in range(98):
-            repository.submit_job(database, "alice", f"fill-{number}", "x", 0)
+            repository.submit_job(database, f"owner-{number // 20}", f"fill-{number}", "x", 0)
         full = client.post(
             "/v1/jobs", headers={**auth, "Idempotency-Key": "new"}, json={"text": "new"}
         )
@@ -248,3 +255,75 @@ def test_http_pause_capacity_and_owner_scoped_keys(
         assert client.post("/v1/jobs", headers=auth, json={"text": "alice"}).status_code == 200
         conflict = client.post("/v1/jobs", headers=auth, json={"text": "changed"})
         assert conflict.status_code == 409 and "Retry-After" not in conflict.headers
+
+
+def test_owner_quota_is_atomic_and_includes_running_jobs(database: Settings) -> None:
+    for number in range(MAX_PENDING_JOBS_PER_OWNER - 1):
+        repository.submit_job(database, "alice", f"fill-{number}", "abc", 15)
+    running = repository.claim_job(database)
+    assert running is not None
+
+    def submit(number: int) -> str:
+        try:
+            repository.submit_job(database, "alice", f"race-{number}", "abc", 15)
+            return "created"
+        except OwnerQueueFull:
+            return "full"
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        result = list(pool.map(submit, range(8)))
+    assert result.count("created") == 1 and result.count("full") == 7
+    counts = repository.snapshot(database)["counts"]
+    assert counts["running"] == 1 and counts["queued"] == MAX_PENDING_JOBS_PER_OWNER - 1
+    assert repository.complete_job(database, running, analyze_text(running.payload))
+    assert repository.submit_job(database, "alice", "released-slot", "abc", 15)[1]
+
+
+def test_one_owner_cannot_block_another_in_demo_mode(
+    database: Settings, auth: dict[str, str]
+) -> None:
+    with TestClient(create_app(database)) as client:
+        body = {"text": "synthetic demo", "demo_duration_seconds": 15}
+        for number in range(MAX_PENDING_JOBS_PER_OWNER):
+            headers = {**auth, "Idempotency-Key": f"alice-{number}"}
+            assert client.post("/v1/jobs", headers=headers, json=body).status_code == 201
+        full = client.post("/v1/jobs", headers=auth, json=body)
+        assert full.status_code == 429 and full.headers["Retry-After"] == "2"
+        assert "proprietário" in full.json()["detail"]
+        replay = {**auth, "Idempotency-Key": "alice-0"}
+        assert client.post("/v1/jobs", headers=replay, json=body).status_code == 200
+        assert client.post("/v1/jobs", headers=replay, json={"text": "changed"}).status_code == 409
+        bob = {**auth, "Authorization": f"Bearer {TOKEN_BOB}"}
+        response = client.post("/v1/jobs", headers=bob, json=body)
+        assert response.status_code == 201
+        first = repository.claim_job(database)
+        second = repository.claim_job(database)
+        assert first is not None and first.owner == "alice"
+        assert second is not None and second.owner == "bob"
+        assert str(second.id) == response.json()["id"]
+
+
+def test_dispatch_shares_workers_between_owners(database: Settings) -> None:
+    # Todo o backlog de Alice é anterior ao de Bob. FIFO global monopolizaria os workers.
+    for owner in ("alice", "bob"):
+        for number in range(6):
+            repository.submit_job(database, owner, f"{owner}-{number}", "abc", 15)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        jobs = list(pool.map(lambda _: repository.claim_job(database), range(4)))
+    assert all(job is not None for job in jobs)
+    assert len({job.id for job in jobs if job is not None}) == 4
+    assert sum(job.owner == "alice" for job in jobs if job is not None) == 2
+    assert sum(job.owner == "bob" for job in jobs if job is not None) == 2
+
+
+def test_continuous_owner_cannot_delay_another_behind_its_backlog(database: Settings) -> None:
+    for owner in ("alice", "bob"):
+        for number in range(4):
+            repository.submit_job(database, owner, f"{owner}-{number}", "abc", 15)
+    owners = []
+    for _ in range(8):
+        job = repository.claim_job(database)
+        assert job is not None
+        owners.append(job.owner)
+        assert repository.complete_job(database, job, analyze_text(job.payload))
+    assert owners == ["alice", "bob"] * 4

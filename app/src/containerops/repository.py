@@ -9,9 +9,11 @@ from containerops.domain import (
     LEASE_SECONDS,
     MAX_ATTEMPTS,
     MAX_PENDING_JOBS,
+    MAX_PENDING_JOBS_PER_OWNER,
     AdmissionPaused,
     Job,
     JobConflict,
+    OwnerQueueFull,
     QueueFull,
     SchemaIncompatible,
     TextResult,
@@ -61,7 +63,7 @@ def submit_job(
 ) -> tuple[Job, bool]:
     payload_hash = fingerprint(text, duration)
     with connect(settings) as connection:
-        # O lock em operations serializa admissão, pausa e limite global; UNIQUE impede duplicatas.
+        # O mesmo lock protege as duas quotas, inclusive entre réplicas da API.
         operation = connection.execute(
             "SELECT admission_paused FROM operations WHERE singleton FOR UPDATE"
         ).fetchone()
@@ -84,9 +86,13 @@ def submit_job(
             if operation[0]:
                 raise AdmissionPaused
             count = connection.execute(
-                "SELECT count(*) FROM jobs WHERE state IN ('queued', 'running')"
+                "SELECT count(*), count(*) FILTER (WHERE owner = %s) "
+                "FROM jobs WHERE state IN ('queued', 'running')",
+                (owner,),
             ).fetchone()
             assert count is not None
+            if cast(int, count[1]) >= MAX_PENDING_JOBS_PER_OWNER:
+                raise OwnerQueueFull
             if cast(int, count[0]) >= MAX_PENDING_JOBS:
                 raise QueueFull
             cursor.execute(
@@ -111,6 +117,13 @@ def get_job(settings: Settings, owner: str, job_id: UUID) -> Job | None:
 
 def claim_job(settings: Settings) -> Job | None:
     with connect(settings) as connection:
+        # Serializa somente o despacho, não a execução. Outros workers observam a
+        # escolha já persistida antes de decidir o próximo owner. Pausa não impede dreno.
+        operation = connection.execute(
+            "SELECT singleton FROM operations WHERE singleton FOR UPDATE"
+        ).fetchone()
+        if operation is None:
+            raise SchemaIncompatible("Estado operacional ausente")
         connection.execute(
             "UPDATE jobs SET state='failed', error_category='attempts_exhausted', "
             "lease_token=NULL, lease_until=NULL, completed_at=clock_timestamp(), "
@@ -120,9 +133,13 @@ def claim_job(settings: Settings) -> Job | None:
         )
         with connection.cursor(row_factory=class_row(Job)) as cursor:
             cursor.execute(
-                "WITH candidate AS (SELECT id FROM jobs WHERE attempts < %s AND "
-                "(state='queued' OR (state='running' AND lease_until < clock_timestamp())) "
-                "ORDER BY created_at, id FOR UPDATE SKIP LOCKED LIMIT 1) "
+                "WITH activity AS (SELECT owner, max(updated_at) AS last_active "
+                "FROM jobs WHERE attempts > 0 GROUP BY owner), "
+                "candidate AS (SELECT j.id FROM jobs j "
+                "LEFT JOIN activity a ON a.owner=j.owner WHERE j.attempts < %s AND "
+                "(j.state='queued' OR (j.state='running' AND j.lease_until < clock_timestamp())) "
+                "ORDER BY a.last_active NULLS FIRST, j.created_at, j.id "
+                "FOR UPDATE OF j SKIP LOCKED LIMIT 1) "
                 "UPDATE jobs SET state='running', attempts=attempts+1, lease_token=%s, "
                 "lease_until=clock_timestamp() + %s * interval '1 second', "
                 "updated_at=clock_timestamp() WHERE id IN (SELECT id FROM candidate) "

@@ -24,15 +24,19 @@ Caractere NUL e surrogate isolado são rejeitados porque não representam texto
 armazenável em PostgreSQL UTF-8. O corpo HTTP completo tem limite de 32.768 bytes,
 inclusive para transferência em chunks. Campos desconhecidos são rejeitados.
 `demo_duration_seconds` é numérico finito, entre 0 e 15; valores maiores que zero
-exigem `DEMO_MODE=true`. Há no máximo 100 jobs queued/running em conjunto.
-O limite é global, sem quota por proprietário nem garantia de equidade: um usuário
-autenticado pode ocupar toda a fila. O escopo é operação local com usuários confiáveis.
+exigem `DEMO_MODE=true` (padrão no Compose; fora dele, o padrão da aplicação é false).
+Há no máximo 100 jobs queued/running em conjunto e 20 por proprietário. Os dois
+limites incluem leases vivas ou expiradas ainda não finalizadas e são verificados
+sob o mesmo lock transacional da inserção. Um proprietário não ocupa sozinho a
+capacidade global; excesso de qualquer quota retorna 429 com Retry-After 2.
+As quotas não reservam capacidade para todos os proprietários simultaneamente:
+cinco proprietários podem preencher os 100 lugares. O escopo permanece local.
 
 Mesma chave, proprietário, texto e duração retornam o mesmo job (HTTP 200).
 Uma criação retorna 201; conteúdo ou duração diferentes sob a mesma chave retornam
 409. A duração 1 equivale a 1.0, e -0.0 equivale a 0.0. O replay também reconhece
 o hash de zero negativo persistido pela versão anterior, sem migrar nem duplicar jobs. A restrição UNIQUE(owner,idempotency_key) e o lock
-transacional no singleton de operações protegem concorrência e limite da fila.
+transacional no singleton de operações protegem concorrência e ambos os limites da fila.
 Nova admissão pausada retorna 503; fila cheia, 429; entrada inválida, 422; corpo
 excessivo, 413; indisponibilidade, timeout ou lock de banco, 503 com Retry-After.
 Um defeito SQL permanente retorna 500 sem instruir o cliente a repetir, e um
@@ -75,8 +79,16 @@ a versão 1 ou 2 do schema. Todos os dados de negócio ficam no PostgreSQL.
 
 Transições: queued → running → succeeded; running expirado pode ser adquirido
 novamente com outro token; após três aquisições, uma lease expirada passa a failed
-com `error_category=attempts_exhausted`. O worker usa `FOR UPDATE SKIP LOCKED`,
-lease de cinco segundos e renovação a cada segundo durante a duração demo.
+com `error_category=attempts_exhausted`. O despacho usa o mesmo lock curto de
+operações para que workers concorrentes observem a escolha anterior. Prioriza o
+owner sem atividade anterior e, depois, o menor `max(updated_at)` dos jobs desse
+owner com `attempts > 0`; dentro dessa prioridade, usa created_at/id. Aquisição,
+renovação, conclusão e falha contam como atividade. O histórico expira com a retenção.
+Isso evita despachar todo o backlog de um owner antes de atender outro; não é
+reserva de workers, preempção ou garantia de latência. Após o despacho, workers
+executam em paralelo. A pausa de admissão não impede o dreno.
+O worker usa `FOR UPDATE OF j SKIP LOCKED`, lease de cinco segundos e renovação
+a cada segundo durante a duração demo.
 Renovação e conclusão exigem token atual **e** lease ainda válida. Um worker antigo
 pode recalcular a função pura, mas não sobrescreve o resultado persistido.
 
@@ -124,7 +136,8 @@ Downgrade de schema é rejeitado. Migração 2 apenas acrescenta uma coluna opci
 | demo_duration_seconds | Número finito, 0–15 inclusive; bool/string/null/NaN/Infinity/fora do intervalo → 422; valor positivo exige DEMO_MODE | `test_http_contract.py`; `test_domain.py` |
 | Canonização e replay | 1=1.0 e -0.0=0.0; mesmo pedido/owner/chave → 200 e mesmo UUID; alteração de texto/duração → 409 | Unidade + integração com hash legado em PostgreSQL + jornada HTTP |
 | job_id | UUID inválido → 422 sem consultar banco; inexistente ou não autorizado → 404 | Contrato HTTP e integração |
-| Pausa/fila cheia | Pausa → 503/Retry-After 2 para novos; limite global de 100 → 429/Retry-After 2; replay continua 200; pedido conflitante permanece 409 | Integração HTTP e corrida de admissão com PostgreSQL |
+| Pausa/fila cheia | Pausa → 503/Retry-After 2 para novos; limites de 100 globais e 20 por owner → 429/Retry-After 2; replay continua 200; pedido conflitante permanece 409 | Integração HTTP e corridas de ambas as quotas com PostgreSQL |
+| Distribuição entre owners | Alice no limite não impede admissão de Bob; backlog mais antigo de Alice não toma os quatro despachos concorrentes; terminais liberam quota | `test_one_owner_cannot_block_another_in_demo_mode`, `test_dispatch_shares_workers_between_owners`, `test_owner_quota_is_atomic_and_includes_running_jobs` |
 | Resultado | Queued/running: result e error null; succeeded: contagem e SHA-256 dos bytes; failed: tentativas 3 e erro estável sem payload | Integração, algoritmo puro e jornada |
 | Concorrência/lease | Uma linha por chave; workers não tomam a mesma lease viva; token antigo não renova/conclui; 3 expirações produzem failed; replay não reenfileira | Testes concorrentes com PostgreSQL real |
 | Retenção/manutenção | Limpeza de terminais após retenção; bloqueada durante pausa; snapshot estável após drenar | Integração; backup/restore e operação |

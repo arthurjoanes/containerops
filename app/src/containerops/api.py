@@ -23,6 +23,7 @@ from containerops.domain import (
     AdmissionPaused,
     Job,
     JobConflict,
+    OwnerQueueFull,
     QueueFull,
     SchemaIncompatible,
 )
@@ -254,6 +255,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         except AdmissionPaused as error:
             raise HTTPException(
                 503, "Admissão pausada para manutenção", headers={"Retry-After": "2"}
+            ) from error
+        except OwnerQueueFull as error:
+            raise HTTPException(
+                429, "Limite de trabalhos pendentes do proprietário", headers={"Retry-After": "2"}
             ) from error
         except QueueFull as error:
             raise HTTPException(429, "Fila cheia", headers={"Retry-After": "2"}) from error

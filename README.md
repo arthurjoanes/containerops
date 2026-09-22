@@ -4,6 +4,10 @@ Desenvolvi este laboratório para conferir o que permanece correto quando um pro
 
 A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo simples deixa a pergunta principal verificável: **o trabalho aceito continua identificável e o resultado está correto depois da recuperação?** Os textos e as falhas são sintéticos; os processos, HTTP e banco são reais, no mesmo computador.
 
+![Página principal do ContainerOps](docs/readme/home.png)
+
+*Página principal da demonstração.*
+
 [Na prática](#na-prática) · [Implementação](#implementação) · [Executar e verificar](#executar-e-verificar) · [Limites e manutenção](#limites-e-manutenção)
 
 <p><img src="docs/readme/uso.svg" width="800" height="8" alt=""></p>

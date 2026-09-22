@@ -12,3 +12,9 @@ Dockerfile text eol=lf
 /docs/evidence/**/*.html text eol=lf
 /docs/evidence/**/*.xml text eol=lf
 /docs/evidence/**/*.txt text eol=lf
+
+# Preserve the original bytes bound to this archived verification manifest.
+/docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/test-results.json -text
+/docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json -text
+/docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json -text
+/docs/evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json -text

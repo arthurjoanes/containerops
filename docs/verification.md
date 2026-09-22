@@ -7,9 +7,12 @@ detalhe, etapas e arquivos de origem. O modelo de evidências e a execução da
 aplicação não foram substituídos. A nova navegação é local e funciona como
 melhoria progressiva: sem JavaScript, todos os resultados continuam disponíveis.
 
-Nesta revisão foram executados 45 testes do gerador e 30 testes de operações no
-host, separadamente. Os casos cobrem também seleção estática, identidade separada
-de backup/restauração e tentativa de release inválida. As capturas em
+O gerador passou em 46 testes, incluindo sete subcasos que distinguem job na fila,
+em execução, concluído, incompleto, falho, desconhecido e ausente. A etapa inicial
+da adaptação também executou os 30 testes de operações no host; essa suíte não foi
+repetida após os ajustes restritos de navegação e rótulo do job. Os casos do gerador
+cobrem seleção estática, identidade separada de backup/restauração e tentativa de
+release inválida. As capturas em
 `docs/screenshots/report-*.png` vêm do HTML gerado com os JSONs versionados,
 sem executar novamente a prova Docker abaixo.
 
@@ -17,6 +20,17 @@ A revisão no Edge conferiu os oito painéis em 1440, 768, 390 e 320 px, navega�
 por teclado, histórico do navegador, links locais e leitura sem JavaScript.
 Também foram conferidos impressão e reflow em viewport equivalente a zoom de
 200%. Não houve overflow horizontal na página nem erros no console.
+
+A revisão posterior corrigiu dois comportamentos: jobs pendentes ou incompletos
+não aparecem mais como falha na lista, e **Ir para a operação** mantém o painel
+selecionado, focando o conteúdo sem mudar o fragmento da URL. O teste opcional
+`node scripts/test_report_browser.cjs` confere seis casos do atalho (três painéis
+em desktop e celular), seleção por teclado, histórico, impressão e leitura sem
+JavaScript. Ele usa o HTML local, sem servidor. Playwright é ferramenta de
+desenvolvimento: `PLAYWRIGHT_MODULE` pode indicar uma instalação externa e
+`PLAYWRIGHT_CHANNEL=msedge` seleciona Edge. Ruff check/format e `node --check`
+passaram. O relatório e as cinco capturas foram regenerados com os mesmos JSONs;
+nenhuma prova Docker foi executada.
 
 ## Revisão posterior de isolamento de capacidade
 

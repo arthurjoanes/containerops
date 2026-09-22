@@ -992,7 +992,7 @@ footer {
       <main id="content" tabindex="-1">
         <div class="report-heading">
           <h1>Operações registradas</h1>
-          <p>Relatório gerado em <time datetime="2026-09-22T03:18:54.354866+00:00">22/09/2026 · 03:18:54 UTC</time></p>
+          <p>Relatório gerado em <time datetime="2026-09-22T03:48:12.486354+00:00">22/09/2026 · 03:48:12 UTC</time></p>
         </div>
 
         <noscript
@@ -1016,7 +1016,7 @@ footer {
           <div class="attempt pass">
             <div>
               <h3>Última verificação aprovada</h3>
-              <p>3,1 h antes da geração</p>
+              <p>3,6 h antes da geração</p>
             </div>
             <strong class="duration">246,7 s</strong>
 
@@ -1347,6 +1347,14 @@ footer {
   const links = Array.from(document.querySelectorAll("[data-operation]"));
   const picker = document.querySelector(".operation-picker");
   if (!panels.length || !picker) return;
+
+  const content = document.getElementById("content");
+  document.querySelector(".skip-link")?.addEventListener("click", (event) => {
+    if (!content) return;
+    event.preventDefault();
+    content.focus({ preventScroll: true });
+    content.scrollIntoView({ block: "start" });
+  });
 
   function select(focus) {
     const target = document.getElementById(window.location.hash.slice(1));

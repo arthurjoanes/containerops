@@ -559,6 +559,27 @@ class ReportTests(unittest.TestCase):
         self.assertIn("Inválido", link)
         self.assertNotIn("Aprovado", link)
 
+    def test_job_navigation_matches_pending_failed_and_incomplete_results(self):
+        incomplete = {**job(), "result": None}
+        cases = (
+            (job("queued"), "queued", "Na fila", "Na fila"),
+            (job("running"), "running", "Em andamento", "Processando"),
+            (job(), "pass", "Aprovado", "Concluído"),
+            (incomplete, "partial", "Parcial", "Resultado incompleto"),
+            (job("failed"), "fail", "Falhou", "Falhou"),
+            (job("unexpected"), "invalid", "Inválido", "Estado não reconhecido"),
+            ({}, "missing", "Ausente", "Nenhum resultado registrado"),
+        )
+        for payload, state, navigation_label, detail_label in cases:
+            with self.subTest(state=state):
+                self.write("demo", {"recorded_at": "2026-09-21T04:00:00Z", "job": payload})
+                page = self.render()
+                link = page.split('data-operation="result"', 1)[1].split("</a>", 1)[0]
+                panel = page.split('<section id="result"', 1)[1].split("</section>", 1)[0]
+                self.assertIn(f'class="state-dot {state}"', link)
+                self.assertIn(navigation_label, link)
+                self.assertIn(f"<h3>{detail_label}</h3>", panel)
+
 
 if __name__ == "__main__":
     unittest.main()

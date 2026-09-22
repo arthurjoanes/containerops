@@ -5,6 +5,14 @@
   const picker = document.querySelector(".operation-picker");
   if (!panels.length || !picker) return;
 
+  const content = document.getElementById("content");
+  document.querySelector(".skip-link")?.addEventListener("click", (event) => {
+    if (!content) return;
+    event.preventDefault();
+    content.focus({ preventScroll: true });
+    content.scrollIntoView({ block: "start" });
+  });
+
   function select(focus) {
     const target = document.getElementById(window.location.hash.slice(1));
     const panel = target?.closest("[data-panel]") || panels[0];

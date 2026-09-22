@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-09-22T09:27:10.879Z",
+  "removed": [
+    ".report-heading .eyebrow",
+    ".eyebrow",
+    ".panel-heading p:not(.eyebrow)",
+    ".panel-symbol",
+    ".identity-column .surface-panel",
+    ".attempt .eyebrow",
+    ".attempt p:not(.eyebrow)",
+    ".section-heading",
+    ".section-heading a",
+    ".section-heading > span",
+    ".section-details",
+    ".section-details[open]",
+    ".section-details[open] > summary",
+    ".subheading",
+    ".evidence-block",
+    ".evidence-block p",
+    ".evidence-catalog",
+    ".evidence-catalog",
+    ".panel-heading p:not(.eyebrow)",
+    ".identity-column .surface-panel",
+    ".identity-column .surface-panel",
+    ".evidence-catalog",
+    "earlier duplicate .artifact-diagnosis padding-bottom"
+  ],
+  "scope": "No selector consumer in report.py/report.html/report.js; removes dead CSS and an overridden declaration. Existing rendered data and clock preserved; CSS parsed with PostCSS.",
+  "pixelChecks": [
+    {
+      "view": "recovery",
+      "width": 1440,
+      "before": "3687adc6c3d55c1adf7c3598c2c451e5aac8211532812cb09d98964275c172d0",
+      "after": "3687adc6c3d55c1adf7c3598c2c451e5aac8211532812cb09d98964275c172d0",
+      "identical": true
+    },
+    {
+      "view": "result",
+      "width": 1440,
+      "before": "f7378853cca6f254801366593bbd8c6f5fa27ec0c753efb7e39b79d9ebceece3",
+      "after": "f7378853cca6f254801366593bbd8c6f5fa27ec0c753efb7e39b79d9ebceece3",
+      "identical": true
+    },
+    {
+      "view": "artifacts",
+      "width": 1440,
+      "before": "726b28c63ea7dea21b97a0bbc311bdd365e66d3ebbad05a4d1712fb33ae6fedc",
+      "after": "726b28c63ea7dea21b97a0bbc311bdd365e66d3ebbad05a4d1712fb33ae6fedc",
+      "identical": true
+    }
+  ],
+  "currentHtmlBytes": 291089
+}

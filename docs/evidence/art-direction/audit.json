@@ -1,0 +1,2781 @@
+{
+  "checkedAt": "2026-09-22T09:15:53.234Z",
+  "scope": "Static report, identical historical records and generation clock; no operation executed",
+  "views": [
+    {
+      "width": 1440,
+      "id": "overview",
+      "overflow": false,
+      "contrast": {
+        "checked": 64,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "result",
+      "overflow": false,
+      "contrast": {
+        "checked": 39,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "tls",
+      "overflow": false,
+      "contrast": {
+        "checked": 34,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "recovery",
+      "overflow": false,
+      "contrast": {
+        "checked": 52,
+        "min": 5.31716265023901,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "operations",
+      "overflow": false,
+      "contrast": {
+        "checked": 42,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "rollback",
+      "overflow": false,
+      "contrast": {
+        "checked": 39,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "artifacts",
+      "overflow": false,
+      "contrast": {
+        "checked": 36,
+        "min": 5.496419141866841,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 1440,
+      "id": "evidence",
+      "overflow": false,
+      "contrast": {
+        "checked": 143,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "overview",
+      "overflow": false,
+      "contrast": {
+        "checked": 63,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "result",
+      "overflow": false,
+      "contrast": {
+        "checked": 38,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "tls",
+      "overflow": false,
+      "contrast": {
+        "checked": 33,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "recovery",
+      "overflow": false,
+      "contrast": {
+        "checked": 51,
+        "min": 5.31716265023901,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "operations",
+      "overflow": false,
+      "contrast": {
+        "checked": 41,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "rollback",
+      "overflow": false,
+      "contrast": {
+        "checked": 38,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "artifacts",
+      "overflow": false,
+      "contrast": {
+        "checked": 35,
+        "min": 5.496419141866841,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 768,
+      "id": "evidence",
+      "overflow": false,
+      "contrast": {
+        "checked": 142,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": [
+        "Revisar"
+      ]
+    },
+    {
+      "width": 390,
+      "id": "overview",
+      "overflow": false,
+      "contrast": {
+        "checked": 51,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "result",
+      "overflow": false,
+      "contrast": {
+        "checked": 26,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "tls",
+      "overflow": false,
+      "contrast": {
+        "checked": 21,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "recovery",
+      "overflow": false,
+      "contrast": {
+        "checked": 39,
+        "min": 5.31716265023901,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "operations",
+      "overflow": false,
+      "contrast": {
+        "checked": 29,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "rollback",
+      "overflow": false,
+      "contrast": {
+        "checked": 26,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "artifacts",
+      "overflow": false,
+      "contrast": {
+        "checked": 23,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 390,
+      "id": "evidence",
+      "overflow": false,
+      "contrast": {
+        "checked": 130,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "overview",
+      "overflow": false,
+      "contrast": {
+        "checked": 51,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "result",
+      "overflow": false,
+      "contrast": {
+        "checked": 26,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "tls",
+      "overflow": false,
+      "contrast": {
+        "checked": 21,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "recovery",
+      "overflow": false,
+      "contrast": {
+        "checked": 39,
+        "min": 5.31716265023901,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "operations",
+      "overflow": false,
+      "contrast": {
+        "checked": 29,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "rollback",
+      "overflow": false,
+      "contrast": {
+        "checked": 26,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "artifacts",
+      "overflow": false,
+      "contrast": {
+        "checked": 23,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    },
+    {
+      "width": 320,
+      "id": "evidence",
+      "overflow": false,
+      "contrast": {
+        "checked": 130,
+        "min": 5.733950107023084,
+        "failures": []
+      },
+      "visibleApprovalsInNav": []
+    }
+  ],
+  "fonts": [
+    {
+      "selector": "#result-title",
+      "fonts": [
+        {
+          "familyName": "SourceSans3VF",
+          "postScriptName": "SourceSans3Upright-Semibold",
+          "isCustomFont": true,
+          "glyphCount": 21
+        }
+      ]
+    },
+    {
+      "selector": ".job h3",
+      "fonts": [
+        {
+          "familyName": "SourceSans3VF",
+          "postScriptName": "SourceSans3Upright-Semibold",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "selector": ".job-values dd",
+      "fonts": [
+        {
+          "familyName": "SourceSans3VF",
+          "postScriptName": "SourceSans3Upright-Semibold",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    }
+  ],
+  "network": [],
+  "comparisons": [
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 1440,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 1440,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 768,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 768,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 390,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 390,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "overview",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:10:13.773630+00:00",
+          "2026-09-22T00:14:20.434830+00:00",
+          "2026-09-22T00:12:10.808867+00:00"
+        ],
+        "proofs": [
+          "#evidence",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/hardening.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/recovery.json",
+          "evidence/verification-run.json"
+        ],
+        "values": [
+          "2b29fb96a914490198d61c583b2c75d4",
+          "pf-containerops-test-2b29fb96"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "result",
+      "fields": {
+        "times": [
+          "2026-09-22T00:11:55.428074+00:00",
+          "2026-09-22T00:11:55.428074+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/runs/2b29fb96a914490198d61c583b2c75d4/journey.json"
+        ],
+        "values": [
+          "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc",
+          "2b29fb96a914490198d61c583b2c75d4",
+          "64dc6386-3541-4da4-b0a7-4e8972e12f98",
+          "pf-containerops-test-2b29fb96",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "tls",
+      "fields": {
+        "times": [
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:18:13.032711+00:00"
+        ],
+        "proofs": [
+          "evidence/tls.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "recovery",
+      "fields": {
+        "times": [
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:19:27.627077+00:00"
+        ],
+        "proofs": [
+          "evidence/backup.json",
+          "evidence/restore.json",
+          "evidence/restore.json"
+        ],
+        "values": [
+          "11d238075773cf5328e8732b351a4a9b7d8ee0e28a899443b85b5eeb33e18acb",
+          "5787bb14-bd06-4e2d-83b3-9a101a8a5b6d",
+          "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c",
+          "Não informado",
+          "Não informado",
+          "pf-containerops-restore-b83b509e",
+          "pf-containerops-test-fc39e58c",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "operations",
+      "fields": {
+        "times": [
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-22T00:17:18.628751+00:00"
+        ],
+        "proofs": [
+          "#artifacts",
+          "evidence/release.json",
+          "evidence/release.json",
+          "evidence/release.json"
+        ],
+        "values": [
+          "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "284dad44-17e2-4af9-8f05-af2068b87e8b",
+          "Não informado",
+          "pf-containerops-test-881fdd3d",
+          "sha256:523ac7a5d357533eb6dd4fe3bea7a52df86d9d7dd1c62dd7f8446ee651dccea5",
+          "sha256:e22c531e0a498122cce0b8adbe3dfd572b1d37023fdec75ff19d43a942f47a21",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "rollback",
+      "fields": {
+        "times": [
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T06:19:13.533545+00:00"
+        ],
+        "proofs": [
+          "evidence/rollback.json",
+          "evidence/rollback.json",
+          "evidence/rollback.json"
+        ],
+        "values": [
+          "4e1a4711-814d-4cc3-a9f5-f579450db3dc",
+          "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "Não informado",
+          "pf-containerops-test-fc39e58c",
+          "sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8",
+          "succeeded"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "artifacts",
+      "fields": {
+        "times": [
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-21T05:03:02.371318+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/cache-experiment.json",
+          "evidence/final-state.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json"
+        ],
+        "values": [
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "Não informado",
+          "pf-containerops",
+          "python scripts/ops.py scan --version <versão>",
+          "sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8"
+        ]
+      }
+    },
+    {
+      "mode": "baseline",
+      "width": 320,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    },
+    {
+      "mode": "candidate",
+      "width": 320,
+      "id": "evidence",
+      "fields": {
+        "times": [
+          "2026-09-22T00:08:07.525272+00:00",
+          "2026-09-22T00:09:20.263400+00:00",
+          "2026-09-22T06:19:27.627077+00:00",
+          "2026-09-22T06:03:14.958608+00:00",
+          "2026-09-22T06:07:26.276150+00:00",
+          "2026-09-21T04:00:03.001113+00:00",
+          "2026-09-21T05:02:35.183404+00:00",
+          "2026-09-21T04:00:57.739665+00:00",
+          "2026-09-21T05:03:02.371318+00:00",
+          "2026-09-22T00:12:10.808867+00:00",
+          "2026-09-22T00:14:53.608218+00:00",
+          "2026-09-22T00:17:52.319615+00:00",
+          "2026-09-22T06:20:05.990271+00:00",
+          "2026-09-22T00:19:32.313316+00:00",
+          "2026-09-22T00:14:18.044655+00:00",
+          "2026-09-22T00:17:18.628751+00:00",
+          "2026-09-21T23:54:44.694934+00:00",
+          "2026-09-22T06:20:00.831503+00:00",
+          "2026-09-21T05:01:23.854284+00:00",
+          "2026-09-21T05:02:05.963724+00:00",
+          "2026-09-21T04:55:19.974865+00:00",
+          "2026-09-21T05:03:02.902086+00:00",
+          "2026-09-21T05:01:24.734836+00:00",
+          "2026-09-21T05:04:02.197545+00:00",
+          "2026-09-21T04:57:51.830699+00:00",
+          "2026-09-21T04:04:27.145746+00:00",
+          "2026-09-21T04:05:38.491030+00:00",
+          "2026-09-21T03:59:03.353000+00:00",
+          "2026-09-22T06:19:13.533545+00:00",
+          "2026-09-22T00:08:28.791163+00:00",
+          "2026-09-22T00:09:38.668536+00:00",
+          "2026-09-21T03:05:46.975543+00:00",
+          "2026-09-22T00:10:13.737516+00:00",
+          "2026-09-22T00:11:45.940660+00:00",
+          "2026-09-22T00:18:13.032711+00:00",
+          "2026-09-22T00:14:20.434830+00:00"
+        ],
+        "proofs": [
+          "evidence/audit-1.0.0.json",
+          "evidence/audit-2.0.0.json",
+          "evidence/backup.json",
+          "evidence/build-1.0.0.json",
+          "evidence/build-2.0.0.json",
+          "evidence/cache-experiment.json",
+          "evidence/demo.json",
+          "evidence/error-propagation.json",
+          "evidence/final-state.json",
+          "evidence/hardening.json",
+          "evidence/journey.json",
+          "evidence/manual-rollback.json",
+          "evidence/operations-proof-latest.json",
+          "evidence/operations-publication.json",
+          "evidence/problem-proof-latest.json",
+          "evidence/recovery.json",
+          "evidence/release-failed.json",
+          "evidence/release.json",
+          "evidence/restore.json",
+          "evidence/review-followup-collection-error.json",
+          "evidence/review-followup-host-checks-41.json",
+          "evidence/review-followup-host-checks.json",
+          "evidence/review-followup-main.json",
+          "evidence/review-followup-operations.json",
+          "evidence/review-followup-runtime.json",
+          "evidence/review-followup-source-images.json",
+          "evidence/review-host-checks.json",
+          "evidence/review-main-update.json",
+          "evidence/review-operations.json",
+          "evidence/rollback.json",
+          "evidence/scan-1.0.0.json",
+          "evidence/scan-2.0.0.json",
+          "evidence/scan-initial-failed.json",
+          "evidence/scan-services.json",
+          "evidence/test-results.json",
+          "evidence/tls.json",
+          "evidence/verification-run.json",
+          "runbooks.md"
+        ],
+        "values": [
+          "python scripts/ops.py report"
+        ]
+      }
+    }
+  ],
+  "offline": {
+    "reload": true,
+    "navigation": true,
+    "scope": "file report with embedded font, brand, CSS and JavaScript"
+  },
+  "sizes": {
+    "baselineBytes": 57002,
+    "candidateBytes": 292306
+  }
+}

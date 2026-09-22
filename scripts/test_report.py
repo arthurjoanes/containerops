@@ -418,7 +418,8 @@ class ReportTests(unittest.TestCase):
     def test_missing_scan_uses_context_without_placeholder_counts(self):
         self.supply(scan_image="sha256:" + "d" * 64)
         page = self.render()
-        self.assertIn("Sem scan para esta imagem", page)
+        self.assertIn("Faltam auditoria e scan desta imagem", page)
+        self.assertIn("Gerar scan pelo terminal", page)
         self.assertNotIn("Não informado HIGH", page)
         self.assertNotIn("Não informado CRITICAL", page)
 
@@ -576,7 +577,7 @@ class ReportTests(unittest.TestCase):
             (job("queued"), "queued", "Na fila", "Na fila"),
             (job("running"), "running", "Em andamento", "Processando"),
             (job(), "pass", "Aprovado", "Concluído"),
-            (incomplete, "partial", "Parcial", "Resultado incompleto"),
+            (incomplete, "partial", "Revisar", "Resultado incompleto"),
             (job("failed"), "fail", "Falhou", "Falhou"),
             (job("unexpected"), "invalid", "Inválido", "Estado não reconhecido"),
             ({}, "missing", "Ausente", "Nenhum resultado registrado"),
@@ -587,8 +588,11 @@ class ReportTests(unittest.TestCase):
                 page = self.render()
                 link = page.split('data-operation="result"', 1)[1].split("</a>", 1)[0]
                 panel = page.split('<section id="result"', 1)[1].split("</section>", 1)[0]
-                self.assertIn(f'class="state-dot {state}"', link)
-                self.assertIn(navigation_label, link)
+                self.assertIn(f'data-state="{state}" data-operation="result"', page)
+                if state == "pass":
+                    self.assertNotIn("Aprovado", link)
+                else:
+                    self.assertIn(navigation_label, link)
                 self.assertIn(f"<h3>{detail_label}</h3>", panel)
 
 

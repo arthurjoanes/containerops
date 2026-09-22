@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import math
 from datetime import UTC, datetime
 from html import escape
@@ -83,22 +84,23 @@ def record_context(record: dict, *, label: str = "Registro") -> str:
 
 def operation_link(identifier: str, title: str, state: str, detail: str) -> str:
     labels = {
-        "pass": "Aprovado",
         "fail": "Falhou",
-        "pending": "Sem resultado",
+        "pending": "Revisar",
         "missing": "Ausente",
         "invalid": "Inválido",
-        "partial": "Parcial",
+        "partial": "Revisar",
         "running": "Em andamento",
         "queued": "Na fila",
         "stale": "Registro antigo",
-        "info": "Consulta",
     }
+    attention = (
+        f'<span class="operation-meta">{escape(labels[state])}</span>' if state in labels else ""
+    )
     return (
-        f'<a class="operation-link" href="#{identifier}" data-operation="{identifier}">'
-        f'<span class="operation-title"><span class="state-dot {state}" aria-hidden="true"></span>'
-        f'{escape(title)}</span><span class="operation-meta" title="{escape(detail, quote=True)}">'
-        f"{escape(labels.get(state, state))}</span></a>"
+        f'<a class="operation-link" href="#{identifier}" data-state="{state}" '
+        f'data-operation="{identifier}" '
+        f'title="{escape(detail, quote=True)}">'
+        f'<span class="operation-title">{escape(title)}</span>{attention}</a>'
     )
 
 
@@ -150,9 +152,9 @@ def resource_table(hardening: dict) -> str:
             )
         rows.append(
             f'<tr><th scope="row">{service}</th><td>{shown(user)}</td>'
-            f"<td class=\"numeric\">{shown(round(memory / 1024**2, 1) if isinstance(memory, (int, float)) else None, ' MiB')}</td>"
-            f"<td class=\"numeric\">{shown(cpu / 1_000_000_000 if isinstance(cpu, (int, float)) else None)}</td>"
-            f"<td class=\"numeric\">{shown(values.get('pids_limit'))}</td>"
+            f'<td class="numeric">{shown(round(memory / 1024**2, 1) if isinstance(memory, (int, float)) else None, " MiB")}</td>'
+            f'<td class="numeric">{shown(cpu / 1_000_000_000 if isinstance(cpu, (int, float)) else None)}</td>'
+            f'<td class="numeric">{shown(values.get("pids_limit"))}</td>'
             f"<td>{filesystem}</td></tr>"
         )
     return (
@@ -179,13 +181,16 @@ def job_panel(job: dict, evidence: str) -> str:
         '<div class="job"><div>'
         f"<h3>{shown(label)}</h3>"
         "</div>"
-        + metrics(
-            [
-                ("Palavras", result.get("word_count"), ""),
-                ("Tentativas", job.get("attempts"), ""),
-                ("Versão", job.get("version"), ""),
-            ]
+        + '<dl class="job-values">'
+        + "".join(
+            f"<div><dt>{label}</dt><dd>{shown(value)}</dd></div>"
+            for label, value in (
+                ("Palavras", result.get("word_count")),
+                ("Tentativas", job.get("attempts")),
+                ("Versão", job.get("version")),
+            )
         )
+        + "</dl>"
         + '<details class="checksum"><summary>Detalhes do job</summary>'
         f"<p>Estado na API</p><code>{shown(state)}</code>"
         f"<p>ID do job</p><code>{shown(job.get('id'))}</code>"
@@ -493,11 +498,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         + f'<div class="proof">{proof(scan_name, records)}</div></div>'
     )
     if not scan:
-        scan_findings = '<p class="empty-state">Sem scan para esta imagem. Execute <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>'
+        scan_findings = '<p class="empty-state">Gerar scan pelo terminal: <code>python scripts/ops.py scan --version &lt;versão&gt;</code>.</p>'
     cache = records.get("cache-experiment", {})
     cache_rows = "".join(
         f'<tr><th scope="row">{shown(item.get("case"))}</th><td class="numeric">{shown(item.get("duration_seconds"), " s")}</td>'
-        f"<td class=\"numeric\">{shown(item.get('cached_steps'))}</td></tr>"
+        f'<td class="numeric">{shown(item.get("cached_steps"))}</td></tr>'
         for item in cache.get("runs", [])
         if isinstance(item, dict)
     )
@@ -563,6 +568,26 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     )
     if any(name.startswith(("build-", "audit-", "scan-")) for name in errors):
         artifact_state = "invalid"
+    if artifact_state == "invalid":
+        artifact_diagnosis = "Registros de artefatos inválidos"
+        artifact_reason = "Confira os erros de JSON. A integridade dos registros precisa ser resolvida antes de aprovar a imagem."
+    elif not build:
+        artifact_diagnosis = "Nenhum build selecionado"
+        artifact_reason = "Não há imagem identificada para vincular auditoria e scan. Gere o build pelo terminal e atualize este relatório."
+    elif artifact_state == "fail":
+        artifact_diagnosis = "A imagem não passou por todas as verificações"
+        artifact_reason = "Confira os achados e os critérios abaixo; uma falha registrada não é substituída por outra execução."
+    elif not audit and not scan:
+        artifact_diagnosis = "Faltam auditoria e scan desta imagem"
+        artifact_reason = "O build está identificado. Sem scan compatível nem auditoria vinculada, os outros arquivos não aprovam esta imagem."
+    elif not audit or not scan:
+        artifact_diagnosis = (
+            "Falta auditoria desta imagem" if not audit else "Falta scan desta imagem"
+        )
+        artifact_reason = "A verificação disponível cobre apenas uma parte da imagem selecionada. Confira o vínculo por identidade e tempo."
+    else:
+        artifact_diagnosis = "Auditoria e scan vinculados à imagem"
+        artifact_reason = "Os registros selecionados passaram pelos critérios de identidade, integridade e política do scanner."
     operation_groups = [
         (
             "Verificação",
@@ -633,7 +658,27 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     )
     template = Template((assets / "report.html").read_text(encoding="utf-8"))
     page = template.substitute(
-        styles=(assets / "report.css").read_text(encoding="utf-8"),
+        styles=(
+            "/* "
+            + (assets / "assets/source-sans-LICENSE.md").read_text(encoding="utf-8")
+            + " */\n@font-face { font-family:'Source Sans 3'; font-weight:200 900; "
+            + "font-display:swap; src:url(data:font/woff2;base64,"
+            + base64.b64encode((assets / "assets/source-sans-3.woff2").read_bytes()).decode()
+            + ") format('woff2'); }\n"
+            + (assets / "report.css").read_text(encoding="utf-8")
+        ),
+        brand_mark=(assets / "assets/mark-light.svg").read_text(encoding="utf-8"),
+        favicon=base64.b64encode((assets / "assets/favicon.svg").read_bytes()).decode(),
+        artifact_diagnosis=escape(artifact_diagnosis),
+        artifact_reason=escape(artifact_reason),
+        artifact_state=artifact_state,
+        artifact_state_label={
+            "pass": "Verificado",
+            "fail": "Falha na verificação",
+            "partial": "Verificação parcial",
+            "missing": "Sem evidência",
+            "invalid": "Registro inválido",
+        }[artifact_state],
         scripts=(assets / "report.js").read_text(encoding="utf-8"),
         navigation=navigation,
         created=timestamp({"recorded_at": generated_at.isoformat()}),
@@ -686,7 +731,9 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         restore_duration_style="unavailable" if restore.get("recovery_seconds") is None else "",
         release_version_style="unavailable" if release.get("requested_version") is None else "",
         release_duration_style="unavailable" if release.get("maintenance_seconds") is None else "",
-        rollback_duration_style="unavailable" if rollback.get("maintenance_seconds") is None else "",
+        rollback_duration_style="unavailable"
+        if rollback.get("maintenance_seconds") is None
+        else "",
         restored_job=job_panel(restore.get("new_job") or {}, proof("restore", records)),
         release_status=badge(controls[7][1]),
         release_duration=shown(release.get("maintenance_seconds"), " s"),
@@ -718,7 +765,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     )
     page = "\n".join(line.rstrip() for line in page.splitlines()) + "\n"
     destination = root / "docs" / "report.html"
-    destination.write_text(page, encoding="utf-8")
+    destination.write_text(page, encoding="utf-8", newline="\n")
     print(f"Relatório: {destination}")
     return destination
 

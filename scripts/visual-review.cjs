@@ -5,8 +5,8 @@ const path = require('node:path');
 const {pathToFileURL, fileURLToPath} = require('node:url');
 const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root=path.resolve(__dirname,'..');
-const images=path.join(root,'docs/screenshots/interface-v3');
-const evidence=path.join(root,'docs/evidence/interface-v3');
+const images=path.join(root,'docs/screenshots/art-direction');
+const evidence=path.join(root,'docs/evidence/art-direction');
 const report=pathToFileURL(path.join(root,'docs/report.html')).href;
 const fixture=name=>pathToFileURL(path.join(root,'artifacts/interface-review',name,'docs/report.html')).href;
 (async()=>{
@@ -49,6 +49,8 @@ const fixture=name=>pathToFileURL(path.join(root,'artifacts/interface-review',na
   for(const href of await page.locator('a[href]').evaluateAll(es=>es.map(e=>e.href))){const u=new URL(href);if(u.protocol==='file:'){u.hash='';assert.ok(fs.existsSync(fileURLToPath(u)),href);}}
   await capture('evidence-long');
   await page.goto(report+'#artifacts');
+  assert.ok(await page.locator('.artifact-diagnosis').isVisible());
+  await page.getByText('Critérios de auditoria e scan',{exact:true}).click();
   assert.ok((await page.locator('#artifacts').innerText()).includes('Scan da imagem'));
   await page.goto(report+'#recovery');
   await page.emulateMedia({reducedMotion:'no-preference'});

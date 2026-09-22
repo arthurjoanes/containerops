@@ -1,8 +1,10 @@
 # ContainerOps
 
+A captura atual usa os registros operacionais versionados de 22/09/2026: restauração de 3 jobs em 27,4 s. O layout foi refeito sem executar outra restauração. Job compacto, compatibilidade de artefatos e origem da cópia têm hierarquia própria; [comparação e limites da revisão](docs/frontend-quality.md#direção-visual-atual--revisão-de-22092026).
+
 Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
 
-![Interface atual: três jobs restaurados, verificações e registro da cópia separados](docs/screenshots/interface-v3/after-recovery-1440.png)
+![Interface atual: três jobs restaurados, verificações e registro da cópia separados](docs/screenshots/art-direction/recovery-1440.png)
 
 Interface atual do relatório, gerada a partir das evidências salvas. Cada operação mantém sua própria data e identidade; abrir o HTML não executa os testes novamente. A [sequência comentada da prova local de 22/09/2026](docs/operational-recovery.md), com textos sintéticos, mostra job inicial, rollback após falha e restauração com novo trabalho, com os limites de cada medição e as capturas daquela execução.
 

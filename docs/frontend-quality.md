@@ -107,6 +107,8 @@ node scripts/test_report_browser.cjs
 
 Resultado: 47 testes Python passaram; Ruff e sintaxe JS passaram; seis casos do link de salto, seleção por teclado, histórico, impressão e leitura sem JS passaram. Para o navegador, `PLAYWRIGHT_MODULE` apontou para a instalação local de desenvolvimento e `PLAYWRIGHT_CHANNEL=msedge`. Playwright não faz parte do HTML. O gerador `report.generate` produziu ambas as versões com instante fixo compartilhado; não existe etapa de bundle ou typecheck TypeScript neste frontend.
 
+Antes de integrar, também passaram 56 testes unitários de contratos de operações, prova e medição (`test_operations_proof`, `test_operations`, `test_proof`, `test_contracts`, `test_measure_admission`) e `ruff check scripts tests`. Esses testes usam fixtures temporárias e não representam outra execução de backup/restauração em Docker. [Comandos e fontes conferidas](evidence/interface-v3/checks.json).
+
 As fixtures de apresentação ficam em `artifacts/interface-review`, identificadas como dados de teste. Incluem vazio, backup sem restore, release inválida/falha, job na fila/processando/concluído/falho/desconhecido/incompleto, zero, número extenso, identificador longo e restore com falha. Contagem negativa de palavras não é um caso válido do domínio; nenhum número foi transformado em negativo para produzir uma imagem.
 
 Não foi repetida a prova de infraestrutura Docker/backup/release/TLS/scan nesta revisão do HTML. As evidências operacionais anteriores permanecem em seus diretórios e têm escopo próprio. CI/publicação desta rodada devem ser consultados pelo commit; não se presume sucesso futuro.

@@ -1,0 +1,40 @@
+{
+  "copy": {
+    "recorded_at": "2026-09-22T12:37:51.842754+00:00",
+    "original": "<runtime>\\backups\\proof-copy-a04547c1148c4fb8830ec109cccb23b2",
+    "copy": "<runtime>\\backups\\proof-copy-46af316f4413457a9f6154c8092a73a9",
+    "sha256": {
+      "metadata.json": "5c5cc70d0fec33aabe7505f24c69b3c4ed846a632feadc3cc132faeae87647b2",
+      "containerops.dump": "f158902153b63919d16ef0f8069814a38c440ba988595e280f956936a7b3bb61"
+    },
+    "protection": {
+      "method": "Windows DACL",
+      "verified_files": 2,
+      "inheritance_disabled": true,
+      "principals": "current user and SYSTEM"
+    },
+    "same_host": true,
+    "limit": "Independent files, not an independent host/disaster recovery or encrypted backup"
+  },
+  "rejection": {
+    "recorded_at": "2026-09-22T12:37:51.850273+00:00",
+    "started_at": "2026-09-22T12:37:51.843753+00:00",
+    "status": "failed",
+    "phases": [
+      {
+        "name": "checksum",
+        "started_at": "2026-09-22T12:37:51.844754+00:00",
+        "status": "failed",
+        "error_category": "RuntimeError",
+        "completed_at": "2026-09-22T12:37:51.850273+00:00",
+        "elapsed_seconds": 0.015
+      }
+    ],
+    "error_category": "RuntimeError",
+    "cleanup_succeeded": true,
+    "observations": {},
+    "completed_at": "2026-09-22T12:37:51.850273+00:00",
+    "total_seconds": 0.015
+  },
+  "rejected_before_target_created": true
+}

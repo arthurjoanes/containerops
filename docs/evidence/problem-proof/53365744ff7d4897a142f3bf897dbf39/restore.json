@@ -1,0 +1,153 @@
+{
+  "recorded_at": "2026-09-22T12:38:21.526947+00:00",
+  "started_at": "2026-09-22T12:37:51.866848+00:00",
+  "status": "passed",
+  "phases": [
+    {
+      "name": "checksum",
+      "started_at": "2026-09-22T12:37:51.867357+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:37:51.867357+00:00",
+      "elapsed_seconds": 0.0
+    },
+    {
+      "name": "database-ready",
+      "started_at": "2026-09-22T12:37:52.002693+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:37:57.997498+00:00",
+      "elapsed_seconds": 6.0
+    },
+    {
+      "name": "stage-dump",
+      "started_at": "2026-09-22T12:37:58.419494+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:37:58.489264+00:00",
+      "elapsed_seconds": 0.078
+    },
+    {
+      "name": "pg-restore",
+      "started_at": "2026-09-22T12:37:58.489264+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:37:58.870349+00:00",
+      "elapsed_seconds": 0.375
+    },
+    {
+      "name": "grants-and-schema",
+      "started_at": "2026-09-22T12:37:58.918706+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:01.470567+00:00",
+      "elapsed_seconds": 2.547
+    },
+    {
+      "name": "snapshot",
+      "started_at": "2026-09-22T12:38:01.470567+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:03.917170+00:00",
+      "elapsed_seconds": 2.453
+    },
+    {
+      "name": "application-ready",
+      "started_at": "2026-09-22T12:38:06.290019+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:19.127500+00:00",
+      "elapsed_seconds": 12.828
+    },
+    {
+      "name": "new-job",
+      "started_at": "2026-09-22T12:38:19.146135+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:19.584483+00:00",
+      "elapsed_seconds": 0.438
+    },
+    {
+      "name": "cleanup",
+      "started_at": "2026-09-22T12:38:19.584483+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:21.403767+00:00",
+      "elapsed_seconds": 1.812
+    },
+    {
+      "name": "cleanup-check",
+      "started_at": "2026-09-22T12:38:21.403767+00:00",
+      "status": "passed",
+      "completed_at": "2026-09-22T12:38:21.526947+00:00",
+      "elapsed_seconds": 0.125
+    }
+  ],
+  "backup": "<runtime>\\backups\\proof-copy-a04547c1148c4fb8830ec109cccb23b2",
+  "backup_sha256": "f158902153b63919d16ef0f8069814a38c440ba988595e280f956936a7b3bb61",
+  "backup_created_at": "2026-09-22T12:37:48.102830+00:00",
+  "cutoff_interval": {
+    "started_at": "2026-09-22T12:37:42.201817+00:00",
+    "completed_at": "2026-09-22T12:37:47.174994+00:00",
+    "method": "admission paused; queued/running drained; snapshot observed in interval"
+  },
+  "project": "pf-containerops-restore-1b113dd3",
+  "restored_snapshot": {
+    "admission_paused": true,
+    "counts": {
+      "failed": 0,
+      "queued": 0,
+      "running": 0,
+      "succeeded": 3
+    },
+    "jobs": [
+      {
+        "attempts": 1,
+        "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+        "error_category": null,
+        "id": "38a84749-68dd-4cfd-b440-cd5d76d6473f",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 3
+      },
+      {
+        "attempts": 1,
+        "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+        "error_category": null,
+        "id": "c52d5df2-6f60-405b-aa24-7b969e030675",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      },
+      {
+        "attempts": 1,
+        "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
+        "error_category": null,
+        "id": "e04a4059-b4e9-4428-a4af-ead966cceefb",
+        "owner": "alice",
+        "state": "succeeded",
+        "word_count": 4
+      }
+    ],
+    "schema_version": 2
+  },
+  "checksum_verified": true,
+  "snapshot_equal": true,
+  "restored_jobs": 3,
+  "new_job": {
+    "id": "447551b5-f525-4085-89a2-413052088f49",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 4,
+      "checksum": "7972303594c2a1d7d60fba74305a54cd217e7e40f23fc57f6a5f4ff851318d4c"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "validated_at": "2026-09-22T12:38:19.584483+00:00",
+  "recovery_seconds": 27.594,
+  "timing_definition": {
+    "recovery": "recovery_seconds: after preflight/setup through validated new job; excludes cleanup (legacy scope)",
+    "total": "total_seconds: entry through cleanup and resource absence check"
+  },
+  "backup_age_seconds": 31.481653,
+  "cutoff_age": {
+    "minimum_seconds": 32.409489,
+    "maximum_seconds": 37.382666
+  },
+  "cleanup_succeeded": true,
+  "completed_at": "2026-09-22T12:38:21.526947+00:00",
+  "total_seconds": 29.656
+}

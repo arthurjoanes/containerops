@@ -1,26 +1,41 @@
 # ContainerOps
 
-A captura atual usa os registros operacionais versionados de 22/09/2026: restauração de 3 jobs em 27,4 s. O layout foi refeito sem executar outra restauração. Job compacto, compatibilidade de artefatos e origem da cópia têm hierarquia própria; [comparação e limites da revisão](docs/frontend-quality.md#direção-visual-atual--revisão-de-22092026).
+Desenvolvi este laboratório para conferir o que permanece correto quando um processo morre, uma imagem nova falha ou os dados precisam ser restaurados. Ele é útil para quem desenvolve ou opera uma aplicação pequena com trabalhos em segundo plano.
 
-Verifique recuperação de processos, restauração de dados e troca de imagens em uma aplicação com API, worker e PostgreSQL. Cada operação registra o resultado e os arquivos que permitem conferir o que aconteceu.
+A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo simples deixa a pergunta principal verificável: **o trabalho aceito continua identificável e o resultado está correto depois da recuperação?** Os textos e as falhas são sintéticos; os processos, HTTP e banco são reais, no mesmo computador.
 
-![Interface atual: três jobs restaurados, verificações e registro da cópia separados](docs/screenshots/art-direction/recovery-1440.png)
+![Restauração real de três jobs, cópia conferida e novo trabalho validado no destino.](docs/screenshots/editorial-20260922/restore.png)
 
-Interface atual do relatório, gerada a partir das evidências salvas. Cada operação mantém sua própria data e identidade; abrir o HTML não executa os testes novamente. A [sequência comentada da prova local de 22/09/2026](docs/operational-recovery.md), com textos sintéticos, mostra job inicial, rollback após falha e restauração com novo trabalho, com os limites de cada medição e as capturas daquela execução.
+Em 22/09/2026, restaurei três jobs em outro volume e exigi um novo trabalho concluído. O relatório separa a cópia da restauração; o dump sozinho não comprovaria esse resultado. [Imagem em tamanho completo](docs/screenshots/editorial-20260922/restore.png) · [caso, comandos e limites](docs/demo.md#execução-editorial-de-22092026). A imagem é um snapshot dessa operação, sem controles ao vivo.
 
-Uma API recebe texto; o worker calcula palavras e SHA-256; o banco preserva trabalhos e resultados. Esse fluxo simples permite observar o efeito de uma falha, de uma restauração e do retorno à imagem anterior.
+**Exemplo curto:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e um resultado de **sete palavras**. Trocar o conteúdo mantendo a chave retornou 409. Em outro caso, matei o worker depois de assumir um job: o mesmo ID passou da tentativa 1 para a 2 e terminou com as cinco palavras esperadas. [Entrada, mecanismo e provas](docs/problem-solution.md).
 
-**Exemplo:** Alice envia `Olá, mundo!` com uma chave de idempotência. A primeira chamada cria um job; repetir a mesma chave e conteúdo devolve seu mesmo ID. O worker produz duas palavras e o checksum dos bytes originais. Se ele morrer após assumir o trabalho, outra tentativa pode recuperar esse ID; um token impede que o processo antigo sobrescreva o resultado. [Entrada, resultado e limites](docs/problem-solution.md#exemplo-repetição-da-chamada-e-morte-do-worker).
+## O que eu implementei
 
-O PostgreSQL reúne fila, resultado e transações para manter o laboratório pequeno. Na recuperação, o projeto restaura o dump em outro volume, compara os dados e exige um novo job concluído. Na troca de versão, o rollback muda a imagem e conserva o schema compatível e os dados recentes. [Por que essas decisões e onde estão no código](docs/decisoes-tecnicas.md#problemas-que-orientaram-a-implementação).
+- Separei replay de conflito na admissão: mesma chave e conteúdo recuperam o job; conteúdo diferente não sobrescreve o pedido. A transação aplica também quotas global e por proprietário.
+- Implementei posse temporária (*lease*) e token por aquisição. Um trabalho pode ser calculado novamente após a morte do worker, mas uma posse antiga não pode publicar por cima da atual.
+- Organizei backup, cópia protegida, restore em volume novo, comparação de dados e processamento posterior. A proteção demonstrada continua limitada ao mesmo host.
+- Separei troca de imagem de restauração de dados. A migração expansiva mantém a versão anterior compatível, preservando o job criado pela candidata antes de falhar.
+- Construí os comandos de operação, verificações de falhas e o relatório offline com identidade por operação. Configurei FastAPI, PostgreSQL, Nginx, Docker/BuildKit e Trivy; essas ferramentas são de terceiros, integradas ao laboratório.
+
+## Decisões que podem ser conferidas
+
+| Situação executada | Resultado e compromisso |
+|---|---|
+| Seis requisições repetem a mesma chave | Um UUID, sete palavras, checksum conferido; a chave pertence ao proprietário |
+| Worker recebe SIGKILL após assumir o job | Mesmo UUID concluído na tentativa 2; o cálculo pode repetir, não há promessa de execução única |
+| Candidata 2 cria dados e falha no smoke | API/worker voltam à imagem 1, schema fica em 2 e o job da candidata permanece |
+| Cópia restaurada em volume novo | Três jobs comparados e novo job com quatro palavras; não equivale a recuperação fora do computador |
+
+Escolhi PostgreSQL para reunir fila, estado e transações deste laboratório. Isso evita operar outro serviço de mensagens, mas faz a fila disputar recursos com a API. O token complementa a lease: o prazo diz quando recuperar; o token diz qual aquisição ainda pode finalizar. [Decisões, alternativas, código e testes](docs/decisoes-tecnicas.md).
 
 ## Conferir uma operação
 
-Abra [docs/report.html](docs/report.html) localmente; o GitHub exibe o HTML como código. O relatório é um snapshot de evidências, sem comandos de operação ao vivo.
+Abra o [relatório da nova operação](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; o GitHub exibe HTML como código. Ele contém somente job, cópia, restore e rollback dessa tentativa. O [relatório geral histórico](docs/report.html) permanece disponível com as próprias datas. Ambos são snapshots, sem comandos de operação ao vivo.
 
-1. Em **Verificação**, confira a execução, suas etapas e o job registrado.
-2. Em **Recuperação → Backup e restauração**, confira os jobs restaurados e as três verificações. Expanda **Resultado do novo job no volume restaurado** para consultar o trabalho. Backup e restauração mantêm suas próprias datas e projetos.
-3. Em **Release**, compare as imagens da troca e do retorno após falha controlada. Em **Artefatos**, confira a imagem à qual a auditoria e o scan se aplicam.
+1. Em **Job**, confira o trabalho de quatro palavras registrado no início da operação.
+2. Em **Backup e restauração**, confira os três jobs restaurados e as três verificações. Expanda **Resultado do novo job no volume restaurado** para consultar o trabalho posterior. Cópia e restauração mantêm suas próprias datas e projetos.
+3. Em **Rollback**, compare as imagens da troca e do retorno após falha controlada. O relatório geral histórico inclui também **Verificação** e **Artefatos**; seus testes e scans pertencem às imagens e datas indicadas nele.
 
 Os links abrem os JSONs de origem. Uma versão de job não identifica, por si só, a imagem de outra operação. [Como ler o relatório](docs/report-guide.md) · [cenários e resultados esperados](docs/problem-solution.md) · [roteiro da demonstração](docs/demo.md).
 
@@ -34,7 +49,7 @@ python scripts/ops.py prove
 
 Executa build, scan, restauração, TLS e troca de versão em projetos Docker descartáveis. Cada tentativa fica em `docs/evidence/problem-proof/`, com resultados e hashes. Exige Docker, OpenSSL e uma base Trivy preparada pelo comando `scan`. Essa prova é mais abrangente que `demo`, que envia um job à aplicação principal.
 
-As [verificações publicadas](docs/verification.md) identificam a execução e as fontes testadas, incluindo a revisão posterior de isolamento de capacidade. Gerar outra versão do HTML não executa novamente essas provas.
+As [verificações publicadas](docs/verification.md) separam a prova histórica completa da nova rodada: builds locais, 58 testes de comandos, 47 do relatório, 116 da aplicação e falhas reais. A correção do registro que descobriu zero testes está explícita; suas contagens não são reaproveitadas. Gerar outra versão do HTML não executa novamente essas provas.
 
 Para repetir apenas job, rollback e restauração após preparar as duas imagens, use `python scripts/ops.py prove --scenario operations`. Esse cenário tem [evidência própria](docs/operational-recovery.md) e não executa novamente scans, TLS ou a suíte completa.
 

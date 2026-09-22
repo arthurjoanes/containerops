@@ -1,0 +1,252 @@
+{
+  "scanner": "aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969",
+  "db_metadata": {
+    "Version": 2,
+    "NextUpdate": "2026-09-23T07:24:27.402428948Z",
+    "UpdatedAt": "2026-09-22T07:24:27.402429319Z",
+    "DownloadedAt": "2026-09-22T12:33:25.310956682Z"
+  },
+  "method": "Docker image IDs, OS and language vulnerabilities, all severities, empty ignorefile, unfixed findings included. No deployment/SBOM attestation audit.",
+  "command": "trivy image --image-src docker --skip-db-update --scanners vuln --ignorefile <empty> --format json <executed-image-id>",
+  "results": [
+    {
+      "name": "container-containerops-app-1.0.0",
+      "image_id": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069",
+      "started_at": "2026-09-22T12:50:28.304557+00:00",
+      "elapsed_seconds": 1.813,
+      "exit_code": 0,
+      "image_tags": [
+        "pf-containerops-editorial:app-v1-20260922"
+      ],
+      "vulnerabilities": 0,
+      "severity_counts": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "targets": [
+        {
+          "target": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069 (alpine 3.24.2)",
+          "class": "os-pkgs",
+          "type": "alpine"
+        },
+        {
+          "target": "Python",
+          "class": "lang-pkgs",
+          "type": "python-pkg"
+        }
+      ],
+      "report": "security/container-containerops-app-1.0.0.json",
+      "raw_report_sha256": "6d008e59cd435c38f5790c8364480ea8632ce9173369fc4ac59c57891062d4a7",
+      "published_report_sha256": "c85e5e709bf740c0efa7137c5fea8d450d89bce5284f2fb607852f3e9bbd2aa3"
+    },
+    {
+      "name": "container-containerops-app-2.0.0",
+      "image_id": "sha256:573678bd6510bd305aaea9f30ece765088213c0d88d2a84cdeb9a75fd98c4a3d",
+      "started_at": "2026-09-22T12:50:30.204725+00:00",
+      "elapsed_seconds": 1.719,
+      "exit_code": 0,
+      "image_tags": [
+        "pf-containerops-editorial:app-v2-20260922"
+      ],
+      "vulnerabilities": 0,
+      "severity_counts": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "targets": [
+        {
+          "target": "sha256:573678bd6510bd305aaea9f30ece765088213c0d88d2a84cdeb9a75fd98c4a3d (alpine 3.24.2)",
+          "class": "os-pkgs",
+          "type": "alpine"
+        },
+        {
+          "target": "Python",
+          "class": "lang-pkgs",
+          "type": "python-pkg"
+        }
+      ],
+      "report": "security/container-containerops-app-2.0.0.json",
+      "raw_report_sha256": "df0e3f7068eea02ff88a360c55be2185989dee3af3590e3efa858d5358f41190",
+      "published_report_sha256": "efd5f0cbfbafbf7d133110ac0d3ebcb3f1ad923aa514a8101c6c4c112de2b125"
+    },
+    {
+      "name": "container-containerops-test-local",
+      "image_id": "sha256:0db1f1c82d6910db98f46202a9149ff4e274c056742d41784faa6be4761c4994",
+      "started_at": "2026-09-22T12:50:31.999854+00:00",
+      "elapsed_seconds": 3.062,
+      "exit_code": 0,
+      "image_tags": [
+        "pf-containerops-editorial:test-20260922"
+      ],
+      "vulnerabilities": 3,
+      "severity_counts": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 1,
+        "HIGH": 2,
+        "CRITICAL": 0
+      },
+      "targets": [
+        {
+          "target": "sha256:0db1f1c82d6910db98f46202a9149ff4e274c056742d41784faa6be4761c4994 (alpine 3.24.2)",
+          "class": "os-pkgs",
+          "type": "alpine"
+        },
+        {
+          "target": "Python",
+          "class": "lang-pkgs",
+          "type": "python-pkg"
+        }
+      ],
+      "report": "security/container-containerops-test-local.json",
+      "raw_report_sha256": "c826a8322217fe17ff0974eec7e2a414c2db97ca185691da53032d3baa5d0eae",
+      "published_report_sha256": "39f8935a0b2b45f03c64a6514ae0ee53e359b83ed968f886e7c40c84acbc062b"
+    },
+    {
+      "name": "container-containerops-database-local",
+      "image_id": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7",
+      "started_at": "2026-09-22T12:50:35.154388+00:00",
+      "elapsed_seconds": 5.328,
+      "exit_code": 0,
+      "image_tags": [
+        "containerops-database:local",
+        "pf-containerops-editorial:database-20260922"
+      ],
+      "vulnerabilities": 0,
+      "severity_counts": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "targets": [
+        {
+          "target": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7 (alpine 3.24.2)",
+          "class": "os-pkgs",
+          "type": "alpine"
+        }
+      ],
+      "report": "security/container-containerops-database-local.json",
+      "raw_report_sha256": "a902e3df157204e853efb9f91aa281c50beddda5865129440619efd3a108a8d6",
+      "published_report_sha256": "7c0362c6a840cd4a0c4584baeec7b0e438cc390cc370a62fa6297ed9590571e3"
+    },
+    {
+      "name": "container-containerops-proxy-local",
+      "image_id": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe",
+      "started_at": "2026-09-22T12:50:40.577164+00:00",
+      "elapsed_seconds": 1.734,
+      "exit_code": 0,
+      "image_tags": [
+        "containerops-proxy:local",
+        "pf-containerops-editorial:proxy-20260922"
+      ],
+      "vulnerabilities": 0,
+      "severity_counts": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "targets": [
+        {
+          "target": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe (alpine 3.24.2)",
+          "class": "os-pkgs",
+          "type": "alpine"
+        }
+      ],
+      "report": "security/container-containerops-proxy-local.json",
+      "raw_report_sha256": "d32300bebd75383c424918391a3c8ad2caf60454e1cf66b41cd721024cc79068",
+      "published_report_sha256": "378450138f188322a679a33e9e6297cfd0f3ad4f2875512362f59eaa407f8565"
+    }
+  ],
+  "gate": "HIGH/CRITICAL assessed from full JSON; Trivy collection exit0 alone does not mean zero findings.",
+  "no_new_ignore_rules": true,
+  "limits": [
+    "Point-in-time vulnerability database, not proof of absence of all vulnerabilities.",
+    "No new SBOM/provenance attestation audit."
+  ],
+  "test_image_remediation": {
+    "started_at": "2026-09-22T12:54:39.506404+00:00",
+    "source_sha256": "ada706e704b78cf419fd3a0413c770316cf52d4457d7d5f6e431a5add694c30e",
+    "scope": "Only test target strips unused pip/ensurepip after locked dependency install; no application/runtime change.",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "seconds": 5.954
+      },
+      {
+        "name": "database",
+        "exit_code": 0,
+        "seconds": 6.25
+      },
+      {
+        "name": "no-installer",
+        "exit_code": 0,
+        "seconds": 0.89
+      },
+      {
+        "name": "lint",
+        "exit_code": 0,
+        "seconds": 0.875
+      },
+      {
+        "name": "format",
+        "exit_code": 0,
+        "seconds": 0.75
+      },
+      {
+        "name": "types",
+        "exit_code": 0,
+        "seconds": 11.079
+      },
+      {
+        "name": "tests",
+        "exit_code": 0,
+        "seconds": 13.921
+      },
+      {
+        "name": "cleanup",
+        "exit_code": 0,
+        "seconds": 0.657
+      }
+    ],
+    "image_id": "sha256:33b9d615fb781a860549adeb0f6a0aa63263244e1022ea805efed30a7626d87b",
+    "project": "pf-containerops-test-2cd4b979",
+    "status": "passed",
+    "completed_at": "2026-09-22T12:55:22.107566+00:00",
+    "tests": {
+      "passed": 116,
+      "warnings": 2,
+      "skipped": 0
+    },
+    "scan": {
+      "image_id": "sha256:33b9d615fb781a860549adeb0f6a0aa63263244e1022ea805efed30a7626d87b",
+      "started_at": "2026-09-22T12:55:52.415072+00:00",
+      "elapsed_seconds": 2.39,
+      "exit_code": 0,
+      "vulnerabilities": 0,
+      "results": []
+    },
+    "report": "security/container-test-fixed.json",
+    "before_report": "security/container-containerops-test-local.json",
+    "diagnosis": "Scanner read pip 26.2.1 vendor.txt containing msgpack1.1.2/setuptools70.3.0. These were not runtime/test lock dependencies; pip existed in system, virtualenv and ensurepip wheel. Removal after locked install removes these unused installers from test just as runtime already did. No exploitability test is claimed.",
+    "source": "docker/app.Dockerfile",
+    "references": [
+      "https://github.com/msgpack/msgpack-python/security/advisories/GHSA-6v7p-g79w-8964",
+      "https://github.com/pypa/setuptools/security/advisories/GHSA-5rjg-fvgr-3xxf"
+    ],
+    "raw_report_sha256": "6be68cb17d57fdb4168c3d26391f531497ff3cd084c146c49e903013e290e922",
+    "published_report_sha256": "27beae61c2de1248e635f22c9515d2431c1cc37492be6a28b680ecacd04e7bb7"
+  },
+  "current_gate": "passed: app1/app2/database/proxy zero findings; rebuilt test zero findings. Original executed test image had2HIGH+1MEDIUM and is retained as before evidence.",
+  "publication": "Curated full Results; only redundant image configuration/environment/history omitted. SHA-256 of each complete raw scan retained for external audit."
+}

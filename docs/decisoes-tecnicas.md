@@ -1,5 +1,7 @@
 # Decisões técnicas
 
+As escolhas abaixo explicam o que implementei e os compromissos atuais. Elas não descrevem incidentes de clientes nem uma comparação histórica de alternativas que não foi registrada. Os [casos novos](problem-solution.md) têm entradas sintéticas pequenas, execução real e prova separada das capturas.
+
 ## Problemas que orientaram a implementação
 
 | Problema | Decisão e motivo | Custo ou limite; como conferir |
@@ -52,7 +54,7 @@ PostgreSQL guarda fila, resultados e estado operacional. O proxy usa a rede fron
 
 ## Decisões
 
-**Fila no PostgreSQL.** Transações, leases e resultados ficam no mesmo banco. Dispensa um broker, mas fila e API disputam recursos.
+**Fila no PostgreSQL.** Escolhi manter transações, leases e resultados no mesmo banco. Isso dispensa um broker, mas fila e API disputam recursos. Um serviço de mensagens separado seria uma alternativa para outro volume ou topologia; não foi comparado em benchmark nesta rodada.
 
 **Quota por proprietário e despacho compartilhado.** O limite global sozinho
 permitia a um token preencher todos os 100 lugares com jobs de demo de 15 segundos.
@@ -75,6 +77,11 @@ A [medição posterior de admissão e espera](admission-measurement.md) estabele
 
 **Migração separada.** App faz DML; migrator faz DDL; backup tem SELECT. A API controla o acesso por owner, sem RLS no banco.
 
-**Pausa durante o backup.** Pausar a admissão e drenar a fila mantém snapshot e dump no mesmo estado. A pausa dura até terminar a cópia.
+**Pausa durante o backup.** Pausei novas admissões e drenei a fila para que snapshot e dump descrevam o mesmo estado. A pausa dura até terminar a cópia. Uma estratégia sem essa pausa exigiria outra forma de comparar um banco que continua mudando; este laboratório prioriza uma prova local pequena e verificável.
 
 **TLS no proxy.** O cliente recebe a CA local explicitamente. A rede interna não usa TLS.
+
+
+### Instaladores ficam na preparação
+
+O scan da rodada editorial encontrou dependências vendorizadas vulneráveis dentro do pip da imagem de testes. Como pytest, Ruff e mypy já estavam instalados pelo lock, retirei pip e ensurepip do target executável depois da instalação, seguindo a separação já aplicada ao runtime em [app.Dockerfile](../docker/app.Dockerfile). Mantive as versões das bibliotecas da aplicação. O compromisso é que uma dependência nova exige rebuild; não se instala pacote dentro desse contêiner de teste. A [verificação posterior](verification.md#scan-posterior-e-correção-restrita-à-imagem-de-testes) repete os 116 testes com banco, lint/tipos e scan; o registro inicial com achados não foi apagado.

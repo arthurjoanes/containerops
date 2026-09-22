@@ -1,0 +1,126 @@
+{
+  "before": {
+    "snapshot": {
+      "admission_paused": false,
+      "counts": {
+        "failed": 0,
+        "queued": 0,
+        "running": 0,
+        "succeeded": 3
+      },
+      "jobs": [
+        {
+          "attempts": 1,
+          "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "error_category": null,
+          "id": "38a84749-68dd-4cfd-b440-cd5d76d6473f",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 3
+        },
+        {
+          "attempts": 1,
+          "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "error_category": null,
+          "id": "c52d5df2-6f60-405b-aa24-7b969e030675",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 4
+        },
+        {
+          "attempts": 1,
+          "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
+          "error_category": null,
+          "id": "e04a4059-b4e9-4428-a4af-ead966cceefb",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 4
+        }
+      ],
+      "schema_version": 2
+    },
+    "services": {
+      "db": {
+        "id": "ff85ef6341a6ae0e00c5cd068628f89efaf8b760264ded2a35830983dc1b37bc",
+        "image": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7"
+      },
+      "api": {
+        "id": "ee18f2224db125dc77d5b8d94a402a2eb71ed5e16835bd1c94d614041d139a81",
+        "image": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069"
+      },
+      "worker": {
+        "id": "865f0a2dc2c9947368abd5b3f0c4c24d9017ed8a1d5826425c7b14774312c575",
+        "image": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069"
+      },
+      "proxy": {
+        "id": "fd233ce3176320b1e79e0095a86bda5cbc51bb94cb6aa67bd6b8b4fac440992b",
+        "image": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe"
+      }
+    }
+  },
+  "after": {
+    "snapshot": {
+      "admission_paused": false,
+      "counts": {
+        "failed": 0,
+        "queued": 0,
+        "running": 0,
+        "succeeded": 3
+      },
+      "jobs": [
+        {
+          "attempts": 1,
+          "checksum": "81629c25399a04eba2fc3137bd4b794d7b401a2ee7265d19908392bd8c0c3556",
+          "error_category": null,
+          "id": "38a84749-68dd-4cfd-b440-cd5d76d6473f",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 3
+        },
+        {
+          "attempts": 1,
+          "checksum": "282c8eb02af81f89071d6f5021a0813c5b1d21b67d73ce072e11add48ddd8895",
+          "error_category": null,
+          "id": "c52d5df2-6f60-405b-aa24-7b969e030675",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 4
+        },
+        {
+          "attempts": 1,
+          "checksum": "10cc7de64a7b26ea6526264f80b2ab12beeb169aed6784d3da29cb7953c6bb60",
+          "error_category": null,
+          "id": "e04a4059-b4e9-4428-a4af-ead966cceefb",
+          "owner": "alice",
+          "state": "succeeded",
+          "word_count": 4
+        }
+      ],
+      "schema_version": 2
+    },
+    "services": {
+      "db": {
+        "id": "ff85ef6341a6ae0e00c5cd068628f89efaf8b760264ded2a35830983dc1b37bc",
+        "image": "sha256:fdeae116b5c51b09e53dc95be1eff62701fa8fbadc3e4ad71c510228c717faa7"
+      },
+      "api": {
+        "id": "ee18f2224db125dc77d5b8d94a402a2eb71ed5e16835bd1c94d614041d139a81",
+        "image": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069"
+      },
+      "worker": {
+        "id": "865f0a2dc2c9947368abd5b3f0c4c24d9017ed8a1d5826425c7b14774312c575",
+        "image": "sha256:ddbce26029f62092e0b3b75060a47d1138113b66c4da05eb6a39c1955cb1c069"
+      },
+      "proxy": {
+        "id": "fd233ce3176320b1e79e0095a86bda5cbc51bb94cb6aa67bd6b8b4fac440992b",
+        "image": "sha256:b2dccb10d70d524e0c9fd73e06f2582ebfd6f02e622d94d3b4c57da4af3909fe"
+      }
+    }
+  },
+  "equal": true,
+  "original_backup_sha256_after": {
+    "metadata.json": "5c5cc70d0fec33aabe7505f24c69b3c4ed846a632feadc3cc132faeae87647b2",
+    "containerops.dump": "f158902153b63919d16ef0f8069814a38c440ba988595e280f956936a7b3bb61"
+  },
+  "original_backup_unchanged": true
+}

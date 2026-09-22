@@ -63,3 +63,39 @@ Credenciais e dumps ficam no runtime reservado; não os exiba na apresentação.
 Para operar a demo principal, use `start`, `demo`, `backup`, `release` e `rollback`
 conforme os [runbooks](runbooks.md). `stop` preserva seus volumes. Para demonstrar
 falhas, use `prove`; não é necessário parar ou fazer rollback da demo principal.
+
+## Execução editorial de 22/09/2026
+
+Executei primeiro a verificação da aplicação (`a1560b0d…`, 12:31:52–12:36:05 UTC) e depois a sequência de operações (`53365744…`, 12:36:06–12:38:26 UTC). A base foi `46d43bf`, sem alterações nas fontes da aplicação, do relatório ou dos comandos. As edições de documentação vieram depois. O [recibo](evidence/editorial-20260922/execution.json) registra hashes das fontes, locks, digests e limites; o [manifesto operacional original](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/manifest.json) foi copiado byte a byte, com LF.
+
+A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a partir dos Dockerfiles/locks atuais, usando cache e tags próprias. Não foi um build frio. Para chamar os helpers existentes, redirecionei apenas a pasta de evidências e apontei temporariamente seus aliases fixos às imagens novas. Os IDs anteriores foram registrados, conferidos antes de cada troca e restaurados no final. Não removi imagens históricas nem volumes compartilhados. O wrapper e logs integrais permanecem no registro externo da revisão; os JSONs públicos não incluem credenciais ou dumps.
+
+Esse build local usou `--provenance=false`: **não produziu uma nova prova de SBOM/attestations**. O Trivy posterior está registrado separadamente em [segurança](evidence/editorial-20260922/security.json). Os scans históricos e o CI de outra imagem não passam a aprovar estas imagens. A prova demonstra instalação e comportamento local do código atual; a cadeia de suprimentos completa continua sendo o cenário padrão `prove`.
+
+| Caso e esperado independente | Observado | Evidência |
+|---|---|---|
+| Seis POSTs, mesma chave e texto de sete palavras | Um UUID; sete palavras; conteúdo divergente 409; outro proprietário 404 | [journey.json](evidence/editorial-20260922/journey.json) |
+| `Recuperar depois de término abrupto`: cinco palavras | Mesmo UUID, running/tentativa 1 antes do SIGKILL, succeeded/tentativa 2 depois | [Antes/depois](evidence/editorial-20260922/recovery.json) |
+| Candidata 2 falha após gravar seu job | Imagem 1 retomada, schema 2 e três jobs preservados | [Rollback](screenshots/editorial-20260922/rollback.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json) |
+| Dump restaurado em volume novo | Três jobs iguais, novo job com quatro palavras, cleanup concluído | [Restauração](screenshots/editorial-20260922/restore.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json) |
+| Cópia separada adulterada | Checksum recusado antes de criar destino | [Controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json) |
+
+A conta de palavras foi definida antes: `Olá / mundo / Café / e / ação / 東京 / 42` são sete; `Backup / restaurado / com / sucesso` são quatro. O runner compara também SHA-256 dos bytes originais. Não há ganho financeiro, capacidade de produção ou prazo de recuperação inferido desses números.
+
+A verificação executou **58 testes de comandos**, **47 do relatório** e **116 da aplicação**, além da jornada HTTP, hardening, SIGKILL/SIGTERM e recuperação do banco. Lint, formato e tipos passaram. Os dois avisos de depreciação da aplicação foram preservados; não houve skip nessa suíte. O teste de posse antiga usa PostgreSQL real, mas não simula um efeito externo. Contagens de testes, jobs e requisições não são somadas.
+
+O cenário de operações levou 140,703 s, incluindo limpeza. O restore registra 27,594 s internos e 29,656 s na chamada completa; são fronteiras distintas, não valores concorrentes de um SLA. A conferência da origem verificou dados, imagens, pausa e backup original inalterados. Os resultados não repetem a medição de quota nem o ensaio histórico de oito jobs.
+
+Para repetir pelos comandos públicos, use uma janela reservada e siga os requisitos do README:
+
+```sh
+python scripts/ops.py setup
+python scripts/ops.py build --version 1.0.0
+python scripts/ops.py build --version 2.0.0
+python scripts/ops.py verify
+python scripts/ops.py prove --scenario operations
+```
+
+Esses comandos geram novas identidades; `verify` e `prove` criam projetos descartáveis. Os aliases de evidência fora da pasta de cada tentativa representam a execução mais recente. Preserve a pasta imutável indicada no manifesto para apresentar uma rodada anterior. O wrapper desta revisão isolou também os aliases de arquivos e de imagens, para não substituir os da demonstração histórica.
+
+As três capturas vêm de um HTML gerado com os JSONs reais dessa rodada. Navegação e expansão foram feitas no navegador, sem trocar dados no DOM. A [fonte das imagens](evidence/editorial-20260922/captures.json) identifica relatórios, hashes e dimensões. O [relatório da operação](evidence/editorial-20260922/operations-view/docs/report.html) abre offline. A captura do [job inicial](screenshots/editorial-20260922/initial-job.png) mostra quatro palavras da operação; a jornada concorrente de sete palavras está registrada em seu JSON, com outra identidade. Abrir ou capturar esses HTMLs não executa novamente os serviços.

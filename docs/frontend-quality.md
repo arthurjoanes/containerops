@@ -27,7 +27,9 @@ A fonte original é incorporada ao HTML para manter abertura offline e arquivo a
 
 ### Proveniência e semântica dos dados
 
-As capturas da README e os pares [antes](screenshots/art-direction/baseline-recovery-1440.png)/[depois](screenshots/art-direction/candidate-recovery-1440.png) usam **JSONs operacionais sintéticos já versionados**, não as fixtures de apresentação. O `restore.json` registra **3 jobs / 27,4 s**, conclusão em **22/09/2026 06:20:00 UTC**; o `backup.json` tem data própria **06:19:27 UTC**. A imagem histórica enviada com **8 jobs / 45,3 s** pertence a outra execução e não foi substituída como prova. Nenhuma operação foi refeita nesta rodada.
+A captura usada na README **durante esta rodada visual** e os pares [antes](screenshots/art-direction/baseline-recovery-1440.png)/[depois](screenshots/art-direction/candidate-recovery-1440.png) usam **JSONs operacionais sintéticos já versionados**, não as fixtures de apresentação. O `restore.json` registra **3 jobs / 27,4 s**, conclusão em **22/09/2026 06:20:00 UTC**; o `backup.json` tem data própria **06:19:27 UTC**. A imagem histórica enviada com **8 jobs / 45,3 s** pertence a outra execução e não foi substituída como prova. Nenhuma operação foi refeita nesta rodada.
+
+A README atual passou a usar a [captura editorial de restauração](screenshots/editorial-20260922/restore.png), de uma execução posterior: **3 jobs / 27,594 s internos**, registrada às **12:38:21 UTC** de 22/09/2026; o relatório arredonda a duração para 27,6 s. O [JSON da operação](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), o [recibo de execução](evidence/editorial-20260922/execution.json) e os [hashes da captura](evidence/editorial-20260922/captures.json) identificam essa prova. Ela não substitui os pares de comparação visual nem recebe o horário de 06:20 ou a duração de 27,4 s do registro anterior. A rodada editorial capturou somente três vistas; não repete a auditoria completa das oito operações.
 
 [Inputs e hashes](evidence/art-direction/inputs.json) separam os 37 JSONs lidos diretamente dos arquivos históricos recursivos. A leitura antes/depois compartilha os mesmos arquivos e o mesmo instante de geração; datas das operações permanecem originais. `scripts/render_art_direction.py` carrega o renderer da base Git e gera os dois HTMLs. O horário de geração é atual e compartilhado, não uma nova execução de restore.
 
@@ -42,31 +44,49 @@ As capturas da README e os pares [antes](screenshots/art-direction/baseline-reco
 
 Não há gráfico: as evidências são operações independentes e valores exatos, sem série comparável. Não há animação de atividade, promessa de dado ao vivo, nova fórmula ou controle de execução.
 
-### Matriz da revisão atual
+### Matriz da revisão atual — antes → depois
 
-Legenda: C = conforme no escopo dos checks; PC = parcial; NA = não aplicável. Sem média ou certificação.
+Legenda: **C** = Conforme no escopo descrito; **PC** = Parcialmente conforme; **NC** = Não conforme; **NV** = Não verificado; **NA** = Não aplicável, com motivo. Sem média ou certificação. Cada célula compara a base **`243b1a44769b324faf28f1795f510a49cda5fbdf` → candidato desta rodada**, com os mesmos JSONs e instante de geração. A matriz histórica abaixo usa outro baseline e não é tomada como o “antes” desta tabela.
 
-| Dimensão | Verificação | Job | TLS | Restore/cópia | Troca/retorno | Artefatos | Arquivos |
-|---|---|---|---|---|---|---|---|
-| Objetivo e público | C | C | C | C | C | C | C |
-| Hierarquia | C | C | C | C | C | C | C |
-| Layout e densidade | C | C | C | C | C | C | C |
-| Tipografia e cor | C | C | C | C | C | C | C |
-| Indicadores/tabelas | C | C | NA | C | C | C | C |
-| Navegação e ações | C | C | C | C | C | C | C |
-| Estados e atualização | C | C | C | C | C | C | C |
-| Acessibilidade/reflow | PC | PC | PC | PC | PC | PC | PC |
-| Desempenho | PC | PC | PC | PC | PC | PC | PC |
-| Manutenção | C | C | C | C | C | C | C |
-| Dados/regras/permissões | C | C | C | C | C | C | C |
+A classificação anterior de hierarquia/tipo/layout vem dos pares e do diagnóstico desta rodada. Dados e navegação são comparados no [audit.json](evidence/art-direction/audit.json). Não há auditoria completa de acessibilidade ou medição de desempenho vinculada ao baseline `243b1a4`: esses campos anteriores ficam NV. As [provas atuais](evidence/art-direction/visual-review.json) sustentam somente o alcance indicado após a seta.
+
+| Dimensão | Verificação | Job | TLS | Restore/cópia | Troca | Retorno | Artefatos | Arquivos |
+|---|---|---|---|---|---|---|---|---|
+| 1. Objetivo e público | C→C | C→C | C→C | C→C | C→C | C→C | C→C | C→C |
+| 2. Hierarquia | PC→C | PC→C | C→C | PC→C | C→C | C→C | PC→C | C→C |
+| 3. Layout e densidade | PC→C | PC→C | C→C | PC→C | C→C | C→C | PC→C | C→C |
+| 4. Tipografia e cor | PC→C | PC→C | PC→C | PC→C | PC→C | PC→C | PC→C | PC→C |
+| 5. Indicadores/tabelas | C→C | C→C | NA→NA | C→C | C→C | C→C | PC→C | C→C |
+| 6. Navegação e ações | C→C | C→C | C→C | C→C | C→C | C→C | C→C | C→C |
+| 7. Estados e atualização | C→C | C→C | C→C | C→C | C→C | C→C | C→C | C→C |
+| 8. Acessibilidade/reflow | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC |
+| 9. Desempenho | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC | NV→PC |
+| 10. Manutenção | C→C | C→C | C→C | C→C | C→C | C→C | C→C | C→C |
+| 11. Dados/regras/permissões | C→C | C→C | C→C | C→C | C→C | C→C | C→C | C→C |
+
+TLS não tem métrica quantitativa/tabela, portanto a dimensão 5 é NA; seus textos, datas e estado são avaliados nas outras dimensões. Gráficos, filtros remotos, formulários, permissão de tela e ações de deploy são NA em todas as vistas: não existem no relatório. Fonte/carregamento offline, hash, detalhes, foco e impressão são aplicáveis. Leitor de tela, zoom nativo, outros motores, hardware lento e paginação integral do PDF continuam NV; não estão escondidos nos “C” visuais. Não se declara conformidade WCAG completa.
+
+C→C não significa funcionalidade nova: a separação de operações, leitura sem comandos, navegação, contratos e estados já existia. A comparação preserva datas, códigos, valores e links de prova, inclusive nos detalhes recolhidos. Os 47 testes do renderer cobrem a seleção e os estados; a verificação editorial posterior das operações não amplia o alcance da auditoria de frontend. Em desempenho, PC cobre tamanho do HTML e ausência de chamadas externas, sem alegar melhora de velocidade.
+
+### Problemas desta rodada, prioridades e validação
+
+| Tela/componente | Evidência e impacto anterior | Prioridade | Correção | Validação existente |
+|---|---|---|---|---|
+| Navegação de todas as vistas | “Aprovado” repetido disputava atenção com exceções reais | P2 | Retirar a repetição positiva e manter falha, ausência, inválido e revisão | Oito destinos nos pares; `visibleApprovalsInNav` em `audit.json` e estados no registro do navegador |
+| Job | Contagem de palavras tinha escala visual de KPI em painel largo, sem representar saúde | P2 | Conclusão e valores inline, limite de leitura e detalhes completos | Pares de Job, valores/códigos preservados e fixtures de fila/falha/incompleto |
+| Restore/cópia | Operação, limite e origem competiam com pouca distinção de superfícies | P2 | Resultado e checklist contínuo na operação; cópia em superfície independente | Desktop/celular, checks de dados/prova e cenários de restore falho/cópia isolada |
+| Artefatos | Ausência repetida em blocos afastava a conclusão de compatibilidade | P1 | Conclusão única; critérios, registros e identidades por aprofundamento | Pares de Artefatos; cenários de ausência/incompatibilidade; 47 testes do gerador |
+| Fonte e estados de todas as vistas | Fonte do sistema e pouca diferenciação tipográfica reduziam consistência entre ambientes | P2 | Source Sans local, papéis tipográficos e estados acompanhados de texto | Fonte efetiva via CDP, contraste textual computado, abertura offline e movimento reduzido |
+
+Próximo trabalho seguro para o escopo parcial: **P2**, leitor de tela/zoom nativo/outro motor; **P3**, hardware lento e PDF página a página. Uma sessão com operadores pode avaliar utilidade, mas não foi realizada nem é substituída por screenshots. Os registros históricos de limitações permanecem abaixo.
 
 ### Checks e limites
 
 - [Navegador](evidence/art-direction/visual-review.json): 40 vistas + 39 cenários; oito operações em 1440/1024/768/390/320, sem erro JS/overflow. Inclui vazio, job em fila/execução/falha/incompleto, zero/número longo, restore com falha, backup isolado e release inválida.
 - [Auditoria](evidence/art-direction/audit.json): 32 pares de viewport/operação com os mesmos horários, links de prova e códigos; contraste textual computado, fonte realmente carregada, reload e navegação offline, nenhuma requisição externa. São comparados também os detalhes fechados via DOM, não só o texto visível.
 - Teclado, retorno/histórico, seis casos do link de salto, impressão e HTML sem JS passaram em `scripts/test_report_browser.cjs`. Zoom CSS 200% e movimento reduzido foram exercitados. Leitor de tela, zoom nativo e dispositivos lentos continuam não verificados; nenhum estudo com operadores foi realizado.
-- [Checks locais](evidence/art-direction/checks.json): 47 testes do gerador e suites de contratos/ops/prova, Ruff de scripts/testes, formato dos Python alterados e sintaxe JS. A expectativa antiga de ponto colorido/Aprovado na navegação foi substituída por estado semântico e texto de exceção, mantendo todos os casos de job.
-- Build do frontend = geração do HTML autocontido e fixtures, sem bundler nem TypeScript. API/worker/imagens não mudaram; não se repetiram stack, backup, restore, scan de imagens ou CI de infraestrutura nesta rodada. Os resultados históricos conservam seu escopo.
+- [Checks locais preservados](evidence/art-direction/checks.json): 47 testes do gerador, Ruff de scripts/testes, formato dos Python alterados e sintaxe JS. **Retificação de 22/09:** os cinco comandos de contratos/ops/prova usaram `-s scripts` e descobriram zero testes; exit 0 não comprovava execução dessas suítes. A [nova verificação](evidence/editorial-20260922/execution.json) usa `-s tests` e registra 58 testes efetivamente descobertos e aprovados. O resultado anterior de 56 testes na revisão v3 usa outro comando e conserva a própria identidade histórica. A expectativa antiga de ponto colorido/Aprovado na navegação foi substituída por estado semântico e texto de exceção, mantendo todos os casos de job.
+- Build do frontend = geração do HTML autocontido e fixtures, sem bundler nem TypeScript. Naquela rodada visual, API/worker/imagens não mudaram; não se repetiram stack, backup, restore, scan de imagens ou CI de infraestrutura. Os resultados históricos conservam seu escopo.
 
 ### Referências e escolhas
 
@@ -80,7 +100,7 @@ Legenda: C = conforme no escopo dos checks; PC = parcial; NA = não aplicável. 
 
 Consulta visual em 22/09/2026. As capturas oficiais e o registro de navegação ficam no caderno externo de pesquisa `art-direction-api-container-20260922`; não integram os assets do produto. As adaptações são inferências de design verificadas no navegador, não resultados de estudo com usuários. Nenhum código ou asset desses produtos foi incorporado.
 
-As skills `frontend-design` e `web-design-guidelines` orientaram a revisão. React/Next.js continua não aplicável: o HTML é gerado em Python. A marca vetorial é original para este projeto; os glifos dos wordmarks derivam das fontes licenciadas abaixo. Os SVGs têm versões compacta, wordmark, clara e monocromática; o favicon usa o símbolo. O nome continua sendo texto real na interface. Sem garantia de exclusividade jurídica da marca.
+A revisão aplicou critérios de composição, semântica, foco e interação. React/Next.js continua não aplicável: o HTML é gerado em Python. A marca vetorial é original para este projeto; os glifos dos wordmarks derivam das fontes licenciadas abaixo. Os SVGs têm versões compacta, wordmark, clara e monocromática; o favicon usa o símbolo. O nome continua sendo texto real na interface. Sem garantia de exclusividade jurídica da marca.
 
 ## Registro anterior — preservado
 
@@ -121,7 +141,7 @@ Referências consultadas:
 - [Vercel — Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md): navegação nativa, foco, conteúdo extenso, redução de movimento e revisão dos controles. Fonte atual consultada em 22/09/2026.
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/): referência para contraste, teclado, foco, alvo e reorganização. Esta revisão não é uma certificação WCAG.
 
-As skills `frontend-design` e `web-design-guidelines` orientaram composição e revisão. `vercel-react-best-practices` é **Não aplicável**: este frontend é gerado em Python com HTML/CSS/JavaScript, sem React ou Next.js. Nenhuma dependência de produção foi adicionada.
+A composição e a revisão seguiram as referências acima. Orientações específicas de React/Next.js são **Não aplicáveis**: este frontend é gerado em Python com HTML/CSS/JavaScript. Nenhuma dependência de produção foi adicionada.
 
 ## Padrões e semântica
 

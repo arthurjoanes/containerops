@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-10-04T00:49:31.448090+00:00",
+  "nginx_config_valid": true,
+  "runtime_controls": "Compose non-root101, read-only, caps dropped, tmpfs, memory32m, CPU0.25, pids32",
+  "checks": [
+    {
+      "path": "/proxy-health",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/internal",
+      "status": 404,
+      "expected": 404
+    },
+    {
+      "path": "/internal/metrics",
+      "status": 404,
+      "expected": 404
+    }
+  ],
+  "installed_packages": {
+    "libexpat": "2.8.5-r0",
+    "libpng": "1.6.59-r0",
+    "nghttp2-libs": "1.70.0-r0",
+    "pcre2": "10.49-r0"
+  },
+  "application_journey_rerun": false,
+  "container_removed": true
+}

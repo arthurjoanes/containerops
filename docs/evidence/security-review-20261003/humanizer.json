@@ -85,13 +85,25 @@
   },
   "publication_preparation": {
     "file": "docs/SECURITY-REVIEW-2026-10-03.md",
-    "file_sha256": "9801f081aa4724a5e9826eecf8156eadb85ccb919b9d5065c485ee156170da2a",
+    "file_sha256": "eb7afee4403954418d76765f355ef889db81ff176e79604efb62910b2d826757",
     "workflow": [
       "leitura integral",
       "registro da redução dos metadados publicáveis e do escopo histórico da rodada inicial",
       "conferência de fatos, comandos e links anteriores",
       "releitura da versão final"
     ],
-    "scope": "Apenas a seção de preparação para publicação e o esclarecimento histórico sobre commit e push."
+    "scope": "Apenas a seção de preparação para publicação e o esclarecimento histórico sobre commit e push.",
+    "previous_file_sha256": "9801f081aa4724a5e9826eecf8156eadb85ccb919b9d5065c485ee156170da2a"
+  },
+  "proxy_ci_follow_up": {
+    "file": "docs/SECURITY-REVIEW-2026-10-03.md",
+    "file_sha256": "eb7afee4403954418d76765f355ef889db81ff176e79604efb62910b2d826757",
+    "workflow": [
+      "leitura integral do relatório e da falha remota",
+      "prosa baseada nos quatro achados e nas verificações dirigidas",
+      "conferência de hashes, pacotes, resultados, links e limites históricos",
+      "releitura da versão final"
+    ],
+    "scope": "Atualização do item 13, nova seção da correção do proxy e esclarecimento dos limites da rodada inicial."
   }
 }

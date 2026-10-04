@@ -1,0 +1,209 @@
+{
+  "recorded_at_utc": "2026-10-04T00:54:51.754158+00:00",
+  "status": "passed_local_follow_up",
+  "repository": "https://github.com/arthurjoanes/containerops",
+  "baseline_commit": "2e87335a33d6adbdc2470acbb6b94dac5459ad5a",
+  "failed_remote_ci": {
+    "run_id": 37165077121,
+    "run_url": "https://github.com/arthurjoanes/containerops/actions/runs/37165077121",
+    "job_id": 111326231385,
+    "failed_step": "Scan e relatório",
+    "reason": "The unchanged database/proxy policy found two HIGH vulnerabilities in the proxy image.",
+    "earlier_steps_passed": [
+      "build",
+      "tests",
+      "backup",
+      "restore",
+      "release",
+      "rollback"
+    ],
+    "artifact_id": 11289656054,
+    "artifact_name": "containerops-evidence",
+    "artifact_zip_sha256": "sha256:5de26ca42a8b40039780315800ff01e7e584c13131ed8495e08c4ba66cc6b4a1"
+  },
+  "change": {
+    "file": "docker/proxy/Dockerfile",
+    "file_sha256": "sha256:4d4fc59a5a2da244d1ecf3e3b38cc714adadef412b256569f393229f827a014b",
+    "base_image_unchanged": "nginx:1.30.5-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6",
+    "package_changes": [
+      {
+        "package": "libexpat",
+        "installed_before": "2.8.4-r0",
+        "installed_after": "2.8.5-r0",
+        "fixed_version_reported": "2.8.5-r0",
+        "vulnerability_id": "CVE-2026-93990",
+        "severity": "HIGH",
+        "primary_url": "https://avd.aquasec.com/nvd/cve-2026-93990"
+      },
+      {
+        "package": "libpng",
+        "installed_before": "1.6.58-r1",
+        "installed_after": "1.6.59-r0",
+        "fixed_version_reported": "1.6.59-r0",
+        "vulnerability_id": "CVE-2026-46675",
+        "severity": "UNKNOWN",
+        "primary_url": "https://avd.aquasec.com/nvd/cve-2026-46675"
+      },
+      {
+        "package": "nghttp2-libs",
+        "installed_before": "1.69.0-r0",
+        "installed_after": "1.70.0-r0",
+        "fixed_version_reported": "1.70.0-r0",
+        "vulnerability_id": "CVE-2026-58055",
+        "severity": "MEDIUM",
+        "primary_url": "https://avd.aquasec.com/nvd/cve-2026-58055"
+      },
+      {
+        "package": "pcre2",
+        "installed_before": "10.48-r0",
+        "installed_after": "10.49-r0",
+        "fixed_version_reported": "10.49-r0",
+        "vulnerability_id": "CVE-2026-103111",
+        "severity": "HIGH",
+        "primary_url": "https://avd.aquasec.com/nvd/cve-2026-103111"
+      }
+    ],
+    "application_or_database_source_changed": false,
+    "policy_changed": false,
+    "findings_suppressed": false
+  },
+  "validation": {
+    "platform": "linux/amd64",
+    "build_flags": [
+      "--provenance=false",
+      "--platform",
+      "linux/amd64"
+    ],
+    "builds": [
+      {
+        "component": "database",
+        "recipe": "docker/db/Dockerfile"
+      },
+      {
+        "component": "proxy",
+        "recipe": "docker/proxy/Dockerfile"
+      }
+    ],
+    "gate_source": "scripts/scan_services.py",
+    "gate_invocation": "with ops.operation_lock(): scan_services.scan_services(offline=True)",
+    "gate_output_redirect": "Only ops.RUNTIME and ops.EVIDENCE were redirected to private audit paths; policy and source were unchanged.",
+    "gate": {
+      "recorded_at": "2026-10-04T00:49:32.332857+00:00",
+      "status": "passed",
+      "scanner_image": "aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969",
+      "images": [
+        {
+          "component": "database",
+          "image": "containerops-database:local",
+          "image_id": "sha256:ec73f57ae87f7fc8f80a721664de7f3557bfb13ebffe99ac1b4503d4eb8dbc0d",
+          "config_digest": "sha256:512dcd9c24e32aab2038a3101c948976fa97f8146da9fdb93165d739fde2fc2a",
+          "findings_by_severity": {
+            "UNKNOWN": 0,
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 0
+          },
+          "blocking_count": 0,
+          "report_sha256": "sha256:205c5fac4c54f2dc42b7014fbe5c013b41a97cf0dad33d633ea02065314eefb3",
+          "database_sha256": "sha256:004acbf4d8b0d8527987d80f0b98a6eea54c0fd8ac26d4cf728de2adbaf4abb5",
+          "database_updated_at": "2026-10-03T19:02:38.737369755Z",
+          "database_age_hours": 5.771
+        },
+        {
+          "component": "proxy",
+          "image": "containerops-proxy:local",
+          "image_id": "sha256:99960d309dbafb212ecf057b8d54b93093895e7e59480ab538f1df6eec5ed274",
+          "config_digest": "sha256:e8ec8e0a75fc63d230ad3f50a7f91ba5e767c3f9c587c5a6bd48089742ee6cfe",
+          "findings_by_severity": {
+            "UNKNOWN": 0,
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 0
+          },
+          "blocking_count": 0,
+          "report_sha256": "sha256:b2c1f80ba8df5a5c18476400f6c1839f482b417e0ff2946b84b3317080abe50d",
+          "database_sha256": "sha256:004acbf4d8b0d8527987d80f0b98a6eea54c0fd8ac26d4cf728de2adbaf4abb5",
+          "database_updated_at": "2026-10-03T19:02:38.737369755Z",
+          "database_age_hours": 5.777
+        }
+      ],
+      "policy": "Bloqueia HIGH/CRITICAL, inclusive sem correção; todas as severidades registradas."
+    },
+    "scan_uses_exported_archive": true,
+    "scanner_docker_socket_mounted": false,
+    "scanner_ignorefile": "/dev/null",
+    "all_severities_recorded": true,
+    "public_reports": [
+      {
+        "file": "proxy-before.json",
+        "source": "GitHub Actions artifact containerops-evidence / .runtime-containerops/service-scans/proxy/scanner/trivy-report.json",
+        "source_sha256": "sha256:f51aa69e546373c47d24820411aeb02d9b26d0421a524ec94993211cb8e731fb",
+        "public_sha256": "sha256:5e3e3939e072636941bd3b9e808b6b90ab81fe894a0e4f9dd0446fca82fff4db",
+        "results_preserved": true,
+        "packages": 71,
+        "metadata_retained": [
+          "ImageID",
+          "OS"
+        ],
+        "findings_by_severity": {
+          "UNKNOWN": 1,
+          "LOW": 0,
+          "MEDIUM": 1,
+          "HIGH": 2,
+          "CRITICAL": 0
+        }
+      },
+      {
+        "file": "database-final.json",
+        "source": "Local exact scan_services gate; original raw report retained privately",
+        "source_sha256": "sha256:205c5fac4c54f2dc42b7014fbe5c013b41a97cf0dad33d633ea02065314eefb3",
+        "public_sha256": "sha256:4beef8f826b1edd951230c57b0d060537f7968aa64baba1454c429355f6df50b",
+        "results_preserved": true,
+        "packages": 46,
+        "metadata_retained": [
+          "ImageID",
+          "OS"
+        ],
+        "findings_by_severity": {
+          "UNKNOWN": 0,
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 0
+        }
+      },
+      {
+        "file": "proxy-final.json",
+        "source": "Local exact scan_services gate; original raw report retained privately",
+        "source_sha256": "sha256:b2c1f80ba8df5a5c18476400f6c1839f482b417e0ff2946b84b3317080abe50d",
+        "public_sha256": "sha256:c5037014525bbd2e550a752375f57479acf0629586de308bf54ec0e1cdfcd05b",
+        "results_preserved": true,
+        "packages": 71,
+        "metadata_retained": [
+          "ImageID",
+          "OS"
+        ],
+        "findings_by_severity": {
+          "UNKNOWN": 0,
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 0
+        }
+      }
+    ],
+    "smoke_file": "proxy-smoke.json",
+    "smoke_sha256": "sha256:0899fe6a23b3287de06d49eb379f5f539da66ab4182b7e647367573a6d95de1f",
+    "original_image_aliases_restored": true,
+    "existing_demo_unchanged": true
+  },
+  "limits": [
+    "Local directed validation; the follow-up remote CI outcome is not asserted here.",
+    "The 232 application tests and full backup/restore/release/rollback journey were not repeated locally for this proxy-only change; the original remote CI approved their gates.",
+    "Auxiliary builds used --provenance=false; this receipt does not claim new build attestations.",
+    "Zero findings refers to the recorded database snapshot and images, not future vulnerability data.",
+    "Raw image configuration and environment metadata remain private. Full Results arrays, package inventories and vulnerability records are preserved in the public reports."
+  ]
+}

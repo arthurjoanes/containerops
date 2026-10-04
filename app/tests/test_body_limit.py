@@ -40,3 +40,14 @@ def test_disconnected_partial_body_never_reaches_route() -> None:
     asyncio.run(BodyLimitMiddleware(app)({"type": "http"}, receive, send))
     app.assert_not_called()
     send.assert_not_called()
+
+
+def test_total_body_deadline_cancels_slow_stream_before_route() -> None:
+    async def receive():
+        await asyncio.sleep(4)
+        return {"type": "http.request", "body": b"x", "more_body": True}
+
+    app, send = AsyncMock(), AsyncMock()
+    asyncio.run(BodyLimitMiddleware(app)({"type": "http"}, receive, send))
+    assert send.call_args_list[0].args[0]["status"] == 408
+    app.assert_not_called()

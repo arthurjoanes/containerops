@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-03",
+  "file": "scripts/capture_docs.py",
+  "formatter": "ruff 0.16.8",
+  "formatter_output": "1 file reformatted",
+  "ast_equal": true,
+  "ast_before_sha256": "00041fe3e11da0b58c04bebca02c967c95cc55f16d71410b4ab58b33e0e9a15c",
+  "ast_after_sha256": "00041fe3e11da0b58c04bebca02c967c95cc55f16d71410b4ab58b33e0e9a15c",
+  "checks": [
+    {
+      "command": "python -m ruff check app/src app/tests tests scripts",
+      "exit_code": 0,
+      "output": "All checks passed!"
+    },
+    {
+      "command": "python -m ruff format --check app/src app/tests tests scripts",
+      "exit_code": 0,
+      "output": "40 files already formatted"
+    }
+  ],
+  "functional_suite_repeated": false,
+  "reason": "Only Ruff formatting; Python AST unchanged."
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-03",
+  "scope": "containerops",
+  "runtime_report": "runtime-image-vulnerabilities.json",
+  "original_report_sha256": "4819adc2e4d82ef7624bd587a632f5d28b4f448a7e66c5ea981e96e5d705d66b",
+  "public_report_sha256": "34083111fc2abcbc63d201a8ca5727e77482925ae29cd11a6b4859700b70648b",
+  "preserved_image_id": "sha256:a6260e9f72bebb6025a91f0c489e3ada67cc5e4c74870d885dac54686bb4f747",
+  "removed_metadata_keys": [
+    "DiffIDs",
+    "ImageConfig",
+    "Layers",
+    "Reference",
+    "RepoDigests",
+    "RepoTags",
+    "Size"
+  ],
+  "results_preserved_exactly": true,
+  "results_canonical_sha256": "39747cc8174601de7f8c5cb8ee4444e031493f33798a5d4983ccb2753f776c4e",
+  "packages": 46,
+  "vulnerabilities": 0,
+  "runtime_or_tests_changed": false
+}

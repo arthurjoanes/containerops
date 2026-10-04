@@ -1,8 +1,8 @@
 # Segurança e isolamento de capacidade
 
-A admissão é definida pelo [domínio](../app/src/containerops/domain.py), pelo [repositório](../app/src/containerops/repository.py) e pelos [testes de integração](../app/tests/test_integration.py). O [manifesto](evidence/security-admission-20260922/manifest.json) e o [JUnit](evidence/security-admission-20260922/tests.xml) registram a execução de **22/09/2026**.
+A admissão é definida pelo [domínio](../app/src/containerops/domain.py), pelo [repositório](../app/src/containerops/repository.py) e pelos [testes de integração](../app/tests/test_integration.py). O [manifesto](evidence/security-admission-20260922/manifest.json) e o [JUnit](evidence/security-admission-20260922/tests.xml) registram a execução de 22/09/2026.
 
-## COPS-01 — ocupação da fila por um proprietário
+## COPS-01 Ocupação da fila por um proprietário
 
 A revisão local encontrou um problema de disponibilidade: um Bearer válido podia
 criar os 100 jobs pendentes permitidos e fazer outro proprietário receber 429.
@@ -28,7 +28,7 @@ retornar a uma imagem anterior também retorna ao comportamento anterior de fila
 
 ## Validação de 22/09/2026 UTC
 
-A suíte completa com PostgreSQL real passou: **188 testes e 99 subtests**, sem
+A suíte completa com PostgreSQL real passou: 188 testes e 99 subtests, sem
 casos pulados. São 116 testes da aplicação (18 integrações), 30 da operação e
 42 do relatório. Ruff, formatação e mypy estrito passaram. Os comandos executaram
 o código do checkout montado em `/audit`, com a imagem local de ferramentas
@@ -63,6 +63,8 @@ integração em banco descartável. Nunca configure `CONTAINEROPS_TEST_DATABASE=
 contra o banco da demonstração: a fixture limpa seus dados.
 
 ## Limites restantes
+
+Na revisão de 03/10/2026, `/v1/` recebeu limite de 100 requisições/s por peer, com rajada de 200, e Bearers válidos receberam 20/s por proprietário, com rajada de 40. A recepção do corpo tem prazo total de 3 s. Exceções inesperadas recebem resposta genérica, com categoria e ID no log. A [revisão dos 18 itens](SECURITY-REVIEW-2026-10-03.md) registra os testes e o alcance desses controles.
 
 O Compose mantém `DEMO_MODE=true`; definir false recusa durações positivas, mas
 não é necessário para que quota e distribuição funcionem. A fila não faz

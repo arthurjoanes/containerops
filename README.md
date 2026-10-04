@@ -13,7 +13,7 @@ Laboratório de operação de uma aplicação com trabalhos em segundo plano: ac
 
 ## Visão geral
 
-A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo pequeno permite conferir o que aconteceu depois da recuperação. Textos e falhas são **sintéticos**; HTTP, processos e banco executam localmente no mesmo computador.
+A API recebe texto; um worker conta palavras e calcula o SHA-256 dos bytes; PostgreSQL guarda fila e resultado. O cálculo pequeno permite conferir o que aconteceu depois da recuperação. Textos e falhas são sintéticos; HTTP, processos e banco executam localmente no mesmo computador.
 
 Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o job existente; conteúdo diferente conflita. O [repositório transacional](app/src/containerops/repository.py) controla uma posse temporária (_lease_) e seu token, impedindo que um [worker](app/src/containerops/worker.py) antigo sobrescreva a aquisição atual.
 
@@ -23,9 +23,9 @@ Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o jo
 
 ![Recorte do relatório de restauração: três jobs e verificações dos dados restaurados](docs/screenshots/focused-20260922/restauracao-foco.png)
 
-Captura real de **22/09/2026, 17:37 UTC**, gerada com registros históricos. A restauração exibida ocorreu às **06:20 UTC**: **3 jobs / 27,4 s**. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
+Captura real de 22/09/2026, 17:37 UTC, gerada com registros históricos. A restauração exibida ocorreu às 06:20 UTC: 3 jobs / 27,4 s. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
 
-**Exemplo:** seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e **sete palavras**; trocar o conteúdo retornou 409. A [jornada de **22/09/2026, 12:34 UTC**](docs/evidence/editorial-20260922/journey.json) registra as respostas segundo os [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
+Seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e sete palavras; trocar o conteúdo retornou 409. A [jornada de 22/09/2026, 12:34 UTC](docs/evidence/editorial-20260922/journey.json) registra as respostas segundo os [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
 
 <a id="conferir-uma-operação"></a>
 
@@ -63,7 +63,7 @@ As setas contínuas representam chamadas e transferência de dados; as pontilhad
 | Persistir e operar | [Conexões](app/src/containerops/database.py) e [CLI](scripts/ops.py): papéis distintos para DML, migração e backup. Guarda dump/hash/snapshot no runtime local e restaura em volume novo. Release troca API/worker; rollback preserva o schema expansivo. |
 | Observar e apresentar | [Logs estruturados](app/src/containerops/log.py), healthchecks e métricas internas; [relatório](scripts/report.py) lê arquivos de execuções identificadas e apresenta evidências estáticas. |
 
-**Um job completo:** POST autenticado → admissão transacional → `queued` → claim com lease → cálculo → `succeeded` → GET pelo mesmo owner. Se o worker morrer, o próximo claim após expirar a lease conserva o ID e incrementa a tentativa. [Sequências, permissões e recuperação](docs/architecture.md) mostram o caminho normal e as operações de manutenção.
+O job passa por POST autenticado → admissão transacional → `queued` → claim com lease → cálculo → `succeeded` → GET pelo mesmo owner. Se o worker morrer, o próximo claim após expirar a lease conserva o ID e incrementa a tentativa. [Sequências, permissões e recuperação](docs/architecture.md) mostram o caminho normal e as operações de manutenção.
 
 ## Stack e decisões
 
@@ -94,7 +94,7 @@ As setas contínuas representam chamadas e transferência de dados; as pontilhad
 
 ## Executar localmente
 
-Use Docker com containers Linux em **x86-64**, Compose v2, Buildx e Python **3.11+**. São os requisitos adotados pelos [comandos](scripts/ops.py), [imagens](docker/images.lock.json) e [CI](.github/workflows/verify.yml). Primeiro build e scan precisam baixar dependências.
+Use Docker com containers Linux em x86-64, Compose v2, Buildx e Python 3.11+. São os requisitos adotados pelos [comandos](scripts/ops.py), [imagens](docker/images.lock.json) e [CI](.github/workflows/verify.yml). Primeiro build e scan precisam baixar dependências.
 
 ```sh
 python3 scripts/ops.py setup
@@ -117,9 +117,9 @@ No Windows, use `python` ou o [wrapper PowerShell](scripts/containerops.ps1), co
 
 | Pergunta                              | Fonte e data da execução                                                                                                                 | Limite                                                                                 |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Worker interrompido recupera o job?   | [Antes/depois do SIGKILL](docs/evidence/editorial-20260922/recovery.json), **22/09/2026, 12:36 UTC**                                     | Mesmo ID concluiu na tentativa 2; cálculo pode repetir.                                |
-| Os dados voltam após restore?         | [Restore JSON](docs/evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), **22/09/2026, 12:38 UTC**                     | Três jobs comparados e novo trabalho concluído; volume novo no mesmo host.             |
-| A admissão se distribui entre owners? | [Manifesto da medição](docs/evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json), **22/09/2026, 06:12–06:15 UTC** | Três repetições: 120 aceitos/concluídos e 24 recusados; cenário local com dois owners. |
+| Worker interrompido recupera o job?   | [Antes/depois do SIGKILL](docs/evidence/editorial-20260922/recovery.json), 22/09/2026, 12:36 UTC                                     | Mesmo ID concluiu na tentativa 2; cálculo pode repetir.                                |
+| Os dados voltam após restore?         | [Restore JSON](docs/evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json), 22/09/2026, 12:38 UTC                     | Três jobs comparados e novo trabalho concluído; volume novo no mesmo host.             |
+| A admissão se distribui entre owners? | [Manifesto da medição](docs/evidence/admission-measurement/20260922T031250-0300-b87b5952/manifest.json), 22/09/2026, 06:12 a 06:15 UTC | Três repetições: 120 aceitos/concluídos e 24 recusados; cenário local com dois owners. |
 
 Para repetir a prova completa, prepare antes a base Trivy com `scan`; Docker e OpenSSL são necessários:
 
@@ -133,7 +133,7 @@ O [runner](scripts/proof.py) cria projetos descartáveis e registra manifestos p
 python scripts/ops.py prove --scenario operations
 ```
 
-[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md). Não foram repetidos builds, scans ou falhas durante esta revisão da documentação.
+[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md). A revisão documental de 22/09/2026 usou os registros anteriores, sem repetir builds, scans ou falhas.
 
 <a id="limites-e-manutenção"></a>
 <a id="segurança-das-imagens"></a>
@@ -141,10 +141,11 @@ python scripts/ops.py prove --scenario operations
 
 ## Limites e segurança
 
-- **16 KiB** por texto; **100** jobs pendentes globais; **20** por owner; **3** tentativas; retenção de **24 h**. São limites do [contrato](docs/data-contract.md), implementados no [domínio](app/src/containerops/domain.py) e no [repositório](app/src/containerops/repository.py); não medem capacidade.
-- A demo permite atraso de até **15 s**; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
+- 16 KiB por texto; 100 jobs pendentes globais; 20 por owner; 3 tentativas; retenção de 24 h. São limites do [contrato](docs/data-contract.md), implementados no [domínio](app/src/containerops/domain.py) e no [repositório](app/src/containerops/repository.py); não medem capacidade.
+- A demo permite atraso de até 15 s; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
 - Backup permanece no mesmo computador; TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
 - O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md).
+- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) cobre os 18 itens recebidos, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
 
 ## Documentação
 
@@ -162,4 +163,4 @@ Para conversar sobre containers, recuperação e operação deste laboratório:
 
 <p><a href="https://www.linkedin.com/in/arthur-joanes-6a2967373/"><img src="docs/contact/linkedin.svg" alt="" width="24" height="24"> <strong>Arthur Joanes no LinkedIn</strong></a></p>
 
-[Licença MIT](LICENSE). Ícones da stack e LinkedIn: [Devicon — licença MIT](docs/stack/LICENSE.devicon).
+[Licença MIT](LICENSE). Ícones da stack e LinkedIn: [Devicon licença MIT](docs/stack/LICENSE.devicon).

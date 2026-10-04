@@ -49,8 +49,9 @@ class Settings:
                 or not owner
                 or len(owner) > 100
                 or not isinstance(token, str)
-                or len(token) < 24
+                or not 24 <= len(token) <= 256
                 or not token.isascii()
+                or any(not 33 <= ord(character) <= 126 for character in token)
             ):
                 raise ValueError("Credencial demo inválida")
             result[owner] = token

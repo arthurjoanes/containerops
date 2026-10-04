@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-03",
+  "scope": "containerops",
+  "junit": {
+    "file": "local-tests.xml",
+    "tests": 338,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "runtime_image": {
+    "tags": [
+      "containerops-security-review:20261003"
+    ],
+    "id": "sha256:a6260e9f72bebb6025a91f0c489e3ada67cc5e4c74870d885dac54686bb4f747",
+    "digests": [
+      "containerops-security-review@sha256:a6260e9f72bebb6025a91f0c489e3ada67cc5e4c74870d885dac54686bb4f747"
+    ],
+    "vulnerability_count": 0
+  },
+  "checks": {
+    "ruff": "passed",
+    "mypy": "passed",
+    "changed_python_format": "passed",
+    "git_diff_check": "passed",
+    "markdown_missing_local_links": 0,
+    "humanizer_protected_elements": {
+      "README.md": {
+        "code_blocks": 4,
+        "inline_code": 16,
+        "link_targets": 58,
+        "numeric_tokens": 92
+      },
+      "docs/security.md": {
+        "code_blocks": 0,
+        "inline_code": 7,
+        "link_targets": 9,
+        "numeric_tokens": 39
+      },
+      "docs/data-contract.md": {
+        "code_blocks": 2,
+        "inline_code": 55,
+        "link_targets": 18,
+        "numeric_tokens": 99
+      },
+      "docs/problem-solution.md": {
+        "code_blocks": 0,
+        "inline_code": 26,
+        "link_targets": 42,
+        "numeric_tokens": 130
+      }
+    },
+    "all_python_format": "passed",
+    "format_only_correction": {
+      "file": "scripts/capture_docs.py",
+      "ast_equal": true,
+      "proof": "format-capture-docs.json",
+      "functional_suite_repeated": false
+    }
+  },
+  "test_resources": {
+    "isolated": true,
+    "containers_networks_removed": true,
+    "existing_demo_unchanged": true
+  },
+  "limits": [
+    "runtime image only; auxiliary images excluded",
+    "scanner results are dated evidence, not a guarantee of absence of vulnerabilities"
+  ]
+}

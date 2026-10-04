@@ -1,3 +1,4 @@
+import asyncio
 import hmac
 import time
 from collections.abc import AsyncIterator
@@ -28,6 +29,7 @@ from containerops.domain import (
     SchemaIncompatible,
 )
 from containerops.log import configure, event
+from containerops.rate_limit import RateLimit
 
 
 class JobInput(BaseModel):
@@ -59,19 +61,25 @@ class BodyLimitMiddleware:
             return
         chunks: list[bytes] = []
         size = 0
-        while True:
-            message = await receive()
-            if message["type"] == "http.disconnect":
-                return
-            body = message.get("body", b"")
-            size += len(body)
-            if size > MAX_BODY_BYTES:
-                response = JSONResponse({"detail": "Corpo excede 32 KiB"}, status_code=413)
-                await response(scope, receive, send)
-                return
-            chunks.append(body)
-            if not message.get("more_body", False):
-                break
+        try:
+            async with asyncio.timeout(3):
+                while True:
+                    message = await receive()
+                    if message["type"] == "http.disconnect":
+                        return
+                    body = message.get("body", b"")
+                    size += len(body)
+                    if size > MAX_BODY_BYTES:
+                        response = JSONResponse({"detail": "Corpo excede 32 KiB"}, status_code=413)
+                        await response(scope, receive, send)
+                        return
+                    chunks.append(body)
+                    if not message.get("more_body", False):
+                        break
+        except TimeoutError:
+            response = JSONResponse({"detail": "Tempo de leitura do corpo excedido"}, 408)
+            await response(scope, receive, send)
+            return
         replayed = False
 
         async def replay() -> Message:
@@ -104,6 +112,8 @@ def job_response(job: Job, settings: Settings) -> dict[str, object]:
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     tokens: dict[str, str] = {}
+    peer_rate = RateLimit(rate=100, burst=200)
+    owner_rate = RateLimit(rate=20, burst=40)
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
@@ -130,8 +140,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         started = time.monotonic()
         request_id = str(uuid4())
         request.state.request_id = request_id
-        response = await call_next(request)
+        peer = request.client.host if request.client else "unknown"
+        retry = peer_rate.consume(peer) if request.scope["path"].startswith("/v1/") else 0
+        response: Response
+        if retry:
+            response = JSONResponse(
+                {"detail": "Limite de requisições excedido"},
+                429,
+                headers={"Retry-After": str(retry)},
+            )
+        else:
+            try:
+                response = await call_next(request)
+            except Exception as error:
+                event(
+                    "api",
+                    settings.version,
+                    "request_failed",
+                    request_id=request_id,
+                    error_category=type(error).__name__,
+                )
+                response = JSONResponse({"detail": "Falha ao concluir a operação"}, 500)
         response.headers["X-Request-ID"] = request_id
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["X-Content-Type-Options"] = "nosniff"
         event(
             "api",
             settings.version,
@@ -151,10 +183,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             )
         scheme, separator, supplied = authorization[0].partition(" ")
         supplied = supplied.lstrip(" ")
-        if scheme.lower() != "bearer" or not separator or not supplied or not supplied.isascii():
+        if (
+            scheme.lower() != "bearer"
+            or not separator
+            or not supplied
+            or len(supplied) > 256
+            or not supplied.isascii()
+        ):
             raise HTTPException(401, "Credencial inválida", headers={"WWW-Authenticate": "Bearer"})
         for owner, token in tokens.items():
             if hmac.compare_digest(supplied, token):
+                retry = owner_rate.consume(owner)
+                if retry:
+                    raise HTTPException(
+                        429,
+                        "Limite de requisições do proprietário",
+                        headers={"Retry-After": str(retry)},
+                    )
                 return owner
         raise HTTPException(401, "Credencial inválida", headers={"WWW-Authenticate": "Bearer"})
 
@@ -292,4 +337,14 @@ app = create_app()
 
 if __name__ == "__main__":
     configure()
-    uvicorn.run(app, host="0.0.0.0", port=8000, access_log=False, timeout_graceful_shutdown=15)
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=8000,
+        access_log=False,
+        proxy_headers=False,
+        limit_concurrency=64,
+        backlog=64,
+        timeout_keep_alive=3,
+        timeout_graceful_shutdown=15,
+    )

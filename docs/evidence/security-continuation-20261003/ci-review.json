@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-03",
+  "workflow": ".github/workflows/verify.yml",
+  "purpose": "Review CI gates related to authentication rate limits, request body deadline and error handling.",
+  "strict_types": {
+    "command": "python -m mypy --config-file app/pyproject.toml --cache-dir .runtime/mypy-ci app/src",
+    "config": "app/pyproject.toml",
+    "exit_code": 0,
+    "source_files": 11,
+    "output": "Success: no issues found in 11 source files"
+  },
+  "ci_journey_review": {
+    "concurrent_submission_requests": 6,
+    "owner_rate_per_second": 20,
+    "owner_burst": 40,
+    "review_result": "The existing bounded journey fits the configured budget; no code change was needed."
+  },
+  "generated_report": "generated-report.json",
+  "code_changed": false,
+  "limits": [
+    "Selected CI gates were checked locally; this is not a GitHub Actions run.",
+    "Functional suite and historical operations were not rerun.",
+    "Auxiliary image scans, recovery and public deployment remain outside this continuation."
+  ],
+  "documentation": {
+    "markdown_files_checked": 20,
+    "html_files_checked": 1,
+    "local_references_checked": 526,
+    "missing_local_references": [],
+    "matrix_items": 18,
+    "unexpected_publicable_temporary_files": []
+  }
+}

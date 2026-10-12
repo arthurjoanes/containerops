@@ -6,6 +6,50 @@ Execute os comandos na raiz do projeto. Anote horário, versão e job antes de i
 
 Operações de escrita usam um lock no runtime. Aguarde a atual terminar; `status`, `logs` e `report` continuam disponíveis. O lock é liberado ao sair do processo. Não apague `operation.lock` nem execute comandos Docker manuais durante backup, restore ou troca de release.
 
+## Contexto de sessão
+
+Para ensaiar sem usar a demonstração principal, defina a sessão antes de qualquer
+comando ou import Python:
+
+```powershell
+$env:CONTAINEROPS_SESSION = 'backup-lab-20261012'
+$env:CONTAINEROPS_RUNTIME = Join-Path $env:USERPROFILE 'AppData\Local\ContainerOps-runtime'
+python scripts/ops.py setup
+```
+
+O basename tem de 1 a 32 letras minúsculas/dígitos/hífens, sem hífen inicial ou
+final e sem nomes reservados do Windows. O runtime efetivo fica em
+`sessions/<slug>` abaixo da raiz reservada. A variável de runtime pode indicar
+essa raiz ou o caminho exato da sessão; outro caminho é recusado. Links,
+junções e traversal também são recusados. No Linux, configure a raiz de CI com
+nome contendo `containerops`; `CONTAINEROPS_SESSION` acrescenta o subdiretório.
+
+Um lançador Windows empacotado pode virtualizar novas gravações de AppData para
+um cache privado do pacote. Se o caminho resolvido sair da raiz reservada, a CLI
+recusa a operação. Execute os comandos em um terminal sem essa virtualização;
+não autorize LocalCache como runtime alternativo nem contorne o guard com links.
+
+O contexto deriva `pf-containerops-session-<slug>`,
+`pf-containerops-builder-<slug>` e `containerops-<slug>-app:1.0.0`/`:2.0.0`, além
+das tags de banco, proxy e testes. Labels de release permanecem 1.0.0/2.0.0.
+Credenciais, lock, temporários, OCI, cache e backups ficam nesse runtime. JSONs e
+HTML ficam em `sessions/<slug>/docs/`; os aliases de `docs/evidence` do repositório
+continuam próprios do contexto padrão.
+
+`verify`, `prove` e `restore-test` criam projetos UUID, conferem ausência prévia e
+removem somente os recursos da tentativa. Todos os comandos Compose usam `-p`;
+portas são livres e publicadas apenas em loopback. Faça inventário de IDs antes
+e depois. Não use prune global, down sem projeto ou remoção de builder alheio.
+Build, scan e carga pesada devem ocorrer em sequência: o daemon e os limites do
+computador são compartilhados.
+
+Congele as fontes durante a rodada. `proof.py` registra hashes dos arquivos,
+revisão Git e hashes de diff/status restritos às fontes, e confere as fontes
+dentro das imagens. Uma edição durante a prova invalida a associação; repita os
+checks afetados com fontes estáveis. Um mount read-only não impede edição pelo
+host. Guarde a evidência bruta privadamente e publique resumos sem segredos,
+paths pessoais ou inventário de outros projetos.
+
 `start` sem `--version` conserva a imagem salva e deriva dela a migração necessária.
 Em um ambiente novo, a imagem padrão é 1.0.0. `start --version 2.0.0` seleciona
 explicitamente a imagem 2 e schema 2; para atualizar uma stack com dados, use
@@ -36,6 +80,9 @@ Use `python scripts/ops.py <comando> --help` para ver apenas as opções daquele
 comando. `--version` pertence a build/start/scan/sbom/release; release aceita
 somente 2.0.0. `--offline` pertence a scan e `--inject-smoke-failure` a release.
 Opções desconhecidas ou sem efeito encerram com código 2 antes de tocar Docker.
+`restore-test --backup <id>` seleciona um ID catalogado; `--trusted-source` é
+necessário para restaurar cópia importada. Transporte e retenção têm seus próprios
+subcomandos descritos abaixo.
 Portas HTTP e TLS precisam ser diferentes, entre 1 e 65535 e fora da lista de
 portas recusadas em `scripts/ops.py` (usadas por outros serviços locais). A ferramenta nunca tenta liberar uma porta ocupada por outro processo.
 
@@ -154,6 +201,126 @@ Backup pausa e drena a fila até terminar snapshot e dump. Restore confere check
 
 O artefato binário é exportado com `docker cp`; não use redirecionamento textual do PowerShell para `pg_dump`. Guarde o JSON de metadados junto ao dump. Backup no mesmo computador não protege contra perda do computador.
 
+## Pacote portátil de backup
+
+Depois de `backup`, consulte o ID no contexto de origem e exporte para uma pasta
+nova cujo diretório pai já exista:
+
+```powershell
+python scripts/ops.py backups list
+python scripts/ops.py backup-export --backup <id-origem> --destination <pasta-nova>
+# Para incluir explicitamente a imagem de aplicação:
+python scripts/ops.py backup-export --backup <id-origem> --destination <outra-pasta-nova> --include-image
+```
+
+O pacote v1 é plano: `manifest.json`, `containerops.dump`, `metadata.json` e,
+somente com a opção acima, `application-image.tar`. O manifesto registra versão
+do formato, tamanhos/hashes SHA-256, intervalo UTC de corte, schema, PostgreSQL e
+pg_dump 17, projeto/contexto de origem, revisão/fingerprint das fontes e release
+da aplicação. ImageID, config digest e digest de manifesto OCI são identidades
+distintas; uma tag reconstruída não substitui a imagem registrada.
+
+Limites de transporte: 8 MiB por JSON, 1 GiB para dump e 2 GiB para archive de
+imagem. A inspeção do archive permite até 10.000 itens e 4 GiB no total de camadas
+descomprimidas. Schemas aceitos: 1 e 2; releases: 1.0.0 e 2.0.0, em linux/amd64.
+A lista externa tem três ou quatro arquivos; itens extras, links/reparse points,
+JSON duplicado/malformado, cortes incoerentes e tamanho/hash divergentes falham.
+Hashes são calculados em streaming e a identidade dos arquivos é conferida
+durante cópia. Dumps legados sem os campos necessários ao formato portátil
+precisam de um backup novo; os bytes antigos não são completados por suposição.
+
+Exportação e importação usam staging próprio e destino novo, com finalização no
+mesmo filesystem sem sobrescrever outro ID. POSIX usa pasta 0700/arquivos 0600;
+Windows verifica DACL limitada ao usuário atual e SYSTEM. Essa proteção não
+criptografa o pacote. Falha na cópia impede sua publicação como cópia completa.
+Segredos, certificados privados, state.json, env e Docker inspect bruto ficam
+fora do conjunto exportado. Dump e metadados continuam privados porque podem
+conter dados dos jobs.
+
+No destino, use outra sessão reservada e prepare banco/proxy compatíveis. Importe
+somente o pacote escolhido e anote o novo ID retornado:
+
+```powershell
+$env:CONTAINEROPS_SESSION = 'backup-destino-20261012'
+python scripts/ops.py setup
+python scripts/ops.py backup-import --source <pasta-do-pacote>
+python scripts/ops.py backups list
+# Somente se o pacote contém imagem e sua origem é confiável:
+python scripts/ops.py backup-image-load --backup <id-importado> --trusted-image-source
+python scripts/ops.py restore-test --backup <id-importado> --trusted-source
+python scripts/ops.py report
+```
+
+Importar registra uma cópia privada e preserva `latest-backup.json` da stack
+principal; não restaura nem carrega imagens. O carregamento é um comando separado
+e exige sessão. O archive exportado por ImageID deve estar sem tags que possam
+substituir nomes compartilhados. Após validar config/camadas/identidade, o comando
+aplica somente a tag da sessão e recusa colisão com conteúdo diferente.
+
+Imagem ausente ou incompatível encerra o preflight antes de criar stack/volume.
+Sem archive, disponibilize no daemon a imagem exata registrada e repita o
+preflight. Não há substituição silenciosa por build de uma tag. O pacote não
+inclui PostgreSQL, proxy, scanner ou BuildKit: offline completo exige preparar
+essas imagens compatíveis e a base Trivy válida separadamente.
+
+Restauração executa código escolhido pela origem, conforme o
+[aviso do PostgreSQL 17](https://www.postgresql.org/docs/17/app-pgrestore.html).
+SHA-256 detecta corrupção; um atacante pode alterar dump e manifesto juntos.
+Use origem confiável. O destino permanece descartável, com papéis, rede, mounts
+e credenciais próprios, sem volume existente ou downgrade de schema. Snapshot,
+novo job e limpeza precisam passar antes de registrar restore verificado. Esse
+ensaio não promove automaticamente o destino a serviço principal.
+
+## Catálogo e retenção de arquivos
+
+`backups list` descobre os backups existentes sem reescrever seus bytes. O catálogo
+v1 guarda ID/caminho interno, origem/contexto, criação, schema, tamanho,
+integridade, proteção, importação e recibo de recuperação. Metadados incompletos
+ou arquivos desconhecidos ficam como `unknown` e fora da remoção automática.
+O catálogo aceita até 16 MiB de metadados e 8 GiB por dump/archive legado; isso
+não amplia os limites mais restritos do transporte.
+
+```powershell
+python scripts/ops.py backups protect --backup <id>
+python scripts/ops.py backups prune --keep-last 3
+# Confira candidatos, retidos e motivos; então use o ID exato da prévia:
+python scripts/ops.py backups prune --keep-last 3 --apply --plan-id <id-do-plano>
+```
+
+A prévia não altera bytes, mtime, catálogo ou ponteiros. `keep-last` agrupa por
+projeto e contexto de origem; aceita zero, conservando as proteções obrigatórias.
+Latest, backups marcados, última cópia válida e última cópia com restore
+verificado de cada origem sempre permanecem, mesmo quando são IDs diferentes.
+Um hash válido não comprova recuperação: o recibo liga hashes do dump/metadados
+ao snapshot, novo job e limpeza aprovados. A marca de proteção pode ser retirada
+com `backups protect --backup <id> --unprotect`; as outras proteções continuam.
+
+Aplicar recomputa catálogo e hashes sob `operation_lock`. Backup concorrente,
+plano obsoleto, links, item desconhecido ou alteração dos arquivos provoca falha
+explícita. A exclusão usa APIs nativas e IDs exatos dentro de `backups` da sessão,
+sem interpretar caminhos de metadados externos. Gerar um backup não remove
+cópias antigas. Os 24 h de retenção de jobs no banco não definem retenção de dumps.
+
+Se a aplicação do plano for interrompida, o journal identifica o plano e sua
+quarentena. Confira a tentativa e retome somente aquele plano aprovado:
+
+```powershell
+python scripts/ops.py backups prune --keep-last 3 --recover --apply --plan-id <id-do-plano>
+```
+
+Recuperação continua a exclusão exata já aprovada; não recria arquivos removidos.
+Conteúdo desconhecido ou modificado interrompe novamente a operação e conserva
+o journal para investigação. Ensaios destrutivos devem usar somente fixtures
+temporárias; não execute a retenção sobre backups históricos do usuário.
+
+A separação entre origem e cópia segue a referência de
+[transporte do restic](https://restic.readthedocs.io/en/stable/045_working_with_repos.html#copying-snapshots-between-repositories);
+grupos, keep-last e prévia seguem sua
+[política de retenção](https://restic.readthedocs.io/en/stable/060_forget.html).
+O formato continua próprio do ContainerOps, sem deduplicação ou criptografia.
+[Renomeação no mesmo filesystem](https://docs.python.org/3/library/os.html#os.replace)
+finaliza um artefato local; não cria uma transação entre computadores.
+
 ## Recuperação em outro computador — roteiro ainda não executado
 
 **Objetivo:** conferir se uma cópia fora da máquina original permite retomar trabalho quando ela não está disponível. A prova local em volume novo valida o procedimento de restauração, mas não satisfaz esse objetivo. É necessário um destino independente, armazenamento protegido da cópia e acesso às imagens compatíveis.
@@ -161,7 +328,7 @@ O artefato binário é exportado com `docker cp`; não use redirecionamento text
 1. Na origem, registre versão do schema, imagem, intervalo de captura e hashes do dump/metadados. Guarde também a referência das fontes e o artefato de imagem correspondente; reconstruir uma tag não garante obter a mesma imagem.
 2. Transfira a cópia por um meio protegido e confira os hashes no destino. Mantenha dump e metadados privados: podem conter textos dos jobs e identificadores. Copiar apenas o arquivo JSON não restaura os dados.
 3. Prepare um runtime novo, credenciais próprias e as imagens conferidas. Verifique a compatibilidade das ferramentas PostgreSQL e da plataforma antes de restaurar. Não reutilize um volume já preenchido nem o runtime principal da outra máquina.
-4. Execute a restauração pelo contrato de destino descartável de `restore_test`, usando explicitamente a cópia escolhida. Confira IDs, proprietários, estados, contagens e checksums dos jobs restaurados; depois exija um novo job concluído.
+4. Importe com `backup-import --source <pacote>`, anote o ID interno novo e carregue a imagem somente por `backup-image-load --trusted-image-source` se sua origem for confiável. Execute `restore-test --backup <id> --trusted-source`. Confira IDs, proprietários, estados, contagens e checksums dos jobs restaurados; depois exija um novo job concluído.
 5. Registre o tempo desde o início da preparação até o novo resultado, com fases separadas: obtenção de imagem/cópia, configuração, restore, validação e limpeza. Registre também a idade dos dados no ponto de corte. O tempo interno de `pg_restore` sozinho não representa o tempo total de recuperação.
 6. Preserve o relatório, eventuais falhas e a conferência de que a origem permaneceu intacta. Remova somente os recursos descartáveis identificados. A adoção do destino como serviço principal exige um procedimento próprio de troca de acesso; este ensaio não faz essa mudança.
 
@@ -171,4 +338,4 @@ O artefato binário é exportado com `docker cp`; não use redirecionamento text
 
 `python .\scripts\ops.py stop` mantém os volumes. Os scripts apagam só volumes dos projetos temporários que criaram. Não use `docker system prune` para limpar este projeto.
 
-Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`.
+Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`, com sessões opcionais em `sessions/<slug>`.

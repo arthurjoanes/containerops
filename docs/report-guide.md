@@ -6,6 +6,12 @@ Abra `docs/report.html` no navegador depois de clonar ou baixar o repositório.
 O HTML inclui estilos e navegação; os arquivos de evidência precisam permanecer
 na pasta `docs/evidence`. A página não consulta containers nem executa operações.
 
+Com `CONTAINEROPS_SESSION` definido, `report` lê apenas os JSONs em
+`sessions/<slug>/docs/evidence` do runtime reservado e escreve
+`sessions/<slug>/docs/report.html`. Template, CSS, JavaScript e assets continuam
+nas fontes do repositório. A geração da sessão conserva `docs/report.html` e
+aliases históricos globais. O caminho de saída aparece no terminal.
+
 A [sequência operacional de 22/09](operational-recovery.md) tem um [relatório isolado](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/view/docs/report.html) com somente os quatro JSONs daquela tentativa. Use-o para relacionar job inicial, rollback e restore. O relatório principal reúne registros de momentos diferentes; cada painel conserva a identidade da sua operação. Os percentis da [medição de admissão](admission-measurement.md) ficam no documento próprio.
 
 | Grupo       | O que conferir                                                                                            |
@@ -40,6 +46,20 @@ o JSON de restauração registra qual backup recebeu. Da mesma forma, o job tem 
 versão, a release tem suas imagens e o scan se aplica à imagem selecionada.
 A seleção do build exige compatibilidade de identidade e tempo para auditoria e
 scan. O snapshot do runtime fica separado, dentro de Artefatos.
+
+Quando existe `backup-catalog.json`, o painel de recuperação apresenta IDs,
+origem, schema, tamanho, integridade, importação e proteção. Restore verificado
+refere-se a um recibo aprovado após conferir snapshot, novo job e limpeza; hash
+válido sozinho não comprova recuperação. Os campos são escapados e os caminhos
+privados dos dumps ficam fora do HTML público. O catálogo é o estado registrado
+pela CLI, sem atualização automática ao abrir a página.
+
+Os comandos exibidos podem ser copiados para execução local, com o contexto de
+sessão explícito: listar, selecionar um ID para restore e gerar uma prévia de
+retenção. A aplicação da retenção exige `--apply` e ID do plano; a página não
+executa essas operações. Para um backup importado, acrescente `--trusted-source`
+somente depois de conferir a origem. Transporte e carregamento de imagem têm
+comandos separados nos [runbooks](runbooks.md#pacote-portátil-de-backup).
 
 As durações resumidas usam uma casa decimal. A verificação conserva a duração
 exata nos detalhes. Os JSONs mantêm os valores completos, hashes e campos que

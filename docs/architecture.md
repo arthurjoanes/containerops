@@ -30,7 +30,18 @@ Backups de projetos descartáveis atualizam somente o ponteiro de seu próprio r
 `latest-backup.json` da stack principal continua apontando para seu backup. O dump
 fica no diretório reservado de backups e `restore-test` usa projeto e volume novos.
 
-No Windows, o runtime reservado é `%USERPROFILE%\AppData\Local\ContainerOps-runtime`. Os comandos Docker recebem o caminho resolvido por `Path.resolve()`, então junção ou link para essa pasta aponta para o mesmo runtime, não para um diretório adicional. Limpeza continua limitada aos projetos descartáveis e seus caminhos validados.
+No Windows, o runtime reservado é `%USERPROFILE%\AppData\Local\ContainerOps-runtime`.
+O [contexto central](../scripts/runtime_context.py) aceita `CONTAINEROPS_SESSION`
+e resolve somente `sessions/<slug>` dentro dessa raiz. Ele recusa links e junções
+em cada ancestral existente, traversal e destinos externos. A resolução ocorre
+antes de importar consumidores que capturam constantes. Sem sessão, permanecem
+os nomes e caminhos antigos. Limpeza continua limitada aos projetos descartáveis.
+
+Cada sessão tem lock, credenciais, temporários, artefatos, cache e evidências
+próprios. O projeto principal da sessão é `pf-containerops-session-<slug>`;
+builder e tags derivam do mesmo slug. Projetos de teste/restore conservam UUIDs e
+`-p` explícito, com portas livres somente em loopback. Esse isolamento separa
+identidades e arquivos; os recursos do daemon e do computador são compartilhados.
 
 ## Fluxo
 
@@ -169,7 +180,26 @@ Setup gera segredos somente demo fora do Git → build/test → db saudável →
 
 Backup pausa admissão e drena fila até zero `running`/`queued`, captura snapshot e dump custom enquanto permanece pausado, exporta binário por `docker cp`; finalmente retoma.
 
-Restore valida hash e destino novo `pf-containerops-restore-*`, inicializa papéis, restaura sem ownership/ACL para migrator, reaplica grants, compara snapshot e processa job novo.
+Restore seleciona um ID catalogado no runtime ativo, valida hash, schema,
+ferramenta e imagem antes de criar `pf-containerops-restore-*`, inicializa papéis
+próprios, restaura sem ownership/ACL para migrator, reaplica grants, compara
+snapshot e processa job novo. A aprovação exige também limpeza e ausência dos
+recursos temporários. O comando legado usa `latest-backup.json`.
+
+O [pacote portátil](../scripts/backup_package.py) separa transporte de execução:
+exportar cria pasta nova protegida; importar valida um conjunto explícito de
+arquivos e finaliza uma cópia privada catalogada. O manifesto v1 registra hashes,
+tamanhos, corte, origem, referência de fontes e identidades de imagem. Carregar
+uma imagem opcional exige comando próprio e confirmação explícita de origem
+confiável; importar o pacote sozinho não executa Docker.
+
+O [catálogo v1](../scripts/backup_catalog.py) identifica cópias por ID interno,
+origem/contexto e integridade. Backups antigos válidos são descobertos sem
+reescrever seus bytes; incompletos permanecem desconhecidos. Retenção gera um
+plano com fingerprint e só aplica os IDs exatos após reconferir o catálogo sob
+lock. A política mantém latest, marcas de proteção, última cópia válida e último
+recibo de restore aprovado por origem, inclusive quando são IDs diferentes.
+O journal permite retomar uma remoção interrompida do mesmo plano aprovado.
 
 Release salva os IDs anteriores, faz backup, pausa e drena a fila, aplica migração expand-only e troca API/worker. Se readiness ou smoke falhar, volta aos IDs anteriores sem downgrade do banco.
 
@@ -181,7 +211,12 @@ Trivy bloqueia qualquer HIGH/CRITICAL, inclusive sem correção disponível, e f
 
 PostgreSQL 17.11 também usa Alpine 3.24, com UID/GID 999 preservados na imagem própria. O entrypoint usa `su-exec` e exige um marcador de plataforma ao reutilizar PGDATA; volumes Debian antigos exigem backup/restore. O scan de serviços verifica banco e proxy além das duas releases da aplicação.
 
-Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`. No Linux CI, o diretório é configurado para a execução. Runtime, secrets, caches, backups e OCI ficam fora das fontes. Os projetos Compose são pf-containerops, pf-containerops-test-* e pf-containerops-restore-*.
+Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`, com sessões
+opcionais em `sessions/<slug>`. No Linux CI, o diretório-base configurado conserva
+um nome com `containerops`. Runtime, secrets, caches, backups e OCI ficam fora das
+fontes. Os projetos Compose são `pf-containerops`, o principal de cada sessão e
+os UUIDs de teste/restore. O relatório lê evidências do contexto e mantém template
+e assets no repositório.
 
 ## Decisões
 

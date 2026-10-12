@@ -20,13 +20,48 @@ python -B scripts/scan_services.py --offline
 
 Runtime Windows: `%USERPROFILE%\AppData\Local\ContainerOps-runtime`. No Linux CI, configure `CONTAINEROPS_RUNTIME` com um nome que contenha `containerops`. `scripts/ops.py` chama os mesmos módulos.
 
+Com `CONTAINEROPS_SESSION=<slug>` definido antes da CLI, runtime, artifacts,
+sentinela, cache Trivy e evidências ficam em `sessions/<slug>` na raiz reservada.
+App, teste, banco, proxy e experimento de cache selecionam tags do mesmo contexto;
+build, auditoria, scan, comparação de fontes e restore não usam tags globais como
+substituto. O relatório da sessão lê esses JSONs e escreve HTML no runtime,
+mantendo os templates/assets do repositório. Sem sessão, os defaults históricos
+permanecem. [Resolução central](../scripts/runtime_context.py).
+
 Buildx recusou o caminho Unicode em `x-docker-expose-session-sharedkey`. O script copia os inputs permitidos de `app/`, `docker/` e `.dockerignore` para um caminho ASCII temporário no runtime. Recusa links/junctions e exclui caches, secrets, Git e docs. Remove a cópia após o build.
 
-`docker/images.lock.json` fixa bases, Trivy 0.74.0, BuildKit 0.28.0 e Syft por digest. O build registra a versão do Buildx e usa `pf-containerops-builder`, com driver `docker-container`, 1,5 GiB de memória e 1,5 CPU. Se o builder tiver outro driver ou imagem, o script falha.
+`docker/images.lock.json` fixa bases, Trivy 0.74.0, BuildKit 0.28.0 e Syft por digest.
+O build registra a versão do Buildx e usa `pf-containerops-builder`, ou
+`pf-containerops-builder-<slug>` na sessão, com driver `docker-container`, até
+1,5 GiB de memória e 1,5 CPU. O script confere driver, imagem BuildKit e limites de
+memória/swap/CPU; configuração divergente falha. Operações pesadas do contexto
+devem ocorrer em sequência porque compartilham o daemon e recursos do host.
 
 O Dockerfile separa deps, test e runtime. Copiar o lock antes das fontes permite cache de dependências; o cache mount do pip evita downloads repetidos. Runtime recebe venv e fontes sobre Python 3.13.15/Alpine 3.24. Dependências são instaladas somente por wheels; o Python também executa os healthchecks.
 
 Arquivos em `artifacts/<versão>/` no runtime: `image.oci.tar`, `image.docker.tar`, `filesystem.tar`, `build.log`, `build-metadata.json`, `sbom-0.json`, `provenance-0.json`, `history.jsonl` e `scanner/trivy-report.json`. Resumos: `docs/evidence/`. Cache Trivy: `trivy-cache/`.
+
+## Imagem no pacote portátil
+
+`backup-export --include-image` salva explicitamente a aplicação por ImageID com
+`docker image save --output`; não usa redirecionamento textual para binários.
+O manifesto do pacote registra SHA-256/tamanho do archive, release, config digest
+e digest OCI distinguido do ID do daemon. API e worker precisam usar a mesma
+release conferida. O archive deve transportar uma única imagem e não pode conter
+tags que substituam nomes compartilhados.
+
+`backup-import` confere e guarda o archive junto dos artefatos, sem carregá-lo.
+`backup-image-load --backup <id> --trusted-image-source` exige sessão e origem
+confiável, valida config/camadas/identidade e recusa tag de sessão já ocupada por
+conteúdo diferente. Só depois aplica a tag exclusiva da sessão. Restore faz
+preflight da imagem exata; imagem ausente exige obtê-la explicitamente. Rebuild de
+uma tag não é fallback automático nem aprovação por um scan histórico.
+
+O pacote não inclui banco, proxy, scanner, BuildKit ou suas bases. Operação
+inteiramente offline exige obter e conferir essas imagens auxiliares compatíveis
+e a base Trivy válida separadamente. O carregamento de um archive não concede
+aprovação de scan/SBOM. Os gates atuais e HIGH/CRITICAL bloqueantes continuam
+necessários para as imagens da rodada. [Formato e limites](runbooks.md#pacote-portátil-de-backup).
 
 ## Imagem e OCI
 

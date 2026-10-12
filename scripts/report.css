@@ -373,6 +373,7 @@ button:focus-visible,input:focus-visible,select:focus-visible { outline: 3px sol
 @media print {
   .masthead { background: white; color: var(--ink); }
   .brand-mark { color: var(--brand-deep); }
+  .brand-mark svg { color: inherit; }
   .catalog-filters,.copy-feedback,[data-copy-command],.catalog-count,[data-catalog-no-results] { display: none !important; }
   .backup-ledger > li[hidden] { display: block !important; }
   .local-command { background: white; color: var(--ink); }

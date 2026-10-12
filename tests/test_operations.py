@@ -311,7 +311,7 @@ class OperationSafetyTests(unittest.TestCase):
             "algorithm": "unicode-alnum-marks-v1",
         }
         stack = Mock()
-        # A response from version 1 is expected; a result change or missing row is not.
+        # A resposta usa a versão 1 após o rollback, mas deve preservar o job e seu resultado.
         restored = {key: value for key, value in candidate.items() if key != "algorithm"}
         restored["version"] = "1.0.0"
         stack.request.return_value = (200, restored)

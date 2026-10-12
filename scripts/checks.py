@@ -173,8 +173,8 @@ rm "$temporary"
 
 
 def database_role_probe(stack, service, expected_user):
-    # Statements that unexpectedly succeed are still rolled back. No business row
-    # is changed; these probes run with only the helper's own mounted credential.
+    # Cada sonda usa a credencial do helper e termina com rollback,
+    # inclusive se uma escrita passar por engano; os dados de negócio ficam intactos.
     permission_sql = """SELECT json_build_object(
         'user', current_user, 'superuser', r.rolsuper, 'createdb', r.rolcreatedb,
         'createrole', r.rolcreaterole, 'replication', r.rolreplication, 'bypassrls', r.rolbypassrls,
@@ -426,7 +426,7 @@ print(json.dumps({'uid':os.getuid(),'blocked':blocked,'status':{line.split(':',1
 
 
 def http_boundary_checks(stack, job_id):
-    """Send literal duplicate headers through the proxy, which TestClient bypasses."""
+    """Envia headers duplicados pelo proxy, que o TestClient não percorre."""
     token = read_json(stack.directory / "secrets" / "api_tokens")["alice"]
     auth = ("Authorization", "Bearer " + token)
     content = b'{"text":"boundary"}'
@@ -583,8 +583,7 @@ def failure_experiments(stack):
     result["sigkill_before"] = running_before_kill
     result["sigkill"] = recovered
 
-    # Both observations happen before restart: success after restart alone would
-    # not prove graceful completion or that the worker stopped acquiring jobs.
+    # Antes de reiniciar, o job atual deve terminar e o seguinte permanecer na fila.
     graceful = stack.job("Preservar trabalho em SIGTERM", duration=12)
     wait_for(lambda: read_job(graceful["id"])["state"] == "running", "worker assume job SIGTERM")
     queued = stack.job("Aguardar o reinício do worker")
@@ -654,8 +653,8 @@ def failure_experiments(stack):
         if isinstance(record, dict) and record.get("service") == "api":
             lifespan_stopped |= record.get("event") == "stopped"
     state = api["State"]
-    # Uvicorn 0.53 restores handlers and re-emits SIGTERM after lifespan shutdown.
-    # On Linux the resulting 143 is expected; exit code alone cannot prove grace.
+    # Uvicorn 0.53 restaura os handlers e reenvia SIGTERM após encerrar o lifespan.
+    # Por isso, 143 é esperado no Linux; o código de saída não comprova shutdown limpo.
     require(
         state["Status"] == "exited"
         and not state["Running"]
@@ -672,7 +671,7 @@ def failure_experiments(stack):
         "API não completou o shutdown de lifespan antes de encerrar",
     )
     stack.compose("up", "-d", "--no-deps", "api")
-    # The proxy re-resolves the API address; readiness retries tolerate that window.
+    # O proxy precisa resolver de novo o endereço da API; readiness aguarda essa janela.
     stack.ready()
     accepted_after_restart = stack.completed(accepted["id"])
     require(
@@ -699,7 +698,7 @@ def failure_experiments(stack):
     actual_schema = stack.snapshot()["schema_version"]
     change_schema = "import sys\nfrom containerops.config import Settings\nfrom containerops.database import connect\nwith connect(Settings.from_env()) as connection:\n    changed = connection.execute('UPDATE schema_version SET version=%s', (int(sys.argv[1]),))\n    if changed.rowcount != 1:\n        raise RuntimeError('schema_version deve conter uma única linha')\n"
     try:
-        # Only the migrator can update schema_version; application grants stay intact.
+        # Só o migrator altera schema_version; as permissões da aplicação ficam intactas.
         stack.compose(
             "run", "--rm", "--no-deps", "migrate", "python", "-c", change_schema, "99", capture=True
         )

@@ -188,8 +188,8 @@ def inspect_docker_archive(path: Path, expected: dict, daemon_id: str) -> dict:
             if not member.isfile():
                 raise RuntimeError("Export Docker contém camada não regular.")
             with archive.extractfile(member) as source:
-                # containerd may reuse a compressed base blob alongside tar layers.
-                # diff_ids always describe the uncompressed tar bytes.
+                # O containerd pode reutilizar um blob base comprimido junto às camadas tar.
+                # Os diff_ids correspondem aos bytes do tar descomprimido.
                 compressed = source.read(2) == b"\x1f\x8b"
                 source.seek(0)
                 if compressed:
@@ -233,7 +233,7 @@ def convert_to_docker(oci_path: Path, docker_path: Path, tag: str, sentinel: byt
             raise RuntimeError("Quantidade de camadas diverge dos diff_ids.")
         layers = []
         for index, descriptor in enumerate(image.manifest["layers"]):
-            # A single scratch file bounds RAM use; no archive path is extracted.
+            # O arquivo temporário limita o uso de RAM, sem extrair caminhos do pacote.
             with tempfile.TemporaryFile(dir=docker_path.parent) as layer:
                 digest = image.copy_layer(descriptor, layer, sentinel)
                 if digest != diff_ids[index]:

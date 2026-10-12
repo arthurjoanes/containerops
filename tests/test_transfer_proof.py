@@ -59,7 +59,7 @@ class TransferProofTests(unittest.TestCase):
         ):
             with self.assertRaisesRegex(RuntimeError, "já existe"):
                 transfer.destination_context("destination")
-        # Real resolver enforces the basename without creating the directory.
+        # O resolver real valida o basename antes de criar qualquer diretório.
         real = RuntimeContext(
             ops.ROOT, ops.DEFAULT_RUNTIME, ops.DEFAULT_RUNTIME / "sessions/source", "source"
         )

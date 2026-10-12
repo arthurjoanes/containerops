@@ -83,7 +83,7 @@ def control_row(title: str, passed: bool | None, body: str, evidence: str) -> st
 
 
 def record_context(record: dict, *, label: str = "Registro") -> str:
-    """Keep the identity and clock of each operation beside its own result."""
+    """Mostra a identificação e a data junto do resultado da operação."""
     return (
         '<dl class="record-context">'
         f"<div><dt>{escape(label)}</dt><dd>{timestamp(record)}</dd></div>"
@@ -236,7 +236,7 @@ def catalog_namespace(record: dict, context: RuntimeContext) -> tuple[str | None
 def backup_catalog_panel(
     record: dict, context: RuntimeContext, *, records: dict | None = None, invalid: bool = False
 ) -> str:
-    """A public ledger keeps copy integrity, restore receipts and protection separate."""
+    """Apresenta integridade, recibo de restore e proteção em campos separados."""
     namespace, namespace_label = catalog_namespace(record, context)
     prefix = (
         f"$env:CONTAINEROPS_SESSION='{namespace}'\n"

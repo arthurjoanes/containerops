@@ -176,7 +176,7 @@ def ensure_builder(root: Path, runtime: Path) -> dict:
         raise RuntimeError("Builder existente usa driver incompatível")
     driver = json.loads(run(["docker", "info", "--format", "{{json .DriverStatus}}"]).stdout)
     buildx = run(["docker", "buildx", "version"]).stdout.strip()
-    # Inspect only this builder's container; do not touch the machine's default builder.
+    # Inspecione só os contêineres deste builder; preserve o builder padrão do host.
     containers = run(
         ["docker", "ps", "-aq", "--filter", "name=buildx_buildkit_" + BUILDER]
     ).stdout.split()
@@ -524,7 +524,8 @@ def scan(
         )
     database_hash = file_digest(cache / "db" / "trivy.db")
     started = time.monotonic()
-    # Keep every severity and unfixed finding in the full report; policy is evaluated below.
+    # O relatório completo inclui todas as severidades e falhas sem correção.
+    # A política é aplicada depois da coleta.
     run(
         command
         + [
@@ -632,8 +633,8 @@ def cache_experiment(root: Path, runtime: Path) -> dict:
             if path.is_file()
         }
         experiment_id = secrets.token_hex(12)
-        # The same namespace in all four builds prevents a previous experiment's
-        # alternate lock/source from disguising this series' invalidation behavior.
+        # Os quatro builds usam o mesmo namespace para isolar esta rodada.
+        # Locks e fontes de rodadas anteriores poderiam mascarar a invalidação do cache.
         with (context / "app/requirements-runtime.lock").open("a", encoding="utf-8") as lock:
             lock.write(f"\n# controlled-cache-experiment: {experiment_id}\n")
         runs = []

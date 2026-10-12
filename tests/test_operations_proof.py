@@ -250,7 +250,7 @@ class OperationsProofTests(unittest.TestCase):
                 self.assertGreaterEqual(record["total_seconds"], record["recovery_seconds"])
                 self.assertEqual(record["phases"][-1]["name"], "cleanup-check")
                 self.assertTrue(all(step["status"] == "passed" for step in record["phases"]))
-                # The unchanged report parser must accept actual operational records.
+                # O parser do relatório deve aceitar os registros gerados pela operação.
                 parsed, errors = report_evidence.read_records(root / "evidence")
                 self.assertFalse(errors)
                 self.assertIn("restore", parsed)

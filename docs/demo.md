@@ -1,21 +1,20 @@
 # Demo de 5–8 minutos
 
-O roteiro usa os [comandos](../scripts/ops.py) e o [runner](../scripts/proof.py); uma execução está registrada no [recibo editorial de 22/09/2026](evidence/editorial-20260922/execution.json). Os 5–8 minutos são uma duração sugerida para apresentar o projeto, não um tempo medido de instalação ou restauração.
+O roteiro usa os [comandos](../scripts/ops.py) e o [runner](../scripts/proof.py); uma execução está registrada no [recibo de 22/09/2026](evidence/editorial-20260922/execution.json). Os 5–8 minutos são uma duração sugerida para apresentar o projeto, não um tempo medido de instalação ou restauração.
 
-Abra o [caderno de operações](report.html) para navegar entre **Verificação**,
-**Recuperação**, **Release** e **Artefatos**. A seleção mostra resultado, identidade
+Abra o [caderno de operações](examples/report.html) para navegar entre
+**Verificação**, **Cópias de backup**, **Último ensaio de restore**, **Release** e
+**Artefatos**. A seleção mostra resultado, identidade
 do registro e arquivos de origem. O HTML é um snapshot; os comandos abaixo são
 executados separadamente no terminal. [Guia de leitura](report-guide.md).
 
-Para uma apresentação centrada no problema, use primeiro a [sequência de job, rollback e restauração](operational-recovery.md): três trabalhos preservados e um novo concluído no destino, com capturas e tempos explicados. A [medição de admissão e espera](admission-measurement.md) mostra separadamente o comportamento de dois proprietários sob uma carga pequena e controlada. Esses ensaios têm manifestos próprios; não substituem a prova completa descrita abaixo.
+Para uma apresentação centrada no problema, use primeiro a [sequência de job, rollback e restauração](operational-recovery.md): três trabalhos preservados e um novo concluído no destino, com registros e tempos explicados. A [medição de admissão e espera](admission-measurement.md) mostra separadamente o comportamento de dois proprietários sob uma carga pequena e controlada. Esses ensaios têm manifestos próprios; não substituem a prova completa descrita abaixo.
 
 ## Percorrer a interface de cópias e recibos
 
-Abra o [relatório da revisão](evidence/uiux-20261012/view/docs/report.html#backups). As
-capturas da interface de 12/10/2026 usam registros da
-[rodada operacional de 12/10](evidence/containerops-evolution-20261012/manifest.json),
-sem repetir backup, restore ou carga. O roteiro abaixo consulta evidências;
-comandos permanecem no terminal.
+Abra o [relatório de exemplo](examples/report.html#backups), gerado
+com registros da [rodada operacional de 12/10/2026](evidence/containerops-evolution-20261012/manifest.json).
+O HTML consulta evidências salvas; os comandos são executados no terminal.
 
 1. Abra **Cópias de backup**. Confira o contexto e a data do catálogo, depois
    busque um ID ou origem. Use o filtro de recibo para distinguir cópias íntegras
@@ -31,13 +30,13 @@ comandos permanecem no terminal.
    avalie a origem antes de acrescentar `--trusted-source`; o hash não autentica
    o conteúdo. Cópias desconhecidas não recebem um comando de restore pronto.
 5. Abra o JSON de origem e compare a data da operação com a geração do HTML.
-   Guarde o link da vista e dos filtros (`copy`/`receipt`). Explique que uma
-   captura nova apresenta o registro salvo e não executa o domínio novamente.
+   Guarde o link da vista e dos filtros (`copy`/`receipt`). Abrir o relatório
+   apresenta o registro salvo e não executa backup, restore ou carga.
 
 Repita a leitura no celular. Sem JavaScript, as nove vistas e a listagem completa
-continuam disponíveis; a cópia manual usa o texto do comando. A
-[marca](brand.md) conserva Source Sans 3 e identifica estados com texto e cor.
-Os testes, capturas e limitações da revisão estão em [frontend-quality.md](frontend-quality.md).
+continuam disponíveis; a cópia manual usa o texto do comando. Veja o catálogo nas
+capturas para [desktop](screenshots/backups-desktop.png) e
+[celular](screenshots/backups-mobile.png).
 
 ## Preparar outra execução operacional
 
@@ -98,11 +97,13 @@ Para operar a demo principal, use `start`, `demo`, `backup`, `release` e `rollba
 conforme os [runbooks](runbooks.md). `stop` preserva seus volumes. Para demonstrar
 falhas, use `prove`; não é necessário parar ou fazer rollback da demo principal.
 
-## Execução editorial de 22/09/2026
+<a id="execução-editorial-de-22092026"></a>
 
-Executei primeiro a verificação da aplicação (`a1560b0d…`, 12:31:52–12:36:05 UTC) e depois a sequência de operações (`53365744…`, 12:36:06–12:38:26 UTC). A base foi `46d43bf`, sem alterações nas fontes da aplicação, do relatório ou dos comandos. As edições de documentação vieram depois. O [recibo](evidence/editorial-20260922/execution.json) registra hashes das fontes, locks, digests e limites; o [manifesto operacional original](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/manifest.json) foi copiado byte a byte, com LF.
+## Execução de 22/09/2026
 
-A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a partir dos Dockerfiles/locks atuais, usando cache e tags próprias. Não foi um build frio. Para chamar os helpers existentes, redirecionei apenas a pasta de evidências e apontei temporariamente seus aliases fixos às imagens novas. Os IDs anteriores foram registrados, conferidos antes de cada troca e restaurados no final. Não removi imagens históricas nem volumes compartilhados. O wrapper e logs integrais permanecem no registro externo da revisão; os JSONs públicos não incluem credenciais ou dumps.
+A execução verificou primeiro a aplicação (`a1560b0d…`, 12:31:52–12:36:05 UTC) e depois a sequência de operações (`53365744…`, 12:36:06–12:38:26 UTC). A base foi `46d43bf`, sem alterações nas fontes da aplicação, do relatório ou dos comandos. O [recibo](evidence/editorial-20260922/execution.json) registra hashes das fontes, locks, digests e limites; o [manifesto operacional original](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/manifest.json) foi copiado byte a byte, com LF.
+
+A instalação construiu versões 1 e 2, a imagem de testes, banco e proxy a partir dos Dockerfiles/locks atuais, usando cache e tags próprias. Não foi um build frio. A execução usou os helpers existentes com uma pasta de evidências própria e aliases fixos apontados temporariamente às imagens novas. Os IDs anteriores foram registrados, conferidos antes de cada troca e restaurados no final. Imagens históricas e volumes compartilhados foram preservados. Os JSONs públicos não incluem credenciais ou dumps.
 
 Esse build local usou `--provenance=false`: **não produziu uma nova prova de SBOM/attestations**. O Trivy posterior está registrado separadamente em [segurança](evidence/editorial-20260922/security.json). Os scans históricos e o CI de outra imagem não passam a aprovar estas imagens. A prova demonstra instalação e comportamento local do código atual; a cadeia de suprimentos completa continua sendo o cenário padrão `prove`.
 
@@ -110,8 +111,8 @@ Esse build local usou `--provenance=false`: **não produziu uma nova prova de SB
 | ----------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Seis POSTs, mesma chave e texto de sete palavras      | Um UUID; sete palavras; conteúdo divergente 409; outro proprietário 404        | [journey.json](evidence/editorial-20260922/journey.json)                                                                                |
 | `Recuperar depois de término abrupto`: cinco palavras | Mesmo UUID, running/tentativa 1 antes do SIGKILL, succeeded/tentativa 2 depois | [Antes/depois](evidence/editorial-20260922/recovery.json)                                                                               |
-| Candidata 2 falha após gravar seu job                 | Imagem 1 retomada, schema 2 e três jobs preservados                            | [Rollback](screenshots/editorial-20260922/rollback.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json)  |
-| Dump restaurado em volume novo                        | Três jobs iguais, novo job com quatro palavras, cleanup concluído              | [Restauração](screenshots/editorial-20260922/restore.png), [JSON](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json) |
+| Candidata 2 falha após gravar seu job                 | Imagem 1 retomada, schema 2 e três jobs preservados                            | [Rollback](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/rollback.json)                                                        |
+| Dump restaurado em volume novo                        | Três jobs iguais, novo job com quatro palavras, cleanup concluído              | [Restauração](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/restore.json)                                                      |
 | Cópia separada adulterada                             | Checksum recusado antes de criar destino                                       | [Controle negativo](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/corrupted-copy-rejected.json)                               |
 
 A conta de palavras foi definida antes: `Olá / mundo / Café / e / ação / 東京 / 42` são sete; `Backup / restaurado / com / sucesso` são quatro. O runner compara também SHA-256 dos bytes originais. Não há ganho financeiro, capacidade de produção ou prazo de recuperação inferido desses números.
@@ -130,6 +131,6 @@ python scripts/ops.py verify
 python scripts/ops.py prove --scenario operations
 ```
 
-Esses comandos geram novas identidades; `verify` e `prove` criam projetos descartáveis. Os aliases de evidência fora da pasta de cada tentativa representam a execução mais recente. Preserve a pasta imutável indicada no manifesto para apresentar uma rodada anterior. O wrapper desta revisão isolou também os aliases de arquivos e de imagens, para não substituir os da demonstração histórica.
+Esses comandos geram novas identidades; `verify` e `prove` criam projetos descartáveis. Os aliases de evidência fora da pasta de cada tentativa representam a execução mais recente. Preserve a pasta imutável indicada no manifesto para apresentar uma rodada anterior. O wrapper desta execução isolou também os aliases de arquivos e de imagens, para não substituir os da demonstração histórica.
 
-As três capturas vêm de um HTML gerado com os JSONs reais dessa rodada. Navegação e expansão foram feitas no navegador, sem trocar dados no DOM. A [fonte das imagens](evidence/editorial-20260922/captures.json) identifica relatórios, hashes e dimensões. O [relatório da operação](evidence/editorial-20260922/operations-view/docs/report.html) abre offline. A captura do [job inicial](screenshots/editorial-20260922/initial-job.png) mostra quatro palavras da operação; a jornada concorrente de sete palavras está registrada em seu JSON, com outra identidade. Abrir ou capturar esses HTMLs não executa novamente os serviços.
+O [job inicial](evidence/problem-proof/53365744ff7d4897a142f3bf897dbf39/demo.json) concluiu com quatro palavras; a [jornada concorrente](evidence/editorial-20260922/journey.json) de sete palavras tem outra identidade. Os valores correspondem às operações registradas nos recibos dessa rodada.

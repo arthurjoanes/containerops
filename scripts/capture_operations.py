@@ -52,15 +52,15 @@ def capture(manifest_path):
         ops.EVIDENCE / "operations-captures" / (manifest["run_id"] + "-" + uuid.uuid4().hex[:8])
     )
     checks.require(not destination.exists(), "Captura já existe; preserve a tentativa anterior")
-    # The renderer expects docs/evidence; this separate root never touches docs/report.html.
+    # O renderer exige docs/evidence; a pasta isolada preserva docs/report.html.
     isolated = destination / "view"
     evidence = isolated / "docs" / "evidence"
     evidence.mkdir(parents=True)
     for name in ("demo", "rollback", "backup", "restore"):
-        # Copy bytes, preserving the exact records that passed their hashes above.
+        # Copia os bytes dos registros cujos hashes foram conferidos acima.
         shutil.copyfile(manifest_path.parent / (name + ".json"), evidence / (name + ".json"))
     html = report.generate(isolated, destination / "unused-runtime")
-    # Keep the unchanged renderer's documentation links usable from this nested report.
+    # Ajusta os links da documentação à pasta deste relatório.
     text = html.read_text(encoding="utf-8")
     documentation_links = {}
     for original, target in {

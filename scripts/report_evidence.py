@@ -197,7 +197,7 @@ def record_time(record: dict) -> datetime | None:
 
 
 def select_artifacts(records: dict[str, dict]) -> tuple[str, str, str]:
-    """A recent scan of another image cannot approve the selected build."""
+    """Confere se o scan pertence à imagem selecionada."""
     builds = [name for name in records if name.startswith("build-")]
     if not builds or any(record_time(records[name]) is None for name in builds):
         return "", "", ""
@@ -268,7 +268,7 @@ class Verification:
 
 
 def verification_result(directory: Path, record: dict, errors: dict, now: datetime) -> Verification:
-    """Read the latest attempt independently of successful files left by older runs."""
+    """Lê a tentativa mais recente, mesmo quando há resultados antigos aprovados."""
     if "verification-run.json" in errors:
         return Verification(
             "invalid",

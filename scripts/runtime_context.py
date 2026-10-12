@@ -1,4 +1,4 @@
-"""Resolve the optional session namespace before operational modules are imported."""
+"""Define os caminhos e os nomes dos recursos de cada sessão."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ def valid_session_slug(value: object) -> bool:
 
 
 def ensure_no_links(path: Path) -> Path:
-    """Reject links/reparse points in every existing ancestor without following them."""
+    """Recusa links e reparse points no caminho e nos diretórios acima dele."""
     path = Path(path).expanduser().absolute()
     if ".." in path.parts:
         raise RuntimeError("Caminho de runtime não aceita traversal")
@@ -50,7 +50,7 @@ def ensure_no_links(path: Path) -> Path:
 
 
 def ensure_file_path(path: Path) -> Path:
-    """Validate a writable file and its parents, including existing hard links."""
+    """Valida o arquivo e seus diretórios; recusa hardlinks existentes."""
     path = Path(path).expanduser().absolute()
     if ".." in path.parts:
         raise RuntimeError("Caminho de arquivo não aceita traversal")
@@ -73,7 +73,7 @@ def ensure_file_path(path: Path) -> Path:
 
 
 def ensure_tree(path: Path) -> Path:
-    """Check existing writable descendants before tools receive a directory mount."""
+    """Valida os arquivos e diretórios existentes antes de montar o caminho."""
     directory = ensure_no_links(path)
     pending = [directory] if directory.exists() else []
     while pending:
@@ -128,7 +128,7 @@ def resolve_context(
     environment: Mapping[str, str] | None = None,
     windows: bool | None = None,
 ) -> RuntimeContext:
-    """Windows sessions stay below the original reserved root; defaults are unchanged."""
+    """No Windows, as sessões ficam dentro do runtime reservado."""
     environment = os.environ if environment is None else environment
     windows = os.name == "nt" if windows is None else windows
     root = Path(root).resolve()
@@ -144,7 +144,7 @@ def resolve_context(
             "CONTAINEROPS_SESSION deve ser basename de 1 a 32 letras minúsculas/dígitos/hífens"
         )
     if not windows:
-        # An explicit CI root is still supported. A session root cannot escape it.
+        # A sessão deve ficar dentro do runtime informado pelo CI.
         if session and requested.name == session and requested.parent.name == "sessions":
             base = requested.parent.parent
         else:
@@ -167,7 +167,7 @@ def active_context(root: Path = ROOT) -> RuntimeContext:
 
 
 def validate_runtime(root: Path, runtime: Path) -> Path:
-    """Check an explicit supply runtime against the same active context as ops."""
+    """Confere se o runtime de build pertence à sessão ativa."""
     context = active_context(root)
     runtime = ensure_no_links(runtime)
     if context.session or os.name == "nt":

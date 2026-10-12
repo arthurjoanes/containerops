@@ -72,7 +72,7 @@ def require(condition, message):
 
 
 def nearest_rank(values, percentile=95):
-    """No interpolation; empty observations stay null, never zero."""
+    """Calcula o percentil sem interpolar; uma lista vazia retorna null."""
     if not 0 < percentile <= 100:
         raise ValueError("Percentile must be in (0, 100]")
     if not values:
@@ -139,7 +139,7 @@ def source_identity():
 
 @contextmanager
 def bounded_commands(deadline):
-    """Preserve ops guards; cap subprocesses and Stack HTTP by the shared deadline."""
+    """Limita subprocessos e HTTP ao prazo comum, mantendo os guards de ops."""
     original = ops.run
     original_urlopen = ops.urllib.request.urlopen
 
@@ -308,8 +308,8 @@ def correlate(requests, snapshot, logs, release):
     db = {job["id"]: job for job in snapshot["jobs"]}
     starts = {}
     for event in logs:
-        # The DB transaction is a consistent snapshot. Later logs remain archived but
-        # cannot turn a queued/censored job in that snapshot into an observed start.
+        # A transação do banco fornece um snapshot consistente. Logs posteriores ficam
+        # arquivados, mas não contam como início observado de um job nesse snapshot.
         if event["event"] == "job_started" and utc_seconds(event["timestamp"]) <= utc_seconds(
             snapshot["observed_at"]
         ):
@@ -404,7 +404,7 @@ def summarize(requests, jobs):
 
 
 def write(path, data):
-    # Public evidence hashes refer to canonical LF bytes on Windows and Git clones.
+    # Usa LF para manter os hashes iguais no Windows e nos clones do Git.
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
     temporary.write_bytes((json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode())
@@ -412,7 +412,7 @@ def write(path, data):
 
 
 def observe_drain(stack, deadline, release_started, record):
-    """Preserve the last DB snapshot on timeout; late terminal rows do not pass."""
+    """Mantém o último snapshot no timeout; conclusões após o prazo não aprovam a prova."""
     drain_deadline = min(release_started + SCENARIO["drain_deadline_seconds"], deadline[0])
     global_phase_deadline = deadline[0]
     record["final_database"] = record["paused_database"]
@@ -493,7 +493,7 @@ def repetition(number, images, deadline, hard_deadline, started, directory):
             ),
             "Worker consumed paused queue",
         )
-        # Validate after archiving every request, including any unexpected response.
+        # Confere os resultados após salvar todas as requisições, inclusive as inesperadas.
         for owner in SCENARIO["owners"]:
             own = [r for r in record["requests"] if r["owner"] == owner]
             require(
@@ -567,7 +567,7 @@ def repetition(number, images, deadline, hard_deadline, started, directory):
                     not item or not item["State"].get("Paused"),
                     "Unexpected frozen worker state; do not hide external mutation",
                 )
-                # Assert ownership of all extant project resources before destructive cleanup.
+                # Confere se os recursos pertencem ao projeto antes de removê-los.
                 ids = ops.run(
                     [
                         "docker",

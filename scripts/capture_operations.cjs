@@ -1,4 +1,4 @@
-// Real operation records only. No generated state/fixture is accepted here.
+// Captura os registros reais de operação validados pelo manifesto.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -29,7 +29,7 @@ const read = name => JSON.parse(fs.readFileSync(path.join(path.dirname(report), 
         await page.goto(pathToFileURL(report).href + '#' + panel);
         const section = page.locator('#' + panel); await section.waitFor({state:'visible'});
         assert.equal(await page.locator('[data-panel]:visible').count(),1);
-        // Open actual disclosure widgets so identity/results appear in the capture.
+        // Abre os detalhes para incluir a identidade e os resultados na captura.
         await section.locator('details').evaluateAll(elements => elements.forEach(e => e.open=true));
         const content = await section.innerText();
         assert.ok(content.includes(job.id), panel + ' job identity');

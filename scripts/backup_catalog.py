@@ -1,8 +1,8 @@
-"""Private backup catalogue and explicit, content-addressed retention plans.
+"""Catálogo de backups e planos de retenção identificados pelo conteúdo.
 
-Read operations do not create files. Callers hold ``ops.operation_lock`` around
-every mutation, including apply/recovery; the CLI owns that lock so a backup and
-a retention application cannot run concurrently in the same runtime.
+Consultas não gravam arquivos. A CLI mantém ops.operation_lock durante alterações,
+inclusive aplicação e retomada de planos, para evitar disputa com um backup
+no mesmo runtime.
 """
 
 from __future__ import annotations
@@ -331,7 +331,7 @@ def _receipt(runtime, entry, saved):
 
 
 def discover(runtime, *, context="default"):
-    """Discover legacy bytes without rewriting them; incomplete entries stay unknown."""
+    """Inclui backups legados sem regravá-los; cópias incompletas ficam desconhecidas."""
     runtime = _directory(runtime, allow_missing=True)
     root = _directory(runtime / "backups", allow_missing=True)
     state, state_signature = _state(runtime)
@@ -530,7 +530,7 @@ def mark_protected(runtime, identifier, protected=True, *, context="default"):
 
 
 def record_restore_verified(runtime, identifier, result, *, context="default"):
-    """Link a receipt only after the caller has validated the job and resource absence."""
+    """O recibo exige que o chamador confira o novo job e a ausência dos recursos."""
     _require(
         result.get("status") == "passed"
         and all(
@@ -670,7 +670,7 @@ def _guard_retention(runtime, journal):
 
 
 def _finish_retention(runtime, journal):
-    """Resume the exact approved native unlink sequence; unknown content stops it."""
+    """Retoma as remoções do plano aprovado; conteúdo inesperado interrompe a retomada."""
     _guard_retention(runtime, journal)
     root = _directory(runtime / "backups")
     quarantine = _directory(root / journal["quarantine"], allow_missing=True)
@@ -707,7 +707,8 @@ def _finish_retention(runtime, journal):
         _require(
             set(expected) - actual <= allowed_missing, "Arquivo do journal desapareceu sem registro"
         )
-        # Validate every remaining file before deleting any file in this directory.
+        # Confere todos os arquivos antes da remoção, para não apagar parte
+        # de uma pasta cujos bytes mudaram após o plano.
         for name in sorted(actual):
             _require(
                 _file(
@@ -752,7 +753,7 @@ def _finish_retention(runtime, journal):
 
 
 def apply_retention(runtime, keep_last, plan_id, *, context="default"):
-    """Caller holds operation_lock. Recompute hashes and reject any stale preview."""
+    """Exige operation_lock do chamador; refaz os hashes para recusar prévia desatualizada."""
     _require(
         isinstance(plan_id, str) and bool(_HASH.fullmatch(plan_id)),
         "Aplicação exige plan-id SHA-256 explícito",
@@ -818,7 +819,7 @@ def apply_retention(runtime, keep_last, plan_id, *, context="default"):
 
 
 def recover_retention(runtime, plan_id, *, context="default"):
-    """Explicitly resume an interrupted plan under operation_lock, without new IDs."""
+    """Retoma o plano interrompido com operation_lock, sem escolher novos IDs."""
     runtime = _directory(runtime)
     journal, _ = _json(runtime / JOURNAL_FILE)
     _require(

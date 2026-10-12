@@ -1,6 +1,6 @@
 # ContainerOps
 
-Laboratório de operação de uma aplicação com trabalhos em segundo plano: aceitar um pedido, recuperar um worker interrompido, trocar imagens e restaurar dados, mantendo o resultado verificável. Desenvolvi a API, o worker, os comandos de operação e o relatório de evidências.
+Laboratório de operação de uma aplicação com trabalhos em segundo plano: aceitar um pedido, recuperar um worker interrompido, trocar imagens e restaurar dados, mantendo o resultado verificável. Inclui API, worker, comandos de operação e relatório de evidências.
 
 <!-- Navegação do README -->
 <p>
@@ -21,18 +21,16 @@ Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o jo
 
 ## Demonstração
 
-![Catálogo do ContainerOps com identificação das cópias e estados separados de integridade e restore](docs/screenshots/uiux-20261012/after-overview-backups-1440.png)
+![Catálogo do ContainerOps com identificação das cópias e estados separados de integridade e restore](docs/screenshots/backups-desktop.png)
 
-A revisão de interface de 12/10/2026 mostra os registros da
+O catálogo reúne os registros da
 [rodada de backup e transporte](docs/evidence/containerops-evolution-20261012/manifest.json).
 Localize uma cópia por ID ou origem, confira integridade e recibo de restore e
 abra os detalhes para consultar a fonte ou preparar um comando local. O último
 ensaio tem painel próprio, com checksum, snapshot, novo job e limpeza separados.
-Renderizar esta captura não repetiu as operações do domínio.
 
-[Abrir o relatório local](docs/evidence/uiux-20261012/view/docs/report.html#backups) ·
-[catálogo no celular](docs/screenshots/uiux-20261012/after-backups-390.png) ·
-[jornadas e validação da interface](docs/frontend-quality.md) ·
+[Abrir o relatório local](docs/examples/report.html#backups) ·
+[catálogo no celular](docs/screenshots/backups-mobile.png) ·
 [guia de leitura](docs/report-guide.md).
 
 A [paleta da marca](docs/brand.md) usa azul profundo `#142D4E`, azul de ação
@@ -42,15 +40,16 @@ permanecem incorporados ao relatório para leitura offline.
 
 ### Registro histórico de 22/09/2026
 
-![Recorte do relatório de restauração: três jobs e verificações dos dados restaurados](docs/screenshots/focused-20260922/restauracao-foco.png)
-
-Captura real de 22/09/2026, 17:37 UTC, gerada com registros históricos. A restauração exibida ocorreu às 06:20 UTC: 3 jobs / 27,4 s. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
+O [registro de restauração](docs/evidence/restore.json) de 22/09/2026, às 06:20 UTC,
+recuperou três jobs e concluiu o novo trabalho em uma janela de 27,4 s.
 
 Seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e sete palavras; trocar o conteúdo retornou 409. A [jornada de 22/09/2026, 12:34 UTC](docs/evidence/editorial-20260922/journey.json) registra as respostas segundo os [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
 
 <a id="conferir-uma-operação"></a>
 
-Abra o [relatório histórico da operação editorial](docs/evidence/editorial-20260922/operations-view/docs/report.html) localmente; GitHub apresenta HTML como código. Confira o job, depois backup/restauração e rollback. Cada painel liga sua operação ao JSON de origem, como mostra o [guia de leitura](docs/report-guide.md).
+A [sequência operacional](docs/operational-recovery.md) relaciona o job, a
+restauração e o rollback aos respectivos registros. O [guia de leitura](docs/report-guide.md)
+explica como conferir a origem e a identidade de cada operação no relatório.
 
 <a id="implementação"></a>
 
@@ -212,7 +211,7 @@ O [runner](scripts/proof.py) cria projetos descartáveis e registra manifestos p
 python scripts/ops.py prove --scenario operations
 ```
 
-[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md). A revisão documental de 22/09/2026 usou os registros anteriores, sem repetir builds, scans ou falhas.
+[Verificação e histórico de correções](docs/verification.md) · [fontes e afirmações](docs/fontes-e-afirmacoes.md).
 
 <a id="limites-e-manutenção"></a>
 <a id="segurança-das-imagens"></a>
@@ -234,7 +233,7 @@ python scripts/ops.py prove --scenario operations
 | API, fila e idempotência         | [Contrato de dados](docs/data-contract.md)                                                                                      |
 | Executar e recuperar             | [Demonstração](docs/demo.md) · [runbooks](docs/runbooks.md) · [recuperação](docs/operational-recovery.md)                       |
 | Conferir resultados e fontes     | [Verificação](docs/verification.md) · [admissão](docs/admission-measurement.md) · [fontes e datas](docs/fontes-e-afirmacoes.md) |
-| Interface e manutenção           | [Guia do relatório](docs/report-guide.md) · [marca e paleta](docs/brand.md) · [qualidade](docs/frontend-quality.md) · [capturas](docs/screenshots.md) · [padrão documental](docs/padrao-documentacao.md)  |
+| Relatório e manutenção           | [Guia do relatório](docs/report-guide.md) · [marca e paleta](docs/brand.md) · [manutenção](docs/frontend-quality.md) · [capturas](docs/screenshots.md) |
 
 ## Autor e licença
 

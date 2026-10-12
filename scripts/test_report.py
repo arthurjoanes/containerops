@@ -39,7 +39,7 @@ def job(state="succeeded", attempts=1):
 
 
 class CommandText(HTMLParser):
-    """Read commands as users copy them, independent of syntax highlighting spans."""
+    """Extrai o texto copiado do comando, ignorando os spans de destaque."""
 
     def __init__(self, document):
         super().__init__(convert_charrefs=True)

@@ -2,7 +2,7 @@
 
 A API mantém isolamento por proprietário, SQL parametrizado e idempotência transacional. Esta revisão acrescentou limites temporais de requisições, prazo total para receber o corpo e tratamento de exceções inesperadas sem mensagens privadas. A demonstração continua local, com dados sintéticos e atraso controlado disponível.
 
-A imagem recebida contém 18 itens preenchidos; o item 19 está vazio. A revisão cobre o código, os locks e os testes em um banco PostgreSQL descartável, sem usar os dados da demonstração já em execução.
+A revisão cobre o código, os locks e os testes em um banco PostgreSQL descartável, sem usar os dados da demonstração já em execução.
 
 ## Resultado por item
 
@@ -33,7 +33,7 @@ O limitador em `app/src/containerops/rate_limit.py` usa tempo monotônico, lock 
 
 `BodyLimitMiddleware` interrompe a recepção do corpo após 3 s, mesmo que o cliente continue enviando pequenos trechos. `request_log` trata falhas inesperadas sem colocar mensagens privadas no log ou na resposta. Os handlers existentes de banco continuam respondendo com seus códigos e `Retry-After` apropriados.
 
-A execução com Python 3.13.15 e PostgreSQL 17.11 descartável passou 232 testes e 106 subtests, sem casos pulados; inclui as 18 integrações da aplicação: [JUnit](evidence/security-review-20261003/local-tests.xml). Ruff e mypy estrito passaram. A conferência ampla de formatação passou após aplicar Ruff a `scripts/capture_docs.py`; a [verificação da estrutura do código](evidence/security-review-20261003/format-capture-docs.json) confirmou AST idêntica antes e depois. A suíte funcional foi preservada, pois essa última alteração mudou apenas a formatação. Permanecem duas advertências de depreciação de Starlette/httpx e AnyIO.
+A execução com Python 3.13.15 e PostgreSQL 17.11 descartável passou 232 testes e 106 subtests, sem casos pulados; inclui as 18 integrações da aplicação: [JUnit](evidence/security-review-20261003/local-tests.xml). Ruff e mypy estrito passaram. Permanecem duas advertências de depreciação de Starlette/httpx e AnyIO.
 
 Os novos testes cobrem concorrência e reposição do orçamento, memória limitada sob troca de peers, rate por proprietário, tentativas anônimas com cabeçalho falsificado, healthcheck disponível, segredo ausente em erro inesperado, configuração de token inválida e cancelamento de corpo lento. A integração existente continua verificando isolamento, idempotência, leases, quotas e distribuição da fila.
 
@@ -45,7 +45,7 @@ Trivy não encontrou vulnerabilidades na imagem da aplicação. Gitleaks também
 
 O mypy com a configuração estrita de `app/pyproject.toml`, usada pelo CI, aprovou 11 fontes: [conferência dos gates](evidence/security-continuation-20261003/ci-review.json). A jornada existente limita a criação concorrente a seis chamadas; seus pedidos e consultas cabem nos novos orçamentos. Esta conferência dispensou mudança de código e repetição da suíte funcional.
 
-A geração de `docs/report.html` com os mesmos registros e o timestamp histórico reproduziu o HTML byte a byte: [prova de geração](evidence/security-continuation-20261003/generated-report.json). A página histórica permaneceu intacta. As referências locais da documentação e do relatório foram verificadas sem faltas; não apareceram arquivos temporários publicáveis fora das evidências selecionadas.
+A geração de `docs/report.html` com os mesmos registros e o timestamp histórico reproduziu o HTML byte a byte: [prova de geração](evidence/security-continuation-20261003/generated-report.json). A página histórica permaneceu intacta.
 
 ## Preparação para publicação
 
@@ -63,10 +63,6 @@ As receitas de banco e proxy foram construídas para Linux amd64 e examinadas pe
 
 Esta verificação local cobre a alteração do proxy. A suíte da aplicação não foi repetida nesta etapa, pois seu código e suas dependências permaneceram iguais aos aprovados no CI anterior. Os builds auxiliares usaram `--provenance=false`; esta prova não declara nova atestação ou execução de toda a jornada do CI.
 
-## Revisão da prosa
-
-O Humanizer 3.1.0 foi aplicado em modo de arquivo ao README, segurança, contrato de dados, problema e solução, e a este relatório. A revisão identificou rótulos em negrito, pontuação repetitiva e contrastes dispensáveis; reescreveu a prosa, conferiu os fatos e releu o resultado. Comandos, blocos de código, links, paths, números e artefatos históricos foram preservados. O [registro editorial](evidence/security-review-20261003/humanizer.json) informa o escopo e as verificações dos elementos protegidos.
-
 ## Limites da conclusão
 
-A rodada local inicial não executou recuperação, backup, release, rollback, carga de longa duração ou nova medição da fila; o CI remoto aprovou os gates de operação citados acima. Banco e proxy receberam scans próprios na correção complementar. Carga prolongada e nova medição da fila permanecem fora desta revisão. Os limites temporais são por processo, enquanto as quotas de fila são compartilhadas no PostgreSQL. Tokens estáticos, host único, TLS opcional e backup local continuam sendo condições da demonstração. Na rodada inicial, não houve commit ou push; o primeiro commit publicado e sua falha de CI estão identificados na seção complementar. A demonstração já em execução permaneceu intacta.
+A rodada local inicial não executou recuperação, backup, release, rollback, carga de longa duração ou nova medição da fila; o CI remoto aprovou os gates de operação citados acima. Banco e proxy receberam scans próprios na correção complementar. Carga prolongada e nova medição da fila permanecem fora desta revisão. Os limites temporais são por processo, enquanto as quotas de fila são compartilhadas no PostgreSQL. Tokens estáticos, host único, TLS opcional e backup local continuam sendo condições da demonstração. A demonstração já em execução permaneceu intacta.

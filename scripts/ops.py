@@ -9,6 +9,7 @@ import secrets
 import shutil
 import socket
 import ssl
+import stat
 import subprocess
 import sys
 import time
@@ -19,25 +20,32 @@ from contextlib import contextmanager, nullcontext
 from datetime import UTC, datetime
 from pathlib import Path
 
+from runtime_context import active_context, ensure_file_path, ensure_no_links
+
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RUNTIME = (
-    Path(os.environ["USERPROFILE"]) / "AppData" / "Local" / "ContainerOps-runtime"
-    if os.name == "nt"
-    else ROOT / ".runtime-containerops"
-)
-RUNTIME = Path(os.environ.get("CONTAINEROPS_RUNTIME", str(DEFAULT_RUNTIME))).resolve()
-if os.name == "nt" and RUNTIME != DEFAULT_RUNTIME.resolve():
-    raise RuntimeError(f"Runtime Windows deve ser o caminho reservado: {DEFAULT_RUNTIME}")
-EVIDENCE = ROOT / "docs" / "evidence"
-MAIN = "pf-containerops"
+CONTEXT = active_context(ROOT)
+DEFAULT_RUNTIME = CONTEXT.base
+RUNTIME = CONTEXT.runtime
+EVIDENCE = CONTEXT.evidence
+MAIN = CONTEXT.main
 RELEASES = ("1.0.0", "2.0.0")
 
 
 @contextmanager
 def operation_lock(directory=RUNTIME):
     """The OS releases this lock when the process exits, including after a crash."""
+    directory = ensure_no_links(Path(directory))
     directory.mkdir(parents=True, exist_ok=True)
-    with (directory / "operation.lock").open("a+b") as lock:
+    lock_path = directory / "operation.lock"
+    if lock_path.exists() or lock_path.is_symlink():
+        info = lock_path.lstat()
+        if (
+            not stat.S_ISREG(info.st_mode)
+            or info.st_nlink != 1
+            or getattr(info, "st_file_attributes", 0) & 0x400
+        ):
+            raise RuntimeError("operation.lock deve ser arquivo regular privado")
+    with lock_path.open("a+b") as lock:
         lock.seek(0, 2)
         if lock.tell() == 0:
             lock.write(b"0")
@@ -79,6 +87,7 @@ def now():
 
 
 def write_json(path, data):
+    ensure_file_path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
     try:
@@ -144,17 +153,20 @@ def free_port():
 
 def setup_secrets(directory):
     secret_dir = directory / "secrets"
+    ensure_no_links(secret_dir)
     secret_dir.mkdir(parents=True, exist_ok=True)
     if os.name != "nt":
         directory.chmod(0o700)
         secret_dir.chmod(0o700)
     for name in ("db_admin", "db_migrator", "db_app", "db_backup", "sentinel"):
         path = secret_dir / name
+        assert_regular_private(path)
         if not path.exists():
             path.write_text("containerops-demo-" + secrets.token_hex(24), encoding="utf-8")
         if os.name != "nt":
             path.chmod(0o600)
     token_file = secret_dir / "api_tokens"
+    assert_regular_private(token_file)
     if not token_file.exists():
         write_json(
             token_file, {owner: "demo-" + secrets.token_urlsafe(32) for owner in ("alice", "bob")}
@@ -167,24 +179,48 @@ def setup_secrets(directory):
             (secret_dir / name).chmod(0o644)
 
 
+def assert_regular_private(path):
+    if path.exists() or path.is_symlink():
+        info = path.lstat()
+        if (
+            not stat.S_ISREG(info.st_mode)
+            or info.st_nlink != 1
+            or getattr(info, "st_file_attributes", 0) & 0x400
+        ):
+            raise RuntimeError("Arquivo privado precisa ser regular, sem links/junções")
+
+
 class Stack:
     def __init__(self, project=MAIN, *, image=None, port=None, tls=False):
-        if not re.fullmatch(r"pf-containerops(?:-(?:test|restore)-[a-f0-9]{8})?", project):
+        if project != MAIN and not re.fullmatch(
+            r"pf-containerops-(?:test|restore)-[a-f0-9]{8}", project
+        ):
             raise ValueError("Nome Compose fora do escopo ContainerOps")
         self.project = project
+        self._owns_resources = False
         self.directory = RUNTIME if project == MAIN else RUNTIME / "environments" / project
+        ensure_no_links(self.directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.state_path = self.directory / "state.json"
+        assert_regular_private(self.state_path)
         state = read_json(self.state_path) if self.state_path.exists() else {}
-        self.image = image or state.get("image", "containerops-app:1.0.0")
+        self.image = image or state.get("image", CONTEXT.image("app", "1.0.0"))
         default_port = (
-            int(os.environ.get("HTTP_PORT", state.get("port", 8105)))
+            int(
+                os.environ.get(
+                    "HTTP_PORT", state.get("port", free_port() if CONTEXT.session else 8105)
+                )
+            )
             if project == MAIN
             else free_port()
         )
         self.port = port if port is not None else default_port
         self.tls_port = (
-            int(os.environ.get("TLS_PORT", state.get("tls_port", 8445)))
+            int(
+                os.environ.get(
+                    "TLS_PORT", state.get("tls_port", free_port() if CONTEXT.session else 8445)
+                )
+            )
             if project == MAIN
             else free_port()
         )
@@ -224,9 +260,9 @@ class Stack:
             **os.environ,
             "CONTAINEROPS_RUNTIME": self.directory.as_posix(),
             "APP_IMAGE": self.image,
-            "PROXY_IMAGE": "containerops-proxy:local",
-            "DATABASE_IMAGE": "containerops-database:local",
-            "TEST_IMAGE": "containerops-test:local",
+            "PROXY_IMAGE": CONTEXT.image("proxy"),
+            "DATABASE_IMAGE": CONTEXT.image("database"),
+            "TEST_IMAGE": CONTEXT.image("test"),
             "HTTP_PORT": str(self.port),
             "TLS_PORT": str(self.tls_port),
             "COMPOSE_ANSI": "never",
@@ -274,6 +310,7 @@ class Stack:
         ):
             if run(["docker", *args, "--filter", label], capture=True).stdout.strip():
                 raise RuntimeError(f"Projeto de teste já contém {resource}: {self.project}")
+        self._owns_resources = True
 
     def cid(self, service):
         value = self.compose("ps", "-a", "-q", service, capture=True).stdout.strip()
@@ -388,6 +425,8 @@ class Stack:
             ("pf-containerops-test-", "pf-containerops-restore-")
         ):
             raise RuntimeError("Exclusão permitida apenas em projeto de teste gerado")
+        if not self._owns_resources:
+            raise RuntimeError("Limpeza exige projeto conferido vazio por esta tentativa")
         self.compose("--profile", "tools", "down", "--volumes", "--remove-orphans")
 
     def job(self, text="Olá mundo! Café e ação. 東京 42", *, duration=0, key=None):
@@ -416,10 +455,47 @@ def evidence(name, data):
 
 
 def setup():
+    import proof
+
+    RUNTIME.mkdir(parents=True, exist_ok=True)
+    if CONTEXT.session:
+        proof.protect_copy_directory(RUNTIME)
     setup_secrets(RUNTIME)
     run(["docker", "version"], capture=True)
     run(["docker", "compose", "version"])
     print(f"Runtime demo: {RUNTIME}\nCredenciais: {RUNTIME / 'secrets' / 'api_tokens'}")
+
+
+def catalog_evidence():
+    import backup_catalog
+
+    catalog = backup_catalog.discover(RUNTIME, context=CONTEXT.session or "default")
+    fields = (
+        "id",
+        "source_project",
+        "source_context",
+        "created_at",
+        "schema_version",
+        "size_bytes",
+        "validation",
+        "protected",
+        "imported",
+        "restore_verified",
+    )
+    evidence(
+        "backup-catalog",
+        {
+            "context": CONTEXT.session or "default",
+            "entries": [
+                {
+                    key: bool(entry.get(key)) if key == "restore_verified" else entry.get(key)
+                    for key in fields
+                }
+                for entry in catalog["entries"]
+            ],
+        },
+    )
+    return catalog
 
 
 def build(version):
@@ -434,11 +510,11 @@ def build(version):
                 "buildx",
                 "build",
                 "--builder",
-                "pf-containerops-builder",
+                CONTEXT.builder,
                 "--load",
                 "--provenance=false",
                 "--tag",
-                "containerops-database:local",
+                CONTEXT.image("database"),
                 "--build-arg",
                 "POSTGRES_IMAGE=" + supply.image_lock(ROOT)["postgres"],
                 "-f",
@@ -454,11 +530,11 @@ def build(version):
                 "buildx",
                 "build",
                 "--builder",
-                "pf-containerops-builder",
+                CONTEXT.builder,
                 "--load",
                 "--provenance=false",
                 "--tag",
-                "containerops-proxy:local",
+                CONTEXT.image("proxy"),
                 "-f",
                 context / "docker" / "proxy" / "Dockerfile",
                 context,
@@ -481,11 +557,19 @@ def drain(stack):
 
 
 def backup(stack):
+    import backup_catalog
+    import backup_package
+    import proof
+
     started = time.monotonic()
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:8]
     destination = RUNTIME / "backups" / stamp
-    destination.mkdir(parents=True)
+    ensure_no_links(destination)
+    destination.mkdir(parents=True, mode=0o700)
+    proof.protect_copy_directory(destination)
     helper = stack.project + "-backup-" + uuid.uuid4().hex[:8]
+    active_image = stack.inspect("api")["Image"]
+    running_images(stack, active_image)
     previous_pause = stack.snapshot()["admission_paused"]
     try:
         cutoff_started_at = now()
@@ -505,6 +589,19 @@ def backup(stack):
         server = stack.compose(
             "exec", "-T", "db", "postgres", "--version", capture=True
         ).stdout.strip()
+        tool = stack.compose(
+            "exec", "-T", "db", "pg_dump", "--version", capture=True
+        ).stdout.strip()
+        image_release = release_version(active_image)
+        build_record = EVIDENCE / f"build-{image_release}.json"
+        image_identity = {}
+        if build_record.is_file():
+            built = read_json(build_record)
+            if built.get("image_id") == active_image:
+                image_identity["config_digest"] = built["runtime_link"]["config_digest"]
+                image_identity["oci_manifest_digest"] = built["runtime_link"][
+                    "platform_manifest_digest"
+                ]
         metadata = {
             "created_at": now(),
             "cutoff_interval": {
@@ -512,18 +609,30 @@ def backup(stack):
                 "completed_at": cutoff_completed_at,
                 "method": "admission paused; queued/running drained; snapshot observed in interval",
             },
-            "sha256": hashlib.sha256(dump.read_bytes()).hexdigest(),
+            "sha256": backup_package.file_hash(dump),
             "server": server,
+            "tool": tool,
             "schema_version": snapshot["schema_version"],
             "snapshot": snapshot,
             "source_project": stack.project,
-            "image": stack.inspect("api")["Image"],
+            "source_context": CONTEXT.session or "default",
+            "source_ref": {
+                key: value
+                for key, value in proof.source_manifest().items()
+                if key in ("revision", "sha256", "files")
+            },
+            "image": active_image,
+            "image_release": image_release,
+            **image_identity,
             "elapsed_seconds": round(time.monotonic() - started, 3),
         }
         write_json(destination / "metadata.json", metadata)
+        proof.protect_copy_directory(destination)
         evidence("backup", {**metadata, "directory": str(destination)})
         pointer_directory = RUNTIME if stack.project == MAIN else stack.directory
         write_json(pointer_directory / "latest-backup.json", {"directory": str(destination)})
+        backup_catalog.register_backup(RUNTIME, stamp, context=CONTEXT.session or "default")
+        catalog_evidence()
         print(f"Backup: {destination}")
         return destination
     finally:
@@ -533,7 +642,55 @@ def backup(stack):
             stack.manage("resume")
 
 
-def restore_test(directory=None):
+def restore_preflight(metadata, identity=None):
+    import backup_package
+
+    selected = backup_package.preflight_image(metadata, run, identity=identity)
+    for component in ("database", "proxy"):
+        try:
+            image_id(CONTEXT.image(component))
+        except RuntimeError as error:
+            raise RuntimeError(
+                f"Imagem auxiliar {component} ausente; execute build neste contexto ou obtenha a imagem compatível."
+            ) from error
+    tool = run(
+        [
+            "docker",
+            "run",
+            "--rm",
+            "--network",
+            "none",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges:true",
+            "--memory",
+            "64m",
+            "--cpus",
+            "0.25",
+            "--pids-limit",
+            "32",
+            "--entrypoint",
+            "pg_restore",
+            CONTEXT.image("database"),
+            "--version",
+        ],
+        capture=True,
+    ).stdout.strip()
+    expected_major = re.search(
+        r"(?:PostgreSQL\)?\s+)(\d+)", metadata.get("tool", metadata["server"])
+    )
+    actual_major = re.search(r"PostgreSQL\)?\s+(\d+)", tool)
+    if not expected_major or not actual_major or expected_major[1] != actual_major[1]:
+        raise RuntimeError("Ferramenta PostgreSQL incompatível com o backup")
+    return {"image_id": selected, "pg_restore": tool, "schema_version": metadata["schema_version"]}
+
+
+def restore_test(directory=None, *, backup_id=None, trusted_source=False):
+    import backup_catalog
+    import backup_package
+
     started = time.monotonic()
     result = {"started_at": now(), "status": "in_progress", "phases": []}
     stack = None
@@ -557,28 +714,57 @@ def restore_test(directory=None):
 
     evidence("restore", result)
     try:
+        if backup_id is not None:
+            if directory is not None:
+                raise ValueError("Selecione apenas um ID de backup")
+            directory = backup_catalog.select_backup(
+                RUNTIME, backup_id, context=CONTEXT.session or "default"
+            )
         directory = Path(
             directory or read_json(RUNTIME / "latest-backup.json")["directory"]
         ).resolve()
         if not directory.is_relative_to(RUNTIME / "backups"):
             raise RuntimeError("Origem de backup fora do runtime reservado")
-        metadata = read_json(directory / "metadata.json")
+        if directory.parent != (RUNTIME / "backups").resolve():
+            raise RuntimeError("Origem de backup fora do runtime reservado")
+        backup_package.safe_path(directory, directory=True)
+        metadata = backup_package.read_json(directory / "metadata.json")
         dump = directory / "containerops.dump"
 
         def verify_checksum():
-            actual_hash = hashlib.sha256(dump.read_bytes()).hexdigest()
+            backup_catalog.select_backup(
+                RUNTIME, directory.name, context=CONTEXT.session or "default"
+            )
+            actual_hash = backup_package.file_hash(dump)
             if actual_hash != metadata["sha256"]:
                 raise RuntimeError("Checksum de backup inválido")
             return actual_hash
 
         actual_hash = phase("checksum", verify_checksum)
+        validated = phase("package-validation", lambda: backup_package.validate_backup(directory))
+        metadata = validated["metadata"]
+        catalog = backup_catalog.discover(RUNTIME, context=CONTEXT.session or "default")
+        entry = next(item for item in catalog["entries"] if item["id"] == directory.name)
+        if entry.get("imported") and not trusted_source:
+            raise RuntimeError(
+                "Backup importado exige --trusted-source: restore executa código da origem confiável."
+            )
+        identity = validated["manifest"]["application_image"] if validated["manifest"] else None
+        preflight = phase("preflight", lambda: restore_preflight(metadata, identity))
         result.update(
             backup=str(directory),
             backup_sha256=actual_hash,
+            backup_metadata_sha256=validated["files"]["metadata.json"]["sha256"],
             backup_created_at=metadata["created_at"],
             cutoff_interval=metadata.get("cutoff_interval"),
+            backup_id=directory.name,
+            source_project=metadata["source_project"],
+            source_context=metadata.get("source_context", "default"),
+            preflight=preflight,
         )
-        stack = Stack("pf-containerops-restore-" + uuid.uuid4().hex[:8], image=metadata["image"])
+        stack = Stack(
+            "pf-containerops-restore-" + uuid.uuid4().hex[:8], image=preflight["image_id"]
+        )
         stack.assert_fresh()
         result["project"] = stack.project
         setup_secrets(stack.directory)
@@ -591,7 +777,11 @@ def restore_test(directory=None):
         stack.compose("create", "restore")
         helper = stack.cid("restore")
         staged = stack.directory / "restore.dump"
-        shutil.copyfile(dump, staged)
+        with staged.open("xb") as output:
+            copied = backup_package.file_record(dump, output=output)
+        if copied["sha256"] != actual_hash or backup_package.file_hash(staged) != actual_hash:
+            staged.unlink(missing_ok=True)
+            raise RuntimeError("Backup mudou durante staging do restore")
         staged.chmod(0o644)  # Docker cp preserves the mode; pg_restore runs as UID 999.
         try:
             phase(
@@ -699,6 +889,24 @@ def restore_test(directory=None):
                     if key in result
                 }
             result.update(completed_at=now(), total_seconds=round(time.monotonic() - started, 3))
+            if result["status"] == "passed":
+                try:
+                    final_backup = backup_package.validate_backup(directory)
+                    if final_backup["files"] != validated["files"]:
+                        raise RuntimeError("Backup mudou durante restore; recibo recusado")
+                    backup_catalog.record_restore_verified(
+                        RUNTIME, directory.name, result, context=CONTEXT.session or "default"
+                    )
+                    catalog_evidence()
+                except BaseException as error:
+                    result.update(status="failed", error_category=type(error).__name__)
+                    result["observations"] = {
+                        key: result.pop(key)
+                        for key in ("checksum_verified", "snapshot_equal", "new_job")
+                        if key in result
+                    }
+                    evidence("restore", result)
+                    raise
             evidence("restore", result)
     return result
 
@@ -736,7 +944,7 @@ def release(stack, version, inject_failure=False, *, candidate_image=None):
         "phase": "preflight",
     }
     try:
-        candidate = image_id(candidate_image or "containerops-app:" + version)
+        candidate = image_id(candidate_image or CONTEXT.image("app", version))
         old = stack.inspect("api")["Image"]
         result.update(previous_image=old, candidate_image=candidate)
         previous_pause = stack.snapshot()["admission_paused"]
@@ -1026,6 +1234,10 @@ def parse_arguments(argv=None):
         "inspect",
         "verify",
         "backup",
+        "backup-export",
+        "backup-import",
+        "backup-image-load",
+        "backups",
         "restore-test",
         "release",
         "rollback",
@@ -1046,18 +1258,68 @@ def parse_arguments(argv=None):
             command.add_argument("--offline", action="store_true")
         if name == "prove":
             command.add_argument("--scenario", choices=("full", "operations"), default="full")
+        if name in ("restore-test", "backup-export", "backup-image-load"):
+            command.add_argument("--backup", required=name != "restore-test")
+        if name == "restore-test":
+            command.add_argument("--trusted-source", action="store_true")
+        if name == "backup-export":
+            command.add_argument("--destination", type=Path, required=True)
+            command.add_argument("--include-image", action="store_true")
+        if name == "backup-import":
+            command.add_argument("--source", type=Path, required=True)
+        if name == "backup-image-load":
+            command.add_argument("--trusted-image-source", action="store_true", required=True)
+        if name == "backups":
+            actions = command.add_subparsers(dest="backup_action", required=True)
+            actions.add_parser("list")
+            protect = actions.add_parser("protect")
+            protect.add_argument("--backup", required=True)
+            protect.add_argument("--unprotect", action="store_true")
+            prune = actions.add_parser("prune")
+            prune.add_argument("--keep-last", type=int, required=True)
+            prune.add_argument("--apply", action="store_true")
+            prune.add_argument("--plan-id")
+            prune.add_argument("--recover", action="store_true")
     return parser.parse_args(argv)
 
 
 def main():
     args = parse_arguments()
-    readonly = args.command in ("status", "logs", "report")
+    readonly = args.command in ("status", "logs", "report") or (
+        args.command == "backups"
+        and (
+            args.backup_action == "list"
+            or args.backup_action == "prune"
+            and not args.apply
+            and not args.recover
+        )
+    )
+    print(f"Contexto ativo: {CONTEXT.session or 'default'}; projeto: {MAIN}", flush=True)
     with nullcontext() if readonly else operation_lock():
         execute(args)
 
 
 def execute(args):
-    stack = Stack()
+    if args.command in ("backup-export", "backup-import", "backup-image-load", "backups"):
+        execute_backups(args)
+        return
+    stack = (
+        Stack()
+        if args.command
+        in (
+            "start",
+            "stop",
+            "status",
+            "logs",
+            "demo",
+            "backup",
+            "release",
+            "rollback",
+            "tls",
+            "inspect",
+        )
+        else None
+    )
     version = args.version or "1.0.0"
     if args.command == "setup":
         setup()
@@ -1065,7 +1327,7 @@ def execute(args):
         build(version)
     elif args.command == "start":
         if args.version:
-            stack.image = image_id("containerops-app:" + args.version)
+            stack.image = image_id(CONTEXT.image("app", args.version))
         stack.start()
     elif args.command == "stop":
         stack.stop()
@@ -1076,11 +1338,11 @@ def execute(args):
     elif args.command == "demo":
         result = stack.completed(stack.job()["id"])
         evidence("demo", {"job": result, "url": f"http://localhost:{stack.port}"})
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
     elif args.command == "backup":
         backup(stack)
     elif args.command == "restore-test":
-        restore_test()
+        restore_test(backup_id=args.backup, trusted_source=args.trusted_source)
     elif args.command == "release":
         release(stack, args.version or "2.0.0", args.inject_smoke_failure)
     elif args.command == "rollback":
@@ -1114,6 +1376,91 @@ def execute(args):
             proof.prove_operations()
         else:
             proof.prove()
+
+
+def execute_backups(args):
+    import backup_catalog
+    import backup_package
+
+    context = CONTEXT.session or "default"
+    if args.command == "backup-export":
+        directory = backup_catalog.select_backup(RUNTIME, args.backup, context=context)
+        checked = backup_package.validate_backup(directory)
+        metadata = checked["metadata"]
+        manifest = checked["manifest"]
+        result = backup_package.export_backup(
+            directory,
+            args.destination,
+            source_ref=metadata.get("source_ref"),
+            source_context=metadata.get(
+                "source_context", manifest["backup"]["origin"]["context"] if manifest else "default"
+            ),
+            image_release=metadata.get(
+                "image_release", manifest["application_image"]["release"] if manifest else None
+            ),
+            include_image=args.include_image,
+            run=run,
+            config_digest=metadata.get("config_digest"),
+            oci_manifest_digest=metadata.get("oci_manifest_digest"),
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+    elif args.command == "backup-import":
+        backup_id = "import-" + uuid.uuid4().hex
+        ensure_no_links(RUNTIME / "backups")
+        (RUNTIME / "backups").mkdir(parents=True, exist_ok=True)
+        directory, _record = backup_package.import_backup(
+            args.source, RUNTIME / "backups", backup_id
+        )
+        backup_catalog.register_backup(
+            RUNTIME, backup_id, imported=True, protected=True, context=context
+        )
+        print(f"Importado: {directory.name}. Integridade conferida; nenhuma restauração executada.")
+        evidence("backup-import", {"backup_id": backup_id, "integrity_verified": True})
+        catalog_evidence()
+    elif args.command == "backup-image-load":
+        if not CONTEXT.session:
+            raise RuntimeError("Carregamento exige CONTAINEROPS_SESSION para tag exclusiva")
+        directory = backup_catalog.select_backup(RUNTIME, args.backup, context=context)
+        checked = backup_package.validate_backup(directory, portable=True)
+        image_release = checked["manifest"]["application_image"]["release"]
+        result = backup_package.load_application_image(
+            directory,
+            run=run,
+            tag=CONTEXT.image("app", image_release),
+            trusted=args.trusted_image_source,
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+    elif args.backup_action == "list":
+        print(
+            json.dumps(
+                backup_catalog.discover(RUNTIME, context=context), ensure_ascii=False, indent=2
+            )
+        )
+    elif args.backup_action == "protect":
+        backup_catalog.mark_protected(
+            RUNTIME, args.backup, protected=not args.unprotect, context=context
+        )
+        catalog_evidence()
+    else:
+        if args.keep_last < 0:
+            raise ValueError("--keep-last deve ser >= 0")
+        if args.recover:
+            if not args.apply or not args.plan_id:
+                raise ValueError("Recuperação exige --apply e --plan-id explícitos")
+            result = backup_catalog.recover_retention(RUNTIME, args.plan_id, context=context)
+        elif args.apply:
+            if not args.plan_id:
+                raise ValueError("Aplicação exige --plan-id da prévia")
+            result = backup_catalog.apply_retention(
+                RUNTIME, args.keep_last, args.plan_id, context=context
+            )
+        else:
+            if args.plan_id:
+                raise ValueError("--plan-id exige --apply")
+            result = backup_catalog.plan_retention(RUNTIME, args.keep_last, context=context)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        if args.apply:
+            catalog_evidence()
 
 
 if __name__ == "__main__":

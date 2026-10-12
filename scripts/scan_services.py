@@ -8,19 +8,24 @@ from datetime import UTC, datetime
 
 import ops
 import supply
+from runtime_context import ensure_file_path, ensure_no_links, ensure_tree
 
 
 def scan_services(*, offline=False):
     lock = supply.image_lock(ops.ROOT)
     cache = ops.RUNTIME / "trivy-cache"
+    ensure_tree(cache)
     cache.mkdir(parents=True, exist_ok=True)
     summaries = []
     ops.evidence("scan-services", {"status": "incomplete", "images": []})
     for component in ("database", "proxy"):
-        image = f"containerops-{component}:local"
+        image = ops.CONTEXT.image(component)
         artifact = ops.RUNTIME / "service-scans" / component
+        ensure_tree(artifact)
+        ensure_no_links(artifact / "scanner")
         (artifact / "scanner").mkdir(parents=True, exist_ok=True)
         archive = artifact / "image.docker.tar"
+        ensure_file_path(archive)
         supply.run(["docker", "image", "save", "--output", str(archive), image])
         with tarfile.open(archive, "r:*") as exported:
             manifests = json.load(exported.extractfile("manifest.json"))

@@ -30,13 +30,16 @@ class OperationsProofTests(unittest.TestCase):
         ops.write_json(
             directory / "metadata.json",
             {
-                "created_at": "2026-01-01T00:00:00+00:00",
+                "created_at": "2026-01-01T00:00:02+00:00",
                 "cutoff_interval": {
                     "started_at": "2026-01-01T00:00:00+00:00",
                     "completed_at": "2026-01-01T00:00:01+00:00",
+                    "method": "paused and drained",
                 },
                 "sha256": hashlib.sha256(dump).hexdigest(),
-                "image": "sha256:source",
+                "image": "sha256:" + "a" * 64,
+                "server": "postgres (PostgreSQL) 17.11",
+                "source_project": "pf-containerops-test-12345678",
                 "schema_version": 2,
                 "snapshot": {"schema_version": 2, "admission_paused": True, "jobs": []},
             },
@@ -111,7 +114,22 @@ class OperationsProofTests(unittest.TestCase):
     def test_legacy_backup_without_cutoff_remains_restorable_and_readable(self):
         self.exercise_restore(cleanup_failure=False, legacy=True)
 
-    def exercise_restore(self, *, cleanup_failure, legacy=False):
+    def test_restore_failure_phases_clean_resources_without_verified_receipt(self):
+        for failure in (
+            "database-ready",
+            "create",
+            "stage-dump",
+            "pg-restore",
+            "grants-and-schema",
+            "snapshot",
+            "new-job",
+            "cleanup-check",
+            "receipt",
+        ):
+            with self.subTest(failure=failure):
+                self.exercise_restore(cleanup_failure=False, failure_at=failure)
+
+    def exercise_restore(self, *, cleanup_failure, legacy=False, failure_at=None):
         with tempfile.TemporaryDirectory(prefix="containerops-restore-") as temporary:
             root = Path(temporary)
             directory = self.backup(root)
@@ -139,6 +157,41 @@ class OperationsProofTests(unittest.TestCase):
                 },
             }
 
+            if failure_at == "snapshot":
+                stack.snapshot.side_effect = RuntimeError("injected snapshot")
+            if failure_at == "new-job":
+                stack.completed.side_effect = RuntimeError("injected new-job")
+            if failure_at == "cleanup-check":
+                stack.assert_fresh.side_effect = [None, RuntimeError("injected cleanup-check")]
+
+            def compose(*args, **kwargs):
+                phase = (
+                    "database-ready"
+                    if args[:3] == ("up", "-d", "--wait") and args[-1] == "db"
+                    else "create"
+                    if args[0] == "create"
+                    else "grants-and-schema"
+                    if "--target" in args
+                    else None
+                )
+                if failure_at == phase and phase:
+                    raise RuntimeError("injected " + phase)
+                return Mock(stdout="")
+
+            stack.compose.side_effect = compose
+
+            def command(args, **kwargs):
+                phase = (
+                    "stage-dump"
+                    if args[:2] == ["docker", "cp"]
+                    else "pg-restore"
+                    if args[:3] == ["docker", "start", "-a"]
+                    else None
+                )
+                if phase and failure_at == phase:
+                    raise RuntimeError("injected " + phase)
+                return Mock(stdout='[{"State":{"ExitCode":0}}]')
+
             def destroy():
                 record = ops.read_json(root / "evidence/restore.json")
                 self.assertEqual(record["status"], "in_progress")
@@ -152,16 +205,42 @@ class OperationsProofTests(unittest.TestCase):
                 patch.object(ops, "EVIDENCE", root / "evidence"),
                 patch.object(ops, "Stack", return_value=stack),
                 patch.object(ops, "setup_secrets"),
-                patch.object(ops, "run", return_value=Mock(stdout='[{"State":{"ExitCode":0}}]')),
+                patch.object(
+                    ops, "restore_preflight", return_value={"image_id": "sha256:" + "a" * 64}
+                ),
+                patch.object(ops, "run", side_effect=command),
             ):
-                if cleanup_failure:
-                    with self.assertRaisesRegex(RuntimeError, "cleanup failed"):
+                if failure_at == "receipt":
+                    import backup_catalog
+
+                    with patch.object(
+                        backup_catalog,
+                        "record_restore_verified",
+                        side_effect=RuntimeError("injected receipt"),
+                    ):
+                        with self.assertRaisesRegex(RuntimeError, "injected receipt"):
+                            ops.restore_test(directory)
+                elif cleanup_failure or failure_at:
+                    with self.assertRaisesRegex(
+                        RuntimeError,
+                        "cleanup failed" if cleanup_failure else "injected " + failure_at,
+                    ):
                         ops.restore_test(directory)
                 else:
                     ops.restore_test(directory)
             record = ops.read_json(root / "evidence/restore.json")
-            self.assertEqual(record["status"], "failed" if cleanup_failure else "passed")
-            self.assertEqual(record["cleanup_succeeded"], not cleanup_failure)
+            self.assertEqual(
+                record["status"], "failed" if cleanup_failure or failure_at else "passed"
+            )
+            self.assertEqual(
+                record["cleanup_succeeded"], not cleanup_failure and failure_at != "cleanup-check"
+            )
+            if failure_at:
+                self.assertNotIn("snapshot_equal", record)
+                self.assertNotIn("new_job", record)
+                self.assertFalse((root / "backup-receipts").exists())
+                stack.destroy_test.assert_called_once()
+                return
             if cleanup_failure:
                 self.assertNotIn("snapshot_equal", record)
                 self.assertNotIn("new_job", record)

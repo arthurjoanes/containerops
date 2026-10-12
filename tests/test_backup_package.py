@@ -1,3 +1,4 @@
+import gzip
 import hashlib
 import io
 import json
@@ -313,8 +314,11 @@ class BackupPackageTests(unittest.TestCase):
         inspect = Mock(side_effect=[Mock(returncode=1), self.image_inspect(image_id=config)])
         self.assertEqual(package.preflight_image(metadata, inspect), config)
 
-    def create_image(self, *, tags=None, oci=False, link=False):
+    def create_image(
+        self, *, tags=None, oci=False, classic_oci=False, compressed=False, link=False
+    ):
         layer = b"synthetic layer bytes"
+        raw_layer = gzip.compress(layer, mtime=0) if compressed else layer
         config = {
             "os": "linux",
             "architecture": "amd64",
@@ -330,20 +334,56 @@ class BackupPackageTests(unittest.TestCase):
         config_bytes = json.dumps(config).encode()
         config_digest = "sha256:" + digest(config_bytes)
         image_id = config_digest
+        config_name = "config.json"
+        layer_name = "layer.tar"
+        if oci or classic_oci:
+            config_name = "blobs/sha256/" + config_digest.split(":")[1]
+            layer_name = "blobs/sha256/" + digest(raw_layer)
         files = {
-            "config.json": config_bytes,
-            "layer.tar": layer,
+            config_name: config_bytes,
+            layer_name: raw_layer,
             "manifest.json": json.dumps(
-                [{"Config": "config.json", "RepoTags": tags, "Layers": ["layer.tar"]}]
+                [{"Config": config_name, "RepoTags": tags, "Layers": [layer_name]}]
             ).encode(),
         }
-        if oci:
-            payload = json.dumps({"config": {"digest": config_digest}}).encode()
-            image_id = "sha256:" + digest(payload)
-            files["index.json"] = json.dumps(
-                {"manifests": [{"digest": image_id, "size": len(payload)}]}
+        archive_manifest_digest = None
+        if oci or classic_oci:
+            payload = json.dumps(
+                {
+                    "schemaVersion": 2,
+                    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                    "config": {
+                        "mediaType": "application/vnd.oci.image.config.v1+json",
+                        "digest": config_digest,
+                        "size": len(config_bytes),
+                    },
+                    "layers": [
+                        {
+                            "mediaType": "application/vnd.oci.image.layer.v1.tar"
+                            + ("+gzip" if compressed else ""),
+                            "digest": "sha256:" + digest(raw_layer),
+                            "size": len(raw_layer),
+                        }
+                    ],
+                }
             ).encode()
-            files["blobs/sha256/" + image_id.split(":")[1]] = payload
+            archive_manifest_digest = "sha256:" + digest(payload)
+            if not classic_oci:
+                image_id = archive_manifest_digest
+            files["index.json"] = json.dumps(
+                {
+                    "schemaVersion": 2,
+                    "mediaType": "application/vnd.oci.image.index.v1+json",
+                    "manifests": [
+                        {
+                            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+                            "digest": archive_manifest_digest,
+                            "size": len(payload),
+                        }
+                    ],
+                }
+            ).encode()
+            files["blobs/sha256/" + archive_manifest_digest.split(":")[1]] = payload
         path = self.root / "synthetic-image.tar"
         with tarfile.open(path, "w") as archive:
             for name, content in files.items():
@@ -360,7 +400,7 @@ class BackupPackageTests(unittest.TestCase):
         return path, {
             "image_id": image_id,
             "config_digest": config_digest,
-            "oci_manifest_digest": image_id if oci else None,
+            "oci_manifest_digest": "sha256:" + "d" * 64 if classic_oci else archive_manifest_digest,
             "release": "1.0.0",
             "archive": "application-image.tar",
         }
@@ -378,6 +418,80 @@ class BackupPackageTests(unittest.TestCase):
         path, identity = self.create_image(link=True)
         with self.assertRaisesRegex(RuntimeError, "link"):
             package.inspect_application_archive(path, identity)
+
+    def test_classic_config_image_id_accepts_separately_hashed_export_manifest(self):
+        path, identity = self.create_image(classic_oci=True)
+        with tarfile.open(path) as archive:
+            descriptor = json.load(archive.extractfile("index.json"))["manifests"][0]
+        self.assertEqual(identity["image_id"], identity["config_digest"])
+        self.assertNotEqual(descriptor["digest"], identity["image_id"])
+        self.assertNotEqual(descriptor["digest"], identity["oci_manifest_digest"])
+        inspected = package.inspect_application_archive(path, identity)
+        self.assertEqual(inspected["archive_manifest_digest"], descriptor["digest"])
+        self.assertEqual(inspected["image_id"], identity["image_id"])
+        self.assertFalse(inspected["shared_tags"])
+        with self.assertRaisesRegex(RuntimeError, "ImageID OCI ausente"):
+            package.inspect_application_archive(
+                path, {**identity, "image_id": "sha256:" + "e" * 64}
+            )
+
+    def test_classic_oci_gzip_descriptor_hashes_compressed_bytes_and_diff_id(self):
+        path, identity = self.create_image(classic_oci=True, compressed=True)
+        with tarfile.open(path) as archive:
+            descriptor = json.load(archive.extractfile("index.json"))["manifests"][0]
+            manifest = json.load(
+                archive.extractfile("blobs/sha256/" + descriptor["digest"].split(":")[1])
+            )
+            config = json.load(
+                archive.extractfile("blobs/sha256/" + identity["config_digest"].split(":")[1])
+            )
+        self.assertNotEqual(manifest["layers"][0]["digest"], config["rootfs"]["diff_ids"][0])
+        self.assertEqual(
+            package.inspect_application_archive(path, identity)["config_digest"],
+            identity["config_digest"],
+        )
+
+    def test_classic_oci_linkage_tampering_rejected_even_with_new_manifest_hash(self):
+        for mutation, message in (
+            (lambda value: value["config"].update(digest="sha256:" + "f" * 64), "outro config"),
+            (lambda value: value["config"].update(size=True), "Config OCI"),
+            (
+                lambda value: value["layers"][0].update(digest="sha256:" + "f" * 64),
+                "camada OCI diverge",
+            ),
+            (lambda value: value["layers"][0].update(size=True), "camada OCI diverge"),
+            (
+                lambda value: value["layers"][0].update(
+                    mediaType="application/vnd.oci.image.layer.v1.tar+gzip"
+                ),
+                "Compressão",
+            ),
+        ):
+            with self.subTest(message=message):
+                path, identity = self.create_image(classic_oci=True)
+                with tarfile.open(path) as archive:
+                    values = {
+                        member.name: archive.extractfile(member).read()
+                        for member in archive
+                        if member.isfile()
+                    }
+                index = json.loads(values["index.json"])
+                descriptor = index["manifests"][0]
+                manifest = json.loads(
+                    values.pop("blobs/sha256/" + descriptor["digest"].split(":")[1])
+                )
+                mutation(manifest)
+                content = json.dumps(manifest).encode()
+                descriptor.update(digest="sha256:" + digest(content), size=len(content))
+                values["index.json"] = json.dumps(index).encode()
+                values["blobs/sha256/" + digest(content)] = content
+                with tarfile.open(path, "w") as archive:
+                    for name, value in values.items():
+                        member = tarfile.TarInfo(name)
+                        member.size = len(value)
+                        archive.addfile(member, io.BytesIO(value))
+                with self.assertRaisesRegex(RuntimeError, message):
+                    package.inspect_application_archive(path, identity)
 
     def test_oci_containerd_naming_annotation_cannot_replace_shared_tag(self):
         path, identity = self.create_image(oci=True)

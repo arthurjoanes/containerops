@@ -217,8 +217,11 @@ O pacote v1 é plano: `manifest.json`, `containerops.dump`, `metadata.json` e,
 somente com a opção acima, `application-image.tar`. O manifesto registra versão
 do formato, tamanhos/hashes SHA-256, intervalo UTC de corte, schema, PostgreSQL e
 pg_dump 17, projeto/contexto de origem, revisão/fingerprint das fontes e release
-da aplicação. ImageID, config digest e digest de manifesto OCI são identidades
-distintas; uma tag reconstruída não substitui a imagem registrada.
+da aplicação. ImageID, config digest e digest de manifesto OCI são registrados
+separadamente. No store clássico, ImageID coincide com o digest da config e
+`docker save` gera outro manifesto OCI; no store containerd, ImageID identifica
+o manifesto. A inspeção confere essas relações, tamanho/hash dos descriptors e
+config/camadas do archive. Uma tag reconstruída não substitui a imagem registrada.
 
 Limites de transporte: 8 MiB por JSON, 1 GiB para dump e 2 GiB para archive de
 imagem. A inspeção do archive permite até 10.000 itens e 4 GiB no total de camadas

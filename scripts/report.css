@@ -306,7 +306,7 @@ td,th { padding: 7px; overflow-wrap: anywhere; }
   .syntax-placeholder { color: #116329; }
   }
 
-/* The copy ledger uses the ContainerOps palette; status colors remain semantic. */
+/* As cores da marca organizam a navegação; os estados usam cores próprias. */
 .masthead { background: var(--brand-deep); }
 .operation-sidebar { background: var(--brand-cloud); }
 .operation-link { color: var(--brand-ink); min-height: 44px; }

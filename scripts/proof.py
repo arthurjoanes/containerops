@@ -1,4 +1,4 @@
-"""Ensaio operacional completo em projetos descartáveis; nunca altera a stack principal."""
+"""Executa ensaios em projetos descartáveis, sem alterar a stack principal."""
 
 import hashlib
 import json
@@ -221,7 +221,7 @@ def require_completed_count(snapshot, expected):
 
 
 def public_record(data):
-    """A public proof references private dumps; it never publishes their bytes or host path."""
+    """Provas públicas referenciam dumps privados sem expor seu conteúdo ou caminho no host."""
     if isinstance(data, dict):
         return {key: public_record(value) for key, value in data.items()}
     if isinstance(data, list):
@@ -232,7 +232,7 @@ def public_record(data):
 
 
 def protect_copy_directory(directory):
-    """Limit a newly created private copy to its operator (and SYSTEM on Windows)."""
+    """Restringe a nova cópia ao operador e, no Windows, à conta SYSTEM."""
     if os.name != "nt":
         directory.chmod(0o700)
         checks.require(stat.S_IMODE(directory.stat().st_mode) == 0o700, "Cópia não protegida")
@@ -366,7 +366,7 @@ def source_state(stack):
 
 
 def prove_operations():
-    """Short CO-03/04 proof. Reuse only existing images with exact app-source matches."""
+    """Ensaio curto CO-03/04 com imagens existentes que correspondem às fontes da app."""
     started = time.monotonic()
     attempt = ProofRun(scenario="operations")
     attempt.data.update(
@@ -580,7 +580,7 @@ def prove():
         attempt.step("journey", lambda: checks.journey(stack))
         attempt.archive("journey")
         before = stack.snapshot()
-        # Jornada: texto concorrente + corpo no limite + replay de zero com sinal.
+        # Os três jobs vêm da concorrência, do corpo no limite e do replay de zero com sinal.
         require_completed_count(before, 3)
         attempt.write("snapshot-before", before)
         failed_release = attempt.step(
@@ -590,7 +590,7 @@ def prove():
         checks.require(failed_release["rolled_back"], "Retorno automático não ocorreu")
         checks.require("preserved_candidate_job" in failed_release, "Job candidato não conferido")
         after_failure = stack.snapshot()
-        require_completed_count(after_failure, 5)  # candidata e smoke do retorno
+        require_completed_count(after_failure, 5)  # Jobs da candidata e smoke do rollback.
         checks.require(after_failure["schema_version"] == 2, "Rollback rebaixou o schema")
         require_jobs(before, after_failure)
         attempt.write("snapshot-after-controlled-failure", after_failure)

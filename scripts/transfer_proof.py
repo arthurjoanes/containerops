@@ -36,7 +36,7 @@ def destination_context(session):
 
 
 def inventory(project=None):
-    """Record IDs, not changing uptime/health summaries, and never mutate resources."""
+    """Só consulta IDs; uptime e health ficam fora por variarem entre as chamadas."""
     label = ["--filter", "label=com.docker.compose.project=" + project] if project else []
     return {
         "containers": sorted(ops.run(["docker", "ps", "-aq", *label], capture=True).stdout.split()),
@@ -91,8 +91,8 @@ def public_record(value):
 
 def transfer_auxiliaries(destination):
     records = []
-    # Validate every target before the first tag mutation. These exact images
-    # already exist on this host; the package transports only the application.
+    # O pacote leva só a aplicação; banco e proxy já precisam existir no host.
+    # Conferir todas as tags antes da alteração evita mudanças parciais por conflito.
     for component in ("database", "proxy"):
         source_id = ops.image_id(ops.CONTEXT.image(component))
         tag = destination.image(component)
@@ -186,7 +186,10 @@ def _private_worker_result(run_id, result):
 
 
 def receive_package(source, corrupted, run_id):
-    """Called only by a child whose destination environment preceded all imports."""
+    """O ambiente do destino precisa estar definido antes dos imports.
+
+    ops fixa o contexto ao ser carregado pelo processo filho.
+    """
     checks.require(ops.CONTEXT.session is not None, "Destino exige sessão reservada")
     checks.require(bool(re.fullmatch(r"[a-f0-9]{32}", run_id)), "ID da transferência inválido")
     backup_package.safe_path(ops.RUNTIME)

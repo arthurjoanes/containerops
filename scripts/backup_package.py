@@ -1,4 +1,7 @@
-"""Private, bounded transport of logical backups; importing never restores or loads images."""
+"""Pacotes de backup lógico com limites de tamanho.
+
+Importar registra a cópia; restore e carregamento de imagem são comandos separados.
+"""
 
 from __future__ import annotations
 
@@ -292,7 +295,7 @@ def _fingerprint(item):
 
 
 def safe_path(path, *, directory=False):
-    """Reject every existing ancestor before resolve can hide a junction or symlink."""
+    """Confere os ancestrais antes de resolver o caminho, para não ocultar links ou junções."""
     path = Path(os.path.abspath(path))
     for ancestor in (*reversed(path.parents), path):
         if not ancestor.exists() and not ancestor.is_symlink():
@@ -541,8 +544,9 @@ def _finalize(stage, destination):
     if os.name == "nt":
         os.rename(stage, destination)
     else:
-        # os.rename may replace an empty directory on POSIX. Linux provides the
-        # exclusive same-filesystem finalization needed by the fixture/CI path.
+        # No POSIX, os.rename pode substituir um diretório vazio criado após a checagem.
+        # No Linux, renameat2 com RENAME_NOREPLACE recusa esse destino concorrente;
+        # a troca exige origem e destino no mesmo filesystem.
         library = ctypes.CDLL(None, use_errno=True)
         require(
             hasattr(library, "renameat2"), "Finalização exclusiva indisponível nesta plataforma"
@@ -691,7 +695,7 @@ def import_backup(source, backups_root, backup_id, *, protect=None):
 
 
 def preflight_image(metadata, run, *, identity=None):
-    """Inspect the immutable identity only; missing images are never rebuilt or loaded."""
+    """Confere a identidade da imagem; se ela faltar, não tenta build nem carregamento."""
     validate_metadata(metadata)
     expected = identity or {}
     config_digest = expected.get("config_digest", metadata.get("config_digest"))
@@ -726,7 +730,7 @@ def preflight_image(metadata, run, *, identity=None):
 
 
 def inspect_application_archive(path, identity):
-    """Never extract untrusted tar members or transport a daemon's shared tags."""
+    """Inspeciona o tar sem extração; tags compartilhadas do daemon ficam fora do pacote."""
     file_record(path)
     with tarfile.open(path, "r:") as archive:
         members = {}
@@ -873,10 +877,10 @@ def inspect_application_archive(path, identity):
                 and bool(IMAGE_ID.fullmatch(archive_manifest_digest)),
                 "Digest do descriptor OCI inválido",
             )
-            # The classic image store identifies an image by its config. Its
-            # Docker save exporter synthesizes an OCI manifest with a separate
-            # digest (Moby image/tarexport/save.go). A containerd ImageID instead
-            # identifies the manifest and must still match that descriptor.
+            # No store clássico, ImageID é o digest da config; docker save gera um
+            # manifesto OCI com outro digest (Moby image/tarexport/save.go).
+            # Com containerd, ImageID identifica o manifesto e precisa corresponder
+            # ao descritor presente no tar.
             require(
                 identity["image_id"] == config_digest
                 or archive_manifest_digest == identity["image_id"],

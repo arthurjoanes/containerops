@@ -1,4 +1,4 @@
-"""Truth states for recorded restores, independent of their visual presentation."""
+"""Classifica o resultado do restore pelas etapas registradas."""
 
 from __future__ import annotations
 

@@ -33,7 +33,7 @@ RELEASES = ("1.0.0", "2.0.0")
 
 @contextmanager
 def operation_lock(directory=RUNTIME):
-    """The OS releases this lock when the process exits, including after a crash."""
+    """O sistema libera o lock quando o processo termina, inclusive após um crash."""
     directory = ensure_no_links(Path(directory))
     directory.mkdir(parents=True, exist_ok=True, mode=0o700)
     lock_path = directory / "operation.lock"
@@ -136,7 +136,7 @@ def run(args, *, env=None, capture=False, timeout=300, check=True, cwd=ROOT):
 
 
 class JobFailed(RuntimeError):
-    """A terminal job cannot succeed by polling it again."""
+    """Novas consultas não mudam o resultado de um job encerrado."""
 
 
 def wait_for(predicate, description, timeout=90):
@@ -181,8 +181,8 @@ def setup_secrets(directory):
         write_json(
             token_file, {owner: "demo-" + secrets.token_urlsafe(32) for owner in ("alice", "bob")}
         )
-    # Docker Desktop file mounts do not honor all POSIX mode fields. Effective
-    # permissions are checked in the running containers, not assumed here.
+    # Binds no Docker Desktop podem ignorar permissões POSIX.
+    # Confira as permissões efetivas dentro dos contêineres.
     if os.name != "nt":
         token_file.chmod(0o644)
         for name in ("db_admin", "db_migrator", "db_app", "db_backup"):
@@ -408,9 +408,7 @@ class Stack:
                 "run", "--rm", "--no-deps", "migrate", "python", "-c", probe, capture=True
             ).stdout.strip()
         )
-        target = max(
-            target, current
-        )  # Starting release 1 after rollback never downgrades schema 2.
+        target = max(target, current)  # O rollback para a release 1 mantém o schema 2.
         self.compose(
             "run",
             "--rm",
@@ -472,7 +470,7 @@ def setup():
         if os.name == "nt":
             proof.protect_copy_directory(RUNTIME)
         else:
-            # A runtime contains directories; the flat backup-copy check does not apply.
+            # O runtime tem subdiretórios; a checagem de arquivos do backup não se aplica.
             RUNTIME.chmod(0o700)
             if stat.S_IMODE(RUNTIME.stat().st_mode) != 0o700:
                 raise RuntimeError("Runtime da sessão não protegido")
@@ -652,7 +650,7 @@ def backup(stack):
         print(f"Backup: {destination}")
         return destination
     finally:
-        # Remove only the uniquely named helper started above, retaining artifacts volume.
+        # Remove só o helper desta operação e preserva o volume de artefatos.
         run(["docker", "rm", "-f", helper], capture=True, check=False)
         if not previous_pause:
             stack.manage("resume")
@@ -798,7 +796,7 @@ def restore_test(directory=None, *, backup_id=None, trusted_source=False):
         if copied["sha256"] != actual_hash or backup_package.file_hash(staged) != actual_hash:
             staged.unlink(missing_ok=True)
             raise RuntimeError("Backup mudou durante staging do restore")
-        staged.chmod(0o644)  # Docker cp preserves the mode; pg_restore runs as UID 999.
+        staged.chmod(0o644)  # Docker cp preserva o modo; pg_restore usa o UID 999.
         try:
             phase(
                 "stage-dump",
@@ -898,7 +896,7 @@ def restore_test(directory=None, *, backup_id=None, trusted_source=False):
             if result["status"] == "in_progress":
                 result["status"] = "passed"
             if result["status"] != "passed":
-                # Preserve facts, but do not expose the legacy success shape to the report.
+                # Guarde os fatos em observations para o relatório não ler a falha como sucesso.
                 result["observations"] = {
                     key: result.pop(key)
                     for key in ("checksum_verified", "snapshot_equal", "new_job")
@@ -1192,7 +1190,7 @@ def tls_setup(stack):
             capture=True,
         )
     if os.name != "nt":
-        (directory / "server.key").chmod(0o644)  # Demo bind mount readable by container UID101.
+        (directory / "server.key").chmod(0o644)  # O bind da demo precisa ser legível pelo UID 101.
         (directory / "ca.key").chmod(0o600)
     stack.tls = True
     stack.compose("config", "--quiet")

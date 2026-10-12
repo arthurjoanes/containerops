@@ -1,4 +1,4 @@
-"""Scan the database and proxy archives without exposing the Docker socket."""
+"""Analisa os arquivos de imagem do banco e do proxy sem expor o socket Docker."""
 
 import argparse
 import hashlib

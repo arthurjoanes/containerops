@@ -1,9 +1,9 @@
-// Optional: Playwright is a developer tool, never a dependency of the HTML.
+// Playwright é usado nos testes; o HTML funciona sem ele.
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
-const report = process.argv[2] || pathToFileURL(path.resolve(__dirname, "../docs/evidence/uiux-20261012/view/docs/report.html")).href;
+const report = process.argv[2] || pathToFileURL(path.resolve(__dirname, "../docs/examples/report.html")).href;
 if (process.argv[2]) {
   const url = new URL(report);
   assert.ok(url.protocol === "http:" && url.hostname === "127.0.0.1", "Only an explicit loopback report is accepted");
@@ -26,7 +26,7 @@ if (process.argv[2]) {
         await page.goto(`${report}#${id}`);
         await page.locator(".skip-link").focus();
         await page.keyboard.press("Enter");
-        // Give hashchange two frames to run: inspecting immediately can miss the regression.
+        // Aguarde o hashchange antes de conferir o painel e o foco.
         await page.evaluate(() => new Promise(resolve => {
           requestAnimationFrame(() => requestAnimationFrame(resolve));
         }));
@@ -39,8 +39,7 @@ if (process.argv[2]) {
     }
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(`${report}#recovery`);
-    // The matchMedia change opens the native picker after the390px journey.
-    // Hidden details descendants can retain a box while rejecting focus.
+    // Aguarde o índice abrir ao sair do mobile; um link oculto pode recusar o foco.
     await page.waitForFunction(() => document.querySelector(".operation-picker").open);
     await page.locator('[data-operation="operations"]').waitFor({ state: "visible" });
     await page.locator('[data-operation="operations"]').focus();

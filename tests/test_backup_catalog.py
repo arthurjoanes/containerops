@@ -16,7 +16,7 @@ import backup_catalog as catalog
 
 class BackupCatalogTests(unittest.TestCase):
     def setUp(self):
-        # Destructive tests use only a freshly created fixture in a reserved session.
+        # Testes destrutivos usam só fixtures novas dentro de uma sessão reservada.
         parent = (
             Path(os.environ["USERPROFILE"])
             / "AppData/Local/ContainerOps-runtime/sessions/catalog-fixtures/test-temp"
@@ -231,7 +231,7 @@ class BackupCatalogTests(unittest.TestCase):
     def test_any_new_backup_changed_bytes_or_mtime_invalidates_preview(self):
         for mutation in ("new-backup", "corrupt", "touch", "new-file"):
             with self.subTest(mutation=mutation):
-                # Each mutation uses a separate freshly created fixture subtree.
+                # Cada mutação usa seu próprio diretório de fixture.
                 nested = self.runtime / mutation
                 nested.mkdir()
                 original_runtime = self.runtime

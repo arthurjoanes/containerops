@@ -7,6 +7,7 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 
 from ops import (
+    CONTEXT,
     EVIDENCE,
     ROOT,
     RUNTIME,
@@ -861,13 +862,13 @@ def verify(full=True):
                     "buildx",
                     "build",
                     "--builder",
-                    "pf-containerops-builder",
+                    CONTEXT.builder,
                     "--load",
                     "--provenance=false",
                     "--target",
                     "test",
                     "-t",
-                    "containerops-test:local",
+                    CONTEXT.image("test"),
                     "--secret",
                     f"id=sentinel,src={RUNTIME / 'secrets' / 'sentinel'}",
                     "-f",
@@ -881,7 +882,7 @@ def verify(full=True):
         attempt.record(
             "in_progress",
             application_image_id=stack.image,
-            test_image_id=image_id("containerops-test:local"),
+            test_image_id=image_id(CONTEXT.image("test")),
         )
         stack.compose("stop", "api", "worker")
         for name, command in (

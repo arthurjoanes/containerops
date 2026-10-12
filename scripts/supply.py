@@ -23,6 +23,13 @@ try:
         inspect_oci,
         locked_packages,
     )
+    from .runtime_context import (
+        active_context,
+        ensure_file_path,
+        ensure_no_links,
+        ensure_tree,
+        validate_runtime,
+    )
 except ImportError:
     from oci_audit import (
         convert_to_docker,
@@ -31,10 +38,18 @@ except ImportError:
         inspect_oci,
         locked_packages,
     )
+    from runtime_context import (
+        active_context,
+        ensure_file_path,
+        ensure_no_links,
+        ensure_tree,
+        validate_runtime,
+    )
 
 
-BUILDER = "pf-containerops-builder"
 ROOT = Path(__file__).resolve().parents[1]
+CONTEXT = active_context(ROOT)
+BUILDER = CONTEXT.builder
 TRIVY_VERSION = "0.74.0"
 
 
@@ -47,20 +62,18 @@ def utc_now() -> str:
 
 
 def paths(root: Path, runtime: Path, version: str = "1.0.0") -> tuple[Path, Path, Path]:
-    root, runtime = Path(root).resolve(), Path(runtime).resolve()
+    root = Path(root).resolve()
     if root != ROOT:
         raise RuntimeError("Execute a partir da raiz do ContainerOps")
-    if os.name == "nt":
-        allowed = (Path(os.environ["USERPROFILE"]) / "AppData/Local/ContainerOps-runtime").resolve()
-        if runtime != allowed:
-            raise RuntimeError(f"Runtime Windows deve ser {allowed}")
-    elif "containerops" not in runtime.name.lower():
-        raise RuntimeError("Runtime CI precisa de nome exclusivo com containerops")
+    runtime = validate_runtime(root, runtime)
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?", version):
         raise RuntimeError("Versão inválida; use major.minor.patch")
     artifact = runtime / "artifacts" / version
+    ensure_tree(artifact)
     artifact.mkdir(parents=True, exist_ok=True)
-    (root / "docs" / "evidence").mkdir(parents=True, exist_ok=True)
+    directory = active_context(root).evidence
+    ensure_no_links(directory)
+    directory.mkdir(parents=True, exist_ok=True)
     return root, runtime, artifact
 
 
@@ -80,6 +93,7 @@ def run(
     )
     output = result.stdout + result.stderr
     if log is not None:
+        ensure_file_path(log)
         log.parent.mkdir(parents=True, exist_ok=True)
         log.write_text(output, encoding="utf-8")
     if result.returncode:
@@ -92,9 +106,11 @@ def run(
 
 
 def evidence(root: Path, name: str, data: dict) -> dict:
-    (root / "docs" / "evidence" / f"{name}.json").write_text(
-        json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    directory = active_context(root).evidence
+    ensure_no_links(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    target = ensure_file_path(directory / f"{name}.json")
+    target.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return data
 
 
@@ -108,6 +124,7 @@ def image_lock(root: Path) -> dict[str, str]:
 
 def sentinel_file(runtime: Path) -> Path:
     path = runtime / "secrets" / "sentinel"
+    ensure_file_path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
         path.write_text("CONTAINEROPS_SYNTHETIC_" + secrets.token_hex(32), encoding="ascii")
@@ -168,6 +185,14 @@ def ensure_builder(root: Path, runtime: Path) -> dict:
     ]
     if not instances or any(item["Config"]["Image"] != lock["buildkit"] for item in instances):
         raise RuntimeError("Builder não usa a imagem BuildKit do lock")
+    if any(
+        not 0 < item["HostConfig"]["Memory"] <= 1536 * 1024**2
+        or item["HostConfig"]["MemorySwap"] != item["HostConfig"]["Memory"]
+        or item["HostConfig"]["CpuPeriod"] != 100000
+        or not 0 < item["HostConfig"]["CpuQuota"] <= 150000
+        for item in instances
+    ):
+        raise RuntimeError("Builder existente não respeita os limites de memória/CPU")
     return {
         "name": BUILDER,
         "driver": "docker-container",
@@ -256,6 +281,7 @@ def build_context(root: Path, runtime: Path):
     "Copia os inputs para um caminho ASCII exigido pelo Buildx no Windows."
     root, runtime, _ = paths(root, runtime)
     context = Path(tempfile.mkdtemp(prefix="containerops-build-context-", dir=runtime)).resolve()
+    ensure_no_links(context)
     context.relative_to(runtime)
     try:
         ignored = {"__pycache__", ".venv", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
@@ -295,7 +321,7 @@ def build(root: Path, runtime: Path, version: str = "1.0.0") -> dict:
     root, runtime, artifact = paths(root, runtime, version)
     builder = ensure_builder(root, runtime)
     started = time.monotonic()
-    tag = "containerops-app:" + version
+    tag = CONTEXT.image("app", version)
     lock = image_lock(root)
     with build_context(root, runtime) as context:
         command = build_args(context, runtime, version) + [
@@ -351,6 +377,7 @@ def verify_loaded_image(actual: dict, expected: dict, artifact: Path) -> dict:
     if actual["RootFS"]["Layers"] != expected["diff_ids"]:
         raise RuntimeError("Camadas da imagem carregada não correspondem ao OCI.")
     exported = artifact / "loaded-image.docker.tar"
+    ensure_file_path(exported)
     run(
         ["docker", "image", "save", "--output", str(exported), actual["Id"]],
         log=artifact / "daemon-export.log",
@@ -371,7 +398,7 @@ def audit(root: Path, runtime: Path, version: str = "1.0.0") -> dict:
     ):
         raise RuntimeError("Base Python da provenance difere do lock")
     report["python_base_material_matches_lock"] = True
-    actual = json.loads(run(["docker", "image", "inspect", "containerops-app:" + version]).stdout)[
+    actual = json.loads(run(["docker", "image", "inspect", CONTEXT.image("app", version)]).stdout)[
         0
     ]
     daemon_link = verify_loaded_image(actual, report, artifact)
@@ -380,7 +407,7 @@ def audit(root: Path, runtime: Path, version: str = "1.0.0") -> dict:
     ).stdout
     if sentinel.decode("ascii") in history:
         raise RuntimeError("Sentinela encontrada no histórico do daemon.")
-    (artifact / "history.jsonl").write_text(history, encoding="utf-8")
+    ensure_file_path(artifact / "history.jsonl").write_text(history, encoding="utf-8")
     container = run(
         [
             "docker",
@@ -393,6 +420,7 @@ def audit(root: Path, runtime: Path, version: str = "1.0.0") -> dict:
         ]
     ).stdout.strip()
     try:
+        ensure_file_path(artifact / "filesystem.tar")
         run(["docker", "export", "--output", str(artifact / "filesystem.tar"), container])
         filesystem_hash = file_digest(artifact / "filesystem.tar", sentinel)
     finally:
@@ -473,7 +501,9 @@ def scan(
     if not (artifact / "image.docker.tar").is_file():
         raise RuntimeError("Execute build antes do scan")
     cache = runtime / "trivy-cache"
+    ensure_tree(cache)
     cache.mkdir(parents=True, exist_ok=True)
+    ensure_no_links(artifact / "scanner")
     (artifact / "scanner").mkdir(exist_ok=True)
     command = scanner_command(lock, cache, artifact, offline)
     version_result = run(command + ["--version"], log=artifact / "scanner-version.log").stdout
@@ -530,7 +560,7 @@ def scan(
     if not {"os-pkgs", "lang-pkgs"}.issubset(classes):
         raise RuntimeError("Scan precisa incluir SO e dependências Python")
     build_evidence = json.loads(
-        (root / "docs/evidence" / f"build-{version}.json").read_text(encoding="utf-8")
+        (CONTEXT.evidence / f"build-{version}.json").read_text(encoding="utf-8")
     )
     expected_id = build_evidence["runtime_link"]["config_digest"]
     if report.get("Metadata", {}).get("ImageID") != expected_id:
@@ -591,6 +621,7 @@ def cache_experiment(root: Path, runtime: Path) -> dict:
     root, runtime, _ = paths(root, runtime)
     ensure_builder(root, runtime)
     experiment = runtime / "cache-experiment"
+    ensure_tree(experiment)
     experiment.mkdir(exist_ok=True)
     original_lock = root / "app" / "requirements-runtime.lock"
     original_hash = file_digest(original_lock)
@@ -631,7 +662,7 @@ def cache_experiment(root: Path, runtime: Path) -> dict:
             if name == "dependency":
                 command += [
                     "--tag",
-                    "containerops-cache-experiment:" + experiment_id,
+                    CONTEXT.image("cache-experiment", experiment_id),
                     "--attest",
                     "type=provenance,mode=max",
                     "--attest",

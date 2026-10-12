@@ -10,6 +10,7 @@ from unittest.mock import Mock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import checks
 import ops
+import proof
 
 
 class OperationSafetyTests(unittest.TestCase):
@@ -183,12 +184,19 @@ class OperationSafetyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="containerops-backup-") as temporary:
             runtime = Path(temporary)
             main_pointer = runtime / "latest-backup.json"
-            ops.write_json(main_pointer, {"directory": "main-backup"})
+            pointer = {"directory": str(runtime / "backups" / "main-backup")}
+            ops.write_json(main_pointer, pointer)
             stack = Mock(project="pf-containerops-test-12345678", directory=runtime / "isolated")
             snapshot = {"admission_paused": False, "schema_version": 2, "jobs": []}
             stack.snapshot.return_value = snapshot
-            stack.compose.return_value = Mock(stdout="postgres 17")
-            stack.inspect.return_value = {"Image": "sha256:actual"}
+            stack.compose.side_effect = lambda *args, **kwargs: Mock(
+                stdout=(
+                    "pg_dump (PostgreSQL) 17.11"
+                    if "pg_dump" in args
+                    else "postgres (PostgreSQL) 17.11"
+                )
+            )
+            stack.inspect.return_value = {"Image": "sha256:" + "a" * 64}
 
             def command(args, **kwargs):
                 if args[:2] == ["docker", "cp"]:
@@ -200,13 +208,77 @@ class OperationSafetyTests(unittest.TestCase):
                 patch.object(ops, "drain", return_value=snapshot),
                 patch.object(ops, "run", side_effect=command),
                 patch.object(ops, "evidence"),
+                patch.object(ops, "release_version", return_value="1.0.0"),
+                patch.object(proof, "protect_copy_directory", return_value={"method": "fixture"}),
+                patch.object(
+                    proof,
+                    "source_manifest",
+                    return_value={"revision": "uncommitted", "sha256": "b" * 64},
+                ),
             ):
                 directory = ops.backup(stack)
-            self.assertEqual(ops.read_json(main_pointer), {"directory": "main-backup"})
+            self.assertEqual(ops.read_json(main_pointer), pointer)
             self.assertEqual(
                 ops.read_json(stack.directory / "latest-backup.json"),
                 {"directory": str(directory)},
             )
+
+    def test_portable_commands_require_explicit_ids_and_do_not_instantiate_main_stack(self):
+        self.assertEqual(ops.parse_arguments(["restore-test"]).backup, None)
+        selected = ops.parse_arguments(["restore-test", "--backup", "known", "--trusted-source"])
+        self.assertEqual(selected.backup, "known")
+        self.assertTrue(selected.trusted_source)
+        with patch.object(ops, "Stack") as stack, patch.object(ops, "execute_backups") as execute:
+            args = ops.parse_arguments(["backups", "list"])
+            ops.execute(args)
+        stack.assert_not_called()
+        execute.assert_called_once_with(args)
+
+    def test_retention_apply_needs_plan_and_dry_run_calls_no_mutation(self):
+        import backup_catalog
+
+        with patch.object(backup_catalog, "apply_retention") as apply:
+            with self.assertRaisesRegex(ValueError, "plan-id"):
+                ops.execute_backups(
+                    ops.parse_arguments(["backups", "prune", "--keep-last", "2", "--apply"])
+                )
+        apply.assert_not_called()
+        with (
+            patch.object(
+                backup_catalog, "plan_retention", return_value={"plan_id": "fixture"}
+            ) as plan,
+            patch.object(ops, "catalog_evidence") as write,
+        ):
+            ops.execute_backups(ops.parse_arguments(["backups", "prune", "--keep-last", "2"]))
+        plan.assert_called_once()
+        write.assert_not_called()
+
+    def test_destroy_rejects_valid_uuid_project_without_attempt_ownership(self):
+        with tempfile.TemporaryDirectory(prefix="containerops-destroy-") as temporary:
+            with patch.object(ops, "RUNTIME", Path(temporary)):
+                stack = ops.Stack("pf-containerops-test-12345678")
+            with patch.object(stack, "compose") as compose:
+                with self.assertRaisesRegex(RuntimeError, "tentativa"):
+                    stack.destroy_test()
+            compose.assert_not_called()
+
+    def test_restore_tool_preflight_rejects_incompatible_major_before_stack(self):
+        import backup_package
+
+        metadata = {
+            "image": "sha256:" + "a" * 64,
+            "server": "postgres (PostgreSQL) 17.11",
+            "schema_version": 2,
+        }
+        with (
+            patch.object(backup_package, "preflight_image", return_value=metadata["image"]),
+            patch.object(ops, "image_id", return_value="auxiliary"),
+            patch.object(ops, "run", return_value=Mock(stdout="pg_restore (PostgreSQL) 16.1")),
+            patch.object(ops, "Stack") as stack,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "PostgreSQL incompatível"):
+                ops.restore_preflight(metadata)
+        stack.assert_not_called()
 
     def test_candidate_job_must_survive_rollback_with_result_and_attempts(self):
         candidate = {

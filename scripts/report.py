@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import math
+import re
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
@@ -16,6 +17,7 @@ from report_evidence import (
     verification_checks,
     verification_result,
 )
+from runtime_context import ROOT, RuntimeContext, active_context, ensure_file_path, ensure_no_links
 
 
 def shown(value: object, suffix: str = "") -> str:
@@ -199,17 +201,109 @@ def job_panel(job: dict, evidence: str) -> str:
     )
 
 
+def backup_catalog_panel(record: dict, context: RuntimeContext) -> str:
+    """Render only the public catalog summary, without exposing private runtime paths."""
+    entries = record.get("entries")
+    if not isinstance(entries, list):
+        return ""
+    rows = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        identifier = entry.get("id")
+        if not isinstance(identifier, str) or not re.fullmatch(
+            r"[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}", identifier
+        ):
+            continue
+        origin = entry.get("source_project")
+        if not isinstance(origin, str) or any(char in origin for char in "/\\:"):
+            origin = None
+        source_context = entry.get("source_context")
+        if not isinstance(source_context, str) or any(char in source_context for char in "/\\:"):
+            source_context = None
+        protection = "Protegido" if entry.get("protected") is True else "Sem marca"
+        if entry.get("imported") is True:
+            protection += "; importado"
+        if entry.get("restore_verified") is True:
+            protection += "; restore verificado"
+        reasons = entry.get("retention_reasons", entry.get("reasons", []))
+        reason_labels = {
+            "unknown": "Integridade desconhecida",
+            "latest-backup": "Último ponteiro",
+            "marked-protected": "Marca de proteção",
+            "last-valid": "Última cópia válida",
+            "keep-last": "Manter últimas",
+            "last-restore-verified": "Último restore verificado",
+        }
+        reason = (
+            "; ".join(
+                reason_labels[value]
+                for value in reasons
+                if isinstance(value, str) and value in reason_labels
+            )
+            if isinstance(reasons, list)
+            else ""
+        )
+        validation_value = entry.get("validation")
+        validation = (
+            {"valid": "Íntegro", "unknown": "Desconhecido"}.get(validation_value, "Dado inválido")
+            if isinstance(validation_value, str)
+            else "Dado inválido"
+        )
+        rows.append(
+            f'<tr><th scope="row"><code>{escape(identifier)}</code></th>'
+            f"<td>{shown(origin)}</td><td>{shown(source_context)}</td><td>{shown(entry.get('schema_version'))}</td>"
+            f"<td>{shown(entry.get('size_bytes'), ' bytes')}</td>"
+            f"<td>{escape(validation)}</td><td>{escape(protection)}</td>"
+            f"<td>{escape(reason) if reason else 'Consultar plano'}</td></tr>"
+        )
+    prefix = f"$env:CONTAINEROPS_SESSION='{context.session}'; " if context.session else ""
+    commands = (
+        "python scripts/ops.py backups list",
+        "python scripts/ops.py restore-test --backup <id>",
+        "python scripts/ops.py backups prune --keep-last 3",
+    )
+    return (
+        '<div class="surface-panel backup-catalog"><h3>Catálogo de backups</h3>'
+        f"<p>Contexto: <code>{escape(context.session or 'padrão')}</code>. "
+        "Integridade confere bytes; restore verificado exige snapshot, novo job e limpeza.</p>"
+        '<div class="table-wrap" role="region" aria-label="Catálogo de backups" tabindex="0">'
+        '<table><caption>Cópias no contexto ativo</caption><thead><tr><th scope="col">ID</th>'
+        '<th scope="col">Origem</th><th scope="col">Contexto de origem</th><th scope="col">Schema</th><th scope="col">Tamanho</th>'
+        '<th scope="col">Integridade</th><th scope="col">Proteção</th>'
+        '<th scope="col">Retenção</th></tr></thead><tbody>'
+        + ("".join(rows) or '<tr><td colspan="8">Nenhuma cópia catalogada.</td></tr>')
+        + "</tbody></table></div><p>Execute localmente para atualizar, testar uma cópia ou gerar a prévia de retenção:</p>"
+        + "".join(
+            f'<pre tabindex="0"><code>{escape(prefix + command)}</code></pre>'
+            for command in commands
+        )
+        + "<p>A prévia não remove cópias. A aplicação exige o ID do plano e flag explícita. "
+        "O relatório registra resultados e comandos locais.</p></div>"
+    )
+
+
 def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     root, runtime = Path(root), Path(runtime)
+    context = active_context(root)
+    session_output = bool(context.session and runtime.resolve() == context.runtime)
+    if context.session and root.resolve() == ROOT and not session_output:
+        raise RuntimeError("Relatório deve usar o runtime do contexto ativo")
+    directory = context.evidence if session_output else root / "docs" / "evidence"
+    destination = context.report if session_output else root / "docs" / "report.html"
+    ensure_file_path(destination)
+    if session_output:
+        ensure_no_links(directory)
+        ensure_no_links(destination.parent)
     generated_at = now or datetime.now(UTC)
-    records, errors = read_records(root / "docs" / "evidence")
+    records, errors = read_records(directory)
     for name, record in list(records.items()):
         stamped = record_time(record)
         if stamped is not None and stamped > generated_at:
             errors[name + ".json"] = "data posterior à geração; confira o relógio"
             del records[name]
     verification = records.get("verification-run", {})
-    attempt = verification_result(root / "docs" / "evidence", verification, errors, generated_at)
+    attempt = verification_result(directory, verification, errors, generated_at)
     current = attempt.records
     journey = current.get("journey", {})
     hardening = current.get("hardening", {})
@@ -723,6 +817,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         verification_context=record_context(verification, label="Conclusão registrada"),
         job_context=record_context(job_record),
         backup_context=record_context(backup),
+        backup_catalog=backup_catalog_panel(records.get("backup-catalog", {}), context),
         restore_context=record_context(restore),
         release_context=record_context(release),
         rollback_context=record_context(rollback),
@@ -772,7 +867,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         evidence_rows=evidence_rows,
     )
     page = "\n".join(line.rstrip() for line in page.splitlines()) + "\n"
-    destination = root / "docs" / "report.html"
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(page, encoding="utf-8", newline="\n")
     print(f"Relatório: {destination}")
     return destination
@@ -780,4 +875,4 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
 
 if __name__ == "__main__":
     project = Path(__file__).resolve().parents[1]
-    generate(project, project / ".runtime")
+    generate(project, active_context(project).runtime)

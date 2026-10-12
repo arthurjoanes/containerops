@@ -47,10 +47,28 @@ def source_manifest():
         path.relative_to(ops.ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
         for path in sorted(set(paths))
     }
+    source_scope = [
+        "app",
+        "docker",
+        "scripts",
+        "tests",
+        "compose.yaml",
+        "compose.tls.yaml",
+        ".dockerignore",
+        "pyproject.toml",
+    ]
+    source_diff = ops.run(
+        ["git", "diff", "--binary", "HEAD", "--", *source_scope], capture=True
+    ).stdout
+    source_status = ops.run(
+        ["git", "status", "--porcelain", "--", *source_scope], capture=True
+    ).stdout
     return {
         "files": files,
         "sha256": hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest(),
         "revision": supply.revision(ops.ROOT),
+        "source_diff_sha256": hashlib.sha256(source_diff.encode("utf-8")).hexdigest(),
+        "source_status_sha256": hashlib.sha256(source_status.encode("utf-8")).hexdigest(),
     }
 
 
@@ -106,11 +124,18 @@ def inventory():
 
 
 def main_runtime_state():
-    return {
+    state = {
         name: hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
         for name in ("state.json", "latest-backup.json")
         for path in (ops.RUNTIME / name,)
     }
+    if ops.CONTEXT.session:
+        state["default_runtime"] = {
+            name: hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
+            for name in ("state.json", "latest-backup.json")
+            for path in (ops.CONTEXT.base / name,)
+        }
+    return state
 
 
 class ProofRun:
@@ -382,7 +407,7 @@ def prove_operations():
         attempt.write("main-runtime-before", runtime_before)
         images = {}
         for version in ops.RELEASES:
-            image = ops.image_id("containerops-app:" + version)
+            image = ops.image_id(ops.CONTEXT.image("app", version))
             checks.require(ops.release_version(image) == version, "Release da imagem incompatível")
             images[version] = image
             attempt.write(
@@ -518,7 +543,7 @@ def prove():
         for version in ops.RELEASES:
             attempt.step("build-" + version, lambda v=version: ops.build(v))
             attempt.archive("build-" + version)
-            image = ops.image_id("containerops-app:" + version)
+            image = ops.image_id(ops.CONTEXT.image("app", version))
             attempt.write(
                 "sources-" + version,
                 attempt.step("sources-" + version, lambda i=image: image_sources(i)),
@@ -545,7 +570,9 @@ def prove():
             )
             attempt.write("verify-" + path.stem, ops.read_json(path))
 
-        stack = ops.Stack(attempt.data["project"], image=ops.image_id("containerops-app:1.0.0"))
+        stack = ops.Stack(
+            attempt.data["project"], image=ops.image_id(ops.CONTEXT.image("app", "1.0.0"))
+        )
         stack.assert_fresh()
         cleanup_required = True
         attempt.step("start-isolated", stack.start)

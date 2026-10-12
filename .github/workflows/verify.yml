@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 35
     env:
       CONTAINEROPS_RUNTIME: ${{ github.workspace }}/.runtime-containerops
+      CONTAINEROPS_SESSION: ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Setup e build
@@ -21,29 +22,20 @@ jobs:
           python3 scripts/ops.py setup
           python3 scripts/ops.py build
           python3 scripts/ops.py sbom --version 1.0.0
+          python3 scripts/ops.py build --version 2.0.0
+          python3 scripts/ops.py sbom --version 2.0.0
       - name: Testes
         run: python3 scripts/ops.py verify
       - name: Backup, restore, release e rollback
         run: |
-          python3 scripts/ops.py start
-          python3 scripts/ops.py demo
-          python3 scripts/ops.py backup
-          python3 scripts/ops.py restore-test
-          python3 scripts/ops.py build --version 2.0.0
-          python3 scripts/ops.py sbom --version 2.0.0
-          python3 scripts/ops.py release --version 2.0.0 --inject-smoke-failure
-          python3 scripts/ops.py release --version 2.0.0
-          python3 scripts/ops.py tls
-          python3 scripts/ops.py inspect
+          python3 scripts/ops.py prove --scenario operations
+          python3 scripts/transfer_proof.py --destination-session ci-rx-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Scan e relatório
         run: |
           python3 scripts/ops.py scan --version 1.0.0
           python3 scripts/ops.py scan --version 2.0.0
           python3 scripts/scan_services.py --offline
           python3 scripts/ops.py report
-      - name: Parar containers
-        if: always()
-        run: python3 scripts/ops.py stop
       - name: Salvar resultados
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -52,11 +44,12 @@ jobs:
           # O runtime é oculto; publicar só os caminhos abaixo.
           include-hidden-files: true
           path: |
-            docs/evidence/
-            docs/report.html
-            .runtime-containerops/artifacts/*/scanner/*.json
-            .runtime-containerops/artifacts/*/sbom-*.json
-            .runtime-containerops/artifacts/*/provenance-*.json
-            .runtime-containerops/artifacts/*/build-metadata.json
-            .runtime-containerops/service-scans/*/scanner/*.json
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/docs/evidence/
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/docs/report.html
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/scanner/*.json
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/sbom-*.json
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/provenance-*.json
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/build-metadata.json
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/service-scans/*/scanner/*.json
+            .runtime-containerops/sessions/ci-rx-${{ github.run_id }}-${{ github.run_attempt }}/docs/evidence/
           if-no-files-found: warn

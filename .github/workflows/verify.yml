@@ -46,6 +46,7 @@ jobs:
           path: |
             .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/docs/evidence/
             .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/docs/report.html
+            .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/docs/documentation/
             .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/scanner/*.json
             .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/sbom-*.json
             .runtime-containerops/sessions/${{ env.CONTAINEROPS_SESSION }}/artifacts/*/provenance-*.json

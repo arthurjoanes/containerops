@@ -71,6 +71,14 @@ def parse_record(content: str, name: str) -> dict:
     ):
         raise ValueError("image_id: digest SHA-256 esperado")
     kind = name.split("-", 1)[0]
+    if kind == "restore":
+        if "status" in record and (
+            type(record["status"]) is not str
+            or record["status"] not in {"passed", "failed", "in_progress"}
+        ):
+            raise ValueError("status: passed, failed ou in_progress esperado")
+        if "cleanup_succeeded" in record and type(record["cleanup_succeeded"]) is not bool:
+            raise ValueError("cleanup_succeeded: booleano esperado")
     objects = {
         "demo": ["job", "job.result"],
         "journey": ["job", "job.result"],
@@ -142,6 +150,7 @@ def parse_record(content: str, name: str) -> dict:
                     "rolled_back",
                     "checksum_verified",
                     "snapshot_equal",
+                    "cleanup_succeeded",
                     "verified_with_explicit_ca",
                     "no_published_port",
                     "limits_enforced",

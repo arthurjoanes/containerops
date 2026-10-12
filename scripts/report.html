@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="color-scheme" content="light"/><meta name="description" content="Operações registradas do ContainerOps: resultados, etapas e evidências de verificação, restauração e release."/><link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,$favicon"/><title>ContainerOps | Operações registradas</title><style>$styles</style></head>
 <body>
 <a class="skip-link" href="#content">Ir para a operação</a>
-<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">$brand_mark</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="../README.md">Como executar</a><a href="runbooks.md">Runbooks</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
+<header class="masthead"><a class="brand" href="#overview"><span class="brand-mark" aria-hidden="true">$brand_mark</span>ContainerOps</a><span class="report-kind">Registro operacional</span><nav class="header-docs" aria-label="Documentação"><a href="$readme_url">Como executar</a><a href="$runbooks_url">Runbooks</a></nav><span class="snapshot-label">Snapshot · somente leitura</span></header>
 <div class="report-shell">
   <aside class="operation-sidebar">
     <div class="report-heading"><h1>Operações registradas</h1></div>
@@ -40,15 +40,21 @@
         <p class="notice">O TLS termina no proxy. Este registro não é uma observação da disponibilidade atual.</p>
       </div>
     </section>
+    <section id="backups" data-panel aria-labelledby="backups-title">
+      <div class="panel-heading"><div><h2 id="backups-title" tabindex="-1">Cópias de backup</h2><p>Localize uma cópia e confira o que foi registrado sobre ela.</p></div><a class="context-link" href="#recovery">Consultar o último ensaio</a></div>
+      $backup_catalog
+    </section>
     <section id="recovery" data-panel aria-labelledby="recovery-title">
-      <div class="panel-heading"><h2 id="recovery-title" tabindex="-1">Backup e restauração</h2></div>
+      <div class="panel-heading"><div><h2 id="recovery-title" tabindex="-1">Último ensaio de restore</h2><p>Este resultado pertence à cópia identificada no recibo.</p></div><a class="context-link" href="#backups">Localizar outra cópia</a></div>
       <div class="inspection-grid">
         <div class="result-column surface-panel">
           <div class="panel-toolbar"><h3>Restauração em volume novo</h3>$restore_status</div>
+          <p class="restore-explanation">$restore_explanation</p>
+          <p class="restore-copy">ID da cópia ensaiada: <code>$restore_backup_id</code></p>
           <div class="operation-summary"><div><span>Jobs restaurados</span><strong class="$restored_jobs_style">$restored_jobs</strong></div><div><span>Restauração + novo job</span><strong class="$restore_duration_style">$restore_duration</strong></div></div>
           <ol class="control-list">$restore_steps</ol>
           <div class="proof">$restore_proof</div>
-          <details class="record-details"><summary>Identidade da restauração</summary>$restore_context</details>
+          <details class="record-details"><summary>Identidade da restauração</summary>$restore_context<dl class="facts"><dt>SHA-256 do dump recebido</dt><dd><code>$restore_backup_checksum</code></dd><dt>SHA-256 dos metadados</dt><dd><code>$restore_metadata_checksum</code></dd></dl><p>Confira ID, origem e hashes no JSON antes de associar este ensaio a uma cópia.</p></details>
           <details class="record-details recovery-job"><summary>Resultado do novo job no volume restaurado</summary>$restored_job</details>
           <p class="notice operation-limit">O backup permanece no mesmo computador do banco. A prova não cobre perda do host nem representa um prazo garantido de recuperação.</p>
         </div>
@@ -59,7 +65,6 @@
           <details class="record-details"><summary>Identidade e checksum da cópia</summary>$backup_context<dl class="facts"><dt>Schema do backup</dt><dd>$backup_schema</dd><dt>SHA-256 do dump</dt><dd><code>$backup_checksum</code></dd></dl></details>
         </aside>
       </div>
-      $backup_catalog
     </section>
     <section id="operations" data-panel aria-labelledby="operations-title">
       <div class="panel-heading"><div><h2 id="operations-title" tabindex="-1">Troca de imagem</h2><p>Tentativa mais recente, incluindo falha quando registrada.</p></div></div>
@@ -99,9 +104,9 @@
       <div class="panel-heading"><div><h2 id="evidence-title" tabindex="-1">Evidências disponíveis</h2><p>$record_count arquivos JSON válidos. Arquivos de outras tentativas não aprovam a operação selecionada.</p></div></div>
       <div class="surface-panel">
         <div class="table-wrap" role="region" aria-label="JSONs, tabela com rolagem horizontal" tabindex="0"><table><caption>Arquivos e datas dos registros</caption><thead><tr><th scope="col">Arquivo</th><th scope="col">Data</th><th scope="col">Projeto</th></tr></thead><tbody>$evidence_rows</tbody></table></div>
-        <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><div class="code-block"><span class="code-language">Shell</span><pre tabindex="0" aria-label="Comando para gerar o relatório"><code class="language-sh"><span class="syntax-command">python</span> <span class="syntax-path">scripts/ops.py</span> report</code></pre></div><p>Os <a href="runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></details>
+        <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><div class="code-block"><span class="code-language">Shell</span><pre tabindex="0" aria-label="Comando para gerar o relatório"><code class="language-sh"><span class="syntax-command">python</span> <span class="syntax-path">scripts/ops.py</span> report</code></pre></div><p>Os <a href="$runbooks_url">runbooks</a> descrevem a execução de cada operação.</p></details>
       </div>
     </section>
-    <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em $created</span><a href="verification.md">Escopo das verificações</a></footer>
+    <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em $created</span><a href="$verification_url">Escopo das verificações</a></footer>
   </main>
 </div><script>$scripts;</script></body></html>

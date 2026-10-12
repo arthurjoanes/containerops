@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import math
 import re
 from datetime import UTC, datetime
@@ -17,7 +18,15 @@ from report_evidence import (
     verification_checks,
     verification_result,
 )
-from runtime_context import ROOT, RuntimeContext, active_context, ensure_file_path, ensure_no_links
+from report_recovery import restore_result
+from runtime_context import (
+    ROOT,
+    RuntimeContext,
+    active_context,
+    ensure_file_path,
+    ensure_no_links,
+    valid_session_slug,
+)
 
 
 def shown(value: object, suffix: str = "") -> str:
@@ -201,40 +210,103 @@ def job_panel(job: dict, evidence: str) -> str:
     )
 
 
-def backup_catalog_panel(record: dict, context: RuntimeContext) -> str:
-    """Render only the public catalog summary, without exposing private runtime paths."""
+def command_block(command: str, identifier: str, label: str) -> str:
+    return (
+        '<div class="code-block local-command"><div class="command-heading">'
+        f'<span class="code-language">{escape(label)}</span>'
+        f'<button type="button" data-copy-command data-command-target="{identifier}" '
+        "hidden>Copiar comando</button></div>"
+        f'<pre id="{identifier}" role="region" tabindex="0" aria-label="{escape(label, quote=True)}">'
+        f"<code>{escape(command)}</code></pre>"
+        '<p class="copy-feedback" role="status" aria-live="polite"></p></div>'
+    )
+
+
+def catalog_namespace(record: dict, context: RuntimeContext) -> tuple[str | None, str]:
+    value = record.get("context")
+    if value == "default":
+        return "default", "padrão"
+    if valid_session_slug(value):
+        return value, value
+    if "context" in record or record:
+        return None, "Não registrado ou inválido"
+    return context.session or "default", context.session or "padrão"
+
+
+def backup_catalog_panel(
+    record: dict, context: RuntimeContext, *, records: dict | None = None, invalid: bool = False
+) -> str:
+    """A public ledger keeps copy integrity, restore receipts and protection separate."""
+    namespace, namespace_label = catalog_namespace(record, context)
+    prefix = (
+        f"$env:CONTAINEROPS_SESSION='{namespace}'\n"
+        if namespace and namespace != "default"
+        else "Remove-Item Env:CONTAINEROPS_SESSION -ErrorAction SilentlyContinue\n"
+    )
     entries = record.get("entries")
-    if not isinstance(entries, list):
-        return ""
-    rows = []
-    for entry in entries:
-        if not isinstance(entry, dict):
-            continue
-        identifier = entry.get("id")
-        if not isinstance(identifier, str) or not re.fullmatch(
-            r"[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}", identifier
+    malformed = invalid or bool(record and not isinstance(entries, list))
+    accepted, rejected, identifiers = [], 0, set()
+    for entry in entries if isinstance(entries, list) else []:
+        identifier = entry.get("id") if isinstance(entry, dict) else None
+        if (
+            not isinstance(identifier, str)
+            or identifier in identifiers
+            or not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}", identifier)
         ):
+            rejected += 1
             continue
+        identifiers.add(identifier)
+        accepted.append(entry)
+    malformed = malformed or rejected > 0
+    accepted.sort(
+        key=lambda entry: (
+            record_time({"created_at": entry.get("created_at")})
+            or datetime.min.replace(tzinfo=UTC),
+            entry["id"],
+        ),
+        reverse=True,
+    )
+    reason_labels = {
+        "unknown": "Integridade desconhecida",
+        "latest-backup": "Último ponteiro",
+        "marked-protected": "Marca de proteção",
+        "last-valid": "Última cópia válida",
+        "keep-last": "Manter últimas",
+        "last-restore-verified": "Último restore verificado",
+    }
+    rows = []
+    for entry in accepted:
+        identifier = entry["id"]
         origin = entry.get("source_project")
-        if not isinstance(origin, str) or any(char in origin for char in "/\\:"):
-            origin = None
         source_context = entry.get("source_context")
-        if not isinstance(source_context, str) or any(char in source_context for char in "/\\:"):
-            source_context = None
-        protection = "Protegido" if entry.get("protected") is True else "Sem marca"
-        if entry.get("imported") is True:
-            protection += "; importado"
-        if entry.get("restore_verified") is True:
-            protection += "; restore verificado"
+        origin = (
+            origin if isinstance(origin, str) and not any(c in origin for c in "/\\:") else None
+        )
+        source_context = (
+            source_context
+            if isinstance(source_context, str) and not any(c in source_context for c in "/\\:")
+            else None
+        )
+        valid = entry.get("validation") == "valid"
+        verified = entry.get("restore_verified") is True and valid
+        validation = (
+            "Íntegro"
+            if valid
+            else "Desconhecido"
+            if entry.get("validation") == "unknown"
+            else "Dado inválido"
+        )
+        restore_label = "Verificado no catálogo" if verified else "Sem recibo no catálogo"
+        restore_state = "verified" if verified else "unverified" if valid else "unknown"
+        protection = (
+            "Protegido"
+            if entry.get("protected") is True
+            else "Sem marca de proteção"
+            if entry.get("protected") is False
+            else "Proteção não informada"
+        )
+        imported = entry.get("imported") is True
         reasons = entry.get("retention_reasons", entry.get("reasons", []))
-        reason_labels = {
-            "unknown": "Integridade desconhecida",
-            "latest-backup": "Último ponteiro",
-            "marked-protected": "Marca de proteção",
-            "last-valid": "Última cópia válida",
-            "keep-last": "Manter últimas",
-            "last-restore-verified": "Último restore verificado",
-        }
         reason = (
             "; ".join(
                 reason_labels[value]
@@ -244,43 +316,146 @@ def backup_catalog_panel(record: dict, context: RuntimeContext) -> str:
             if isinstance(reasons, list)
             else ""
         )
-        validation_value = entry.get("validation")
-        validation = (
-            {"valid": "Íntegro", "unknown": "Desconhecido"}.get(validation_value, "Dado inválido")
-            if isinstance(validation_value, str)
-            else "Dado inválido"
+        command = (
+            command_block(
+                prefix + f"python scripts/ops.py restore-test --backup {identifier}",
+                f"restore-command-{identifier}",
+                "Comando local para este ID · PowerShell",
+            )
+            + (
+                "<p class=notice>Esta cópia foi importada. Confira a origem antes de acrescentar <code>--trusted-source</code>; o hash não autentica o conteúdo.</p>"
+                if imported
+                else ""
+            )
+            if valid and namespace
+            else '<p class="notice">Confira integridade e contexto com <code>backups list</code> antes de preparar um restore deste ID.</p>'
         )
+        search = " ".join(str(v) for v in (identifier, origin or "", source_context or ""))
         rows.append(
-            f'<tr><th scope="row"><code>{escape(identifier)}</code></th>'
-            f"<td>{shown(origin)}</td><td>{shown(source_context)}</td><td>{shown(entry.get('schema_version'))}</td>"
-            f"<td>{shown(entry.get('size_bytes'), ' bytes')}</td>"
-            f"<td>{escape(validation)}</td><td>{escape(protection)}</td>"
-            f"<td>{escape(reason) if reason else 'Consultar plano'}</td></tr>"
+            f'<li id="copy-{identifier}" data-backup-row data-backup-search="{escape(search, quote=True)}" '
+            f'data-backup-restore="{restore_state}" tabindex="-1"><article aria-labelledby="copy-title-{identifier}">'
+            '<div class="backup-row-heading"><div class="backup-identity">'
+            f'<h3 id="copy-title-{identifier}"><code>{escape(identifier)}</code></h3>'
+            f'<p class="backup-date">{("Criada em " + timestamp({"created_at": entry.get("created_at")})) if record_time({"created_at": entry.get("created_at")}) else "Data de criação não registrada"}</p>'
+            f'<p class="backup-origin">Origem: <code>{shown(origin)}</code> · contexto <code>{shown(source_context)}</code></p></div>'
+            '<dl class="backup-checks"><div><dt>Integridade</dt>'
+            f'<dd><span class="badge {"pass" if valid else "pending" if entry.get("validation") == "unknown" else "fail"}">{validation}</span></dd></div>'
+            f'<div><dt>Restore</dt><dd><span class="badge {"pass" if verified else "pending"}">{restore_label}</span></dd></div></dl></div>'
+            '<details class="record-details"><summary>Detalhes e comando local</summary>'
+            f'<dl class="copy-facts"><div><dt>Schema</dt><dd>{shown(entry.get("schema_version"))}</dd></div>'
+            f"<div><dt>Tamanho</dt><dd>{shown(entry.get('size_bytes'), ' bytes')}</dd></div>"
+            f"<div><dt>Proteção</dt><dd>{protection}</dd></div><div><dt>Transporte</dt><dd>{'Importado' if imported else 'Não marcado como importado'}</dd></div>"
+            f"<div><dt>Retenção</dt><dd>{escape(reason) if reason else 'Consulte a prévia na CLI'}</dd></div></dl>"
+            + command
+            + "</details></article></li>"
         )
-    prefix = f"$env:CONTAINEROPS_SESSION='{context.session}'; " if context.session else ""
+    warning = (
+        '<p class="record-warning">Há entradas inválidas ou um catálogo ilegível. Nenhuma delas é tratada como ausência de cópias. Confira o JSON e a CLI.</p>'
+        if malformed
+        else ""
+    )
+    missing = (
+        '<div class="empty-state"><h3>Catálogo ainda não registrado</h3><p>Gere o catálogo na CLI e atualize este relatório. A ausência do registro não demonstra que não há backups.</p></div>'
+        if not record and not invalid
+        else '<div class="empty-state"><h3>Nenhuma entrada válida para apresentar</h3><p>Confira as entradas inválidas no arquivo.</p></div>'
+        if malformed and not rows
+        else '<div class="empty-state"><h3>Nenhuma cópia catalogada</h3><p>Este catálogo foi registrado sem cópias. Gere um backup pelo procedimento dos runbooks.</p></div>'
+        if not rows
+        else ""
+    )
+    filters = (
+        '<form class="catalog-filters" data-catalog-controls hidden role="search" aria-label="Buscar cópia no catálogo">'
+        '<div><label for="catalog-search">Buscar ID ou origem</label><input id="catalog-search" type="search" data-catalog-search maxlength="128" autocomplete="off" placeholder="ID, projeto ou contexto"/></div>'
+        '<div><label for="catalog-restore">Recibo de restore</label><select id="catalog-restore" data-catalog-restore>'
+        '<option value="all">Todas as cópias</option><option value="verified">Com restore verificado</option><option value="unverified">Íntegras sem recibo</option><option value="unknown">Desconhecida ou inválida</option></select></div>'
+        '<button type="button" data-catalog-reset>Limpar filtros</button></form>'
+        f'<p class="catalog-count" role="status" aria-live="polite" data-catalog-status>{len(rows)} cópias no registro. Mais recentes primeiro.</p>'
+        '<p class="empty-state" data-catalog-no-results hidden>Nenhuma cópia corresponde aos filtros. Limpe a busca ou escolha outro estado.</p>'
+        if rows
+        else ""
+    )
     commands = (
-        "python scripts/ops.py backups list",
-        "python scripts/ops.py restore-test --backup <id>",
-        "python scripts/ops.py backups prune --keep-last 3",
+        command_block(
+            prefix + "python scripts/ops.py backups list",
+            "catalog-list-command",
+            "Conferir o catálogo atual · PowerShell",
+        )
+        if namespace
+        else '<p class="notice">Contexto não registrado. Confira a sessão no terminal antes de selecionar uma cópia.</p>'
+    )
+    retention = (
+        command_block(
+            prefix + "python scripts/ops.py backups prune --keep-last 3",
+            "catalog-plan-command",
+            "Gerar uma prévia sem remoção · PowerShell",
+        )
+        if namespace
+        else ""
     )
     return (
-        '<div class="surface-panel backup-catalog"><h3>Catálogo de backups</h3>'
-        f"<p>Contexto: <code>{escape(context.session or 'padrão')}</code>. "
-        "Integridade confere bytes; restore verificado exige snapshot, novo job e limpeza.</p>"
-        '<div class="table-wrap" role="region" aria-label="Catálogo de backups" tabindex="0">'
-        '<table><caption>Cópias no contexto ativo</caption><thead><tr><th scope="col">ID</th>'
-        '<th scope="col">Origem</th><th scope="col">Contexto de origem</th><th scope="col">Schema</th><th scope="col">Tamanho</th>'
-        '<th scope="col">Integridade</th><th scope="col">Proteção</th>'
-        '<th scope="col">Retenção</th></tr></thead><tbody>'
-        + ("".join(rows) or '<tr><td colspan="8">Nenhuma cópia catalogada.</td></tr>')
-        + "</tbody></table></div><p>Execute localmente para atualizar, testar uma cópia ou gerar a prévia de retenção:</p>"
-        + "".join(
-            f'<pre tabindex="0"><code>{escape(prefix + command)}</code></pre>'
-            for command in commands
-        )
-        + "<p>A prévia não remove cópias. A aplicação exige o ID do plano e flag explícita. "
-        "O relatório registra resultados e comandos locais.</p></div>"
+        '<div class="surface-panel backup-catalog">'
+        f'<div class="catalog-intro"><p>Contexto do catálogo: <code>{escape(namespace_label)}</code></p>'
+        f'<p class="metadata">{("Registrado em " + timestamp(record)) if record_time(record) else "Data do catálogo não registrada"}. A CLI confere o estado atual.</p></div>'
+        '<p class="catalog-reading">Integridade confere os bytes. Restore verificado registra snapshot, novo job e limpeza. Sem recibo no catálogo não significa que a cópia nunca foi ensaiada.</p>'
+        + warning
+        + filters
+        + missing
+        + ('<ol class="backup-ledger">' + "".join(rows) + "</ol>" if rows else "")
+        + '<div class="catalog-source"><h3>Fonte e próximos passos</h3><div class="proof">'
+        + proof("backup-catalog", records or ({"backup-catalog": record} if record else {}))
+        + "</div>"
+        + commands
+        + '<details class="record-details"><summary>Prévia de retenção</summary>'
+        + retention
+        + "<p>A prévia não remove cópias. Aplicar exige <code>--apply --plan-id &lt;id-do-plano&gt;</code> e uma nova conferência sob lock na CLI.</p></details>"
+        + '<p class="notice">O HTML permite consultar registros e copiar texto. Execute operações somente no terminal, na sessão indicada.</p></div></div>'
     )
+
+
+def guide_urls(root: Path, destination: Path, session_output: bool) -> dict[str, str]:
+    if not session_output:
+        return {
+            "readme_url": "../README.md",
+            "runbooks_url": "runbooks.md",
+            "verification_url": "verification.md",
+        }
+    names = (
+        "README.md",
+        "docs/runbooks.md",
+        "docs/verification.md",
+        "docs/report-guide.md",
+        "docs/architecture.md",
+        "docs/security.md",
+        "docs/supply-chain.md",
+        "docs/operational-recovery.md",
+        "docs/demo.md",
+        "docs/frontend-quality.md",
+        "docs/screenshots.md",
+        "docs/data-contract.md",
+        "docs/brand.md",
+    )
+    sources = [(name, ROOT / name) for name in names if (ROOT / name).is_file()]
+    signature = hashlib.sha256(
+        b"".join(name.encode() + path.read_bytes() for name, path in sources)
+    ).hexdigest()[:16]
+    directory = ensure_no_links(destination.parent / "documentation" / signature)
+    for name, source in sources:
+        target = ensure_file_path(directory / name)
+        target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        content = source.read_bytes()
+        if target.exists():
+            if target.read_bytes() != content:
+                raise RuntimeError(
+                    "Documentação da sessão diverge da fonte; nenhum arquivo foi sobrescrito"
+                )
+        else:
+            with target.open("xb") as stream:
+                stream.write(content)
+    return {
+        "readme_url": f"documentation/{signature}/README.md",
+        "runbooks_url": f"documentation/{signature}/docs/runbooks.md",
+        "verification_url": f"documentation/{signature}/docs/verification.md",
+    }
 
 
 def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
@@ -310,6 +485,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
     recovery = current.get("recovery", {})
     backup = records.get("backup", {})
     restore = records.get("restore", {})
+    restore_outcome = restore_result({"status": "invalid"} if "restore.json" in errors else restore)
     release_source = "release"
     if "release-failed" in records and (
         not records.get("release")
@@ -432,13 +608,12 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         ),
         (
             "Backup restaurado",
-            observed(
-                restore,
-                restore.get("checksum_verified") is True
-                and restore.get("snapshot_equal") is True
-                and successful_job(restore.get("new_job", {})),
-            ),
-            "Restaura o dump em outro projeto e volume. Confere checksum, snapshot e um novo job.",
+            True
+            if restore_outcome.state == "pass"
+            else False
+            if restore_outcome.state in ("fail", "invalid")
+            else None,
+            "Restaura em volume novo e confere checksum, snapshot, novo job e limpeza dos recursos de teste.",
             "restore",
         ),
         (
@@ -526,6 +701,13 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 "Novo job após restauração",
                 observed(restore.get("new_job", {}), successful_job(restore.get("new_job", {}))),
                 "Confere conclusão, contagem de palavras e checksum do novo resultado.",
+            ),
+            (
+                "Limpeza dos recursos de teste",
+                restore.get("cleanup_succeeded"),
+                "Remove os recursos da tentativa e confere sua ausência."
+                if "cleanup_succeeded" in restore
+                else "Limpeza não registrada neste recibo. Confira o JSON antes de concluir que a recuperação terminou.",
             ),
         )
     )
@@ -713,9 +895,19 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
             "Recuperação",
             [
                 (
+                    "backups",
+                    "Cópias de backup",
+                    "invalid"
+                    if "backup-catalog.json" in errors
+                    else "pass"
+                    if records.get("backup-catalog")
+                    else "missing",
+                    "Localizar ID, integridade e recibo de restore",
+                ),
+                (
                     "recovery",
-                    "Backup e restauração",
-                    operation_states["restore"],
+                    "Último ensaio de restore",
+                    "invalid" if "restore.json" in errors else restore_outcome.state,
                     shown(restore.get("recovery_seconds"), " s"),
                 ),
             ],
@@ -784,6 +976,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         scripts=(assets / "report.js").read_text(encoding="utf-8"),
         navigation=navigation,
         created=timestamp({"recorded_at": generated_at.isoformat()}),
+        **guide_urls(root, destination, session_output),
         record_count=len(records),
         verification_class=attempt.state,
         verification_title=escape(attempt.title),
@@ -817,7 +1010,12 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         verification_context=record_context(verification, label="Conclusão registrada"),
         job_context=record_context(job_record),
         backup_context=record_context(backup),
-        backup_catalog=backup_catalog_panel(records.get("backup-catalog", {}), context),
+        backup_catalog=backup_catalog_panel(
+            records.get("backup-catalog", {}),
+            context,
+            records=records,
+            invalid="backup-catalog.json" in errors,
+        ),
         restore_context=record_context(restore),
         release_context=record_context(release),
         rollback_context=record_context(rollback),
@@ -825,7 +1023,11 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         artifact_context=record_context(build, label="Build registrado"),
         snapshot_context=record_context(final_state),
         restore_duration=shown(restore.get("recovery_seconds"), " s"),
-        restore_status=badge(controls[6][1]),
+        restore_status=f'<span class="badge {"pass" if restore_outcome.state == "pass" else "fail" if restore_outcome.state in ("fail", "invalid") else "pending"}">{escape(restore_outcome.label)}</span>',
+        restore_explanation=escape(restore_outcome.explanation),
+        restore_backup_id=shown(restore.get("backup_id")),
+        restore_backup_checksum=shown(restore.get("backup_sha256")),
+        restore_metadata_checksum=shown(restore.get("backup_metadata_sha256")),
         backup_duration=shown(backup.get("elapsed_seconds"), " s"),
         backup_checksum=shown(backup.get("sha256")),
         backup_schema=shown(backup.get("schema_version")),

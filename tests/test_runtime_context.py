@@ -235,6 +235,7 @@ class RuntimeContextTests(unittest.TestCase):
         global_report.parent.mkdir(parents=True)
         global_report.write_text("preserve-global", encoding="utf-8")
         catalog = {
+            "context": "alpha",
             "entries": [
                 {
                     "id": "sample-1",
@@ -249,7 +250,7 @@ class RuntimeContextTests(unittest.TestCase):
                     "source_context": "origin-alpha",
                     "retention_reasons": ["latest-backup", "C:\\private\\do-not-publish"],
                 }
-            ]
+            ],
         }
         (context.evidence / "backup-catalog.json").write_text(json.dumps(catalog), encoding="utf-8")
         with patch.object(report, "active_context", return_value=context):
@@ -261,7 +262,7 @@ class RuntimeContextTests(unittest.TestCase):
         self.assertIn("Último ponteiro", page)
         self.assertIn("&lt;source&gt;", page)
         self.assertIn("CONTAINEROPS_SESSION", page)
-        self.assertIn("restore-test --backup &lt;id&gt;", page)
+        self.assertIn("restore-test --backup sample-1", page)
         self.assertNotIn("do-not-publish", page)
         self.assertEqual(global_report.read_text(encoding="utf-8"), "preserve-global")
 

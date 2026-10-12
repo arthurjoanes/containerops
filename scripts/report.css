@@ -1,5 +1,5 @@
 
-:root { color-scheme: light; --surface: #ffffff; --green: #176246; --fail: #a52734; --warning: #80530a; --navy: #242d3d; --blue: #245ac0; --canvas: #f2f3f5; --ink: #202b3a; --muted: #555f6d; --line: #d6dde5; }
+:root { color-scheme: light; --brand-deep: #142d4e; --brand-action: #1f5fbf; --brand-accent: #0f798a; --brand-cloud: #f0f4f8; --brand-paper: #ffffff; --brand-ink: #24374b; --surface: var(--brand-paper); --green: #16604b; --fail: #ac2e3b; --warning: #7a4e0b; --navy: var(--brand-deep); --blue: var(--brand-action); --canvas: var(--brand-cloud); --ink: var(--brand-ink); --muted: #526478; --line: #ced8e3; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html { scroll-padding-top: 24px; }
@@ -305,5 +305,79 @@ td,th { padding: 7px; overflow-wrap: anywhere; }
   .syntax-path { color: #9a3412; }
   .syntax-placeholder { color: #116329; }
   }
+
+/* The copy ledger uses the ContainerOps palette; status colors remain semantic. */
+.masthead { background: var(--brand-deep); }
+.operation-sidebar { background: var(--brand-cloud); }
+.operation-link { color: var(--brand-ink); min-height: 44px; }
+.operation-link[aria-current] { background: #dfeaf8; color: var(--brand-deep); border-left: 3px solid var(--brand-action); padding-left: 9px; }
+.brand-mark { color: #89d5df; }
+.context-link { display: inline-flex; align-items: center; min-height: 44px; }
+.panel-heading p { margin-top: 7px; color: var(--muted); max-width: 70ch; font-size: 15px; }
+.restore-explanation { margin-top: 16px; color: var(--muted); max-width: 72ch; }
+.restore-copy { margin-top: 8px; overflow-wrap: anywhere; }
+.catalog-intro { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.catalog-intro .metadata { color: var(--muted); font-size: 14px; }
+.catalog-reading { margin: 16px 0; max-width: 78ch; font-size: 15px; color: var(--muted); }
+.catalog-filters { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(0,1fr) auto; gap: 16px; align-items: end; padding: 16px; background: var(--brand-cloud); border-radius: 4px; }
+.catalog-filters > div { min-width: 0; }
+.catalog-filters label { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 600; }
+.catalog-filters input,.catalog-filters select { display: block; width: 100%; min-width: 0; min-height: 44px; border: 1px solid #77859b; background: white; color: var(--ink); border-radius: 4px; padding: 9px 11px; font: inherit; }
+.catalog-filters input::placeholder { color: var(--muted); }
+button { min-height: 44px; border: 1px solid #77859b; border-radius: 4px; padding: 9px 12px; background: white; color: var(--blue); font: 600 14px/1.4 'Source Sans 3','Segoe UI',sans-serif; cursor: pointer; touch-action: manipulation; }
+button:hover { background: #dfeaf8; }
+button:focus-visible,input:focus-visible,select:focus-visible { outline: 3px solid var(--brand-action); outline-offset: 3px; }
+.catalog-count { padding: 14px 0 10px; font-size: 14px; color: var(--muted); }
+.backup-ledger { margin: 0; padding: 0; list-style: none; }
+.backup-ledger > li { padding: 20px 0 10px; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
+.backup-row-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(300px,.75fr); gap: 18px 32px; align-items: start; }
+.backup-identity { min-width: 0; }
+.backup-identity h3 code { color: var(--brand-deep); font-size: 14px; }
+.backup-date,.backup-origin { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.backup-origin code { color: var(--ink); }
+.backup-checks { display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,1fr); gap: 12px; margin: 0; }
+.backup-checks dt { font-size: 13px; }
+.backup-checks dd { font-size: 15px; }
+.backup-checks .badge { white-space: normal; max-width: 100%; }
+.backup-ledger .record-details { margin-top: 10px; border-top: 0; }
+.copy-facts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 24px; margin: 12px 0; }
+.copy-facts > div { min-width: 0; }
+.copy-facts dt { font-size: 13px; }
+.copy-facts dd { font-size: 15px; }
+.local-command { min-width: 0; background: var(--brand-deep); }
+.command-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 8px 12px; border-bottom: 1px solid #7185a0; }
+.command-heading .code-language { padding: 0; border: 0; font-size: 13px; }
+.command-heading button { flex-shrink: 0; color: white; border-color: #91a5c2; background: transparent; min-height: 36px; padding: 6px 10px; }
+.command-heading button:hover { background: white; color: var(--brand-deep); }
+.command-heading button:focus-visible,.local-command pre:focus-visible { outline-color: white; outline-offset: -4px; }
+.local-command pre { white-space: pre; overflow-x: auto; max-width: 100%; }
+.copy-feedback { margin: 0; padding: 8px 14px 12px; font-size: 14px; color: white; }
+.copy-feedback:empty { display: none; }
+.catalog-source { margin-top: 16px; padding-top: 20px; border-top: 2px solid var(--brand-accent); }
+.catalog-source > h3 { font-size: 18px; }
+.fixture-notice { padding: 10px 14px; border-left: 3px solid var(--warning); background: #fff4df; margin-bottom: 16px; font-size: 14px; }
+@media (max-width: 1100px) {
+  .backup-row-heading { grid-template-columns: minmax(0,1fr); gap: 14px; }
+  .backup-checks { grid-template-columns: repeat(2,minmax(0,1fr)); max-width: 440px; }
+}
+@media (max-width: 760px) {
+  .catalog-filters { grid-template-columns: minmax(0,1fr); padding: 14px; gap: 12px; }
+  .catalog-filters button { justify-self: start; }
+  .catalog-intro { display: block; }
+  .catalog-intro .metadata { margin-top: 6px; }
+  .backup-checks { max-width: none; }
+  .command-heading { flex-wrap: wrap; }
+  .copy-facts { grid-template-columns: minmax(0,1fr); }
+  .backup-identity h3 code { font-size: 13px; }
+}
+@media print {
+  .masthead { background: white; color: var(--ink); }
+  .brand-mark { color: var(--brand-deep); }
+  .catalog-filters,.copy-feedback,[data-copy-command],.catalog-count,[data-catalog-no-results] { display: none !important; }
+  .backup-ledger > li[hidden] { display: block !important; }
+  .local-command { background: white; color: var(--ink); }
+  .command-heading,.command-heading .code-language { color: var(--ink); border-color: var(--line); }
+  .local-command pre,.local-command code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
 @media (prefers-reduced-motion: reduce) {
 *,*::before,*::after { transition: none !important; scroll-behavior: auto !important; } }

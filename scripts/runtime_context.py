@@ -20,6 +20,10 @@ _RESERVED = {
 }
 
 
+def valid_session_slug(value: object) -> bool:
+    return isinstance(value, str) and bool(_SLUG.fullmatch(value)) and value not in _RESERVED
+
+
 def ensure_no_links(path: Path) -> Path:
     """Reject links/reparse points in every existing ancestor without following them."""
     path = Path(path).expanduser().absolute()
@@ -135,7 +139,7 @@ def resolve_context(
     )
     requested = Path(environment.get("CONTAINEROPS_RUNTIME", str(base)))
     session = environment.get("CONTAINEROPS_SESSION")
-    if session is not None and (not _SLUG.fullmatch(session) or session in _RESERVED):
+    if session is not None and not valid_session_slug(session):
         raise RuntimeError(
             "CONTAINEROPS_SESSION deve ser basename de 1 a 32 letras minúsculas/dígitos/hífens"
         )

@@ -1,0 +1,52 @@
+{
+  "status": "failed_policy",
+  "raw_record_sha256": "a5178c9155d07429bd8d23adb04b59a2eca31d66470d9c5b9fb7fcbe609e680a",
+  "images": [
+    {
+      "component": "database",
+      "image": "containerops-co-20261012-f040d4f5-database:local",
+      "image_id": "sha256:5e764fe4470b3b4099f899b206fe0f6ec794fd3e223bb1a94162a1358cbc2f54",
+      "config_digest": "sha256:49582cf1e5486d6287196f54f0b28ce4e4bd9c9e2b9ab43400aa0e68eeb06864",
+      "findings_by_severity": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 1,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "blocking_count": 0,
+      "report_sha256": "sha256:074133f99ff10efeb5e3e3e02e4b5ce2b9093fb658edb0f4f3c713a42bb8e6d2",
+      "database_sha256": "sha256:0990079ec0cccf470631982a3282e7a003bb924cd52b1a1e29796a9ee1beb8c5",
+      "database_updated_at": "2026-10-12T01:14:57.362085088Z",
+      "database_age_hours": 3.587
+    },
+    {
+      "component": "proxy",
+      "image": "containerops-co-20261012-f040d4f5-proxy:local",
+      "image_id": "sha256:0a675fa30a0c1aaf04aef632dfe7529c318d62ea85c444b4a473b89694d21f34",
+      "config_digest": "sha256:ddca824226fd55ac4cacd846c88360be71a8064888f8ae355ae5daa5e9dd62c9",
+      "findings_by_severity": {
+        "UNKNOWN": 0,
+        "LOW": 0,
+        "MEDIUM": 1,
+        "HIGH": 1,
+        "CRITICAL": 0
+      },
+      "blocking_count": 1,
+      "report_sha256": "sha256:d099400f26dded700496a05d582b07ba655a90af125ac217e34718dc5c89d833",
+      "database_sha256": "sha256:0990079ec0cccf470631982a3282e7a003bb924cd52b1a1e29796a9ee1beb8c5",
+      "database_updated_at": "2026-10-12T01:14:57.362085088Z",
+      "database_age_hours": 3.594
+    }
+  ],
+  "finding": {
+    "component": "proxy",
+    "vulnerability_id": "CVE-2026-4775",
+    "package": "tiff",
+    "from": "4.7.1-r0",
+    "fixed": "4.7.2-r0",
+    "severity": "HIGH"
+  },
+  "attempt_source_commit": "dd1344829c460fb67b5650ca80519c7803357e52",
+  "policy_unchanged": true
+}

@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-10-12T05:01:03.426109+00:00",
+  "created_at": "2026-10-12T05:01:02.965457+00:00",
+  "cutoff_interval": {
+    "started_at": "2026-10-12T05:00:55.782571+00:00",
+    "completed_at": "2026-10-12T05:01:01.675988+00:00",
+    "method": "admission paused; queued/running drained; snapshot observed in interval"
+  },
+  "sha256": "ef1e162c80b543568e15ea3243e28ec700a9dd3ac7f8d2eb01071bd8a40fd595",
+  "server": "postgres (PostgreSQL) 17.11",
+  "tool": "pg_dump (PostgreSQL) 17.11",
+  "schema_version": 2,
+  "source_project": "pf-containerops-test-53ac5022",
+  "source_context": "co-20261012-f040d4f5",
+  "source_ref": {
+    "sha256": "d0d112c3591143572fad0360b4232d21696dac27f020e9d840b74cc5af1ee91e",
+    "revision": "ec090fc33b89c848113537cdcdcb42f9888cc1d9"
+  },
+  "image": "sha256:d5dd3ea2a3f0272598d96cd0d42630a8598390689e99cbb8f519c89946a3407c",
+  "image_release": "1.0.0",
+  "config_digest": "sha256:dfb543cc3232e378220ccc41e1a4ae2a288888df69a84aec472addf1ccd1c105",
+  "oci_manifest_digest": "sha256:54ebf553c71ff8f5aef9c086f3bc2370e54bae473358fc66f62e03bc09a8e549",
+  "elapsed_seconds": 11.156,
+  "directory": "<runtime>\\backups\\20261012T050051-0ecf062e",
+  "_curation": {
+    "raw_record_sha256": "f72f5a3aa4c32b88dfca00ac0130e1ba78c8097bec413fd1af44a4168704a979",
+    "private_host_paths_and_unrelated_inventory_omitted": true
+  }
+}

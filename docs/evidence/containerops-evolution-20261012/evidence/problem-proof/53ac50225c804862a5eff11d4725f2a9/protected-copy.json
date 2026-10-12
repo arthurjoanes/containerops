@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-12T05:01:07.270632+00:00",
+  "original": "<runtime>\\backups\\20261012T050051-0ecf062e",
+  "copy": "<runtime>\\backups\\proof-copy-f4f9ebea4e704b2fb3d0729f7a74040c",
+  "sha256": {
+    "metadata.json": "93dd8f67a0abba836a3110871d2f42676a977e1b6599a754192493fc88a94668",
+    "containerops.dump": "ef1e162c80b543568e15ea3243e28ec700a9dd3ac7f8d2eb01071bd8a40fd595"
+  },
+  "protection": {
+    "method": "Windows DACL",
+    "verified_files": 2,
+    "inheritance_disabled": true,
+    "principals": "current user and SYSTEM"
+  },
+  "same_host": true,
+  "limit": "Independent files, not an independent host/disaster recovery or encrypted backup",
+  "_curation": {
+    "raw_record_sha256": "bb06b3ddfb379da6b041768bcbe4174abe874eee17145ca5f6128476e9a1bf9a",
+    "private_host_paths_and_unrelated_inventory_omitted": true
+  }
+}

@@ -110,3 +110,18 @@ A navegação lateral ocupa a altura do documento e mantém as oito operações 
 Cada conjunto de verificações tem uma superfície delimitada. Na restauração, quantidade de jobs, duração e as três conferências ficam juntos; o registro da cópia ocupa uma superfície própria. Identidades, hashes e o novo job abrem em detalhes nativos. Resultados de falha, registros inválidos e ausência de scan continuam visíveis sem expansão. A versão 3 não acrescenta animações decorativas.
 
 [Restauração desktop](screenshots/interface-v3/after-recovery-1440.png) · [celular](screenshots/interface-v3/after-recovery-390.png) · [matriz antes/depois, decisões e validação](frontend-quality.md).
+
+## Relatório da entrega de 12/10/2026
+
+O [HTML da rodada](evidence/containerops-evolution-20261012/report.html) lê os
+resumos identificados no
+[manifesto](evidence/containerops-evolution-20261012/manifest.json), sobre fontes
+`ec090fc33b89c848113537cdcdcb42f9888cc1d9`. A geração preservou o relatório e os
+aliases históricos. Passaram 48 testes do gerador, além dos casos de contexto,
+escape do catálogo, rejeição de caminhos privados e saída vinculada à sessão.
+
+Confira no catálogo a origem e o contexto antes de copiar um comando. Integridade
+e restore verificado continuam critérios separados; o novo recibo exige
+snapshot, outro job e limpeza. O transporte verificado nesta rodada ocorreu no
+mesmo host. Abrir o HTML não executa operações, e as durações registradas não são
+um prazo garantido de recuperação.

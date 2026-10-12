@@ -1,0 +1,100 @@
+{
+  "recorded_at": "2026-10-12T05:08:26.284830+00:00",
+  "status": "passed",
+  "source_commit": "ec090fc33b89c848113537cdcdcb42f9888cc1d9",
+  "source_unchanged": true,
+  "default_demo_files_and_shared_tags_unchanged": true,
+  "historical_evidence_and_report_unchanged": true,
+  "resource_checks": [
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-restore-cc9b1412",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-restore-cfaa32f4",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-1a4b810a",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-22e8cd9c",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-53ac5022",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-9c43022f",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-a80c03e7",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5",
+      "project": "pf-containerops-test-e09bed0e",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5-rx",
+      "project": "pf-containerops-restore-c8135b49",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    },
+    {
+      "context": "co-20261012-f040d4f5-rx2",
+      "project": "pf-containerops-restore-a5f0d1ba",
+      "containers": [],
+      "volumes": [],
+      "networks": [],
+      "absent": true
+    }
+  ],
+  "builder": {
+    "name": "pf-containerops-builder-co-20261012-f040d4f5",
+    "created_by_attempt": true,
+    "removed": true,
+    "container_ids": [
+      "3f703fdf2f19590eb60c34abffc15a352361bfdf7f9cb98ab0d55fb9db371c4b"
+    ]
+  },
+  "no_global_prune": true,
+  "no_user_backup_prune": true
+}

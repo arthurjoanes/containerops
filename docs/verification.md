@@ -2,6 +2,59 @@
 
 A [prova completa](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/manifest.json), a [execução editorial](evidence/editorial-20260922/execution.json) e o [scan/correção](evidence/editorial-20260922/security.json) registram as rodadas de **22/09/2026**. Contagens descrevem as suítes e versões identificadas nesses recibos.
 
+## Verificar sessão, transporte e catálogo
+
+As novas suítes em `tests/test_runtime_context.py`, `tests/test_backup_package.py`
+e `tests/test_backup_catalog.py` cobrem resolução e locks sem Docker, validação
+do formato/cópia, seleção por ID e planos de retenção em fixtures temporárias.
+Os casos de pacote incluem corrupção, conjuntos incompletos, schema futuro,
+imagem ausente/incompatível, corte inválido, links/junções e falhas de cópia.
+Retenção confere prévia sem escrita, IDs esperados, proteções obrigatórias,
+mudanças desde o plano, arquivos desconhecidos e retomada por journal. Esses
+ensaios não removem backups existentes do usuário.
+
+```powershell
+python -m unittest discover -s tests -v
+python -m unittest discover -s scripts -p test_report.py -v
+$env:CONTAINEROPS_SESSION = 'verificacao-20261012'
+python scripts/ops.py setup
+python scripts/ops.py build --version 1.0.0
+python scripts/ops.py build --version 2.0.0
+python scripts/ops.py sbom --version 1.0.0
+python scripts/ops.py sbom --version 2.0.0
+python scripts/ops.py scan --version 1.0.0
+python scripts/ops.py scan --version 2.0.0
+python scripts/scan_services.py --offline
+python scripts/ops.py verify
+python scripts/ops.py prove --scenario operations
+python scripts/ops.py report
+```
+
+Execute build/scan/carga em sequência, com as fontes estáveis. `verify` roda Ruff,
+formato, mypy e testes da aplicação com PostgreSQL descartável, além das suítes do
+host e relatório. O cenário curto compara as fontes atuais às duas imagens e
+provoca rollback real, mas exige scans/SBOM separados para essas mesmas imagens.
+A existência dos comandos ou de provas históricas não aprova uma imagem nova.
+
+Complete a rodada com exportação/importação entre dois contextos reservados,
+restore por ID, snapshot igual e novo job correto. Registre hashes antes/depois,
+credenciais próprias do destino, estado da origem e ausência de recursos
+temporários. A corrupção deve falhar antes de criar stack/volume. O
+[runbook](runbooks.md#pacote-portátil-de-backup) fornece a sequência de transporte;
+offline completo depende de imagens auxiliares compatíveis preparadas à parte.
+
+O manifesto da prova registra fontes, revisão Git, hashes de diff/status das
+fontes e imagem; HEAD sozinho não identifica alterações locais. Edição durante a
+rodada invalida os checks afetados. Evidências da sessão ficam no runtime próprio
+e não substituem aliases históricos globais. Publique resumos curados com fases,
+comandos, hashes, falhas e limpeza; mantenha dump, credenciais, paths pessoais e
+inventários de outros projetos privados.
+
+Transporte entre contextos locais valida o procedimento no mesmo computador.
+Outro host e armazenamento físico independente continuam necessários para
+proteção contra perda da máquina. Tempos sob concorrência não são RTO garantido.
+Os registros históricos seguintes conservam suas fontes, datas e limites.
+
 ## Auditoria do candidato — 22/09/2026
 
 A narrativa anterior descrevia uma inspeção sobre `783461d7b0a0a68c3f67990c90c9b3afa10ba941`, com resultados locais e consultas ao CI. Seus registros completos não estão ligados a um pacote público verificável nesta seção. Por isso, as contagens, tempos, inventários e conclusões de contratação sustentados apenas por essa narrativa foram retirados da apresentação de resultados comprovados.

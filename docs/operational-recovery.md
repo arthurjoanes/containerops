@@ -2,6 +2,41 @@
 
 O [manifesto de 22/09/2026, 06:17–06:20 UTC](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/manifest.json), o [rollback](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/rollback.json) e o [restore](evidence/problem-proof/fc39e58c890841a089c9b1173869b0aa/restore.json) registram a mesma tentativa histórica.
 
+## Transporte e seleção no contrato atual
+
+O procedimento atual aceita um pacote plano de transporte e seleção por ID.
+`backup-export` cria pasta privada nova com manifesto v1, dump e metadados;
+`backup-import` valida o pacote e registra uma cópia no runtime de destino.
+Importar preserva os bytes da origem e o ponteiro da demonstração principal,
+sem executar restore ou carregar imagem. O
+[runbook do pacote](runbooks.md#pacote-portátil-de-backup) define comandos e limites.
+
+Use `CONTAINEROPS_SESSION` diferente em origem/destino, sempre dentro da raiz
+reservada. `restore-test --backup <id-importado> --trusted-source` exige uma cópia
+catalogada e preflight de hash, ferramenta, schema e imagem. Um byte corrompido
+falha antes da criação de stack ou volume. O destino usa credenciais próprias,
+restaura como migrator, reaplica grants e compara o snapshot completo. Outro job
+precisa concluir com contagem e checksum corretos; limpeza faz parte do sucesso.
+
+Uma imagem local pode faltar em outro daemon. `backup-export --include-image`
+inclui o archive da aplicação por ImageID; `backup-image-load --backup <id>
+--trusted-image-source` valida suas identidades e aplica apenas a tag da sessão,
+recusando colisões. O carregamento é explícito e separado da importação.
+Banco/proxy e outras imagens auxiliares compatíveis precisam estar preparadas no
+destino. A ferramenta não substitui imagem ausente por uma tag reconstruída.
+
+O catálogo registra restore verificado somente depois de snapshot, novo job e
+limpeza aprovados, com recibo ligado aos hashes dos artefatos. A prévia de retenção
+protege esse último recibo por origem, além de latest, marcas e última cópia
+válida. [Plano e recuperação de interrupção](runbooks.md#catálogo-e-retenção-de-arquivos).
+
+Ensaiar dois contextos no mesmo host verifica transporte e procedimento. Proteção
+contra perda física ainda exige outra máquina e cópia independente. Restore
+executa conteúdo escolhido pela origem; hashes não autenticam dump e manifesto
+adulterados conjuntamente. Aceite somente origem confiável e mantenha o destino
+descartável. Os tempos dependem dos recursos compartilhados do host e não
+estabelecem RTO garantido. A adoção como serviço principal tem procedimento próprio.
+
 **Registro histórico:** as imagens desta página pertencem às execuções identificadas abaixo e preservam seus bytes originais. Veja a [galeria da interface atual](screenshots.md) para a apresentação do código atual.
 
 **Problema central:** voltar a versão do programa não pode apagar o trabalho que ela já aceitou. E encontrar um dump no disco não basta: o serviço restaurado precisa devolver os dados corretos e aceitar um novo trabalho.
@@ -67,9 +102,11 @@ O novo cenário usa `operations-proof-latest.json`. O cenário padrão continua 
 
 A publicação também exigiu cuidado com as quebras de linha: os JSONs originais do Windows foram preservados privadamente, e as cópias públicas usam LF, com referências recalculadas. O [registro de publicação](evidence/operations-publication.json) distingue essas representações e as mudanças posteriores no gravador/coletor. Dos 63 arquivos de fonte da execução, 62 tiveram os bytes originais recuperados para conferência; o CSS anterior não foi recuperado. Seu hash histórico foi mantido como registro, e as capturas finais identificam o CSS posterior. Não se declara que o conjunto final de fontes é idêntico ao executado. Os hashes de dump, metadados privados e imagens não foram substituídos.
 
-## 6. Como repetir e o que ainda falta
+## 6. Como repetir o cenário histórico e o que ainda falta
 
-Na raiz, com Docker/Compose/Buildx e Python nos requisitos do README:
+Os comandos abaixo descrevem a preparação da tentativa histórica, no contexto
+padrão. Para uma execução nova em computador compartilhado, use o contexto de
+sessão dos [runbooks](runbooks.md#contexto-de-sessão) antes dos mesmos comandos:
 
 ```sh
 python scripts/ops.py build --version 1.0.0

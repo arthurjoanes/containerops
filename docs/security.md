@@ -2,6 +2,55 @@
 
 A admissão é definida pelo [domínio](../app/src/containerops/domain.py), pelo [repositório](../app/src/containerops/repository.py) e pelos [testes de integração](../app/tests/test_integration.py). O [manifesto](evidence/security-admission-20260922/manifest.json) e o [JUnit](evidence/security-admission-20260922/tests.xml) registram a execução de 22/09/2026.
 
+## Fronteiras do pacote de backup
+
+O pacote portátil contém somente manifesto, dump, metadados e, por opção
+explícita, archive da imagem de aplicação. Ele exclui secrets, env, certificados
+privados, estado do runtime e inspect bruto. Dump e metadados podem conter dados
+dos jobs; exportação/importação usam destinos novos privados, POSIX 0700/0600 ou
+DACL Windows limitada ao operador e SYSTEM. ACL não é criptografia.
+
+Importação confere chaves/tipos, datas, schema, ferramenta, origem, conjunto
+permitido, tamanhos e SHA-256 em streaming. Recusa links/reparse points, JSON
+duplicado, itens extras, destinos existentes e mudanças durante a cópia.
+Referências externas não definem caminhos de destino. Restore seleciona somente
+um ID catalogado no runtime reservado; importar não restaura nem carrega imagens.
+
+Hash detecta corrupção, mas não autentica um conjunto adulterado de dump e
+manifesto. O [PostgreSQL documenta](https://www.postgresql.org/docs/17/app-pgrestore.html)
+que restore executa código escolhido pela origem. `--trusted-source` declara
+explicitamente confiança ao restaurar uma cópia importada. O banco permanece
+descartável, com papéis e credenciais próprios, redes/mounts atuais e volume novo.
+Esse isolamento não torna seguro um dump de origem desconhecida.
+
+`backup-image-load --trusted-image-source` exige archive conferido e sessão
+ativa. Exportação usa ImageID sem tags de substituição; carregamento aplica
+somente uma tag exclusiva da sessão e recusa colisão com conteúdo diferente.
+Config digest, ImageID e manifesto OCI são conferidos separadamente. A confiança
+na imagem continua necessária; validação de hashes não substitui auditoria ou
+política de vulnerabilidades.
+
+## Isolamento operacional e exclusão
+
+`CONTAINEROPS_SESSION` limita o runtime a `sessions/<slug>` na raiz reservada,
+com validação de cada ancestral e recusa de links/junções/traversal. Lock,
+secrets, temporários, artefatos, cache e evidências usam o mesmo contexto. Tags e
+builder derivados impedem substituição acidental das identidades da demonstração;
+o daemon e os recursos do host continuam compartilhados.
+
+Retenção atua sobre IDs internos exatos, com plano identificado e aplicação
+explícita sob lock. Latest, marcas, última cópia válida e último restore
+verificado por origem permanecem; cópias desconhecidas não são candidatas.
+Alteração desde o plano ou conteúdo inesperado interrompe a exclusão. Um journal
+permite retomar somente a tentativa aprovada. Os testes destrutivos usam fixtures
+temporárias; nenhum pruning dos backups existentes é necessário para validar a
+funcionalidade. A política dos dumps é separada da retenção de jobs no banco.
+
+Provas e relatórios públicos usam resumos sem dump, segredos, paths pessoais ou
+configuração bruta. O HTML escapa os campos do catálogo e apresenta comandos
+locais; abrir a página não chama backup/restore. Uma cópia no mesmo host continua
+exposta à perda física dessa máquina.
+
 ## COPS-01 Ocupação da fila por um proprietário
 
 A revisão local encontrou um problema de disponibilidade: um Bearer válido podia

@@ -111,6 +111,48 @@ No Windows, use `python` ou o [wrapper PowerShell](scripts/containerops.ps1), co
 
 [Runbooks](docs/runbooks.md) detalham `backup`, `restore-test`, `release`, `rollback`, `scan` e o runtime. `stop` preserva o volume; um comando de limpeza deve usar o projeto e o destino identificados pela operação.
 
+### Operar em um contexto separado
+
+Defina `CONTAINEROPS_SESSION` antes de executar a CLI. No Windows, o contexto fica
+em `%USERPROFILE%\AppData\Local\ContainerOps-runtime\sessions\<slug>`; a demonstração
+sem sessão conserva seu runtime e nomes. Use um basename de até 32 caracteres,
+com letras minúsculas, dígitos e hífens, sem hífen nas extremidades. Links,
+junções, traversal e caminhos externos são recusados.
+
+```powershell
+$env:CONTAINEROPS_SESSION = 'backup-lab-20261012'
+python scripts/ops.py setup
+python scripts/ops.py build --version 1.0.0
+python scripts/ops.py build --version 2.0.0
+python scripts/ops.py verify
+python scripts/ops.py prove --scenario operations
+```
+
+O contexto tem lock, segredos, builder, tags, cache e evidências próprios. Portas
+dos novos ambientes usam loopback e portas livres. Docker, CPU e memória continuam
+compartilhados; execute builds, scans e carga em sequência. O relatório da sessão
+fica em `sessions/<slug>/docs/report.html`, junto de suas evidências. Os aliases
+históricos do repositório permanecem separados.
+
+### Transportar e selecionar backups
+
+`backups list` mostra IDs, origem, integridade e proteção. `backup-export --backup
+<id> --destination <pasta-nova>` cria um pacote privado com dump, metadados e
+manifesto versionado. `backup-import --source <pacote>` confere os bytes e registra
+outra cópia no contexto ativo, sem restaurar nem carregar imagens. Use o ID
+retornado em `restore-test --backup <id> --trusted-source` para um pacote de origem
+confiável. O comando sem `--backup` conserva a seleção pelo ponteiro legado.
+
+A opção `--include-image` exporta a imagem de aplicação por ID. Seu carregamento
+exige `backup-image-load --backup <id> --trusted-image-source`, em uma sessão;
+a tag aplicada pertence somente a essa sessão. Imagens auxiliares compatíveis
+precisam estar preparadas no destino. [Formato, limites e roteiro](docs/runbooks.md#pacote-portátil-de-backup).
+
+`backups prune --keep-last 3` gera uma prévia. Remoção exige `--apply --plan-id
+<id-do-plano>` e nova conferência sob lock. Latest, marcas de proteção, última
+cópia válida e último restore verificado por origem são preservados. A retenção
+dos jobs no banco é independente da retenção desses arquivos.
+
 <a id="repetir-a-prova-completa"></a>
 
 ## Verificação e evidências
@@ -143,7 +185,7 @@ python scripts/ops.py prove --scenario operations
 
 - 16 KiB por texto; 100 jobs pendentes globais; 20 por owner; 3 tentativas; retenção de 24 h. São limites do [contrato](docs/data-contract.md), implementados no [domínio](app/src/containerops/domain.py) e no [repositório](app/src/containerops/repository.py); não medem capacidade.
 - A demo permite atraso de até 15 s; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
-- Backup permanece no mesmo computador; TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
+- Backup local compartilha a falha do computador. O pacote permite transporte; proteção contra perda do host exige cópia física e destino independentes, ainda fora da prova local. TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
 - O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md).
 - A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) cobre os 18 itens recebidos, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
 

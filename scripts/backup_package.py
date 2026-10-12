@@ -811,6 +811,7 @@ def inspect_application_archive(path, identity):
             "Camadas do archive inválidas",
         )
         expanded = 0
+        verified_layers = []
         for name, expected in zip(layers, diff_ids, strict=True):
             require(
                 type(name) is str
@@ -834,6 +835,22 @@ def inspect_application_archive(path, identity):
                     if compressed:
                         reader.close()
             require("sha256:" + digest.hexdigest() == expected, "Conteúdo da camada divergente")
+            raw_digest = digest.hexdigest()
+            if compressed:
+                raw_hash = hashlib.sha256()
+                with archive.extractfile(members[name]) as stream:
+                    while chunk := stream.read(CHUNK_BYTES):
+                        raw_hash.update(chunk)
+                raw_digest = raw_hash.hexdigest()
+            verified_layers.append(
+                {
+                    "name": name,
+                    "digest": "sha256:" + raw_digest,
+                    "size": members[name].size,
+                    "compressed": compressed,
+                }
+            )
+        archive_manifest_digest = None
         if "index.json" in members:
             index = decode_json(read("index.json"))
             require(type(index) is dict, "Índice OCI inválido")
@@ -850,23 +867,102 @@ def inspect_application_archive(path, identity):
                 )
                 check_annotations(descriptor)
             descriptor = descriptors[0]
+            archive_manifest_digest = descriptor.get("digest")
             require(
-                descriptor.get("digest") == identity["image_id"], "ImageID OCI ausente do archive"
+                type(archive_manifest_digest) is str
+                and bool(IMAGE_ID.fullmatch(archive_manifest_digest)),
+                "Digest do descriptor OCI inválido",
             )
-            payload = read("blobs/sha256/" + identity["image_id"].split(":")[1])
+            # The classic image store identifies an image by its config. Its
+            # Docker save exporter synthesizes an OCI manifest with a separate
+            # digest (Moby image/tarexport/save.go). A containerd ImageID instead
+            # identifies the manifest and must still match that descriptor.
+            require(
+                identity["image_id"] == config_digest
+                or archive_manifest_digest == identity["image_id"],
+                "ImageID OCI ausente do archive",
+            )
+            payload = read("blobs/sha256/" + archive_manifest_digest.split(":")[1])
             require(
                 type(descriptor.get("size")) is int
                 and len(payload) == descriptor["size"]
-                and "sha256:" + hashlib.sha256(payload).hexdigest() == identity["image_id"],
+                and "sha256:" + hashlib.sha256(payload).hexdigest() == archive_manifest_digest,
                 "Identidade do manifesto OCI divergente",
             )
             oci = decode_json(payload)
             require(type(oci) is dict and type(oci.get("config")) is dict, "Manifesto OCI inválido")
             check_annotations(oci)
             require(
+                type(oci.get("schemaVersion")) is int
+                and oci["schemaVersion"] == 2
+                and oci.get("mediaType")
+                in (
+                    "application/vnd.oci.image.manifest.v1+json",
+                    "application/vnd.docker.distribution.manifest.v2+json",
+                )
+                and descriptor.get("mediaType") == oci["mediaType"],
+                "Formato do manifesto OCI/Docker inválido",
+            )
+            require(
                 oci.get("config", {}).get("digest") == config_digest,
                 "Manifesto OCI referencia outro config",
             )
+            require(
+                type(oci["config"].get("size")) is int
+                and oci["config"]["size"] == len(content)
+                and oci["config"].get("mediaType")
+                in (
+                    "application/vnd.oci.image.config.v1+json",
+                    "application/vnd.docker.container.image.v1+json",
+                )
+                and read("blobs/sha256/" + config_digest.split(":")[1]) == content,
+                "Config OCI diverge do arquivo Docker conferido",
+            )
+            oci_layers = oci.get("layers")
+            require(
+                type(oci_layers) is list and len(oci_layers) == len(verified_layers),
+                "Camadas OCI não correspondem às camadas Docker",
+            )
+            for layer, verified in zip(oci_layers, verified_layers, strict=True):
+                require(type(layer) is dict, "Descriptor de camada OCI inválido")
+                check_annotations(layer)
+                require(
+                    layer.get("digest") == verified["digest"]
+                    and type(layer.get("size")) is int
+                    and layer["size"] == verified["size"],
+                    "Descriptor de camada OCI diverge do conteúdo Docker conferido",
+                )
+                media_types = (
+                    (
+                        "application/vnd.oci.image.layer.v1.tar+gzip",
+                        "application/vnd.docker.image.rootfs.diff.tar.gzip",
+                    )
+                    if verified["compressed"]
+                    else (
+                        "application/vnd.oci.image.layer.v1.tar",
+                        "application/vnd.docker.image.rootfs.diff.tar",
+                    )
+                )
+                require(
+                    layer.get("mediaType") in media_types,
+                    "Compressão/mediaType da camada OCI divergente",
+                )
+                blob_name = "blobs/sha256/" + verified["digest"].split(":")[1]
+                require(
+                    blob_name in members
+                    and members[blob_name].isfile()
+                    and members[blob_name].size == verified["size"],
+                    "Blob de camada OCI ausente ou divergente",
+                )
+                if blob_name != verified["name"]:
+                    raw_hash = hashlib.sha256()
+                    with archive.extractfile(members[blob_name]) as stream:
+                        while chunk := stream.read(CHUNK_BYTES):
+                            raw_hash.update(chunk)
+                    require(
+                        "sha256:" + raw_hash.hexdigest() == verified["digest"],
+                        "Blob de camada OCI diverge do conteúdo Docker conferido",
+                    )
         else:
             require(
                 identity["image_id"] == config_digest,
@@ -875,6 +971,7 @@ def inspect_application_archive(path, identity):
     return {
         "image_id": identity["image_id"],
         "config_digest": config_digest,
+        "archive_manifest_digest": archive_manifest_digest,
         "release": identity["release"],
         "shared_tags": False,
     }

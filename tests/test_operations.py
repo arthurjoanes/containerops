@@ -1,5 +1,7 @@
 import argparse
 import json
+import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -14,6 +16,24 @@ import proof
 
 
 class OperationSafetyTests(unittest.TestCase):
+    @unittest.skipIf(os.name == "nt", "POSIX permission check; Windows uses DACL")
+    def test_session_setup_accepts_private_lock_and_json_across_repeated_commands(self):
+        with tempfile.TemporaryDirectory(prefix="containerops-private-mode-") as temporary:
+            directory = Path(temporary)
+            with (
+                patch.object(ops, "RUNTIME", directory),
+                patch.object(ops, "CONTEXT", Mock(session="fixture")),
+                patch.object(ops, "run", return_value=Mock(stdout="", returncode=0)),
+            ):
+                with ops.operation_lock(directory):
+                    ops.setup()
+                ops.write_json(directory / "state.json", {"status": "private"})
+                with ops.operation_lock(directory):
+                    ops.setup()
+                self.assertEqual(stat.S_IMODE((directory / "operation.lock").stat().st_mode), 0o600)
+                self.assertEqual(stat.S_IMODE((directory / "state.json").stat().st_mode), 0o600)
+                self.assertEqual(stat.S_IMODE(directory.stat().st_mode), 0o700)
+
     def test_verification_invalidates_previous_success_before_running_checks(self):
         with (
             patch.object(checks, "evidence") as write_evidence,

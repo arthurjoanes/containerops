@@ -129,9 +129,13 @@ class RuntimeContextTests(unittest.TestCase):
             junction.rmdir()
 
     def test_supply_rejects_a_runtime_from_another_session(self):
-        environment = {**os.environ, **self.environment, "CONTAINEROPS_SESSION": "alpha"}
-        environment.pop("CONTAINEROPS_RUNTIME", None)
         context = self.context("alpha")
+        environment = {
+            **os.environ,
+            **self.environment,
+            "CONTAINEROPS_SESSION": "alpha",
+            "CONTAINEROPS_RUNTIME": str(context.base),
+        }
         with patch.dict(os.environ, environment, clear=True):
             with self.assertRaisesRegex(RuntimeError, "contexto ativo"):
                 supply.paths(ROOT, context.base / "sessions/beta")
@@ -172,8 +176,12 @@ class RuntimeContextTests(unittest.TestCase):
             timeout=10,
         )
         self.assertEqual(created.returncode, 0, created.stderr)
-        environment = {**os.environ, **self.environment, "CONTAINEROPS_SESSION": "alpha"}
-        environment.pop("CONTAINEROPS_RUNTIME", None)
+        environment = {
+            **os.environ,
+            **self.environment,
+            "CONTAINEROPS_SESSION": "alpha",
+            "CONTAINEROPS_RUNTIME": str(context.base),
+        }
         try:
             with (
                 patch.dict(os.environ, environment, clear=True),
@@ -193,8 +201,12 @@ class RuntimeContextTests(unittest.TestCase):
             str(ROOT / "scripts"),
         ]
         first = self.context("alpha")
-        environment = {**os.environ, **self.environment, "CONTAINEROPS_SESSION": "alpha"}
-        environment.pop("CONTAINEROPS_RUNTIME", None)
+        environment = {
+            **os.environ,
+            **self.environment,
+            "CONTAINEROPS_SESSION": "alpha",
+            "CONTAINEROPS_RUNTIME": str(first.base),
+        }
         with ops.operation_lock(first.runtime):
             blocked = subprocess.run(
                 command, env=environment, capture_output=True, text=True, timeout=10

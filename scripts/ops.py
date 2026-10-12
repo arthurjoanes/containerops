@@ -35,7 +35,7 @@ RELEASES = ("1.0.0", "2.0.0")
 def operation_lock(directory=RUNTIME):
     """The OS releases this lock when the process exits, including after a crash."""
     directory = ensure_no_links(Path(directory))
-    directory.mkdir(parents=True, exist_ok=True)
+    directory.mkdir(parents=True, exist_ok=True, mode=0o700)
     lock_path = directory / "operation.lock"
     if lock_path.exists() or lock_path.is_symlink():
         info = lock_path.lstat()
@@ -45,7 +45,14 @@ def operation_lock(directory=RUNTIME):
             or getattr(info, "st_file_attributes", 0) & 0x400
         ):
             raise RuntimeError("operation.lock deve ser arquivo regular privado")
-    with lock_path.open("a+b") as lock:
+    descriptor = os.open(
+        lock_path,
+        os.O_RDWR | os.O_CREAT | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0),
+        0o600,
+    )
+    if os.name != "nt":
+        os.fchmod(descriptor, 0o600)
+    with os.fdopen(descriptor, "r+b") as lock:
         lock.seek(0, 2)
         if lock.tell() == 0:
             lock.write(b"0")
@@ -91,6 +98,9 @@ def write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
     try:
+        if os.name != "nt" and path.absolute().is_relative_to(RUNTIME):
+            descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            os.close(descriptor)
         temporary.write_text(
             json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
@@ -457,9 +467,15 @@ def evidence(name, data):
 def setup():
     import proof
 
-    RUNTIME.mkdir(parents=True, exist_ok=True)
+    ensure_no_links(RUNTIME).mkdir(parents=True, exist_ok=True, mode=0o700)
     if CONTEXT.session:
-        proof.protect_copy_directory(RUNTIME)
+        if os.name == "nt":
+            proof.protect_copy_directory(RUNTIME)
+        else:
+            # A runtime contains directories; the flat backup-copy check does not apply.
+            RUNTIME.chmod(0o700)
+            if stat.S_IMODE(RUNTIME.stat().st_mode) != 0o700:
+                raise RuntimeError("Runtime da sessão não protegido")
     setup_secrets(RUNTIME)
     run(["docker", "version"], capture=True)
     run(["docker", "compose", "version"])

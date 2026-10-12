@@ -3,12 +3,14 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 import tempfile
 import unittest
 from contextlib import redirect_stdout
 from datetime import UTC, datetime, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
+from unittest.mock import patch
 
 import report
 from report_evidence import (
@@ -36,33 +38,45 @@ def job(state="succeeded", attempts=1):
     }
 
 
+class CommandText(HTMLParser):
+    """Read commands as users copy them, independent of syntax highlighting spans."""
+
+    def __init__(self, document):
+        super().__init__(convert_charrefs=True)
+        self.commands = []
+        self.active = False
+        self.feed(document)
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "pre":
+            self.active = True
+            self.commands.append("")
+
+    def handle_endtag(self, tag):
+        if tag == "pre":
+            self.active = False
+
+    def handle_data(self, value):
+        if self.active:
+            self.commands[-1] += value
+
+
+def panel(document, identifier):
+    return document.split(f'<section id="{identifier}"', 1)[1].split("</section>", 1)[0]
+
+
 class ReportTests(unittest.TestCase):
     def test_terminal_commands_are_highlighted_without_changing_source(self):
-        class CodeText(HTMLParser):
-            def __init__(self, document):
-                super().__init__(convert_charrefs=True)
-                self.commands = []
-                self.active = False
-                self.feed(document)
-
-            def handle_starttag(self, tag, attrs):
-                if tag == "code" and dict(attrs).get("class") == "language-sh":
-                    self.active = True
-                    self.commands.append("")
-
-            def handle_endtag(self, tag):
-                if tag == "code":
-                    self.active = False
-
-            def handle_data(self, value):
-                if self.active:
-                    self.commands[-1] += value
-
         page = self.render()
-        self.assertEqual(
-            CodeText(page).commands,
-            ["python scripts/ops.py scan --version <versão>", "python scripts/ops.py report"],
-        )
+        commands = {
+            line.strip()
+            for command in CommandText(page).commands
+            for line in command.splitlines()
+            if line.strip().startswith("python ")
+        }
+        self.assertIn("python scripts/ops.py scan --version <versão>", commands)
+        self.assertIn("python scripts/ops.py report", commands)
+        self.assertIn("python scripts/ops.py backups list", commands)
         self.assertIn('class="syntax-option">--version</span>', page)
         self.assertNotIn("<versão>", page)
 
@@ -99,6 +113,176 @@ class ReportTests(unittest.TestCase):
     def outcome(self, now=NOW):
         records, errors = read_records(self.evidence)
         return verification_result(self.evidence, records.get("verification-run", {}), errors, now)
+
+    def guide_fixture(self):
+        selected = {
+            "README.md": b"# ContainerOps\n",
+            "docs/runbooks.md": b"# Runbooks\n",
+            "docs/verification.md": b"# Verification\n",
+            "docs/brand.md": b"# Brand\n",
+        }
+        excluded = {
+            "docs/unselected-notes.md": b"Private notes are not a selected guide.\n",
+            "docs/evidence/private.json": b'{"private": true}',
+            "docs/report.html": b"Historical report must remain unchanged.",
+            ".env": b"PRIVATE_FIXTURE=not-a-real-secret\n",
+        }
+        for name, content in {**selected, **excluded}.items():
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+        runtime = self.root / "reserved-runtime" / "sessions" / "co-guides"
+        context = report.RuntimeContext(self.root, runtime.parent.parent, runtime, "co-guides")
+        return selected, excluded, context
+
+    @staticmethod
+    def file_snapshot(paths):
+        return {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in paths}
+
+    def test_session_guides_copy_selected_markdown_and_preserve_historical_sources(self):
+        selected, excluded, context = self.guide_fixture()
+        originals = [self.root / name for name in {**selected, **excluded}]
+        before = self.file_snapshot(originals)
+        with patch.object(report, "ROOT", self.root):
+            urls = report.guide_urls(self.root, context.report, True)
+        bundle = (context.report.parent / urls["readme_url"]).parent
+        self.assertRegex(bundle.name, r"^[0-9a-f]{16}$")
+        self.assertEqual(bundle.parent, context.report.parent / "documentation")
+        actual = {
+            path.relative_to(bundle).as_posix(): path.read_bytes()
+            for path in bundle.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual, selected)
+        self.assertEqual(self.file_snapshot(originals), before)
+        for name in excluded:
+            self.assertFalse((bundle / name).exists(), name)
+
+    def test_session_guides_render_direct_links_to_existing_bundled_documents(self):
+        _, _, context = self.guide_fixture()
+        historical = self.root / "docs" / "report.html"
+        before = self.file_snapshot([historical])
+        with (
+            patch.object(report, "ROOT", self.root),
+            patch.object(report, "active_context", return_value=context),
+            redirect_stdout(io.StringIO()),
+        ):
+            destination = report.generate(self.root, context.runtime, now=NOW)
+            urls = report.guide_urls(self.root, destination, True)
+        self.assertEqual(destination, context.report)
+        page = destination.read_text(encoding="utf-8")
+        expected_names = {
+            "readme_url": "README.md",
+            "runbooks_url": "runbooks.md",
+            "verification_url": "verification.md",
+        }
+        for key, name in expected_names.items():
+            with self.subTest(document=name):
+                self.assertIn(f'href="{urls[key]}"', page)
+                target = destination.parent / urls[key]
+                self.assertTrue(target.is_file())
+                self.assertEqual(target.name, name)
+                self.assertTrue(target.resolve().is_relative_to(destination.parent.resolve()))
+        self.assertEqual(self.file_snapshot([historical]), before)
+
+    def test_session_guides_reuse_identical_bundle_without_file_writes(self):
+        _, _, context = self.guide_fixture()
+        with patch.object(report, "ROOT", self.root):
+            first = report.guide_urls(self.root, context.report, True)
+            directory = context.report.parent / "documentation"
+            before = self.file_snapshot(path for path in directory.rglob("*") if path.is_file())
+            second = report.guide_urls(self.root, context.report, True)
+        self.assertEqual(second, first)
+        self.assertEqual(self.file_snapshot(before), before)
+        self.assertEqual(len(list(directory.iterdir())), 1)
+
+    def test_session_guides_reject_conflicting_bytes_without_overwriting_bundle(self):
+        _, _, context = self.guide_fixture()
+        with patch.object(report, "ROOT", self.root):
+            urls = report.guide_urls(self.root, context.report, True)
+            target = context.report.parent / urls["runbooks_url"]
+            target.write_bytes(b"Conflicting fixture contents must not be overwritten.")
+            directory = context.report.parent / "documentation"
+            before = self.file_snapshot(path for path in directory.rglob("*") if path.is_file())
+            with self.assertRaisesRegex(RuntimeError, "diverge"):
+                report.guide_urls(self.root, context.report, True)
+        self.assertEqual(self.file_snapshot(before), before)
+
+    def test_session_guides_reject_hardlinked_targets_without_touching_either_name(self):
+        _, _, context = self.guide_fixture()
+        with patch.object(report, "ROOT", self.root):
+            urls = report.guide_urls(self.root, context.report, True)
+            target = context.report.parent / urls["readme_url"]
+            external = self.root / "unrelated-fixture.md"
+            external.write_bytes(target.read_bytes())
+            target.unlink()
+            os.link(external, target)
+            directory = context.report.parent / "documentation"
+            before = self.file_snapshot(
+                [external, *(path for path in directory.rglob("*") if path.is_file())]
+            )
+            with self.assertRaisesRegex(RuntimeError, "links|hardlinks"):
+                report.guide_urls(self.root, context.report, True)
+        self.assertEqual(self.file_snapshot(before), before)
+
+    def test_historical_guide_urls_do_not_create_session_bundle(self):
+        _, _, context = self.guide_fixture()
+        before = self.file_snapshot(path for path in self.root.rglob("*") if path.is_file())
+        with patch.object(report, "ROOT", self.root):
+            urls = report.guide_urls(self.root, context.report, False)
+        self.assertEqual(
+            urls,
+            {
+                "readme_url": "../README.md",
+                "runbooks_url": "runbooks.md",
+                "verification_url": "verification.md",
+            },
+        )
+        self.assertEqual(self.file_snapshot(before), before)
+        self.assertFalse(context.report.parent.exists())
+
+    def catalog_entry(self, identifier="20260921T050000-0123abcd", **changes):
+        return {
+            "id": identifier,
+            "source_project": PROJECT,
+            "source_context": "origin-a",
+            "created_at": "2026-09-21T05:00:00Z",
+            "schema_version": 2,
+            "size_bytes": 123456,
+            "validation": "valid",
+            "protected": False,
+            "imported": False,
+            "restore_verified": False,
+            "retention_reasons": ["last-valid"],
+            **changes,
+        }
+
+    def catalog_record(self, entries, **changes):
+        self.write(
+            "backup-catalog",
+            {
+                "recorded_at": "2026-09-21T05:30:00Z",
+                "context": "co-captured",
+                "entries": entries,
+                **changes,
+            },
+        )
+
+    def restore_record(self, **changes):
+        self.write(
+            "restore",
+            {
+                "recorded_at": "2026-09-21T05:00:00Z",
+                "project": "pf-containerops-restore-12345678",
+                "backup_id": "20260921T050000-0123abcd",
+                "status": "passed",
+                "checksum_verified": True,
+                "snapshot_equal": True,
+                "new_job": job(),
+                "cleanup_succeeded": True,
+                **changes,
+            },
+        )
 
     def complete_attempt(self, *, full=True):
         runtime = {
@@ -549,6 +733,7 @@ class ReportTests(unittest.TestCase):
             "result",
             "tls",
             "recovery",
+            "backups",
             "operations",
             "rollback",
             "artifacts",
@@ -559,6 +744,225 @@ class ReportTests(unittest.TestCase):
         self.assertNotIn("data-panel hidden", page)
         self.assertIn("Snapshot · somente leitura", page)
         self.assertNotIn("fetch(", page)
+
+    def test_catalog_commands_replay_recorded_context_without_using_current_default(self):
+        entry = self.catalog_entry()
+        self.catalog_record([entry])
+        content = panel(self.render(), "backups")
+        commands = CommandText(content).commands
+        restore = next(command for command in commands if " restore-test " in command)
+        self.assertIn("CONTAINEROPS_SESSION='co-captured'", restore)
+        self.assertIn(f"--backup {entry['id']}", restore)
+        self.assertNotIn("CONTAINEROPS_SESSION='default'", restore)
+        self.assertNotIn(str(self.root), content)
+
+    def test_catalog_ledger_separates_creation_integrity_restore_protection_and_import(self):
+        entry = self.catalog_entry(protected=True, imported=True, restore_verified=True)
+        self.catalog_record([entry])
+        content = panel(self.render(), "backups")
+        for fact in (
+            entry["id"],
+            PROJECT,
+            "origin-a",
+            "21/09/2026",
+            "Íntegro",
+            "Protegido",
+            "Importado",
+        ):
+            self.assertIn(fact, content)
+        self.assertIn("Verificado no catálogo", content)
+        self.assertNotIn("Sem marca; importado; restore verificado", content)
+
+    def test_imported_copy_command_requires_operator_trust_decision(self):
+        entry = self.catalog_entry(imported=True)
+        self.catalog_record([entry])
+        content = panel(self.render(), "backups")
+        command = next(
+            command for command in CommandText(content).commands if " restore-test " in command
+        )
+        self.assertIn(f"--backup {entry['id']}", command)
+        self.assertNotIn("--trusted-source", command)
+        self.assertIn("--trusted-source", content)
+
+    def test_unknown_copy_has_no_restore_command_even_if_receipt_flag_claims_success(self):
+        entry = self.catalog_entry(validation="unknown", restore_verified=True)
+        self.catalog_record([entry])
+        content = panel(self.render(), "backups")
+        self.assertIn(entry["id"], content)
+        self.assertIn("Desconhecid", content)
+        self.assertFalse(
+            any(" restore-test " in command for command in CommandText(content).commands)
+        )
+
+    def test_empty_catalog_and_invalid_entry_catalog_are_distinguishable(self):
+        self.catalog_record([])
+        empty_page = self.render()
+        empty_content = panel(empty_page, "backups")
+        self.assertIn("Nenhuma cópia", empty_content)
+        self.catalog_record([None, 3, {"id": "../private"}])
+        invalid_content = panel(self.render(), "backups")
+        self.assertNotIn("Nenhuma cópia catalogada", invalid_content)
+        self.assertIn("inválid", invalid_content.casefold())
+        self.assertNotIn("../private", invalid_content)
+
+    def test_catalog_unknown_and_invalid_integrity_have_distinct_states_and_no_restore_commands(
+        self,
+    ):
+        unknown_id, invalid_id = "copy-unknown", "copy-invalid"
+        self.catalog_record(
+            [
+                self.catalog_entry(unknown_id, validation="unknown", restore_verified=True),
+                self.catalog_entry(invalid_id, validation="invalid", restore_verified=True),
+            ]
+        )
+        content = panel(self.render(), "backups")
+        self.assertIn('class="badge pending">Desconhecido</span>', content)
+        self.assertIn('class="badge fail">Dado inválido</span>', content)
+        self.assertIn('value="unknown">Desconhecida ou inválida</option>', content)
+        commands = CommandText(content).commands
+        for identifier in (unknown_id, invalid_id):
+            with self.subTest(identifier=identifier):
+                self.assertIn(f'id="copy-{identifier}"', content)
+                self.assertFalse(
+                    any(f"restore-test --backup {identifier}" in command for command in commands)
+                )
+        self.assertNotIn("Verificado no catálogo", content)
+
+    def test_missing_catalog_remains_explicit_without_inventing_a_valid_empty_list(self):
+        content = panel(self.render(), "backups")
+        self.assertIn("Catálogo ainda não registrado", content)
+        self.assertFalse(
+            any(" restore-test " in command for command in CommandText(content).commands)
+        )
+
+    def test_catalog_keeps_valid_long_identifiers_and_rejects_untrusted_private_fields(self):
+        long_id = "backup-" + "a" * 120
+        safe = self.catalog_entry(long_id)
+        malicious = self.catalog_entry(
+            "<img src=x onerror=alert(1)>",
+            source_project="C:\\Users\\private-owner\\secret",
+            source_context="/home/private-owner",
+            validation="<script>alert(1)</script>",
+        )
+        self.catalog_record([safe, malicious])
+        page = self.render()
+        content = panel(page, "backups")
+        self.assertIn(long_id, content)
+        for unsafe in ("<img src=x", "<script>alert", "private-owner", "onerror=alert"):
+            self.assertNotIn(unsafe, content)
+        self.assertEqual(page.count("<script>"), 1)
+
+    def test_invalid_captured_context_is_not_interpolated_into_commands(self):
+        for captured in (
+            "co'; Invoke-Expression danger; '",
+            "con",
+            "nul",
+            "../session",
+            "C:\\Users\\private-owner",
+        ):
+            with self.subTest(context=captured):
+                self.catalog_record([self.catalog_entry()], context=captured)
+                content = panel(self.render(), "backups")
+                self.assertNotIn("Invoke-Expression", content)
+                self.assertNotIn("private-owner", content)
+                self.assertFalse(
+                    any(" restore-test " in command for command in CommandText(content).commands)
+                )
+
+    def test_valid_catalog_id_does_not_make_untrusted_origin_or_reasons_safe(self):
+        entry = self.catalog_entry(
+            source_project="C:\\Users\\private-owner\\database",
+            source_context="/home/private-owner/runtime",
+            retention_reasons=["last-valid", "<img src=x onerror=alert(1)>", "/home/private-owner"],
+        )
+        self.catalog_record([entry])
+        content = panel(self.render(), "backups")
+        for unsafe in ("private-owner", "<img src=x", "onerror=alert"):
+            self.assertNotIn(unsafe, content)
+
+    def test_malformed_catalog_collection_is_not_reported_as_no_copies(self):
+        for entries in (None, "not a list", {"id": "copy"}):
+            with self.subTest(entries=entries):
+                self.catalog_record(entries)
+                content = panel(self.render(), "backups")
+                self.assertNotIn("Nenhuma cópia catalogada", content)
+                self.assertIn("inválid", content.casefold())
+
+    def test_cleanup_failure_prevents_overall_restore_success_despite_valid_data_and_job(self):
+        for changes in (
+            {"status": "passed", "cleanup_succeeded": False},
+            {"status": "failed", "cleanup_succeeded": True},
+        ):
+            with self.subTest(changes=changes):
+                self.restore_record(**changes)
+                page = self.render()
+                self.assertIn('data-state="fail" data-operation="recovery"', page)
+                content = panel(page, "recovery")
+                self.assertIn("Limpeza", content)
+                self.assertIn("falh", content.casefold())
+                self.assertIn("Checksum do backup", content)
+                self.assertIn("Novo job após restauração", content)
+
+    def test_running_restore_cannot_inherit_success_from_approved_partial_facts(self):
+        self.restore_record(status="in_progress")
+        page = self.render()
+        self.assertIn('data-state="running" data-operation="recovery"', page)
+        self.assertIn("Restauração em andamento", panel(page, "recovery"))
+
+    def test_passed_status_without_cleanup_does_not_imply_complete_restore(self):
+        self.restore_record()
+        path = self.evidence / "restore.json"
+        record = json.loads(path.read_text(encoding="utf-8"))
+        record.pop("cleanup_succeeded")
+        path.write_text(json.dumps(record), encoding="utf-8")
+        page = self.render()
+        self.assertNotIn('data-state="pass" data-operation="recovery"', page)
+        content = panel(page, "recovery")
+        self.assertIn("Limpeza", content)
+        self.assertIn("Sem resultado", content)
+
+    def test_legacy_restore_preserves_data_facts_and_marks_cleanup_as_unrecorded(self):
+        self.restore_record()
+        path = self.evidence / "restore.json"
+        record = json.loads(path.read_text(encoding="utf-8"))
+        record.pop("status")
+        record.pop("cleanup_succeeded")
+        path.write_text(json.dumps(record), encoding="utf-8")
+        page = self.render()
+        self.assertIn('data-state="partial" data-operation="recovery"', page)
+        content = panel(page, "recovery")
+        self.assertIn("Limpeza", content)
+        self.assertIn("Sem resultado", content)
+        self.assertIn("não informa", content)
+
+    def test_restore_complete_success_requires_all_four_recorded_checks(self):
+        self.restore_record()
+        page = self.render()
+        self.assertIn('data-state="pass" data-operation="recovery"', page)
+        content = panel(page, "recovery")
+        for check in (
+            "Checksum do backup",
+            "Dados no volume restaurado",
+            "Novo job após restauração",
+            "Limpeza",
+        ):
+            self.assertIn(check, content)
+
+    def test_cleanup_and_restore_status_wrong_types_are_invalid_records(self):
+        for changes in (
+            {"cleanup_succeeded": "true"},
+            {"cleanup_succeeded": 1},
+            {"cleanup_succeeded": None},
+            {"status": True},
+            {"status": ["passed"]},
+            {"status": None},
+            {"status": "unknown-success"},
+        ):
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                parse_record(
+                    json.dumps({"status": "passed", "cleanup_succeeded": True, **changes}),
+                    "restore",
+                )
 
     def test_restore_and_backup_identity_are_not_combined(self):
         self.write(

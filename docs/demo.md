@@ -9,6 +9,38 @@ executados separadamente no terminal. [Guia de leitura](report-guide.md).
 
 Para uma apresentação centrada no problema, use primeiro a [sequência de job, rollback e restauração](operational-recovery.md): três trabalhos preservados e um novo concluído no destino, com capturas e tempos explicados. A [medição de admissão e espera](admission-measurement.md) mostra separadamente o comportamento de dois proprietários sob uma carga pequena e controlada. Esses ensaios têm manifestos próprios; não substituem a prova completa descrita abaixo.
 
+## Percorrer a interface de cópias e recibos
+
+Abra o [relatório da revisão](evidence/uiux-20261012/view/docs/report.html#backups). As
+capturas da interface de 12/10/2026 usam registros da
+[rodada operacional de 12/10](evidence/containerops-evolution-20261012/manifest.json),
+sem repetir backup, restore ou carga. O roteiro abaixo consulta evidências;
+comandos permanecem no terminal.
+
+1. Abra **Cópias de backup**. Confira o contexto e a data do catálogo, depois
+   busque um ID ou origem. Use o filtro de recibo para distinguir cópias íntegras
+   com e sem restore registrado. Limpe a busca para voltar à listagem.
+2. Leia uma cópia e expanda **Detalhes e comando local**. Compare data, origem,
+   schema e proteção. **Íntegro** confirma os bytes; **Sem recibo no catálogo**
+   não demonstra que a cópia nunca foi ensaiada.
+3. Siga para **Último ensaio de restore**. Confira o ID e os quatro resultados:
+   checksum, snapshot, novo job e limpeza. Uma falha de limpeza impede aprovação;
+   falta de status ou limpeza em registro antigo permanece parcial.
+4. Volte à cópia para preparar a próxima ação. **Copiar comando** copia texto,
+   sem executar a operação. Confira o contexto no terminal. Para um importado,
+   avalie a origem antes de acrescentar `--trusted-source`; o hash não autentica
+   o conteúdo. Cópias desconhecidas não recebem um comando de restore pronto.
+5. Abra o JSON de origem e compare a data da operação com a geração do HTML.
+   Guarde o link da vista e dos filtros (`copy`/`receipt`). Explique que uma
+   captura nova apresenta o registro salvo e não executa o domínio novamente.
+
+Repita a leitura no celular. Sem JavaScript, as nove vistas e a listagem completa
+continuam disponíveis; a cópia manual usa o texto do comando. A
+[marca](brand.md) conserva Source Sans 3 e identifica estados com texto e cor.
+Os testes, capturas e limitações da revisão estão em [frontend-quality.md](frontend-quality.md).
+
+## Preparar outra execução operacional
+
 Prepare fora da apresentação, na raiz do projeto:
 
 ```powershell

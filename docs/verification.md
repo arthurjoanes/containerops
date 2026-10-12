@@ -1,5 +1,12 @@
 # Verificação
 
+## Revisão da interface em 12/10/2026
+
+A validação de UI está separada dos ensaios de domínio em [recibo e limites](evidence/uiux-20261012/review.md). [Qualidade da interface](frontend-quality.md) descreve as cinco jornadas, diagnóstico e critérios. Os JSONs operacionais de 12/10 foram apenas reproduzidos pelo renderer; novas capturas não renovam aquela execução.
+
+O resultado de restore exige status aprovado, checksum válido, snapshot equivalente, novo job concluído e limpeza confirmada. Falha de limpeza invalida a aprovação; registro legado sem limpeza permanece parcial. O catálogo é um registro de consulta com contexto próprio, sem executar operações. O relatório de sessão acompanha textos Markdown selecionados em `docs/documentation/<digest>/`; os uploads do CI incluem esse diretório para resolver os links diretos dos guias.
+
+
 A [prova completa](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/manifest.json), a [execução editorial](evidence/editorial-20260922/execution.json) e o [scan/correção](evidence/editorial-20260922/security.json) registram as rodadas de **22/09/2026**. Contagens descrevem as suítes e versões identificadas nesses recibos.
 
 ## Verificar sessão, transporte e catálogo

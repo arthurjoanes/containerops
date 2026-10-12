@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-10-12T04:56:39.937292+00:00",
+  "project": "pf-containerops-test-e09bed0e",
+  "job": {
+    "id": "deb6f001-dce6-438a-ae45-c1cfee5f6534",
+    "state": "succeeded",
+    "attempts": 1,
+    "result": {
+      "word_count": 7,
+      "checksum": "27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc"
+    },
+    "error": null,
+    "version": "1.0.0"
+  },
+  "concurrent_requests": 6,
+  "unique_jobs": 1,
+  "authorization": "anonymous 401 / other owner 404",
+  "conflict": 409,
+  "limits_enforced": true,
+  "http_boundaries": {
+    "bearer_case": 200,
+    "duplicate_authorization": 400,
+    "duplicate_key": 422,
+    "blank_key": 422,
+    "body_at_limit": 201,
+    "body_over_limit": 413,
+    "signed_zero_same_job": true
+  },
+  "run_id": "e09bed0eb0f847c2842946cb813e81f5",
+  "_curation": {
+    "raw_record_sha256": "e22090562cb15b8119b6a5b14ed7ceac8210ce3970abf0756a4daef7833a163c",
+    "private_host_paths_and_unrelated_inventory_omitted": true
+  }
+}

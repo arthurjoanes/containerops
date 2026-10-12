@@ -1,0 +1,1917 @@
+{
+  "schema_version": 1,
+  "scope": "PNG bytes are copied unchanged. Comparison aliases reuse source PNGs and are not new captures; supplemental baseline captures retain their actual source phase.",
+  "original_receipts": [
+    {
+      "path": "artifacts/uxqbiii/review.json",
+      "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+    },
+    {
+      "path": "artifacts/uxqa7i/review.json",
+      "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+    },
+    {
+      "path": "artifacts/uxqa7i/extra-captures.json",
+      "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+    }
+  ],
+  "source_manifests": [
+    {
+      "path": "artifacts/uxqb/review-manifest.json",
+      "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b"
+    },
+    {
+      "path": "artifacts/uxqa7/review-manifest.json",
+      "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7"
+    }
+  ],
+  "counts": {
+    "baseline_main_captures": 15,
+    "candidate_main_captures": 21,
+    "supplemental_captures": 6,
+    "published_png_files": 52,
+    "distinct_png_byte_hashes": 42,
+    "comparison_pairs": 5
+  },
+  "aliases_policy": "Comparative recovery-1440/320 and cleanup-failed-320 filenames select the documented crops. Colliding original full-operation traces use before/after-trace-*; all other original names are phase-prefixed.",
+  "comparisons": [
+    {
+      "subject": "backups",
+      "viewport_width": 1440,
+      "before": "docs/screenshots/uiux-20261012/before-backups-1440.png",
+      "after": "docs/screenshots/uiux-20261012/after-backups-1440.png",
+      "same_fixture_json_bytes": true,
+      "scope": "Same target selector and viewport; original native crop bounds retained as recorded."
+    },
+    {
+      "subject": "backups",
+      "viewport_width": 320,
+      "before": "docs/screenshots/uiux-20261012/before-backups-320.png",
+      "after": "docs/screenshots/uiux-20261012/after-backups-320.png",
+      "same_fixture_json_bytes": true,
+      "scope": "Same target selector and viewport; original native crop bounds retained as recorded."
+    },
+    {
+      "subject": "recovery",
+      "viewport_width": 1440,
+      "before": "docs/screenshots/uiux-20261012/before-recovery-1440.png",
+      "after": "docs/screenshots/uiux-20261012/after-recovery-1440.png",
+      "same_fixture_json_bytes": true,
+      "scope": "Same target selector and viewport; original native crop bounds retained as recorded."
+    },
+    {
+      "subject": "recovery",
+      "viewport_width": 320,
+      "before": "docs/screenshots/uiux-20261012/before-recovery-320.png",
+      "after": "docs/screenshots/uiux-20261012/after-recovery-320.png",
+      "same_fixture_json_bytes": true,
+      "scope": "Same target selector and viewport; original native crop bounds retained as recorded."
+    },
+    {
+      "subject": "cleanup-failed",
+      "viewport_width": 320,
+      "before": "docs/screenshots/uiux-20261012/before-cleanup-failed-320.png",
+      "after": "docs/screenshots/uiux-20261012/after-cleanup-failed-320.png",
+      "same_fixture_json_bytes": true,
+      "scope": "Supplemental pair includes the synthetic-fixture banner and recovery heading. Same 320x1000 viewport and 320x900 crop; before belongs to the baseline source manifest."
+    }
+  ],
+  "readme_hero": "docs/screenshots/uiux-20261012/after-overview-backups-1440.png",
+  "readme_mobile": "docs/screenshots/uiux-20261012/after-backups-390.png",
+  "captures": [
+    {
+      "file": "recovery-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "5933569330892014ac269057cc7a0528ac808fafe1923c90cff8f908b116eec7",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-trace-recovery-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-320.png",
+      "image_pixels": {
+        "width": 378,
+        "height": 8973
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "7a9664db9558696f6f8ee323ba2b5aaa88524c66806b81bd85e445a92c68cbb7",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-top-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "catalog-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "9c236b68c167bd960bba1721c5cedc898846f97fbe99d50e3636ef1b9c8d1185",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-catalog-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/catalog-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "6796dc3c62eb8058a3f5d7e4253fb469aee25a4fde75782e87a4bc415f4f8422",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-390.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 8776
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-768.png",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "b62bb87233ec7b394de31c5f91d30888166fe088dbef52ea4d6134c6e7582d8c",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-768.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-768.png",
+      "image_pixels": {
+        "width": 768,
+        "height": 8637
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-1024.png",
+      "viewport": {
+        "width": 1024,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "ce5de6286c4978a4a41d0042aaae6f81732d3359068d91db6f43642bf81257fc",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-1024.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-1024.png",
+      "image_pixels": {
+        "width": 1024,
+        "height": 3109
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "cb02b4aec087e0b0115223fb250e295d46fcbcfc59fa4af83ed3772020364e4b",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-trace-recovery-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-1440.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1967
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "94287dfc6922d8bafb93e8492f7168ccf48eccf64930de2bc4621f550033df53",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-top-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "catalog-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "a57aca814db1ef70785a1dbb5db6d92c4379fe42ea25789b063e555ca4ae0ec1",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-catalog-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/catalog-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "cleanup-failed-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "75806dae14066e02050a59a9162b8e5f2185821f6d557a782679db28647785de",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-trace-cleanup-failed-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/cleanup-failed-320.png",
+      "image_pixels": {
+        "width": 378,
+        "height": 9022
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "cleanup-failed-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "0f74671b62f056a76dad589031146cfcee7d7a24f2efdfe939212664d8e6ef30",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-cleanup-failed-top-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/cleanup-failed-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "cleanup-failed-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "9e3e08c8667f1a344c5f2e138cc50a40a4d8e4e8c89fdb3066d363bd11c124f4",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-cleanup-failed-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/cleanup-failed-1440.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1992
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "cleanup-failed-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "2e804877518e2cda3a77295588d27f6524393186ecbdffb031a4746fd67f08dd",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-cleanup-failed-top-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/cleanup-failed-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "print-preview.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 900
+      },
+      "sha256": "cf9f8331bd88a8c15c88d3a9a9140e9b4a9beccda8028588c2abda431b78d1a8",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-print-preview.png",
+      "original_artifact_path": "artifacts/uxqbiii/print-preview.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "print-top.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "viewport",
+      "sha256": "28ed3e61165f8bdc47ec4d8886e32a811bbf92f641359ca288b3503042da1a25",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-print-top.png",
+      "original_artifact_path": "artifacts/uxqbiii/print-top.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "71b5becaee3f2b4313f74a22c633fbdb568741bd8928e948342ac034c83bdbbf",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-trace-recovery-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 1725
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "11be313a7a57cce5e053e1ece1616464c92b8fddee565db21a9dd7aa01353ec2",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-top-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "7416e908c3e0b76b1339c1c9f66e05bc054ab1759388ae818d90a85d424b83f6",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "341f573bea70c08ee3b0e97517d88c6d72bb856d9996b5d5df1f4f471e8d21cd",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 1518
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-768.png",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "b04bf962925766a7ce1e882a068aae7c1f208dbe3caa80ca20c5440fec117926",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-768.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-768.png",
+      "image_pixels": {
+        "width": 768,
+        "height": 1309
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-1024.png",
+      "viewport": {
+        "width": 1024,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "b7e1bb977c20cad8784869105c552e70b0e29da8c734bbb3523556b163629a35",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-1024.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-1024.png",
+      "image_pixels": {
+        "width": 1024,
+        "height": 1236
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "9f35fc40647921117989613e7f1c14d7abd7eef5c6826f8d861c89873a7730d1",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-trace-recovery-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-1440.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 92,
+        "width": 1176,
+        "height": 823
+      },
+      "sha256": "a2e7b27cd724c9fcf2701880a8ead835669bfe39832f7b49af18236c2f62c983",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-top-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 823
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "e809afd8618a355cbdf408c2d90011aedef4acac1b75c867f545c3c021fc6479",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "cleanup-failed-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "346a11acf4ee302959418e909f17d521bc877ff019f0753ea305cdcd16d3f346",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-trace-cleanup-failed-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/cleanup-failed-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 1804
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "cleanup-failed-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "d038ecdb87d285c7ec01d3017d8ce34595b1b02fbbcd9b7168bcdcf957e26251",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-cleanup-failed-top-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/cleanup-failed-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "cleanup-failed-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "whole visible operation",
+      "sha256": "2c07f02fda885bf127ebe26459c2544183e8429b3a5e4fc11dc6b0b702d16ac6",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-cleanup-failed-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/cleanup-failed-1440.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1050
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "cleanup-failed-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 100,
+        "width": 1176,
+        "height": 823
+      },
+      "sha256": "ad96a736a6d0171d8c66399ba31a61d5b95b676d1a79e2122f99f480a8370df1",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-cleanup-failed-top-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/cleanup-failed-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 823
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "print-preview.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 900
+      },
+      "sha256": "3ec9a738fcbd6143f8470558cd757102e3f09cb378b336fe38e98cde3efc7641",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-print-preview.png",
+      "original_artifact_path": "artifacts/uxqa7i/print-preview.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "print-top.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "viewport",
+      "sha256": "f4f63838b9076a31b0ec88a1439039b94d8bb5684692d49f88594ab7fba14ec4",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-print-top.png",
+      "original_artifact_path": "artifacts/uxqa7i/print-top.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 354,
+        "height": 900
+      },
+      "sha256": "aa5ed0b473191cd31c806fb4922a5e3146a8810b026df86724493fa4f48858e8",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-390.png",
+      "image_pixels": {
+        "width": 354,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "backups-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "#backups",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 354,
+        "height": 900
+      },
+      "sha256": "6b85d42b232db1fb953da081b003f4be2a76db552144d668566b6d593d58d09d",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-backups-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/backups-390.png",
+      "image_pixels": {
+        "width": 354,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-empty-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "#content",
+      "clip": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 900
+      },
+      "sha256": "643b6fd0b5174fecf4bbb9fad503f3f3928574c2e4ffdf4d47515cc54ab29601",
+      "route": "http://127.0.0.1:62814/uxqa7/catalog-empty/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "catalog-empty",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-empty-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-empty-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-malformed-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "#content",
+      "clip": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 900
+      },
+      "sha256": "19e00b3612bfc5514db05e3270b8936911a0e77be81c694500f83010db77a2de",
+      "route": "http://127.0.0.1:62814/uxqa7/catalog-malformed/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "catalog-malformed",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-malformed-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-malformed-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "long-ids-imported-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "#content",
+      "clip": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 900
+      },
+      "sha256": "84852f7c55b85a79cfa448164c177b9e8caa1436bf1144ee245b130cbeac62ad",
+      "route": "http://127.0.0.1:62814/uxqa7/long-ids-imported/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "long-ids-imported",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-long-ids-imported-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/long-ids-imported-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-no-results-390.png",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "selector": "#backups",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 354,
+        "height": 900
+      },
+      "sha256": "48b6a19c6b78f7fc6d619b6d88f77bd9ef95b33230dde3d58703f336ca776527",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html?copy=no-matching-backup-fixture-5927#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-no-results-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-no-results-390.png",
+      "image_pixels": {
+        "width": 354,
+        "height": 900
+      },
+      "publication_role": "trace",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-malformed-overview-390.png",
+      "sha256": "34e1f2a5cff955ce443a90a7a826c7e13a3788602d26345ae0885c6a3da374ad",
+      "scenario": "catalog-malformed",
+      "route": "http://127.0.0.1:62814/uxqa7/catalog-malformed/docs/report.html#backups",
+      "filter": null,
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "full_page": false,
+      "scope": "Visibly marked synthetic presentation fixture; no operation was executed.",
+      "selector": "viewport",
+      "phase": "after",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-catalog-malformed-overview-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-malformed-overview-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 900
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "long-id-selected-390.png",
+      "sha256": "fa3c32324702672b775b22fc1901be17d6a014415ad90ee94bc4ac7f9e1f51b2",
+      "scenario": "long-ids-imported",
+      "route": "http://127.0.0.1:62814/uxqa7/long-ids-imported/docs/report.html?copy=import-long#backups",
+      "filter": "import-long",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "full_page": true,
+      "scope": "Visibly marked synthetic presentation fixture; no operation was executed.",
+      "selector": "full page",
+      "phase": "after",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-long-id-selected-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/long-id-selected-390.png",
+      "image_pixels": {
+        "width": 390,
+        "height": 1796
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "overview-backups-1440.png",
+      "sha256": "1c9187f42840eb58e66f7344fcf37ca8aaea029e115ffe5ca12317be0c4656d8",
+      "scenario": "real",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "filter": null,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "full_page": false,
+      "scope": "Public12Oct saved evidence; static replay.",
+      "selector": "viewport",
+      "phase": "after",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-overview-backups-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/overview-backups-1440.png",
+      "image_pixels": {
+        "width": 1440,
+        "height": 1000
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "clipboard-fallback-390.png",
+      "sha256": "a1d00b60ffc1e73bc094e3e324dc6303b9e54681acc47a69b8234fbed0c91762",
+      "scenario": "real",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "selector": ".code-block containing restore-command-20261012T050349-ae2cf805",
+      "scope": "Static real evidence with simulated clipboard rejection. Command is selected for manual copy; no command or domain operation executed.",
+      "phase": "after",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-clipboard-fallback-390.png",
+      "original_artifact_path": "artifacts/uxqa7i/clipboard-fallback-390.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 223
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "before-cleanup-marked-320.png",
+      "sha256": "973574a307c2b22847a62742c962148343283d9eec5dfa6a8bfe76d7af8f11b4",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#content including fixture notice and recovery heading",
+      "clip": {
+        "x": 0,
+        "y": 170,
+        "width": 320,
+        "height": 900
+      },
+      "source_manifest_file": "artifacts/uxqb/review-manifest.json",
+      "source_manifest_sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+      "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+      "generated_at": "2026-10-12T13:32:03+00:00",
+      "scope": "Same visibly marked synthetic cleanup-failed fixture; static public evidence replay, no operation executed.",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-cleanup-marked-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/before-cleanup-marked-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 830
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "after-cleanup-marked-320.png",
+      "sha256": "337b09c076e945c4e552f6b7a11c082866cb24dbc734c30f4e3d280e71c24ef9",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#content including fixture notice and recovery heading",
+      "clip": {
+        "x": 0,
+        "y": 170,
+        "width": 320,
+        "height": 900
+      },
+      "source_manifest_file": "artifacts/uxqa7/review-manifest.json",
+      "source_manifest_sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+      "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+      "generated_at": "2026-10-12T13:32:03+00:00",
+      "scope": "Same visibly marked synthetic cleanup-failed fixture; static public evidence replay, no operation executed.",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-cleanup-marked-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/after-cleanup-marked-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 830
+      },
+      "publication_role": "supplemental",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "catalog-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "a57aca814db1ef70785a1dbb5db6d92c4379fe42ea25789b063e555ca4ae0ec1",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-backups-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/catalog-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "catalog-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "e809afd8618a355cbdf408c2d90011aedef4acac1b75c867f545c3c021fc6479",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-backups-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "catalog-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "9c236b68c167bd960bba1721c5cedc898846f97fbe99d50e3636ef1b9c8d1185",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-backups-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/catalog-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "catalog-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": ".backup-catalog",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "7416e908c3e0b76b1339c1c9f66e05bc054ab1759388ae818d90a85d424b83f6",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#backups",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-backups-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/catalog-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 0,
+        "width": 1176,
+        "height": 900
+      },
+      "sha256": "94287dfc6922d8bafb93e8492f7168ccf48eccf64930de2bc4621f550033df53",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-1440.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-top-1440.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 232,
+        "y": 92,
+        "width": 1176,
+        "height": 823
+      },
+      "sha256": "a2e7b27cd724c9fcf2701880a8ead835669bfe39832f7b49af18236c2f62c983",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-1440.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-top-1440.png",
+      "image_pixels": {
+        "width": 1176,
+        "height": 823
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "recovery-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "7a9664db9558696f6f8ee323ba2b5aaa88524c66806b81bd85e445a92c68cbb7",
+      "route": "http://127.0.0.1:62814/uxqb/real/docs/report.html#recovery",
+      "phase": "before",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/before-recovery-320.png",
+      "original_artifact_path": "artifacts/uxqbiii/recovery-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqbiii/review.json",
+        "sha256": "729224834bf95257082f90dc5867b2221c239dbe0af31cee8638fb7e597ea64a"
+      }
+    },
+    {
+      "file": "recovery-top-320.png",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#recovery",
+      "clip": {
+        "x": 18,
+        "y": 0,
+        "width": 284,
+        "height": 900
+      },
+      "sha256": "11be313a7a57cce5e053e1ece1616464c92b8fddee565db21a9dd7aa01353ec2",
+      "route": "http://127.0.0.1:62814/uxqa7/real/docs/report.html#recovery",
+      "phase": "after",
+      "scenario": "real",
+      "presentation_fixture": false,
+      "published_path": "docs/screenshots/uiux-20261012/after-recovery-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/recovery-top-320.png",
+      "image_pixels": {
+        "width": 284,
+        "height": 900
+      },
+      "publication_role": "comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/review.json",
+        "sha256": "599e2df6e99b4935c2de6972fe068f264c4fe09ccffedc33b782aec145de7f70"
+      }
+    },
+    {
+      "file": "before-cleanup-marked-320.png",
+      "sha256": "973574a307c2b22847a62742c962148343283d9eec5dfa6a8bfe76d7af8f11b4",
+      "phase": "before",
+      "scenario": "cleanup-failed",
+      "route": "http://127.0.0.1:62814/uxqb/cleanup-failed/docs/report.html#recovery",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#content including fixture notice and recovery heading",
+      "clip": {
+        "x": 0,
+        "y": 170,
+        "width": 320,
+        "height": 900
+      },
+      "source_manifest_file": "artifacts/uxqb/review-manifest.json",
+      "source_manifest_sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+      "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+      "generated_at": "2026-10-12T13:32:03+00:00",
+      "scope": "Same visibly marked synthetic cleanup-failed fixture; static public evidence replay, no operation executed.",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/before-cleanup-failed-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/before-cleanup-marked-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 830
+      },
+      "publication_role": "marked-comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqb/review-manifest.json",
+        "sha256": "2923023b62fcdf4d47e64353e6d7e6f6fcd538cea1d267ec4d1c71af5328676b",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/before/manifest",
+        "source_revision": "4816852ed7623be1e844d6fc1a2311bcaf486114",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    },
+    {
+      "file": "after-cleanup-marked-320.png",
+      "sha256": "337b09c076e945c4e552f6b7a11c082866cb24dbc734c30f4e3d280e71c24ef9",
+      "phase": "after",
+      "scenario": "cleanup-failed",
+      "route": "http://127.0.0.1:62814/uxqa7/cleanup-failed/docs/report.html#recovery",
+      "viewport": {
+        "width": 320,
+        "height": 1000
+      },
+      "selector": "#content including fixture notice and recovery heading",
+      "clip": {
+        "x": 0,
+        "y": 170,
+        "width": 320,
+        "height": 900
+      },
+      "source_manifest_file": "artifacts/uxqa7/review-manifest.json",
+      "source_manifest_sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+      "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+      "generated_at": "2026-10-12T13:32:03+00:00",
+      "scope": "Same visibly marked synthetic cleanup-failed fixture; static public evidence replay, no operation executed.",
+      "presentation_fixture": true,
+      "published_path": "docs/screenshots/uiux-20261012/after-cleanup-failed-320.png",
+      "original_artifact_path": "artifacts/uxqa7i/after-cleanup-marked-320.png",
+      "image_pixels": {
+        "width": 320,
+        "height": 830
+      },
+      "publication_role": "marked-comparison-alias",
+      "source_manifest": {
+        "path": "artifacts/uxqa7/review-manifest.json",
+        "sha256": "80eddeb35b16a39f215dbbfb706a4106f79b73871247806df192c26463c806c7",
+        "public_reference": "docs/evidence/uiux-20261012/provenance.json#/after/manifest",
+        "source_revision": "02a9c5662e2eef7870540e3782be1fa0e0fc5725",
+        "generated_at": "2026-10-12T13:32:03+00:00"
+      },
+      "original_browser_receipt": {
+        "path": "artifacts/uxqa7i/extra-captures.json",
+        "sha256": "5e42190b750a3f70095f365140ec51672133001ce0b7b96c601b0bba94b42bc2"
+      }
+    }
+  ]
+}

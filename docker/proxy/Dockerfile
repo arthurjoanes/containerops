@@ -5,7 +5,8 @@ RUN apk add --no-cache \
     libexpat=2.8.5-r0 \
     libpng=1.6.59-r0 \
     nghttp2-libs=1.70.0-r0 \
-    pcre2=10.49-r0
+    pcre2=10.49-r0 \
+    tiff=4.7.2-r0
 LABEL org.opencontainers.image.title="ContainerOps proxy" \
       org.opencontainers.image.source="https://github.com/arthurjoanes/containerops"
 COPY docker/proxy/nginx.conf /etc/nginx/nginx.conf

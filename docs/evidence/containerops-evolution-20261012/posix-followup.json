@@ -1,0 +1,123 @@
+{
+  "schema": "containerops-posix-followup-v1",
+  "status": "passed",
+  "started_at": "2026-10-12T05:30:20.708324+00:00",
+  "completed_at": "2026-10-12T05:30:49.735547+00:00",
+  "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
+  "scope": "Session lock/private JSON POSIX modes, repeated setup and cross-platform context fixtures. Original full Docker proof remains bound to ec090fc.",
+  "private_record_sha256": "a679e7ec24eb27e3d3e910c2a5b7c96b503e3f7a227a68dd3a483bfc08cf1a3d",
+  "sources_head_and_diff_unchanged": true,
+  "preservation": {
+    "default_demo_container_ids_unchanged": true,
+    "default_state_pointers_backups_and_mtime_unchanged": true,
+    "shared_image_tags_unchanged": true,
+    "historical_evidence_and_report_unchanged_during_followup": true
+  },
+  "tests": {
+    "windows_host": {
+      "discovered": 128,
+      "skipped": 3,
+      "reason": "Two symlink privilege skips and one POSIX permission case."
+    },
+    "linux_host": {
+      "discovered": 128,
+      "skipped": 2,
+      "reason": "Two Windows junction cases; actual POSIX permissions and symlinks passed."
+    },
+    "report_windows": 48,
+    "report_linux": 48
+  },
+  "linux_harness": {
+    "existing_application_image": "containerops-co-20261012-f040d4f5-app:1.0.0",
+    "current_sources_bound_read_only": true,
+    "network": "none",
+    "docker_socket_mounted": false,
+    "application_postgresql_gates_repeated": false
+  },
+  "gates": [
+    {
+      "name": "setup",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:24.256072+00:00",
+      "completed_at": "2026-10-12T05:30:25.070416+00:00",
+      "elapsed_seconds": 0.813,
+      "log_sha256": "affb4a6d60f6bbe0339b77fb0247bf8f9b23d4c433f4fe6215193888263d6b25"
+    },
+    {
+      "name": "host-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:25.255842+00:00",
+      "completed_at": "2026-10-12T05:30:33.529123+00:00",
+      "elapsed_seconds": 8.266,
+      "log_sha256": "48a8c779afb4d0a75b7964261aed16af01a4f839274e7a6d6db947c5b1a79854"
+    },
+    {
+      "name": "report-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:33.719392+00:00",
+      "completed_at": "2026-10-12T05:30:37.239350+00:00",
+      "elapsed_seconds": 3.516,
+      "log_sha256": "dbaa888062dca2dd42cc4b7e6af608ff27a3df41b2e38952163c46abddc0119c"
+    },
+    {
+      "name": "host-lint",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:37.419397+00:00",
+      "completed_at": "2026-10-12T05:30:37.453451+00:00",
+      "elapsed_seconds": 0.031,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "host-format",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:37.634964+00:00",
+      "completed_at": "2026-10-12T05:30:37.666042+00:00",
+      "elapsed_seconds": 0.016,
+      "log_sha256": "dde85ab0ab657507e2a1c53a7cfe26e5ab8acfd4abe3547bac113731d2477097"
+    },
+    {
+      "name": "linux-host-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:37.843416+00:00",
+      "completed_at": "2026-10-12T05:30:44.817065+00:00",
+      "elapsed_seconds": 6.969,
+      "log_sha256": "14e4903ddeb132022a3e99fa55cdeec82fdaccdce48a550a90a0179352665d05"
+    },
+    {
+      "name": "linux-report-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:30:45.016234+00:00",
+      "completed_at": "2026-10-12T05:30:47.325101+00:00",
+      "elapsed_seconds": 2.297,
+      "log_sha256": "c30659d3a958312308b90c2729e50ad11940e96e18fe8ebf3461ad31ffe989ff"
+    }
+  ],
+  "changed_sources": [
+    {
+      "path": "scripts/ops.py",
+      "sha256": "aec01ea575ead7893cec01bec87f1575c0d53fe9d02405dca8b3095f8cc2dab0"
+    },
+    {
+      "path": "tests/test_operations.py",
+      "sha256": "b4b710b0e657c4d1ae400217fbfb8bb77b1498ae3c313a625e71b566e4641c97"
+    },
+    {
+      "path": "tests/test_runtime_context.py",
+      "sha256": "2f917860fda17f48f7ca1730911b1e1e4f9c1ee601046c3bbb4ddd3b6d7414c4"
+    }
+  ],
+  "gitleaks_history": {
+    "version": "8.30.1",
+    "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
+    "commits_scanned": 37,
+    "exit_code": 0,
+    "allowlist_changed": false
+  }
+}

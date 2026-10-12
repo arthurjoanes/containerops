@@ -13,7 +13,7 @@
     },
     {
       "path": "docs/runbooks.md",
-      "sha256": "91982625c1f9a6f17918f9680d5ce6def864869f631e28ba98f436d84bfc5b05"
+      "sha256": "fb68b83b448a27ae67ecc62a99c9da2f95f7acf57d9f5af85eba1260176defae"
     },
     {
       "path": "docs/operational-recovery.md",
@@ -21,7 +21,7 @@
     },
     {
       "path": "docs/verification.md",
-      "sha256": "807677b33658eeefed66e157d3637bc2c4a9825906fb2c2788cefce317d43c36"
+      "sha256": "3487623ab1d36b725d993fc25be97b0d7004c5af50eb6e5c5b02a0eb7cd5fa35"
     },
     {
       "path": "docs/security.md",
@@ -82,5 +82,11 @@
     "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
     "sha256": "2a500812eda78649ef81f83f5cc1e0ad465c55128b0df01ab0daa9c1adcdba11",
     "scope": "Focused POSIX and cross-platform fixture regression; full operational proof retains original source commit."
+  },
+  "archive_compatibility_followup": {
+    "path": "ci-archive-compatibility.json",
+    "source_commit": "a88b0b8437a1d1ab67cac70196c8279c9f998fd7",
+    "sha256": "e6cc805bcc3af3690ec5b74b4fb0a731784cce4493fe0a6192de8afa75927322",
+    "scope": "Focused classic-store OCI regression and read-only original containerd archive validation."
   }
 }

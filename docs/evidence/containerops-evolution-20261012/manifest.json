@@ -375,12 +375,16 @@
   "public_record_curation": "Host paths, raw command logs, unrelated inventories, credentials and dump/full metadata remain private. Source file hashes use path/sha256 rows; artifact reference hashes were recomputed for curated LF JSON bytes.",
   "files": [
     {
+      "path": "ci-archive-compatibility.json",
+      "sha256": "e6cc805bcc3af3690ec5b74b4fb0a731784cce4493fe0a6192de8afa75927322"
+    },
+    {
       "path": "cleanup.json",
       "sha256": "0bd53e6b28de1840270f303da84b3fba4d7bafbd089e7ff7066656b43e4ef857"
     },
     {
       "path": "editorial.json",
-      "sha256": "9c8817794087e96b17f5f8e5ebac5fe66c6a25c39391594108dfdbd6a5494177"
+      "sha256": "a198ba857390f783fe3b810f08050912366fc1e6cb57bd1eb8e7c71904a608eb"
     },
     {
       "path": "evidence/audit-1.0.0.json",
@@ -584,5 +588,11 @@
     "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
     "sha256": "2a500812eda78649ef81f83f5cc1e0ad465c55128b0df01ab0daa9c1adcdba11",
     "scope": "Focused POSIX and cross-platform fixture regression; full operational proof retains original source commit."
+  },
+  "archive_compatibility_followup": {
+    "path": "ci-archive-compatibility.json",
+    "source_commit": "a88b0b8437a1d1ab67cac70196c8279c9f998fd7",
+    "sha256": "e6cc805bcc3af3690ec5b74b4fb0a731784cce4493fe0a6192de8afa75927322",
+    "scope": "Focused classic-store OCI regression and read-only original containerd archive validation."
   }
 }

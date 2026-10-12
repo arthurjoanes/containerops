@@ -1,0 +1,151 @@
+{
+  "schema": "containerops-archive-compatibility-v1",
+  "local_regression_status": "passed",
+  "started_at": "2026-10-12T05:43:33.413395+00:00",
+  "completed_at": "2026-10-12T05:44:02.012496+00:00",
+  "source_commit": "a88b0b8437a1d1ab67cac70196c8279c9f998fd7",
+  "sources_head_and_diff_unchanged": true,
+  "private_record_sha256": "37826f7c516fc4ae134614397388dd887b60086dad3cafd4463a7c48ea3196fd",
+  "scope": "Focused classic-save compatibility and strict OCI-linkage checks. Fresh full Docker gates execute in the GitHub workflow; original local full proof remains bound to ec090fc.",
+  "diagnostic_ci": {
+    "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
+    "url": "https://github.com/arthurjoanes/containerops/actions/runs/38208102509",
+    "status": "failed",
+    "reason": "Classic store ImageID equals verified config digest; Docker save synthesizes a separate OCI manifest digest.",
+    "passed": [
+      "setup",
+      "builds_and_oci_audits",
+      "verify",
+      "operations_proof",
+      "transfer_release2_tls_hardening_logical_backup",
+      "transfer_cleanup_and_absence_check"
+    ],
+    "failed_phase": "portable-export"
+  },
+  "contract": {
+    "classic_store_config_image_id_verified": true,
+    "containerd_image_id_requires_manifest_digest_match": true,
+    "config_and_ordered_layers_hash_size_media_type_verified": true,
+    "shared_tags_rejected": true,
+    "v1_transport_schema_unchanged": true
+  },
+  "primary_reference": "https://github.com/moby/moby/blob/v28.0.4/image/tarexport/save.go#L232-L294",
+  "tests": {
+    "windows_host": {
+      "discovered": 131,
+      "skipped": 3
+    },
+    "linux_host": {
+      "discovered": 131,
+      "skipped": 2
+    },
+    "report_windows": 48,
+    "report_linux": 48,
+    "focused_package_cases": 24
+  },
+  "real_containerd_archive_read_only": {
+    "archive_sha256": "05096e6309dc4890a47d39f13a4d49044daf720bfe838d2c14760f5dfdccc94f",
+    "original_unchanged": true,
+    "inspection": {
+      "image_id": "sha256:37567a290540e16037411eeaad0bcdce81f262f420def1fcb7ea0caec43892a5",
+      "config_digest": "sha256:4f61b6843f98a7515024533a6a5cebef6570352d2329b72fa9c117826bbc20a3",
+      "archive_manifest_digest": "sha256:37567a290540e16037411eeaad0bcdce81f262f420def1fcb7ea0caec43892a5",
+      "release": "2.0.0",
+      "shared_tags": false
+    }
+  },
+  "gates": [
+    {
+      "name": "setup",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:35.356044+00:00",
+      "completed_at": "2026-10-12T05:43:35.988603+00:00",
+      "elapsed_seconds": 0.625,
+      "log_sha256": "affb4a6d60f6bbe0339b77fb0247bf8f9b23d4c433f4fe6215193888263d6b25"
+    },
+    {
+      "name": "host-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:36.160706+00:00",
+      "completed_at": "2026-10-12T05:43:44.573709+00:00",
+      "elapsed_seconds": 8.406,
+      "log_sha256": "57dc7e2d87a5d2dff2e56865e285b47ebce71cdffc8fd48cf9f201a08815323f"
+    },
+    {
+      "name": "report-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:44.772814+00:00",
+      "completed_at": "2026-10-12T05:43:48.513701+00:00",
+      "elapsed_seconds": 3.718,
+      "log_sha256": "bf0342afc198c74f8c1295319663b7d36b17848419bb61949fea4587432659e7"
+    },
+    {
+      "name": "host-lint",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:48.786375+00:00",
+      "completed_at": "2026-10-12T05:43:48.839729+00:00",
+      "elapsed_seconds": 0.031,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "host-format",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:49.120049+00:00",
+      "completed_at": "2026-10-12T05:43:49.168839+00:00",
+      "elapsed_seconds": 0.032,
+      "log_sha256": "dde85ab0ab657507e2a1c53a7cfe26e5ab8acfd4abe3547bac113731d2477097"
+    },
+    {
+      "name": "linux-host-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:49.484919+00:00",
+      "completed_at": "2026-10-12T05:43:56.542362+00:00",
+      "elapsed_seconds": 7.047,
+      "log_sha256": "e5acb42f072511941a547d02e363b372464845dec8fea4a252498fcb127c2117"
+    },
+    {
+      "name": "linux-report-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:56.741688+00:00",
+      "completed_at": "2026-10-12T05:43:59.151379+00:00",
+      "elapsed_seconds": 2.406,
+      "log_sha256": "d2fac366dd0727d78bc12095f7fc10b342d0c452c75c87d1dced853ecae04295"
+    },
+    {
+      "name": "real-containerd-archive",
+      "status": "passed",
+      "exit_code": 0,
+      "started_at": "2026-10-12T05:43:59.373825+00:00",
+      "completed_at": "2026-10-12T05:43:59.807678+00:00",
+      "elapsed_seconds": 0.422,
+      "log_sha256": "b2d12c753987df14aaa10f9ccf7918e437266799b3641981426c43c880b7368e"
+    }
+  ],
+  "changed_sources": [
+    {
+      "path": "scripts/backup_package.py",
+      "sha256": "8fc4c70901425a7cc1239aeb2013c752e6fc1a2c17962b43f00e2b9b9f38cdd5"
+    },
+    {
+      "path": "tests/test_backup_package.py",
+      "sha256": "d290d4d4f4041926c960f80ef2f99ccdd5085646691f897e86a43d6499585a47"
+    },
+    {
+      "path": "docs/runbooks.md",
+      "sha256": "fb68b83b448a27ae67ecc62a99c9da2f95f7acf57d9f5af85eba1260176defae"
+    }
+  ],
+  "preservation": {
+    "default_demo_container_ids_unchanged": true,
+    "default_state_pointers_backups_and_mtime_unchanged": true,
+    "shared_tags_unchanged": true,
+    "historical_evidence_and_report_unchanged_during_regression": true
+  }
+}

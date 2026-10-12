@@ -264,3 +264,17 @@ Linux teve dois casos exclusivos de junções Windows, com permissões POSIX e
 symlinks efetivamente testados. IDs da demo, estado, ponteiros, backups, tags
 compartilhadas e evidências históricas permaneceram iguais. Esse recibo cobre
 a correção; a prova completa anterior continua ligada a `ec090fc`.
+
+O CI seguinte passou por verify e prova de operações, mas recusou o export da
+imagem no store clássico do Docker. Nesse store, ImageID é o digest da config;
+o archive contém um manifesto OCI sintetizado com outro digest. A correção em
+`a88b0b8437a1d1ab67cac70196c8279c9f998fd7` confere essa relação e os descriptors
+de config/camadas por conteúdo, tamanho e mediaType, mantendo a recusa de tags.
+O formato v1 do pacote permanece igual.
+
+O [recibo de compatibilidade](evidence/containerops-evolution-20261012/ci-archive-compatibility.json)
+registra 131 testes de host nas duas plataformas (três skips no Windows, dois no
+Linux), 48 testes do relatório em cada uma e 24 casos focados do pacote. A nova
+inspeção também aprovou o archive real do store containerd, sem alterar seus
+bytes. As provas completas, os recibos de regressão e o CI têm seus próprios
+escopos e referências de fonte.

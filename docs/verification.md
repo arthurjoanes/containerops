@@ -248,3 +248,19 @@ resumos curados, sem publicar dumps, credenciais ou caminhos pessoais.
 O ensaio de transporte usou dois contextos no mesmo computador. Outro host,
 cópia física independente e imagens auxiliares preparadas para offline completo
 continuam necessários. As durações observadas não estabelecem RTO garantido.
+
+### Correção de permissões e regressão Linux
+
+O primeiro CI Ubuntu recusou o lock da sessão, criado com modo 0644. A correção
+em `faba051d31fb586777dc7dcca436937a84173acc` cria o lock e os JSONs privados com
+0600 e protege o runtime com 0700. A validação de setup também aceita seus
+subdiretórios em comandos repetidos. Os fixtures de contexto agora informam a
+mesma base ao processo filho no Windows e no Linux.
+
+O [recibo complementar](evidence/containerops-evolution-20261012/posix-followup.json)
+registra fontes estáveis, 128 testes do host nas duas plataformas e 48 testes
+do relatório em cada uma, além de Ruff e formato. Windows teve três skips;
+Linux teve dois casos exclusivos de junções Windows, com permissões POSIX e
+symlinks efetivamente testados. IDs da demo, estado, ponteiros, backups, tags
+compartilhadas e evidências históricas permaneceram iguais. Esse recibo cobre
+a correção; a prova completa anterior continua ligada a `ec090fc`.

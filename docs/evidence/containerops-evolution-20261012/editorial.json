@@ -21,7 +21,7 @@
     },
     {
       "path": "docs/verification.md",
-      "sha256": "002ebd6f4b954afcc8db8cff24f40d368d1984b9f2e847e34ad18b10c750dff2"
+      "sha256": "807677b33658eeefed66e157d3637bc2c4a9825906fb2c2788cefce317d43c36"
     },
     {
       "path": "docs/security.md",
@@ -76,5 +76,11 @@
   ],
   "html_local_links_checked": 54,
   "broken_links": [],
-  "historical_report_and_evidence_preserved": true
+  "historical_report_and_evidence_preserved": true,
+  "followup": {
+    "path": "posix-followup.json",
+    "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
+    "sha256": "2a500812eda78649ef81f83f5cc1e0ad465c55128b0df01ab0daa9c1adcdba11",
+    "scope": "Focused POSIX and cross-platform fixture regression; full operational proof retains original source commit."
+  }
 }

@@ -380,7 +380,7 @@
     },
     {
       "path": "editorial.json",
-      "sha256": "180791a24fc3654b63a6671b158c4cbf763fa4cc9a707b9ffb8fc0b2c91b08b1"
+      "sha256": "9c8817794087e96b17f5f8e5ebac5fe66c6a25c39391594108dfdbd6a5494177"
     },
     {
       "path": "evidence/audit-1.0.0.json",
@@ -563,6 +563,10 @@
       "sha256": "210fefe3fd16735647a421a14aa12b808028841adb1d1d00dd4aa519e66665a4"
     },
     {
+      "path": "posix-followup.json",
+      "sha256": "2a500812eda78649ef81f83f5cc1e0ad465c55128b0df01ab0daa9c1adcdba11"
+    },
+    {
       "path": "report.html",
       "sha256": "84036e541fd3bc492bba6e3644a194baac46003d94dd0440ecb7c106984cce6a"
     },
@@ -574,5 +578,11 @@
       "path": "source.json",
       "sha256": "5fbdbc4774699e1edd1f02bcce9750e3b535530636c46a40fe881da8d37ddf53"
     }
-  ]
+  ],
+  "followup": {
+    "path": "posix-followup.json",
+    "source_commit": "faba051d31fb586777dc7dcca436937a84173acc",
+    "sha256": "2a500812eda78649ef81f83f5cc1e0ad465c55128b0df01ab0daa9c1adcdba11",
+    "scope": "Focused POSIX and cross-platform fixture regression; full operational proof retains original source commit."
+  }
 }

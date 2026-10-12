@@ -21,6 +21,27 @@ Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o jo
 
 ## Demonstração
 
+![Catálogo do ContainerOps com identificação das cópias e estados separados de integridade e restore](docs/screenshots/uiux-20261012/after-overview-backups-1440.png)
+
+A revisão de interface de 12/10/2026 mostra os registros da
+[rodada de backup e transporte](docs/evidence/containerops-evolution-20261012/manifest.json).
+Localize uma cópia por ID ou origem, confira integridade e recibo de restore e
+abra os detalhes para consultar a fonte ou preparar um comando local. O último
+ensaio tem painel próprio, com checksum, snapshot, novo job e limpeza separados.
+Renderizar esta captura não repetiu as operações do domínio.
+
+[Abrir o relatório local](docs/evidence/uiux-20261012/view/docs/report.html#backups) ·
+[catálogo no celular](docs/screenshots/uiux-20261012/after-backups-390.png) ·
+[jornadas e validação da interface](docs/frontend-quality.md) ·
+[guia de leitura](docs/report-guide.md).
+
+A [paleta da marca](docs/brand.md) usa azul profundo `#142D4E`, azul de ação
+`#1F5FBF` e ciano `#0F798A`, sobre fundo nuvem e superfícies brancas. Os estados
+mantêm verde, âmbar e vermelho com rótulos. Source Sans 3 e os assets locais
+permanecem incorporados ao relatório para leitura offline.
+
+### Registro histórico de 22/09/2026
+
 ![Recorte do relatório de restauração: três jobs e verificações dos dados restaurados](docs/screenshots/focused-20260922/restauracao-foco.png)
 
 Captura real de 22/09/2026, 17:37 UTC, gerada com registros históricos. A restauração exibida ocorreu às 06:20 UTC: 3 jobs / 27,4 s. Gerar o HTML não repetiu a operação. [Entradas e identificação](docs/screenshots/focused-20260922/inputs.json) · [outros focos](docs/screenshots.md) · [página completa versionada](docs/readme/home.png).
@@ -213,7 +234,7 @@ python scripts/ops.py prove --scenario operations
 | API, fila e idempotência         | [Contrato de dados](docs/data-contract.md)                                                                                      |
 | Executar e recuperar             | [Demonstração](docs/demo.md) · [runbooks](docs/runbooks.md) · [recuperação](docs/operational-recovery.md)                       |
 | Conferir resultados e fontes     | [Verificação](docs/verification.md) · [admissão](docs/admission-measurement.md) · [fontes e datas](docs/fontes-e-afirmacoes.md) |
-| Interface e manutenção           | [Guia do relatório](docs/report-guide.md) · [capturas](docs/screenshots.md) · [padrão documental](docs/padrao-documentacao.md)  |
+| Interface e manutenção           | [Guia do relatório](docs/report-guide.md) · [marca e paleta](docs/brand.md) · [qualidade](docs/frontend-quality.md) · [capturas](docs/screenshots.md) · [padrão documental](docs/padrao-documentacao.md)  |
 
 ## Autor e licença
 

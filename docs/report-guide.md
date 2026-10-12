@@ -2,6 +2,10 @@
 
 O relatório é um snapshot: datas e resultados vêm dos JSONs de cada operação, sem executar comandos ao abrir o HTML. A implementação separa [seleção das evidências](../scripts/report_evidence.py), [gerador](../scripts/report.py), [template](../scripts/report.html) e [navegação](../scripts/report.js).
 
+Abra o [relatório da revisão de 12/10/2026](evidence/uiux-20261012/view/docs/report.html#backups)
+para seguir as jornadas atuais de cópias e recibos. Suas entradas são os registros
+operacionais curados de 12/10; a revisão da interface não reexecuta esses ensaios.
+
 Abra `docs/report.html` no navegador depois de clonar ou baixar o repositório.
 O HTML inclui estilos e navegação; os arquivos de evidência precisam permanecer
 na pasta `docs/evidence`. A página não consulta containers nem executa operações.
@@ -12,12 +16,18 @@ Com `CONTAINEROPS_SESSION` definido, `report` lê apenas os JSONs em
 nas fontes do repositório. A geração da sessão conserva `docs/report.html` e
 aliases históricos globais. O caminho de saída aparece no terminal.
 
+O HTML da sessão incorpora fonte, estilos, marca e JavaScript. Um pacote de
+guias Markdown selecionados acompanha a saída em `documentation/<hash>/`, com
+links relativos para leitura local. Os arquivos históricos, imagens e fontes
+de código continuam no repositório; o pacote de textos não transporta todos
+esses assets. Caminhos privados do host ficam fora dos links da página.
+
 A [sequência operacional de 22/09](operational-recovery.md) tem um [relatório isolado](evidence/operations-captures/fc39e58c890841a089c9b1173869b0aa-848eec21/view/docs/report.html) com somente os quatro JSONs daquela tentativa. Use-o para relacionar job inicial, rollback e restore. O relatório principal reúne registros de momentos diferentes; cada painel conserva a identidade da sua operação. Os percentis da [medição de admissão](admission-measurement.md) ficam no documento próprio.
 
 | Grupo       | O que conferir                                                                                            |
 | ----------- | --------------------------------------------------------------------------------------------------------- |
 | Verificação | Última execução validada pelo manifesto, etapas de isolamento e recuperação, resultado do job e teste TLS |
-| Recuperação | Checksum do backup, igualdade dos dados restaurados e processamento de um novo job                        |
+| Recuperação | Catálogo das cópias e último ensaio: checksum, snapshot, novo job e limpeza                              |
 | Release     | Tentativa mais recente de troca de imagem, inclusive falha, e teste de retorno à imagem anterior          |
 | Artefatos   | Identidade do build, auditoria OCI, scan compatível e catálogo dos JSONs                                  |
 
@@ -27,6 +37,34 @@ ser guardados. Voltar/avançar no navegador percorre as seleções. O teclado al
 a lista, os arquivos e os detalhes; após selecionar, o foco segue para o título
 do resultado. Sem JavaScript, todas as operações ficam visíveis na mesma página.
 O atalho **Ir para a operação** pula a navegação e mantém o resultado selecionado.
+
+## Cinco jornadas no relatório atual
+
+As nove vistas incluem **Cópias de backup** (`#backups`) e **Último ensaio de
+restore** (`#recovery`) como destinos separados. Um recibo do último ensaio não
+se aplica automaticamente a todas as cópias listadas.
+
+| Tarefa | Ação na página | O que conferir |
+| --- | --- | --- |
+| Localizar uma cópia | Abrir o catálogo e buscar ID, projeto ou contexto | ID completo, origem e data; cópias mais recentes primeiro |
+| Avaliar recuperabilidade | Ler integridade e recibo de restore separadamente | Bytes íntegros e ensaio verificado são critérios diferentes |
+| Investigar uma falha | Abrir o último ensaio e seu JSON | Status da tentativa e os quatro critérios, incluindo limpeza |
+| Preparar a próxima operação | Expandir os detalhes da cópia e copiar o comando local | ID e contexto capturados; confiança na origem de um importado |
+| Conferir a evidência | Seguir o JSON e as datas do registro | Fonte da operação, distinta da data de geração ou captura da UI |
+
+Com JavaScript, os filtros de busca e recibo usam os parâmetros `copy` e
+`receipt` da URL. Recarregar a página recupera esses filtros. **Limpar filtros**
+restaura a listagem; nenhum resultado após uma busca é diferente de catálogo
+vazio. Catálogo ausente ou inválido também recebe seu próprio estado. Sem
+JavaScript, todas as vistas e os detalhes nativos continuam disponíveis, com a
+listagem completa e comandos legíveis.
+
+**Copiar comando** copia somente texto. Se a área de transferência não estiver
+disponível, a página seleciona o comando e orienta a cópia manual. Execute no
+terminal, na sessão indicada. Uma cópia importada exige conferir a origem antes
+de acrescentar `--trusted-source`; a página não adiciona essa confiança
+automaticamente. Integridade desconhecida ou contexto inválido impede preparar
+um comando de restore para aquele ID.
 
 ## Interpretar o resultado
 
@@ -47,7 +85,7 @@ versão, a release tem suas imagens e o scan se aplica à imagem selecionada.
 A seleção do build exige compatibilidade de identidade e tempo para auditoria e
 scan. O snapshot do runtime fica separado, dentro de Artefatos.
 
-Quando existe `backup-catalog.json`, o painel de recuperação apresenta IDs,
+Quando existe `backup-catalog.json`, o painel **Cópias de backup** apresenta IDs,
 origem, schema, tamanho, integridade, importação e proteção. Restore verificado
 refere-se a um recibo aprovado após conferir snapshot, novo job e limpeza; hash
 válido sozinho não comprova recuperação. Os campos são escapados e os caminhos
@@ -65,6 +103,22 @@ As durações resumidas usam uma casa decimal. A verificação conserva a duraç
 exata nos detalhes. Os JSONs mantêm os valores completos, hashes e campos que
 não aparecem na página. Esses dados são demonstrações locais, não disponibilidade
 atual, SLA ou certificação das imagens.
+
+O último ensaio só aparece como **Restauração verificada** quando registra
+`status=passed`, checksum e snapshot aprovados, novo job completo e
+`cleanup_succeeded=true`. Falha da tentativa ou da limpeza impede aprovação,
+mesmo que os dados e o job tenham passado. Uma tentativa em andamento permanece
+em andamento. Registros antigos sem status final ou limpeza ficam parciais,
+com o motivo explícito e as verificações já observadas preservadas.
+
+No catálogo, **Sem recibo no catálogo** informa ausência de um recibo ligado à
+cópia; isso não demonstra que ela nunca foi ensaiada. Proteção e importação ficam
+nos detalhes, separadas de integridade e recuperação. Confira ID, origem e hashes
+no JSON antes de relacionar um ensaio à cópia selecionada.
+
+A [marca e paleta](brand.md) definem as cores por função. Resultados e limites da
+revisão no navegador ficam na [qualidade da interface](frontend-quality.md);
+abrir uma captura nova não renova a data de uma prova operacional histórica.
 
 ## Atualizar
 
@@ -103,7 +157,7 @@ Os corpos de texto, linhas divisórias e títulos compartilham eixos e espaçame
 
 A variável CSS `--surface`, sem uso, foi removida da fonte e do HTML publicado. O restante do HTML, incluindo datas, identidades e JavaScript, foi preservado. O [registro da limpeza](evidence/interface-v2/cleanup.json) descreve o delta e as verificações estáticas; as provas anteriores não foram reexecutadas nem substituídas.
 
-## Composição atual — versão 3
+## Composição de 22/09/2026 — versão 3
 
 A navegação lateral ocupa a altura do documento e mantém as oito operações identificáveis. O título e o resultado da operação iniciam o conteúdo. No celular, o seletor informa a operação atual e recolhe a lista.
 

@@ -2,9 +2,73 @@
 
 Medidas e contagens pertencem aos recibos históricos de cada rodada, incluindo a [auditoria](evidence/art-direction/audit.json) e o [navegador](evidence/art-direction/visual-review.json), de **22/09/2026**. A retificação dos comandos que descobriram zero testes permanece explícita.
 
-As [capturas de apresentação atuais](screenshots.md) foram refeitas em 22/09/2026 a partir do código atual. As comparações e provas abaixo são registros históricos das respectivas rodadas; seus arquivos e hashes não foram regravados.
+As capturas da rodada anterior foram refeitas em 22/09/2026 a partir daquele candidato. As comparações e provas abaixo são registros históricos das respectivas rodadas; seus arquivos e hashes não foram regravados.
 
-## Direção visual atual — revisão de 22/09/2026
+## Revisão de 12/10/2026: localizar cópias e conferir restore
+
+A interface atual usa a [paleta da marca](brand.md), nove destinos e duas vistas de recuperação: **Cópias de backup** e **Último ensaio de restore**. Os [pares antes/depois](screenshots.md#revisão-de-uiux--12102026) e o [recibo desta revisão](evidence/uiux-20261012/review.md) identificam arquivos executados, cenários e limites. As seções de setembro abaixo permanecem históricas.
+
+O público principal é quem opera ou revisa uma stack local e precisa decidir qual cópia conferir pela CLI. O HTML é um snapshot de evidências. Datas de criação, contexto, origem, integridade e recibo precedem detalhes técnicos. Copiar um comando copia texto; a operação continua no terminal.
+
+### Cinco jornadas e critérios de aceite
+
+| Jornada | Estado e ação | Resultado esperado | Consequência do erro |
+| --- | --- | --- | --- |
+| Localizar uma cópia | Catálogo salvo; buscar ID/origem e filtrar recibo | ID completo, data, origem e contagem; filtro preservado na URL ao navegar, voltar e recarregar | Escolher outra cópia ou outro contexto |
+| Conferir validade | Abrir detalhes de uma cópia | Integridade separada de restore; desconhecido continua desconhecido | Tratar checksum como prova de recuperação |
+| Conferir o ensaio | Abrir Último ensaio | ID e hashes explícitos; checksum, snapshot, novo job e limpeza separados; falha de limpeza impede aprovação | Aceitar um ensaio incompleto |
+| Preparar a CLI | Copiar texto do ID escolhido | Sessão capturada e ID exato; origem importada exige decisão sobre confiança; clipboard negado oferece seleção manual | Executar no runtime errado ou presumir autenticidade |
+| Investigar ausência/erro | Abrir catálogo vazio, inválido ou filtro sem resultado | Mensagens distintas e próximo passo pela CLI; limpar filtro mantém os registros | Interpretar falha de leitura como zero cópias |
+
+### Diagnóstico comprovado e mudanças
+
+| Prioridade | Evidência na base `4816852` | Mudança | Aceite |
+| --- | --- | --- | --- |
+| P1 | Fixture com `cleanup_succeeded=false` aparecia como “Passou” | Resultado exige os quatro critérios e status explícito; registro legado incompleto aparece parcial | Fixture de falha não aprova; testes de parser/resultado/renderer |
+| P1 | Contexto capturado divergente aparecia como padrão e comando sem sessão | Namespace vem do catálogo; ausente/inválido impede comando de restore por ID | Testes de sessão, default, namespaces reservados e escape |
+| P2 | Em 320 px, restore media 378 px de largura de página | Comandos têm rolagem local; catálogo vira lista contínua com detalhes nativos | Reflow nas cinco larguras e texto CSS a 200% |
+| P2 | Tabela comprimia IDs e misturava proteção/recibo; faltava data | ID/data/origem em cada linha; integridade e restore em campos separados | Capturas legíveis de IDs extensos, importados e desconhecidos |
+| P2 | Template de relatório de sessão apontava para guias fora do runtime | Bundle de Markdown selecionado, identificado por conteúdo; links diretos próprios | Links resolvidos e testes de preservação/conflito |
+
+A escolha da lista e da vista própria do catálogo é uma decisão de usabilidade, sem entrevistas ou métricas de produtividade. O recibo antigo não prova o estado atual do filesystem: a CLI revalida a cópia.
+
+### Duas composições comparadas
+
+```text
+A: Recuperação
+   Último restore → quatro critérios → cópia usada → catálogo de todas as cópias
+
+B: Recuperação
+   Cópias de backup → busca/recibo → ID, data, origem, integridade, restore → detalhes
+   Último ensaio de restore → quatro critérios → identidade e arquivos de prova
+```
+
+Foi escolhida B porque localizar uma cópia não depende de ler o último ensaio. Conserva o índice por famílias, as âncoras anteriores e os disclosures nativos. A vista de restore liga ao catálogo e mostra o ID realmente ensaiado; a proximidade entre arquivos não cria vínculo.
+
+Source Sans 3 e os assets licenciados continuam incorporados no HTML. Corpo de 16 px, descrição de 14 px e monoespaçada para IDs/comandos. Espaçamento de 8/16/24/32 px organiza os grupos; ações principais de formulário têm 44 px. Em telas estreitas, filtros empilham e estados ficam junto da cópia. Listas não substituem tabelas operacionais que ainda precisam de cabeçalhos e rolagem local. Impressão abre detalhes e inclui todas as cópias; estado de tela é restaurado depois.
+
+### Fontes primárias e adaptação
+
+| Referência | Mecanismo útil e aplicação |
+| --- | --- |
+| [WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/) | Contraste, reflow, foco visível e alvos; textos acompanham todas as cores de estado |
+| [ARIA APG](https://www.w3.org/WAI/ARIA/apg/patterns/) | HTML nativo para links, filtros e details; não fingir tabs, menus ou operações sem contrato |
+| [Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md) | Contexto na URL, rótulos e estados compreensíveis; detalhes técnicos sem disputar a decisão |
+| [Playwright: acessibilidade](https://playwright.dev/docs/accessibility-testing) | axe para violações automatizáveis e revisão manual dos resultados inconclusivos |
+| [pgAdmin: processos](https://www.pgadmin.org/docs/pgadmin4/latest/processes.html) | Objeto, data e estado por item, mais recentes primeiro, detalhes sob demanda; aplicado ao ledger de cópias |
+| [restic: retenção](https://restic.readthedocs.io/en/stable/060_forget.html) | Separar manter/remover, motivo e prévia; relatório apresenta razões e comando de prévia, sem botão de exclusão |
+
+Não há nova biblioteca de aplicação, gráfico, serviço web ou consulta remota. Sem JavaScript, todas as operações e detalhes continuam legíveis; filtros e copiar texto ficam ocultos. Fonte/CSS/JS/marca são locais. O bundle de guias inclui textos selecionados; imagens e código referenciados nesses textos continuam no repositório.
+
+### Validação e limites
+
+A rodada final no Chromium e a conferência no navegador integrado exercitam 320, 390, 768, 1024 e 1440 CSS px, teclado, foco, histórico, filtros, detalhes, copiar texto, leitura sem JavaScript, impressão, movimento reduzido, links e estados sintéticos. Resultados e contagens exatos ficam no [recibo](evidence/uiux-20261012/review.md), junto das fontes congeladas.
+
+axe sem violações não certifica WCAG. Os resultados inconclusivos tiveram revisão de contraste e leitura nas capturas. Ampliação de texto por CSS foi testada; zoom nativo, preferências do sistema e leitor de tela estão **não verificados**. Firefox está não verificado porque a revisão automática rejeitou iniciar o processo com “blocked by policy”; nenhum segundo motor foi executado.
+
+Não se aplicam login, sessão de conta, pagamentos, loading/timeout de API ou modal de confirmação a este relatório estático. Catálogo ausente, vazio, inválido, filtro sem resultado, integridade desconhecida, restore sem recibo, limpeza com falha e registro legado parcial são estados aplicáveis e verificados. Não há persistência de dados protegidos ou mutação pela interface.
+
+## Direção visual histórica — revisão de 22/09/2026
 
 Esta seção descreve somente a rodada baseada em `243b1a44769b324faf28f1795f510a49cda5fbdf`; as seções seguintes são o registro da rodada anterior. O relatório continua estático, sem executar comandos ao abrir. Contratos, seleção de registros, auth, worker e operações não foram alterados.
 

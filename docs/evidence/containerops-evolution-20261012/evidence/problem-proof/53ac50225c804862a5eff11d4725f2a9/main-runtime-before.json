@@ -1,0 +1,12 @@
+{
+  "state.json": null,
+  "latest-backup.json": null,
+  "default_runtime": {
+    "state.json": "1272e2cfda7a169bb44eefc6cadff6b1e3db89ad92c8b49a6b5b4acfadd80cec",
+    "latest-backup.json": null
+  },
+  "_curation": {
+    "raw_record_sha256": "d634a07a1344cd2a57115fd0f3accbb02c91493a0b8e248bd8f4e2180b08af50",
+    "private_host_paths_and_unrelated_inventory_omitted": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "executed_at": "2026-10-12T05:05:31.252942+00:00",
+  "duration_seconds": 23.937,
+  "status": "passed",
+  "version": "1.0.0",
+  "image_id": "sha256:d5dd3ea2a3f0272598d96cd0d42630a8598390689e99cbb8f519c89946a3407c",
+  "config_digest": "sha256:dfb543cc3232e378220ccc41e1a4ae2a288888df69a84aec472addf1ccd1c105",
+  "scanner_image": "aquasec/trivy:0.74.0@sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969",
+  "scanner_version": "Version: 0.74.0\nVulnerability DB:\n  Version: 2\n  UpdatedAt: 2026-10-12 01:14:57.362085088 +0000 UTC\n  NextUpdate: 2026-10-13 01:14:57.362084798 +0000 UTC\n  DownloadedAt: 2026-10-12 04:49:03.502317397 +0000 UTC",
+  "offline": true,
+  "database": {
+    "Version": 2,
+    "NextUpdate": "2026-10-13T01:14:57.362084798Z",
+    "UpdatedAt": "2026-10-12T01:14:57.362085088Z",
+    "DownloadedAt": "2026-10-12T04:49:03.502317397Z"
+  },
+  "database_age_hours": 3.836,
+  "database_sha256": "sha256:0990079ec0cccf470631982a3282e7a003bb924cd52b1a1e29796a9ee1beb8c5",
+  "max_db_age_hours": 72,
+  "report": "<runtime>\\artifacts\\1.0.0\\scanner\\trivy-report.json",
+  "report_sha256": "sha256:1bc45f8631c5acc97456aa791ca1be7f247271235e04c32df6285e9c3dbe641b",
+  "docker_archive_sha256": "sha256:a49553fb364f2e21deaa2ad9a21e4a410fd6913f2429298868daed13ed7bb842",
+  "findings_by_severity": {
+    "UNKNOWN": 0,
+    "LOW": 0,
+    "MEDIUM": 1,
+    "HIGH": 0,
+    "CRITICAL": 0
+  },
+  "unfixed_findings": 0,
+  "blocking_findings": [],
+  "policy": "Bloqueia todo HIGH/CRITICAL reportado, inclusive sem correção disponível.",
+  "_curation": {
+    "raw_record_sha256": "afb27fd88894503ddbe0e6b89f140aaacb7f7e7464741362a96ee199bf0cf256",
+    "private_host_paths_and_unrelated_inventory_omitted": true
+  }
+}

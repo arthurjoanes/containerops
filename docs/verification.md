@@ -215,3 +215,36 @@ Removi pip/ensurepip **depois** da instalação do lock no target `test`, assim 
 O [recibo de segurança](evidence/editorial-20260922/security.json) liga IDs, Dockerfile, comando, base, relatórios antes/depois e verificação da correção. `exit 0` da coleta JSON não é aprovação por si só: o gate foi conferido no conteúdo completo. Os relatórios anteriores permanecem presentes. O scan não substitui uma auditoria nova de attestations nem cobre deploy em produção.
 
 Gitleaks 8.30.1 aprovou o histórico acessível e a cópia final dos arquivos públicos. O recibo novo continha dois hashes SHA-256 de fontes interpretados como chave pela regra genérica; recomputei ambos e acrescentei somente o caminho exato do recibo à regra existente, que exige os dois valores literais. Um controle positivo com token fictício no mesmo caminho continuou sendo detectado. [Escopo, capturas e revisão final](evidence/editorial-20260922/review.json). Isso não é uma exclusão de diretório nem de qualquer valor com 64 caracteres.
+
+## Entrega verificada em 12/10/2026
+
+O [manifesto da rodada](evidence/containerops-evolution-20261012/manifest.json)
+identifica fontes estáveis em `ec090fc33b89c848113537cdcdcb42f9888cc1d9`, imagens,
+comandos, falhas, hashes e limpeza. Foram executados 127 testes unittest no host,
+com dois skips por privilégio de symlink; os testes reais de junções Windows e
+hardlinks passaram. Os 48 testes do relatório e 126 pytest da aplicação com
+PostgreSQL passaram, com dois avisos no pytest. Ruff check/formato e mypy passaram.
+
+As duas releases tiveram build e auditoria OCI com SBOM/provenance. `verify`,
+`prove --scenario operations` e transferência para um contexto reservado novo
+exercitaram rollback provocado, release 2 bem-sucedida, TLS e hardening.
+Exportação/importação e restore por ID conferiram snapshot completo, novo job,
+credenciais independentes, hashes originais e preservação da origem. A retenção
+destrutiva ficou limitada às fixtures; não houve pruning dos backups do usuário.
+
+O primeiro scan bloqueou CVE-2026-4775 no tiff 4.7.1-r0 do proxy. O pin restrito
+para 4.7.2-r0 foi seguido de nova execução de todos os gates sobre as fontes
+estáveis acima. Os scans finais da aplicação 1/2, banco e proxy registraram,
+cada um, MEDIUM 1, HIGH 0 e CRITICAL 0. A política de bloqueio e as exclusões não
+foram afrouxadas.
+
+A conferência final encontrou ausentes os dez projetos UUID e removeu somente o
+builder da rodada. Estado, latest e backups da demonstração preservaram bytes e
+mtime nas visões nativa e do app; tags compartilhadas e `docs/evidence`/relatório
+históricos permaneceram iguais. O
+[HTML da tentativa](evidence/containerops-evolution-20261012/report.html) usa
+resumos curados, sem publicar dumps, credenciais ou caminhos pessoais.
+
+O ensaio de transporte usou dois contextos no mesmo computador. Outro host,
+cópia física independente e imagens auxiliares preparadas para offline completo
+continuam necessários. As durações observadas não estabelecem RTO garantido.

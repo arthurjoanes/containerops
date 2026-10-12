@@ -157,6 +157,22 @@ dos jobs no banco é independente da retenção desses arquivos.
 
 ## Verificação e evidências
 
+A [rodada de 12/10/2026](docs/evidence/containerops-evolution-20261012/manifest.json)
+verificou o backup portátil e o catálogo sobre
+`ec090fc33b89c848113537cdcdcb42f9888cc1d9`: exportação/importação entre contextos,
+snapshot igual, novo job, credenciais próprias e hashes originais preservados.
+Builds das duas releases, auditorias OCI/SBOM/provenance, qualidade, PostgreSQL,
+rollback, release 2, TLS e hardening passaram. Os scans finais da aplicação 1/2,
+banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política atual.
+O [relatório dessa rodada](docs/evidence/containerops-evolution-20261012/report.html)
+mantém suas identidades separadas das provas históricas abaixo.
+
+A limpeza conferiu os dez projetos UUID e o builder próprio. Estado, ponteiro,
+backups, tags compartilhadas e evidências históricas da demonstração foram
+preservados. Retenção destrutiva foi testada somente em fixtures temporárias.
+O transporte ocorreu no mesmo host; outra máquina, cópia física independente e
+preparação das imagens auxiliares para offline completo continuam necessários.
+
 | Pergunta                              | Fonte e data da execução                                                                                                                 | Limite                                                                                 |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | Worker interrompido recupera o job?   | [Antes/depois do SIGKILL](docs/evidence/editorial-20260922/recovery.json), 22/09/2026, 12:36 UTC                                     | Mesmo ID concluiu na tentativa 2; cálculo pode repetir.                                |

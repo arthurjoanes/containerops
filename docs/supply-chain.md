@@ -114,3 +114,20 @@ Logs, duração e cache por etapa ficam no runtime; resumo em `docs/evidence/cac
 Resolva a versão/digest com `docker buildx imagetools inspect <imagem:versão>`. Atualize lock e defaults do Dockerfile. Resolva dependências em ambiente descartável. Gere outra imagem e rode testes, audit, scan e HTTP. Guarde o ID anterior para rollback.
 
 Referências oficiais: [armazenamento de attestations](https://docs.docker.com/build/metadata/attestations/attestation-storage/), [exportadores OCI/Docker](https://docs.docker.com/build/exporters/oci-docker/), [geração de SBOM](https://docs.docker.com/build/metadata/attestations/sbom/), [driver docker-container](https://docs.docker.com/build/builders/drivers/docker-container/), [Trivy em arquivos de imagem](https://trivy.dev/docs/latest/target/container_image/) e [bases do Trivy](https://trivy.dev/docs/latest/configuration/db/).
+
+## Rodada de imagens de 12/10/2026
+
+A [entrega](evidence/containerops-evolution-20261012/manifest.json) identifica as
+imagens construídas das fontes `ec090fc33b89c848113537cdcdcb42f9888cc1d9`. As duas
+releases passaram por SBOM, provenance e auditoria OCI, além dos testes da
+aplicação, verificação e prova operacional. O scan inicial recusou o proxy por
+CVE-2026-4775 em tiff 4.7.1-r0. Após fixar somente tiff 4.7.2-r0, todos os gates
+foram repetidos com fontes estáveis.
+
+Aplicação 1/2, banco e proxy terminaram com um MEDIUM cada e zero HIGH/CRITICAL,
+com a mesma política bloqueante e sem mudança nas exclusões. O manifesto liga
+IDs, base Trivy e hashes; o
+[relatório da rodada](evidence/containerops-evolution-20261012/report.html)
+apresenta esses registros. Tags compartilhadas foram preservadas e o builder
+próprio foi removido após a limpeza. Transporte local não incluiu uma máquina
+independente; offline completo ainda exige preparar as imagens auxiliares.

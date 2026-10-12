@@ -1,0 +1,80 @@
+{
+  "scope": "New curated proof and static report; historical editorial receipts remain unchanged.",
+  "tested_source_commit": "ec090fc33b89c848113537cdcdcb42f9888cc1d9",
+  "report_sha256": "84036e541fd3bc492bba6e3644a194baac46003d94dd0440ecb7c106984cce6a",
+  "current_documents": [
+    {
+      "path": "README.md",
+      "sha256": "d60351cc2ba3877f209400ecbcac5ab0b8a5cf1d29e3a1c5cecdb90700c45859"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "ed846256e288729ed4f0e459bd94a6c4078eb08c568846f4c0303f44bd92dba4"
+    },
+    {
+      "path": "docs/runbooks.md",
+      "sha256": "91982625c1f9a6f17918f9680d5ce6def864869f631e28ba98f436d84bfc5b05"
+    },
+    {
+      "path": "docs/operational-recovery.md",
+      "sha256": "20b3a9ff7f4be9ad90ee06b10c7d676da562def0312b0157f27f095fb6ba15dc"
+    },
+    {
+      "path": "docs/verification.md",
+      "sha256": "002ebd6f4b954afcc8db8cff24f40d368d1984b9f2e847e34ad18b10c750dff2"
+    },
+    {
+      "path": "docs/security.md",
+      "sha256": "39260e51e0ec9a661e8b8bbc9204a9214f848bfb78cedc3c7716337ae3a40504"
+    },
+    {
+      "path": "docs/supply-chain.md",
+      "sha256": "2eef0f7bbdf7d2d3d0c413ede8373121e6b7600bf87a4382603be21da8e1e1b5"
+    },
+    {
+      "path": "docs/report-guide.md",
+      "sha256": "8946df38901823843d4023872e35f34490fb64ce17f14f0ef7635f17c2b74f59"
+    }
+  ],
+  "renderer_and_assets": [
+    {
+      "path": "scripts/report.py",
+      "sha256": "c9d93761a6815c2e8e7288207c6aacf57efd2a34ef97a95129bddffbe96dd610"
+    },
+    {
+      "path": "scripts/report_evidence.py",
+      "sha256": "c50770fed74bf7ee60b3831b96171fd04de2162c31b16129b8338ea87f7589c5"
+    },
+    {
+      "path": "scripts/report.html",
+      "sha256": "c28c9ee5bd4c6b6d6050d7ffe3afdc1ad93a0f3e9716bb9100d27776fa25d876"
+    },
+    {
+      "path": "scripts/report.css",
+      "sha256": "d772d757045677b8d8fb67eaf43eb3b015cb3a205324baf17394285a76776305"
+    },
+    {
+      "path": "scripts/report.js",
+      "sha256": "ba01f72f569c42a49a001b4ed93ad6807178603ae86a62df02d3cc996cefe89b"
+    },
+    {
+      "path": "scripts/assets/source-sans-3.woff2",
+      "sha256": "5f16566f7a40d39b339ad26be151fa5a1ab1f0c2574c7a2e619765584a1acbd8"
+    },
+    {
+      "path": "scripts/assets/source-sans-LICENSE.md",
+      "sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328"
+    },
+    {
+      "path": "scripts/assets/mark-light.svg",
+      "sha256": "3d110f659ebc23ceb0d7d3ee6f83d6b024adc5a23c2123f5a00bd5f1888fa3f3"
+    },
+    {
+      "path": "scripts/assets/favicon.svg",
+      "sha256": "61ee62c1a3ab626fd8e47a9a808aacb482ee16128e389493be546faf97391df7"
+    }
+  ],
+  "html_local_links_checked": 54,
+  "broken_links": [],
+  "historical_report_and_evidence_preserved": true
+}

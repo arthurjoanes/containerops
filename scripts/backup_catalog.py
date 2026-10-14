@@ -391,6 +391,10 @@ def discover(runtime, *, context="default"):
                 )
                 source_context = metadata.get("source_context", "legacy")
                 if "manifest.json" in files:
+                    # Publication and catalog registration are separate writes. A
+                    # portable package with no durable local record must never
+                    # acquire local trust or lose retention protection on restart.
+                    entry.update(imported=True, protected=True)
                     from backup_package import validate_manifest, validate_metadata
 
                     manifest, _ = _json(path / "manifest.json")
@@ -506,8 +510,8 @@ def register_backup(runtime, identifier, *, imported=False, protected=False, con
         )
     }
     record.update(
-        imported=bool(imported or previous.get("imported")),
-        protected=bool(protected or previous.get("protected")),
+        imported=bool(imported or previous.get("imported") or entry["imported"]),
+        protected=bool(protected or previous.get("protected") or entry["protected"]),
         files={
             name: {"size": value["size"], "sha256": value["sha256"]}
             for name, value in entry["files"].items()

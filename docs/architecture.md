@@ -73,7 +73,7 @@ flowchart TB
   F -->|"UPDATE condicional · mesma linha do job"| D
   L["Logs JSON no stdout<br/>request_id / job_id / tentativa"]
   H -.->|"requisição e admissão"| L
-  X -.->|"início, conclusão ou perda de lease"| L
+  X -..->|"início, conclusão ou perda de lease"| L
 ```
 
 O único caminho publicado para jobs passa pelo proxy. O [Compose](../compose.yaml) conecta API a `front` e `data`; worker e banco somente a `data`, marcada `internal: true`, sem porta de banco no host. Segredos são arquivos montados nos serviços que os usam. A API resolve Bearer para owner a partir do arquivo de tokens carregado no startup; o repositório aplica esse owner nas consultas. [Conexões curtas](../app/src/containerops/database.py) usam papel de aplicação, timeout de conexão de 2 s, SQL de 3 s e espera de lock de 2 s.

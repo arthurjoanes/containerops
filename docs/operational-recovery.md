@@ -88,9 +88,9 @@ Os JSONs originais do Windows foram preservados privadamente. As cópias públic
 
 ## 6. Como repetir o cenário histórico e o que ainda falta
 
-Os comandos abaixo descrevem a preparação da tentativa histórica, no contexto
-padrão. Para uma execução nova em computador compartilhado, use o contexto de
-sessão dos [runbooks](runbooks.md#contexto-de-sessão) antes dos mesmos comandos:
+Os comandos abaixo registram a preparação da tentativa histórica, no contexto
+padrão. O nome `pf-containerops-builder` pertence à demonstração padrão; esse
+bloco não é um roteiro para uma sessão isolada.
 
 ```sh
 python scripts/ops.py build --version 1.0.0
@@ -98,6 +98,19 @@ python scripts/ops.py build --version 2.0.0
 docker buildx stop pf-containerops-builder
 python scripts/ops.py prove --scenario operations
 ```
+
+Para uma execução nova em computador compartilhado, configure primeiro o contexto
+de sessão dos [runbooks](runbooks.md#contexto-de-sessão). Mantenha essa seleção
+durante os comandos abaixo, que derivam os nomes da sessão:
+
+```sh
+python scripts/ops.py build --version 1.0.0
+python scripts/ops.py build --version 2.0.0
+python scripts/ops.py prove --scenario operations
+```
+
+Não pare o builder padrão como parte dessa nova sessão. Qualquer intervenção
+manual deve conferir o nome e a propriedade do recurso no contexto selecionado.
 
 Os builds são preparação; o cenário confere as fontes dentro das imagens antes de reutilizá-las. Use uma janela sem outra operação no builder. As imagens desta prova foram `sha256:08fc96aefa056da9a3ab0d0869bd91cef7751caa4c8249d139d1bfcefb3836ed` e `sha256:ee23bc56b175a8c775240f5063e7d4baa242fd26addf1d7ba8b6da5c3f9268b8`. Não houve novo scan dentro desse cenário, e o scan histórico de outra imagem não passa a aprová-las.
 

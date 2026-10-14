@@ -70,7 +70,7 @@ flowchart TB
   end
   A -->|"SQL: admissão e consulta"| D
   O["CLI ops.py<br/>migração e backup"] -->|"pausa / dreno / pg_dump"| D
-  O -->|"dump + restore-test"| T[("Volume novo<br/>dados + job de verificação")]
+  O --->|"dump + restore-test"| T[("Volume novo<br/>dados + job de verificação")]
   O -.->|"evidências → report.py"| R["Relatório HTML<br/>execuções identificadas"]
 ```
 
@@ -183,7 +183,7 @@ verificou o backup portátil e o catálogo sobre
 snapshot igual, novo job, credenciais próprias e hashes originais preservados.
 Builds das duas releases, auditorias OCI/SBOM/provenance, qualidade, PostgreSQL,
 rollback, release 2, TLS e hardening passaram. Os scans finais da aplicação 1/2,
-banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política atual.
+banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política daquela rodada.
 O [relatório dessa rodada](docs/evidence/containerops-evolution-20261012/report.html)
 mantém suas identidades separadas das provas históricas abaixo.
 
@@ -223,7 +223,7 @@ python scripts/ops.py prove --scenario operations
 - A demo permite atraso de até 15 s; `DEMO_MODE=false` aceita duração zero. A distribuição não interrompe jobs em execução nem garante prazo. [Configuração](app/src/containerops/config.py) e [validação](app/src/containerops/api.py).
 - Backup local compartilha a falha do computador. O pacote permite transporte; proteção contra perda do host exige cópia física e destino independentes, ainda fora da prova local. TLS termina no proxy; rollback troca imagens sem rebaixar schema. [Runbooks](docs/runbooks.md).
 - O scanner bloqueia HIGH/CRITICAL, inclusive sem correção. Um resultado sem achados vale para imagem/base/data registradas. [Política e escopo](docs/supply-chain.md).
-- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) cobre os 18 itens recebidos, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
+- A [revisão de segurança de 03/10/2026](docs/SECURITY-REVIEW-2026-10-03.md) registra a avaliação de 18 itens de segurança, rate limit, prazo total do corpo, erros privados e testes com banco descartável.
 
 ## Documentação
 

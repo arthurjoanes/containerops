@@ -36,7 +36,7 @@ A relação entre seis chamadas e um UUID, o resultado de sete palavras, o confl
 
 Em uma falha separada, o texto `Recuperar depois de término abrupto` tem cinco palavras. O worker morreu quando o job estava `running`, tentativa 1; a nova aquisição concluiu o mesmo UUID na tentativa 2. O trabalho pode repetir; a recuperação não demonstra execução única. O [registro de recuperação](evidence/editorial-20260922/recovery.json) conserva antes/depois, SIGTERM, reinício e verificações do banco.
 
-A proteção contra resultado antigo não é provada apenas pelo retorno após SIGKILL. O teste `test_stale_worker_cannot_renew_or_overwrite_result`, em [test_integration.py](../app/tests/test_integration.py), tenta renovar e concluir com uma posse obsoleta em PostgreSQL real; ambos são recusados. Ele integra os 116 casos aprovados da [rodada atual](evidence/editorial-20260922/execution.json). Essa regra protege a gravação local, não efeitos externos como cobrar ou enviar uma mensagem.
+A proteção contra resultado antigo não é provada apenas pelo retorno após SIGKILL. O teste `test_stale_worker_cannot_renew_or_overwrite_result`, em [test_integration.py](../app/tests/test_integration.py), tenta renovar e concluir com uma posse obsoleta em PostgreSQL real; ambos são recusados. Ele integra os 116 casos aprovados da [rodada de 22/09/2026](evidence/editorial-20260922/execution.json). Essa regra protege a gravação local, não efeitos externos como cobrar ou enviar uma mensagem.
 
 ## Exemplo: o dump existe, mas o serviço voltou?
 

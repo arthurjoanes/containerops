@@ -511,6 +511,9 @@ class BackupCatalogTests(unittest.TestCase):
         )
         self.assertEqual(entry["source_context"], "origin-a")
         self.assertEqual((imported / "metadata.json").read_bytes(), original)
+        self.assertTrue(entry["imported"] and entry["protected"])
+        self.assertNotIn("imported", catalog.plan_retention(self.runtime, 1)["candidates"])
+        catalog.mark_protected(self.runtime, "imported", protected=False, context="destination")
         self.assertIn("imported", catalog.plan_retention(self.runtime, 1)["candidates"])
 
 

@@ -3,12 +3,15 @@ from __future__ import annotations
 import base64
 import hashlib
 import math
+import posixpath
 import re
+import subprocess
 from datetime import UTC, datetime
+from decimal import Decimal
 from html import escape
 from pathlib import Path
 from string import Template
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urlsplit
 
 from report_evidence import (
     read_records,
@@ -164,15 +167,24 @@ def resource_table(hardening: dict) -> str:
         rows.append(
             f'<tr><th scope="row">{service}</th><td>{shown(user)}</td>'
             f'<td class="numeric">{shown(round(memory / 1024**2, 1) if isinstance(memory, (int, float)) else None, " MiB")}</td>'
-            f'<td class="numeric">{shown(cpu / 1_000_000_000 if isinstance(cpu, (int, float)) else None)}</td>'
+            f'<td class="numeric">{cpu_quota(cpu)}</td>'
             f'<td class="numeric">{shown(values.get("pids_limit"))}</td>'
             f"<td>{filesystem}</td></tr>"
         )
     return (
-        '<div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col" class="numeric">Memória máxima</th><th scope="col" class="numeric">Limite de CPU</th><th scope="col" class="numeric">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody>'
+        '<div class="table-wrap" role="region" aria-label="Limites dos containers, tabela com rolagem horizontal" tabindex="0"><table><caption>Limites por serviço</caption><thead><tr><th scope="col">Serviço</th><th scope="col">UID:GID</th><th scope="col" class="numeric">Memória máxima</th><th scope="col" class="numeric">Limite de CPU (CPUs)</th><th scope="col" class="numeric">PIDs máx.</th><th scope="col">Filesystem</th></tr></thead><tbody>'
         + "".join(rows)
         + "</tbody></table></div>"
     )
+
+
+def cpu_quota(nano_cpus: object) -> str:
+    if nano_cpus is None:
+        return "Não informado"
+    if type(nano_cpus) is not int or not 0 <= nano_cpus <= 2**63 - 1:
+        return "Dado inválido"
+    value = Decimal(nano_cpus) / Decimal(1_000_000_000)
+    return format(value.normalize(), "f").replace(".", ",")
 
 
 def job_panel(job: dict, evidence: str) -> str:
@@ -233,16 +245,32 @@ def catalog_namespace(record: dict, context: RuntimeContext) -> tuple[str | None
     return context.session or "default", context.session or "padrão"
 
 
+def catalog_commands(namespace: str, arguments: str, identifier: str, label: str) -> str:
+    # Namespace and backup IDs have already passed their strict slug validation.
+    powershell = (
+        (
+            f"$env:CONTAINEROPS_SESSION='{namespace}'\n"
+            if namespace != "default"
+            else "Remove-Item Env:CONTAINEROPS_SESSION -ErrorAction SilentlyContinue\n"
+        )
+        + "python scripts/ops.py "
+        + arguments
+    )
+    posix = (
+        f"CONTAINEROPS_SESSION='{namespace}' python3 scripts/ops.py {arguments}"
+        if namespace != "default"
+        else f"(unset CONTAINEROPS_SESSION; python3 scripts/ops.py {arguments})"
+    )
+    return command_block(powershell, identifier, label + " · PowerShell") + command_block(
+        posix, identifier + "-posix", label + " · Shell POSIX"
+    )
+
+
 def backup_catalog_panel(
     record: dict, context: RuntimeContext, *, records: dict | None = None, invalid: bool = False
 ) -> str:
     """Apresenta integridade, recibo de restore e proteção em campos separados."""
     namespace, namespace_label = catalog_namespace(record, context)
-    prefix = (
-        f"$env:CONTAINEROPS_SESSION='{namespace}'\n"
-        if namespace and namespace != "default"
-        else "Remove-Item Env:CONTAINEROPS_SESSION -ErrorAction SilentlyContinue\n"
-    )
     entries = record.get("entries")
     malformed = invalid or bool(record and not isinstance(entries, list))
     accepted, rejected, identifiers = [], 0, set()
@@ -317,10 +345,11 @@ def backup_catalog_panel(
             else ""
         )
         command = (
-            command_block(
-                prefix + f"python scripts/ops.py restore-test --backup {identifier}",
+            catalog_commands(
+                namespace,
+                f"restore-test --backup {identifier}",
                 f"restore-command-{identifier}",
-                "Comando local para este ID · PowerShell",
+                "Comando local para este ID",
             )
             + (
                 "<p class=notice>Esta cópia foi importada. Confira a origem antes de acrescentar <code>--trusted-source</code>; o hash não autentica o conteúdo.</p>"
@@ -375,19 +404,21 @@ def backup_catalog_panel(
         else ""
     )
     commands = (
-        command_block(
-            prefix + "python scripts/ops.py backups list",
+        catalog_commands(
+            namespace,
+            "backups list",
             "catalog-list-command",
-            "Conferir o catálogo atual · PowerShell",
+            "Conferir o catálogo atual",
         )
         if namespace
         else '<p class="notice">Contexto não registrado. Confira a sessão no terminal antes de selecionar uma cópia.</p>'
     )
     retention = (
-        command_block(
-            prefix + "python scripts/ops.py backups prune --keep-last 3",
+        catalog_commands(
+            namespace,
+            "backups prune --keep-last 3",
             "catalog-plan-command",
-            "Gerar uma prévia sem remoção · PowerShell",
+            "Gerar uma prévia sem remoção",
         )
         if namespace
         else ""
@@ -410,6 +441,90 @@ def backup_catalog_panel(
         + "<p>A prévia não remove cópias. Aplicar exige <code>--apply --plan-id &lt;id-do-plano&gt;</code> e uma nova conferência sob lock na CLI.</p></details>"
         + '<p class="notice">O HTML permite consultar registros e copiar texto. Execute operações somente no terminal, na sessão indicada.</p></div></div>'
     )
+
+
+def bundle_guides(sources: list[tuple[str, Path]]) -> list[tuple[str, bytes]]:
+    bundled = {name for name, _ in sources}
+    try:
+        revision = subprocess.check_output(
+            ["git", "-C", str(ROOT), "rev-parse", "HEAD"], stderr=subprocess.DEVNULL, text=True
+        ).strip()
+        tracked = set(
+            subprocess.check_output(
+                ["git", "-C", str(ROOT), "ls-tree", "-r", "--name-only", revision], text=True
+            ).splitlines()
+        )
+        dirty = bool(
+            subprocess.check_output(
+                ["git", "-C", str(ROOT), "status", "--porcelain", "--untracked-files=no"], text=True
+            ).strip()
+        )
+    except (OSError, subprocess.CalledProcessError):
+        revision, tracked, dirty = None, set(), True
+    output = []
+    for name, source in sources:
+        linked = False
+
+        def destination(value: str, *, image: bool = False) -> str:
+            nonlocal linked
+            parsed = urlsplit(value.strip("<>"))
+            if parsed.scheme or parsed.netloc or not parsed.path:
+                return value
+            resolved = posixpath.normpath(
+                posixpath.join(posixpath.dirname(name), unquote(parsed.path))
+            )
+            if resolved in bundled:
+                return value
+            if resolved.startswith("../") or resolved.startswith("/") or not revision:
+                raise RuntimeError(
+                    f"Referência de guia sem destino público versionado: {name}: {value}"
+                )
+            directory = any(item.startswith(resolved.rstrip("/") + "/") for item in tracked)
+            if resolved not in tracked and not directory:
+                raise RuntimeError(
+                    f"Referência fora dos arquivos públicos do commit: {name}: {value}"
+                )
+            linked = True
+            path = quote(resolved, safe="/")
+            url = (
+                f"https://raw.githubusercontent.com/arthurjoanes/containerops/{revision}/{path}"
+                if image and not directory
+                else f"https://github.com/arthurjoanes/containerops/{'tree' if directory else 'blob'}/{revision}/{path}"
+            )
+            return (
+                url
+                + ("?" + parsed.query if parsed.query else "")
+                + ("#" + parsed.fragment if parsed.fragment else "")
+            )
+
+        document = source.read_text(encoding="utf-8")
+        document = re.sub(
+            r"(!?\[[^\]\n]*\]\()(<[^>\n]+>|[^\s)]+)",
+            lambda match: match[1] + destination(match[2], image=match[1].startswith("!")),
+            document,
+        )
+        document = re.sub(
+            r"(?m)^(\s*\[[^\]\n]+\]:\s*)(<[^>\n]+>|\S+)",
+            lambda match: match[1] + destination(match[2]),
+            document,
+        )
+        document = re.sub(
+            r"((?:href|src)=[\"'])([^\"']+)([\"'])",
+            lambda match: (
+                match[1] + destination(match[2], image=match[1].startswith("src")) + match[3]
+            ),
+            document,
+        )
+        if linked:
+            notice = (
+                f"> Referências externas: código e imagens usam o commit `{revision}` e exigem rede. "
+                "Os guias deste pacote são cópias dos arquivos locais."
+            )
+            if dirty:
+                notice += " Há alterações locais: os links do commit não são permalinks dessas alterações."
+            document = notice + "\n\n" + document
+        output.append((name, document.encode("utf-8")))
+    return output
 
 
 def guide_urls(root: Path, destination: Path, session_output: bool) -> dict[str, str]:
@@ -435,14 +550,14 @@ def guide_urls(root: Path, destination: Path, session_output: bool) -> dict[str,
         "docs/brand.md",
     )
     sources = [(name, ROOT / name) for name in names if (ROOT / name).is_file()]
+    contents = bundle_guides(sources)
     signature = hashlib.sha256(
-        b"".join(name.encode() + path.read_bytes() for name, path in sources)
+        b"".join(name.encode() + content for name, content in contents)
     ).hexdigest()[:16]
     directory = ensure_no_links(destination.parent / "documentation" / signature)
-    for name, source in sources:
+    for name, content in contents:
         target = ensure_file_path(directory / name)
         target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-        content = source.read_bytes()
         if target.exists():
             if target.read_bytes() != content:
                 raise RuntimeError(

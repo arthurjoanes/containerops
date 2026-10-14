@@ -93,9 +93,11 @@ O job passa por POST autenticado → admissão transacional → `queued` → cla
 <p>
   <img src="docs/stack/python.svg" alt="Python" width="64" height="64">
   <img src="docs/stack/fastapi.svg" alt="FastAPI" width="64" height="64">
+  <img src="docs/stack/pydantic.svg" alt="Pydantic" width="64" height="64">
   <img src="docs/stack/postgresql.svg" alt="PostgreSQL" width="64" height="64">
   <img src="docs/stack/nginx.svg" alt="NGINX" width="64" height="64">
   <img src="docs/stack/docker.svg" alt="Docker" width="64" height="64">
+  <img src="docs/stack/buildkit.svg" alt="BuildKit" width="64" height="64">
   <img src="docs/stack/trivy.svg" alt="Trivy" width="64" height="64">
   <img src="docs/stack/html5.svg" alt="HTML" width="64" height="64">
   <img src="docs/stack/css3.svg" alt="CSS" width="64" height="64">
@@ -105,9 +107,10 @@ O job passa por POST autenticado → admissão transacional → `queued` → cla
 | Escolha                 | Motivo e compromisso                                                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | FastAPI + worker Python | Separa admissão de cálculo; exige posse, renovação e tentativas.                                                         |
+| Pydantic | Valida o corpo recebido pela API, incluindo tipo, tamanho e caracteres do texto, antes de aceitar um job. |
 | PostgreSQL              | Reúne fila, estado e transações; API e fila disputam recursos.                                                           |
 | NGINX + Compose         | Entrada HTTP/TLS e processos separados; não protege contra perda do host.                                                |
-| BuildKit + Trivy        | Identifica artefatos e verifica vulnerabilidades conhecidas; scan não é certificação nem garantia de ausência de falhas. |
+| BuildKit + Trivy | BuildKit gera as imagens e suas attestations; Trivy verifica vulnerabilidades conhecidas nos artefatos. Um scan registra os achados daquela imagem e base. |
 | HTML, CSS e JavaScript | Relatório local com resultados registrados; estilos e navegação são empacotados junto do HTML. |
 
 <a id="o-que-eu-implementei"></a>
@@ -247,6 +250,6 @@ Para conversar sobre containers, recuperação e operação deste laboratório:
 
 <p><a href="https://www.linkedin.com/in/arthur-joanes-6a2967373/"><img src="docs/contact/linkedin.svg" alt="" width="24" height="24"> <strong>Arthur Joanes no LinkedIn</strong></a></p>
 
-[Licença MIT](LICENSE). Ícones Devicon e LinkedIn: [licença MIT](docs/stack/LICENSE.devicon). Trivy: [Simple Icons, CC0 1.0](docs/stack/LICENSE.simple-icons.md).
+[Licença MIT](LICENSE). Ícones Devicon e LinkedIn: [licença MIT](docs/stack/LICENSE.devicon). Trivy e Pydantic: [Simple Icons, CC0 1.0](docs/stack/LICENSE.simple-icons.md).
 
 Fontes dos ícones e cartões: [documentação da stack](docs/stack/README.md).

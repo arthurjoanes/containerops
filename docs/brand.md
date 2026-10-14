@@ -1,34 +1,14 @@
 # Identidade visual do ContainerOps
 
 ContainerOps é um laboratório de operação local. Sua interface ajuda o operador
-a localizar uma cópia e o avaliador técnico a conferir o que foi ensaiado. A
-marca usa o símbolo de camadas já presente nos assets e uma paleta fria, com
-estados operacionais separados das cores de navegação.
+a localizar uma cópia e o avaliador técnico a conferir o que foi ensaiado. O
+símbolo de camadas, a fonte e os ícones acompanham o HTML para leitura offline.
 
-## Paleta
+## Estados operacionais
 
-Os tokens estão em [report.css](../scripts/report.css). As cores têm papéis
-definidos para manter a mesma identidade no catálogo, nos recibos e na navegação.
-
-| Cor | Hex | Token | Uso |
-| --- | --- | --- | --- |
-| Azul profundo | `#142D4E` | `--brand-deep` | Cabeçalho e estrutura da marca |
-| Azul de ação | `#1F5FBF` | `--brand-action` | Links, seleção e ações locais como copiar texto |
-| Ciano | `#0F798A` | `--brand-accent` | Acento de identidade e contexto |
-| Nuvem | `#F0F4F8` | `--brand-cloud` | Fundo da página |
-| Papel | `#FFFFFF` | `--brand-paper` | Superfícies de leitura e registros |
-| Tinta | `#24374B` | `--brand-ink` | Texto principal |
-| Texto secundário | `#526478` | `--muted` | Datas, descrições e metadados |
-
-| Estado | Hex | Significado no relatório |
-| --- | --- | --- |
-| Verde | `#16604B` | Critério registrado como aprovado |
-| Âmbar | `#7A4E0B` | Resultado parcial, pendência ou ausência de registro |
-| Vermelho | `#AC2E3B` | Falha ou dado inválido |
-
-Rótulos acompanham as cores. Integridade aprovada, recibo de restore e proteção
-são informações distintas; um verde de checksum não aprova a recuperação inteira.
-A marca e seus acentos não representam aprovação operacional.
+Integridade aprovada, recibo de restore e proteção são informações distintas.
+Um checksum aprovado não comprova a recuperação inteira. Os rótulos conservam
+essa distinção mesmo sem depender de cor.
 
 ## Tipografia e assets
 

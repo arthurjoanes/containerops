@@ -122,4 +122,4 @@ caminhos privados do computador ficam fora dos links públicos.
 
 Sem JavaScript, todas as operações e detalhes nativos permanecem disponíveis;
 filtros e controles de copiar texto ficam ocultos. Para manutenção, consulte
-as [regras do relatório](frontend-quality.md) e a [paleta](brand.md).
+as [regras do relatório](frontend-quality.md) e o [guia de identidade e fontes](brand.md).

@@ -2,7 +2,7 @@
 
 O relatório usa HTML, CSS e JavaScript locais, gerados em Python. Ao mudar a
 apresentação, preserve a seleção dos registros e os significados descritos no
-[guia de leitura](report-guide.md). As cores e fontes estão em [marca e paleta](brand.md).
+[guia de leitura](report-guide.md). Fonte, licença e assets locais estão no [guia de identidade](brand.md).
 
 ## Estrutura e estados
 

@@ -65,10 +65,16 @@ python .\scripts\ops.py status
 python .\scripts\ops.py logs
 ```
 
-A função abaixo fixa o projeto Compose.
+A função abaixo é exclusiva da demonstração padrão `pf-containerops`. Ela
+interrompe antes de chamar Docker quando há uma sessão selecionada. Em uma sessão,
+use os comandos de `ops.py`, que resolvem seu projeto e seu runtime; não copie os
+passos com `dc` deste roteiro para diagnosticar uma sessão.
 
 ```powershell
 function dc {
+    if ($env:CONTAINEROPS_SESSION) {
+        throw "dc atende somente a demonstração padrão. Use ops.py no contexto da sessão selecionada."
+    }
     & docker compose --project-directory $project -p pf-containerops -f "$project\compose.yaml" @args
     if ($LASTEXITCODE -ne 0) { throw "Compose falhou: $LASTEXITCODE" }
 }
@@ -259,6 +265,14 @@ principal; não restaura nem carrega imagens. O carregamento é um comando separ
 e exige sessão. O archive exportado por ImageID deve estar sem tags que possam
 substituir nomes compartilhados. Após validar config/camadas/identidade, o comando
 aplica somente a tag da sessão e recusa colisão com conteúdo diferente.
+
+Se a importação falhar depois de publicar o diretório, consulte `backups list` na
+mesma sessão. Um pacote portátil íntegro sem registro persistido permanece importado
+e protegido, inclusive após reiniciar o processo. Para concluir seu registro, confira
+o ID e execute `python scripts/ops.py backups protect --backup <id>`. Repetir esse
+comando preserva bytes, origem e proteção. Pacote inválido deve ser investigado;
+não edite o catálogo para contornar a validação. Restore ainda exige confiança
+explícita na origem. Nenhuma restauração ou exclusão faz parte dessa recuperação.
 
 Imagem ausente ou incompatível encerra o preflight antes de criar stack/volume.
 Sem archive, disponibilize no daemon a imagem exata registrada e repita o

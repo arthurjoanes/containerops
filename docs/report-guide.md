@@ -5,6 +5,14 @@ Abrir o HTML não consulta containers nem executa comandos. O [exemplo do catál
 contém registros operacionais de 12/10/2026; GitHub apresenta o HTML como código.
 Depois de clonar ou baixar o repositório, abra o arquivo localmente no navegador.
 
+O exemplo foi regenerado em 13/10/2026 com esses mesmos registros, sem executar
+novamente as operações. Nele, os limites de CPU preservam a precisão dos
+`NanoCpus`: proxy 0,25 e banco 0,75 CPU. Os HTMLs históricos de 22/09 e 12/10 foram
+preservados com seus hashes; suas tabelas antigas arredondam esses valores para
+0,2 e 0,8. Para conferir o limite configurado daquela execução, use o JSON de
+hardening vinculado, não esse arredondamento histórico. Regenerar a apresentação
+também não torna atuais a verificação nem o scan registrados.
+
 A implementação separa [seleção das evidências](../scripts/report_evidence.py),
 [resultado do restore](../scripts/report_recovery.py), [gerador](../scripts/report.py),
 [template](../scripts/report.html) e [navegação](../scripts/report.js).
@@ -49,6 +57,11 @@ página seleciona o comando e orienta a cópia manual. Execute no terminal, no
 contexto indicado, depois de conferir o catálogo atual. Uma cópia importada exige
 verificar a origem antes de acrescentar `--trusted-source`. Integridade
 desconhecida ou contexto inválido impede preparar o comando de restore por ID.
+
+Cada operação oferece blocos identificados como **PowerShell** e **Shell POSIX**,
+com botões de cópia independentes. Escolha o shell do terminal em que vai executar.
+No POSIX, o comando configura a sessão apenas naquela execução; o contexto padrão
+usa um subshell com `unset`, sem alterar o ambiente do terminal que o chamou.
 
 Os comandos disponíveis permitem listar cópias, selecionar um ID para restore
 e gerar uma prévia de retenção. Remoção exige `--apply` e o ID do plano.
@@ -100,7 +113,11 @@ comando lê somente `sessions/<slug>/docs/evidence` no runtime reservado e escre
 
 O HTML incorpora fonte, estilos, marca e JavaScript. Na sessão, guias Markdown
 selecionados acompanham a saída em `documentation/<hash>/`, com links relativos.
-Imagens e código referenciados nesses guias continuam no repositório. Os dumps e
+Links entre guias copiados continuam relativos. Código, imagens e outros arquivos
+públicos não incluídos apontam para URLs do commit registrado e exigem rede.
+Quando há alterações locais, o pacote avisa que esses links mostram a versão do
+commit e não constituem permalinks das alterações. Referências a arquivos não
+versionados ou fora do repositório interrompem a geração, sem copiá-los. Os dumps e
 caminhos privados do computador ficam fora dos links públicos.
 
 Sem JavaScript, todas as operações e detalhes nativos permanecem disponíveis;

@@ -4,6 +4,7 @@ import io
 import json
 import os
 import stat
+import subprocess
 import sys
 import tarfile
 import tempfile
@@ -106,6 +107,72 @@ class BackupPackageTests(unittest.TestCase):
             self.assertTrue(
                 all(stat.S_IMODE(path.stat().st_mode) == 0o600 for path in copied.iterdir())
             )
+
+    def test_published_import_keeps_trust_and_protection_after_catalog_failure(self):
+        import backup_catalog as catalog
+        import ops
+
+        self.export()
+        directory, _ = self.import_package()
+        runtime = self.destination.parent
+        with patch.object(catalog, "_write", side_effect=OSError("interrupted catalog write")):
+            with self.assertRaises(OSError):
+                catalog.register_backup(runtime, directory.name, imported=True, protected=True)
+        # Open the runtime in a fresh interpreter: no in-memory import state survives.
+        reopened = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                "import backup_catalog as c,json,sys; print(json.dumps(c.discover(sys.argv[1])))",
+                str(runtime),
+            ],
+            cwd=Path(__file__).resolve().parents[1] / "scripts",
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        entry = json.loads(reopened.stdout)["entries"][0]
+        self.assertEqual(entry["validation"], "valid")
+        self.assertTrue(entry["imported"] and entry["protected"])
+        # A later copy removes the independent last-valid exemption from this ID.
+        package.import_backup(self.transport, self.destination, "zz-later-copy", protect=protected)
+        catalog.register_backup(runtime, "zz-later-copy", imported=True, protected=True)
+        self.assertEqual(catalog.plan_retention(runtime, 0)["candidates"], [])
+        with (
+            patch.object(ops, "RUNTIME", runtime),
+            patch.object(ops, "CONTEXT", SimpleNamespace(session=None)),
+            patch.object(ops, "evidence"),
+            patch.object(ops, "restore_preflight") as preflight,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "trusted-source"):
+                ops.restore_test(backup_id=directory.name, trusted_source=False)
+            preflight.assert_not_called()
+        # Recovery through the existing protect command cannot erase the import flag.
+        catalog.mark_protected(runtime, directory.name)
+        catalog.register_backup(runtime, directory.name)
+        recovered = catalog.discover(runtime)["entries"][0]
+        self.assertTrue(recovered["imported"] and recovered["protected"])
+        self.assertEqual(
+            package.validate_backup(directory)["files"],
+            package.validate_backup(self.transport)["files"],
+        )
+
+    def test_interruption_immediately_after_rename_is_conservatively_discovered(self):
+        import backup_catalog as catalog
+
+        self.export()
+        finalize = package._finalize
+
+        def interrupted(stage, destination):
+            finalize(stage, destination)
+            raise OSError("interrupted after publication")
+
+        with patch.object(package, "_finalize", interrupted), self.assertRaises(OSError):
+            self.import_package()
+        entry = catalog.discover(self.destination.parent)["entries"][0]
+        self.assertEqual(entry["validation"], "valid")
+        self.assertTrue(entry["imported"] and entry["protected"])
 
     def test_corrupt_dump_rejected_before_any_destination_created(self):
         self.export()

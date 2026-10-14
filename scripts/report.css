@@ -48,9 +48,9 @@ main { min-width: 0; width: 100%; max-width: 1480px; padding: 28px 32px 24px; ma
 [data-panel] + [data-panel] { margin-top: 32px; }
 [data-panel][hidden] + [data-panel] { margin-top: 0; }
 .panel-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
-.surface-panel { margin-bottom: 20px; min-width: 0; box-shadow: none; background: white; border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; margin: 0; }
+.surface-panel { min-width: 0; box-shadow: none; background: white; border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; margin: 0; }
 .surface-panel > :last-child { margin-bottom: 0; }
-.panel-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin-bottom: 4px; border-bottom: 1px solid var(--line); margin: 0; padding-bottom: 14px; }
+.panel-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; border-bottom: 1px solid var(--line); margin: 0; padding-bottom: 14px; }
 .panel-toolbar .proof { margin-top: 0; font-size: 12px; }
 .panel-toolbar > h3 { font-size: 16px; }
 .panel-toolbar > a { display: inline-block; padding-block: 4px; }
@@ -107,13 +107,13 @@ summary:hover { color: #123f98; }
 .metric strong { display: block; font-size: 23px; font-weight: 600; margin-top: 5px; overflow-wrap: anywhere; }
 .metric strong.unavailable { font-size: 13px; line-height: 1.5; overflow-wrap: normal; color: var(--muted); }
 .metrics-block { margin: 24px 0; }
-.operation-summary { display: flex; align-items: center; border-radius: 7px; background: none; border: 0; margin-bottom: 12px; margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); gap: 28px; }
+.operation-summary { display: flex; align-items: center; border-radius: 7px; background: none; border: 0; margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); gap: 28px; }
 .operation-summary > div + div { border-left: 1px solid #c0d1e8; padding-left: 28px; }
 .operation-summary span { color: #405b7e; display: block; font-size: 13px; }
 .operation-summary strong { display: block; font-weight: 600; margin-top: 3px; overflow-wrap: anywhere; font-size: 22px; }
 .operation-summary > div + div strong { font-size: 21px; }
 .operation-summary strong.unavailable { font-size: 14px; font-weight: 500; color: var(--muted); }
-.notice { border-radius: 5px; background: none; border-left: 2px solid #8a9bad; padding: 10px 0; margin-top: 8px; border: 0; border-top: 1px solid var(--line); line-height: 1.5; font-size: 14px; color: var(--muted); }
+.notice { border-radius: 5px; background: none; padding: 10px 0; margin-top: 8px; border: 0; border-top: 1px solid var(--line); line-height: 1.5; font-size: 14px; color: var(--muted); }
 .record-warning,.record-errors { border: 1px solid #e6c68e; border-left: 3px solid #a46b11; border-radius: 7px; background: #fff7e8; padding: 16px 18px; margin-bottom: 20px; font-size: 13px; }
 .record-errors h2 { font-size: 20px; }
 .record-warning a { margin-left: 12px; }
@@ -150,11 +150,11 @@ footer a { display: inline-flex; align-items: center; min-height: 24px; }
 .result-column { border-top: 3px solid #243b60; padding-top: 18px; }
 .identity-column { border-top: 1px solid var(--line); padding-top: 18px; grid-template-columns: 260px 1fr; gap: 4px 24px; display: block; background: #e7ebf0; padding: 22px 20px; border: 0; }
 .identity-column .panel-toolbar { border: 0; display: flex; padding-bottom: 12px; grid-row: auto; }
-.identity-column .panel-toolbar>span { display: block; margin-top: 8px; margin: 0; }
+.identity-column .panel-toolbar>span { display: block; margin: 0; }
 .identity-column p { font-size: 14px; }
 .identity-column .record-details { grid-column: 1/-1; }
 .badge:before { content: '●'; font-size: 8px; margin-right: 6px; }
-.record-details { padding-block: 12px; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.record-details { padding: 0; margin: 0; border-top: 1px solid var(--line); }
 .record-details>summary { padding: 12px 0; font-size: 14px; }
 .job .metric strong { font-size: 18px; }
 .attempt.pass h3 { color: var(--ink); }
@@ -226,7 +226,7 @@ h2 { font-size: 25px; }
 .surface-panel { border-radius: 8px; padding: 16px; }
 .panel-toolbar { gap: 8px; padding-bottom: 12px; }
 .panel-toolbar .proof { width: 100%; }
-.control-list { padding-inline: 16px; padding: 0; }
+.control-list { padding: 0; }
 .control-row { padding: 15px 0; padding-block: 12px; }
 .control-title { gap: 10px; align-items: baseline; }
 .control-title h3 { min-width: 0; max-width: none; flex: 1; }

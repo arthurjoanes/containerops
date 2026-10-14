@@ -16,6 +16,13 @@ duplicado, itens extras, destinos existentes e mudanças durante a cópia.
 Referências externas não definem caminhos de destino. Restore seleciona somente
 um ID catalogado no runtime reservado; importar não restaura nem carrega imagens.
 
+Se a publicação do pacote concluir e a gravação do catálogo falhar, o pacote
+portátil sem registro continua classificado como importado e protegido. A ausência
+do registro não concede confiança local. Essa regra também cobre pacotes portáteis
+colocados manualmente no runtime; backups legados sem manifesto mantêm a política
+de compatibilidade anterior. `backups protect --backup <id>` valida e persiste a
+classificação conservadora; não retira a exigência de `--trusted-source`.
+
 Hash detecta corrupção, mas não autentica um conjunto adulterado de dump e
 manifesto. O [PostgreSQL documenta](https://www.postgresql.org/docs/17/app-pgrestore.html)
 que restore executa código escolhido pela origem. `--trusted-source` declara

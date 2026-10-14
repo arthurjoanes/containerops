@@ -196,6 +196,78 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(self.file_snapshot(before), before)
         self.assertEqual(len(list(directory.iterdir())), 1)
 
+    def test_bundle_links_use_commit_and_keep_copied_guides_relative(self):
+        _, _, context = self.guide_fixture()
+        (self.root / "README.md").write_text(
+            "[Runbooks](docs/runbooks.md#backup)\n[Compose](compose.yaml)\n"
+            "![Marca](docs/brand.svg)\n[Code][source]\n[source]: scripts/ops.py\n",
+            encoding="utf-8",
+        )
+        revision = "a" * 40
+        with (
+            patch.object(report, "ROOT", self.root),
+            patch.object(
+                report.subprocess,
+                "check_output",
+                side_effect=[
+                    revision,
+                    "compose.yaml\ndocs/brand.svg\nscripts/ops.py\n",
+                    " M README.md\n",
+                ],
+            ),
+        ):
+            urls = report.guide_urls(self.root, context.report, True)
+        copied = (context.report.parent / urls["readme_url"]).read_text(encoding="utf-8")
+        self.assertIn("(docs/runbooks.md#backup)", copied)
+        self.assertIn(f"/blob/{revision}/compose.yaml", copied)
+        self.assertIn(f"/containerops/{revision}/docs/brand.svg", copied)
+        self.assertIn(f"/blob/{revision}/scripts/ops.py", copied)
+        self.assertIn("não são permalinks dessas alterações", copied)
+
+    def test_bundle_rejects_untracked_private_link_without_copying_it(self):
+        _, _, context = self.guide_fixture()
+        (self.root / "README.md").write_text("[Secret](.env)", encoding="utf-8")
+        with (
+            patch.object(report, "ROOT", self.root),
+            patch.object(
+                report.subprocess, "check_output", side_effect=["a" * 40, "README.md", ""]
+            ),
+            self.assertRaisesRegex(RuntimeError, "arquivos públicos"),
+        ):
+            report.guide_urls(self.root, context.report, True)
+        self.assertFalse(context.report.parent.exists())
+
+    def test_cpu_quota_preserves_fraction_and_rejects_invalid_types(self):
+        for raw, expected in (
+            (250_000_000, "0,25"),
+            (500_000_000, "0,5"),
+            (750_000_000, "0,75"),
+            (1, "0,000000001"),
+            (0, "0"),
+            (1_000_000_000, "1"),
+        ):
+            self.assertEqual(report.cpu_quota(raw), expected)
+        for raw in (True, -1, float("nan"), 1.5, "250000000", 2**63):
+            self.assertEqual(report.cpu_quota(raw), "Dado inválido")
+
+    def test_catalog_offers_separate_shells_without_adding_trust(self):
+        for namespace in ("default", "backup-lab"):
+            document = report.catalog_commands(
+                namespace, "restore-test --backup safe-id", "fixture", "Restore"
+            )
+            commands = CommandText(document).commands
+            self.assertEqual(len(commands), 2)
+            self.assertIn("PowerShell", document)
+            self.assertIn("Shell POSIX", document)
+            self.assertNotIn("--trusted-source", document)
+            self.assertIn("python3 scripts/ops.py restore-test --backup safe-id", commands[1])
+            self.assertIn(
+                "unset CONTAINEROPS_SESSION"
+                if namespace == "default"
+                else "CONTAINEROPS_SESSION='backup-lab'",
+                commands[1],
+            )
+
     def test_session_guides_reject_conflicting_bytes_without_overwriting_bundle(self):
         _, _, context = self.guide_fixture()
         with patch.object(report, "ROOT", self.root):

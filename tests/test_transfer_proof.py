@@ -16,15 +16,15 @@ from runtime_context import RuntimeContext
 class TransferProofTests(unittest.TestCase):
     def setUp(self):
         parent = (
-            Path(os.environ["USERPROFILE"])
-            / "AppData/Local/ContainerOps-runtime/sessions/transfer-fixtures/test-temp"
+            Path(os.environ["USERPROFILE"]) / "AppData/Local/ContainerOps-runtime/sessions/tests"
             if os.name == "nt"
             else Path(tempfile.gettempdir()) / "containerops-transfer-fixtures"
         )
         parent.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(prefix="transfer-", dir=parent)
+        # Leave room for nested manifest names after Windows app path redirection.
+        self.temporary = tempfile.TemporaryDirectory(prefix="tx-", dir=parent)
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.source = RuntimeContext(ops.ROOT, self.root, self.root / "sessions/source", "source")
         self.destination = RuntimeContext(
             ops.ROOT, self.root, self.root / "sessions/destination", "destination"

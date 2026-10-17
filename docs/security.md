@@ -16,7 +16,8 @@ duplicado, itens extras, destinos existentes e mudanças durante a cópia.
 Referências externas não definem caminhos de destino. Restore seleciona somente
 um ID catalogado no runtime reservado; importar não restaura nem carrega imagens.
 
-As leituras comparam identidade, tamanho, mtime e hash antes/depois. No Windows,
+As leituras comparam identidade, tamanho e mtime antes/depois e calculam o hash
+do conteúdo lido. No Windows,
 a assinatura usa `st_birthtime_ns` quando disponível: `ctime` é depreciado nessa
 plataforma e pode divergir entre `stat` e `fstat` após uma gravação comum. No POSIX,
 o ctime continua detectando mudanças de metadados. Os [testes de identidade do

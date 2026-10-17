@@ -336,6 +336,31 @@ class BackupCatalogTests(unittest.TestCase):
         self.assertIsNone(catalog.discover(self.runtime)["pending_prune"])
         self.assertEqual({path.name for path in (self.runtime / "backups").iterdir()}, {"latest"})
 
+    def test_interruption_after_directory_removal_recovers_without_touching_retained_backup(self):
+        self.backup("old", 1)
+        retained = self.backup("latest", 2)
+        retained_dump = (retained / "containerops.dump").read_bytes()
+        plan = catalog.plan_retention(self.runtime, 1)
+        original_rmdir = Path.rmdir
+
+        def interrupted_rmdir(path):
+            result = original_rmdir(path)
+            if path.name == "old" and ".prune-" in str(path):
+                raise KeyboardInterrupt("interruption after candidate directory removal")
+            return result
+
+        with patch.object(Path, "rmdir", interrupted_rmdir), self.assertRaises(KeyboardInterrupt):
+            catalog.apply_retention(self.runtime, 1, plan["plan_id"])
+
+        pending = catalog.discover(self.runtime)["pending_prune"]
+        self.assertEqual(pending["status"], "interrupted")
+        result = catalog.recover_retention(self.runtime, plan["plan_id"])
+
+        self.assertEqual(result["deleted"], ["old"])
+        self.assertIsNone(catalog.discover(self.runtime)["pending_prune"])
+        self.assertEqual((retained / "containerops.dump").read_bytes(), retained_dump)
+        self.assertEqual({path.name for path in (self.runtime / "backups").iterdir()}, {"latest"})
+
     def test_interruption_during_move_recovers_exact_candidates(self):
         for day in range(3):
             self.backup(f"copy-{day}", day)

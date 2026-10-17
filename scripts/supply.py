@@ -475,6 +475,9 @@ def scanner_command(lock: dict, cache: Path, artifact: Path, offline: bool) -> l
         f"type=bind,src={artifact / 'scanner'},dst=/reports",
         "--env",
         "GOMAXPROCS=1",
+        # DB downloads and extracted layers can exceed the bounded /tmp tmpfs.
+        "--env",
+        "TMPDIR=/cache",
         "--env",
         "TRIVY_DISABLE_VEX_NOTICE=true",
         lock["trivy"],

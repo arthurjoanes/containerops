@@ -86,6 +86,11 @@ Audit procura os bytes da sentinela nas camadas descomprimidas, config/históric
 
 Trivy roda sem socket Docker, com filesystem somente leitura, capabilities removidas, `no-new-privileges` e limites de recursos. Só cache, relatório e `/tmp` são graváveis. `Metadata.ImageID` deve corresponder ao config digest do build; o scan precisa incluir SO e dependências.
 
+O scanner usa `TMPDIR=/cache` no volume `trivy-cache/` do contexto ativo para
+baixar a base e processar arquivos temporários. O `/tmp` continua limitado a
+256 MiB; a base pode ultrapassar esse limite mesmo com espaço livre no host.
+Essa configuração segue a [orientação do Trivy sobre espaço temporário](https://trivy.dev/docs/latest/references/troubleshooting/#running-out-of-space-during-image-scans).
+
 O primeiro scan baixa a base e registra versão/schema, `UpdatedAt`, idade e SHA-256. A análise usa essa base sem atualizar e confere o hash ao terminar. `--offline` exige base disponível com até 72 horas.
 
 Qualquer HIGH/CRITICAL bloqueia o comando, com ou sem `FixedVersion`. Todas as severidades ficam no relatório. O ignorefile é `/dev/null`. Antes do scan, o resultado vira `incomplete`; `passed` exige todas as verificações e zero achados bloqueantes.

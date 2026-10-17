@@ -46,12 +46,6 @@ jobs:
         run: |
           python3 scripts/ops.py prove --scenario operations
           python3 scripts/transfer_proof.py --destination-session ci-rx-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Liberar cache de build da sessão antes dos scans
-        run: |
-          df -h .
-          # Os builds terminaram; as imagens carregadas e as evidências são preservadas.
-          docker buildx prune --builder "pf-containerops-builder-${CONTAINEROPS_SESSION}" --all --force
-          df -h .
       - name: Scan e relatório
         run: |
           python3 scripts/ops.py scan --version 1.0.0

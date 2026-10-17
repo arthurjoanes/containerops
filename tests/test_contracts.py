@@ -16,6 +16,34 @@ import supply
 
 
 class CommandContractTests(unittest.TestCase):
+    def test_scanner_uses_disk_backed_temporary_storage_and_keeps_sandbox(self):
+        cache = Path("scanner-cache")
+        artifact = Path("scan-artifacts")
+        for offline in (False, True):
+            with self.subTest(offline=offline):
+                command = supply.scanner_command(
+                    {"trivy": "locked-scanner"}, cache, artifact, offline
+                )
+                environment = dict(
+                    command[index + 1].split("=", 1)
+                    for index, value in enumerate(command)
+                    if value == "--env"
+                )
+                self.assertEqual(environment.get("TMPDIR"), "/cache")
+                self.assertIn(f"type=bind,src={cache},dst=/cache", command)
+                self.assertIn(f"type=bind,src={artifact},dst=/artifacts,readonly", command)
+                self.assertIn("--read-only", command)
+                for flag, expected in (
+                    ("--cap-drop", "ALL"),
+                    ("--security-opt", "no-new-privileges:true"),
+                    ("--memory", "1g"),
+                    ("--cpus", "1"),
+                    ("--pids-limit", "128"),
+                    ("--network", "none" if offline else "bridge"),
+                ):
+                    self.assertEqual(command[command.index(flag) + 1], expected)
+                self.assertIn("/tmp:rw,noexec,nosuid,size=268435456", command)
+
     def test_security_gate_rejects_high_severity_even_without_a_fix(self):
         unfixed = {"Severity": "CRITICAL", "FixedVersion": ""}
         fixed = {"Severity": "HIGH", "FixedVersion": "2.0"}

@@ -16,6 +16,14 @@ duplicado, itens extras, destinos existentes e mudanças durante a cópia.
 Referências externas não definem caminhos de destino. Restore seleciona somente
 um ID catalogado no runtime reservado; importar não restaura nem carrega imagens.
 
+As leituras comparam identidade, tamanho, mtime e hash antes/depois. No Windows,
+a assinatura usa `st_birthtime_ns` quando disponível: `ctime` é depreciado nessa
+plataforma e pode divergir entre `stat` e `fstat` após uma gravação comum. No POSIX,
+o ctime continua detectando mudanças de metadados. Os [testes de identidade do
+arquivo](../tests/test_file_identity.py) cobrem uma gravação concluída antes da
+leitura; os testes de catálogo mantêm as recusas por corrupção e plano obsoleto.
+Veja o [contrato de stat do Python](https://docs.python.org/3.13/library/os.html#os.stat_result).
+
 Se a publicação do pacote concluir e a gravação do catálogo falhar, o pacote
 portátil sem registro continua classificado como importado e protegido. A ausência
 do registro não concede confiança local. Essa regra também cobre pacotes portáteis

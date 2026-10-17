@@ -74,12 +74,16 @@ def _stamp(value):
 
 
 def _signature(item):
+    # Windows stat/fstat can disagree on deprecated ctime after a normal write.
+    timestamp = (
+        getattr(item, "st_birthtime_ns", item.st_ctime_ns) if os.name == "nt" else item.st_ctime_ns
+    )
     return {
         "device": item.st_dev,
         "inode": item.st_ino,
         "size": item.st_size,
         "mtime_ns": item.st_mtime_ns,
-        "ctime_ns": item.st_ctime_ns,
+        "ctime_ns": timestamp,
         "mode": item.st_mode,
         "links": item.st_nlink,
     }

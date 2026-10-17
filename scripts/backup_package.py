@@ -291,7 +291,11 @@ def validate_metadata(metadata, *, portable=False):
 
 
 def _fingerprint(item):
-    return (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns, item.st_ctime_ns)
+    # Match path and descriptor metadata on Windows; POSIX retains change time.
+    timestamp = (
+        getattr(item, "st_birthtime_ns", item.st_ctime_ns) if os.name == "nt" else item.st_ctime_ns
+    )
+    return (item.st_dev, item.st_ino, item.st_size, item.st_mtime_ns, timestamp)
 
 
 def safe_path(path, *, directory=False):

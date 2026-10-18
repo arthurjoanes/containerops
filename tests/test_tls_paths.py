@@ -15,7 +15,7 @@ class TLSPathTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix="containerops-tls-paths-")
         self.addCleanup(temporary.cleanup)
-        self.root = Path(temporary.name)
+        self.root = Path(temporary.name).resolve()
         self.runtime = self.root / "runtime"
         self.runtime.mkdir()
         self.target = self.root / "preserved.txt"

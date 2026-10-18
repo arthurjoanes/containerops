@@ -142,11 +142,20 @@
     }
 
     function filterActivity(updateURL = false) {
-      const valid = from.value && to.value && from.value <= to.value && from.checkValidity() && to.checkValidity();
+      let error = "";
+      if (!from.value || !to.value) error = "Preencha as duas datas em UTC.";
+      else if ([from, to].some(input => input.value < input.min || input.value > input.max)) {
+        const formatDay = day => day.split("-").reverse().join("/");
+        error = from.min === to.max
+          ? `O registro contém somente ${formatDay(from.min)} UTC.`
+          : `Datas disponíveis: ${formatDay(from.min)} a ${formatDay(to.max)} UTC.`;
+      } else if (from.value > to.value) error = "A data inicial deve ser anterior ou igual à final.";
+      else if (!from.checkValidity() || !to.checkValidity()) error = "Informe datas válidas em UTC.";
+      const valid = !error;
       from.setAttribute("aria-invalid", String(!valid));
       to.setAttribute("aria-invalid", String(!valid));
       if (!valid) {
-        feedback.textContent = "Filtro não aplicado. Informe um período válido, com início anterior ou igual ao fim.";
+        feedback.textContent = `Filtro não aplicado. ${error}`;
         return;
       }
       const visibleJobs = jobs.filter(row => {

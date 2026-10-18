@@ -55,6 +55,17 @@ if (process.argv[2]) {
       assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), expected);
       await analysis.locator("[data-activity-reset]").click();
       assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), totalJobs);
+      const firstDay = await analysis.locator("[data-activity-from]").getAttribute("min");
+      const beforeRange = new Date(`${firstDay}T00:00:00Z`);
+      beforeRange.setUTCDate(beforeRange.getUTCDate() - 1);
+      await analysis.locator("[data-activity-from]").fill(beforeRange.toISOString().slice(0, 10));
+      await analysis.locator("[data-activity-from]").dispatchEvent("change");
+      assert.match(await analysis.locator("[data-activity-feedback]").textContent(), /somente|Datas disponíveis/);
+      assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), totalJobs);
+      await analysis.locator("[data-activity-from]").fill("");
+      await analysis.locator("[data-activity-from]").dispatchEvent("change");
+      assert.match(await analysis.locator("[data-activity-feedback]").textContent(), /Preencha as duas datas/);
+      await analysis.locator("[data-activity-reset]").click();
       await page.emulateMedia({ reducedMotion: "reduce" });
       assert.equal(await analysis.locator(".chart-row").first().evaluate(node => getComputedStyle(node).animationName), "none");
     }

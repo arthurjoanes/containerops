@@ -113,8 +113,7 @@ def activity_panel(records: dict[str, dict]) -> str:
     counts = {state: sum(row["state"] == state for row in data["jobs"]) for state in STATES}
     return (
         '<div class="activity-analysis" data-activity>'
-        '<p class="analysis-scope">Último estado observado por job e projeto. Datas em UTC; '
-        "a amostra inclui cenários de teste, não o tráfego completo da aplicação.</p>"
+        '<p class="analysis-scope">Último estado de cada job por projeto. Amostra de testes · UTC.</p>'
         '<form class="analysis-controls" data-activity-controls hidden>'
         f'<label>De<input type="date" data-activity-from aria-describedby="activity-filter-status" {limits} value="{first}"></label>'
         f'<label>Até<input type="date" data-activity-to aria-describedby="activity-filter-status" {limits} value="{last}"></label>'
@@ -139,7 +138,7 @@ def activity_panel(records: dict[str, dict]) -> str:
         '<th scope="col">Observação</th><th scope="col">Fonte</th></tr></thead>'
         f"<tbody data-job-rows>{job_rows}</tbody></table></div></details></figure>"
         "<figure><figcaption><h3>Tempo por operação</h3>"
-        "<p>Durações de operações distintas; não são latências dos jobs.</p></figcaption>"
+        "<p>Duração dos ensaios registrados.</p></figcaption>"
         '<div data-duration-chart class="analysis-chart" hidden></div>'
         '<p class="analysis-empty" data-operations-empty'
         + (" hidden" if operation_rows else "")

@@ -844,7 +844,7 @@ def verify(full=True):
                     "-s",
                     "scripts",
                     "-p",
-                    "test_report.py",
+                    "test_report*.py",
                     "-v",
                 ],
                 check=False,

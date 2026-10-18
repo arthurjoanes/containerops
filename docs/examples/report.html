@@ -281,7 +281,41 @@ footer a { display: inline-flex; align-items: center; min-height: 24px; }
 .badge.pass,.badge.pending,.badge.fail { background: none; border: 0; }
 .operation-link,summary { transition: background-color 180ms ease,color 180ms ease; }
 
-#result > .surface-panel { max-width:900px; }
+#result > .surface-panel { max-width:none; }
+.analysis-scope { color:var(--muted); max-width:76ch; margin-bottom:20px; }
+.analysis-controls { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin-bottom:12px; }
+.analysis-controls label { display:grid; gap:4px; font-size:14px; font-weight:600; }
+.analysis-controls input,.analysis-controls button { min-height:44px; padding:8px 12px; border:1px solid var(--line); border-radius:5px; font:inherit; color:var(--ink); background:var(--canvas); }
+.analysis-controls button { cursor:pointer; background:var(--surface); font-size:14px; }
+.analysis-controls button:hover { background:var(--canvas); }
+.analysis-controls input:focus-visible,.analysis-controls button:focus-visible { outline:3px solid var(--brand-action); outline-offset:3px; }
+.analysis-controls input[aria-invalid=true] { border-color:var(--fail); }
+.analysis-feedback { color:var(--muted); font-size:14px; margin-bottom:24px; min-height:22px; }
+.activity-totals { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:0 0 28px; }
+.activity-totals dt { font-size:14px; }
+.activity-totals dd { font-size:32px; font-weight:600; font-variant-numeric:tabular-nums; line-height:1.2; }
+.activity-totals dt::before { content:""; display:inline-block; width:8px; height:8px; margin-right:6px; background:var(--brand-action); }
+.activity-totals > div:nth-child(1) dt::before,.chart-queued { background:var(--warning); }
+.activity-totals > div:nth-child(2) dt::before,.chart-running { background:var(--brand-action); }
+.activity-totals > div:nth-child(3) dt::before,.chart-succeeded { background:var(--green); }
+.activity-totals > div:nth-child(4) dt::before,.chart-failed { background:var(--fail); }
+.analysis-charts { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:24px; }
+.analysis-charts figure { min-width:0; margin:0; }
+.analysis-charts figcaption h3 { font-size:19px; }
+.analysis-charts figcaption p { font-size:14px; color:var(--muted); margin:6px 0 20px; }
+.analysis-chart { display:grid; gap:14px; padding-block:4px 20px; }
+.chart-row { display:grid; grid-template-columns:minmax(70px,1fr) minmax(50px,1.4fr) 58px; gap:12px; align-items:center; animation:chart-appear 180ms cubic-bezier(.23,1,.32,1); }
+.chart-row-label { font-size:14px; line-height:1.3; }
+.chart-row-track { display:flex; height:13px; background:var(--canvas); border-radius:2px; overflow:hidden; }
+.chart-segment { height:100%; }
+.chart-duration { background:var(--brand-accent); }
+.chart-row-value { text-align:right; font-size:14px; font-variant-numeric:tabular-nums; }
+.analysis-empty { padding:16px 0; color:var(--muted); font-size:14px; }
+.job-project { display:block; font-size:12px; color:var(--muted); font-weight:400; }
+@keyframes chart-appear { from { opacity:.45; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:1100px) { .analysis-charts { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:760px) { .activity-totals { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; } .analysis-controls label { flex:1; min-width:130px; } .analysis-controls input { width:100%; } }
+@media (prefers-reduced-motion:reduce) { .chart-row { animation:none; } }
 .artifact-diagnosis { padding:16px 18px; margin-bottom:18px; border-left:3px solid #687789; background:#f1f3f6; }
 .artifact-diagnosis.partial,.artifact-diagnosis.missing { background:#fff6e4; border-color:#936511; }
 .artifact-diagnosis.fail,.artifact-diagnosis.invalid { background:#fff0f2; border-color:#a52734; }
@@ -487,7 +521,7 @@ button:focus-visible,input:focus-visible,select:focus-visible { outline: 3px sol
 <div class="report-shell">
   <aside class="operation-sidebar">
     <div class="report-heading"><h1>Operações registradas</h1></div>
-    <nav aria-label="Operações registradas"><details class="operation-picker" open><summary><span data-operation-label>Escolher operação</span><span aria-hidden="true">⌄</span></summary><div class="operation-index"><div class="operation-group"><h2>Verificação</h2><a class="operation-link" href="#overview" data-state="stale" data-operation="overview" title="221,7 s"><span class="operation-title">Aplicação e isolamento</span><span class="operation-meta">Registro antigo</span></a><a class="operation-link" href="#result" data-state="pass" data-operation="result" title="v1.0.0"><span class="operation-title">Resultado do job</span></a><a class="operation-link" href="#tls" data-state="pass" data-operation="tls" title="CA local"><span class="operation-title">Conexão TLS</span></a></div><div class="operation-group"><h2>Recuperação</h2><a class="operation-link" href="#backups" data-state="pass" data-operation="backups" title="Localizar ID, integridade e recibo de restore"><span class="operation-title">Cópias de backup</span></a><a class="operation-link" href="#recovery" data-state="pass" data-operation="recovery" title="30,2 s"><span class="operation-title">Último ensaio de restore</span></a></div><div class="operation-group"><h2>Release</h2><a class="operation-link" href="#operations" data-state="pass" data-operation="operations" title="38,5 s"><span class="operation-title">Última troca de imagem</span></a><a class="operation-link" href="#rollback" data-state="pass" data-operation="rollback" title="54,2 s"><span class="operation-title">Retorno após falha</span></a></div><div class="operation-group"><h2>Artefatos</h2><a class="operation-link" href="#artifacts" data-state="pass" data-operation="artifacts" title="v2.0.0"><span class="operation-title">Imagem, auditoria e scan</span></a><a class="operation-link" href="#evidence" data-state="info" data-operation="evidence" title="20 JSONs"><span class="operation-title">Arquivos de evidência</span></a></div></div></details></nav>
+    <nav aria-label="Operações registradas"><details class="operation-picker" open><summary><span data-operation-label>Escolher operação</span><span aria-hidden="true">⌄</span></summary><div class="operation-index"><div class="operation-group"><h2>Verificação</h2><a class="operation-link" href="#overview" data-state="stale" data-operation="overview" title="221,7 s"><span class="operation-title">Aplicação e isolamento</span><span class="operation-meta">Registro antigo</span></a><a class="operation-link" href="#result" data-state="pass" data-operation="result" title="v1.0.0"><span class="operation-title">Jobs por período</span></a><a class="operation-link" href="#tls" data-state="pass" data-operation="tls" title="CA local"><span class="operation-title">Conexão TLS</span></a></div><div class="operation-group"><h2>Recuperação</h2><a class="operation-link" href="#backups" data-state="pass" data-operation="backups" title="Localizar ID, integridade e recibo de restore"><span class="operation-title">Cópias de backup</span></a><a class="operation-link" href="#recovery" data-state="pass" data-operation="recovery" title="30,2 s"><span class="operation-title">Último ensaio de restore</span></a></div><div class="operation-group"><h2>Release</h2><a class="operation-link" href="#operations" data-state="pass" data-operation="operations" title="38,5 s"><span class="operation-title">Última troca de imagem</span></a><a class="operation-link" href="#rollback" data-state="pass" data-operation="rollback" title="54,2 s"><span class="operation-title">Retorno após falha</span></a></div><div class="operation-group"><h2>Artefatos</h2><a class="operation-link" href="#artifacts" data-state="pass" data-operation="artifacts" title="v2.0.0"><span class="operation-title">Imagem, auditoria e scan</span></a><a class="operation-link" href="#evidence" data-state="info" data-operation="evidence" title="20 JSONs"><span class="operation-title">Arquivos de evidência</span></a></div></div></details></nav>
     <p class="index-note">Resultados salvos em arquivos. Esta página não consulta nem altera os serviços.</p>
   </aside>
   <main id="content" tabindex="-1">
@@ -496,7 +530,7 @@ button:focus-visible,input:focus-visible,select:focus-visible { outline: 3px sol
     <section id="overview" data-panel aria-labelledby="overview-title">
       <div class="panel-heading"><h2 id="overview-title" tabindex="-1">Verificação da aplicação</h2></div>
       <div class="surface-panel">
-        <div class="attempt stale"><div><h3>Verificação aprovada há mais de 24 h</h3><p>42,7 h antes da geração</p><p>Execute verify para atualizar.</p></div><div><span>Duração registrada</span><strong class="duration">221,7 s</strong></div></div>
+        <div class="attempt stale"><div><h3>Verificação aprovada há mais de 24 h</h3><p>141,4 h antes da geração</p><p>Execute verify para atualizar.</p></div><div><span>Duração registrada</span><strong class="duration">221,7 s</strong></div></div>
         <div class="panel-toolbar"><h3>Etapas verificadas</h3><a href="#evidence">Consultar arquivos</a></div>
         <ol class="control-list"><li class="control-row"><div class="control-title"><h3>HTTP pelo proxy</h3><span class="badge pass">Passou</span></div><p>6 requisições simultâneas; 1 job salvo. Testa autorização e limites HTTP.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-10-12T04:56:39.937292+00:00">12/10/2026 · 04:56:39 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Usuário e filesystem</h3><span class="badge pass">Passou</span></div><p>Testa UID, capabilities, no-new-privileges e escrita fora dos mounts.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-10-12T04:56:55.616021+00:00">12/10/2026 · 04:56:55 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Rede isolada</h3><span class="badge pass">Passou</span></div><p>Testa acesso ao banco pelas redes data e front e verifica se o banco publica portas.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/hardening.json">hardening.json</a><span class="proof-date"><time datetime="2026-10-12T04:56:55.616021+00:00">12/10/2026 · 04:56:55 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Recuperação do worker</h3><span class="badge pass">Passou</span></div><p>Testa conclusão após SIGKILL (2 tentativas) e após SIGTERM.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-10-12T04:58:49.805774+00:00">12/10/2026 · 04:58:49 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Banco indisponível</h3><span class="badge pass">Passou</span></div><p>Banco parado: espera liveness 200, readiness e criação de jobs 503. Testa um novo job após o restart.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-10-12T04:58:49.805774+00:00">12/10/2026 · 04:58:49 UTC</time></span></div></li><li class="control-row"><div class="control-title"><h3>Persistência</h3><span class="badge pass">Passou</span></div><p>Compara snapshots antes e depois de recriar os containers: 8 jobs mantidos.</p><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/recovery.json">recovery.json</a><span class="proof-date"><time datetime="2026-10-12T04:58:49.805774+00:00">12/10/2026 · 04:58:49 UTC</time></span></div></li></ol>
         <details class="record-details"><summary>Identificação e duração da execução</summary><dl class="record-context"><div><dt>Conclusão registrada</dt><dd><time datetime="2026-10-12T04:58:51.859046+00:00">12/10/2026 · 04:58:51 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-e09bed0e</code></dd></div><div><dt>Execução</dt><dd><code>e09bed0eb0f847c2842946cb813e81f5</code></dd></div></dl><dl class="facts"><dt>Início</dt><dd><time datetime="2026-10-12T04:55:10.180797+00:00">12/10/2026 · 04:55:10 UTC</time></dd><dt>Duração exata</dt><dd>221,672 s</dd><dt>Categoria de erro</dt><dd>Não informado</dd></dl><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/verification-run.json">verification-run.json</a><span class="proof-date"><time datetime="2026-10-12T04:58:51.859046+00:00">12/10/2026 · 04:58:51 UTC</time></span></div></details>
@@ -504,11 +538,10 @@ button:focus-visible,input:focus-visible,select:focus-visible { outline: 3px sol
       </div>
     </section>
     <section id="result" data-panel aria-labelledby="result-title">
-      <div class="panel-heading"><h2 id="result-title" tabindex="-1">Último job registrado</h2></div>
+      <div class="panel-heading"><h2 id="result-title" tabindex="-1">Jobs por período</h2></div>
       <div class="surface-panel">
-        <div class="job"><div><h3>Concluído</h3></div><dl class="job-values"><div><dt>Palavras</dt><dd>7</dd></div><div><dt>Tentativas</dt><dd>1</dd></div><div><dt>Versão</dt><dd>1.0.0</dd></div></dl><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>deb6f001-dce6-438a-ae45-c1cfee5f6534</code><p>SHA-256 do texto UTF-8</p><code>27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc</code></details><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-10-12T04:56:39.937292+00:00">12/10/2026 · 04:56:39 UTC</time></span></div></div>
-        <details class="record-details"><summary>Origem deste resultado</summary><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-10-12T04:56:39.937292+00:00">12/10/2026 · 04:56:39 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-e09bed0e</code></dd></div><div><dt>Execução</dt><dd><code>e09bed0eb0f847c2842946cb813e81f5</code></dd></div></dl></details>
-        <p class="notice">A versão pertence a este job. A imagem de <a href="#artifacts">Artefatos</a> pode vir de outro build; a proximidade entre os registros não estabelece um vínculo.</p>
+        <div class="activity-analysis" data-activity><p class="analysis-scope">Último estado observado por job e projeto. Datas em UTC; a amostra inclui cenários de teste, não o tráfego completo da aplicação.</p><form class="analysis-controls" data-activity-controls hidden><label>De<input type="date" data-activity-from aria-describedby="activity-filter-status" min="2026-10-12" max="2026-10-12" value="2026-10-12"></label><label>Até<input type="date" data-activity-to aria-describedby="activity-filter-status" min="2026-10-12" max="2026-10-12" value="2026-10-12"></label><button type="button" data-activity-reset>Todo o registro</button></form><p id="activity-filter-status" class="analysis-feedback" data-activity-feedback role="status" aria-live="polite"></p><dl class="activity-totals"><div><dt>Na fila</dt><dd data-state-total="queued">0</dd></div><div><dt>Em execução</dt><dd data-state-total="running">0</dd></div><div><dt>Concluídos</dt><dd data-state-total="succeeded">9</dd></div><div><dt>Falhos</dt><dd data-state-total="failed">0</dd></div></dl><div class="analysis-charts"><figure><figcaption><h3>Jobs observados por dia</h3><p>Um job conta na data de sua última observação.</p></figcaption><div data-job-chart class="analysis-chart" hidden></div><p class="analysis-empty" data-jobs-empty hidden>Nenhum job com estado e data válidos neste período.</p><details class="record-details"><summary>Ver jobs e fontes</summary><div class="table-wrap" role="region" aria-label="Jobs observados" tabindex="0"><table><caption>Jobs únicos por projeto, com a última observação disponível</caption><thead><tr><th scope="col">Job / projeto</th><th scope="col">Estado</th><th scope="col">Observação</th><th scope="col">Fonte</th></tr></thead><tbody data-job-rows><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>deb6f001-dce6-438a-ae45-c1cfee5f6534</code><span class="job-project">pf-containerops-test-e09bed0e</span></th><td>Concluídos</td><td><time datetime="2026-10-12T04:56:39.937292+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/journey.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>41897c3b-44e2-43b4-97ec-4effaa47f910</code><span class="job-project">pf-containerops-test-e09bed0e</span></th><td>Concluídos</td><td><time datetime="2026-10-12T04:58:49.805774+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/recovery.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>4b18068d-3fb4-4713-bfcb-8980acfbf243</code><span class="job-project">pf-containerops-test-e09bed0e</span></th><td>Concluídos</td><td><time datetime="2026-10-12T04:58:49.805774+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/recovery.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>728b2873-4ede-4423-ae75-d23168c97c3c</code><span class="job-project">pf-containerops-test-e09bed0e</span></th><td>Concluídos</td><td><time datetime="2026-10-12T04:58:49.805774+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/recovery.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>bc1bdee7-248d-4300-a931-d636ce69f534</code><span class="job-project">pf-containerops-test-e09bed0e</span></th><td>Concluídos</td><td><time datetime="2026-10-12T04:58:49.805774+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/recovery.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>5b40070a-52cf-4185-b50b-cd6c33980d61</code><span class="job-project">pf-containerops-test-53ac5022</span></th><td>Concluídos</td><td><time datetime="2026-10-12T05:00:44.019090+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/rollback.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>de9369e4-e0e6-4e32-ad27-1b5e39a81b98</code><span class="job-project">pf-containerops-test-53ac5022</span></th><td>Concluídos</td><td><time datetime="2026-10-12T05:00:44.019090+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/rollback.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>b7ea37bb-3655-4fba-9670-c305a2a73f08</code><span class="job-project">pf-containerops-restore-cc9b1412</span></th><td>Concluídos</td><td><time datetime="2026-10-12T05:01:41.708267+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/restore.json">JSON</a></td></tr><tr data-job-day="2026-10-12" data-job-state="succeeded"><th scope="row"><code>6b4e0ad6-60f2-4d0e-b67c-c20a8f973b58</code><span class="job-project">pf-containerops-test-1a4b810a</span></th><td>Concluídos</td><td><time datetime="2026-10-12T05:03:23.305368+00:00">2026-10-12 UTC</time></td><td><a href="../evidence/containerops-evolution-20261012/evidence/release.json">JSON</a></td></tr></tbody></table></div></details></figure><figure><figcaption><h3>Tempo por operação</h3><p>Durações de operações distintas; não são latências dos jobs.</p></figcaption><div data-duration-chart class="analysis-chart" hidden></div><p class="analysis-empty" data-operations-empty hidden>Nenhuma duração registrada neste período.</p><details class="record-details"><summary>Ver durações e fontes</summary><div class="table-wrap" role="region" aria-label="Duração das operações" tabindex="0"><table><caption>Duração registrada, em segundos</caption><thead><tr><th scope="col">Operação</th><th scope="col">Duração</th><th scope="col">Data UTC</th><th scope="col">Fonte</th></tr></thead><tbody data-operation-rows><tr data-operation-day="2026-10-12" data-seconds="11.172"><th scope="row">Backup</th><td class="numeric">11.2 s</td><td>2026-10-12 UTC</td><td><a href="../evidence/containerops-evolution-20261012/evidence/backup.json">JSON</a></td></tr><tr data-operation-day="2026-10-12" data-seconds="38.453"><th scope="row">Troca de imagem</th><td class="numeric">38.5 s</td><td>2026-10-12 UTC</td><td><a href="../evidence/containerops-evolution-20261012/evidence/release.json">JSON</a></td></tr><tr data-operation-day="2026-10-12" data-seconds="30.203"><th scope="row">Restore + novo job</th><td class="numeric">30.2 s</td><td>2026-10-12 UTC</td><td><a href="../evidence/containerops-evolution-20261012/evidence/restore.json">JSON</a></td></tr><tr data-operation-day="2026-10-12" data-seconds="54.203"><th scope="row">Rollback</th><td class="numeric">54.2 s</td><td>2026-10-12 UTC</td><td><a href="../evidence/containerops-evolution-20261012/evidence/rollback.json">JSON</a></td></tr><tr data-operation-day="2026-10-12" data-seconds="221.672"><th scope="row">Verificação</th><td class="numeric">221.7 s</td><td>2026-10-12 UTC</td><td><a href="../evidence/containerops-evolution-20261012/evidence/verification-run.json">JSON</a></td></tr></tbody></table></div></details></figure></div></div>
+        <details class="record-details"><summary>Último resultado registrado</summary><div class="job"><div><h3>Concluído</h3></div><dl class="job-values"><div><dt>Palavras</dt><dd>7</dd></div><div><dt>Tentativas</dt><dd>1</dd></div><div><dt>Versão</dt><dd>1.0.0</dd></div></dl><details class="checksum"><summary>Detalhes do job</summary><p>Estado na API</p><code>succeeded</code><p>ID do job</p><code>deb6f001-dce6-438a-ae45-c1cfee5f6534</code><p>SHA-256 do texto UTF-8</p><code>27ab8e45489e8128d8e922cc51a21933c68a14cd79a23124d744a0d7c28e15bc</code></details><div class="proof"><a href="../evidence/containerops-evolution-20261012/evidence/runs/e09bed0eb0f847c2842946cb813e81f5/journey.json">journey.json</a><span class="proof-date"><time datetime="2026-10-12T04:56:39.937292+00:00">12/10/2026 · 04:56:39 UTC</time></span></div></div><dl class="record-context"><div><dt>Registro</dt><dd><time datetime="2026-10-12T04:56:39.937292+00:00">12/10/2026 · 04:56:39 UTC</time></dd></div><div><dt>Projeto</dt><dd><code>pf-containerops-test-e09bed0e</code></dd></div><div><dt>Execução</dt><dd><code>e09bed0eb0f847c2842946cb813e81f5</code></dd></div></dl><p class="notice">A versão identifica este job; confira o digest em <a href="#artifacts">Artefatos</a> para associá-lo a uma imagem.</p></details>
       </div>
     </section>
     <section id="tls" data-panel aria-labelledby="tls-title">
@@ -599,7 +632,7 @@ python scripts/ops.py backups prune --keep-last 3</code></pre><p class="copy-fee
         <details class="record-details"><summary>Atualizar esta leitura</summary><p>Depois de executar as operações pelo terminal, gere novamente o relatório:</p><div class="code-block"><span class="code-language">Shell</span><pre tabindex="0" aria-label="Comando para gerar o relatório"><code class="language-sh"><span class="syntax-command">python</span> <span class="syntax-path">scripts/ops.py</span> report</code></pre></div><p>Os <a href="../runbooks.md">runbooks</a> descrevem a execução de cada operação.</p></details>
       </div>
     </section>
-    <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em <time datetime="2026-10-13T23:39:57.198562+00:00">13/10/2026 · 23:39:57 UTC</time></span><a href="../verification.md">Escopo das verificações</a></footer>
+    <footer><span>Snapshot de evidências · dados de demonstração</span><span class="generated-at">Relatório gerado em <time datetime="2026-10-18T02:20:22.117892+00:00">18/10/2026 · 02:20:22 UTC</time></span><a href="../verification.md">Escopo das verificações</a></footer>
   </main>
 </div><script>(() => {
   "use strict";
@@ -709,6 +742,119 @@ python scripts/ops.py backups prune --keep-last 3</code></pre><p class="copy-fee
         feedback.textContent = "Não foi possível copiar. O texto está selecionado; use Ctrl+C ou o menu do navegador.";
       }
     });
+  }
+
+  const activity = document.querySelector("[data-activity]");
+  if (activity) {
+    const controls = activity.querySelector("[data-activity-controls]");
+    const from = activity.querySelector("[data-activity-from]");
+    const to = activity.querySelector("[data-activity-to]");
+    const feedback = activity.querySelector("[data-activity-feedback]");
+    const jobs = Array.from(activity.querySelectorAll("[data-job-day]"));
+    const operations = Array.from(activity.querySelectorAll("[data-operation-day]"));
+    const labels = {queued: "Na fila", running: "Em execução", succeeded: "Concluídos", failed: "Falhos"};
+    const number = new Intl.NumberFormat("pt-BR", {maximumFractionDigits: 1});
+
+    function chartRow(label, values, maximum, description) {
+      const row = document.createElement("div");
+      row.className = "chart-row";
+      const name = document.createElement("span");
+      name.className = "chart-row-label";
+      name.textContent = label;
+      const track = document.createElement("span");
+      track.className = "chart-row-track";
+      track.setAttribute("aria-hidden", "true");
+      for (const [state, value] of Object.entries(values)) {
+        const bar = document.createElement("span");
+        bar.className = `chart-segment chart-${state}`;
+        bar.style.width = `${maximum ? 100 * value / maximum : 0}%`;
+        track.append(bar);
+      }
+      const total = document.createElement("strong");
+      total.className = "chart-row-value";
+      total.textContent = description;
+      row.append(name, track, total);
+      return row;
+    }
+
+    function filterActivity(updateURL = false) {
+      const valid = from.value && to.value && from.value <= to.value && from.checkValidity() && to.checkValidity();
+      from.setAttribute("aria-invalid", String(!valid));
+      to.setAttribute("aria-invalid", String(!valid));
+      if (!valid) {
+        feedback.textContent = "Filtro não aplicado. Informe um período válido, com início anterior ou igual ao fim.";
+        return;
+      }
+      const visibleJobs = jobs.filter(row => {
+        row.hidden = row.dataset.jobDay < from.value || row.dataset.jobDay > to.value;
+        return !row.hidden;
+      });
+      const visibleOperations = operations.filter(row => {
+        row.hidden = row.dataset.operationDay < from.value || row.dataset.operationDay > to.value;
+        return !row.hidden;
+      });
+      const totals = Object.fromEntries(Object.keys(labels).map(state => [state, 0]));
+      const days = new Map();
+      for (const job of visibleJobs) {
+        totals[job.dataset.jobState]++;
+        const values = days.get(job.dataset.jobDay) || Object.fromEntries(Object.keys(labels).map(state => [state, 0]));
+        values[job.dataset.jobState]++;
+        days.set(job.dataset.jobDay, values);
+      }
+      for (const [state, value] of Object.entries(totals))
+        activity.querySelector(`[data-state-total="${state}"]`).textContent = number.format(value);
+      const jobChart = activity.querySelector("[data-job-chart]");
+      const maximum = Math.max(1, ...Array.from(days.values(), counts => Object.values(counts).reduce((a, b) => a + b, 0)));
+      jobChart.replaceChildren(...Array.from(days, ([day, counts]) => {
+        const row = chartRow(day.slice(5).split("-").reverse().join("/"), counts, maximum,
+          number.format(Object.values(counts).reduce((a, b) => a + b, 0)));
+        row.setAttribute("aria-label", `${day} UTC. ${Object.entries(counts).map(([state, value]) => `${labels[state]}: ${value}`).join("; ")}`);
+        row.title = row.getAttribute("aria-label");
+        row.setAttribute("role", "img");
+        return row;
+      }));
+      jobChart.hidden = visibleJobs.length === 0;
+      const durationChart = activity.querySelector("[data-duration-chart]");
+      const longest = Math.max(1, ...visibleOperations.map(row => Number(row.dataset.seconds)));
+      durationChart.replaceChildren(...visibleOperations.map(row => chartRow(
+        row.querySelector("th").textContent, {duration: Number(row.dataset.seconds)}, longest,
+        `${number.format(Number(row.dataset.seconds))} s`)));
+      durationChart.hidden = visibleOperations.length === 0;
+      activity.querySelector("[data-jobs-empty]").hidden = visibleJobs.length > 0;
+      activity.querySelector("[data-operations-empty]").hidden = visibleOperations.length > 0;
+      feedback.textContent = `${visibleJobs.length} jobs únicos · ${visibleOperations.length} operações · ${from.value} a ${to.value}, UTC (inclusive).`;
+      if (updateURL) {
+        const url = new URL(location.href);
+        url.searchParams.set("jobs_from", from.value);
+        url.searchParams.set("jobs_to", to.value);
+        history.replaceState(null, "", url);
+      }
+    }
+
+    function restoreActivity() {
+      const params = new URL(location.href).searchParams;
+      for (const [input, key] of [[from, "jobs_from"], [to, "jobs_to"]]) {
+        const requested = params.get(key);
+        input.value = requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) && requested >= input.min && requested <= input.max
+          ? requested : input.defaultValue;
+      }
+      filterActivity();
+    }
+
+    if (jobs.length || operations.length) {
+      controls.hidden = false;
+      restoreActivity();
+      from.addEventListener("change", () => filterActivity(true));
+      to.addEventListener("change", () => filterActivity(true));
+      controls.addEventListener("submit", event => { event.preventDefault(); filterActivity(true); });
+      activity.querySelector("[data-activity-reset]").addEventListener("click", () => {
+        from.value = from.defaultValue;
+        to.value = to.defaultValue;
+        filterActivity(true);
+        from.focus();
+      });
+      window.addEventListener("popstate", restoreActivity);
+    }
   }
 
   select(false);

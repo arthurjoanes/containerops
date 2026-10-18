@@ -24,6 +24,11 @@ Shift+Tab. A troca de operação leva o foco ao título correspondente; voltar e
 avançar recuperam a seleção e os filtros. Rótulos devem identificar busca,
 recibo, comandos e regiões com rolagem.
 
+O intervalo de jobs usa dias UTC inclusivos e permanece em `jobs_from` e
+`jobs_to`. Trocar o filtro mantém gráfico, totais e linhas da tabela coerentes.
+Período inválido não altera a seleção aplicada; período sem observações mostra
+um estado vazio. Não derive métricas de fila atual dos registros de cenários.
+
 Textos e IDs extensos precisam caber em telas estreitas. Comandos conservam a
 formatação e usam rolagem local acessível pelo teclado. Acompanhe verde, âmbar e
 vermelho com rótulos; respeite `prefers-reduced-motion`. A [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
@@ -42,6 +47,6 @@ junto da fonte e no HTML distribuído. Links locais devem continuar relativos,
 sem caminhos privados de dumps ou do computador.
 
 Para alterar o gerador, use as fontes em `scripts/report.py`,
-`scripts/report_evidence.py`, `scripts/report_recovery.py`, `scripts/report.html`,
+`scripts/report_evidence.py`, `scripts/report_activity.py`, `scripts/report_recovery.py`, `scripts/report.html`,
 `scripts/report.css` e `scripts/report.js`. Confira teclado, texto ampliado,
 impressão, leitura sem JavaScript e estados incompletos ao modificar esses arquivos.

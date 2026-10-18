@@ -24,11 +24,10 @@
       </div>
     </section>
     <section id="result" data-panel aria-labelledby="result-title">
-      <div class="panel-heading"><h2 id="result-title" tabindex="-1">Último job registrado</h2></div>
+      <div class="panel-heading"><h2 id="result-title" tabindex="-1">Jobs por período</h2></div>
       <div class="surface-panel">
-        $job_panel
-        <details class="record-details"><summary>Origem deste resultado</summary>$job_context</details>
-        <p class="notice">A versão pertence a este job. A imagem de <a href="#artifacts">Artefatos</a> pode vir de outro build; a proximidade entre os registros não estabelece um vínculo.</p>
+        $job_activity
+        <details class="record-details"><summary>Último resultado registrado</summary>$job_panel$job_context<p class="notice">A versão identifica este job; confira o digest em <a href="#artifacts">Artefatos</a> para associá-lo a uma imagem.</p></details>
       </div>
     </section>
     <section id="tls" data-panel aria-labelledby="tls-title">

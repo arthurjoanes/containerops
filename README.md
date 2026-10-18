@@ -1,6 +1,6 @@
 # ContainerOps
 
-Laboratório de operação de uma aplicação com trabalhos em segundo plano: aceitar um pedido, recuperar um worker interrompido, trocar imagens e restaurar dados, mantendo o resultado verificável. Inclui API, worker, comandos de operação e relatório de evidências.
+API de jobs com worker, fila no PostgreSQL e ferramentas de backup, restore e troca de versão. O relatório local reúne os resultados das operações e os jobs observados.
 
 <!-- Navegação do README -->
 <p>
@@ -21,36 +21,24 @@ Pelo [contrato](docs/data-contract.md), a mesma chave e conteúdo recuperam o jo
 
 ## Demonstração
 
-![Página inicial do relatório com duração registrada e resultados de HTTP, permissões e isolamento de rede](docs/readme/home.png)
+![Jobs observados por período, estados e duração de cada operação no relatório local](docs/readme/home.png)
 
-Recorte da página **Verificação da aplicação**, com resultados registrados em
-22/09/2026. A etapa de verificação durou 246,7 s naquela
-[execução](docs/evidence/problem-proof-latest.json). O snapshot mostra os critérios
-conferidos e as fontes; não consulta a saúde atual dos serviços.
+Filtre os jobs por data UTC, compare os estados registrados e consulte a duração
+de backup, restore e troca de imagem. Cada valor mantém um link para seu JSON.
+O exemplo usa os registros de 12/10/2026; abrir a página não consulta os serviços.
 
-O catálogo reúne os registros da
-[rodada de backup e transporte](docs/evidence/containerops-evolution-20261012/manifest.json).
-Localize uma cópia por ID ou origem, confira integridade e recibo de restore e
-abra os detalhes para consultar a fonte ou preparar um comando local. O último
-ensaio tem painel próprio, com checksum, snapshot, novo job e limpeza separados.
+O catálogo permite buscar uma cópia por ID ou origem e conferir integridade e
+recibo de restore. Os detalhes incluem os comandos para operar aquela cópia.
 
-[Abrir o relatório local](docs/examples/report.html#backups) ·
+[Abrir o relatório local](docs/examples/report.html#result) ·
 [catálogo de cópias](docs/screenshots/backups-desktop.png) ·
 [catálogo no celular](docs/screenshots/backups-mobile.png) ·
 [guia de leitura](docs/report-guide.md).
 
-### Registro histórico de 22/09/2026
-
-O [registro de restauração](docs/evidence/restore.json) de 22/09/2026, às 06:20 UTC,
-recuperou três jobs e concluiu o novo trabalho em uma janela de 27,4 s.
-
-Seis chamadas concorrentes enviaram `Olá mundo! Café e ação. 東京 42` com a mesma chave. Receberam um único ID e sete palavras; trocar o conteúdo retornou 409. A [jornada de 22/09/2026, 12:34 UTC](docs/evidence/editorial-20260922/journey.json) registra as respostas segundo os [critérios do caso](docs/problem-solution.md). Esse resultado demonstra o cenário registrado, não execução única de qualquer efeito externo.
-
 <a id="conferir-uma-operação"></a>
 
-A [sequência operacional](docs/operational-recovery.md) relaciona o job, a
-restauração e o rollback aos respectivos registros. O [guia de leitura](docs/report-guide.md)
-explica como conferir a origem e a identidade de cada operação no relatório.
+A [sequência operacional](docs/operational-recovery.md) detalha recuperação do
+worker, restauração e rollback, com os registros de cada cenário.
 
 <a id="implementação"></a>
 
@@ -187,20 +175,10 @@ dos jobs no banco é independente da retenção desses arquivos.
 ## Verificação e evidências
 
 A [rodada de 12/10/2026](docs/evidence/containerops-evolution-20261012/manifest.json)
-verificou o backup portátil e o catálogo sobre
-`ec090fc33b89c848113537cdcdcb42f9888cc1d9`: exportação/importação entre contextos,
-snapshot igual, novo job, credenciais próprias e hashes originais preservados.
-Builds das duas releases, auditorias OCI/SBOM/provenance, qualidade, PostgreSQL,
-rollback, release 2, TLS e hardening passaram. Os scans finais da aplicação 1/2,
-banco e proxy tiveram um MEDIUM cada, sem HIGH/CRITICAL, pela política daquela rodada.
-O [relatório dessa rodada](docs/evidence/containerops-evolution-20261012/report.html)
-mantém suas identidades separadas das provas históricas abaixo.
-
-A limpeza conferiu os dez projetos UUID e o builder próprio. Estado, ponteiro,
-backups, tags compartilhadas e evidências históricas da demonstração foram
-preservados. Retenção destrutiva foi testada somente em fixtures temporárias.
-O transporte ocorreu no mesmo host; outra máquina, cópia física independente e
-preparação das imagens auxiliares para offline completo continuam necessários.
+registra exportação/importação de backup, snapshot restaurado, novo job, TLS,
+release e rollback em ambientes descartáveis. O transporte foi testado entre
+contextos no mesmo host. [Resultados e limites](docs/verification.md) ·
+[relatório original](docs/evidence/containerops-evolution-20261012/report.html).
 
 | Pergunta                              | Fonte e data da execução                                                                                                                 | Limite                                                                                 |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |

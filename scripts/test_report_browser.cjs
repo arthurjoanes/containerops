@@ -38,6 +38,26 @@ if (process.argv[2]) {
       }
     }
     await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(`${report}#result`);
+    const analysis = page.locator("[data-activity]");
+    const totalJobs = await analysis.locator("[data-job-day]").count();
+    if (totalJobs) {
+      const days = await analysis.locator("[data-job-day]").evaluateAll(rows => rows.map(row => row.dataset.jobDay).sort());
+      await analysis.locator("[data-activity-from]").fill(days.at(-1));
+      await analysis.locator("[data-activity-from]").dispatchEvent("change");
+      await analysis.locator("[data-activity-to]").fill(days.at(-1));
+      await analysis.locator("[data-activity-to]").dispatchEvent("change");
+      const expected = days.filter(day => day === days.at(-1)).length;
+      assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), expected);
+      assert.equal(await analysis.locator("[data-state-total]").evaluateAll(nodes => nodes.reduce((sum, node) => sum + Number(node.textContent.replaceAll(".", "")), 0)), expected);
+      assert.equal(new URL(page.url()).searchParams.get("jobs_from"), days.at(-1));
+      await page.reload();
+      assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), expected);
+      await analysis.locator("[data-activity-reset]").click();
+      assert.equal(await analysis.locator("[data-job-day]:not([hidden])").count(), totalJobs);
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      assert.equal(await analysis.locator(".chart-row").first().evaluate(node => getComputedStyle(node).animationName), "none");
+    }
     await page.goto(`${report}#recovery`);
     // Aguarde o índice abrir ao sair do mobile; um link oculto pode recusar o foco.
     await page.waitForFunction(() => document.querySelector(".operation-picker").open);
@@ -54,7 +74,7 @@ if (process.argv[2]) {
     await plainPage.goto(report);
     assert.equal(await plainPage.locator("[data-panel]:visible").count(), 9);
     assert.deepEqual(errors, []);
-    console.log("Passed: eight skip-link cases, keyboard selection/history, nine-panel print and no-JS.");
+    console.log("Passed: eight skip-link cases, keyboard selection/history, inclusive UTC date filters/URL/reset/reduced motion, nine-panel print and no-JS.");
     await noScript.close();
   } finally {
     await browser.close();

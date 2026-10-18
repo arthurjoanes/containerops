@@ -108,6 +108,119 @@
     });
   }
 
+  const activity = document.querySelector("[data-activity]");
+  if (activity) {
+    const controls = activity.querySelector("[data-activity-controls]");
+    const from = activity.querySelector("[data-activity-from]");
+    const to = activity.querySelector("[data-activity-to]");
+    const feedback = activity.querySelector("[data-activity-feedback]");
+    const jobs = Array.from(activity.querySelectorAll("[data-job-day]"));
+    const operations = Array.from(activity.querySelectorAll("[data-operation-day]"));
+    const labels = {queued: "Na fila", running: "Em execução", succeeded: "Concluídos", failed: "Falhos"};
+    const number = new Intl.NumberFormat("pt-BR", {maximumFractionDigits: 1});
+
+    function chartRow(label, values, maximum, description) {
+      const row = document.createElement("div");
+      row.className = "chart-row";
+      const name = document.createElement("span");
+      name.className = "chart-row-label";
+      name.textContent = label;
+      const track = document.createElement("span");
+      track.className = "chart-row-track";
+      track.setAttribute("aria-hidden", "true");
+      for (const [state, value] of Object.entries(values)) {
+        const bar = document.createElement("span");
+        bar.className = `chart-segment chart-${state}`;
+        bar.style.width = `${maximum ? 100 * value / maximum : 0}%`;
+        track.append(bar);
+      }
+      const total = document.createElement("strong");
+      total.className = "chart-row-value";
+      total.textContent = description;
+      row.append(name, track, total);
+      return row;
+    }
+
+    function filterActivity(updateURL = false) {
+      const valid = from.value && to.value && from.value <= to.value && from.checkValidity() && to.checkValidity();
+      from.setAttribute("aria-invalid", String(!valid));
+      to.setAttribute("aria-invalid", String(!valid));
+      if (!valid) {
+        feedback.textContent = "Filtro não aplicado. Informe um período válido, com início anterior ou igual ao fim.";
+        return;
+      }
+      const visibleJobs = jobs.filter(row => {
+        row.hidden = row.dataset.jobDay < from.value || row.dataset.jobDay > to.value;
+        return !row.hidden;
+      });
+      const visibleOperations = operations.filter(row => {
+        row.hidden = row.dataset.operationDay < from.value || row.dataset.operationDay > to.value;
+        return !row.hidden;
+      });
+      const totals = Object.fromEntries(Object.keys(labels).map(state => [state, 0]));
+      const days = new Map();
+      for (const job of visibleJobs) {
+        totals[job.dataset.jobState]++;
+        const values = days.get(job.dataset.jobDay) || Object.fromEntries(Object.keys(labels).map(state => [state, 0]));
+        values[job.dataset.jobState]++;
+        days.set(job.dataset.jobDay, values);
+      }
+      for (const [state, value] of Object.entries(totals))
+        activity.querySelector(`[data-state-total="${state}"]`).textContent = number.format(value);
+      const jobChart = activity.querySelector("[data-job-chart]");
+      const maximum = Math.max(1, ...Array.from(days.values(), counts => Object.values(counts).reduce((a, b) => a + b, 0)));
+      jobChart.replaceChildren(...Array.from(days, ([day, counts]) => {
+        const row = chartRow(day.slice(5).split("-").reverse().join("/"), counts, maximum,
+          number.format(Object.values(counts).reduce((a, b) => a + b, 0)));
+        row.setAttribute("aria-label", `${day} UTC. ${Object.entries(counts).map(([state, value]) => `${labels[state]}: ${value}`).join("; ")}`);
+        row.title = row.getAttribute("aria-label");
+        row.setAttribute("role", "img");
+        return row;
+      }));
+      jobChart.hidden = visibleJobs.length === 0;
+      const durationChart = activity.querySelector("[data-duration-chart]");
+      const longest = Math.max(1, ...visibleOperations.map(row => Number(row.dataset.seconds)));
+      durationChart.replaceChildren(...visibleOperations.map(row => chartRow(
+        row.querySelector("th").textContent, {duration: Number(row.dataset.seconds)}, longest,
+        `${number.format(Number(row.dataset.seconds))} s`)));
+      durationChart.hidden = visibleOperations.length === 0;
+      activity.querySelector("[data-jobs-empty]").hidden = visibleJobs.length > 0;
+      activity.querySelector("[data-operations-empty]").hidden = visibleOperations.length > 0;
+      feedback.textContent = `${visibleJobs.length} jobs únicos · ${visibleOperations.length} operações · ${from.value} a ${to.value}, UTC (inclusive).`;
+      if (updateURL) {
+        const url = new URL(location.href);
+        url.searchParams.set("jobs_from", from.value);
+        url.searchParams.set("jobs_to", to.value);
+        history.replaceState(null, "", url);
+      }
+    }
+
+    function restoreActivity() {
+      const params = new URL(location.href).searchParams;
+      for (const [input, key] of [[from, "jobs_from"], [to, "jobs_to"]]) {
+        const requested = params.get(key);
+        input.value = requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) && requested >= input.min && requested <= input.max
+          ? requested : input.defaultValue;
+      }
+      filterActivity();
+    }
+
+    if (jobs.length || operations.length) {
+      controls.hidden = false;
+      restoreActivity();
+      from.addEventListener("change", () => filterActivity(true));
+      to.addEventListener("change", () => filterActivity(true));
+      controls.addEventListener("submit", event => { event.preventDefault(); filterActivity(true); });
+      activity.querySelector("[data-activity-reset]").addEventListener("click", () => {
+        from.value = from.defaultValue;
+        to.value = to.defaultValue;
+        filterActivity(true);
+        from.focus();
+      });
+      window.addEventListener("popstate", restoreActivity);
+    }
+  }
+
   select(false);
   window
     .matchMedia("(max-width: 760px)")

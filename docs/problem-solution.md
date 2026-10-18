@@ -2,9 +2,9 @@
 
 Os casos ligam o [contrato do domínio](../app/src/containerops/domain.py) à [admissão e posse](../app/src/containerops/repository.py), à [jornada de 22/09/2026](evidence/editorial-20260922/journey.json) e à [recuperação da mesma rodada](evidence/editorial-20260922/recovery.json). As evidências antigas conservam suas identidades e datas.
 
-## Tese e limite
+## Objetivo e limite
 
-Desenvolvi este laboratório para recuperar um serviço assíncrono pequeno sem perder trabalhos aceitos,
+O laboratório exercita a recuperação de um serviço assíncrono sem perder trabalhos aceitos,
 confundir uma imagem testada com outra executada ou tratar um dump como recuperação
 testada. A jornada é: cliente envia texto e chave → API persiste → worker adquire
 lease → resultado fica consultável → operador recupera falha, restaura e troca versão.
@@ -28,11 +28,12 @@ Considere Alice enviando `Olá, mundo!`, duração zero e chave `pedido-42`. A p
 
 Agora o worker morre com esse job em `running`. Após a lease expirar, [`claim_job`](../app/src/containerops/repository.py) pode assumir o mesmo UUID, aumentar a tentativa e emitir outro token. [`complete_job`](../app/src/containerops/repository.py) exige o token atual e lease válida: um worker antigo que volte não pode finalizar. O cálculo pode ocorrer mais de uma vez; o projeto não promete execução única. O [teste `test_stale_worker_cannot_renew_or_overwrite_result`](../app/tests/test_integration.py) verifica esse caso, enquanto a [prova histórica de recuperação](evidence/problem-proof/881fdd3dd92f4b7f86c6862e9022a589/verify-recovery.json) registra SIGKILL e retomada na tentativa 2 em containers reais.
 
-## Conferência nova: identidade e posse do trabalho
+## Idempotência e posse do trabalho
 
-Na rodada de 22/09 às 12:31 UTC, executei seis POSTs concorrentes com `Olá mundo! Café e ação. 東京 42`. A conta independente é Olá(1), mundo(2), Café(3), e(4), ação(5), 東京(6), 42(7). As seis chamadas receberam o mesmo UUID. O checksum usa os bytes originais; esta contagem não normaliza o texto nem pretende fazer análise linguística.
-
-A relação entre seis chamadas e um UUID, o resultado de sete palavras, o conflito 409 e a recusa de leitura por outro proprietário são asserções da jornada HTTP, registradas em [journey.json](evidence/editorial-20260922/journey.json).
+A [jornada HTTP de 22/09/2026](evidence/editorial-20260922/journey.json) registra
+seis POSTs concorrentes com a mesma chave: um UUID, resultado de sete palavras,
+409 para conteúdo diferente e 404 na consulta por outro proprietário. A regra de
+contagem e o checksum dos bytes UTF-8 são testados separadamente no domínio.
 
 Em uma falha separada, o texto `Recuperar depois de término abrupto` tem cinco palavras. O worker morreu quando o job estava `running`, tentativa 1; a nova aquisição concluiu o mesmo UUID na tentativa 2. O trabalho pode repetir; a recuperação não demonstra execução única. O [registro de recuperação](evidence/editorial-20260922/recovery.json) conserva antes/depois, SIGTERM, reinício e verificações do banco.
 

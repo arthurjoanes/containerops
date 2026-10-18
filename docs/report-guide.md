@@ -5,6 +5,25 @@ Abrir o HTML não consulta containers nem executa comandos. O [exemplo do catál
 contém registros operacionais de 12/10/2026; GitHub apresenta o HTML como código.
 Depois de clonar ou baixar o repositório, abra o arquivo localmente no navegador.
 
+## Jobs por período
+
+Selecione as datas inicial e final em UTC, incluindo os dois dias. O filtro
+atualiza os totais, os gráficos e as tabelas, e permanece na URL. **Todo o registro**
+recupera o intervalo completo dos arquivos carregados.
+
+Cada par projeto/ID aparece uma vez, no estado e na data de sua última observação
+disponível. O gráfico conta observações, não entradas reais na fila. Um estado
+anterior do mesmo job não reaparece ao selecionar uma data antiga. Na fila e em
+execução são estados salvos nos cenários, não uma leitura da fila atual.
+
+As barras de tempo usam as durações dos registros de verificação, backup,
+restore, release e rollback. São operações diferentes: não formam uma média de
+latência dos jobs. Ausência de duração fica separada de zero segundos. Abra
+**Ver jobs e fontes** ou **Ver durações e fontes** para conferir os valores exatos.
+
+Não há série contínua de tráfego nesses arquivos. O relatório não calcula
+throughput, percentis de latência nem tamanho atual da fila a partir dessa amostra.
+
 O exemplo foi regenerado em 13/10/2026 com esses mesmos registros, sem executar
 novamente as operações. Nele, os limites de CPU preservam a precisão dos
 `NanoCpus`: proxy 0,25 e banco 0,75 CPU. Os HTMLs históricos de 22/09 e 12/10 foram

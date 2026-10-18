@@ -13,6 +13,7 @@ from pathlib import Path
 from string import Template
 from urllib.parse import quote, unquote, urlsplit
 
+from report_activity import activity_panel
 from report_evidence import (
     read_records,
     record_time,
@@ -999,7 +1000,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
                 ),
                 (
                     "result",
-                    "Resultado do job",
+                    "Jobs por período",
                     job_state(job),
                     "v" + shown(job["version"]) if job.get("version") else "Versão não informada",
                 ),
@@ -1124,6 +1125,7 @@ def generate(root: Path, runtime: Path, *, now: datetime | None = None) -> Path:
         ),
         verification_context=record_context(verification, label="Conclusão registrada"),
         job_context=record_context(job_record),
+        job_activity=activity_panel(records),
         backup_context=record_context(backup),
         backup_catalog=backup_catalog_panel(
             records.get("backup-catalog", {}),

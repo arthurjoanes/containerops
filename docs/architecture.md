@@ -133,10 +133,13 @@ O despacho favorece o owner menos recentemente ativo entre os elegíveis, com de
 | worker  | 10001:10001                                             | data         | tmpfs /tmp limitado                        | db_app                                   | assumir/finalizar jobs; sem DDL          |
 | db      | entrypoint inicializa volume; processo postgres UID 999 | data interna | volume nomeado pgdata, /var/run/postgresql | db_admin, db_migrator, db_app, db_backup | bootstrap de papéis; não exposto no host |
 | migrate | 10001:10001                                             | data         | /tmp                                       | db_migrator                              | dono do schema, DDL explícito            |
-| backup  | postgres                                                | data         | volume temporário para dump                | db_backup                                | CONNECT, USAGE, SELECT                   |
+| backup  | postgres                                                | data         | volume nomeado artifacts para dump         | db_backup                                | CONNECT, USAGE, SELECT                   |
 | restore | postgres                                                | data isolada | volume isolado                             | db_migrator do ambiente destino          | restauração como dono, sem superusuário  |
 
 Compose configura redes, mounts, limites e ordem inicial. O kernel aplica as restrições. A API controla autorização e limites; o banco impede resultados duplicados. O cálculo pode repetir após expirar uma lease.
+
+O volume `artifacts` é separado de `pgdata` e permanece após a remoção do helper
+de backup. A operação também copia o dump para `backups/<id>` no runtime.
 
 Admissão e despacho usam transações curtas no singleton de operações. A admissão
 limita queued/running a 100 globais e 20 por owner. O despacho escolhe primeiro o

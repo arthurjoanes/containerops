@@ -62,10 +62,15 @@ permite retomar somente a tentativa aprovada. Os testes destrutivos usam fixture
 temporárias; nenhum pruning dos backups existentes é necessário para validar a
 funcionalidade. A política dos dumps é separada da retenção de jobs no banco.
 
-Provas e relatórios públicos usam resumos sem dump, segredos, paths pessoais ou
-configuração bruta. O HTML escapa os campos do catálogo e apresenta comandos
-locais; abrir a página não chama backup/restore. Uma cópia no mesmo host continua
-exposta à perda física dessa máquina.
+Os JSONs operacionais locais, incluindo `backup.json` e `restore.json`, podem
+conter caminhos absolutos e são vinculados pelo relatório HTML. Nas cópias desses
+registros do cenário `operations` e da prova de transferência, `public_record`
+substitui o prefixo literal do runtime por `<runtime>`. O cenário `full` arquiva
+os registros originais. Confira as evidências antes de compartilhá-las.
+
+O HTML escapa os campos do catálogo e apresenta comandos locais; abrir a página
+não chama backup/restore. Uma cópia no mesmo host continua exposta à perda física
+dessa máquina.
 
 ## COPS-01 Ocupação da fila por um proprietário
 

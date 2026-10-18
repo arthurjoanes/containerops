@@ -20,7 +20,7 @@ from contextlib import contextmanager, nullcontext
 from datetime import UTC, datetime
 from pathlib import Path
 
-from runtime_context import active_context, ensure_file_path, ensure_no_links
+from runtime_context import active_context, ensure_file_path, ensure_no_links, ensure_tree
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTEXT = active_context(ROOT)
@@ -1117,7 +1117,7 @@ def rollback(stack):
 
 
 def tls_setup(stack):
-    directory = stack.directory / "tls"
+    directory = ensure_tree(stack.directory / "tls")
     directory.mkdir(parents=True, exist_ok=True)
     if os.name != "nt":
         directory.chmod(0o700)

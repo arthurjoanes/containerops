@@ -25,6 +25,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_backup_catalog.py -v
       - name: Transporte no Windows
         run: python -m unittest discover -s tests -p test_backup_package.py -v
+      - name: Caminhos TLS no Windows
+        run: python -m unittest discover -s tests -p test_tls_paths.py -v
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
